@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    data_extraction_rules.xml - قواعد استخراج البيانات
+    المسار: app/src/main/res/xml/data_extraction_rules.xml
+    يُستخدم مع Android 12+ (API 31+)
+-->
+<data-extraction-rules>
+    
+    <!-- Cloud Backup - النسخ الاحتياطي السحابي -->
+    <cloud-backup 
+        disableIfNoEncryptionCapabilities="true">
+        
+        <!-- Include -->
+        <include 
+            domain="database" 
+            path="." />
+        
+        <include 
+            domain="sharedpref" 
+            path="." />
+        
+        <include 
+            domain="file" 
+            path="." />
+        
+        <!-- Exclude -->
+        <exclude 
+            domain="file" 
+            path="cache/" />
+        
+        <exclude 
+            domain="file" 
+            path="temp/" />
+    </cloud-backup>
+    
+    <!-- Device Transfer - نقل البيانات بين الأجهزة -->
+    <device-transfer>
+        
+        <!-- Include -->
+        <include 
+            domain="database" 
+            path="." />
+        
+        <include 
+            domain="sharedpref" 
+            path="." />
+        
+        <include 
+            domain="file" 
+            path="." />
+        
+        <!-- Exclude -->
+        <exclude 
+            domain="file" 
+            path="cache/" />
+        
+        <exclude 
+            domain="file" 
+            path="temp/" />
+    </device-transfer>
+
+</data-extraction-rules>

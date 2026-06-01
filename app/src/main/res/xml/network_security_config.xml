@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    network_security_config.xml - تكوين أمان الشبكة
+    المسار: app/src/main/res/xml/network_security_config.xml
+    يُستخدم مع Android 7.0+ (API 24+)
+-->
+<network-security-config>
+    
+    <!-- Base Config - التكوين الأساسي -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <!-- الشهادات الموثوقة من النظام -->
+            <certificates src="system" />
+            <!-- الشهادات الموثوقة من المستخدم (للتطوير فقط) -->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+    
+    <!-- Debug Config - تكوين التطوير (اختياري) -->
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+    
+    <!-- Domain Config - تكوين النطاقات (إذا كنت تستخدم API) -->
+    <!-- 
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">api.example.com</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+    </domain-config>
+    -->
+    
+    <!-- Certificate Pinning - تثبيت الشهادات (للأمان العالي) -->
+    <!--
+    <domain-config>
+        <domain includeSubdomains="true">secure.example.com</domain>
+        <pin-set expiration="2027-01-01">
+            <pin digest="SHA-256">base64==</pin>
+            <pin digest="SHA-256">backup-base64==</pin>
+        </pin-set>
+    </domain-config>
+    -->
+
+</network-security-config>

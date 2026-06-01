@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    // هذا السطر يضمن أن الإعدادات هنا هي المرجعية الوحيدة لمنع التعارض
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        // مستودع JitPack ضروري لمكتبات الطابعة والرسوم البيانية
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+rootProject.name = "NewProject112"
+include ':app'

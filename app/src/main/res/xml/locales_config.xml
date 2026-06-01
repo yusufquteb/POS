@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    locales_config.xml - تكوين اللغات المدعومة
+    المسار: app/src/main/res/xml/locales_config.xml
+    يُستخدم مع Android 13+ (API 33+)
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- اللغة العربية (الافتراضية) -->
+    <locale android:name="ar" />
+    
+    <!-- اللغة الإنجليزية -->
+    <locale android:name="en" />
+    
+    <!-- يمكن إضافة لغات أخرى -->
+    <!-- <locale android:name="fr" /> -->
+    <!-- <locale android:name="es" /> -->
+
+</locale-config>

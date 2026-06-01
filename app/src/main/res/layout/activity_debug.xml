@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorErrorContainer">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="⚠️ تقرير خطأ"
+            app:titleTextColor="?attr/colorOnErrorContainer"
+            android:background="?attr/colorErrorContainer" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Error Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="?attr/colorErrorContainer"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Error Icon -->
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/ic_error_large"
+                        android:tint="?attr/colorError"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/error_icon" />
+
+                    <!-- Error Title -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="حدث خطأ في التطبيق"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnErrorContainer"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/cairo_bold" />
+
+                    <!-- Timestamp -->
+                    <TextView
+                        android:id="@+id/tv_timestamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="?attr/colorOnErrorContainer"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/cairo_regular" />
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/colorOutlineVariant"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:alpha="0.5" />
+
+                    <!-- Error Message -->
+                    <TextView
+                        android:id="@+id/tv_error_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="?attr/colorOnErrorContainer"
+                        android:lineSpacingExtra="4dp"
+                        android:fontFamily="@font/cairo_regular" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Device Info Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Section Title -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📱 معلومات الجهاز"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface"
+                        android:fontFamily="@font/cairo_bold" />
+
+                    <!-- Device Info -->
+                    <TextView
+                        android:id="@+id/tv_device_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginTop="12dp"
+                        android:lineSpacingExtra="4dp"
+                        android:fontFamily="@font/cairo_regular" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Details Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Toggle Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_toggle_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="عرض التفاصيل ▼"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        app:icon="@drawable/ic_expand_more"
+                        app:iconGravity="end"
+                        android:fontFamily="@font/cairo_semibold" />
+
+                    <!-- Scrollable Stack Trace -->
+                    <androidx.core.widget.NestedScrollView
+                        android:id="@+id/scroll_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="12dp"
+                        android:visibility="gone"
+                        android:background="?attr/colorSurfaceVariant"
+                        android:padding="12dp"
+                        android:scrollbars="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_stack_trace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:fontFamily="monospace"
+                            android:textIsSelectable="true" />
+
+                    </androidx.core.widget.NestedScrollView>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <!-- Restart Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_restart"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="إعادة تشغيل التطبيق"
+                    android:textSize="16sp"
+                    app:icon="@drawable/ic_refresh"
+                    app:iconGravity="textStart"
+                    app:cornerRadius="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/cairo_semibold"
+                    app:elevation="4dp" />
+
+                <!-- Copy Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_copy"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="نسخ التقرير"
+                    android:textSize="16sp"
+                    app:icon="@drawable/ic_copy"
+                    app:iconGravity="textStart"
+                    app:cornerRadius="16dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/cairo_semibold" />
+
+            </LinearLayout>
+
+            <!-- Share Options Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📤 إرسال التقرير للمطور"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/cairo_bold" />
+
+                    <!-- Share Buttons Grid -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <!-- Email -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_send_email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Email"
+                            android:textSize="12sp"
+                            app:icon="@drawable/ic_email"
+                            app:iconGravity="top"
+                            app:iconPadding="4dp"
+                            app:cornerRadius="12dp"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/cairo_semibold" />
+
+                        <!-- WhatsApp -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_send_whatsapp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="WhatsApp"
+                            android:textSize="12sp"
+                            app:icon="@drawable/ic_whatsapp"
+                            app:iconGravity="top"
+                            app:iconPadding="4dp"
+                            app:cornerRadius="12dp"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/cairo_semibold" />
+
+                        <!-- Telegram -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_send_telegram"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Telegram"
+                            android:textSize="12sp"
+                            app:icon="@drawable/ic_telegram"
+                            app:iconGravity="top"
+                            app:iconPadding="4dp"
+                            app:cornerRadius="12dp"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_marginStart="4dp"
+                            android:fontFamily="@font/cairo_semibold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- View History Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_view_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📋 عرض سجل الأخطاء"
+                android:textSize="14sp"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:fontFamily="@font/cairo_regular" />
+
+            <!-- Bottom Spacer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

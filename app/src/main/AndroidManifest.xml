@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- الصلاحيات                                               -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <!-- الإنترنت للـ Billing و Firebase -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <!-- الكاميرا للباركود -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+
+    <!-- التخزين Android 13+ -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <!-- التخزين Android 10-12 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage"/>
+    <!-- ✅ MANAGE_EXTERNAL_STORAGE مطلوب لـ Google Play Console وصف خاص -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage"/>
+
+    <!-- Bluetooth للطابعة الحرارية -->
+    <!-- Android 12+ -->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s"/>
+    <!-- Android 11 وأقل -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30"/>
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
+
+    <!-- ✅ الفوترة عبر Google Play -->
+    <uses-permission android:name="com.android.vending.BILLING"/>
+
+    <!-- الإشعارات (Android 13+) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- الموقع (اختياري لتتبع الفروع) -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- التطبيق                                                 -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <application
+        android:name=".SketchApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:description="@string/app_tagline"
+        android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:enableOnBackInvokedCallback="true"
+        android:localeConfig="@xml/locales_config"
+        tools:targetApi="tiramisu">
+
+        <!-- ════════ Splash ════════ -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.App.Starting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- ════════ Onboarding ════════ -->
+        <activity
+            android:name=".OnboardingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!-- ════════ Auth ════════ -->
+        <activity
+            android:name=".AuthActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/AppTheme"/>
+
+        <!-- ════════ Main ════════ -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <!-- ════════ Products ════════ -->
+        <activity
+            android:name=".ActivityProductsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/products_title"/>
+
+        <activity
+            android:name=".ActivityAddProductActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityProductsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/add_product"/>
+
+        <!-- ════════ Sales / Cart ════════ -->
+        <activity
+            android:name=".ActivityCartActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/cart_title"/>
+
+        <activity
+            android:name=".ActivityBarcodeScannerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <!-- ════════ Customers & Suppliers ════════ -->
+        <activity
+            android:name=".ActivityCustomersActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/customers_title"/>
+
+        <activity
+            android:name=".ActivitySuppliersActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/suppliers_title"/>
+
+        <!-- ════════ Invoices ════════ -->
+        <activity
+            android:name=".ActivityInvoicesActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/invoices_title"/>
+
+        <activity
+            android:name=".ActivityInvoiceDetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityInvoicesActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/invoice_details"/>
+
+        <!-- ════════ Reports & Expenses ════════ -->
+        <activity
+            android:name=".ActivityReportsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/reports_title"/>
+
+        <activity
+            android:name=".ActivityExpensesActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/expenses_title"/>
+
+        <!-- ════════ Settings ════════ -->
+        <activity
+            android:name=".ActivitySettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/settings_title"/>
+
+        <activity
+            android:name=".ActivityStoreSettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivitySettingsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/store_settings"/>
+
+        <activity
+            android:name=".ActivityPrinterSettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivitySettingsActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/printer_settings"/>
+
+        <activity
+            android:name=".ActivityBackupActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivitySettingsActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/backup_title"/>
+
+        <activity
+            android:name=".ActivityLocationActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivitySettingsActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/location"/>
+
+        <!-- ════════ Utility ════════ -->
+        <activity
+            android:name=".CrashActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true"/>
+
+        <activity
+            android:name=".DebugActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <!-- ════════ FileProvider ════════ -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
+        <!-- ════════ WorkManager ════════ -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove"/>
+        </provider>
+
+    </application>
+
+</manifest>

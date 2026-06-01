@@ -1,0 +1,259 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:id="@+id/_main">
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/app_bar_layout39"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			app:title="تفاصيلالفاتورة"
+			app:navigationIcon="@drawable/ic_arrow_back" />
+	</com.google.android.material.appbar.AppBarLayout>
+	<androidx.core.widget.NestedScrollView
+		android:id="@+id/vscroll4"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+		<LinearLayout
+			android:id="@+id/linear40"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="16dp"
+			android:orientation="vertical">
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/cardview13"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				app:cardBackgroundColor="?attr/colorPrimaryContainer"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:id="@+id/linear41"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="16dp"
+					android:orientation="vertical">
+					<TextView
+						android:id="@+id/tv_invoice_number"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="فاتورة #123"
+						android:textSize="20sp"
+						android:textStyle="bold" />
+					<TextView
+						android:id="@+id/tv_date"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="4dp"
+						android:text="09/02/2026 14:30"
+						android:textSize="14sp" />
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/cardview14"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:id="@+id/linear42"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="16dp"
+					android:orientation="vertical">
+					<TextView
+						android:id="@+id/textview31"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="8dp"
+						android:text="بيانات العميل"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+					<TextView
+						android:id="@+id/tv_customer_name"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="4dp"
+						android:text="الاسم: محمد أحمد"
+						android:textSize="14sp" />
+					<TextView
+						android:id="@+id/tv_customer_phone"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="الهاتف: 01234567890"
+						android:textSize="14sp" />
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/cardview15"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:id="@+id/linear43"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="16dp"
+					android:orientation="vertical">
+					<TextView
+						android:id="@+id/textview32"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="12dp"
+						android:text="المنتجات"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/recycler_items"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content" />
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/cardview16"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="80dp"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:id="@+id/linear44"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="16dp"
+					android:orientation="vertical">
+					<LinearLayout
+						android:id="@+id/linear45"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="8dp"
+						android:orientation="horizontal">
+						<TextView
+							android:id="@+id/textview33"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="المجموع الفرعي:"
+							android:textSize="14sp"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_subtotal"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="250.00 ج.م"
+							android:textSize="14sp" />
+					</LinearLayout>
+					<LinearLayout
+						android:id="@+id/layout_discount"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="8dp"
+						android:orientation="horizontal"
+						android:visibility="gone">
+						<TextView
+							android:id="@+id/textview34"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="الخصم:"
+							android:textSize="14sp"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_discount"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="-10.00 ج.م"
+							android:textSize="14sp"
+							android:textColor="#D32F2F" />
+					</LinearLayout>
+					<LinearLayout
+						android:id="@+id/layout_tax"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="8dp"
+						android:orientation="horizontal"
+						android:visibility="gone">
+						<TextView
+							android:id="@+id/textview35"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="الضريبة:"
+							android:textSize="14sp"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_tax"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="+5.00 ج.م"
+							android:textSize="14sp" />
+					</LinearLayout>
+					<View
+						android:id="@+id/view46"
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="?android:attr/listDivider"
+						android:layout_marginVertical="8dp" />
+					<LinearLayout
+						android:id="@+id/linear47"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal">
+						<TextView
+							android:id="@+id/textview36"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="الإجمالي النهائي:"
+							android:textSize="18sp"
+							android:textStyle="bold"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_final_total"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="245.00 ج.م"
+							android:textSize="18sp"
+							android:textStyle="bold" />
+					</LinearLayout>
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+		</LinearLayout>
+	</androidx.core.widget.NestedScrollView>
+	<LinearLayout
+		android:id="@+id/linear48"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="16dp"
+		android:background="?attr/colorSurface"
+		android:orientation="horizontal"
+		android:layout_gravity="bottom"
+		android:elevation="8dp">
+		<Button
+			android:id="@+id/btn_print"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="طباعة"
+			android:textSize="12sp"
+			android:layout_weight="1"
+			android:layout_marginEnd="8dp"
+			style="@style/Widget.Material3.Button" />
+		<Button
+			android:id="@+id/btn_whatsapp"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="واتساب"
+			android:textSize="12sp"
+			android:layout_weight="1"
+			android:layout_marginStart="8dp"
+			style="@style/Widget.Material3.Button.TonalButton" />
+	</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

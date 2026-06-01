@@ -1,0 +1,158 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="?attr/colorSurface"
+	android:id="@+id/_main"
+	android:fitsSystemWindows="true">
+	<LinearLayout
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="56dp"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:background="@android:color/white"
+		android:elevation="4dp"
+		android:paddingStart="16dp"
+		android:paddingEnd="16dp"
+		android:focusable="true">
+		<ImageView
+			android:id="@+id/imageview3"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:scaleType="center"
+			android:src="@android:drawable/ic_menu_revert"
+			android:contentDescription="رجوع"
+			android:tint="#1976D2" />
+		<TextView
+			android:id="@+id/textview25"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="النسخ الاحتياطي"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:textColor="#212121"
+			android:layout_weight="1"
+			android:layout_marginStart="16dp" />
+	</LinearLayout>
+	<LinearLayout
+		android:id="@+id/linear12"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="1dp"
+		android:padding="16dp"
+		android:gravity="center_horizontal|center_vertical"
+		android:orientation="horizontal"
+		android:background="@android:color/white">
+		<Button
+			android:id="@+id/btn_create_backup"
+			android:layout_width="0dp"
+			android:layout_height="48dp"
+			android:background="#4CAF50"
+			android:text="إنشاء نسخة"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			android:layout_weight="1"
+			android:textColor="@android:color/white"
+			android:layout_marginEnd="8dp" />
+		<Button
+			android:id="@+id/btn_restore_backup"
+			android:layout_width="0dp"
+			android:layout_height="48dp"
+			android:background="#2196F3"
+			android:text="استعادة نسخة"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			android:layout_weight="1"
+			android:textColor="@android:color/white"
+			android:layout_marginStart="8dp" />
+	</LinearLayout>
+	<TextView
+		android:id="@+id/textview26"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="1dp"
+		android:padding="16dp"
+		android:text="النسخ الاحتياطية المحفوظة"
+		android:textSize="14sp"
+		android:textStyle="bold"
+		android:textColor="#757575"
+		android:background="@android:color/white" />
+	<FrameLayout
+		android:id="@+id/frame_layout13"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+		<ListView
+			android:id="@+id/list_backups"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:choiceMode="none"
+			android:background="@android:color/white"
+			android:divider="#E0E0E0" />
+		<LinearLayout
+			android:id="@+id/empty_state"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:padding="32dp"
+			android:gravity="center_horizontal|center_vertical"
+			android:orientation="vertical"
+			android:visibility="gone">
+			<ImageView
+				android:id="@+id/imageview4"
+				android:layout_width="120dp"
+				android:layout_height="120dp"
+				android:scaleType="center"
+				android:src="@android:drawable/ic_menu_save"
+				android:tint="#BDBDBD"
+				android:contentDescription="لاتوجدنسخ" />
+			<TextView
+				android:id="@+id/textview27"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="16dp"
+				android:text="لا توجد نسخ احتياطية"
+				android:textSize="18sp"
+				android:textStyle="bold"
+				android:textColor="#616161" />
+			<TextView
+				android:id="@+id/textview28"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:gravity="center_horizontal|center_vertical"
+				android:text="قم بإنشاء نسخة احتياطية من البيانات\nللحفاظ على معلوماتك آمنة"
+				android:textSize="14sp"
+				android:textColor="#9E9E9E" />
+		</LinearLayout>
+	</FrameLayout>
+	<LinearLayout
+		android:id="@+id/linear14"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="1dp"
+		android:padding="16dp"
+		android:background="#E3F2FD"
+		android:orientation="vertical">
+		<TextView
+			android:id="@+id/textview29"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="ℹ️ معلومات هامة:"
+			android:textSize="13sp"
+			android:textStyle="bold"
+			android:textColor="#1976D2" />
+		<TextView
+			android:id="@+id/textview30"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:text="• يتم حفظ النسخ في: SmartPOS_Backups\n• استعادة النسخة ستحذف البيانات الحالية\n• احتفظ بنسخ منتظمة من بياناتك"
+			android:textSize="12sp"
+			android:textColor="#1565C0"
+			android:lineSpacingExtra="4dp" />
+	</LinearLayout>
+</LinearLayout>
