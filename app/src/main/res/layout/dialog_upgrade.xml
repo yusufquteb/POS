@@ -1,0 +1,301 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	<LinearLayout
+		android:id="@+id/linear59"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="24dp"
+		android:orientation="vertical"
+		android:background="@android:color/white">
+		<TextView
+			android:id="@+id/textview76"
+			android:focusable="false"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="✨ ترقية إلى Premium"
+			android:textSize="24sp"
+			android:textStyle="bold"
+			android:textColor="#212121"
+			android:layout_gravity="center_horizontal" />
+		<TextView
+			android:id="@+id/textview77"
+			android:focusable="false"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="24dp"
+			android:text="استمتع بجميع الميزات المتقدمة"
+			android:textSize="14sp"
+			android:textColor="#757575"
+			android:layout_gravity="center_horizontal" />
+		<LinearLayout
+			android:id="@+id/linear60"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="24dp"
+			android:orientation="vertical">
+			<LinearLayout
+				android:id="@+id/linear61"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="12dp"
+				android:orientation="horizontal">
+				<TextView
+					android:id="@+id/textview78"
+					android:focusable="false"
+					android:layout_width="32dp"
+					android:layout_height="32dp"
+					android:gravity="center_horizontal|center_vertical"
+					android:text="♾️"
+					android:textSize="20sp" />
+				<LinearLayout
+					android:id="@+id/linear62"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:layout_weight="1"
+					android:layout_marginStart="12dp">
+					<TextView
+						android:id="@+id/textview79"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="عمليات غير محدودة"
+						android:textSize="16sp"
+						android:textStyle="bold"
+						android:textColor="#212121" />
+					<TextView
+						android:id="@+id/textview80"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="لا حدود للعمليات اليومية"
+						android:textSize="13sp"
+						android:textColor="#757575" />
+				</LinearLayout>
+			</LinearLayout>
+			<LinearLayout
+				android:id="@+id/linear63"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="12dp"
+				android:orientation="horizontal">
+				<TextView
+					android:id="@+id/textview81"
+					android:focusable="false"
+					android:layout_width="32dp"
+					android:layout_height="32dp"
+					android:gravity="center_horizontal|center_vertical"
+					android:text="☁️"
+					android:textSize="20sp" />
+				<LinearLayout
+					android:id="@+id/linear64"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:layout_weight="1"
+					android:layout_marginStart="12dp">
+					<TextView
+						android:id="@+id/textview82"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="نسخ احتياطي تلقائي"
+						android:textSize="16sp"
+						android:textStyle="bold"
+						android:textColor="#212121" />
+					<TextView
+						android:id="@+id/textview83"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="نسخ يومي آمن لبياناتك"
+						android:textSize="13sp"
+						android:textColor="#757575" />
+				</LinearLayout>
+			</LinearLayout>
+			<LinearLayout
+				android:id="@+id/linear65"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="12dp"
+				android:orientation="horizontal">
+				<TextView
+					android:id="@+id/textview84"
+					android:focusable="false"
+					android:layout_width="32dp"
+					android:layout_height="32dp"
+					android:gravity="center_horizontal|center_vertical"
+					android:text="📊"
+					android:textSize="20sp" />
+				<LinearLayout
+					android:id="@+id/linear66"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:layout_weight="1"
+					android:layout_marginStart="12dp">
+					<TextView
+						android:id="@+id/textview85"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="تقارير متقدمة"
+						android:textSize="16sp"
+						android:textStyle="bold"
+						android:textColor="#212121" />
+					<TextView
+						android:id="@+id/textview86"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="تحليلات شاملة لمبيعاتك"
+						android:textSize="13sp"
+						android:textColor="#757575" />
+				</LinearLayout>
+			</LinearLayout>
+			<LinearLayout
+				android:id="@+id/linear67"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="12dp"
+				android:orientation="horizontal">
+				<TextView
+					android:id="@+id/textview87"
+					android:focusable="false"
+					android:layout_width="32dp"
+					android:layout_height="32dp"
+					android:gravity="center_horizontal|center_vertical"
+					android:text="🎯"
+					android:textSize="20sp" />
+				<LinearLayout
+					android:id="@+id/linear68"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:layout_weight="1"
+					android:layout_marginStart="12dp">
+					<TextView
+						android:id="@+id/textview88"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="دعم فني أولوية"
+						android:textSize="16sp"
+						android:textStyle="bold"
+						android:textColor="#212121" />
+					<TextView
+						android:id="@+id/textview89"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="دعم سريع وأولوية في الرد"
+						android:textSize="13sp"
+						android:textColor="#757575" />
+				</LinearLayout>
+			</LinearLayout>
+			<LinearLayout
+				android:id="@+id/linear69"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+				<TextView
+					android:id="@+id/textview90"
+					android:focusable="false"
+					android:layout_width="32dp"
+					android:layout_height="32dp"
+					android:gravity="center_horizontal|center_vertical"
+					android:text="🚫"
+					android:textSize="20sp" />
+				<LinearLayout
+					android:id="@+id/linear70"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:layout_weight="1"
+					android:layout_marginStart="12dp">
+					<TextView
+						android:id="@+id/textview91"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="بدون إعلانات"
+						android:textSize="16sp"
+						android:textStyle="bold"
+						android:textColor="#212121" />
+					<TextView
+						android:id="@+id/textview92"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="تجربة نظيفة بدون إزعاج"
+						android:textSize="13sp"
+						android:textColor="#757575" />
+				</LinearLayout>
+			</LinearLayout>
+		</LinearLayout>
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/cardview20"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="16dp"
+			app:cardBackgroundColor="#F3E5F5"
+			app:cardCornerRadius="12dp"
+			app:cardElevation="0dp">
+			<LinearLayout
+				android:id="@+id/linear71"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="16dp"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+				<TextView
+					android:id="@+id/textview93"
+					android:focusable="false"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="💎"
+					android:textSize="32sp" />
+				<LinearLayout
+					android:id="@+id/linear72"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:layout_weight="1"
+					android:layout_marginStart="12dp">
+					<TextView
+						android:id="@+id/textview94"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="ابدأ من"
+						android:textSize="12sp"
+						android:textColor="#757575" />
+					<TextView
+						android:id="@+id/textview95"
+						android:focusable="false"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="$4.99 / شهر"
+						android:textSize="20sp"
+						android:textStyle="bold" />
+				</LinearLayout>
+			</LinearLayout>
+		</com.google.android.material.card.MaterialCardView>
+		<TextView
+			android:id="@+id/textview96"
+			android:focusable="false"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:text="✅ ضمان استرجاع المال خلال 7 أيام"
+			android:textSize="12sp"
+			android:textColor="#388E3C"
+			android:layout_gravity="center_horizontal" />
+	</LinearLayout>
+</LinearLayout>

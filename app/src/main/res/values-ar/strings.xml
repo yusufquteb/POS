@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============================================ -->
+    <!-- 📱 App Information -->
+    <!-- ============================================ -->
+    <string name="app_name">كاشير POS</string>
+    <string name="app_tagline">نظام نقاط البيع الاحترافي</string>
+
+    <!-- ============================================ -->
+    <!-- 🔐 Authentication -->
+    <!-- ============================================ -->
+    <string name="auth_welcome">مرحباً بك</string>
+    <string name="auth_sign_in">تسجيل الدخول</string>
+    <string name="auth_sign_up">إنشاء حساب</string>
+    <string name="auth_sign_in_google">تسجيل الدخول عبر Google</string>
+    <string name="auth_sign_in_email">تسجيل الدخول بالبريد الإلكتروني</string>
+    <string name="auth_email">البريد الإلكتروني</string>
+    <string name="auth_password">كلمة المرور</string>
+    <string name="auth_skip">تخطي</string>
+    <string name="auth_or">أو</string>
+    <string name="auth_no_account">ليس لديك حساب؟ إنشاء حساب</string>
+    <string name="auth_have_account">لديك حساب؟ تسجيل الدخول</string>
+    <string name="auth_forgot_password">نسيت كلمة المرور؟</string>
+
+    <!-- ============================================ -->
+    <!-- 👋 Onboarding -->
+    <!-- ============================================ -->
+    <string name="onboarding_welcome_title">مرحباً بك في كاشير POS</string>
+    <string name="onboarding_welcome_desc">نظام نقاط البيع الأكثر سهولة واحترافية\nلإدارة متجرك بكفاءة عالية</string>
+    <string name="onboarding_products_title">إدارة المنتجات والمخزون</string>
+    <string name="onboarding_products_desc">أضف منتجاتك بسهولة مع الباركود\nوراقب المخزون بتنبيهات ذكية</string>
+    <string name="onboarding_sales_title">مبيعات سريعة وسهلة</string>
+    <string name="onboarding_sales_desc">نقطة بيع سريعة مع طباعة الفواتير\nوإدارة العملاء بشكل احترافي</string>
+    <string name="onboarding_reports_title">تقارير شاملة ودقيقة</string>
+    <string name="onboarding_reports_desc">احصل على رؤى واضحة عن أداء متجرك\nمع تقارير مفصلة وتحليلات ذكية</string>
+    <string name="onboarding_next">التالي</string>
+    <string name="onboarding_start">ابدأ الآن</string>
+    <string name="onboarding_skip">تخطي</string>
+    <string name="onboarding_image">صورة التهيئة</string>
+
+    <!-- ============================================ -->
+    <!-- 🏠 Main Screen -->
+    <!-- ============================================ -->
+    <string name="main_dashboard">لوحة التحكم</string>
+    <string name="main_today_sales">مبيعات اليوم</string>
+    <string name="main_today_invoices">فواتير اليوم</string>
+    <string name="main_quick_sale">بيع سريع</string>
+
+    <!-- ============================================ -->
+    <!-- 🛒 POS & Cart -->
+    <!-- ============================================ -->
+    <string name="pos_title">نقطة البيع</string>
+    <string name="cart_empty">السلة فارغة</string>
+    <string name="cart_add_product">أضف منتج</string>
+    <string name="cart_total">المجموع</string>
+    <string name="cart_checkout">إتمام البيع</string>
+    <string name="cart_clear">مسح السلة</string>
+    <string name="cart_title">سلة المشتريات</string>
+    <string name="cart_search_hint">بحث في السلة...</string>
+    <string name="cart_add_products">إضافة منتجات للسلة</string>
+    <string name="cart_items_count">عدد العناصر: 0</string>
+    <string name="empty_cart">السلة فارغة</string>
+
+    <!-- ============================================ -->
+    <!-- 📦 Products -->
+    <!-- ============================================ -->
+    <string name="products_title">المنتجات</string>
+    <string name="product_add">إضافة منتج</string>
+    <string name="product_name">اسم المنتج</string>
+    <string name="product_barcode">الباركود</string>
+    <string name="product_price">السعر</string>
+    <string name="product_cost">التكلفة</string>
+    <string name="product_quantity">الكمية</string>
+    <string name="product_category">الفئة</string>
+    <string name="product_description">الوصف</string>
+    <string name="product_save">حفظ</string>
+    <string name="product_delete">حذف</string>
+    <string name="product_edit">تعديل</string>
+    <string name="add_product">إضافة منتج</string>
+    <string name="add_product_title">إضافة منتج جديد</string>
+    <string name="add_product_image_hint">اضغط لإضافة صورة</string>
+    <string name="add_product_section_basic">المعلومات الأساسية</string>
+    <string name="add_product_section_pricing">التسعير</string>
+    <string name="add_product_profit">الربح المتوقع</string>
+    <string name="add_product_profit_percent">نسبة الربح %</string>
+    <string name="add_product_section_supply">المورد والمخزن</string>
+    <string name="add_product_section_saved">المنتجات المحفوظة</string>
+    <string name="swipe_hint">اسحب للحذف</string>
+    <string name="add_product_save_and_new">حفظ وإضافة جديد</string>
+    <string name="add_product_save">حفظ المنتج</string>
+    <string name="products_count">إجمالي المنتجات: %1$d</string>
+    <string name="product_deleted">تم حذف المنتج بنجاح</string>
+    <string name="delete_product_confirm">تأكيد الحذف</string>
+    <string name="product_details">تفاصيل المنتج</string>
+    <string name="products">المنتجات</string>
+    <string name="product_added">تم إضافة المنتج بنجاح</string>
+
+    <!-- ============================================ -->
+    <!-- 👥 Customers -->
+    <!-- ============================================ -->
+    <string name="customers_title">العملاء</string>
+    <string name="customer_add">إضافة عميل</string>
+    <string name="customer_name">اسم العميل</string>
+    <string name="customer_phone">رقم الهاتف</string>
+    <string name="customer_email">البريد الإلكتروني</string>
+    <string name="customer_address">العنوان</string>
+    <string name="customers_search_hint">بحث عن عميل...</string>
+    <string name="customers_empty">لا يوجد عملاء حالياً</string>
+    <string name="customers_add_first">أضف أول عميل للبدء</string>
+    <string name="customers_no_phone">لا يوجد رقم هاتف مسجل</string>
+
+    <!-- ============================================ -->
+    <!-- 🏭 Suppliers -->
+    <!-- ============================================ -->
+    <string name="suppliers_title">الموردين</string>
+    <string name="supplier_add">إضافة مورد</string>
+    <string name="supplier_name">اسم المورد</string>
+    <string name="supplier_company">اسم الشركة</string>
+    <string name="suppliers_search_hint">بحث عن مورد...</string>
+    <string name="suppliers_empty">لا يوجد موردين مسجلين</string>
+    <string name="suppliers_add_first">أضف أول مورد للبدء</string>
+
+    <!-- ============================================ -->
+    <!-- 🧾 Invoices -->
+    <!-- ============================================ -->
+    <string name="invoices_title">الفواتير</string>
+    <string name="invoice_number">رقم الفاتورة</string>
+    <string name="invoice_date">التاريخ</string>
+    <string name="invoice_customer">العميل</string>
+    <string name="invoice_total">المجموع</string>
+    <string name="invoice_paid">مدفوع</string>
+    <string name="invoice_pending">معلق</string>
+    <string name="invoice_print">طباعة</string>
+    <string name="invoice_details">تفاصيل الفاتورة</string>
+    <string name="invoice_details_total">إجمالي الفاتورة</string>
+    <string name="invoice_details_whatsapp_not_installed">تطبيق واتساب غير مثبت</string>
+    <string name="invoices_filter_today">اليوم</string>
+    <string name="invoices_filter_month">هذا الشهر</string>
+    <string name="invoices_search_hint">بحث في الفواتير...</string>
+    <string name="invoices_empty">لا توجد فواتير مسجلة</string>
+    <string name="invoices">الفواتير</string>
+
+    <!-- ============================================ -->
+    <!-- 📊 Reports -->
+    <!-- ============================================ -->
+    <string name="reports_title">التقارير</string>
+    <string name="reports_sales">تقرير المبيعات</string>
+    <string name="reports_products">تقرير المنتجات</string>
+    <string name="reports_customers">تقرير العملاء</string>
+    <string name="reports_profit">تقرير الأرباح</string>
+
+    <!-- ============================================ -->
+    <!-- 💰 Expenses -->
+    <!-- ============================================ -->
+    <string name="expenses_title">المصروفات</string>
+    <string name="expense_add">إضافة مصروف</string>
+    <string name="expense_amount">المبلغ</string>
+    <string name="expense_category">الفئة</string>
+    <string name="expense_note">ملاحظة</string>
+
+    <!-- ============================================ -->
+    <!-- ⚙️ Settings -->
+    <!-- ============================================ -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_general">الإعدادات العامة</string>
+    <string name="settings_store">إعدادات المتجر</string>
+    <string name="settings_printer">إعدادات الطابعة</string>
+    <string name="settings_theme">المظهر</string>
+    <string name="settings_language">اللغة</string>
+    <string name="settings_backup">النسخ الاحتياطي</string>
+    <string name="settings_restore">استعادة النسخة</string>
+    <string name="settings_about">حول التطبيق</string>
+    <string name="settings">الإعدادات</string>
+    <string name="settings_saved">تم حفظ الإعدادات</string>
+    <string name="general_settings">الإعدادات العامة</string>
+    <string name="language">اللغة</string>
+    <string name="country">الدولة</string>
+    <string name="currency">العملة</string>
+    <string name="dark_mode">الوضع الداكن</string>
+    <string name="dark_mode_desc">تبديل بين المظهر الفاتح والداكن</string>
+    <string name="tax_settings">إعدادات الضريبة</string>
+    <string name="enable_tax">تفعيل الضريبة</string>
+    <string name="enable_tax_desc">تطبيق الضريبة على جميع الفواتير الصادرة</string>
+    <string name="tax_rate">نسبة الضريبة (%)</string>
+    <string name="special_features">المميزات الخاصة</string>
+    <string name="country_feature_desc">تفعيل الخصائص المخصصة حسب منطقتك الجغرافية</string>
+    <string name="backup_settings">إعدادات النسخ الاحتياطي</string>
+    <string name="auto_backup">النسخ الاحتياطي التلقائي</string>
+    <string name="auto_backup_desc">تفعيل حفظ البيانات تلقائياً لحمايتها من الضياع</string>
+    <string name="backup_interval">تكرار النسخ</string>
+    <string name="backup_time">وقت النسخ</string>
+    <string name="notifications">التنبيهات</string>
+    <string name="stock_alerts">تنبيهات المخزون</string>
+    <string name="stock_alerts_desc">تنبيه عند وصول المنتجات للحد الأدنى</string>
+    <string name="debt_alerts">تنبيهات الديون</string>
+    <string name="debt_alerts_desc">تنبيه بمواعيد تحصيل مستحقات العملاء</string>
+    <string name="auto_print">طباعة تلقائية</string>
+    <string name="auto_print_desc">طباعة الفاتورة فور إتمام عملية البيع</string>
+    <string name="advanced_settings">إعدادات متقدمة</string>
+    <string name="subscription">الاشتراك</string>
+    <string name="free_plan">النسخة المجانية</string>
+    <string name="about">حول التطبيق</string>
+    <string name="color_scheme">مجموعة الألوان</string>
+
+    <!-- Theme Settings -->
+    <string name="theme_mode">وضع المظهر</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+    <string name="theme_auto">تلقائي</string>
+    <string name="theme_color">مجموعة الألوان</string>
+    <string name="theme_blue">أزرق كلاسيكي</string>
+    <string name="theme_purple">بنفسجي أنيق</string>
+    <string name="theme_green">أخضر منعش</string>
+    <string name="theme_orange">برتقالي دافئ</string>
+    <string name="theme_teal">تركواز عصري</string>
+
+    <!-- Language -->
+    <string name="language_arabic">العربية</string>
+    <string name="language_english">English</string>
+    <string name="language_change_message">سيتم إعادة تشغيل التطبيق لتطبيق اللغة الجديدة</string>
+
+    <!-- ============================================ -->
+    <!-- 💾 Backup & Restore -->
+    <!-- ============================================ -->
+    <string name="backup_title">النسخ الاحتياطي</string>
+    <string name="backup_create">إنشاء نسخة احتياطية</string>
+    <string name="backup_restore">استعادة النسخة</string>
+    <string name="backup_auto">نسخ احتياطي تلقائي</string>
+    <string name="backup_select_data">اختر البيانات</string>
+    <string name="backup_products">المنتجات</string>
+    <string name="backup_customers">العملاء</string>
+    <string name="backup_suppliers">الموردين</string>
+    <string name="backup_invoices">الفواتير</string>
+    <string name="backup_expenses">المصروفات</string>
+    <string name="create_backup">إنشاء نسخة احتياطية</string>
+    <string name="backup_created">تم إنشاء النسخة الاحتياطية بنجاح</string>
+    <string name="backup_failed">فشل إنشاء النسخة الاحتياطية</string>
+    <string name="restore_backup">استعادة نسخة احتياطية</string>
+    <string name="backup_restored">تمت استعادة البيانات بنجاح</string>
+    <string name="restore_failed">فشلت عملية الاستعادة</string>
+    <string name="file_not_found">الملف غير موجود</string>
+
+    <!-- ============================================ -->
+    <!-- 🖨️ Printer -->
+    <!-- ============================================ -->
+    <string name="printer_title">إعدادات الطابعة</string>
+    <string name="printer_connect">ربط طابعة</string>
+    <string name="printer_disconnect">فصل الطابعة</string>
+    <string name="printer_test">طباعة تجريبية</string>
+    <string name="printer_bluetooth">طابعة بلوتوث</string>
+    <string name="printer_connected">متصلة</string>
+    <string name="printer_not_connected">غير متصلة</string>
+    <string name="printer_settings">إعدادات الطابعة</string>
+
+    <!-- ============================================ -->
+    <!-- ⚠️ Errors & Alerts -->
+    <!-- ============================================ -->
+    <string name="error_title">خطأ</string>
+    <string name="error_unknown">حدث خطأ غير متوقع</string>
+    <string name="error_network">خطأ في الاتصال بالشبكة</string>
+    <string name="error_no_internet">لا يوجد اتصال بالإنترنت</string>
+    <string name="error_invalid_input">بيانات غير صحيحة</string>
+    <string name="error_required_field">هذا الحقل مطلوب</string>
+    <string name="error_icon">أيقونة الخطأ</string>
+    <string name="error_loading">خطأ في التحميل</string>
+    <string name="scanner_error">خطأ في تشغيل الماسح الضوئي</string>
+
+    <!-- Validation -->
+    <string name="validation_email_empty">الرجاء إدخال البريد الإلكتروني</string>
+    <string name="validation_email_invalid">البريد الإلكتروني غير صحيح</string>
+    <string name="validation_password_empty">الرجاء إدخال كلمة المرور</string>
+    <string name="validation_password_short">كلمة المرور يجب أن تكون 6 أحرف على الأقل</string>
+    <string name="validation_name_empty">الرجاء إدخال الاسم</string>
+    <string name="validation_barcode_empty">الرجاء إدخال الباركود</string>
+    <string name="validation_price_empty">الرجاء إدخال السعر</string>
+    <string name="validation_quantity_empty">الرجاء إدخال الكمية</string>
+    <string name="required_field">هذا الحقل مطلوب</string>
+    <string name="invalid_price">سعر غير صالح</string>
+    <string name="invalid_quantity">كمية غير صالحة</string>
+    <string name="barcode_exists">هذا الباركود مسجل مسبقاً</string>
+    <string name="name_required">الاسم مطلوب</string>
+
+    <!-- Alerts -->
+    <string name="alert_low_stock">تنبيه: منتجات منخفضة</string>
+    <string name="alert_out_of_stock">نفذت الكمية</string>
+    <string name="low_stock_alert_message">لديك %d منتج منخفض في المخزون</string>
+    <string name="no_low_stock">لا توجد منتجات منخفضة</string>
+    <string name="alert">تنبيه</string>
+    <string name="low_stock_title">منتجات منخفضة (%d)</string>
+    <string name="low_stock">نواقص المخزون</string>
+
+    <!-- ============================================ -->
+    <!-- ✅ Success Messages -->
+    <!-- ============================================ -->
+    <string name="success_saved">تم الحفظ بنجاح</string>
+    <string name="success_deleted">تم الحذف بنجاح</string>
+    <string name="success_updated">تم التحديث بنجاح</string>
+    <string name="success_backup">تم إنشاء النسخة الاحتياطية</string>
+    <string name="success_restore">تم استعادة النسخة بنجاح</string>
+    <string name="success_print">تمت الطباعة بنجاح</string>
+    <string name="operation_failed">فشلت العملية، حاول مجدداً</string>
+    <string name="saved_successfully">تم الحفظ بنجاح</string>
+    <string name="deleted_successfully">تم الحذف بنجاح</string>
+    <string name="unknown_error">حدث خطأ غير معروف</string>
+    <string name="store_updated">تم تحديث بيانات المتجر</string>
+
+    <!-- ============================================ -->
+    <!-- 🔔 Notifications -->
+    <!-- ============================================ -->
+    <string name="notification_new_sale">عملية بيع جديدة</string>
+    <string name="notification_low_stock">تنبيه مخزون منخفض</string>
+
+    <!-- ============================================ -->
+    <!-- 🎯 Actions -->
+    <!-- ============================================ -->
+    <string name="action_save">حفظ</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_edit">تعديل</string>
+    <string name="action_add">إضافة</string>
+    <string name="action_search">بحث</string>
+    <string name="action_filter">تصفية</string>
+    <string name="action_sort">ترتيب</string>
+    <string name="action_refresh">تحديث</string>
+    <string name="action_share">مشاركة</string>
+    <string name="action_print">طباعة</string>
+    <string name="action_export">تصدير</string>
+    <string name="action_import">استيراد</string>
+    <string name="action_ok">حسناً</string>
+    <string name="action_yes">نعم</string>
+    <string name="action_no">لا</string>
+    <string name="action_continue">متابعة</string>
+    <string name="action_back">رجوع</string>
+    <string name="action_close">إغلاق</string>
+    <string name="action_retry">إعادة المحاولة</string>
+
+    <!-- ============================================ -->
+    <!-- 📅 Date & Time -->
+    <!-- ============================================ -->
+    <string name="today">اليوم</string>
+    <string name="yesterday">أمس</string>
+    <string name="this_week">هذا الأسبوع</string>
+    <string name="this_month">هذا الشهر</string>
+    <string name="this_year">هذا العام</string>
+    <string name="custom_date">تاريخ مخصص</string>
+
+    <!-- ============================================ -->
+    <!-- 💵 Currency & Numbers -->
+    <!-- ============================================ -->
+    <string name="currency_symbol">ج.م</string>
+    <string name="currency_name">جنيه مصري</string>
+    <string name="currency_egp">ج.م</string>
+    <string name="item">عنصر</string>
+    <string name="items">عناصر</string>
+
+    <!-- ============================================ -->
+    <!-- 🔒 Permissions -->
+    <!-- ============================================ -->
+    <string name="permission_camera_rationale">نحتاج إذن الكاميرا لمسح الباركود</string>
+    <string name="permission_storage_rationale">نحتاج إذن الوصول للملفات للنسخ الاحتياطي</string>
+    <string name="permission_bluetooth_rationale">نحتاج إذن البلوتوث للطباعة</string>
+    <string name="camera_permission_required">يجب منح إذن الكاميرا للمتابعة</string>
+    <string name="storage_permission_required">يجب منح إذن التخزين للمتابعة</string>
+
+    <!-- ============================================ -->
+    <!-- 📱 Navigation Drawer -->
+    <!-- ============================================ -->
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_pos">نقطة البيع</string>
+    <string name="nav_products">المنتجات</string>
+    <string name="nav_customers">العملاء</string>
+    <string name="nav_suppliers">الموردين</string>
+    <string name="nav_invoices">الفواتير</string>
+    <string name="nav_reports">التقارير</string>
+    <string name="nav_expenses">المصروفات</string>
+    <string name="nav_settings">الإعدادات</string>
+    <string name="nav_backup">النسخ الاحتياطي</string>
+    <string name="nav_help">مساعدة</string>
+    <string name="nav_about">حول</string>
+    <string name="nav_logout">تسجيل الخروج</string>
+    <string name="navigation_drawer_open">فتح قائمة التنقل</string>
+    <string name="navigation_drawer_close">إغلاق قائمة التنقل</string>
+
+    <!-- ============================================ -->
+    <!-- 🎨 Miscellaneous -->
+    <!-- ============================================ -->
+    <string name="loading">جاري التحميل...</string>
+    <string name="please_wait">الرجاء الانتظار</string>
+    <string name="no_data">لا توجد بيانات</string>
+    <string name="empty_list">القائمة فارغة</string>
+    <string name="search_hint">ابحث...</string>
+    <string name="no_results">لا توجد نتائج</string>
+    <string name="coming_soon">قريباً</string>
+    <string name="under_development">قيد التطوير</string>
+    <string name="more">المزيد</string>
+    <string name="sales">المبيعات</string>
+
+    <!-- Confirmation -->
+    <string name="confirm_delete_title">تأكيد الحذف</string>
+    <string name="confirm_delete_message">هل أنت متأكد من الحذف؟</string>
+    <string name="confirm_delete">هل أنت متأكد من الحذف؟</string>
+    <string name="confirm_exit_title">تأكيد الخروج</string>
+    <string name="confirm_exit_message">هل تريد الخروج من التطبيق؟</string>
+    <string name="feature_coming_soon">هذه الميزة قيد التطوير وستكون متاحة قريباً</string>
+    <string name="delete_product_message">هل أنت متأكد من حذف هذا العنصر؟</string>
+
+    <!-- Store Settings -->
+    <string name="store_settings">إعدادات المتجر</string>
+    <string name="store_settings_title">بيانات المتجر</string>
+    <string name="store_settings_logo_hint">شعار المتجر</string>
+    <string name="store_settings_section_info">معلومات التواصل</string>
+    <string name="store_settings_save">حفظ الإعدادات</string>
+    <string name="location">الموقع</string>
+
+    <!-- Product Fields -->
+    <string name="brand">العلامة التجارية</string>
+    <string name="price">سعر البيع</string>
+    <string name="cost">التكلفة</string>
+    <string name="quantity">الكمية</string>
+    <string name="category">التصنيف</string>
+    <string name="supplier">المورد</string>
+    <string name="barcode">الباركود</string>
+    <string name="edit">تعديل</string>
+    <string name="delete">حذف</string>
+    <string name="remove">حذف</string>
+    <string name="save">حفظ</string>
+    <string name="close">إغلاق</string>
+    <string name="cancel">إلغاء</string>
+    <string name="ok">موافق</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+
+    <!-- Dashboard -->
+    <string name="today_sales">مبيعات اليوم</string>
+    <string name="today_invoices">فواتير اليوم</string>
+    <string name="total_products">إجمالي المنتجات</string>
+    <string name="quick_actions">الإجراءات السريعة</string>
+    <string name="quick_sale">بيع سريع</string>
+    <string name="pos">نقطة البيع</string>
+    <string name="warning">تحذير</string>
+
+    <!-- Misc -->
+    <string name="view_products">عرض المنتجات</string>
+    <string name="user">مستخدم</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="logout_confirm">هل أنت متأكد من تسجيل الخروج؟</string>
+    <string name="about_app">حول التطبيق</string>
+    <string name="about_message">سمارت POS - كاشير
+
+الإصدار: 1.0
+
+نظام نقاط البيع الاحترافي
+
+© 2026 جميع الحقوق محفوظة</string>
+    <string name="cannot_open_browser">لا يمكن فتح المتصفح</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="payment_cash">نقدي</string>
+    <string name="restart_app">إعادة تشغيل التطبيق</string>
+    <string name="restart_required">يجب إعادة تشغيل التطبيق لتطبيق التغييرات</string>
+    <string name="choose_image_source">اختر مصدر الصورة</string>
+    <string name="camera">الكاميرا</string>
+    <string name="gallery">المعرض</string>
+    <string name="add_shopping_cart">إضافة للسلة</string>
+    <string name="profile_image">صورة الملف الشخصي</string>
+    <string name="theme_icon">أيقونة المظهر</string>
+    <string name="language_icon">أيقونة اللغة</string>
+    <string name="store_icon">أيقونة المتجر</string>
+    <string name="printer_icon">أيقونة الطابعة</string>
+    <string name="backup_icon">أيقونة النسخ الاحتياطي</string>
+    <string name="info_icon">أيقونة المعلومات</string>
+
+    <!-- Navigation Drawer Extra -->
+    <string name="nav_printer">إعدادات الطابعة</string>
+    <string name="nav_rate">تقييم التطبيق</string>
+    <string name="nav_share">مشاركة التطبيق</string>
+
+    <!-- Cart & Checkout -->
+    <string name="no_products">لا توجد منتجات مضافة</string>
+    <string name="quantity_hint">أدخل الكمية</string>
+    <string name="stock_available">المتاح</string>
+    <string name="quantity_positive">الكمية يجب أن تكون أكبر من صفر</string>
+    <string name="quantity_exceeds">الكمية تتجاوز المتاح</string>
+    <string name="added_to_cart">✓ تمت الإضافة للسلة</string>
+    <string name="no_customers_yet">لا يوجد عملاء مسجلون</string>
+    <string name="no_customer">بدون عميل</string>
+    <string name="select_customer">اختر العميل</string>
+    <string name="no_customer_selected">لا يوجد عميل محدد</string>
+    <string name="total_amount">الإجمالي</string>
+    <string name="confirm_checkout">هل تريد إتمام البيع؟</string>
+    <string name="checkout_failed">فشلت عملية البيع</string>
+    <string name="checkout_error">خطأ في إتمام البيع</string>
+    <string name="checkout_success">تمت العملية بنجاح</string>
+    <string name="print">طباعة</string>
+    <string name="printing">جاري الطباعة…</string>
+    <string name="view_invoice">عرض الفاتورة</string>
+    <string name="confirm_clear_cart">هل تريد مسح جميع المنتجات من السلة؟</string>
+    <string name="product_not_found">المنتج غير موجود</string>
+    <string name="install_barcode_scanner">يرجى تثبيت تطبيق قارئ الباركود</string>
+
+    <!-- Cart Layout Strings -->
+    <string name="customer_label">العميل</string>
+    <string name="select">اختيار</string>
+    <string name="subtotal">المجموع الفرعي</string>
+    <string name="discount_amount">قيمة الخصم</string>
+    <string name="final_total">الإجمالي النهائي</string>
+    <string name="discount_hint">الخصم %</string>
+
+    <!-- Firebase -->
+    <string name="default_web_client_id" translatable="false">YOUR_FIREBASE_WEB_CLIENT_ID</string>
+
+    <!-- Colors as strings (non-translatable) -->
+    <string name="color_error_light" translatable="false">#FFEBEE</string>
+    <string name="color_warning" translatable="false">#FF9800</string>
+
+    <!-- ── طرق الدفع ── -->
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="payment_card">بطاقة</string>
+    <string name="payment_credit">آجل</string>
+
+    <!-- ── السلة / نقطة البيع ── -->
+    <string name="add_to_cart">أُضيف إلى السلة</string>
+    <string name="removed_from_cart">أُزيل من السلة</string>
+    <string name="confirm_sale">تأكيد البيع</string>
+    <string name="out_of_stock">نفد المخزون</string>
+    <string name="print_error">الطابعة غير متصلة أو حدث خطأ</string>
+    <string name="tax">الضريبة</string>
+    <string name="scan_barcode">مسح الباركود</string>
+    <string name="empty_cart_desc">أضف منتجات لبدء عملية البيع</string>
+
+    <!-- ── Google Play / الاشتراك ── -->
+    <string name="premium_title">SmartPOS Premium</string>
+    <string name="premium_desc">افتح جميع الميزات: نسخ سحابي، تقارير متقدمة، متاجر متعددة</string>
+    <string name="subscription_monthly">شهري – 29 ر.س / شهر</string>
+    <string name="subscription_yearly">سنوي – 199 ر.س / سنة</string>
+    <string name="subscription_lifetime">مدى الحياة – 499 ر.س</string>
+    <string name="subscribe_now">اشترك الآن</string>
+    <string name="already_subscribed">أنت مشترك بالفعل!</string>
+    <string name="subscription_success">تم تفعيل الاشتراك بنجاح ✓</string>
+    <string name="subscription_failed">فشل الاشتراك، يرجى المحاولة مجدداً</string>
+    <string name="restore_purchases">استعادة المشتريات</string>
+    <string name="billing_not_ready">خدمة الدفع غير جاهزة</string>
+    <string name="rate_app">قيّم التطبيق</string>
+    <string name="rate_app_message">هل تستمتع باستخدام SmartPOS؟ قيّمنا في جوجل بلاي لمساعدة الآخرين!</string>
+    <string name="rate_now">قيّم الآن</string>
+    <string name="maybe_later">لاحقاً</string>
+
+    <!-- ── التقارير ── -->
+    <string name="reports_period">الفترة الزمنية</string>
+    <string name="reports_today">اليوم</string>
+    <string name="reports_week">هذا الأسبوع</string>
+    <string name="reports_month">هذا الشهر</string>
+    <string name="reports_custom">مخصص</string>
+    <string name="export_pdf">تصدير PDF</string>
+    <string name="share_report">مشاركة التقرير</string>
+    <string name="no_sales_period">لا توجد مبيعات في الفترة المحددة</string>
+    <string name="invoice_average">متوسط الفاتورة</string>
+    <string name="currency_sar">ر.س</string>
+
+    <!-- ── الخصوصية ── -->
+    <string name="privacy_url" translatable="false">https://yourwebsite.com/privacy</string>
+    <string name="store_url" translatable="false">https://play.google.com/store/apps/details?id=com.pos.system</string>
+
+
+    <!-- تسميات التقارير -->
+    <string name="tv_invoice_count_label">عدد الفواتير</string>
+    <string name="tv_inventory_value_label">قيمة المخزون</string>
+    <string name="reports_products_top">المنتجات الأكثر مبيعاً</string>
+
+
+    <!-- Settings sections (bilingual AR) -->
+    <string name="settings_section_account">الحساب</string>
+    <string name="settings_section_appearance">المظهر</string>
+    <string name="settings_section_store">المتجر</string>
+    <string name="settings_section_data">البيانات</string>
+    <string name="settings_section_about">حول</string>
+    <string name="settings_user_name">اسم المستخدم</string>
+    <string name="settings_user_email">user@example.com</string>
+    <string name="settings_store_desc">الاسم، العنوان، الهاتف</string>
+    <string name="settings_printer_desc">ربط وإعداد الطابعة</string>
+    <string name="settings_backup_desc">حفظ واستعادة البيانات</string>
+    <string name="settings_version">الإصدار 1.0</string>
+    <string name="settings_theme_colors">المظهر والألوان</string>
+
+    <!-- Customers/Suppliers/Expenses UI -->
+    <string name="swipe_delete_edit">اسحب لليسار للحذف، ولليمين للتعديل</string>
+    <string name="delete_customer">حذف العميل</string>
+    <string name="delete_supplier">حذف المورد</string>
+    <string name="delete_expense">حذف المصروف</string>
+    <string name="confirm_delete_customer">هل تريد حذف هذا العميل؟</string>
+    <string name="confirm_delete_supplier">هل تريد حذف هذا المورد؟</string>
+    <string name="add_customer_title">إضافة عميل جديد</string>
+    <string name="edit_customer_title">تعديل بيانات العميل</string>
+    <string name="add_supplier_title">إضافة مورد جديد</string>
+    <string name="edit_supplier_title">تعديل بيانات المورد</string>
+    <string name="add_expense_title">إضافة مصروف جديد</string>
+    <string name="total_expenses">إجمالي المصروفات</string>
+    <string name="filter_date">تصفية بالتاريخ</string>
+    <string name="clear_filter">مسح التصفية</string>
+    <string name="notes">ملاحظات</string>
+    <string name="customer_added">تمت إضافة العميل بنجاح</string>
+    <string name="customer_updated">تم تحديث بيانات العميل بنجاح</string>
+    <string name="customer_deleted">تم حذف العميل بنجاح</string>
+    <string name="supplier_added">تمت إضافة المورد بنجاح</string>
+    <string name="supplier_updated">تم تحديث بيانات المورد بنجاح</string>
+    <string name="supplier_deleted">تم حذف المورد بنجاح</string>
+
+</resources>

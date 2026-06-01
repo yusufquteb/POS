@@ -1,0 +1,63 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:padding="24dp"
+	android:background="#FFFFFF">
+	<ImageView
+		android:id="@+id/dialog_icon"
+		android:focusable="false"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:layout_marginBottom="16dp"
+		android:src="@drawable/ic_info"
+		android:scaleType="center"
+		android:layout_gravity="center_horizontal|center_vertical"
+		android:visibility="gone" />
+	<TextView
+		android:id="@+id/base_dialog_title"
+		android:focusable="false"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="12dp"
+		android:gravity="center_horizontal|center_vertical"
+		android:textSize="20sp"
+		android:textStyle="bold"
+		android:textColor="#1D1B20" />
+	<TextView
+		android:id="@+id/base_dialog_message"
+		android:focusable="false"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="24dp"
+		android:gravity="center_horizontal|center_vertical"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:textColor="#49454F" />
+	<LinearLayout
+		android:id="@+id/linear4"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal|center_vertical"
+		android:orientation="horizontal">
+		<Button
+			android:id="@+id/btn_negative"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			android:layout_weight="1"
+			style="@style/Widget.Material3.Button.TextButton" />
+		<Button
+			android:id="@+id/btn_positive"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			android:layout_weight="1"
+			style="@style/Widget.Material3.Button.TonalButton" />
+	</LinearLayout>
+</LinearLayout>

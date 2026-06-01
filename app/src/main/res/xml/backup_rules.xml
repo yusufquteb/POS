@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    backup_rules.xml - قواعد النسخ الاحتياطي التلقائي
+    المسار: app/src/main/res/xml/backup_rules.xml
+    يُستخدم مع Android 12+ (API 31+)
+-->
+<full-backup-content xmlns:tools="http://schemas.android.com/tools">
+    
+    <!-- Include - الملفات المراد نسخها احتياطياً -->
+    
+    <!-- قاعدة البيانات -->
+    <include 
+        domain="database" 
+        path="." />
+    
+    <!-- SharedPreferences -->
+    <include 
+        domain="sharedpref" 
+        path="." />
+    
+    <!-- الملفات الداخلية -->
+    <include 
+        domain="file" 
+        path="." />
+    
+    <!-- Exclude - الملفات المراد استثناؤها من النسخ الاحتياطي -->
+    
+    <!-- الذاكرة المؤقتة - لا حاجة لنسخها -->
+    <exclude 
+        domain="file" 
+        path="cache/" />
+    
+    <!-- الصور المؤقتة -->
+    <exclude 
+        domain="file" 
+        path="temp/" />
+    
+    <!-- ملفات التطبيق الكبيرة -->
+    <exclude 
+        domain="file" 
+        path="large_files/" />
+    
+    <!-- Device Transfer (Android 12+) -->
+    <!-- السماح بنقل البيانات بين الأجهزة -->
+    <cloud-backup 
+        disableIfNoEncryptionCapabilities="true" />
+
+</full-backup-content>

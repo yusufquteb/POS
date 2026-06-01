@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_pos"
+            android:icon="@drawable/ic_pos"
+            android:title="@string/nav_pos" />
+
+        <item
+            android:id="@+id/nav_products"
+            android:icon="@drawable/ic_products"
+            android:title="@string/nav_products" />
+
+        <item
+            android:id="@+id/nav_customers"
+            android:icon="@drawable/ic_customers"
+            android:title="@string/nav_customers" />
+
+        <item
+            android:id="@+id/nav_suppliers"
+            android:icon="@drawable/ic_suppliers"
+            android:title="@string/nav_suppliers" />
+
+        <item
+            android:id="@+id/nav_invoices"
+            android:icon="@drawable/ic_invoices"
+            android:title="@string/nav_invoices" />
+
+        <item
+            android:id="@+id/nav_reports"
+            android:icon="@drawable/ic_reports"
+            android:title="@string/nav_reports" />
+
+        <item
+            android:id="@+id/nav_expenses"
+            android:icon="@drawable/ic_expenses"
+            android:title="@string/nav_expenses" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/nav_settings" />
+
+        <item
+            android:id="@+id/nav_backup"
+            android:icon="@drawable/ic_backup"
+            android:title="@string/nav_backup" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/about_app" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout" />
+
+    </group>
+
+</menu>

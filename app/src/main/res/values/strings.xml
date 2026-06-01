@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App Information -->
+    <string name="app_name">Cashier POS</string>
+    <string name="app_tagline">Professional Point of Sale System</string>
+
+    <!-- Authentication -->
+    <string name="auth_welcome">Welcome</string>
+    <string name="auth_sign_in">Sign In</string>
+    <string name="auth_sign_up">Create Account</string>
+    <string name="auth_sign_in_google">Sign in with Google</string>
+    <string name="auth_sign_in_email">Sign in with Email</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_skip">Skip</string>
+    <string name="auth_or">or</string>
+    <string name="auth_no_account">Don\'t have an account? Sign Up</string>
+    <string name="auth_have_account">Already have an account? Sign In</string>
+    <string name="auth_forgot_password">Forgot Password?</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Welcome to Cashier POS</string>
+    <string name="onboarding_welcome_desc">The easiest and most professional point of sale system\nto manage your store efficiently</string>
+    <string name="onboarding_products_title">Products &amp; Inventory Management</string>
+    <string name="onboarding_products_desc">Add products easily with barcode scanning\nand monitor stock with smart alerts</string>
+    <string name="onboarding_sales_title">Fast &amp; Easy Sales</string>
+    <string name="onboarding_sales_desc">Quick point of sale with invoice printing\nand professional customer management</string>
+    <string name="onboarding_reports_title">Comprehensive &amp; Accurate Reports</string>
+    <string name="onboarding_reports_desc">Get clear insights on your store performance\nwith detailed reports and smart analytics</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_start">Get Started</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_image">Onboarding Image</string>
+
+    <!-- Main Screen -->
+    <string name="main_dashboard">Dashboard</string>
+    <string name="main_today_sales">Today\'s Sales</string>
+    <string name="main_today_invoices">Today\'s Invoices</string>
+    <string name="main_quick_sale">Quick Sale</string>
+
+    <!-- POS & Cart -->
+    <string name="pos_title">Point of Sale</string>
+    <string name="cart_empty">Cart is empty</string>
+    <string name="cart_add_product">Add Product</string>
+    <string name="cart_total">Total</string>
+    <string name="cart_checkout">Checkout</string>
+    <string name="cart_clear">Clear Cart</string>
+    <string name="cart_title">Shopping Cart</string>
+    <string name="cart_search_hint">Search cart...</string>
+    <string name="cart_add_products">Add products to cart</string>
+    <string name="cart_items_count">Items count: 0</string>
+    <string name="empty_cart">Cart is empty</string>
+
+    <!-- Products -->
+    <string name="products_title">Products</string>
+    <string name="product_add">Add Product</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_barcode">Barcode</string>
+    <string name="product_price">Price</string>
+    <string name="product_cost">Cost</string>
+    <string name="product_quantity">Quantity</string>
+    <string name="product_category">Category</string>
+    <string name="product_description">Description</string>
+    <string name="product_save">Save</string>
+    <string name="product_delete">Delete</string>
+    <string name="product_edit">Edit</string>
+    <string name="add_product">Add Product</string>
+    <string name="add_product_title">Add New Product</string>
+    <string name="add_product_image_hint">Tap to add image</string>
+    <string name="add_product_section_basic">Basic Information</string>
+    <string name="add_product_section_pricing">Pricing</string>
+    <string name="add_product_profit">Expected Profit</string>
+    <string name="add_product_profit_percent">Profit Margin %</string>
+    <string name="add_product_section_supply">Supplier &amp; Warehouse</string>
+    <string name="add_product_section_saved">Saved Products</string>
+    <string name="swipe_hint">Swipe to delete</string>
+    <string name="add_product_save_and_new">Save &amp; Add New</string>
+    <string name="add_product_save">Save Product</string>
+    <string name="products_count">Total Products: %1$d</string>
+    <string name="product_deleted">Product deleted successfully</string>
+    <string name="delete_product_confirm">Confirm Delete</string>
+    <string name="product_details">Product Details</string>
+    <string name="products">Products</string>
+    <string name="product_added">Product added successfully</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="product_updated">Product updated successfully</string>
+
+    <!-- Customers -->
+    <string name="customers_title">Customers</string>
+    <string name="customer_add">Add Customer</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_phone">Phone Number</string>
+    <string name="customer_email">Email</string>
+    <string name="customer_address">Address</string>
+    <string name="customers_search_hint">Search customers...</string>
+    <string name="customers_empty">No customers yet</string>
+    <string name="customers_add_first">Add your first customer to get started</string>
+    <string name="customers_no_phone">No phone number registered</string>
+
+    <!-- Suppliers -->
+    <string name="suppliers_title">Suppliers</string>
+    <string name="supplier_add">Add Supplier</string>
+    <string name="supplier_name">Supplier Name</string>
+    <string name="supplier_company">Company Name</string>
+    <string name="suppliers_search_hint">Search suppliers...</string>
+    <string name="suppliers_empty">No suppliers registered</string>
+    <string name="suppliers_add_first">Add your first supplier to get started</string>
+
+    <!-- Invoices -->
+    <string name="invoices_title">Invoices</string>
+    <string name="invoice_number">Invoice #</string>
+    <string name="invoice_date">Date</string>
+    <string name="invoice_customer">Customer</string>
+    <string name="invoice_total">Total</string>
+    <string name="invoice_paid">Paid</string>
+    <string name="invoice_pending">Pending</string>
+    <string name="invoice_print">Print</string>
+    <string name="invoice_details">Invoice Details</string>
+    <string name="invoice_details_total">Invoice Total</string>
+    <string name="invoice_details_whatsapp_not_installed">WhatsApp is not installed</string>
+    <string name="invoices_filter_today">Today</string>
+    <string name="invoices_filter_month">This Month</string>
+    <string name="invoices_search_hint">Search invoices...</string>
+    <string name="invoices_empty">No invoices recorded</string>
+    <string name="invoices">Invoices</string>
+
+    <!-- Reports -->
+    <string name="reports_title">Reports</string>
+    <string name="reports_sales">Sales Report</string>
+    <string name="reports_products">Products Report</string>
+    <string name="reports_customers">Customers Report</string>
+    <string name="reports_profit">Profit Report</string>
+
+    <!-- Expenses -->
+    <string name="expenses_title">Expenses</string>
+    <string name="expense_add">Add Expense</string>
+    <string name="expense_amount">Amount</string>
+    <string name="expense_category">Category</string>
+    <string name="expense_note">Note</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_general">General Settings</string>
+    <string name="settings_store">Store Settings</string>
+    <string name="settings_printer">Printer Settings</string>
+    <string name="settings_theme">Appearance</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_backup">Backup</string>
+    <string name="settings_restore">Restore Backup</string>
+    <string name="settings_about">About</string>
+    <string name="settings">Settings</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="general_settings">General Settings</string>
+    <string name="language">Language</string>
+    <string name="country">Country</string>
+    <string name="currency">Currency</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode_desc">Switch between light and dark themes</string>
+    <string name="tax_settings">Tax Settings</string>
+    <string name="enable_tax">Enable Tax</string>
+    <string name="enable_tax_desc">Apply tax to all outgoing invoices</string>
+    <string name="tax_rate">Tax Rate (%)</string>
+    <string name="special_features">Special Features</string>
+    <string name="country_feature_desc">Enable custom features based on your region</string>
+    <string name="backup_settings">Backup Settings</string>
+    <string name="auto_backup">Auto Backup</string>
+    <string name="auto_backup_desc">Enable automatic data backup to prevent data loss</string>
+    <string name="backup_interval">Backup Frequency</string>
+    <string name="backup_time">Backup Time</string>
+    <string name="notifications">Notifications</string>
+    <string name="stock_alerts">Stock Alerts</string>
+    <string name="stock_alerts_desc">Alert when products reach minimum stock level</string>
+    <string name="debt_alerts">Debt Alerts</string>
+    <string name="debt_alerts_desc">Alert for customer payment collection dates</string>
+    <string name="auto_print">Auto Print</string>
+    <string name="auto_print_desc">Automatically print invoice after each sale</string>
+    <string name="advanced_settings">Advanced Settings</string>
+    <string name="subscription">Subscription</string>
+    <string name="free_plan">Free Plan</string>
+    <string name="about">About</string>
+    <string name="color_scheme">Color Scheme</string>
+    <string name="theme_mode">Display Mode</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_auto">Auto</string>
+    <string name="theme_color">Color Scheme</string>
+    <string name="theme_blue">Classic Blue</string>
+    <string name="theme_purple">Elegant Purple</string>
+    <string name="theme_green">Fresh Green</string>
+    <string name="theme_orange">Warm Orange</string>
+    <string name="theme_teal">Modern Teal</string>
+    <string name="language_arabic">العربية</string>
+    <string name="language_english">English</string>
+    <string name="language_change_message">The app will restart to apply the new language</string>
+
+    <!-- Backup -->
+    <string name="backup_title">Backup &amp; Restore</string>
+    <string name="backup_create">Create Backup</string>
+    <string name="backup_restore">Restore Backup</string>
+    <string name="backup_auto">Auto Backup</string>
+    <string name="backup_select_data">Select Data</string>
+    <string name="backup_products">Products</string>
+    <string name="backup_customers">Customers</string>
+    <string name="backup_suppliers">Suppliers</string>
+    <string name="backup_invoices">Invoices</string>
+    <string name="backup_expenses">Expenses</string>
+    <string name="create_backup">Create Backup</string>
+    <string name="backup_created">Backup created successfully</string>
+    <string name="backup_failed">Backup creation failed</string>
+    <string name="restore_backup">Restore Backup</string>
+    <string name="backup_restored">Data restored successfully</string>
+    <string name="restore_failed">Restore operation failed</string>
+    <string name="file_not_found">File not found</string>
+
+    <!-- Printer -->
+    <string name="printer_title">Printer Settings</string>
+    <string name="printer_connect">Connect Printer</string>
+    <string name="printer_disconnect">Disconnect Printer</string>
+    <string name="printer_test">Test Print</string>
+    <string name="printer_bluetooth">Bluetooth Printer</string>
+    <string name="printer_connected">Connected</string>
+    <string name="printer_not_connected">Not Connected</string>
+    <string name="printer_settings">Printer Settings</string>
+
+    <!-- Errors -->
+    <string name="error_title">Error</string>
+    <string name="error_unknown">An unexpected error occurred</string>
+    <string name="error_network">Network connection error</string>
+    <string name="error_no_internet">No internet connection</string>
+    <string name="error_invalid_input">Invalid data</string>
+    <string name="error_required_field">This field is required</string>
+    <string name="error_icon">Error Icon</string>
+    <string name="error_loading">Loading error</string>
+    <string name="scanner_error">Error starting barcode scanner</string>
+    <string name="validation_email_empty">Please enter your email</string>
+    <string name="validation_email_invalid">Invalid email address</string>
+    <string name="validation_password_empty">Please enter your password</string>
+    <string name="validation_password_short">Password must be at least 6 characters</string>
+    <string name="validation_name_empty">Please enter a name</string>
+    <string name="validation_barcode_empty">Please enter a barcode</string>
+    <string name="validation_price_empty">Please enter a price</string>
+    <string name="validation_quantity_empty">Please enter a quantity</string>
+    <string name="required_field">This field is required</string>
+    <string name="invalid_price">Invalid price</string>
+    <string name="invalid_quantity">Invalid quantity</string>
+    <string name="barcode_exists">This barcode is already registered</string>
+    <string name="name_required">Name is required</string>
+    <string name="alert_low_stock">Alert: Low stock products</string>
+    <string name="alert_out_of_stock">Out of stock</string>
+    <string name="low_stock_alert_message">Warning: %d products need restocking</string>
+    <string name="no_low_stock">All products have sufficient stock</string>
+    <string name="alert">Alert</string>
+    <string name="low_stock_title">Low Stock (%d)</string>
+    <string name="low_stock">Low Stock</string>
+
+    <!-- Success -->
+    <string name="success_saved">Saved successfully</string>
+    <string name="success_deleted">Deleted successfully</string>
+    <string name="success_updated">Updated successfully</string>
+    <string name="success_backup">Backup created successfully</string>
+    <string name="success_restore">Backup restored successfully</string>
+    <string name="success_print">Printed successfully</string>
+    <string name="operation_failed">Operation failed, please try again</string>
+    <string name="saved_successfully">Saved successfully</string>
+    <string name="deleted_successfully">Deleted successfully</string>
+    <string name="unknown_error">An unknown error occurred</string>
+    <string name="store_updated">Store information updated</string>
+    <string name="notification_new_sale">New sale completed</string>
+    <string name="notification_low_stock">Low stock alert</string>
+
+    <!-- Actions -->
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_add">Add</string>
+    <string name="action_search">Search</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_sort">Sort</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_share">Share</string>
+    <string name="action_print">Print</string>
+    <string name="action_export">Export</string>
+    <string name="action_import">Import</string>
+    <string name="action_ok">OK</string>
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_back">Back</string>
+    <string name="action_close">Close</string>
+    <string name="action_retry">Retry</string>
+
+    <!-- Date & Time -->
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="this_week">This Week</string>
+    <string name="this_month">This Month</string>
+    <string name="this_year">This Year</string>
+    <string name="custom_date">Custom Date</string>
+
+    <!-- Currency -->
+    <string name="currency_symbol">EGP</string>
+    <string name="currency_name">Egyptian Pound</string>
+    <string name="currency_egp">EGP</string>
+    <string name="item">item</string>
+    <string name="items">items</string>
+
+    <!-- Permissions -->
+    <string name="permission_camera_rationale">Camera permission is needed for barcode scanning</string>
+    <string name="permission_storage_rationale">Storage permission is needed for backup</string>
+    <string name="permission_bluetooth_rationale">Bluetooth permission is needed for printing</string>
+    <string name="camera_permission_required">Camera permission must be granted to continue</string>
+    <string name="storage_permission_required">Storage permission must be granted to continue</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_pos">Point of Sale</string>
+    <string name="nav_products">Products</string>
+    <string name="nav_customers">Customers</string>
+    <string name="nav_suppliers">Suppliers</string>
+    <string name="nav_invoices">Invoices</string>
+    <string name="nav_reports">Reports</string>
+    <string name="nav_expenses">Expenses</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_backup">Backup</string>
+    <string name="nav_help">Help</string>
+    <string name="nav_about">About</string>
+    <string name="nav_logout">Logout</string>
+    <string name="nav_printer">Printer Settings</string>
+    <string name="nav_rate">Rate App</string>
+    <string name="nav_share">Share App</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Misc -->
+    <string name="loading">Loading...</string>
+    <string name="please_wait">Please wait</string>
+    <string name="no_data">No data available</string>
+    <string name="empty_list">List is empty</string>
+    <string name="search_hint">Search...</string>
+    <string name="no_results">No results found</string>
+    <string name="coming_soon">Coming Soon</string>
+    <string name="under_development">Under Development</string>
+    <string name="more">More</string>
+    <string name="sales">Sales</string>
+    <string name="confirm_delete_title">Confirm Delete</string>
+    <string name="confirm_delete_message">Are you sure you want to delete?</string>
+    <string name="confirm_delete">Are you sure you want to delete?</string>
+    <string name="confirm_exit_title">Confirm Exit</string>
+    <string name="confirm_exit_message">Do you want to exit the app?</string>
+    <string name="feature_coming_soon">This feature is under development and will be available soon</string>
+    <string name="delete_product_message">Are you sure you want to delete this item?</string>
+    <string name="store_settings">Store Settings</string>
+    <string name="store_settings_title">Store Information</string>
+    <string name="store_settings_logo_hint">Store Logo</string>
+    <string name="store_settings_section_info">Contact Information</string>
+    <string name="store_settings_save">Save Settings</string>
+    <string name="location">Location</string>
+    <string name="brand">Brand</string>
+    <string name="price">Sale Price</string>
+    <string name="cost">Cost</string>
+    <string name="quantity">Quantity</string>
+    <string name="category">Category</string>
+    <string name="supplier">Supplier</string>
+    <string name="barcode">Barcode</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="remove">Remove</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="today_sales">Today\'s Sales</string>
+    <string name="today_invoices">Today\'s Invoices</string>
+    <string name="total_products">Total Products</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="quick_sale">Quick Sale</string>
+    <string name="pos">Point of Sale</string>
+    <string name="warning">Warning</string>
+    <string name="view_products">View Products</string>
+    <string name="user">User</string>
+    <string name="logout">Logout</string>
+    <string name="logout_confirm">Are you sure you want to logout?</string>
+    <string name="about_app">About</string>
+    <string name="about_message">SmartPOS – Cashier POS\n\nVersion: 1.0\n\nProfessional Point of Sale System\n\n© 2026 All Rights Reserved</string>
+    <string name="cannot_open_browser">Cannot open browser</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="payment_cash">Cash</string>
+    <string name="restart_app">Restart App</string>
+    <string name="restart_required">App must restart to apply changes</string>
+    <string name="choose_image_source">Choose Image Source</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="add_shopping_cart">Add to Cart</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="theme_icon">Theme Icon</string>
+    <string name="language_icon">Language Icon</string>
+    <string name="store_icon">Store Icon</string>
+    <string name="printer_icon">Printer Icon</string>
+    <string name="backup_icon">Backup Icon</string>
+    <string name="info_icon">Info Icon</string>
+
+    <!-- Cart & Checkout -->
+    <string name="no_products">No products found</string>
+    <string name="quantity_hint">Enter quantity</string>
+    <string name="stock_available">Available</string>
+    <string name="quantity_positive">Quantity must be greater than zero</string>
+    <string name="quantity_exceeds">Quantity exceeds available stock</string>
+    <string name="added_to_cart">Added to cart</string>
+    <string name="no_customers_yet">No customers registered</string>
+    <string name="no_customer">No customer</string>
+    <string name="select_customer">Select Customer</string>
+    <string name="no_customer_selected">No customer selected</string>
+    <string name="total_amount">Total</string>
+    <string name="confirm_checkout">Do you want to complete the sale?</string>
+    <string name="checkout_failed">Sale failed</string>
+    <string name="checkout_error">Error completing sale</string>
+    <string name="checkout_success">Sale Completed Successfully</string>
+    <string name="print">Print</string>
+    <string name="printing">Printing…</string>
+    <string name="view_invoice">View Invoice</string>
+    <string name="confirm_clear_cart">Clear all items from cart?</string>
+    <string name="product_not_found">Product not found</string>
+    <string name="install_barcode_scanner">Please install a barcode scanner app</string>
+
+    <!-- Cart Layout Strings -->
+    <string name="customer_label">Customer</string>
+    <string name="select">Select</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="discount_amount">Discount Amount</string>
+    <string name="final_total">Total</string>
+    <string name="discount_hint">Discount %</string>
+
+    <string name="default_web_client_id" translatable="false">YOUR_FIREBASE_WEB_CLIENT_ID</string>
+    <string name="color_error_light" translatable="false">#FFEBEE</string>
+    <string name="color_warning" translatable="false">#FF9800</string>
+
+    <!-- ── Payment Methods ── -->
+    <string name="payment_method">Payment Method</string>
+    <string name="payment_card">Card</string>
+    <string name="payment_credit">Credit</string>
+
+    <!-- ── Cart / POS ── -->
+    <string name="add_to_cart">Added to cart</string>
+    <string name="removed_from_cart">removed from cart</string>
+    <string name="confirm_sale">Confirm Sale</string>
+    <string name="out_of_stock">Out of stock</string>
+    <string name="print_error">Printer not connected or error occurred</string>
+    <string name="tax">Tax</string>
+    <string name="scan_barcode">Scan barcode</string>
+    <string name="empty_cart_desc">Add products to start a sale</string>
+
+    <!-- ── Google Play / Subscription ── -->
+    <string name="premium_title">SmartPOS Premium</string>
+    <string name="premium_desc">Unlock all features: cloud backup, advanced reports, multi-store</string>
+    <string name="subscription_monthly">Monthly – 29 SAR/month</string>
+    <string name="subscription_yearly">Yearly – 199 SAR/year</string>
+    <string name="subscription_lifetime">Lifetime – 499 SAR</string>
+    <string name="subscribe_now">Subscribe Now</string>
+    <string name="already_subscribed">You are already subscribed!</string>
+    <string name="subscription_success">Subscription activated successfully ✓</string>
+    <string name="subscription_failed">Subscription failed. Please try again.</string>
+    <string name="restore_purchases">Restore Purchases</string>
+    <string name="billing_not_ready">Billing service not ready</string>
+    <string name="rate_app">Rate the App</string>
+    <string name="rate_app_message">Enjoying SmartPOS? Rate us on Google Play to help others find us!</string>
+    <string name="rate_now">Rate Now</string>
+    <string name="maybe_later">Maybe Later</string>
+
+    <!-- ── Reports fixes ── -->
+    <string name="reports_period">Period</string>
+    <string name="reports_today">Today</string>
+    <string name="reports_week">This Week</string>
+    <string name="reports_month">This Month</string>
+    <string name="reports_custom">Custom</string>
+    <string name="export_pdf">Export PDF</string>
+    <string name="share_report">Share Report</string>
+    <string name="no_sales_period">No sales in selected period</string>
+    <string name="invoice_average">Average Invoice</string>
+    <string name="currency_sar">SAR</string>
+
+    <!-- ── Privacy / About ── -->
+    <string name="privacy_url" translatable="false">https://yourwebsite.com/privacy</string>
+    <string name="store_url" translatable="false">https://play.google.com/store/apps/details?id=com.pos.system</string>
+
+
+    <!-- Reports labels -->
+    <string name="tv_invoice_count_label">Invoice Count</string>
+    <string name="tv_inventory_value_label">Inventory Value</string>
+    <string name="reports_products_top">Top Selling Products</string>
+
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+
+    <!-- Settings sections (bilingual) -->
+    <string name="settings_section_account">Account</string>
+    <string name="settings_section_appearance">Appearance</string>
+    <string name="settings_section_store">Store</string>
+    <string name="settings_section_data">Data</string>
+    <string name="settings_section_about">About</string>
+    <string name="settings_user_name">User Name</string>
+    <string name="settings_user_email">user@example.com</string>
+    <string name="settings_store_desc">Name, address, phone</string>
+    <string name="settings_printer_desc">Connect and configure printer</string>
+    <string name="settings_backup_desc">Save and restore data</string>
+    <string name="settings_version">Version 1.0</string>
+    <string name="settings_theme_colors">Appearance &amp; Colors</string>
+
+    <!-- Customers/Suppliers/Expenses UI -->
+    <string name="swipe_delete_edit">Swipe left to delete, right to edit</string>
+    <string name="delete_customer">Delete Customer</string>
+    <string name="delete_supplier">Delete Supplier</string>
+    <string name="delete_expense">Delete Expense</string>
+    <string name="confirm_delete_customer">Delete this customer?</string>
+    <string name="confirm_delete_supplier">Delete this supplier?</string>
+    <string name="add_customer_title">Add New Customer</string>
+    <string name="edit_customer_title">Edit Customer</string>
+    <string name="add_supplier_title">Add New Supplier</string>
+    <string name="edit_supplier_title">Edit Supplier</string>
+    <string name="add_expense_title">Add New Expense</string>
+    <string name="total_expenses">Total Expenses</string>
+    <string name="filter_date">Filter by Date</string>
+    <string name="clear_filter">Clear Filter</string>
+    <string name="notes">Notes</string>
+    <string name="customer_added">Customer added successfully</string>
+    <string name="customer_updated">Customer updated successfully</string>
+    <string name="customer_deleted">Customer deleted successfully</string>
+    <string name="supplier_added">Supplier added successfully</string>
+    <string name="supplier_updated">Supplier updated successfully</string>
+    <string name="supplier_deleted">Supplier deleted successfully</string>
+
+</resources>

@@ -1,0 +1,54 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:padding="24dp">
+	<TextView
+		android:id="@+id/textview40"
+		android:focusable="false"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="16dp"
+		android:text="💾 النسخ الاحتياطي"
+		android:textSize="20sp"
+		android:textStyle="bold" />
+	<TextView
+		android:id="@+id/textview41"
+		android:focusable="false"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="24dp"
+		android:text="احفظ نسخة من قاعدة البيانات لحماية بياناتك"
+		android:textSize="14sp" />
+	<Button
+		android:id="@+id/btn_create_backup"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="إنشاء نسخة احتياطية"
+		android:textSize="12sp"
+		style="@style/Widget.Material3.Button"
+		app:icon="@android:drawable/ic_menu_save" />
+	<Button
+		android:id="@+id/btn_restore_backup"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		android:text="استعادة نسخة احتياطية"
+		android:textSize="12sp"
+		style="@style/Widget.Material3.Button.TonalButton"
+		app:icon="@android:drawable/ic_menu_revert" />
+	<TextView
+		android:id="@+id/textview42"
+		android:focusable="false"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+		android:padding="8dp"
+		android:background="@drawable/bg_rounded_light"
+		android:text="⚠ تأكد من حفظ النسخة الاحتياطية في مكان آمن"
+		android:textSize="12sp"
+		android:textColor="#FF6F00" />
+</LinearLayout>

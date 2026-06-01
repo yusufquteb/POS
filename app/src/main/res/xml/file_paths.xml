@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    file_paths.xml - مسارات الملفات للـ FileProvider
+    المسار: app/src/main/res/xml/file_paths.xml
+-->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- External Storage - التخزين الخارجي -->
+    <external-path 
+        name="external_files" 
+        path="." />
+    
+    <!-- External Cache - الذاكرة المؤقتة الخارجية -->
+    <external-cache-path 
+        name="external_cache" 
+        path="." />
+    
+    <!-- Files Directory - مجلد الملفات -->
+    <files-path 
+        name="internal_files" 
+        path="." />
+    
+    <!-- Cache Directory - مجلد الذاكرة المؤقتة -->
+    <cache-path 
+        name="internal_cache" 
+        path="." />
+    
+    <!-- SmartPOS Folders - مجلدات التطبيق -->
+    <external-path 
+        name="pos_backups" 
+        path="SmartPOS/Backups/" />
+    
+    <external-path 
+        name="pos_reports" 
+        path="SmartPOS/Reports/" />
+    
+    <external-path 
+        name="pos_images" 
+        path="SmartPOS/Images/" />
+    
+    <external-path 
+        name="pos_exports" 
+        path="SmartPOS/Exports/" />
+    
+    <!-- Download Directory (للنسخ الاحتياطي) -->
+    <external-path 
+        name="downloads" 
+        path="Download/" />
+    
+    <!-- Documents Directory -->
+    <external-path 
+        name="documents" 
+        path="Documents/" />
+
+</paths>

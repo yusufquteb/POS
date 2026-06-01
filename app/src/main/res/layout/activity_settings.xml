@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/settings_title"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Account Section -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/settings_section_account" android:textSize="14sp"
+                android:textColor="?attr/colorPrimary" android:textStyle="bold"
+                android:layout_marginBottom="12dp" android:fontFamily="@font/cairo_bold" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_account" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="24dp"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:id="@+id/iv_profile" android:layout_width="56dp" android:layout_height="56dp"
+                        android:src="@drawable/ic_account_circle" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/profile_image" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:id="@+id/tv_user_name" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="@string/settings_user_name"
+                            android:textSize="18sp" android:textStyle="bold" android:textColor="?attr/colorOnSurface"
+                            android:fontFamily="@font/cairo_bold" />
+                        <TextView android:id="@+id/tv_user_email" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="@string/settings_user_email"
+                            android:textSize="14sp" android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginTop="4dp" android:fontFamily="@font/cairo_regular" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Appearance Section -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/settings_section_appearance" android:textSize="14sp"
+                android:textColor="?attr/colorPrimary" android:textStyle="bold"
+                android:layout_marginBottom="12dp" android:fontFamily="@font/cairo_bold" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_theme" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="12dp"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@drawable/ic_palette" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/theme_icon" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_theme" android:textSize="16sp" android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold" />
+                        <TextView android:id="@+id/tv_current_theme" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="@string/theme_light"
+                            android:textSize="13sp" android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginTop="4dp" android:fontFamily="@font/cairo_regular" />
+                        <TextView android:id="@+id/tv_current_color" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="@string/theme_blue"
+                            android:textSize="13sp" android:textColor="?attr/colorPrimary"
+                            android:fontFamily="@font/cairo_regular" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_language" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="24dp"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@drawable/ic_language" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/language_icon" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_language" android:textSize="16sp" android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold" />
+                        <TextView android:id="@+id/tv_current_language" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="@string/language_arabic"
+                            android:textSize="13sp" android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginTop="4dp" android:fontFamily="@font/cairo_regular" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Store Section -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/settings_section_store" android:textSize="14sp"
+                android:textColor="?attr/colorPrimary" android:textStyle="bold"
+                android:layout_marginBottom="12dp" android:fontFamily="@font/cairo_bold" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_store" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="12dp"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@drawable/ic_store" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/store_icon" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_store" android:textSize="16sp" android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_store_desc" android:textSize="13sp"
+                            android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginTop="4dp"
+                            android:fontFamily="@font/cairo_regular" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_printer" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="24dp"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@drawable/ic_print" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/printer_icon" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_printer" android:textSize="16sp" android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_printer_desc" android:textSize="13sp"
+                            android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginTop="4dp"
+                            android:fontFamily="@font/cairo_regular" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Data Section -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/settings_section_data" android:textSize="14sp"
+                android:textColor="?attr/colorPrimary" android:textStyle="bold"
+                android:layout_marginBottom="12dp" android:fontFamily="@font/cairo_bold" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_backup" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="24dp"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@drawable/ic_backup" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/backup_icon" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_backup" android:textSize="16sp" android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_backup_desc" android:textSize="13sp"
+                            android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginTop="4dp"
+                            android:fontFamily="@font/cairo_regular" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- About Section -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/settings_section_about" android:textSize="14sp"
+                android:textColor="?attr/colorPrimary" android:textStyle="bold"
+                android:layout_marginBottom="12dp" android:fontFamily="@font/cairo_bold" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_premium" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="6dp" app:cardBackgroundColor="?attr/colorPrimaryContainer"
+                android:layout_marginBottom="12dp" android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:layout_width="44dp" android:layout_height="44dp"
+                        android:src="@drawable/ic_star" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/premium_title"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/premium_title" android:textSize="17sp" android:textStyle="bold"
+                            android:textColor="?attr/colorOnPrimaryContainer" android:fontFamily="@font/cairo_bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/premium_desc" android:textSize="12sp"
+                            android:textColor="?attr/colorOnPrimaryContainer" android:layout_marginTop="4dp"
+                            android:fontFamily="@font/cairo_regular" android:maxLines="2"/>
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnPrimaryContainer"
+                        android:contentDescription="@string/more"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_rate_app" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="12dp"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@drawable/ic_star" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/rate_app"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/rate_app" android:textSize="16sp" android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/rate_app_message" android:textSize="12sp"
+                            android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginTop="4dp"
+                            android:fontFamily="@font/cairo_regular" android:maxLines="2"/>
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_about" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="24dp"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@drawable/ic_info" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/info_icon" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_about" android:textSize="16sp" android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold" />
+                        <TextView android:id="@+id/tv_app_version" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="@string/settings_version"
+                            android:textSize="13sp" android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginTop="4dp" android:fontFamily="@font/cairo_regular" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Logout Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/logout"
+                android:textSize="16sp"
+                app:icon="@drawable/ic_logout"
+                app:iconGravity="textStart"
+                app:cornerRadius="16dp"
+                app:backgroundTint="?attr/colorErrorContainer"
+                android:textColor="?attr/colorOnErrorContainer"
+                app:iconTint="?attr/colorOnErrorContainer"
+                android:fontFamily="@font/cairo_semibold"
+                android:layout_marginBottom="32dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

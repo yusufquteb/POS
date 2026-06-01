@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true"
+    tools:context=".AuthActivity">
+
+    <!-- Background Gradient -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/gradient_auth_background" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center">
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+            <!-- Logo -->
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_logo_auth"
+                android:contentDescription="@string/app_name"
+                android:elevation="8dp" />
+
+            <!-- App Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/cairo_bold" />
+
+            <!-- Subtitle -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="نظام نقاط البيع الاحترافي"
+                android:textSize="16sp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/cairo_regular" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+            <!-- Google Sign-In Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_google_signin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:strokeWidth="0dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="تسجيل الدخول"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface"
+                        android:fontFamily="@font/cairo_bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="اختر طريقة تسجيل الدخول المفضلة"
+                        android:textSize="14sp"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/cairo_regular" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp" />
+
+                    <!-- Google Sign-In Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_google_signin"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="تسجيل الدخول عبر Google"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/white"
+                        app:icon="@drawable/ic_google"
+                        app:iconTint="@android:color/white"
+                        app:iconGravity="textStart"
+                        app:iconPadding="12dp"
+                        app:cornerRadius="16dp"
+                        app:backgroundTint="#DB4437"
+                        android:fontFamily="@font/cairo_semibold"
+                        app:elevation="4dp" />
+
+                    <!-- Divider -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"
+                            android:background="?attr/colorOutlineVariant" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="أو"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:fontFamily="@font/cairo_regular" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"
+                            android:background="?attr/colorOutlineVariant" />
+
+                    </LinearLayout>
+
+                    <!-- Email Sign-In Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_email_signin"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="تسجيل الدخول بالبريد الإلكتروني"
+                        android:textSize="16sp"
+                        app:icon="@drawable/ic_email"
+                        app:iconGravity="textStart"
+                        app:iconPadding="12dp"
+                        app:cornerRadius="16dp"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:fontFamily="@font/cairo_semibold"
+                        app:strokeWidth="2dp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Email Sign-In Form Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_email_signin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:strokeWidth="0dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="تسجيل الدخول"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface"
+                        android:fontFamily="@font/cairo_bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+
+                    <!-- Email Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="البريد الإلكتروني"
+                        app:startIconDrawable="@drawable/ic_email"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:fontFamily="@font/cairo_regular" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Password Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="كلمة المرور"
+                        android:layout_marginTop="16dp"
+                        app:startIconDrawable="@drawable/ic_lock"
+                        app:endIconMode="password_toggle"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:maxLines="1"
+                            android:fontFamily="@font/cairo_regular" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Login Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_email_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="تسجيل الدخول"
+                        android:textSize="16sp"
+                        android:layout_marginTop="24dp"
+                        app:cornerRadius="16dp"
+                        android:fontFamily="@font/cairo_semibold"
+                        app:elevation="4dp" />
+
+                    <!-- Switch Mode -->
+                    <TextView
+                        android:id="@+id/tv_switch_mode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ليس لديك حساب؟ إنشاء حساب"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:padding="8dp"
+                        android:fontFamily="@font/cairo_semibold"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Skip Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تخطي"
+                android:textSize="14sp"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/cairo_regular" />
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Progress Overlay -->
+    <FrameLayout
+        android:id="@+id/progress_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="?attr/colorPrimary" />
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

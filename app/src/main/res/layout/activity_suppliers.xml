@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/suppliers_title"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- Search -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                app:hintEnabled="false"
+                app:startIconDrawable="@drawable/ic_search"
+                app:startIconTint="?attr/colorPrimary"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:boxStrokeWidth="0dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:textSize="14sp"
+                    android:hint="@string/suppliers_search_hint"
+                    android:imeOptions="actionSearch"
+                    android:fontFamily="@font/cairo_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingBottom="80dp"
+            android:clipToPadding="false" />
+
+        <!-- Empty State -->
+        <LinearLayout
+            android:id="@+id/empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_suppliers"
+                android:tint="?attr/colorOutlineVariant"
+                android:contentDescription="@string/suppliers_title"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/suppliers_empty"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/cairo_bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/suppliers_add_first"
+                android:textSize="14sp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/cairo_regular"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- FAB -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:text="@string/supplier_add"
+        app:icon="@drawable/ic_add"
+        android:fontFamily="@font/cairo_semibold"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

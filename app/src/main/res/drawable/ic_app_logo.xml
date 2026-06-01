@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    
+    <!-- خلفية دائرية -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,10 a50,50 0 1,1 0,100 a50,50 0 1,1 0,-100"/>
+    
+    <!-- رمز POS -->
+    <path
+        android:fillColor="#1976D2"
+        android:pathData="M40,40 h40 v8 h-40 z"/>
+    <path
+        android:fillColor="#1976D2"
+        android:pathData="M40,55 h25 v8 h-25 z"/>
+    <path
+        android:fillColor="#1976D2"
+        android:pathData="M40,70 h35 v8 h-35 z"/>
+</vector>

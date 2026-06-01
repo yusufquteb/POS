@@ -1,0 +1,55 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:padding="24dp"
+	android:background="#FFFFFF">
+	<TextView
+		android:id="@+id/dialog_title"
+		android:focusable="false"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="16dp"
+		android:text="إدارة المنتج"
+		android:textSize="20sp"
+		android:textStyle="bold"
+		android:textColor="#1D1B20" />
+	<TextView
+		android:id="@+id/dialog_message"
+		android:focusable="false"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="24dp"
+		android:text="هل تريد تعديل أو حذف هذا المنتج؟"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:textColor="#49454F" />
+	<LinearLayout
+		android:id="@+id/linear2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="end">
+		<Button
+			android:id="@+id/btn_dialog_delete"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="حذف"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			android:textColor="#B3261E"
+			style="@style/Widget.Material3.Button.TextButton"
+			android:layout_marginEnd="8dp" />
+		<Button
+			android:id="@+id/btn_dialog_edit"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="تعديل"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			style="@style/Widget.Material3.Button.TonalButton" />
+	</LinearLayout>
+</LinearLayout>

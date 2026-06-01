@@ -1,0 +1,114 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="#F5F5F5"
+	android:id="@+id/_main">
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/app_bar_layout9"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:elevation="4dp">
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:background="@color/purple_500"
+			android:layout_height="?attr/actionBarSize"
+			app:title="المنتجات"
+			app:titleTextColor="@android:color/white"
+			app:navigationIcon="@drawable/ic_back"
+			app:navigationIconTint="@android:color/white" />
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/cardview4"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			app:cardCornerRadius="24dp"
+			app:cardElevation="2dp">
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/textinputlayout2"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:boxBackgroundMode="none"
+				app:startIconDrawable="@drawable/ic_search"
+				app:endIconMode="clear_text">
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/et_search"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="12dp"
+					android:textSize="16sp"
+					android:hint="بحث في المنتجات..." />
+			</com.google.android.material.textfield.TextInputLayout>
+		</com.google.android.material.card.MaterialCardView>
+	</com.google.android.material.appbar.AppBarLayout>
+	<androidx.core.widget.NestedScrollView
+		android:id="@+id/vscroll4"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+		<LinearLayout
+			android:id="@+id/linear10"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+			<TextView
+				android:id="@+id/tv_products_count"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="16dp"
+				android:text="0 منتج"
+				android:textSize="14sp"
+				android:textColor="#757575" />
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/recycler_products"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingBottom="80dp"
+				android:clipToPadding="false" />
+			<LinearLayout
+				android:id="@+id/empty_state"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="48dp"
+				android:gravity="center_horizontal|center_vertical"
+				android:orientation="vertical"
+				android:visibility="gone">
+				<TextView
+					android:id="@+id/textview12"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="📦"
+					android:textSize="64sp" />
+				<TextView
+					android:id="@+id/textview13"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="16dp"
+					android:text="لا توجد منتجات"
+					android:textSize="20sp"
+					android:textStyle="bold"
+					android:textColor="#212121" />
+				<TextView
+					android:id="@+id/textview14"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="8dp"
+					android:text="ابدأ بإضافة منتج جديد"
+					android:textSize="14sp"
+					android:textColor="#757575" />
+			</LinearLayout>
+		</LinearLayout>
+	</androidx.core.widget.NestedScrollView>
+	<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+		android:id="@+id/fab_add_product"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="16dp"
+		android:layout_gravity="bottom|end"
+		app:icon="@drawable/ic_add"
+		app:backgroundTint="@color/purple_500" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

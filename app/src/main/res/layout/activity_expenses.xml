@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/expenses_title"
+            app:navigationIcon="@drawable/ic_arrow_back">
+            <ImageView
+                android:id="@+id/btn_filter"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_filter"
+                android:tint="?attr/colorOnSurface"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:contentDescription="@string/action_filter"/>
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- Total Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="?attr/colorPrimaryContainer">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_expenses"
+                    android:textSize="14sp"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:fontFamily="@font/cairo_regular"/>
+                <TextView
+                    android:id="@+id/tv_total_expenses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:fontFamily="@font/cairo_bold"/>
+                <TextView
+                    android:id="@+id/tv_filter_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_date"
+                    android:textSize="12sp"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/cairo_regular"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_expenses"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingBottom="80dp"
+            android:clipToPadding="false" />
+
+        <!-- Empty State -->
+        <LinearLayout
+            android:id="@+id/empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_expenses"
+                android:tint="?attr/colorOutlineVariant"
+                android:contentDescription="@string/expenses_title"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/cairo_bold"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- FAB -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_add_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:text="@string/expense_add"
+        app:icon="@drawable/ic_add"
+        android:fontFamily="@font/cairo_semibold"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

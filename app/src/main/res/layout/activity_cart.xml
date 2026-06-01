@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/cart_title"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ── Customer Card ── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/customer_label"
+                        android:textSize="13sp"
+                        android:textColor="?attr/colorPrimary"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/cairo_semibold"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="6dp">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_person"
+                            android:tint="?attr/colorOnSurfaceVariant"/>
+                        <TextView
+                            android:id="@+id/tv_selected_customer"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/no_customer_selected"
+                            android:textSize="15sp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:fontFamily="@font/cairo_regular"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_select_customer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/select"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:fontFamily="@font/cairo_semibold"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Payment Method Card ── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method"
+                        android:textSize="13sp"
+                        android:textColor="?attr/colorPrimary"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/cairo_semibold"/>
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group_payment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:singleSelection="true"
+                        app:selectionRequired="true">
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_cash"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/payment_cash"
+                            android:tag="cash"
+                            android:checked="true"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:fontFamily="@font/cairo_regular"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/payment_card"
+                            android:tag="card"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:fontFamily="@font/cairo_regular"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_credit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/payment_credit"
+                            android:tag="credit"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:fontFamily="@font/cairo_regular"/>
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Empty View ── -->
+            <LinearLayout
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="visible">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_shopping_cart_empty"
+                    android:tint="?attr/colorOutlineVariant"
+                    android:contentDescription="@string/empty_cart"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cart_empty"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/cairo_bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cart_add_products"
+                    android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/cairo_regular"/>
+            </LinearLayout>
+
+            <!-- ── Cart Items ── -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:visibility="gone"/>
+
+            <!-- ── Totals Card ── -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_totals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="?attr/colorPrimaryContainer"
+                android:layout_marginBottom="12dp"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Discount -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/discount_hint"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_marginBottom="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_discount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:fontFamily="@font/cairo_regular"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Subtotal row -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                            android:text="@string/subtotal" android:textSize="14sp" android:textColor="?attr/colorOnPrimaryContainer" android:fontFamily="@font/cairo_regular"/>
+                        <TextView android:id="@+id/tv_subtotal" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="0.00" android:textSize="15sp" android:textStyle="bold" android:textColor="?attr/colorOnPrimaryContainer" android:fontFamily="@font/cairo_bold"/>
+                    </LinearLayout>
+
+                    <!-- Discount row -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                            android:text="@string/discount_amount" android:textSize="14sp" android:textColor="?attr/colorOnPrimaryContainer" android:fontFamily="@font/cairo_regular"/>
+                        <TextView android:id="@+id/tv_discount" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="0.00" android:textSize="15sp" android:textStyle="bold" android:textColor="?attr/colorError" android:fontFamily="@font/cairo_bold"/>
+                    </LinearLayout>
+
+                    <!-- Tax row -->
+                    <LinearLayout android:id="@+id/row_tax" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="6dp" android:visibility="gone">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                            android:text="@string/tax" android:textSize="14sp" android:textColor="?attr/colorOnPrimaryContainer" android:fontFamily="@font/cairo_regular"/>
+                        <TextView android:id="@+id/tv_tax" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="0.00" android:textSize="15sp" android:textStyle="bold" android:textColor="?attr/colorOnPrimaryContainer" android:fontFamily="@font/cairo_bold"/>
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="?attr/colorOnPrimaryContainer" android:alpha="0.3" android:layout_marginVertical="10dp"/>
+
+                    <!-- Total row -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                            android:text="@string/final_total" android:textSize="18sp" android:textStyle="bold" android:textColor="?attr/colorOnPrimaryContainer" android:fontFamily="@font/cairo_bold"/>
+                        <TextView android:id="@+id/tv_total" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="0.00" android:textSize="22sp" android:textStyle="bold" android:textColor="?attr/colorOnPrimaryContainer" android:fontFamily="@font/cairo_bold"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Action Buttons ── -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_checkout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/cart_checkout"
+                android:textSize="16sp"
+                app:icon="@drawable/ic_check"
+                app:iconGravity="textStart"
+                app:cornerRadius="16dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/cairo_semibold"
+                android:enabled="false"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_clear"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/cart_clear"
+                app:icon="@drawable/ic_delete"
+                app:iconGravity="textStart"
+                app:cornerRadius="16dp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:fontFamily="@font/cairo_semibold"
+                android:enabled="false"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ── FAB Scan ── -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_scan_barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="96dp"
+        app:srcCompat="@drawable/ic_barcode_scanner"
+        android:contentDescription="@string/scan_barcode"/>
+
+    <!-- ── FAB Add Product ── -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btn_add_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:text="@string/cart_add_product"
+        app:icon="@drawable/ic_add"
+        android:fontFamily="@font/cairo_semibold"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

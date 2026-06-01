@@ -1,0 +1,353 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="?attr/colorSurface"
+	android:id="@+id/_main">
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/app_bar_layout14"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			app:title="التقاريروالإحصائيات"
+			app:navigationIcon="@drawable/ic_arrow_back" />
+	</com.google.android.material.appbar.AppBarLayout>
+	<androidx.core.widget.NestedScrollView
+		android:id="@+id/vscroll2"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+		<LinearLayout
+			android:id="@+id/linear15"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="16dp"
+			android:orientation="vertical">
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/cardview5"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:id="@+id/linear16"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="16dp"
+					android:orientation="vertical">
+					<TextView
+						android:id="@+id/textview11"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="12dp"
+						android:text="📅 الفترة الزمنية"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+					<com.google.android.material.chip.ChipGroup
+						android:id="@+id/chip_group_period"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:singleSelection="true"
+						app:checkedChip="@id/chip_today">
+						<com.google.android.material.chip.Chip
+							android:id="@+id/chip_today"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="@style/Widget.Material3.Chip.Filter" />
+						<com.google.android.material.chip.Chip
+							android:id="@+id/chip_week"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="@style/Widget.Material3.Chip.Filter" />
+						<com.google.android.material.chip.Chip
+							android:id="@+id/chip_month"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="@style/Widget.Material3.Chip.Filter" />
+						<com.google.android.material.chip.Chip
+							android:id="@+id/chip_custom"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="@style/Widget.Material3.Chip.Filter" />
+					</com.google.android.material.chip.ChipGroup>
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/cardview6"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				app:cardBackgroundColor="?attr/colorPrimaryContainer"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:id="@+id/linear17"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="16dp"
+					android:orientation="vertical">
+					<TextView
+						android:id="@+id/textview12"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="16dp"
+						android:text="💰 إحصائيات المبيعات"
+						android:textSize="18sp"
+						android:textStyle="bold" />
+					<LinearLayout
+						android:id="@+id/linear18"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="12dp"
+						android:orientation="horizontal">
+						<TextView
+							android:id="@+id/textview13"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="إجمالي المبيعات:"
+							android:textSize="14sp"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_total_sales"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="0.00 ج.م"
+							android:textSize="16sp"
+							android:textStyle="bold" />
+					</LinearLayout>
+					<LinearLayout
+						android:id="@+id/linear19"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="12dp"
+						android:orientation="horizontal">
+						<TextView
+							android:id="@+id/textview14"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="عدد الفواتير:"
+							android:textSize="14sp"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_invoice_count"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="0"
+							android:textSize="16sp"
+							android:textStyle="bold" />
+					</LinearLayout>
+					<LinearLayout
+						android:id="@+id/linear20"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal">
+						<TextView
+							android:id="@+id/textview15"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="متوسط الفاتورة:"
+							android:textSize="14sp"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_average_invoice"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="0.00 ج.م"
+							android:textSize="16sp"
+							android:textStyle="bold" />
+					</LinearLayout>
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/cardview7"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:id="@+id/linear21"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="16dp"
+					android:orientation="vertical">
+					<TextView
+						android:id="@+id/textview16"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="16dp"
+						android:text="📦 إحصائيات المخزون"
+						android:textSize="18sp"
+						android:textStyle="bold" />
+					<LinearLayout
+						android:id="@+id/linear22"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="12dp"
+						android:orientation="horizontal">
+						<TextView
+							android:id="@+id/textview17"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="عدد المنتجات:"
+							android:textSize="14sp"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_products_count"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="0"
+							android:textSize="16sp"
+							android:textStyle="bold" />
+					</LinearLayout>
+					<LinearLayout
+						android:id="@+id/linear23"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="12dp"
+						android:orientation="horizontal">
+						<TextView
+							android:id="@+id/textview18"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="قيمة المخزون:"
+							android:textSize="14sp"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_inventory_value"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="0.00 ج.م"
+							android:textSize="16sp"
+							android:textStyle="bold" />
+					</LinearLayout>
+					<LinearLayout
+						android:id="@+id/linear24"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal">
+						<TextView
+							android:id="@+id/textview19"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:text="تنبيهات المخزون:"
+							android:textSize="14sp"
+							android:layout_weight="1" />
+						<TextView
+							android:id="@+id/tv_low_stock"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="0"
+							android:textSize="16sp"
+							android:textStyle="bold"
+							android:textColor="#FF6F00" />
+					</LinearLayout>
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- بطاقة الأرباح -->
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="12dp"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="16dp"
+					android:orientation="vertical">
+					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+						android:orientation="horizontal" android:layout_marginBottom="8dp">
+						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
+							android:layout_weight="1" android:text="@string/expenses_title" android:textSize="14sp"/>
+						<TextView android:id="@+id/tv_total_expenses"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:text="0.00" android:textSize="16sp" android:textStyle="bold" android:textColor="#C62828"/>
+					</LinearLayout>
+					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
+							android:layout_weight="1" android:text="@string/reports_profit" android:textSize="15sp" android:textStyle="bold"/>
+						<TextView android:id="@+id/tv_net_profit"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:text="0.00" android:textSize="18sp" android:textStyle="bold" android:textColor="#2E7D32"/>
+					</LinearLayout>
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/cardview8"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="80dp"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:id="@+id/linear25"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="16dp"
+					android:orientation="vertical">
+					<TextView
+						android:id="@+id/textview20"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="16dp"
+						android:text="🏆 المنتجات الأكثر مبيعاً"
+						android:textSize="18sp"
+						android:textStyle="bold" />
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/rv_top_products"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:nestedScrollingEnabled="false"/>
+					<TextView
+						android:id="@+id/tv_no_top_products"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="@string/no_sales_period"
+						android:textSize="14sp"
+						android:gravity="center"
+						android:padding="16dp"
+						android:textColor="?attr/colorOnSurfaceVariant"
+						android:visibility="gone"/>
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+		</LinearLayout>
+	</androidx.core.widget.NestedScrollView>
+	<LinearLayout
+		android:id="@+id/linear26"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="16dp"
+		android:background="?attr/colorSurface"
+		android:orientation="horizontal"
+		android:layout_gravity="bottom"
+		android:elevation="8dp">
+		<Button
+			android:id="@+id/btn_export_pdf"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="تصدير PDF"
+			android:textSize="12sp"
+			android:layout_weight="1"
+			android:layout_marginEnd="8dp"
+			style="@style/Widget.Material3.Button" />
+		<Button
+			android:id="@+id/btn_share_report"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="مشاركة"
+			android:textSize="12sp"
+			android:layout_weight="1"
+			android:layout_marginStart="8dp"
+			style="@style/Widget.Material3.Button.TonalButton" />
+	</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

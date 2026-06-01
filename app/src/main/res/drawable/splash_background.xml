@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+
+    <!-- خلفية متدرجة -->
+    <item>
+        <shape>
+            <gradient
+                android:angle="135"
+                android:centerColor="#1976D2"
+                android:endColor="#0D47A1"
+                android:startColor="#42A5F5"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- شعار التطبيق في المنتصف -->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_app_logo" />
+    </item>
+
+</layer-list>
