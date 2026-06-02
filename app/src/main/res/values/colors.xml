@@ -197,6 +197,7 @@
 
     <!-- Legacy backward-compat aliases -->
     <color name="primary">#1B6EF3</color>
+    <color name="dark_primary">#ADC8FF</color>
     <color name="primary_dark">#00449E</color>
     <color name="colorPrimary">#1B6EF3</color>
     <color name="colorAccent">#ADC8FF</color>
