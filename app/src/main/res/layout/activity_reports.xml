@@ -338,7 +338,7 @@
 			android:text="تصدير PDF"
 			android:textSize="12sp"
 			android:layout_weight="1"
-			android:layout_marginEnd="8dp"
+			android:layout_marginEnd="4dp"
 			style="@style/Widget.Material3.Button" />
 		<Button
 			android:id="@+id/btn_share_report"
@@ -347,7 +347,19 @@
 			android:text="مشاركة"
 			android:textSize="12sp"
 			android:layout_weight="1"
-			android:layout_marginStart="8dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginEnd="4dp"
 			style="@style/Widget.Material3.Button.TonalButton" />
+		<Button
+			android:id="@+id/btn_whatsapp_report"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="واتساب"
+			android:textSize="12sp"
+			android:layout_weight="1"
+			android:layout_marginStart="4dp"
+			android:drawableStart="@drawable/ic_whatsapp"
+			android:drawablePadding="4dp"
+			style="@style/Widget.Material3.Button.OutlinedButton" />
 	</LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

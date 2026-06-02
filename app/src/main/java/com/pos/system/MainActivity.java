@@ -59,6 +59,10 @@ public class MainActivity extends BaseActivity
     private MaterialCardView cardReports;
     private MaterialCardView cardExpenses;
     private MaterialCardView cardSettings;
+    private MaterialCardView cardReturns;
+    private MaterialCardView cardShifts;
+    private MaterialCardView cardDebts;
+    private MaterialCardView cardPurchaseOrders;
 
     // Alert Card
     private MaterialCardView cardAlert;
@@ -125,14 +129,18 @@ public class MainActivity extends BaseActivity
         tvTotalProducts = findViewById(R.id.tv_total_products);
         tvLowStockCount = findViewById(R.id.tv_low_stock_count);
 
-        cardPOS       = findViewById(R.id.card_pos);
-        cardProducts  = findViewById(R.id.card_products);
-        cardInvoices  = findViewById(R.id.card_invoices);
-        cardCustomers = findViewById(R.id.card_customers);
-        cardSuppliers = findViewById(R.id.card_suppliers);
-        cardReports   = findViewById(R.id.card_reports);
-        cardExpenses  = findViewById(R.id.card_expenses);
-        cardSettings  = findViewById(R.id.card_settings);
+        cardPOS            = findViewById(R.id.card_pos);
+        cardProducts       = findViewById(R.id.card_products);
+        cardInvoices       = findViewById(R.id.card_invoices);
+        cardCustomers      = findViewById(R.id.card_customers);
+        cardSuppliers      = findViewById(R.id.card_suppliers);
+        cardReports        = findViewById(R.id.card_reports);
+        cardExpenses       = findViewById(R.id.card_expenses);
+        cardSettings       = findViewById(R.id.card_settings);
+        cardReturns        = findViewById(R.id.card_returns);
+        cardShifts         = findViewById(R.id.card_shifts);
+        cardDebts          = findViewById(R.id.card_debts);
+        cardPurchaseOrders = findViewById(R.id.card_purchase_orders);
 
         cardAlert      = findViewById(R.id.card_alert);
         tvAlertMessage = findViewById(R.id.tv_alert_message);
@@ -144,14 +152,18 @@ public class MainActivity extends BaseActivity
         if (cardTodaySales != null) cardTodaySales.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
         if (cardLowStock   != null) cardLowStock.setOnClickListener(v -> showLowStockDialog());
 
-        setCardClick(cardPOS,       ActivityCartActivity.class);
-        setCardClick(cardProducts,  ActivityProductsActivity.class);
-        setCardClick(cardInvoices,  ActivityInvoicesActivity.class);
-        setCardClick(cardCustomers, ActivityCustomersActivity.class);
-        setCardClick(cardSuppliers, ActivitySuppliersActivity.class);
-        setCardClick(cardReports,   ActivityReportsActivity.class);
-        setCardClick(cardExpenses,  ActivityExpensesActivity.class);
-        setCardClick(cardSettings,  ActivitySettingsActivity.class);
+        setCardClick(cardPOS,            ActivityCartActivity.class);
+        setCardClick(cardProducts,       ActivityProductsActivity.class);
+        setCardClick(cardInvoices,       ActivityInvoicesActivity.class);
+        setCardClick(cardCustomers,      ActivityCustomersActivity.class);
+        setCardClick(cardSuppliers,      ActivitySuppliersActivity.class);
+        setCardClick(cardReports,        ActivityReportsActivity.class);
+        setCardClick(cardExpenses,       ActivityExpensesActivity.class);
+        setCardClick(cardSettings,       ActivitySettingsActivity.class);
+        setCardClick(cardReturns,        ActivityReturnActivity.class);
+        setCardClick(cardShifts,         ActivityShiftActivity.class);
+        setCardClick(cardDebts,          ActivityDebtActivity.class);
+        setCardClick(cardPurchaseOrders, ActivityPurchaseOrderActivity.class);
     }
 
     private void setCardClick(MaterialCardView card, Class<?> cls) {
@@ -273,17 +285,21 @@ public class MainActivity extends BaseActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         try {
-            if      (id == R.id.nav_pos)       openActivity(ActivityCartActivity.class);
-            else if (id == R.id.nav_products)  openActivity(ActivityProductsActivity.class);
-            else if (id == R.id.nav_customers) openActivity(ActivityCustomersActivity.class);
-            else if (id == R.id.nav_suppliers) openActivity(ActivitySuppliersActivity.class);
-            else if (id == R.id.nav_invoices)  openActivity(ActivityInvoicesActivity.class);
-            else if (id == R.id.nav_reports)   openActivity(ActivityReportsActivity.class);
-            else if (id == R.id.nav_expenses)  openActivity(ActivityExpensesActivity.class);
-            else if (id == R.id.nav_settings)  openActivity(ActivitySettingsActivity.class);
-            else if (id == R.id.nav_backup)    openActivity(ActivityBackupActivity.class);
-            else if (id == R.id.nav_about)     showAboutDialog();
-            else if (id == R.id.nav_logout)    confirmLogout();
+            if      (id == R.id.nav_pos)             openActivity(ActivityCartActivity.class);
+            else if (id == R.id.nav_products)        openActivity(ActivityProductsActivity.class);
+            else if (id == R.id.nav_customers)       openActivity(ActivityCustomersActivity.class);
+            else if (id == R.id.nav_suppliers)       openActivity(ActivitySuppliersActivity.class);
+            else if (id == R.id.nav_invoices)        openActivity(ActivityInvoicesActivity.class);
+            else if (id == R.id.nav_reports)         openActivity(ActivityReportsActivity.class);
+            else if (id == R.id.nav_expenses)        openActivity(ActivityExpensesActivity.class);
+            else if (id == R.id.nav_settings)        openActivity(ActivitySettingsActivity.class);
+            else if (id == R.id.nav_backup)          openActivity(ActivityBackupActivity.class);
+            else if (id == R.id.nav_shifts)          openActivity(ActivityShiftActivity.class);
+            else if (id == R.id.nav_returns)         openActivity(ActivityReturnActivity.class);
+            else if (id == R.id.nav_debts)           openActivity(ActivityDebtActivity.class);
+            else if (id == R.id.nav_purchase_orders) openActivity(ActivityPurchaseOrderActivity.class);
+            else if (id == R.id.nav_about)           showAboutDialog();
+            else if (id == R.id.nav_logout)          confirmLogout();
         } catch (Exception e) {
             e.printStackTrace();
         }

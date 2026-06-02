@@ -136,7 +136,7 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:hardwareAccelerated="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/AppTheme"/>
 
         <!-- ════════ Customers & Suppliers ════════ -->
         <activity
@@ -232,6 +232,42 @@
             android:name=".DebugActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
+        <!-- ════════ Returns ════════ -->
+        <activity
+            android:name=".ActivityReturnActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityInvoicesActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/return_sale"/>
+
+        <!-- ════════ Shifts ════════ -->
+        <activity
+            android:name=".ActivityShiftActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/shifts_title"/>
+
+        <!-- ════════ Debt Management ════════ -->
+        <activity
+            android:name=".ActivityDebtActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/debt_title"/>
+
+        <!-- ════════ Purchase Orders ════════ -->
+        <activity
+            android:name=".ActivityPurchaseOrderActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/purchase_orders_title"/>
 
         <!-- ════════ FileProvider ════════ -->
         <provider

@@ -524,4 +524,25 @@
     <string name="supplier_updated">Supplier updated successfully</string>
     <string name="supplier_deleted">Supplier deleted successfully</string>
 
+    <!-- Egypt Market -->
+    <string name="return_sale">Sales Return</string>
+    <string name="return_items">Return Items</string>
+    <string name="loyalty_points">Loyalty Points</string>
+    <string name="loyalty_balance">Points Balance</string>
+    <string name="low_stock_notification">Alert: Low Stock</string>
+    <string name="low_stock_notification_msg">%1$d product(s) running low</string>
+    <string name="refund_success">Refund processed successfully</string>
+    <string name="refund_amount">Refund Amount</string>
+    <string name="select_return_reason">Select Return Reason</string>
+    <string name="reason_defective">Defective Product</string>
+    <string name="reason_wrong_item">Wrong Item</string>
+    <string name="reason_customer_request">Customer Request</string>
+    <string name="daily_report">Daily Report</string>
+    <string name="egypt_market">Egyptian Market</string>
+    <string name="vat_egypt">VAT 14%</string>
+    <string name="egp_currency">Egyptian Pound</string>
+    <string name="points_earned">Points Earned</string>
+    <string name="redeem_points">Redeem Points</string>
+    <string name="minimum_redeem">Minimum Redemption</string>
+
 </resources>

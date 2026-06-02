@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -63,7 +64,8 @@ public class ActivityCartActivity extends BaseActivity {
     private TextView          tvSubtotal, tvDiscount, tvTax, tvTotal;
     private TextInputEditText etDiscount;
     private TextView          tvSelectedCustomer;
-    private MaterialButton    btnSelectCustomer, btnAddProduct, btnCheckout, btnClear, btnScanBarcode;
+    private MaterialButton    btnSelectCustomer, btnAddProduct, btnCheckout, btnClear;
+    private FloatingActionButton btnScanBarcode;
     private ChipGroup         chipGroupPayment;
 
     private final ActivityResultLauncher<Intent> barcodeLauncher =

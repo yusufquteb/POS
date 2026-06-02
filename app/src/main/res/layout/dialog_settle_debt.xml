@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    dialog_settle_debt.xml  —  حوار تسوية الدين / Settle Debt Dialog
+    RTL-first, Material Design 3
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- اسم العميل -->
+    <TextView
+        android:id="@+id/tv_dialog_customer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface"
+        android:fontFamily="@font/cairo_bold"
+        android:gravity="center" />
+
+    <!-- الدين الحالي -->
+    <TextView
+        android:id="@+id/tv_dialog_current_debt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:fontFamily="@font/cairo_regular"
+        android:gravity="center" />
+
+    <!-- فاصل -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="16dp"
+        android:background="?attr/colorOutlineVariant" />
+
+    <!-- حقل مبلغ الدفع -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        app:startIconDrawable="@drawable/ic_payments"
+        app:startIconTint="?attr/colorPrimary"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        android:hint="مبلغ الدفع / Payment Amount (ر.س)">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_payment_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionDone"
+            android:textSize="16sp"
+            android:fontFamily="@font/cairo_regular" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- تلميح -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="أدخل المبلغ المدفوع لتسوية الدين أو جزء منه\nEnter the amount paid to settle the debt fully or partially"
+        android:textSize="12sp"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:fontFamily="@font/cairo_regular"
+        android:gravity="center" />
+
+</LinearLayout>
