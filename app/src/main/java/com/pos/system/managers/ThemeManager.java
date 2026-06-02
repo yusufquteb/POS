@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+import com.google.android.material.color.DynamicColors;
 import com.pos.system.R;
 
 /**
@@ -45,7 +46,9 @@ public class ThemeManager {
     public static final int COLOR_PURPLE = 1;
     public static final int COLOR_GREEN  = 2;
     public static final int COLOR_ORANGE = 3;
-    public static final int COLOR_TEAL   = 4;
+    public static final int COLOR_TEAL    = 4;
+    public static final int COLOR_EGYPT   = 5;
+    public static final int COLOR_DYNAMIC = 6;
 
     private static Context          appContext;
     private static SharedPreferences prefs;
@@ -104,6 +107,10 @@ public class ThemeManager {
                 return isDark ? R.style.AppTheme_Orange_Dark : R.style.AppTheme_Orange;
             case COLOR_TEAL:
                 return isDark ? R.style.AppTheme_Teal_Dark   : R.style.AppTheme_Teal;
+            case COLOR_EGYPT:
+                return isDark ? R.style.AppTheme_Egypt_Dark  : R.style.AppTheme_Egypt;
+            case COLOR_DYNAMIC:
+                return isDark ? R.style.AppTheme_Blue_Dark   : R.style.AppTheme_Blue;
             default:
                 return isDark ? R.style.AppTheme_Blue_Dark   : R.style.AppTheme_Blue;
         }
@@ -147,7 +154,7 @@ public class ThemeManager {
 
     public static void setColorScheme(int colorScheme) {
         checkInit();
-        if (colorScheme < COLOR_BLUE || colorScheme > COLOR_TEAL) {
+        if (colorScheme < COLOR_BLUE || colorScheme > COLOR_DYNAMIC) {
             throw new IllegalArgumentException("Invalid color scheme: " + colorScheme);
         }
         prefs.edit().putInt(KEY_COLOR_SCHEME, colorScheme).apply();
@@ -182,8 +189,10 @@ public class ThemeManager {
             case COLOR_PURPLE: return "بنفسجي أنيق";
             case COLOR_GREEN:  return "أخضر منعش";
             case COLOR_ORANGE: return "برتقالي دافئ";
-            case COLOR_TEAL:   return "تركواز عصري";
-            default:           return "غير معروف";
+            case COLOR_TEAL:    return "تركواز عصري";
+            case COLOR_EGYPT:   return "ذهبي مصري";
+            case COLOR_DYNAMIC: return "ألوان ديناميكية";
+            default:            return "غير معروف";
         }
     }
 
@@ -199,7 +208,9 @@ public class ThemeManager {
             "بنفسجي أنيق",
             "أخضر منعش",
             "برتقالي دافئ",
-            "تركواز عصري"
+            "تركواز عصري",
+            "ذهبي مصري",
+            "ألوان ديناميكية"
         };
     }
 
@@ -226,6 +237,16 @@ public class ThemeManager {
             case COLOR_ORANGE: return 0xFFFF7043;
             case COLOR_TEAL:   return 0xFF26A69A;
             default:           return 0xFF42A5F5;
+        }
+    }
+
+    public static boolean isDynamicColorSupported() {
+        return android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S;
+    }
+
+    public static void applyDynamicColorIfEnabled(android.app.Activity activity) {
+        if (getColorScheme() == COLOR_DYNAMIC && isDynamicColorSupported()) {
+            DynamicColors.applyToActivityIfAvailable(activity);
         }
     }
 

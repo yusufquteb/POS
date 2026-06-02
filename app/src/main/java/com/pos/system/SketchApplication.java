@@ -53,6 +53,14 @@ public class SketchApplication extends Application {
             Log.e(TAG, "ThemeManager init failed: " + e.getMessage());
         }
 
+        // Material You - Dynamic Colors (Android 12+)
+        try {
+            com.google.android.material.color.DynamicColors.applyToActivitiesIfAvailable(this);
+            Log.d(TAG, "✓ DynamicColors applied");
+        } catch (Exception e) {
+            Log.e(TAG, "DynamicColors failed: " + e.getMessage());
+        }
+
         // Global Crash Handler
         Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
             StringWriter sw = new StringWriter();

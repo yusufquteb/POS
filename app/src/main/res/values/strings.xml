@@ -300,7 +300,7 @@
     <string name="custom_date">Custom Date</string>
 
     <!-- Currency -->
-    <string name="currency_symbol">EGP</string>
+    <string name="currency_symbol">ج.م</string>
     <string name="currency_name">Egyptian Pound</string>
     <string name="currency_egp">EGP</string>
     <string name="item">item</string>
@@ -530,5 +530,26 @@
     <string name="supplier_added">Supplier added successfully</string>
     <string name="supplier_updated">Supplier updated successfully</string>
     <string name="supplier_deleted">Supplier deleted successfully</string>
+
+    <!-- Egypt Market -->
+    <string name="return_sale">مرتجع بيع</string>
+    <string name="return_items">إرجاع منتجات</string>
+    <string name="loyalty_points">نقاط الولاء</string>
+    <string name="loyalty_balance">رصيد النقاط</string>
+    <string name="low_stock_notification">تنبيه: مخزون منخفض</string>
+    <string name="low_stock_notification_msg">%1$d منتج على وشك النفاد</string>
+    <string name="refund_success">تم الاسترداد بنجاح</string>
+    <string name="refund_amount">مبلغ الاسترداد</string>
+    <string name="select_return_reason">سبب الإرجاع</string>
+    <string name="reason_defective">منتج معيب</string>
+    <string name="reason_wrong_item">صنف خاطئ</string>
+    <string name="reason_customer_request">طلب العميل</string>
+    <string name="daily_report">التقرير اليومي</string>
+    <string name="egypt_market">السوق المصري</string>
+    <string name="vat_egypt">ضريبة القيمة المضافة 14%</string>
+    <string name="egp_currency">جنيه مصري</string>
+    <string name="points_earned">نقاط مكتسبة</string>
+    <string name="redeem_points">استرداد النقاط</string>
+    <string name="minimum_redeem">الحد الأدنى للاسترداد</string>
 
 </resources>

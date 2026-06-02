@@ -1,191 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-╔══════════════════════════════════════════════════════════════════╗
-║                    colors.xml - نظام الألوان الموحَّد           ║
-╠══════════════════════════════════════════════════════════════════╣
-║  المبدأ:                                                        ║
-║  ─────────────────────────────────────────────────────          ║
-║  1. كل ثيم (Blue, Purple, Green, Orange, Teal) له:             ║
-║     • نسخة فاتحة: xxx_primary / xxx_secondary                  ║
-║     • نسخة داكنة: xxx_dark_primary / xxx_dark_secondary        ║
-║                                                                  ║
-║  2. الألوان المشتركة (shared) لا تتغير بين الثيمات:            ║
-║     • white, background, surface, text_primary...               ║
-║                                                                  ║
-║  3. الأسماء القديمة (primary, colorPrimary) تساوي الافتراضي    ║
-║     وتُستخدَم في الملفات القديمة فقط.                          ║
-║                                                                  ║
-║  4. الـ UI الجديد يستخدم ?attr/colorPrimary دائماً             ║
-║     لضمان التغيير الديناميكي مع الثيم.                         ║
-╚══════════════════════════════════════════════════════════════════╝
--->
 <resources>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!--  SHARED NEUTRAL COLORS (مشتركة - لا تتغير بالثيم)    -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- CORE NEUTRALS                                  -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="transparent">#00000000</color>
 
-    <!-- أبيض وأسود -->
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- M3 LIGHT BASELINE (default)                   -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="md_theme_light_primary">#1B6EF3</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#D8E6FF</color>
+    <color name="md_theme_light_onPrimaryContainer">#001B47</color>
+    <color name="md_theme_light_secondary">#565F71</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#DAE2F9</color>
+    <color name="md_theme_light_onSecondaryContainer">#131C2B</color>
+    <color name="md_theme_light_tertiary">#715574</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#FBD7FC</color>
+    <color name="md_theme_light_onTertiaryContainer">#29132D</color>
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+    <color name="md_theme_light_surface">#F9F9FF</color>
+    <color name="md_theme_light_onSurface">#191C20</color>
+    <color name="md_theme_light_surfaceVariant">#E0E2EC</color>
+    <color name="md_theme_light_onSurfaceVariant">#44474F</color>
+    <color name="md_theme_light_outline">#74777F</color>
+    <color name="md_theme_light_outlineVariant">#C4C6D0</color>
+    <color name="md_theme_light_surfaceContainerLowest">#FFFFFF</color>
+    <color name="md_theme_light_surfaceContainerLow">#F3F3FA</color>
+    <color name="md_theme_light_surfaceContainer">#EDEDF4</color>
+    <color name="md_theme_light_surfaceContainerHigh">#E7E8EE</color>
+    <color name="md_theme_light_surfaceContainerHighest">#E2E2E9</color>
 
-    <!-- خلفيات وأسطح (فاتح) -->
-    <color name="background">#FAFAFA</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="surface_variant">#F5F5F5</color>
-    <color name="divider">#E0E0E0</color>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- M3 DARK BASELINE                               -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="md_theme_dark_primary">#ADC8FF</color>
+    <color name="md_theme_dark_onPrimary">#002F6E</color>
+    <color name="md_theme_dark_primaryContainer">#00449E</color>
+    <color name="md_theme_dark_onPrimaryContainer">#D8E6FF</color>
+    <color name="md_theme_dark_secondary">#BEC6DC</color>
+    <color name="md_theme_dark_onSecondary">#283041</color>
+    <color name="md_theme_dark_secondaryContainer">#3E4759</color>
+    <color name="md_theme_dark_onSecondaryContainer">#DAE2F9</color>
+    <color name="md_theme_dark_tertiary">#DEBCDF</color>
+    <color name="md_theme_dark_onTertiary">#3F2844</color>
+    <color name="md_theme_dark_tertiaryContainer">#583D5B</color>
+    <color name="md_theme_dark_onTertiaryContainer">#FBD7FC</color>
+    <color name="md_theme_dark_error">#FFB4AB</color>
+    <color name="md_theme_dark_onError">#690005</color>
+    <color name="md_theme_dark_errorContainer">#93000A</color>
+    <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
+    <color name="md_theme_dark_surface">#111318</color>
+    <color name="md_theme_dark_onSurface">#E2E2E9</color>
+    <color name="md_theme_dark_surfaceVariant">#44474F</color>
+    <color name="md_theme_dark_onSurfaceVariant">#C4C6D0</color>
+    <color name="md_theme_dark_outline">#8E9099</color>
+    <color name="md_theme_dark_outlineVariant">#44474F</color>
+    <color name="md_theme_dark_surfaceContainerLowest">#0C0E13</color>
+    <color name="md_theme_dark_surfaceContainerLow">#191C20</color>
+    <color name="md_theme_dark_surfaceContainer">#1D2024</color>
+    <color name="md_theme_dark_surfaceContainerHigh">#272A2F</color>
+    <color name="md_theme_dark_surfaceContainerHighest">#32353A</color>
 
-    <!-- خلفيات وأسطح (داكن) -->
-    <color name="dark_background">#121212</color>
-    <color name="dark_surface">#1E1E1E</color>
-    <color name="dark_surface_variant">#2C2C2C</color>
-    <color name="dark_divider">#3A3A3A</color>
-    <color name="dark_on_primary">#FFFFFF</color>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- BLUE SCHEME (Expressive)                       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="blue_primary">#1B6EF3</color>
+    <color name="blue_primary_container">#D8E6FF</color>
+    <color name="blue_on_primary_container">#001B47</color>
+    <color name="blue_secondary">#00A3E0</color>
+    <color name="blue_secondary_container">#CCEFFF</color>
+    <color name="blue_tertiary">#7B5CF0</color>
+    <color name="blue_tertiary_container">#E8DEFF</color>
+    <!-- Dark -->
+    <color name="blue_dark_primary">#ADC8FF</color>
+    <color name="blue_dark_on_primary">#002F6E</color>
+    <color name="blue_dark_primary_container">#00449E</color>
+    <color name="blue_dark_on_primary_container">#D8E6FF</color>
+    <color name="blue_dark_secondary">#70D0FF</color>
+    <color name="blue_dark_tertiary">#C4BFFF</color>
 
-    <!-- نصوص فاتح -->
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
-    <color name="text_hint">#BDBDBD</color>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- PURPLE SCHEME (Expressive)                     -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="purple_primary">#7B5CF0</color>
+    <color name="purple_primary_container">#E8DEFF</color>
+    <color name="purple_on_primary_container">#230075</color>
+    <color name="purple_secondary">#C248C5</color>
+    <color name="purple_secondary_container">#FFD6FC</color>
+    <color name="purple_tertiary">#0076C8</color>
+    <color name="purple_tertiary_container">#CEE5FF</color>
+    <!-- Dark -->
+    <color name="purple_dark_primary">#CBBFFF</color>
+    <color name="purple_dark_on_primary">#3200A4</color>
+    <color name="purple_dark_primary_container">#4D33CC</color>
+    <color name="purple_dark_on_primary_container">#E8DEFF</color>
+    <color name="purple_dark_secondary">#F4AAEF</color>
+    <color name="purple_dark_tertiary">#9DCBFF</color>
 
-    <!-- نصوص داكن -->
-    <color name="dark_text_primary">#EEEEEE</color>
-    <color name="dark_text_secondary">#BDBDBD</color>
-    <color name="dark_text_hint">#757575</color>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- GREEN SCHEME (Expressive)                      -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="green_primary">#146B3A</color>
+    <color name="green_primary_container">#B7F2CE</color>
+    <color name="green_on_primary_container">#002111</color>
+    <color name="green_secondary">#00796B</color>
+    <color name="green_secondary_container">#B2DFDB</color>
+    <color name="green_tertiary">#4A6741</color>
+    <color name="green_tertiary_container">#CCE8C0</color>
+    <!-- Dark -->
+    <color name="green_dark_primary">#7CE6A4</color>
+    <color name="green_dark_on_primary">#00391E</color>
+    <color name="green_dark_primary_container">#00522C</color>
+    <color name="green_dark_on_primary_container">#B7F2CE</color>
+    <color name="green_dark_secondary">#80CBC4</color>
+    <color name="green_dark_tertiary">#B1CC9E</color>
 
-    <!-- أخطاء -->
-    <color name="error">#B00020</color>
-    <color name="error_container">#FFEBEE</color>
-    <color name="dark_error">#CF6679</color>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- ORANGE SCHEME (Expressive)                     -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="orange_primary">#D84315</color>
+    <color name="orange_primary_container">#FFD8CC</color>
+    <color name="orange_on_primary_container">#400E00</color>
+    <color name="orange_secondary">#F4511E</color>
+    <color name="orange_secondary_container">#FFE0D7</color>
+    <color name="orange_tertiary">#E65100</color>
+    <color name="orange_tertiary_container">#FFE0B2</color>
+    <!-- Dark -->
+    <color name="orange_dark_primary">#FFB5A0</color>
+    <color name="orange_dark_on_primary">#5C1700</color>
+    <color name="orange_dark_primary_container">#7D2900</color>
+    <color name="orange_dark_on_primary_container">#FFD8CC</color>
+    <color name="orange_dark_secondary">#FF8A65</color>
+    <color name="orange_dark_tertiary">#FFCC80</color>
 
-    <!-- رمادي (Material palette) -->
-    <color name="gray_100">#F5F5F5</color>
-    <color name="gray_200">#EEEEEE</color>
-    <color name="gray_300">#E0E0E0</color>
-    <color name="gray_400">#BDBDBD</color>
-    <color name="gray_500">#9E9E9E</color>
-    <color name="gray_600">#757575</color>
-    <color name="gray_700">#616161</color>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- TEAL SCHEME (Expressive)                       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="teal_primary">#006874</color>
+    <color name="teal_primary_container">#97F0FF</color>
+    <color name="teal_on_primary_container">#001F24</color>
+    <color name="teal_secondary">#006A62</color>
+    <color name="teal_secondary_container">#9FF2E9</color>
+    <color name="teal_tertiary">#4A6174</color>
+    <color name="teal_tertiary_container">#CDE5FC</color>
+    <!-- Dark -->
+    <color name="teal_dark_primary">#4FD8EB</color>
+    <color name="teal_dark_on_primary">#00363D</color>
+    <color name="teal_dark_primary_container">#004F58</color>
+    <color name="teal_dark_on_primary_container">#97F0FF</color>
+    <color name="teal_dark_secondary">#7FD6CB</color>
+    <color name="teal_dark_tertiary">#B1CADF</color>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!--  BLUE THEME — الأزرق (الافتراضي)                     -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <color name="blue_primary">#1565C0</color>
-    <color name="blue_primary_variant">#0D47A1</color>
-    <color name="blue_primary_container">#BBDEFB</color>
-    <color name="blue_secondary">#29B6F6</color>
-    <color name="blue_secondary_variant">#0277BD</color>
-    <!-- داكن -->
-    <color name="blue_dark_primary">#90CAF9</color>
-    <color name="blue_dark_primary_container">#1E3A5F</color>
-    <color name="blue_dark_secondary">#4FC3F7</color>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- EGYPT SCHEME - Warm Gold/Amber                 -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="egypt_primary">#C17900</color>
+    <color name="egypt_primary_container">#FFDEA1</color>
+    <color name="egypt_on_primary_container">#3D2300</color>
+    <color name="egypt_secondary">#B5261E</color>
+    <color name="egypt_secondary_container">#FFDAD6</color>
+    <color name="egypt_tertiary">#4C6546</color>
+    <color name="egypt_tertiary_container">#CEECCA</color>
+    <!-- Dark -->
+    <color name="egypt_dark_primary">#FFC04D</color>
+    <color name="egypt_dark_on_primary">#633E00</color>
+    <color name="egypt_dark_primary_container">#8C5A00</color>
+    <color name="egypt_dark_on_primary_container">#FFDEA1</color>
+    <color name="egypt_dark_secondary">#FFB3AE</color>
+    <color name="egypt_dark_tertiary">#B2CFAC</color>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!--  PURPLE THEME — البنفسجي                             -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <color name="purple_primary">#6A1B9A</color>
-    <color name="purple_primary_variant">#4A148C</color>
-    <color name="purple_primary_container">#E1BEE7</color>
-    <color name="purple_secondary">#AB47BC</color>
-    <color name="purple_secondary_variant">#7B1FA2</color>
-    <!-- داكن -->
-    <color name="purple_dark_primary">#CE93D8</color>
-    <color name="purple_dark_primary_container">#3D1256</color>
-    <color name="purple_dark_secondary">#BA68C8</color>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SEMANTIC COLORS                                -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="color_success">#146B3A</color>
+    <color name="color_success_container">#B7F2CE</color>
+    <color name="color_warning">#C17900</color>
+    <color name="color_warning_container">#FFDEA1</color>
+    <color name="color_error">#BA1A1A</color>
+    <color name="color_error_container">#FFDAD6</color>
+    <color name="color_info">#1B6EF3</color>
+    <color name="color_info_container">#D8E6FF</color>
+    <color name="color_low_stock">#C17900</color>
+    <color name="color_out_of_stock">#BA1A1A</color>
+    <color name="color_profit">#146B3A</color>
+    <color name="color_gold">#C17900</color>
+    <color name="color_loyalty_gold">#FFD700</color>
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!--  GREEN THEME — الأخضر                                -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <color name="green_primary">#2E7D32</color>
-    <color name="green_primary_variant">#1B5E20</color>
-    <color name="green_primary_container">#C8E6C9</color>
-    <color name="green_secondary">#66BB6A</color>
-    <color name="green_secondary_variant">#388E3C</color>
-    <!-- داكن -->
-    <color name="green_dark_primary">#A5D6A7</color>
-    <color name="green_dark_primary_container">#1B3A1E</color>
-    <color name="green_dark_secondary">#81C784</color>
-
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!--  ORANGE THEME — البرتقالي                            -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <color name="orange_primary">#E65100</color>
-    <color name="orange_primary_variant">#BF360C</color>
-    <color name="orange_primary_container">#FFE0B2</color>
-    <color name="orange_secondary">#FFA726</color>
-    <color name="orange_secondary_variant">#F57C00</color>
-    <!-- داكن -->
-    <color name="orange_dark_primary">#FFCC80</color>
-    <color name="orange_dark_primary_container">#5C2400</color>
-    <color name="orange_dark_secondary">#FFB74D</color>
-
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!--  TEAL THEME — الفيروزي                               -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <color name="teal_primary">#00695C</color>
-    <color name="teal_primary_variant">#004D40</color>
-    <color name="teal_primary_container">#B2DFDB</color>
-    <color name="teal_secondary">#26A69A</color>
-    <color name="teal_secondary_variant">#00796B</color>
-    <!-- داكن -->
-    <color name="teal_dark_primary">#80CBC4</color>
-    <color name="teal_dark_primary_container">#003D35</color>
-    <color name="teal_dark_secondary">#4DB6AC</color>
-
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!--  LEGACY ALIASES — أسماء قديمة تشير للأزرق الافتراضي  -->
-    <!--  (تُستخدَم في ملفات Sketchware القديمة فقط)           -->
-    <!--  لا تغيّرها — الـ UI الجديد يستخدم ?attr/colorPrimary -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <color name="primary">@color/blue_primary</color>
-    <color name="primary_dark">@color/blue_primary_variant</color>
-    <color name="primary_variant">@color/blue_primary_variant</color>
-    <color name="secondary">@color/blue_secondary</color>
-    <color name="secondary_variant">@color/blue_secondary_variant</color>
-    <color name="accent">@color/blue_secondary</color>
-    <color name="colorPrimary">@color/blue_primary</color>
-    <color name="colorPrimaryDark">@color/blue_primary_variant</color>
-    <color name="colorAccent">@color/blue_secondary</color>
-    <color name="dark_primary">@color/blue_dark_primary</color>
-    <color name="dark_primary_variant">@color/blue_dark_primary_container</color>
-
-    <!-- Legacy md_theme names → new names -->
-    <color name="md_theme_blue_dark_primary">@color/blue_dark_primary</color>
-    <color name="md_theme_blue_dark_primaryContainer">@color/blue_dark_primary_container</color>
-    <color name="md_theme_purple_dark_primary">@color/purple_dark_primary</color>
-    <color name="md_theme_purple_dark_primaryContainer">@color/purple_dark_primary_container</color>
-    <color name="md_theme_green_dark_primary">@color/green_dark_primary</color>
-    <color name="md_theme_green_dark_primaryContainer">@color/green_dark_primary_container</color>
-    <color name="md_theme_orange_dark_primary">@color/orange_dark_primary</color>
-    <color name="md_theme_orange_dark_primaryContainer">@color/orange_dark_primary_container</color>
-    <color name="md_theme_teal_dark_primary">@color/teal_dark_primary</color>
-    <color name="md_theme_teal_dark_primaryContainer">@color/teal_dark_primary_container</color>
-
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!--  SEMANTIC COLORS — دلالية (لا تتغير بالثيم)          -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <color name="color_success">#2E7D32</color>
-    <color name="color_error">#B00020</color>
-    <color name="color_error_light">#FFEBEE</color>
-    <color name="color_warning">#FF8F00</color>
-    <color name="color_info">#1565C0</color>
-    <color name="low_stock_color">#FF6F00</color>
-    <color name="out_of_stock_color">#C62828</color>
-    <color name="color_success_light">#E8F5E9</color>
-    <color name="color_warning_light">#FFF8E1</color>
-
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!--  SPECIAL COLORS — ألوان خاصة                        -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Premium / Gold -->
-    <color name="gold">#F9A825</color>
-    <color name="gold_dark">#F57F17</color>
-    <color name="gold_light">#FFF8E1</color>
-
-    <!-- Purple standalone (للعناصر البنفسجية في أي ثيم) -->
-    <color name="purple_500">#9C27B0</color>
-
-    <!-- Launcher -->
-    <color name="ic_launcher_background">#1565C0</color>
-    <color name="ic_launcher_foreground">#FFFFFF</color>
+    <!-- Legacy backward-compat aliases -->
+    <color name="primary">#1B6EF3</color>
+    <color name="primary_dark">#00449E</color>
+    <color name="colorPrimary">#1B6EF3</color>
+    <color name="colorAccent">#ADC8FF</color>
+    <color name="colorPrimaryDark">#00449E</color>
 
 </resources>

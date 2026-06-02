@@ -82,7 +82,7 @@ public class InvoicePrinter {
         // 1. الشعار (إذا وجد)
         String logoPath = storeSettings.get("logo");
         if (logoPath != null && !logoPath.isEmpty()) {
-            sb.append("[LOGO]").append(logoPath).append("\n");
+            sb.append("[C]<img>").append(logoPath).append("</img>\n");
         }
         
         // 2. معلومات المتجر
@@ -117,8 +117,8 @@ public class InvoicePrinter {
         sb.append(repeat("-", width)).append("\n");
         
         for (HashMap<String, Object> item : items) {
-            String name = truncate(item.get("product_name").toString(), 20);
-            int qty = (int) item.get("quantity");
+            String name = truncate(item.get("name").toString(), 20);
+            int qty = (int) item.get("qty");
             double price = (double) item.get("price");
             double total = price * qty;
             
@@ -132,7 +132,7 @@ public class InvoicePrinter {
         double subtotal = (double) invoice.get("total");
         double discount = (double) invoice.get("discount");
         double tax = invoice.containsKey("tax") ? (double) invoice.get("tax") : 0;
-        double finalTotal = (double) invoice.get("final_total");
+        double finalTotal = (double) invoice.get("total");
         
         sb.append(String.format("%30s %15.2f\n", "المجموع الفرعي:", subtotal));
         
@@ -154,8 +154,9 @@ public class InvoicePrinter {
         sb.append(centerText("شكراً لتعاملكم معنا", width)).append("\n");
         sb.append(centerText("نتمنى لكم يوماً سعيداً", width)).append("\n");
         
-        // 8. QR Code (اختياري)
-        sb.append("\n[QR]").append(generateQRData(invoice)).append("\n");
+        // 8. QR Code
+        String qrData = generateQRData(invoice);
+        sb.append("\n[C]<qrcode size='20'>").append(qrData).append("</qrcode>\n");
         
         // 9. قطع الورق
         sb.append("\n\n\n[CUT]\n");
@@ -206,9 +207,29 @@ public class InvoicePrinter {
      * الطباعة عبر Bluetooth
      */
     private boolean printViaBluetooth(String content, String paperWidth) {
-        // سيتم التنفيذ في المرحلة التالية
-        Log.d(TAG, "Printing via Bluetooth: " + paperWidth);
-        return false;
+        try {
+            android.bluetooth.BluetoothAdapter adapter = android.bluetooth.BluetoothAdapter.getDefaultAdapter();
+            if (adapter == null || !adapter.isEnabled()) {
+                Log.e(TAG, "Bluetooth not available or disabled");
+                return false;
+            }
+            HashMap<String, String> printerSettings = dbHelper.getPrinterSettings();
+            String address = printerSettings.getOrDefault("printer_address", "");
+            if (address.isEmpty()) {
+                Log.e(TAG, "No printer address configured");
+                return false;
+            }
+            int paperWidthMm = "58mm".equals(paperWidth) ? 58 : 80;
+            com.dantsu.escposprinter.EscPosPrinter printer = new com.dantsu.escposprinter.EscPosPrinter(
+                com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections.selectFirstPaired(),
+                203, paperWidthMm, 32
+            );
+            printer.printFormattedText(content);
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "Bluetooth print error: " + e.getMessage(), e);
+            return false;
+        }
     }
     
     /**
