@@ -26,7 +26,7 @@
 		android:gravity="center_horizontal|center_vertical"
 		android:textSize="20sp"
 		android:textStyle="bold"
-		android:textColor="#1D1B20" />
+		android:textColor="?attr/colorOnSurface" />
 	<TextView
 		android:id="@+id/base_dialog_message"
 		android:focusable="false"
@@ -36,7 +36,7 @@
 		android:gravity="center_horizontal|center_vertical"
 		android:textSize="16sp"
 		android:textStyle="bold"
-		android:textColor="#49454F" />
+		android:textColor="?attr/colorOnSurfaceVariant" />
 	<LinearLayout
 		android:id="@+id/linear4"
 		android:layout_width="match_parent"

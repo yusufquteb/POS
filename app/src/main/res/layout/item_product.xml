@@ -50,7 +50,7 @@
 					android:text="اسم المنتج"
 					android:textSize="16sp"
 					android:textStyle="bold"
-					android:textColor="#212121"
+					android:textColor="?attr/colorOnSurface"
 					android:maxLines="1"
 					android:ellipsize="end" />
 				<TextView
@@ -61,7 +61,7 @@
 					android:layout_marginTop="2dp"
 					android:text="الماركة"
 					android:textSize="13sp"
-					android:textColor="#757575"
+					android:textColor="?attr/colorOnSurfaceVariant"
 					android:visibility="gone" />
 				<TextView
 					android:id="@+id/tv_barcode"
@@ -71,7 +71,7 @@
 					android:layout_marginTop="4dp"
 					android:text="1234567890"
 					android:textSize="12sp"
-					android:textColor="#9E9E9E" />
+					android:textColor="?attr/colorOnSurfaceVariant" />
 			</LinearLayout>
 			<LinearLayout
 				android:id="@+id/linear18"
@@ -95,7 +95,7 @@
 					android:layout_marginTop="4dp"
 					android:text="الكمية: 0"
 					android:textSize="13sp"
-					android:textColor="#388E3C" />
+					android:textColor="@color/color_success" />
 			</LinearLayout>
 		</LinearLayout>
 	</com.google.android.material.card.MaterialCardView>

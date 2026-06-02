@@ -28,7 +28,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_expenses"
-                android:tint="#F44336"
+                android:tint="?attr/colorError"
                 android:contentDescription="@string/expense_category"/>
         </LinearLayout>
 
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#F44336"
+            android:textColor="?attr/colorError"
             android:fontFamily="@font/cairo_bold"/>
 
     </LinearLayout>

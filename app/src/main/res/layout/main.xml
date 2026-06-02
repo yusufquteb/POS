@@ -86,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:text="إدارة متجرك بسهولة وسرعة"
                             android:textSize="13sp"
-                            android:textColor="#E8DEF8"
+                            android:textColor="?attr/colorPrimaryContainer"
                             android:layout_marginBottom="16dp" />
 
                         <!-- إحصائيات اليوم -->
@@ -114,7 +114,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="مبيعات اليوم"
-                                        android:textColor="#E8DEF8"
+                                        android:textColor="?attr/colorPrimaryContainer"
                                         android:textSize="11sp" />
                                     <TextView
                                         android:id="@+id/tv_today_sales"
@@ -145,7 +145,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="الفواتير اليوم"
-                                        android:textColor="#E8DEF8"
+                                        android:textColor="?attr/colorPrimaryContainer"
                                         android:textSize="11sp" />
                                     <TextView
                                         android:id="@+id/tv_today_invoices"

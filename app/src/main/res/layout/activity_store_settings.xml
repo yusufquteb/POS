@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="#FAF8FF"
+	android:background="?attr/colorSurface"
 	android:orientation="vertical"
 	android:layoutDirection="rtl"
 	android:id="@+id/_main">
@@ -16,7 +16,7 @@
 		<com.google.android.material.appbar.MaterialToolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
-			android:background="#6750A4"
+			android:background="?attr/colorPrimary"
 			android:layout_height="?attr/actionBarSize"
 			app:title="@string/store_settings_title"
 			app:titleTextColor="#FFFFFF"
@@ -78,7 +78,7 @@
 						android:layout_marginTop="12dp"
 						android:text="@string/store_settings_logo_hint"
 						android:textSize="13sp"
-						android:textColor="#6750A4"
+						android:textColor="?attr/colorPrimary"
 						android:fontFamily="@font/cairo_semibold" />
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
@@ -105,7 +105,7 @@
 						android:layout_marginBottom="20dp"
 						android:text="@string/store_settings_section_info"
 						android:textSize="16sp"
-						android:textColor="#6750A4"
+						android:textColor="?attr/colorPrimary"
 						android:fontFamily="@font/cairo_bold" />
 					<com.google.android.material.textfield.TextInputLayout
 						android:id="@+id/layout_store_name"
@@ -197,7 +197,7 @@
 						android:layout_height="56dp"
 						android:text="@string/store_settings_save"
 						android:textSize="16sp"
-						android:textColor="#FFFFFF"
+						android:textColor="?attr/colorOnPrimary"
 						android:fontFamily="@font/cairo_bold"
 						app:backgroundTint="#6750A4"
 						app:cornerRadius="14dp"

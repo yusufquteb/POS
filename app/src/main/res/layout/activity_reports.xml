@@ -247,7 +247,7 @@
 							android:text="0"
 							android:textSize="16sp"
 							android:textStyle="bold"
-							android:textColor="#FF6F00" />
+							android:textColor="@color/color_warning" />
 					</LinearLayout>
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
@@ -270,14 +270,14 @@
 							android:layout_weight="1" android:text="@string/expenses_title" android:textSize="14sp"/>
 						<TextView android:id="@+id/tv_total_expenses"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="0.00" android:textSize="16sp" android:textStyle="bold" android:textColor="#C62828"/>
+							android:text="0.00" android:textSize="16sp" android:textStyle="bold" android:textColor="?attr/colorError"/>
 					</LinearLayout>
 					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
 						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
 							android:layout_weight="1" android:text="@string/reports_profit" android:textSize="15sp" android:textStyle="bold"/>
 						<TextView android:id="@+id/tv_net_profit"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="0.00" android:textSize="18sp" android:textStyle="bold" android:textColor="#2E7D32"/>
+							android:text="0.00" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/color_success"/>
 					</LinearLayout>
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>

@@ -326,7 +326,7 @@
 									android:layout_height="wrap_content"
 									android:text="@string/add_product_profit"
 									android:textSize="12sp"
-									android:textColor="#49454F"
+									android:textColor="?attr/colorOnSurfaceVariant"
 									android:fontFamily="@font/cairo_regular" />
 								<TextView
 									android:id="@+id/tv_profit"
@@ -334,14 +334,14 @@
 									android:layout_height="wrap_content"
 									android:text="0.00 ج.م"
 									android:textSize="16sp"
-									android:textColor="#2E7D32"
+									android:textColor="@color/color_success"
 									android:fontFamily="@font/cairo_bold" />
 							</LinearLayout>
 							<View
 								android:id="@+id/view30"
 								android:layout_width="1dp"
 								android:layout_height="match_parent"
-								android:background="#D1C4E9"
+								android:background="?attr/colorSecondaryContainer"
 								android:layout_marginHorizontal="8dp" />
 							<LinearLayout
 								android:id="@+id/linear31"
@@ -356,7 +356,7 @@
 									android:layout_height="wrap_content"
 									android:text="@string/add_product_profit_percent"
 									android:textSize="12sp"
-									android:textColor="#49454F"
+									android:textColor="?attr/colorOnSurfaceVariant"
 									android:fontFamily="@font/cairo_regular" />
 								<TextView
 									android:id="@+id/tv_profit_percentage"
@@ -364,7 +364,7 @@
 									android:layout_height="wrap_content"
 									android:text="0%"
 									android:textSize="16sp"
-									android:textColor="#2E7D32"
+									android:textColor="@color/color_success"
 									android:fontFamily="@font/cairo_bold" />
 							</LinearLayout>
 						</LinearLayout>
@@ -489,7 +489,7 @@
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:textSize="13sp"
-								android:textColor="#1D1B20"
+								android:textColor="?attr/colorOnSurface"
 								android:inputType="none"
 								android:fontFamily="@font/cairo_regular" />
 						</com.google.android.material.textfield.TextInputLayout>
@@ -528,7 +528,7 @@
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:textSize="13sp"
-								android:textColor="#1D1B20"
+								android:textColor="?attr/colorOnSurface"
 								android:inputType="none"
 								android:fontFamily="@font/cairo_regular" />
 						</com.google.android.material.textfield.TextInputLayout>
@@ -567,7 +567,7 @@
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:textSize="13sp"
-								android:textColor="#1D1B20"
+								android:textColor="?attr/colorOnSurface"
 								android:inputType="none"
 								android:fontFamily="@font/cairo_regular" />
 						</com.google.android.material.textfield.TextInputLayout>
@@ -664,7 +664,7 @@
 							android:layout_height="wrap_content"
 							android:text="@string/swipe_hint"
 							android:textSize="11sp"
-							android:textColor="#79747E"
+							android:textColor="?attr/colorOnSurfaceVariant"
 							android:fontFamily="@font/cairo_light" />
 					</LinearLayout>
 					<androidx.recyclerview.widget.RecyclerView
