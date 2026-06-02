@@ -237,9 +237,9 @@ public class MainActivity extends BaseActivity
     private String getCurrencySymbol() {
         try {
             HashMap<String, String> settings = dbHelper.getStoreSettings();
-            return settings.getOrDefault("currency", "ر.س");
+            return settings.getOrDefault("currency", "ج.م");
         } catch (Exception e) {
-            return "ر.س";
+            return "ج.م";
         }
     }
 

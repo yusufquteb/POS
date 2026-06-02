@@ -39,6 +39,7 @@ public class ActivityDebtActivity extends BaseActivity {
     private TextView tvDebtCount;
     private View tvEmpty;
     private TextInputEditText etSearch;
+    private String currency = "ج.م";
     private DebtAdapter adapter;
     private DBHelper dbHelper;
 
@@ -59,6 +60,10 @@ public class ActivityDebtActivity extends BaseActivity {
         applyWindowInsets(findViewById(android.R.id.content));
 
         dbHelper = new DBHelper(this);
+        try {
+            HashMap<String, String> s = dbHelper.getStoreSettings();
+            if (s != null) currency = s.getOrDefault("currency", "ج.م");
+        } catch (Exception ignored) {}
         initViews();
         setupToolbar();
         setupSearch();
@@ -157,7 +162,7 @@ public class ActivityDebtActivity extends BaseActivity {
             catch (NumberFormatException ignored) {}
         }
         if (tvTotalDebt != null)
-            tvTotalDebt.setText(String.format(Locale.getDefault(), "%.2f ر.س", total));
+            tvTotalDebt.setText(String.format(Locale.getDefault(), "%.2f %s", total, currency));
         if (tvDebtCount != null)
             tvDebtCount.setText(String.valueOf(allDebtsList.size()));
     }
@@ -210,7 +215,7 @@ public class ActivityDebtActivity extends BaseActivity {
             tvDialogName.setText(customerName);
         if (tvDialogDebt != null)
             tvDialogDebt.setText(String.format(Locale.getDefault(),
-                    "الدين الحالي / Current Debt:  %.2f ر.س", finalDebt));
+                    "الدين الحالي / Current Debt:  %.2f %s", finalDebt, currency));
 
         new MaterialAlertDialogBuilder(this)
                 .setTitle("تسوية دين العميل\nSettle Customer Debt")
@@ -251,7 +256,7 @@ public class ActivityDebtActivity extends BaseActivity {
                 if (rootView != null) {
                     Snackbar.make(rootView,
                             String.format(Locale.getDefault(),
-                                    "✓ تمت التسوية (%.2f ر.س) / Debt settled", amount),
+                                    "✓ تمت التسوية (%.2f %s) / Debt settled", amount, currency),
                             Snackbar.LENGTH_LONG).show();
                 } else {
                     showToast("✓ تمت التسوية بنجاح");
@@ -298,9 +303,9 @@ public class ActivityDebtActivity extends BaseActivity {
                 try {
                     double debt = Double.parseDouble(safeGet(item, "debt"));
                     holder.tvDebt.setText(
-                            String.format(Locale.getDefault(), "%.2f ر.س", debt));
+                            String.format(Locale.getDefault(), "%.2f %s", debt, currency));
                 } catch (NumberFormatException e) {
-                    holder.tvDebt.setText("0.00 ر.س");
+                    holder.tvDebt.setText("0.00 " + currency);
                 }
             }
 

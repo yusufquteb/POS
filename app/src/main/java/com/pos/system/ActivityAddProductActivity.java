@@ -84,6 +84,7 @@ public class ActivityAddProductActivity extends BaseActivity {
 
     // ═══ Data ═══
     private DBHelper dbHelper;
+    private String currency = "ج.م";
     private String selectedImagePath = "";
     private Uri photoUri;
     private boolean isEditMode = false;
@@ -149,6 +150,7 @@ public class ActivityAddProductActivity extends BaseActivity {
         applyWindowInsets(findViewById(R.id._main));
 
         dbHelper = new DBHelper(this);
+        try { HashMap<String, String> s = dbHelper.getStoreSettings(); if (s != null) currency = s.getOrDefault("currency", "ج.م"); } catch (Exception ignored) {}
 
         // التحقق من وضع التعديل
         checkEditMode();
@@ -582,11 +584,11 @@ public class ActivityAddProductActivity extends BaseActivity {
             double profit    = price - cost;
             double profitPct = (profit / cost) * 100;
             if (tvProfit != null)
-                tvProfit.setText(String.format(Locale.getDefault(), "%.2f ر.س", profit));
+                tvProfit.setText(String.format(Locale.getDefault(), "%.2f %s", profit, currency));
             if (tvProfitPercentage != null)
                 tvProfitPercentage.setText(String.format(Locale.getDefault(), "%.1f%%", profitPct));
         } else {
-            if (tvProfit != null)           tvProfit.setText("0.00 ر.س");
+            if (tvProfit != null)           tvProfit.setText("0.00 " + currency);
             if (tvProfitPercentage != null) tvProfitPercentage.setText("0.0%");
         }
     }

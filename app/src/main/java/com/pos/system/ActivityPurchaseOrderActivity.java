@@ -39,6 +39,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
     private View tvEmpty;
     private OrdersAdapter adapter;
     private DBHelper dbHelper;
+    private String currency = "ج.م";
 
     private final List<HashMap<String, String>> ordersList = new ArrayList<>();
 
@@ -54,6 +55,10 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
         applyWindowInsets(findViewById(android.R.id.content));
 
         dbHelper = new DBHelper(this);
+        try {
+            HashMap<String, String> s = dbHelper.getStoreSettings();
+            if (s != null) currency = s.getOrDefault("currency", "ج.م");
+        } catch (Exception ignored) {}
         initViews();
         setupToolbar();
         setupRecyclerView();
@@ -254,11 +259,11 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
             summary.append("• ").append(safeGet(item, "name"))
                    .append("  ×").append(formatQty(qty))
                    .append("  @").append(String.format(Locale.getDefault(), "%.2f", cost))
-                   .append(" = ").append(String.format(Locale.getDefault(), "%.2f ر.س\n", line));
+                   .append(" = ").append(String.format(Locale.getDefault(), "%.2f %s\n", currency, line));
         }
         summary.append("\n")
                .append("الإجمالي / Total:  ")
-               .append(String.format(Locale.getDefault(), "%.2f ر.س", total));
+               .append(String.format(Locale.getDefault(), "%.2f %s", currency, total));
 
         final double finalTotal = total;
 
@@ -341,7 +346,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
                 .setMessage("المورد / Supplier: " + safeGet(order, "supplier_name")
                         + "\nالإجمالي / Total: "
                         + String.format(Locale.getDefault(),
-                                "%.2f ر.س", parseDouble(safeGet(order, "total")))
+                                "%.2f %s", currency, parseDouble(safeGet(order, "total")))
                         + "\nالتاريخ / Date: " + safeGet(order, "created_at"))
                 .setPositiveButton("تم الاستلام / Mark Received", (dialog, which) ->
                         confirmReceivePo(order))
@@ -391,7 +396,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
               + "المورد / Supplier: "       + safeGet(order, "supplier_name") + "\n"
               + "الإجمالي / Total: "
               + String.format(Locale.getDefault(),
-                      "%.2f ر.س", parseDouble(safeGet(order, "total")))    + "\n"
+                      "%.2f %s", currency, parseDouble(safeGet(order, "total")))    + "\n"
               + "الحالة / Status: "
               + formatStatus(safeGet(order, "status"))                      + "\n"
               + "التاريخ / Date: "          + safeGet(order, "created_at");
@@ -466,7 +471,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
             if (holder.tvSupplier   != null) holder.tvSupplier.setText(supplier);
             if (holder.tvTotal      != null)
                 holder.tvTotal.setText(
-                        String.format(Locale.getDefault(), "%.2f ر.س", total));
+                        String.format(Locale.getDefault(), "%.2f %s", currency, total));
             if (holder.tvDate       != null) holder.tvDate.setText(date);
             if (holder.tvStatus     != null) {
                 holder.tvStatus.setText(formatStatus(status));

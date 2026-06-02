@@ -1213,7 +1213,6 @@ public class DBHelper extends SQLiteOpenHelper {
             settings.put("tax_rate",  taxRate  != null ? taxRate  : "0");
             settings.put("logo_path", logoPath != null ? logoPath : "");
             settings.put("address",   address  != null ? address  : "");
-            settings.put("currency",  "ر.س");
             return saveStoreSettings(settings);
         } catch (Exception e) {
             Log.e(TAG, "updateStoreSettings: " + e.getMessage(), e);

@@ -83,7 +83,7 @@ public class Constants {
         public static final double TAX_RATE = 15.0; // 15%
         public static final double DISCOUNT_RATE = 0.0;
         public static final int REORDER_LEVEL = 5;
-        public static final String CURRENCY_SYMBOL = "ر.س";
+        public static final String CURRENCY_SYMBOL = "ج.م";
         public static final String DATE_FORMAT = "yyyy-MM-dd";
         public static final String TIME_FORMAT = "HH:mm:ss";
         public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";

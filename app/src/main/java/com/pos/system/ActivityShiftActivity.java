@@ -53,7 +53,7 @@ public class ActivityShiftActivity extends BaseActivity {
 
     // ─── Data ─────────────────────────────────────────────────
     private DBHelper           dbHelper;
-    private String             currency = "ر.س";
+    private String             currency = "ج.م";
     private ShiftsAdapter      adapter;
     private List<HashMap<String, String>> shiftsList = new ArrayList<>();
 
