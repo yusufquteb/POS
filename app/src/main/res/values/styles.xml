@@ -102,7 +102,7 @@
         <item name="cornerSize">28dp</item>
     </style>
 
-    <style name="ShapeAppearance.App.ExtraLargeComponent" parent="ShapeAppearance.Material3.ExtraLargeComponent">
+    <style name="ShapeAppearance.App.ExtraLargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">32dp</item>
     </style>
@@ -421,7 +421,7 @@
         <item name="cardCornerRadius">28dp</item>
     </style>
 
-    <style name="NavigationBarStyle" parent="Widget.Material3.NavigationBar">
+    <style name="NavigationBarStyle" parent="Widget.Material3.BottomNavigationView">
         <item name="android:fontFamily">@font/cairo_regular</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.Caption</item>
         <item name="itemTextAppearanceInactive">@style/TextAppearance.Caption</item>
