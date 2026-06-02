@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -36,7 +36,7 @@ import java.util.Locale;
 public class ActivityPurchaseOrderActivity extends BaseActivity {
 
     private RecyclerView rvOrders;
-    private FloatingActionButton fabAddOrder;
+    private ExtendedFloatingActionButton fabAddOrder;
     private View tvEmpty;
     private OrdersAdapter adapter;
     private DBHelper dbHelper;

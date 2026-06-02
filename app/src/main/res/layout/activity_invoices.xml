@@ -63,7 +63,7 @@
 						android:layout_height="wrap_content"
 						android:text="@string/invoices_filter_today"
 						android:textSize="12sp"
-						android:textColor="#E8DEF8"
+						android:textColor="?attr/colorPrimaryContainer"
 						android:fontFamily="@font/cairo_regular" />
 					<TextView
 						android:id="@+id/tv_today_count"
@@ -71,7 +71,7 @@
 						android:layout_height="wrap_content"
 						android:text="0"
 						android:textSize="28sp"
-						android:textColor="#FFFFFF"
+						android:textColor="?attr/colorOnPrimary"
 						android:fontFamily="@font/cairo_bold" />
 					<TextView
 						android:id="@+id/tv_today_total"
@@ -79,7 +79,7 @@
 						android:layout_height="wrap_content"
 						android:text="0.00 ج.م"
 						android:textSize="12sp"
-						android:textColor="#E8DEF8"
+						android:textColor="?attr/colorPrimaryContainer"
 						android:fontFamily="@font/cairo_semibold" />
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
@@ -106,7 +106,7 @@
 						android:layout_height="wrap_content"
 						android:text="@string/invoices_filter_month"
 						android:textSize="12sp"
-						android:textColor="#49454F"
+						android:textColor="?attr/colorOnSurfaceVariant"
 						android:fontFamily="@font/cairo_regular" />
 					<TextView
 						android:id="@+id/tv_month_count"
@@ -114,7 +114,7 @@
 						android:layout_height="wrap_content"
 						android:text="0"
 						android:textSize="28sp"
-						android:textColor="#1C1B1F"
+						android:textColor="?attr/colorOnSurface"
 						android:fontFamily="@font/cairo_bold" />
 					<TextView
 						android:id="@+id/tv_month_total"
@@ -157,7 +157,7 @@
 					android:layout_height="48dp"
 					android:gravity="center_vertical"
 					android:textSize="13sp"
-					android:textColor="#1D1B20"
+					android:textColor="?attr/colorOnSurface"
 					android:hint="@string/invoices_search_hint"
 					android:textColorHint="#79747E"
 					android:imeOptions="actionSearch"
@@ -206,7 +206,7 @@
 				android:layout_marginTop="12dp"
 				android:text="@string/invoices_empty"
 				android:textSize="18sp"
-				android:textColor="#49454F"
+				android:textColor="?attr/colorOnSurfaceVariant"
 				android:fontFamily="@font/cairo_bold" />
 		</LinearLayout>
 	</LinearLayout>

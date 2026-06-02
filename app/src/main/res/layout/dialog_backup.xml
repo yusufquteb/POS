@@ -50,5 +50,5 @@
 		android:background="@drawable/bg_rounded_light"
 		android:text="⚠ تأكد من حفظ النسخة الاحتياطية في مكان آمن"
 		android:textSize="12sp"
-		android:textColor="#FF6F00" />
+		android:textColor="@color/color_warning" />
 </LinearLayout>

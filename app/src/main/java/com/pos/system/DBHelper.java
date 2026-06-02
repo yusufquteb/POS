@@ -969,10 +969,11 @@ public class DBHelper extends SQLiteOpenHelper {
         HashMap<String, String> row = list.get(0);
         result.putAll(row);
         // تحويل الحقول الرقمية
-        try { result.put("total",    Double.parseDouble(row.getOrDefault("total",    "0"))); } catch (Exception ignored) {}
-        try { result.put("discount", Double.parseDouble(row.getOrDefault("discount", "0"))); } catch (Exception ignored) {}
-        try { result.put("tax",      Double.parseDouble(row.getOrDefault("tax",      "0"))); } catch (Exception ignored) {}
-        try { result.put("customer_id", Integer.parseInt(row.getOrDefault("customer_id", "0"))); } catch (Exception ignored) {}
+        try { result.put("subtotal",    Double.parseDouble(row.getOrDefault("subtotal",  "0"))); } catch (Exception ignored) {}
+        try { result.put("total",       Double.parseDouble(row.getOrDefault("total",     "0"))); } catch (Exception ignored) {}
+        try { result.put("discount",    Double.parseDouble(row.getOrDefault("discount",  "0"))); } catch (Exception ignored) {}
+        try { result.put("tax",         Double.parseDouble(row.getOrDefault("tax",       "0"))); } catch (Exception ignored) {}
+        try { result.put("customer_id", Integer.parseInt(row.getOrDefault("customer_id","0"))); } catch (Exception ignored) {}
         return result;
     }
 
@@ -1390,7 +1391,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean isPremiumUser() {
         try {
             HashMap<String, String> settings = getStoreSettings();
-            return "true".equalsIgnoreCase(settings.getOrDefault("is_premium", "false"));
+            if (!"true".equalsIgnoreCase(settings.getOrDefault("is_premium", "false"))) return false;
+            // Lifetime purchases have no expiry; monthly/yearly have a date
+            String planId = settings.getOrDefault("plan_id", "");
+            if ("premium_lifetime".equalsIgnoreCase(planId)) return true;
+            String end = settings.getOrDefault("subscription_end", "");
+            if (end.isEmpty()) return true; // legacy entries without date → keep unlocked
+            // "yyyy-MM-dd" or "yyyy-MM-dd HH:mm:ss"
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US);
+            java.util.Date expiry = sdf.parse(end.length() > 10 ? end.substring(0, 10) : end);
+            return expiry != null && !expiry.before(new java.util.Date());
         } catch (Exception e) {
             Log.e(TAG, "isPremiumUser: " + e.getMessage(), e);
             return false;

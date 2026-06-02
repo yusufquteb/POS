@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	android:background="#FEF7FF"
+	android:background="?attr/colorSurface"
 	android:id="@+id/_main">
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/app_bar_layout3"
@@ -14,7 +14,7 @@
 		<com.google.android.material.appbar.MaterialToolbar
 			android:id="@+id/toolbar_title"
 			android:layout_width="match_parent"
-			android:background="#6750A4"
+			android:background="?attr/colorPrimary"
 			android:layout_height="?attr/actionBarSize"
 			app:titleTextColor="#FFFFFF"
 			app:navigationIcon="@drawable/ic_arrow_back" />

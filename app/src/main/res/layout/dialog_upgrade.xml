@@ -20,7 +20,7 @@
 			android:text="✨ ترقية إلى Premium"
 			android:textSize="24sp"
 			android:textStyle="bold"
-			android:textColor="#212121"
+			android:textColor="?attr/colorOnSurface"
 			android:layout_gravity="center_horizontal" />
 		<TextView
 			android:id="@+id/textview77"
@@ -31,7 +31,7 @@
 			android:layout_marginBottom="24dp"
 			android:text="استمتع بجميع الميزات المتقدمة"
 			android:textSize="14sp"
-			android:textColor="#757575"
+			android:textColor="?attr/colorOnSurfaceVariant"
 			android:layout_gravity="center_horizontal" />
 		<LinearLayout
 			android:id="@+id/linear60"
@@ -68,7 +68,7 @@
 						android:text="عمليات غير محدودة"
 						android:textSize="16sp"
 						android:textStyle="bold"
-						android:textColor="#212121" />
+						android:textColor="?attr/colorOnSurface" />
 					<TextView
 						android:id="@+id/textview80"
 						android:focusable="false"
@@ -76,7 +76,7 @@
 						android:layout_height="wrap_content"
 						android:text="لا حدود للعمليات اليومية"
 						android:textSize="13sp"
-						android:textColor="#757575" />
+						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
 			<LinearLayout
@@ -108,7 +108,7 @@
 						android:text="نسخ احتياطي تلقائي"
 						android:textSize="16sp"
 						android:textStyle="bold"
-						android:textColor="#212121" />
+						android:textColor="?attr/colorOnSurface" />
 					<TextView
 						android:id="@+id/textview83"
 						android:focusable="false"
@@ -116,7 +116,7 @@
 						android:layout_height="wrap_content"
 						android:text="نسخ يومي آمن لبياناتك"
 						android:textSize="13sp"
-						android:textColor="#757575" />
+						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
 			<LinearLayout
@@ -148,7 +148,7 @@
 						android:text="تقارير متقدمة"
 						android:textSize="16sp"
 						android:textStyle="bold"
-						android:textColor="#212121" />
+						android:textColor="?attr/colorOnSurface" />
 					<TextView
 						android:id="@+id/textview86"
 						android:focusable="false"
@@ -156,7 +156,7 @@
 						android:layout_height="wrap_content"
 						android:text="تحليلات شاملة لمبيعاتك"
 						android:textSize="13sp"
-						android:textColor="#757575" />
+						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
 			<LinearLayout
@@ -188,7 +188,7 @@
 						android:text="دعم فني أولوية"
 						android:textSize="16sp"
 						android:textStyle="bold"
-						android:textColor="#212121" />
+						android:textColor="?attr/colorOnSurface" />
 					<TextView
 						android:id="@+id/textview89"
 						android:focusable="false"
@@ -196,7 +196,7 @@
 						android:layout_height="wrap_content"
 						android:text="دعم سريع وأولوية في الرد"
 						android:textSize="13sp"
-						android:textColor="#757575" />
+						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
 			<LinearLayout
@@ -227,7 +227,7 @@
 						android:text="بدون إعلانات"
 						android:textSize="16sp"
 						android:textStyle="bold"
-						android:textColor="#212121" />
+						android:textColor="?attr/colorOnSurface" />
 					<TextView
 						android:id="@+id/textview92"
 						android:focusable="false"
@@ -235,7 +235,7 @@
 						android:layout_height="wrap_content"
 						android:text="تجربة نظيفة بدون إزعاج"
 						android:textSize="13sp"
-						android:textColor="#757575" />
+						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
 		</LinearLayout>
@@ -275,7 +275,7 @@
 						android:layout_height="wrap_content"
 						android:text="ابدأ من"
 						android:textSize="12sp"
-						android:textColor="#757575" />
+						android:textColor="?attr/colorOnSurfaceVariant" />
 					<TextView
 						android:id="@+id/textview95"
 						android:focusable="false"
@@ -295,7 +295,7 @@
 			android:layout_marginBottom="8dp"
 			android:text="✅ ضمان استرجاع المال خلال 7 أيام"
 			android:textSize="12sp"
-			android:textColor="#388E3C"
+			android:textColor="@color/color_success"
 			android:layout_gravity="center_horizontal" />
 	</LinearLayout>
 </LinearLayout>

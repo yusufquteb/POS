@@ -174,7 +174,7 @@
 							android:layout_height="wrap_content"
 							android:text="-10.00 ج.م"
 							android:textSize="14sp"
-							android:textColor="#D32F2F" />
+							android:textColor="?attr/colorError" />
 					</LinearLayout>
 					<LinearLayout
 						android:id="@+id/layout_tax"

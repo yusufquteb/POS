@@ -5,13 +5,19 @@ import android.content.Intent;
 import android.os.Process;
 import android.util.Log;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import com.pos.system.managers.LanguageManager;
 import com.pos.system.managers.ThemeManager;
+import com.pos.system.workers.LowStockWorker;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.concurrent.TimeUnit;
 
 /**
  * SketchApplication - Application Class الرئيسية
@@ -59,6 +65,21 @@ public class SketchApplication extends Application {
             Log.d(TAG, "✓ DynamicColors applied");
         } catch (Exception e) {
             Log.e(TAG, "DynamicColors failed: " + e.getMessage());
+        }
+
+        // Schedule daily low-stock background check
+        try {
+            PeriodicWorkRequest lowStockWork = new PeriodicWorkRequest.Builder(
+                LowStockWorker.class, 1, TimeUnit.DAYS)
+                .build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                "low_stock_daily",
+                ExistingPeriodicWorkPolicy.KEEP,
+                lowStockWork
+            );
+            Log.d(TAG, "✓ LowStockWorker scheduled");
+        } catch (Exception e) {
+            Log.e(TAG, "WorkManager scheduling failed: " + e.getMessage());
         }
 
         // Global Crash Handler

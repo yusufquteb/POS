@@ -57,7 +57,7 @@
 				android:layout_height="wrap_content"
 				android:padding="16dp"
 				android:textSize="14sp"
-				android:textColor="#2E7D32" />
+				android:textColor="@color/color_success" />
 		</com.google.android.material.card.MaterialCardView>
 		<Button
 			android:id="@+id/btn_add_customer"

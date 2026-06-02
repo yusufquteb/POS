@@ -73,7 +73,7 @@
 			android:layout_marginTop="20dp"
 			android:text="إدخال يدوي للباركود"
 			android:textSize="12sp"
-			android:textColor="#1D1B20"
+			android:textColor="?attr/colorOnSurface"
 			app:backgroundTint="#FFFFFF"
 			app:icon="@drawable/ic_keyboard"
 			app:iconTint="#1D1B20"

@@ -8,13 +8,15 @@
 	android:background="?attr/colorSurface"
 	android:id="@+id/_main"
 	android:fitsSystemWindows="true">
+
+	<!-- Toolbar -->
 	<LinearLayout
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="56dp"
 		android:gravity="center_vertical"
 		android:orientation="horizontal"
-		android:background="@android:color/white"
+		android:background="?attr/colorSurface"
 		android:elevation="4dp"
 		android:paddingStart="16dp"
 		android:paddingEnd="16dp"
@@ -26,7 +28,7 @@
 			android:scaleType="center"
 			android:src="@android:drawable/ic_menu_revert"
 			android:contentDescription="رجوع"
-			android:tint="#1976D2" />
+			android:tint="?attr/colorPrimary" />
 		<TextView
 			android:id="@+id/textview25"
 			android:layout_width="0dp"
@@ -34,10 +36,12 @@
 			android:text="النسخ الاحتياطي"
 			android:textSize="18sp"
 			android:textStyle="bold"
-			android:textColor="#212121"
+			android:textColor="?attr/colorOnSurface"
 			android:layout_weight="1"
 			android:layout_marginStart="16dp" />
 	</LinearLayout>
+
+	<!-- Local Backup Buttons -->
 	<LinearLayout
 		android:id="@+id/linear12"
 		android:layout_width="match_parent"
@@ -46,37 +50,37 @@
 		android:padding="16dp"
 		android:gravity="center_horizontal|center_vertical"
 		android:orientation="horizontal"
-		android:background="@android:color/white">
+		android:background="?attr/colorSurface">
 		<Button
 			android:id="@+id/btn_create_backup"
 			android:layout_width="0dp"
 			android:layout_height="48dp"
-			android:background="#4CAF50"
+			style="@style/ButtonStyle"
 			android:text="إنشاء نسخة"
 			android:textSize="14sp"
 			android:textStyle="bold"
 			android:layout_weight="1"
-			android:textColor="@android:color/white"
 			android:layout_marginEnd="8dp" />
 		<Button
 			android:id="@+id/btn_restore_backup"
 			android:layout_width="0dp"
 			android:layout_height="48dp"
-			android:background="#2196F3"
+			style="@style/ButtonStyle_Tonal"
 			android:text="استعادة نسخة"
 			android:textSize="14sp"
 			android:textStyle="bold"
 			android:layout_weight="1"
-			android:textColor="@android:color/white"
 			android:layout_marginStart="8dp" />
 	</LinearLayout>
+
+	<!-- Cloud Backup Card -->
 	<LinearLayout
 		android:id="@+id/section_cloud_backup"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="1dp"
 		android:padding="16dp"
-		android:background="@android:color/white"
+		android:background="?attr/colorSurface"
 		android:orientation="vertical">
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -90,14 +94,14 @@
 				android:text="☁️ النسخ الاحتياطي على السحابة"
 				android:textSize="14sp"
 				android:textStyle="bold"
-				android:textColor="#212121"/>
+				android:textColor="?attr/colorOnSurface"/>
 			<TextView
 				android:id="@+id/tv_cloud_status"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="غير مُفعّل"
 				android:textSize="11sp"
-				android:textColor="#F57C00"
+				android:textColor="@color/color_warning"
 				android:textStyle="bold"/>
 		</LinearLayout>
 		<TextView
@@ -107,7 +111,7 @@
 			android:layout_marginTop="4dp"
 			android:text=""
 			android:textSize="12sp"
-			android:textColor="#757575"
+			android:textColor="?attr/colorOnSurfaceVariant"
 			android:visibility="gone"/>
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -119,24 +123,24 @@
 				android:layout_width="0dp"
 				android:layout_height="40dp"
 				android:layout_weight="1"
+				style="@style/ButtonStyle_Outlined"
 				android:text="اختيار مجلد"
 				android:textSize="12sp"
-				android:textColor="@android:color/white"
-				android:background="#FF8F00"
 				android:layout_marginEnd="6dp"/>
 			<Button
 				android:id="@+id/btn_cloud_backup_now"
 				android:layout_width="0dp"
 				android:layout_height="40dp"
 				android:layout_weight="1"
+				style="@style/ButtonStyle"
 				android:text="نسخ الآن"
 				android:textSize="12sp"
-				android:textColor="@android:color/white"
-				android:background="#43A047"
 				android:visibility="gone"
 				android:layout_marginStart="6dp"/>
 		</LinearLayout>
 	</LinearLayout>
+
+	<!-- Section Header -->
 	<TextView
 		android:id="@+id/textview26"
 		android:layout_width="match_parent"
@@ -146,8 +150,10 @@
 		android:text="النسخ الاحتياطية المحفوظة"
 		android:textSize="14sp"
 		android:textStyle="bold"
-		android:textColor="#757575"
-		android:background="@android:color/white" />
+		android:textColor="?attr/colorOnSurfaceVariant"
+		android:background="?attr/colorSurface" />
+
+	<!-- Backup List -->
 	<FrameLayout
 		android:id="@+id/frame_layout13"
 		android:layout_width="match_parent"
@@ -158,8 +164,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:choiceMode="none"
-			android:background="@android:color/white"
-			android:divider="#E0E0E0" />
+			android:background="?attr/colorSurface"
+			android:divider="?attr/colorOutlineVariant" />
 		<LinearLayout
 			android:id="@+id/empty_state"
 			android:layout_width="match_parent"
@@ -174,7 +180,7 @@
 				android:layout_height="120dp"
 				android:scaleType="center"
 				android:src="@android:drawable/ic_menu_save"
-				android:tint="#BDBDBD"
+				android:tint="?attr/colorOutlineVariant"
 				android:contentDescription="لاتوجدنسخ" />
 			<TextView
 				android:id="@+id/textview27"
@@ -184,7 +190,7 @@
 				android:text="لا توجد نسخ احتياطية"
 				android:textSize="18sp"
 				android:textStyle="bold"
-				android:textColor="#616161" />
+				android:textColor="?attr/colorOnSurface" />
 			<TextView
 				android:id="@+id/textview28"
 				android:layout_width="wrap_content"
@@ -193,16 +199,18 @@
 				android:gravity="center_horizontal|center_vertical"
 				android:text="قم بإنشاء نسخة احتياطية من البيانات\nللحفاظ على معلوماتك آمنة"
 				android:textSize="14sp"
-				android:textColor="#9E9E9E" />
+				android:textColor="?attr/colorOnSurfaceVariant" />
 		</LinearLayout>
 	</FrameLayout>
+
+	<!-- Info Box -->
 	<LinearLayout
 		android:id="@+id/linear14"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="1dp"
 		android:padding="16dp"
-		android:background="#E3F2FD"
+		android:background="?attr/colorPrimaryContainer"
 		android:orientation="vertical">
 		<TextView
 			android:id="@+id/textview29"
@@ -211,7 +219,7 @@
 			android:text="ℹ️ معلومات هامة:"
 			android:textSize="13sp"
 			android:textStyle="bold"
-			android:textColor="#1976D2" />
+			android:textColor="?attr/colorOnPrimaryContainer" />
 		<TextView
 			android:id="@+id/textview30"
 			android:layout_width="match_parent"
@@ -219,7 +227,8 @@
 			android:layout_marginTop="8dp"
 			android:text="• يتم حفظ النسخ في: SmartPOS_Backups\n• استعادة النسخة ستحذف البيانات الحالية\n• احتفظ بنسخ منتظمة من بياناتك"
 			android:textSize="12sp"
-			android:textColor="#1565C0"
+			android:textColor="?attr/colorOnPrimaryContainer"
 			android:lineSpacingExtra="4dp" />
 	</LinearLayout>
+
 </LinearLayout>

@@ -26,7 +26,7 @@
 				android:layout_width="48dp"
 				android:layout_height="48dp"
 				android:padding="10dp"
-				android:background="#F7F2FA"
+				android:background="?attr/colorSecondaryContainer"
 				android:src="@drawable/ic_person"
 				android:focusable="false"
 				app:tint="#6750A4"
@@ -44,14 +44,14 @@
 					android:layout_height="wrap_content"
 					android:textSize="16sp"
 					android:textStyle="bold"
-					android:textColor="#1D1B20"
+					android:textColor="?attr/colorOnSurface"
 					android:focusable="false" />
 				<TextView
 					android:id="@+id/tv_details"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textSize="13sp"
-					android:textColor="#49454F"
+					android:textColor="?attr/colorOnSurfaceVariant"
 					android:focusable="false" />
 			</LinearLayout>
 			<com.google.android.material.button.MaterialButton
