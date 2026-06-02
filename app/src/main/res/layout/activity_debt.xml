@@ -1,35 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    activity_debt.xml  —  صفحة إدارة ديون العملاء / Customer Debt Management
-    RTL-first, Material Design 3
--->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
+    android:layoutDirection="rtl"
     android:fitsSystemWindows="true">
 
-    <!-- ══════════════════════════════════════════════════════════════════════ -->
-    <!-- AppBar                                                                 -->
-    <!-- ══════════════════════════════════════════════════════════════════════ -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="ديون العملاء / Customer Debts"
+            app:title="ديون العملاء"
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
             app:navigationIcon="@drawable/ic_arrow_back" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- ══════════════════════════════════════════════════════════════════════ -->
-    <!-- Scrollable content                                                     -->
-    <!-- ══════════════════════════════════════════════════════════════════════ -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,15 +33,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
-            <!-- ── Stats card ──────────────────────────────────────────────── -->
+            <!-- ── Stats banner ── -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp"
                 app:cardBackgroundColor="?attr/colorPrimaryContainer">
 
                 <LinearLayout
@@ -57,7 +55,6 @@
                     android:padding="20dp"
                     android:gravity="center_vertical">
 
-                    <!-- إجمالي الديون / Total debt amount -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -67,17 +64,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="إجمالي الديون\nTotal Debts"
+                            android:text="إجمالي الديون"
                             android:textSize="13sp"
                             android:textColor="?attr/colorOnPrimaryContainer"
-                            android:fontFamily="@font/cairo_regular" />
+                            android:fontFamily="@font/cairo_regular"
+                            android:alpha="0.8" />
 
                         <TextView
                             android:id="@+id/tv_total_debt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0.00 ر.س"
-                            android:textSize="26sp"
+                            android:textSize="28sp"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_bold"
@@ -85,7 +83,6 @@
 
                     </LinearLayout>
 
-                    <!-- Divider -->
                     <View
                         android:layout_width="1dp"
                         android:layout_height="56dp"
@@ -93,7 +90,6 @@
                         android:alpha="0.2"
                         android:layout_marginHorizontal="16dp" />
 
-                    <!-- عدد العملاء المدينين / Indebted customers count -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -105,7 +101,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textSize="30sp"
+                            android:textSize="32sp"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_bold"
@@ -114,10 +110,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="عميل مدين\nIndebted"
+                            android:text="عميل مدين"
                             android:textSize="12sp"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_regular"
+                            android:alpha="0.8"
                             android:gravity="center" />
 
                     </LinearLayout>
@@ -126,20 +123,21 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- ── Search field ──────────────────────────────────────────────── -->
+            <!-- ── Search field (pill style) ── -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:startIconDrawable="@drawable/ic_search"
-                app:startIconTint="?attr/colorPrimary"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusBottomEnd="16dp"
-                android:hint="البحث عن عميل / Search customer">
+                app:startIconTint="?attr/colorOnSurfaceVariant"
+                app:boxCornerRadiusTopStart="28dp"
+                app:boxCornerRadiusTopEnd="28dp"
+                app:boxCornerRadiusBottomStart="28dp"
+                app:boxCornerRadiusBottomEnd="28dp"
+                android:hint="البحث عن عميل...">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_search"
@@ -152,16 +150,16 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- ── Debt list (rv_debts) ──────────────────────────────────────── -->
+            <!-- ── Debt list ── -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_debts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="24dp"
+                android:paddingTop="4dp"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false" />
 
-            <!-- ── Empty state ──────────────────────────────────────────────── -->
+            <!-- ── Empty state ── -->
             <LinearLayout
                 android:id="@+id/tv_empty"
                 android:layout_width="match_parent"
@@ -172,17 +170,17 @@
                 android:visibility="gone">
 
                 <ImageView
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/ic_customers"
                     android:tint="?attr/colorOutlineVariant"
-                    android:contentDescription="لا توجد ديون / No debts" />
+                    android:contentDescription="لا توجد ديون" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="لا توجد ديون\nNo debts found"
-                    android:textSize="18sp"
+                    android:text="لا توجد ديون"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"
@@ -192,7 +190,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="جميع العملاء سدّدوا ديونهم\nAll customers have settled their debts"
+                    android:text="جميع العملاء سدّدوا ديونهم"
                     android:textSize="14sp"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"

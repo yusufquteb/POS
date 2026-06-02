@@ -8,31 +8,24 @@
     android:layoutDirection="rtl"
     android:fitsSystemWindows="true">
 
-    <!-- ══════════════════════════════════════════════════════════
-         AppBar
-         ══════════════════════════════════════════════════════════ -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar">
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
             app:title="@string/return_sale"
-            app:titleTextColor="#FFFFFF"
             app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="#FFFFFF" />
+            app:titleCentered="false"
+            app:navigationIcon="@drawable/ic_arrow_back" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- ══════════════════════════════════════════════════════════
-         Scrollable content
-         ══════════════════════════════════════════════════════════ -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,15 +35,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
-            <!-- ── Stats card ─────────────────────────────────── -->
+            <!-- ── Stats banner ───────────────────────────────────────── -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp"
                 app:cardBackgroundColor="?attr/colorPrimaryContainer">
 
                 <LinearLayout
@@ -69,32 +66,34 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/tv_returns_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="36sp"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:fontFamily="@font/cairo_bold" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="عدد المرتجعات"
                             android:textSize="12sp"
                             android:textColor="?attr/colorOnPrimaryContainer"
-                            android:fontFamily="@font/cairo_regular" />
-
-                        <TextView
-                            android:id="@+id/tv_returns_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textSize="32sp"
-                            android:textStyle="bold"
-                            android:textColor="?attr/colorOnPrimaryContainer"
-                            android:fontFamily="@font/cairo_bold" />
+                            android:fontFamily="@font/cairo_regular"
+                            android:alpha="0.8"
+                            android:layout_marginTop="2dp" />
 
                     </LinearLayout>
 
-                    <!-- Vertical divider -->
+                    <!-- Divider -->
                     <View
                         android:layout_width="1dp"
-                        android:layout_height="50dp"
+                        android:layout_height="52dp"
                         android:background="?attr/colorOnPrimaryContainer"
-                        android:alpha="0.3"
-                        android:layout_marginHorizontal="8dp" />
+                        android:alpha="0.2"
+                        android:layout_marginHorizontal="16dp" />
 
                     <!-- Total refunded -->
                     <LinearLayout
@@ -105,22 +104,24 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/tv_total_refunded"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.00 ر.س"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:fontFamily="@font/cairo_bold" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="إجمالي المسترد"
                             android:textSize="12sp"
                             android:textColor="?attr/colorOnPrimaryContainer"
-                            android:fontFamily="@font/cairo_regular" />
-
-                        <TextView
-                            android:id="@+id/tv_total_refunded"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0.00 ج.م"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="?attr/colorOnPrimaryContainer"
-                            android:fontFamily="@font/cairo_bold" />
+                            android:fontFamily="@font/cairo_regular"
+                            android:alpha="0.8"
+                            android:layout_marginTop="2dp" />
 
                     </LinearLayout>
 
@@ -128,47 +129,84 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- ── Section label ──────────────────────────────── -->
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- ── Section label ──────────────────────────────────────── -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="اختر فاتورة لتنفيذ مرتجع"
-                android:textSize="14sp"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:fontFamily="@font/cairo_semibold" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp">
 
-            <!-- ── Invoice RecyclerView ───────────────────────── -->
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_receive"
+                    android:tint="?attr/colorPrimary"
+                    android:contentDescription="مرتجعات" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="اختر فاتورة لتنفيذ مرتجع"
+                    android:textSize="15sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:fontFamily="@font/cairo_semibold" />
+
+            </LinearLayout>
+
+            <!-- ── Invoice RecyclerView ──────────────────────────────── -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_invoices"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                android:paddingBottom="16dp"
                 android:clipToPadding="false" />
 
-            <!-- ── Empty state ────────────────────────────────── -->
-            <!--
-                tv_empty is the entire empty-state block. It is a single
-                TextView carrying the primary message; visibility is toggled
-                from Java (VISIBLE when the invoice list is empty).
-            -->
-            <TextView
+            <!-- ── Empty state ────────────────────────────────────────── -->
+            <LinearLayout
                 android:id="@+id/tv_empty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="64dp"
-                android:paddingBottom="48dp"
-                android:paddingHorizontal="24dp"
-                android:text="لا توجد فواتير مسجلة\nأضف مبيعات أولاً ثم تستطيع إرجاعها من هنا"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:fontFamily="@font/cairo_bold"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:lineSpacingMultiplier="1.4"
-                android:visibility="gone" />
+                android:paddingTop="72dp"
+                android:paddingBottom="48dp"
+                android:paddingHorizontal="32dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_invoices"
+                    android:tint="?attr/colorOutlineVariant"
+                    android:contentDescription="لا توجد فواتير" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="لا توجد فواتير مسجلة"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:fontFamily="@font/cairo_bold"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="أضف مبيعات أولاً ثم تستطيع إرجاعها من هنا"
+                    android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:fontFamily="@font/cairo_regular"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.5" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

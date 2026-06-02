@@ -4,87 +4,228 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="rtl">
+    android:background="?attr/colorSurface"
+    android:layoutDirection="rtl"
+    android:fitsSystemWindows="true">
 
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- AppBar                                                      -->
+    <!-- ══════════════════════════════════════════════════════════ -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:navigationIcon="@drawable/ic_arrow_back"
             app:title="@string/purchase_orders_title"
-            app:titleTextColor="@android:color/white" />
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- Scrollable content                                          -->
+    <!-- ══════════════════════════════════════════════════════════ -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingBottom="96dp">
 
-            <!-- Stats card -->
+            <!-- ── Stats banner ──────────────────────────────────── -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp"
                 app:cardBackgroundColor="?attr/colorPrimaryContainer">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="16dp">
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                        <TextView android:id="@+id/tv_total_orders" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="28sp" android:textStyle="bold" android:textColor="?attr/colorOnPrimaryContainer" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="إجمالي الأوامر" android:textSize="12sp" android:textColor="?attr/colorOnPrimaryContainer" />
+                    android:padding="20dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Total orders -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_total_orders"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="36sp"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:fontFamily="@font/cairo_bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="إجمالي الأوامر"
+                            android:textSize="12sp"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:fontFamily="@font/cairo_regular"
+                            android:alpha="0.8"
+                            android:layout_marginTop="2dp" />
+
                     </LinearLayout>
-                    <View android:layout_width="1dp" android:layout_height="40dp" android:background="?attr/colorOutlineVariant" android:layout_gravity="center_vertical" />
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                        <TextView android:id="@+id/tv_pending_orders" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="28sp" android:textStyle="bold" android:textColor="@color/color_warning" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="معلّق" android:textSize="12sp" android:textColor="?attr/colorOnPrimaryContainer" />
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="52dp"
+                        android:background="?attr/colorOnPrimaryContainer"
+                        android:alpha="0.2"
+                        android:layout_marginHorizontal="16dp" />
+
+                    <!-- Pending orders -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_pending_orders"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="36sp"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:fontFamily="@font/cairo_bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="معلّق"
+                            android:textSize="12sp"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:fontFamily="@font/cairo_regular"
+                            android:alpha="0.8"
+                            android:layout_marginTop="2dp" />
+
                     </LinearLayout>
+
                 </LinearLayout>
+
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Empty state -->
-            <TextView
+            <!-- ── Section header ─────────────────────────────────── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_local_shipping"
+                    android:tint="?attr/colorPrimary"
+                    android:contentDescription="أوامر الشراء" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/purchase_orders_title"
+                    android:textSize="15sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:fontFamily="@font/cairo_semibold" />
+
+            </LinearLayout>
+
+            <!-- ── Empty state ────────────────────────────────────── -->
+            <LinearLayout
                 android:id="@+id/tv_empty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:padding="32dp"
-                android:text="@string/purchase_order_no_orders"
-                android:textSize="16sp"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:visibility="gone" />
+                android:paddingTop="64dp"
+                android:paddingBottom="48dp"
+                android:paddingHorizontal="32dp"
+                android:visibility="gone">
 
-            <!-- Orders List -->
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_local_shipping"
+                    android:tint="?attr/colorOutlineVariant"
+                    android:contentDescription="لا توجد أوامر" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/purchase_order_no_orders"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:fontFamily="@font/cairo_bold"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="اضغط + لإضافة أمر شراء جديد"
+                    android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:fontFamily="@font/cairo_regular"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <!-- ── Orders list ────────────────────────────────────── -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_orders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
+                android:nestedScrollingEnabled="false"
+                android:clipToPadding="false" />
 
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
-    <!-- FAB -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <!-- ── FAB ──────────────────────────────────────────────────── -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_add_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|start"
         android:layout_margin="16dp"
+        android:text="@string/purchase_order_add"
+        android:fontFamily="@font/cairo_semibold"
         android:contentDescription="@string/purchase_order_add"
-        app:srcCompat="@drawable/ic_add" />
+        app:icon="@drawable/ic_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
