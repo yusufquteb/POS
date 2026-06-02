@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    item_debt.xml  —  صف عميل مدين في قائمة الديون / Indebted customer row
-    RTL-first, Material Design 3
--->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,9 +6,11 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="6dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="3dp"
-    app:strokeWidth="0dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="?attr/colorOutlineVariant"
+    app:cardBackgroundColor="?attr/colorSurfaceContainerLow">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,24 +19,23 @@
         android:padding="16dp"
         android:gravity="center_vertical">
 
-        <!-- Avatar circle -->
+        <!-- Avatar icon -->
         <LinearLayout
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/circle_purple_light"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_person"
                 android:tint="?attr/colorPrimary"
-                android:contentDescription="عميل / Customer" />
+                android:contentDescription="عميل" />
 
         </LinearLayout>
 
-        <!-- Customer info -->
+        <!-- Customer name + phone -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -53,7 +50,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"
-                android:fontFamily="@font/cairo_semibold" />
+                android:fontFamily="@font/cairo_semibold"
+                android:singleLine="true"
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/tv_customer_phone"
@@ -66,28 +65,33 @@
 
         </LinearLayout>
 
-        <!-- Debt amount (highlighted in red) + call button column -->
+        <!-- Trailing column: debt amount badge + call button -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center|end">
 
+            <!-- Debt badge pill -->
             <TextView
                 android:id="@+id/tv_customer_debt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textSize="13sp"
                 android:textStyle="bold"
-                android:textColor="#F44336"
+                android:textColor="@color/color_error"
                 android:fontFamily="@font/cairo_bold"
+                android:background="@drawable/bg_debt_badge"
                 android:gravity="end" />
 
+            <!-- Call button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_call"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:padding="0dp"
                 android:minWidth="36dp"
                 android:minHeight="36dp"
@@ -97,7 +101,7 @@
                 app:iconPadding="0dp"
                 app:cornerRadius="18dp"
                 style="@style/Widget.Material3.Button.TonalButton"
-                android:contentDescription="اتصال / Call" />
+                android:contentDescription="اتصال" />
 
         </LinearLayout>
 

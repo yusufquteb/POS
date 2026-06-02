@@ -7,9 +7,11 @@
     android:layoutDirection="rtl"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="6dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="3dp"
-    app:strokeWidth="0dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="?attr/colorOutlineVariant"
+    app:cardBackgroundColor="?attr/colorSurfaceContainerLow">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +19,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- ── Header Row: Shift date + Status chip ── -->
+        <!-- ── Header: date + status chip ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +27,14 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="12dp">
 
-            <!-- Shift date & number -->
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_schedule"
+                android:tint="?attr/colorPrimary"
+                android:contentDescription="وردية"
+                android:layout_marginEnd="8dp" />
+
             <TextView
                 android:id="@+id/tv_shift_date"
                 android:layout_width="0dp"
@@ -38,7 +47,7 @@
                 android:singleLine="true"
                 android:ellipsize="end" />
 
-            <!-- Status chip -->
+            <!-- Status chip — background set from Java -->
             <TextView
                 android:id="@+id/tv_shift_status_chip"
                 android:layout_width="wrap_content"
@@ -47,8 +56,10 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/cairo_semibold"
                 android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
-                android:layout_marginStart="8dp" />
+                android:paddingVertical="5dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_chip_open"
+                android:textColor="@color/shift_open_text" />
 
         </LinearLayout>
 
@@ -59,7 +70,7 @@
             android:background="?attr/colorOutlineVariant"
             android:layout_marginBottom="12dp" />
 
-        <!-- ── Stats grid (2 × 2) ── -->
+        <!-- ── Stats 2×2 grid ── -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,7 +141,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="10dp">
 
             <!-- Total Sales -->
             <LinearLayout
@@ -152,7 +163,7 @@
                     android:id="@+id/tv_shift_total_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/color_success"
                     android:fontFamily="@font/cairo_bold"
@@ -182,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorOnSurface"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/cairo_bold"
                     android:layout_marginTop="2dp" />
 
@@ -190,17 +201,15 @@
 
         </LinearLayout>
 
-        <!-- ── Opened At ── -->
+        <!-- ── Timestamps ── -->
         <TextView
             android:id="@+id/tv_shift_opened_at"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="?attr/colorOutline"
-            android:fontFamily="@font/cairo_regular"
-            android:layout_marginTop="4dp" />
+            android:fontFamily="@font/cairo_regular" />
 
-        <!-- ── Closed At (gone when open) ── -->
         <TextView
             android:id="@+id/tv_shift_closed_at"
             android:layout_width="wrap_content"

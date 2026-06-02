@@ -216,11 +216,11 @@
     <color name="ic_launcher_background">#1B6EF3</color>
 
     <!-- ══════════════════════════════════════════════ -->
-    <!-- Shift Status Colors                            -->
+    <!-- Shift Status Colors  (M3-aligned)             -->
     <!-- ══════════════════════════════════════════════ -->
-    <color name="shift_open_bg">#E8F5E9</color>
-    <color name="shift_open_text">#1B5E20</color>
-    <color name="shift_closed_bg">#F5F5F5</color>
-    <color name="shift_closed_text">#616161</color>
+    <color name="shift_open_bg">#C8F5DA</color>
+    <color name="shift_open_text">#0D5C37</color>
+    <color name="shift_closed_bg">#EDEDF4</color>
+    <color name="shift_closed_text">#44474F</color>
 
 </resources>
