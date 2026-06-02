@@ -274,12 +274,12 @@ public class BillingManager implements PurchasesUpdatedListener {
             String expiryDate = calculateExpiryDate(productId);
             
             // تحديث قاعدة البيانات
-            // DBHelper signature: (isPremium, subscriptionType, expiryDate, purchaseToken)
+            // DBHelper signature: (isPremium, subscriptionEnd, planId, orderId)
             boolean updated = dbHelper.updateSubscription(
                 true,
-                productId,
-                expiryDate,
-                purchaseToken
+                expiryDate,    // subscriptionEnd — تاريخ الانتهاء
+                productId,     // planId          — نوع الاشتراك
+                purchaseToken  // orderId         — رمز الشراء
             );
             
             if (updated) {

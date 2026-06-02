@@ -1391,7 +1391,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean isPremiumUser() {
         try {
             HashMap<String, String> settings = getStoreSettings();
-            return "true".equalsIgnoreCase(settings.getOrDefault("is_premium", "false"));
+            if (!"true".equalsIgnoreCase(settings.getOrDefault("is_premium", "false"))) return false;
+            // Lifetime purchases have no expiry; monthly/yearly have a date
+            String planId = settings.getOrDefault("plan_id", "");
+            if ("premium_lifetime".equalsIgnoreCase(planId)) return true;
+            String end = settings.getOrDefault("subscription_end", "");
+            if (end.isEmpty()) return true; // legacy entries without date → keep unlocked
+            // "yyyy-MM-dd" or "yyyy-MM-dd HH:mm:ss"
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US);
+            java.util.Date expiry = sdf.parse(end.length() > 10 ? end.substring(0, 10) : end);
+            return expiry != null && !expiry.before(new java.util.Date());
         } catch (Exception e) {
             Log.e(TAG, "isPremiumUser: " + e.getMessage(), e);
             return false;
