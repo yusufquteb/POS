@@ -517,6 +517,8 @@
     <string name="payment_method">طريقة الدفع</string>
     <string name="payment_card">بطاقة</string>
     <string name="payment_credit">آجل</string>
+    <string name="payment_vodafone">فودافون كاش</string>
+    <string name="payment_instapay">انستاباي</string>
 
     <!-- ── السلة / نقطة البيع ── -->
     <string name="add_to_cart">أُضيف إلى السلة</string>

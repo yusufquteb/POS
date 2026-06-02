@@ -1,6 +1,7 @@
 package com.pos.system;
 
 import android.os.Bundle;
+import com.pos.system.FeatureGate;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -70,6 +71,11 @@ public class ActivityReturnActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_return);
         applyWindowInsets(findViewById(android.R.id.content));
+
+        if (!FeatureGate.isUnlocked(this)) {
+            FeatureGate.requirePremium(this, "إدارة المرتجعات");
+            return;
+        }
 
         dbHelper = new DBHelper(this);
         initViews();

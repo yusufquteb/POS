@@ -49,7 +49,7 @@ public class ActivityCartActivity extends BaseActivity {
     // Totals
     private double subtotal    = 0, discountAmt = 0, discountPct = 0;
     private double taxRate     = 0, taxAmount   = 0, total       = 0;
-    private String currency    = "ر.س";
+    private String currency    = "ج.م";
     private boolean taxEnabled = false;
 
     // Customer & Payment
@@ -104,14 +104,14 @@ public class ActivityCartActivity extends BaseActivity {
     private void loadStoreSettings() {
         try {
             HashMap<String, String> s = dbHelper.getStoreSettings();
-            currency   = s.getOrDefault("currency", "ر.س");
+            currency   = s.getOrDefault("currency", "ج.م");
             taxEnabled = "true".equalsIgnoreCase(s.getOrDefault("tax_enabled", "false"));
             taxRate    = 0;
             if (taxEnabled) {
                 try { taxRate = Double.parseDouble(s.getOrDefault("tax_rate", "0")); }
                 catch (Exception ignored) {}
             }
-        } catch (Exception e) { currency = "ر.س"; }
+        } catch (Exception e) { currency = "ج.م"; }
     }
 
     private void initViews() {
@@ -410,7 +410,9 @@ public class ActivityCartActivity extends BaseActivity {
     private String getPaymentLabel(String m) {
         switch (m) {
             case "card":   return getString(R.string.payment_card);
-            case "credit": return getString(R.string.payment_credit);
+            case "credit":   return getString(R.string.payment_credit);
+            case "vodafone": return getString(R.string.payment_vodafone);
+            case "instapay": return getString(R.string.payment_instapay);
             default:       return getString(R.string.payment_cash);
         }
     }

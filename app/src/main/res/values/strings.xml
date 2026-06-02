@@ -442,6 +442,8 @@
     <string name="payment_method">Payment Method</string>
     <string name="payment_card">Card</string>
     <string name="payment_credit">Credit</string>
+    <string name="payment_vodafone">Vodafone Cash</string>
+    <string name="payment_instapay">InstaPay</string>
 
     <!-- ── Cart / POS ── -->
     <string name="add_to_cart">Added to cart</string>

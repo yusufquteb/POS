@@ -1,6 +1,7 @@
 package com.pos.system;
 
 import android.os.Bundle;
+import com.pos.system.FeatureGate;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,7 @@ public class ActivityShiftActivity extends BaseActivity {
 
     // ─── Data ─────────────────────────────────────────────────
     private DBHelper           dbHelper;
-    private String             currency = "ر.س";
+    private String             currency = "ج.م";
     private ShiftsAdapter      adapter;
     private List<HashMap<String, String>> shiftsList = new ArrayList<>();
 
@@ -64,6 +65,11 @@ public class ActivityShiftActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shift);
+
+        if (!FeatureGate.isUnlocked(this)) {
+            FeatureGate.requirePremium(this, "إدارة الشيفتات");
+            return;
+        }
 
         dbHelper = new DBHelper(this);
 

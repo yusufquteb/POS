@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import com.pos.system.managers.ReviewManager;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * MainActivity - الصفحة الرئيسية
@@ -237,9 +238,9 @@ public class MainActivity extends BaseActivity
     private String getCurrencySymbol() {
         try {
             HashMap<String, String> settings = dbHelper.getStoreSettings();
-            return settings.getOrDefault("currency", "ر.س");
+            return settings.getOrDefault("currency", "ج.م");
         } catch (Exception e) {
-            return "ر.س";
+            return "ج.م";
         }
     }
 
@@ -257,6 +258,27 @@ public class MainActivity extends BaseActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
+        showTrialBannerIfNeeded();
+    }
+
+    private void showTrialBannerIfNeeded() {
+        try {
+            int days = FeatureGate.remainingTrialDays(this);
+            // days == -1 means premium; days == 0 means trial expired; days > 0 means active trial
+            if (days > 0) {
+                View root = findViewById(android.R.id.content);
+                if (root == null) return;
+                String msg = days == 1
+                    ? "آخر يوم في الفترة التجريبية — اشترك الآن"
+                    : "تبقّى " + days + " يوم في الفترة التجريبية";
+                Snackbar.make(root, msg, Snackbar.LENGTH_LONG)
+                    .setAction("ترقية", v -> openActivity(ActivitySettingsActivity.class))
+                    .setBackgroundTint(0xFF1565C0)
+                    .setTextColor(0xFFFFFFFF)
+                    .setActionTextColor(0xFFFFD54F)
+                    .show();
+            }
+        } catch (Exception ignored) {}
     }
 
     private void showLowStockDialog() {

@@ -42,7 +42,7 @@ public class ActivityReportsActivity extends BaseActivity {
     private static final String TAG = "ReportsActivity";
 
     private DBHelper dbHelper;
-    private String   currency = "ر.س";
+    private String   currency = "ج.م";
 
     // Stats Views
     private TextView tvTotalSales, tvInvoiceCount, tvAverageInvoice;
@@ -80,8 +80,8 @@ public class ActivityReportsActivity extends BaseActivity {
     private void loadCurrency() {
         try {
             HashMap<String, String> s = dbHelper.getStoreSettings();
-            currency = s.getOrDefault("currency", "ر.س");
-        } catch (Exception e) { currency = "ر.س"; }
+            currency = s.getOrDefault("currency", "ج.م");
+        } catch (Exception e) { currency = "ج.م"; }
     }
 
     private void initViews() {

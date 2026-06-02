@@ -35,6 +35,7 @@ public class ActivityExpensesActivity extends BaseActivity {
     private RecyclerView recyclerExpenses;
     private ExpensesAdapter adapter;
     private DBHelper dbHelper;
+    private String currency = "ج.م";
     private ExtendedFloatingActionButton fabAddExpense;
     private TextView tvTotalExpenses, tvFilterDate;
     private View emptyState;
@@ -50,6 +51,10 @@ public class ActivityExpensesActivity extends BaseActivity {
         applyWindowInsets(findViewById(android.R.id.content));
 
         dbHelper = new DBHelper(this);
+        try {
+            HashMap<String, String> s = dbHelper.getStoreSettings();
+            if (s != null) currency = s.getOrDefault("currency", "ج.م");
+        } catch (Exception ignored) {}
         initViews();
         setupToolbar();
         setupRecyclerView();
@@ -121,7 +126,7 @@ public class ActivityExpensesActivity extends BaseActivity {
             } catch (NumberFormatException ignored) {}
         }
         if (tvTotalExpenses != null)
-            tvTotalExpenses.setText(String.format(Locale.getDefault(), "%.2f ر.س", total));
+            tvTotalExpenses.setText(String.format(Locale.getDefault(), "%.2f %s", total, currency));
     }
 
     private void showAddExpenseDialog() {
@@ -300,8 +305,8 @@ public class ActivityExpensesActivity extends BaseActivity {
             if (holder.tvAmount != null) {
                 try {
                     double amount = Double.parseDouble(expense.getOrDefault("amount", "0"));
-                    holder.tvAmount.setText(String.format(Locale.getDefault(), "%.2f ر.س", amount));
-                } catch (Exception e) { holder.tvAmount.setText("0.00 ر.س"); }
+                    holder.tvAmount.setText(String.format(Locale.getDefault(), "%.2f %s", amount, currency));
+                } catch (Exception e) { holder.tvAmount.setText("0.00 " + currency); }
             }
             holder.itemView.setOnClickListener(v -> showExpenseDetails(expense));
         }
@@ -322,7 +327,7 @@ public class ActivityExpensesActivity extends BaseActivity {
 
     private void showExpenseDetails(HashMap<String, String> expense) {
         String details = "التصنيف: " + expense.getOrDefault("category", "") + "\n" +
-                         "المبلغ: "   + expense.getOrDefault("amount", "0") + " ر.س\n" +
+                         "المبلغ: "   + expense.getOrDefault("amount", "0") + " " + currency + "\n" +
                          "الوصف: "    + expense.getOrDefault("description", "") + "\n" +
                          "التاريخ: "  + expense.getOrDefault("date", "");
         new MaterialAlertDialogBuilder(this)

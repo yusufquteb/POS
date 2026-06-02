@@ -69,7 +69,13 @@ public class ActivityCustomersActivity extends BaseActivity {
         Snackbar.make(recyclerView, getString(R.string.swipe_delete_edit), Snackbar.LENGTH_LONG).show();
 
         View fabAdd = findViewById(R.id.fab_add);
-        if (fabAdd != null) fabAdd.setOnClickListener(v -> showDataSheet(null));
+        if (fabAdd != null) fabAdd.setOnClickListener(v -> {
+            if (!FeatureGate.canAddCustomer(this)) {
+                FeatureGate.showCustomerLimitDialog(this);
+            } else {
+                showDataSheet(null);
+            }
+        });
 
         if (etSearch != null) {
             etSearch.addTextChangedListener(new TextWatcher() {
