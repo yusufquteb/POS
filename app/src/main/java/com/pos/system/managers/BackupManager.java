@@ -2,7 +2,6 @@ package com.pos.system.managers;
 
 import android.content.Context;
 import com.pos.system.DBHelper;
-import android.os.Environment;
 import android.util.Log;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,9 +38,9 @@ public class BackupManager {
                 return false;
             }
             
-            // 2. إنشاء مجلد النسخ الاحتياطية
+            // 2. إنشاء مجلد النسخ الاحتياطية (app-scoped storage, no special permission needed)
             File backupFolder = new File(
-                Environment.getExternalStorageDirectory(), 
+                context.getExternalFilesDir(null),
                 BACKUP_FOLDER
             );
             
@@ -128,7 +127,7 @@ public class BackupManager {
      */
     public File[] getBackupFiles() {
         File backupFolder = new File(
-            Environment.getExternalStorageDirectory(), 
+            context.getExternalFilesDir(null),
             BACKUP_FOLDER
         );
         

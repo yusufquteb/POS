@@ -177,9 +177,16 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
     private void onConnectionTypeChanged(int checkedId) {
         try {
             if (checkedId == R.id.rb_usb) {
-                currentPrinterType = Constants.PrinterType.USB;
-                Toast.makeText(this, "✓ USB", Toast.LENGTH_SHORT).show();
-                
+                // USB printing is not yet implemented — revert selection to Bluetooth
+                new MaterialAlertDialogBuilder(this)
+                    .setTitle("الطباعة عبر USB")
+                    .setMessage("الطباعة عبر USB غير متاحة في هذا الإصدار.\nيرجى استخدام البلوتوث في الوقت الحالي.")
+                    .setPositiveButton("حسناً", (d, w) -> {
+                        if (rgConnection != null) rgConnection.check(R.id.rb_bluetooth);
+                    })
+                    .setCancelable(false)
+                    .show();
+
             } else if (checkedId == R.id.rb_bluetooth) {
                 currentPrinterType = Constants.PrinterType.BLUETOOTH;
                 handleBluetoothSelection();

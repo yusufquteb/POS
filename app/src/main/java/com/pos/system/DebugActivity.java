@@ -41,10 +41,10 @@ public class DebugActivity extends BaseActivity {
     public static final String EXTRA_STACK = "extra_stack";
     public static final String EXTRA_TIMESTAMP = "extra_timestamp";
 
-    // معلومات المطور - غيّرها بمعلوماتك
-    private static final String DEV_EMAIL = "developer@example.com";
-    private static final String DEV_WHATSAPP = "201XXXXXXXXX"; // بدون +
-    private static final String DEV_TELEGRAM = "developer_username";
+    // معلومات الدعم — يجب تحديثها قبل النشر على Google Play
+    private static final String DEV_EMAIL = "support@smartpos.app";
+    private static final String DEV_WHATSAPP = ""; // أضف رقم الواتساب بدون + قبل النشر
+    private static final String DEV_TELEGRAM = "";
     
     // المتغيرات
     private String errorMessage;
@@ -311,12 +311,14 @@ public class DebugActivity extends BaseActivity {
      * إرسال عبر واتساب
      */
     private void sendWhatsApp() {
+        if (DEV_WHATSAPP == null || DEV_WHATSAPP.isEmpty()) {
+            Toast.makeText(this, "رقم الدعم غير محدد", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
-            // تقصير التقرير لواتساب (حد أقصى 5000 حرف)
-            String shortReport = fullReport.length() > 5000 ? 
-                fullReport.substring(0, 5000) + "\n\n[...تم اقتصاص التقرير]" : 
+            String shortReport = fullReport.length() > 5000 ?
+                fullReport.substring(0, 5000) + "\n\n[...تم اقتصاص التقرير]" :
                 fullReport;
-            
             String msg = Uri.encode(shortReport);
             Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://wa.me/" + DEV_WHATSAPP + "?text=" + msg));
@@ -330,11 +332,14 @@ public class DebugActivity extends BaseActivity {
      * إرسال عبر تليجرام
      */
     private void sendTelegram() {
+        if (DEV_TELEGRAM == null || DEV_TELEGRAM.isEmpty()) {
+            Toast.makeText(this, "معرف التليجرام غير محدد", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
             String msg = Uri.encode(fullReport.length() > 4000 ?
                 fullReport.substring(0, 4000) + "\n\n[...اقتصاص]" :
                 fullReport);
-            
             Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://t.me/" + DEV_TELEGRAM + "?text=" + msg));
             startActivity(intent);
