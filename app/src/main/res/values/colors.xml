@@ -202,4 +202,16 @@
     <color name="colorAccent">#ADC8FF</color>
     <color name="colorPrimaryDark">#00449E</color>
 
+    <!-- Colors still referenced by drawables / layouts after M3 overhaul -->
+    <color name="gold">#C17900</color>
+    <color name="gold_light">#FFD77E</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="color_error_light">#FFDAD6</color>
+    <color name="background">#FFFBFE</color>
+    <color name="text_primary">#1C1B1F</color>
+    <color name="text_secondary">#49454F</color>
+    <color name="purple_500">#6650A4</color>
+    <color name="ic_launcher_background">#1B6EF3</color>
+
 </resources>
