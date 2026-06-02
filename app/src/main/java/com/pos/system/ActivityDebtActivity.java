@@ -3,6 +3,7 @@ package com.pos.system;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import com.pos.system.FeatureGate;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -58,6 +59,11 @@ public class ActivityDebtActivity extends BaseActivity {
         setContentView(R.layout.activity_debt);
 
         applyWindowInsets(findViewById(android.R.id.content));
+
+        if (!FeatureGate.isUnlocked(this)) {
+            FeatureGate.requirePremium(this, "إدارة ديون العملاء");
+            return;
+        }
 
         dbHelper = new DBHelper(this);
         try {

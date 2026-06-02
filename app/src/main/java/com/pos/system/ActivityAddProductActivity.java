@@ -264,8 +264,13 @@ public class ActivityAddProductActivity extends BaseActivity {
             btnSave.setOnClickListener(v -> {
                 hideKeyboard();
                 if (validateForm()) {
-                    if (isEditMode) updateProduct();
-                    else saveProduct(false);
+                    if (isEditMode) {
+                        updateProduct();
+                    } else if (!FeatureGate.canAddProduct(this)) {
+                        FeatureGate.showProductLimitDialog(this);
+                    } else {
+                        saveProduct(false);
+                    }
                 }
             });
         }
@@ -274,7 +279,13 @@ public class ActivityAddProductActivity extends BaseActivity {
         if (btnSaveAndNew != null) {
             btnSaveAndNew.setOnClickListener(v -> {
                 hideKeyboard();
-                if (validateForm()) saveProduct(true);
+                if (validateForm()) {
+                    if (!FeatureGate.canAddProduct(this)) {
+                        FeatureGate.showProductLimitDialog(this);
+                    } else {
+                        saveProduct(true);
+                    }
+                }
             });
         }
 

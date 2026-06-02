@@ -410,7 +410,9 @@ public class ActivityCartActivity extends BaseActivity {
     private String getPaymentLabel(String m) {
         switch (m) {
             case "card":   return getString(R.string.payment_card);
-            case "credit": return getString(R.string.payment_credit);
+            case "credit":   return getString(R.string.payment_credit);
+            case "vodafone": return getString(R.string.payment_vodafone);
+            case "instapay": return getString(R.string.payment_instapay);
             default:       return getString(R.string.payment_cash);
         }
     }

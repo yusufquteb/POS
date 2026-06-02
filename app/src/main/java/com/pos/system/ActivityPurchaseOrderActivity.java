@@ -1,6 +1,7 @@
 package com.pos.system;
 
 import android.os.Bundle;
+import com.pos.system.FeatureGate;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,11 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
         setContentView(R.layout.activity_purchase_order);
 
         applyWindowInsets(findViewById(android.R.id.content));
+
+        if (!FeatureGate.isUnlocked(this)) {
+            FeatureGate.requirePremium(this, "أوامر الشراء");
+            return;
+        }
 
         dbHelper = new DBHelper(this);
         try {

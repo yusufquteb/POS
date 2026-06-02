@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +25,16 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.documentfile.provider.DocumentFile;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
+
+import com.pos.system.managers.CloudBackupManager;
+import com.pos.system.FeatureGate;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -56,6 +64,19 @@ public class ActivityBackupActivity extends BaseActivity {
     private ListView         listBackups;
     private View             emptyState;
     private final ArrayList<File> backupFiles = new ArrayList<>();
+    private CloudBackupManager cloudBackupManager;
+    private Button  btnSelectFolder, btnCloudBackupNow;
+    private TextView tvCloudStatus, tvCloudLastBackup;
+
+    private final androidx.activity.result.ActivityResultLauncher<Uri> folderPickerLauncher =
+        registerForActivityResult(new ActivityResultContracts.OpenDocumentTree(), uri -> {
+            if (uri != null) {
+                cloudBackupManager.saveFolderUri(uri);
+                updateCloudUI();
+                performCloudBackup();
+            }
+        });
+
 
     // ✅ ActivityResultLauncher لإدارة صلاحية الملفات (Android 11+)
     private final ActivityResultLauncher<Intent> manageStorageLauncher =
@@ -92,9 +113,11 @@ public class ActivityBackupActivity extends BaseActivity {
         setContentView(R.layout.activity_backup);
 
         dbHelper = new DBHelper(this);
+        cloudBackupManager = new CloudBackupManager(this);
         initViews();
         setupToolbar();
         setupButtons();
+        setupCloudBackup();
 
         if (checkPermissions()) {
             loadBackupFiles();
@@ -124,6 +147,65 @@ public class ActivityBackupActivity extends BaseActivity {
     }
 
     // ─────────────────────────────────────────────
+
+    // ─────────────────────────────────────────────
+    // Cloud Backup (SAF-based)
+    // ─────────────────────────────────────────────
+
+    private void setupCloudBackup() {
+        btnSelectFolder    = findViewById(R.id.btn_select_cloud_folder);
+        btnCloudBackupNow  = findViewById(R.id.btn_cloud_backup_now);
+        tvCloudStatus      = findViewById(R.id.tv_cloud_status);
+        tvCloudLastBackup  = findViewById(R.id.tv_cloud_last_backup);
+
+        if (btnSelectFolder != null)
+            btnSelectFolder.setOnClickListener(v -> {
+                if (!FeatureGate.isUnlocked(this)) {
+                    FeatureGate.requirePremium(this, "النسخ الاحتياطي على السحابة");
+                    return;
+                }
+                folderPickerLauncher.launch(null);
+            });
+
+        if (btnCloudBackupNow != null)
+            btnCloudBackupNow.setOnClickListener(v -> performCloudBackup());
+
+        updateCloudUI();
+    }
+
+    private void updateCloudUI() {
+        if (cloudBackupManager == null) return;
+        boolean configured = cloudBackupManager.isFolderConfigured();
+        if (tvCloudStatus != null) {
+            tvCloudStatus.setText(configured ? "مُفعّل ✓" : "غير مُفعّل");
+            tvCloudStatus.setTextColor(configured ? 0xFF388E3C : 0xFFF57C00);
+        }
+        if (btnCloudBackupNow != null)
+            btnCloudBackupNow.setVisibility(configured ? View.VISIBLE : View.GONE);
+        if (tvCloudLastBackup != null) {
+            String last = cloudBackupManager.getLastBackupDate();
+            if (last != null) {
+                tvCloudLastBackup.setText("آخر نسخة: " + last);
+                tvCloudLastBackup.setVisibility(View.VISIBLE);
+            } else {
+                tvCloudLastBackup.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void performCloudBackup() {
+        new MaterialAlertDialogBuilder(this)
+            .setTitle("نسخ احتياطي على السحابة")
+            .setMessage("هل تريد إنشاء نسخة احتياطية في المجلد المحدد؟")
+            .setPositiveButton("نعم", (d, w) -> {
+                boolean ok = cloudBackupManager.backup();
+                showSnackbar(ok ? "✓ تم النسخ الاحتياطي بنجاح" : "فشل النسخ الاحتياطي", !ok);
+                updateCloudUI();
+            })
+            .setNegativeButton("إلغاء", null)
+            .show();
+    }
+
     private boolean checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return Environment.isExternalStorageManager();

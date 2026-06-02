@@ -70,6 +70,73 @@
 			android:textColor="@android:color/white"
 			android:layout_marginStart="8dp" />
 	</LinearLayout>
+	<LinearLayout
+		android:id="@+id/section_cloud_backup"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="1dp"
+		android:padding="16dp"
+		android:background="@android:color/white"
+		android:orientation="vertical">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:gravity="center_vertical">
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="☁️ النسخ الاحتياطي على السحابة"
+				android:textSize="14sp"
+				android:textStyle="bold"
+				android:textColor="#212121"/>
+			<TextView
+				android:id="@+id/tv_cloud_status"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="غير مُفعّل"
+				android:textSize="11sp"
+				android:textColor="#F57C00"
+				android:textStyle="bold"/>
+		</LinearLayout>
+		<TextView
+			android:id="@+id/tv_cloud_last_backup"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:text=""
+			android:textSize="12sp"
+			android:textColor="#757575"
+			android:visibility="gone"/>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="12dp"
+			android:orientation="horizontal">
+			<Button
+				android:id="@+id/btn_select_cloud_folder"
+				android:layout_width="0dp"
+				android:layout_height="40dp"
+				android:layout_weight="1"
+				android:text="اختيار مجلد"
+				android:textSize="12sp"
+				android:textColor="@android:color/white"
+				android:background="#FF8F00"
+				android:layout_marginEnd="6dp"/>
+			<Button
+				android:id="@+id/btn_cloud_backup_now"
+				android:layout_width="0dp"
+				android:layout_height="40dp"
+				android:layout_weight="1"
+				android:text="نسخ الآن"
+				android:textSize="12sp"
+				android:textColor="@android:color/white"
+				android:background="#43A047"
+				android:visibility="gone"
+				android:layout_marginStart="6dp"/>
+		</LinearLayout>
+	</LinearLayout>
 	<TextView
 		android:id="@+id/textview26"
 		android:layout_width="match_parent"

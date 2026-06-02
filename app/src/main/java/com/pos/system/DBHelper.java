@@ -421,6 +421,19 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      * ✅ عدد المنتجات الكلي (مطلوب من ActivityReportsActivity)
      */
+    public int getTotalCustomersCount() {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_CUSTOMERS, null);
+            int count = 0;
+            if (c.moveToFirst()) count = c.getInt(0);
+            c.close();
+            return count;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
     public int getTotalProductsCount() {
         return getProductsCount();
     }
@@ -1161,6 +1174,19 @@ public class DBHelper extends SQLiteOpenHelper {
             Log.e(TAG, "getStoreSettings: " + e.getMessage(), e);
         }
         return settings;
+    }
+
+    public String getStoreSetting(String key) {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT value FROM " + TABLE_STORE_SETTINGS + " WHERE key=?", new String[]{key});
+            String v = null;
+            if (c.moveToFirst()) v = c.getString(0);
+            c.close();
+            return v;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public boolean saveStoreSetting(String key, String value) {
