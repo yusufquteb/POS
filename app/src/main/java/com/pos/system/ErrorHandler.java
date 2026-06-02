@@ -22,7 +22,7 @@ import java.net.UnknownHostException;
 public class ErrorHandler {
 
     private static final String TAG = "ErrorHandler";
-    private static final boolean DEBUG_MODE = true; // تغيير إلى false في الإصدار النهائي
+    private static final boolean DEBUG_MODE = com.pos.system.BuildConfig.DEBUG;
 
     /**
      * معالجة الخطأ وعرض رسالة مناسبة
