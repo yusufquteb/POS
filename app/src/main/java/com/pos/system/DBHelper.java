@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
 
     public static final String DATABASE_NAME    = "SmartPOS.db";
-    public static final int    DATABASE_VERSION = 2;
+    public static final int    DATABASE_VERSION = 3;
 
     private final Context mContext;
 
@@ -93,42 +93,45 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d(TAG, "Upgrading database from v" + oldVersion + " to v" + newVersion);
-        try {
-            if (oldVersion < 2) {
-                db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_EXPENSES + " (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "title TEXT NOT NULL, " +
-                    "amount REAL DEFAULT 0.0, " +
-                    "category TEXT, " +
-                    "note TEXT, " +
-                    "date TEXT, " +
-                    "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
-            }
-            if (oldVersion < 3) {
-                db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_BACKUP_LOG + " (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "file_path TEXT NOT NULL, " +
-                    "file_size INTEGER DEFAULT 0, " +
-                    "backup_type TEXT DEFAULT 'local', " +
-                    "status TEXT DEFAULT 'success', " +
-                    "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
-                try { db.execSQL("ALTER TABLE " + TABLE_SUPPLIERS + " ADD COLUMN company TEXT"); }
-                catch (Exception ignored) {}
-                try { db.execSQL("ALTER TABLE " + TABLE_CUSTOMERS + " ADD COLUMN debt REAL DEFAULT 0.0"); }
-                catch (Exception ignored) {}
-                try { db.execSQL("ALTER TABLE " + TABLE_STORE_SETTINGS + " ADD COLUMN is_premium INTEGER DEFAULT 0"); }
-                catch (Exception ignored) {}
-                try { db.execSQL("ALTER TABLE " + TABLE_STORE_SETTINGS + " ADD COLUMN subscription_end TEXT"); }
-                catch (Exception ignored) {}
-            }
+        if (oldVersion < 2) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_EXPENSES + " (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "title TEXT NOT NULL, " +
+                "amount REAL DEFAULT 0.0, " +
+                "category TEXT, " +
+                "note TEXT, " +
+                "date TEXT, " +
+                "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        }
+        if (oldVersion < 3) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_BACKUP_LOG + " (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "file_path TEXT NOT NULL, " +
+                "file_size INTEGER DEFAULT 0, " +
+                "backup_type TEXT DEFAULT 'local', " +
+                "status TEXT DEFAULT 'success', " +
+                "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+            try { db.execSQL("ALTER TABLE " + TABLE_SUPPLIERS + " ADD COLUMN company TEXT"); }
+            catch (Exception ignored) {}
+            try { db.execSQL("ALTER TABLE " + TABLE_CUSTOMERS + " ADD COLUMN debt REAL DEFAULT 0.0"); }
+            catch (Exception ignored) {}
+            try { db.execSQL("ALTER TABLE " + TABLE_STORE_SETTINGS + " ADD COLUMN is_premium INTEGER DEFAULT 0"); }
+            catch (Exception ignored) {}
+            try { db.execSQL("ALTER TABLE " + TABLE_STORE_SETTINGS + " ADD COLUMN subscription_end TEXT"); }
+            catch (Exception ignored) {}
             createReturnsTable(db);
             createLoyaltyTable(db);
             createShiftsTable(db);
             createPurchaseOrdersTable(db);
-        } catch (Exception e) {
-            Log.e(TAG, "Error upgrading database: " + e.getMessage(), e);
-            dropAllTables(db);
-            createAllTables(db);
+        }
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if (!db.isReadOnly()) {
+            db.execSQL("PRAGMA foreign_keys=ON");
+            db.execSQL("PRAGMA journal_mode=WAL");
         }
     }
 
@@ -252,7 +255,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     private void dropAllTables(SQLiteDatabase db) {
+        // Drop child tables before parent tables to respect foreign key constraints
         String[] tables = {
+            TABLE_PURCHASE_ORDER_ITEMS, TABLE_PURCHASE_ORDERS,
+            "return_items", "returns",
+            "loyalty_points",
+            TABLE_SHIFTS,
             TABLE_INVOICE_ITEMS, TABLE_INVOICES, TABLE_PRODUCTS,
             TABLE_CUSTOMERS, TABLE_SUPPLIERS, TABLE_LOCATIONS,
             TABLE_CATEGORIES, TABLE_STORE_SETTINGS, TABLE_PRINTER_SETTINGS,
@@ -264,8 +272,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private void insertDefaultSettings(SQLiteDatabase db) {
         String[][] defaults = {
             {"name", "متجري"}, {"phone", ""}, {"address", ""},
-            {"tax_rate", "15.0"}, {"tax_enabled", "true"},
-            {"currency", "ر.س"}, {"country_code", "SA"},
+            {"tax_rate", "14.0"}, {"tax_enabled", "true"},
+            {"currency", "ج.م"}, {"country_code", "EG"},
             {"is_premium", "false"}, {"subscription_end", ""}
         };
         for (String[] kv : defaults) {
