@@ -28,6 +28,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -124,11 +127,27 @@ public class ActivityReturnActivity extends BaseActivity {
 
     private void loadInvoices() {
         invoicesList.clear();
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
         try {
-            List<HashMap<String, String>> all = dbHelper.getAllInvoices();
-            if (all != null) invoicesList.addAll(all);
+            db = dbHelper.getReadableDatabase();
+            cursor = db.rawQuery(
+                "SELECT id, invoice_number, customer_name, total, created_at, payment_method " +
+                "FROM invoices ORDER BY created_at DESC", null);
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    HashMap<String, String> row = new HashMap<>();
+                    for (int i = 0; i < cursor.getColumnCount(); i++) {
+                        String col = cursor.getColumnName(i);
+                        row.put(col, cursor.isNull(i) ? "" : cursor.getString(i));
+                    }
+                    invoicesList.add(row);
+                } while (cursor.moveToNext());
+            }
         } catch (Exception e) {
             Log.e(TAG, "loadInvoices: " + e.getMessage(), e);
+        } finally {
+            if (cursor != null) cursor.close();
         }
         updateEmptyState();
         if (adapter != null) adapter.notifyDataSetChanged();
