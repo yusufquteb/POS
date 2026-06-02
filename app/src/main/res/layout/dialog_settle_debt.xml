@@ -51,7 +51,7 @@
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
-        app:hint="مبلغ الدفع / Payment Amount (ر.س)">
+        android:hint="مبلغ الدفع / Payment Amount (ر.س)">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_payment_amount"

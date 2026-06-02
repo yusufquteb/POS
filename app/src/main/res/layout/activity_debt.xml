@@ -139,7 +139,7 @@
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusBottomEnd="16dp"
-                app:hint="البحث عن عميل / Search customer">
+                android:hint="البحث عن عميل / Search customer">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_search"
