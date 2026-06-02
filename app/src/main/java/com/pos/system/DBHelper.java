@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
 
     public static final String DATABASE_NAME    = "SmartPOS.db";
-    public static final int    DATABASE_VERSION = 1;
+    public static final int    DATABASE_VERSION = 2;
 
     private final Context mContext;
 
@@ -62,6 +62,9 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_PRINTER_SETTINGS = "printer_settings";
     private static final String TABLE_EXPENSES         = "expenses";
     private static final String TABLE_BACKUP_LOG       = "backup_log";
+    private static final String TABLE_SHIFTS           = "shifts";
+    private static final String TABLE_PURCHASE_ORDERS  = "purchase_orders";
+    private static final String TABLE_PURCHASE_ORDER_ITEMS = "purchase_order_items";
 
     // ════════════════════════════════════════════════════════════
     // Constructor
@@ -120,6 +123,8 @@ public class DBHelper extends SQLiteOpenHelper {
             }
             createReturnsTable(db);
             createLoyaltyTable(db);
+            createShiftsTable(db);
+            createPurchaseOrdersTable(db);
         } catch (Exception e) {
             Log.e(TAG, "Error upgrading database: " + e.getMessage(), e);
             dropAllTables(db);
@@ -242,6 +247,8 @@ public class DBHelper extends SQLiteOpenHelper {
         insertDefaultSettings(db);
         createReturnsTable(db);
         createLoyaltyTable(db);
+        createShiftsTable(db);
+        createPurchaseOrdersTable(db);
     }
 
     private void dropAllTables(SQLiteDatabase db) {
@@ -1911,5 +1918,244 @@ public class DBHelper extends SQLiteOpenHelper {
             c.close();
         } catch (Exception e) { Log.e(TAG, "getCustomersWithDebt: " + e.getMessage()); }
         return list;
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // SHIFTS
+    // ════════════════════════════════════════════════════════════
+
+    public void createShiftsTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_SHIFTS + " ("
+            + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "opening_cash REAL DEFAULT 0,"
+            + "closing_cash REAL DEFAULT 0,"
+            + "total_sales REAL DEFAULT 0,"
+            + "invoice_count INTEGER DEFAULT 0,"
+            + "status TEXT DEFAULT 'open',"
+            + "opened_at TEXT NOT NULL,"
+            + "closed_at TEXT DEFAULT ''"
+            + ")");
+    }
+
+    public long openShift(double openingCash) {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put("opening_cash", openingCash);
+            cv.put("status", "open");
+            cv.put("opened_at", getCurrentDateTime());
+            return db.insert(TABLE_SHIFTS, null, cv);
+        } catch (Exception e) { Log.e(TAG, "openShift: " + e.getMessage()); return -1; }
+    }
+
+    public boolean closeShift(long shiftId, double closingCash) {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            HashMap<String, String> shift = getShiftById(shiftId);
+            if (shift == null) return false;
+            String openedAt = shift.getOrDefault("opened_at", getCurrentDateTime());
+            // Calculate sales during this shift
+            HashMap<String, Object> sales = getShiftSales(openedAt, getCurrentDateTime());
+            double totalSales = sales.get("total_sales") != null ? ((Number) sales.get("total_sales")).doubleValue() : 0;
+            int invoiceCount = sales.get("invoice_count") != null ? ((Number) sales.get("invoice_count")).intValue() : 0;
+            ContentValues cv = new ContentValues();
+            cv.put("closing_cash", closingCash);
+            cv.put("status", "closed");
+            cv.put("closed_at", getCurrentDateTime());
+            cv.put("total_sales", totalSales);
+            cv.put("invoice_count", invoiceCount);
+            return db.update(TABLE_SHIFTS, cv, "id=?", new String[]{String.valueOf(shiftId)}) > 0;
+        } catch (Exception e) { Log.e(TAG, "closeShift: " + e.getMessage()); return false; }
+    }
+
+    public HashMap<String, String> getCurrentShift() {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM " + TABLE_SHIFTS
+                + " WHERE status='open' ORDER BY opened_at DESC LIMIT 1", null);
+            if (c.moveToFirst()) {
+                HashMap<String, String> m = new HashMap<>();
+                for (int i = 0; i < c.getColumnCount(); i++)
+                    m.put(c.getColumnName(i), c.getString(i) != null ? c.getString(i) : "");
+                c.close();
+                return m;
+            }
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getCurrentShift: " + e.getMessage()); }
+        return null;
+    }
+
+    public HashMap<String, String> getShiftById(long id) {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM " + TABLE_SHIFTS + " WHERE id=?",
+                new String[]{String.valueOf(id)});
+            if (c.moveToFirst()) {
+                HashMap<String, String> m = new HashMap<>();
+                for (int i = 0; i < c.getColumnCount(); i++)
+                    m.put(c.getColumnName(i), c.getString(i) != null ? c.getString(i) : "");
+                c.close();
+                return m;
+            }
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getShiftById: " + e.getMessage()); }
+        return null;
+    }
+
+    public List<HashMap<String, String>> getAllShifts() {
+        List<HashMap<String, String>> list = new ArrayList<>();
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM " + TABLE_SHIFTS + " ORDER BY opened_at DESC", null);
+            while (c.moveToNext()) {
+                HashMap<String, String> m = new HashMap<>();
+                for (int i = 0; i < c.getColumnCount(); i++)
+                    m.put(c.getColumnName(i), c.getString(i) != null ? c.getString(i) : "");
+                list.add(m);
+            }
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getAllShifts: " + e.getMessage()); }
+        return list;
+    }
+
+    public HashMap<String, Object> getShiftSales(String startDateTime, String endDateTime) {
+        HashMap<String, Object> result = new HashMap<>();
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c = db.rawQuery(
+                "SELECT COALESCE(SUM(total),0), COUNT(*) FROM " + TABLE_INVOICES
+                + " WHERE created_at BETWEEN ? AND ?",
+                new String[]{startDateTime, endDateTime});
+            if (c.moveToFirst()) {
+                result.put("total_sales", c.getDouble(0));
+                result.put("invoice_count", c.getInt(1));
+            }
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getShiftSales: " + e.getMessage()); }
+        if (!result.containsKey("total_sales")) result.put("total_sales", 0.0);
+        if (!result.containsKey("invoice_count")) result.put("invoice_count", 0);
+        return result;
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // PURCHASE ORDERS
+    // ════════════════════════════════════════════════════════════
+
+    public void createPurchaseOrdersTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PURCHASE_ORDERS + " ("
+            + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "po_number TEXT UNIQUE NOT NULL,"
+            + "supplier_id TEXT DEFAULT '',"
+            + "supplier_name TEXT DEFAULT '',"
+            + "total REAL DEFAULT 0,"
+            + "notes TEXT DEFAULT '',"
+            + "status TEXT DEFAULT 'pending',"
+            + "created_at TEXT NOT NULL"
+            + ")");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PURCHASE_ORDER_ITEMS + " ("
+            + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "po_id INTEGER NOT NULL,"
+            + "product_name TEXT NOT NULL,"
+            + "qty INTEGER DEFAULT 1,"
+            + "cost REAL DEFAULT 0,"
+            + "total REAL DEFAULT 0,"
+            + "FOREIGN KEY(po_id) REFERENCES " + TABLE_PURCHASE_ORDERS + "(id)"
+            + ")");
+    }
+
+    public long addPurchaseOrder(String supplierName, String supplierId,
+                                  List<HashMap<String, String>> items,
+                                  double total, String notes) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            String poNumber = "PO-" + new java.text.SimpleDateFormat("yyyyMMdd-HHmmss",
+                java.util.Locale.US).format(new java.util.Date());
+            ContentValues pv = new ContentValues();
+            pv.put("po_number", poNumber);
+            pv.put("supplier_name", supplierName != null ? supplierName : "");
+            pv.put("supplier_id", supplierId != null ? supplierId : "");
+            pv.put("total", total);
+            pv.put("notes", notes != null ? notes : "");
+            pv.put("status", "pending");
+            pv.put("created_at", getCurrentDateTime());
+            long poId = db.insert(TABLE_PURCHASE_ORDERS, null, pv);
+            if (poId < 0) throw new Exception("Failed to insert PO");
+            for (HashMap<String, String> item : items) {
+                ContentValues iv = new ContentValues();
+                iv.put("po_id", poId);
+                iv.put("product_name", item.getOrDefault("name", ""));
+                iv.put("qty", safeInt(item, "qty", 1));
+                iv.put("cost", safeDouble(item, "cost", 0));
+                iv.put("total", safeDouble(item, "total", 0));
+                db.insert(TABLE_PURCHASE_ORDER_ITEMS, null, iv);
+            }
+            db.setTransactionSuccessful();
+            return poId;
+        } catch (Exception e) {
+            Log.e(TAG, "addPurchaseOrder: " + e.getMessage()); return -1;
+        } finally { db.endTransaction(); }
+    }
+
+    public List<HashMap<String, String>> getPurchaseOrders() {
+        List<HashMap<String, String>> list = new ArrayList<>();
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM " + TABLE_PURCHASE_ORDERS
+                + " ORDER BY created_at DESC", null);
+            while (c.moveToNext()) {
+                HashMap<String, String> m = new HashMap<>();
+                for (int i = 0; i < c.getColumnCount(); i++)
+                    m.put(c.getColumnName(i), c.getString(i) != null ? c.getString(i) : "");
+                list.add(m);
+            }
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getPurchaseOrders: " + e.getMessage()); }
+        return list;
+    }
+
+    public List<HashMap<String, String>> getPurchaseOrderItems(long poId) {
+        List<HashMap<String, String>> list = new ArrayList<>();
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM " + TABLE_PURCHASE_ORDER_ITEMS + " WHERE po_id=?",
+                new String[]{String.valueOf(poId)});
+            while (c.moveToNext()) {
+                HashMap<String, String> m = new HashMap<>();
+                for (int i = 0; i < c.getColumnCount(); i++)
+                    m.put(c.getColumnName(i), c.getString(i) != null ? c.getString(i) : "");
+                list.add(m);
+            }
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getPurchaseOrderItems: " + e.getMessage()); }
+        return list;
+    }
+
+    public boolean receivePurchaseOrder(long poId) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            List<HashMap<String, String>> items = getPurchaseOrderItems(poId);
+            for (HashMap<String, String> item : items) {
+                String productName = item.getOrDefault("product_name", "");
+                int qty = safeInt(item, "qty", 1);
+                // Try to find product by name and increase stock
+                Cursor c = db.rawQuery("SELECT id FROM " + TABLE_PRODUCTS
+                    + " WHERE name=? LIMIT 1", new String[]{productName});
+                if (c.moveToFirst()) {
+                    String productId = c.getString(0);
+                    db.execSQL("UPDATE " + TABLE_PRODUCTS + " SET qty = qty + ? WHERE id = ?",
+                        new Object[]{qty, productId});
+                }
+                c.close();
+            }
+            ContentValues cv = new ContentValues();
+            cv.put("status", "received");
+            db.update(TABLE_PURCHASE_ORDERS, cv, "id=?", new String[]{String.valueOf(poId)});
+            db.setTransactionSuccessful();
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "receivePurchaseOrder: " + e.getMessage()); return false;
+        } finally { db.endTransaction(); }
     }
 }

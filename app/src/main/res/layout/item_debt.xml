@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_debt.xml  —  صف عميل مدين في قائمة الديون / Indebted customer row
+    RTL-first, Material Design 3
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="3dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Avatar circle -->
+        <LinearLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/circle_purple_light"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_person"
+                android:tint="?attr/colorPrimary"
+                android:contentDescription="عميل / Customer" />
+
+        </LinearLayout>
+
+        <!-- Customer info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:id="@+id/tv_customer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:fontFamily="@font/cairo_semibold" />
+
+            <TextView
+                android:id="@+id/tv_customer_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/cairo_regular" />
+
+        </LinearLayout>
+
+        <!-- Debt amount (highlighted in red) + call button column -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center|end">
+
+            <TextView
+                android:id="@+id/tv_customer_debt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#F44336"
+                android:fontFamily="@font/cairo_bold"
+                android:gravity="end" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_call"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="6dp"
+                android:padding="0dp"
+                android:minWidth="36dp"
+                android:minHeight="36dp"
+                app:icon="@drawable/ic_phone"
+                app:iconGravity="textStart"
+                app:iconSize="18dp"
+                app:iconPadding="0dp"
+                app:cornerRadius="18dp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:contentDescription="اتصال / Call" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

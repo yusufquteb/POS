@@ -55,7 +55,7 @@ public class ActivityReportsActivity extends BaseActivity {
     private List<Map<String,String>> topProducts = new ArrayList<>();
 
     // Buttons
-    private MaterialButton btnExportPdf, btnShareReport;
+    private MaterialButton btnExportPdf, btnShareReport, btnWhatsapp;
     private ChipGroup chipGroupPeriod;
 
     // Date range
@@ -105,6 +105,7 @@ public class ActivityReportsActivity extends BaseActivity {
         chipGroupPeriod = findViewById(R.id.chip_group_period);
         btnExportPdf    = findViewById(R.id.btn_export_pdf);
         btnShareReport  = findViewById(R.id.btn_share_report);
+        btnWhatsapp     = findViewById(R.id.btn_whatsapp_report);
     }
 
     private void setupToolbar() {
@@ -126,6 +127,7 @@ public class ActivityReportsActivity extends BaseActivity {
         }
         if (btnExportPdf   != null) btnExportPdf.setOnClickListener(v -> exportToPDF());
         if (btnShareReport != null) btnShareReport.setOnClickListener(v -> shareReport());
+        if (btnWhatsapp    != null) btnWhatsapp.setOnClickListener(v -> shareToWhatsApp());
     }
 
     // ═══════════════════════════════════════════════════════════
@@ -352,28 +354,56 @@ public class ActivityReportsActivity extends BaseActivity {
 
     private void shareReport() {
         try {
-            StringBuilder sb = new StringBuilder();
-            sb.append("📊 *").append(getString(R.string.reports_title)).append("*\n\n");
-            sb.append("📅 ").append(fmt(startDate)).append(" → ").append(fmt(endDate)).append("\n\n");
-            sb.append("💰 ").append(getString(R.string.reports_sales)).append(":\n");
-            sb.append("• ").append(getString(R.string.main_today_sales)).append(": ").append(safe(tvTotalSales)).append("\n");
-            sb.append("• ").append(getString(R.string.invoices_title)).append(": ").append(safe(tvInvoiceCount)).append("\n");
-            sb.append("• ").append(getString(R.string.invoice_average)).append(": ").append(safe(tvAverageInvoice)).append("\n\n");
-            sb.append("📦 ").append(getString(R.string.reports_products)).append(":\n");
-            sb.append("• ").append(getString(R.string.products_count)).append(": ").append(safe(tvProductsCount)).append("\n");
-            sb.append("• ").append(getString(R.string.low_stock)).append(": ").append(safe(tvLowStock)).append("\n\n");
-            sb.append("🔴 ").append(getString(R.string.expenses_title)).append(": ").append(safe(tvTotalExpenses)).append("\n");
-            sb.append("✅ ").append(getString(R.string.reports_profit)).append(": ").append(tvNetProfit != null ? tvNetProfit.getText() : "").append("\n\n");
-            sb.append("─────────────\nSmartPOS – ").append(new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(new Date()));
-
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
             i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.reports_title));
-            i.putExtra(Intent.EXTRA_TEXT, sb.toString());
+            i.putExtra(Intent.EXTRA_TEXT, buildReportText());
             startActivity(Intent.createChooser(i, getString(R.string.share_report)));
         } catch (Exception e) {
             Log.e(TAG, "shareReport: " + e.getMessage(), e);
         }
+    }
+
+    private void shareToWhatsApp() {
+        try {
+            String text = buildReportText();
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.setPackage("com.whatsapp");
+            i.putExtra(Intent.EXTRA_TEXT, text);
+            startActivity(i);
+        } catch (android.content.ActivityNotFoundException e) {
+            // WhatsApp not installed, fall back to generic share
+            shareReport();
+        } catch (Exception e) {
+            Log.e(TAG, "shareToWhatsApp: " + e.getMessage(), e);
+        }
+    }
+
+    private String buildReportText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("📊 *").append(getString(R.string.reports_title)).append("*\n\n");
+        sb.append("📅 ").append(fmt(startDate)).append(" → ").append(fmt(endDate)).append("\n\n");
+        sb.append("💰 ").append(getString(R.string.reports_sales)).append(":\n");
+        sb.append("• ").append(getString(R.string.main_today_sales)).append(": ").append(safe(tvTotalSales)).append("\n");
+        sb.append("• ").append(getString(R.string.invoices_title)).append(": ").append(safe(tvInvoiceCount)).append("\n");
+        sb.append("• ").append(getString(R.string.invoice_average)).append(": ").append(safe(tvAverageInvoice)).append("\n\n");
+        sb.append("📦 ").append(getString(R.string.reports_products)).append(":\n");
+        sb.append("• ").append(getString(R.string.products_count, dbHelper.getTotalProductsCount())).append("\n");
+        sb.append("• ").append(getString(R.string.low_stock)).append(": ").append(safe(tvLowStock)).append("\n\n");
+        sb.append("🔴 ").append(getString(R.string.expenses_title)).append(": ").append(safe(tvTotalExpenses)).append("\n");
+        sb.append("✅ ").append(getString(R.string.reports_profit)).append(": ").append(tvNetProfit != null ? tvNetProfit.getText() : "").append("\n\n");
+        if (!topProducts.isEmpty()) {
+            sb.append("🏆 ").append(getString(R.string.reports_products_top)).append(":\n");
+            for (int i = 0; i < Math.min(topProducts.size(), 5); i++) {
+                Map<String, String> p = topProducts.get(i);
+                sb.append(i + 1).append(". ").append(p.getOrDefault("name", ""))
+                    .append(" – ").append(p.getOrDefault("quantity", "0")).append(" ").append(getString(R.string.items)).append("\n");
+            }
+            sb.append("\n");
+        }
+        sb.append("─────────────\nSmartPOS – ").append(new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(new Date()));
+        return sb.toString();
     }
 
     // ═══════════════════════════════════════════════════════════

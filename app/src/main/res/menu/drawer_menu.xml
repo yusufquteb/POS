@@ -4,6 +4,26 @@
     <group android:checkableBehavior="single">
 
         <item
+            android:id="@+id/nav_shifts"
+            android:icon="@drawable/ic_time"
+            android:title="@string/shifts_title" />
+
+        <item
+            android:id="@+id/nav_returns"
+            android:icon="@drawable/ic_receive"
+            android:title="@string/return_sale" />
+
+        <item
+            android:id="@+id/nav_debts"
+            android:icon="@drawable/ic_money"
+            android:title="@string/debt_title" />
+
+        <item
+            android:id="@+id/nav_purchase_orders"
+            android:icon="@drawable/ic_local_shipping"
+            android:title="@string/purchase_orders_title" />
+
+        <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
             android:title="@string/nav_settings" />

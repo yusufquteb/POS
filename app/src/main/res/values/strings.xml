@@ -531,6 +531,66 @@
     <string name="supplier_updated">Supplier updated successfully</string>
     <string name="supplier_deleted">Supplier deleted successfully</string>
 
+    <!-- Shifts -->
+    <string name="shifts_title">إدارة الورديات</string>
+    <string name="shift_open">فتح وردية</string>
+    <string name="shift_close">إغلاق وردية</string>
+    <string name="shift_current">الوردية الحالية</string>
+    <string name="shift_history">سجل الورديات</string>
+    <string name="shift_status_open">مفتوحة</string>
+    <string name="shift_status_closed">مغلقة</string>
+    <string name="shift_no_active">لا توجد وردية مفتوحة</string>
+    <string name="shift_opening_cash">نقد الافتتاح</string>
+    <string name="shift_closing_cash">نقد الإغلاق</string>
+    <string name="shift_total_sales">مبيعات الوردية</string>
+    <string name="shift_invoice_count">عدد الفواتير</string>
+    <string name="shift_opened_at">وقت الفتح</string>
+    <string name="shift_closed_at">وقت الإغلاق</string>
+    <string name="shift_open_confirm">تأكيد فتح الوردية</string>
+    <string name="shift_close_confirm">تأكيد إغلاق الوردية</string>
+    <string name="shift_opened_success">تم فتح الوردية بنجاح</string>
+    <string name="shift_closed_success">تم إغلاق الوردية بنجاح</string>
+    <string name="shift_open_desc">أدخل مبلغ النقد في الصندوق عند بداية الوردية</string>
+    <string name="shift_close_desc">أدخل مبلغ النقد في الصندوق عند نهاية الوردية</string>
+    <string name="shift_difference">فرق النقد</string>
+    <string name="shift_duration">مدة الوردية</string>
+
+    <!-- Debt Management -->
+    <string name="debt_title">إدارة الديون</string>
+    <string name="debt_customers">عملاء بديون</string>
+    <string name="debt_total">إجمالي الديون</string>
+    <string name="debt_settle">تسوية الدين</string>
+    <string name="debt_settle_amount">مبلغ الدفع</string>
+    <string name="debt_settled_success">تم تسوية الدين بنجاح</string>
+    <string name="debt_balance">رصيد الدين</string>
+    <string name="debt_payment_amount">مبلغ السداد</string>
+    <string name="debt_no_customers">لا يوجد عملاء بديون</string>
+    <string name="debt_enter_amount">أدخل مبلغ السداد</string>
+    <string name="debt_invalid_amount">مبلغ غير صالح</string>
+    <string name="debt_exceeds_balance">المبلغ يتجاوز رصيد الدين</string>
+
+    <!-- Purchase Orders -->
+    <string name="purchase_orders_title">أوامر الشراء</string>
+    <string name="purchase_order_add">إنشاء أمر شراء</string>
+    <string name="purchase_order_number">رقم الأمر</string>
+    <string name="purchase_order_supplier">المورد</string>
+    <string name="purchase_order_items">البنود</string>
+    <string name="purchase_order_total">الإجمالي</string>
+    <string name="purchase_order_status_pending">معلق</string>
+    <string name="purchase_order_status_received">مستلم</string>
+    <string name="purchase_order_receive">تأكيد الاستلام</string>
+    <string name="purchase_order_received_success">تم تأكيد استلام الأمر وتحديث المخزون</string>
+    <string name="purchase_order_no_orders">لا توجد أوامر شراء</string>
+    <string name="purchase_order_select_supplier">اختر المورد</string>
+    <string name="purchase_order_add_item">إضافة صنف</string>
+    <string name="purchase_order_item_name">اسم الصنف</string>
+    <string name="purchase_order_item_qty">الكمية</string>
+    <string name="purchase_order_item_cost">سعر التكلفة</string>
+    <string name="purchase_order_notes">ملاحظات الأمر</string>
+    <string name="purchase_order_created_success">تم إنشاء أمر الشراء بنجاح</string>
+    <string name="purchase_order_no_items">أضف صنفاً واحداً على الأقل</string>
+    <string name="purchase_order_confirm_receive">هل تريد تأكيد استلام هذا الأمر وإضافة الكميات للمخزون؟</string>
+
     <!-- Egypt Market -->
     <string name="return_sale">مرتجع بيع</string>
     <string name="return_items">إرجاع منتجات</string>
@@ -551,5 +611,46 @@
     <string name="points_earned">نقاط مكتسبة</string>
     <string name="redeem_points">استرداد النقاط</string>
     <string name="minimum_redeem">الحد الأدنى للاسترداد</string>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- Shift Management                               -->
+    <!-- ══════════════════════════════════════════════ -->
+    <string name="shift_title">إدارة الوردية</string>
+    <string name="shift_current_status">حالة الوردية الحالية</string>
+    <string name="shift_no_open">لا توجد وردية مفتوحة</string>
+    <string name="shift_no_open_desc">افتح وردية جديدة للبدء في تسجيل المبيعات</string>
+    <string name="shift_status_open">مفتوحة</string>
+    <string name="shift_status_closed">مغلقة</string>
+    <string name="shift_opening_cash_title">النقد الافتتاحي</string>
+    <string name="shift_closing_cash_title">النقد الختامي</string>
+    <string name="shift_opened_at_title">وقت الفتح</string>
+    <string name="shift_closed_at_title">وقت الإغلاق</string>
+    <string name="shift_total_sales_title">إجمالي المبيعات</string>
+    <string name="shift_invoice_count_title">عدد الفواتير</string>
+    <string name="shift_enter_opening_cash">أدخل النقد الافتتاحي</string>
+    <string name="shift_opening_cash_hint">النقد في الصندوق (0.00)</string>
+    <string name="shift_closing_cash_hint">النقد عند الإغلاق (0.00)</string>
+    <string name="shift_open_btn">فتح وردية جديدة</string>
+    <string name="shift_close_btn">إغلاق الوردية</string>
+    <string name="shift_open_title">فتح وردية جديدة</string>
+    <string name="shift_open_desc">أدخل مبلغ النقد الموجود في الصندوق عند بداية الوردية</string>
+    <string name="shift_open_confirm">فتح الوردية</string>
+    <string name="shift_opened_success">✓ تم فتح الوردية بنجاح</string>
+    <string name="shift_open_error">فشل في فتح الوردية، يرجى المحاولة مرة أخرى</string>
+    <string name="shift_close_title">إغلاق الوردية</string>
+    <string name="shift_close_summary_title">ملخص الوردية</string>
+    <string name="shift_close_confirm">إغلاق الوردية</string>
+    <string name="shift_closed_success">✓ تم إغلاق الوردية بنجاح</string>
+    <string name="shift_close_error">فشل في إغلاق الوردية، يرجى المحاولة مرة أخرى</string>
+    <string name="shift_history_title">سجل الورديات</string>
+    <string name="shift_no_history">لا توجد ورديات مسجلة بعد</string>
+    <string name="shift_not_closed_yet">لم تُغلق بعد</string>
+    <string name="shift_number_format">وردية #%1$s — %2$s</string>
+    <string name="shift_opened_at_label">فُتحت: %1$s</string>
+    <string name="shift_closed_at_label">أُغلقت: %1$s</string>
+    <string name="shift_opening_cash_label">افتتاحي: %1$s</string>
+    <string name="shift_closing_cash_label">ختامي: %1$s</string>
+    <string name="shift_total_sales_label">المبيعات: %1$s</string>
+    <string name="shift_invoice_count_label">الفواتير: %1$s</string>
 
 </resources>

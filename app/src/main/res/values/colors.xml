@@ -215,4 +215,12 @@
     <color name="purple_500">#6650A4</color>
     <color name="ic_launcher_background">#1B6EF3</color>
 
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- Shift Status Colors                            -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="shift_open_bg">#E8F5E9</color>
+    <color name="shift_open_text">#1B5E20</color>
+    <color name="shift_closed_bg">#F5F5F5</color>
+    <color name="shift_closed_text">#616161</color>
+
 </resources>
