@@ -283,7 +283,6 @@
 
     <!-- Legacy aliases -->
     <style name="CardStyle" parent="CardStyle.Expressive"/>
-    <style name="CardStyle_Outlined" parent="CardStyle.Outlined"/>
     <style name="Widget.MyFirstWords.CardView" parent="CardStyle.Expressive"/>
 
     <style name="ButtonStyle" parent="Widget.Material3.Button">
