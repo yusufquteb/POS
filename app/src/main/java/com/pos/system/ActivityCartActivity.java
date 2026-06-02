@@ -270,9 +270,27 @@ public class ActivityCartActivity extends BaseActivity {
                         HashMap<String, String> c = customers.get(w - 1);
                         selectedCustomerId = c.get("id"); selectedCustomerName = c.get("name");
                         if (tvSelectedCustomer != null) tvSelectedCustomer.setText(selectedCustomerName);
+                        showCustomerDebtWarning(selectedCustomerId);
                     }
                 }).show();
         } catch (Exception e) { showToast(getString(R.string.error_loading)); }
+    }
+
+    private void showCustomerDebtWarning(String customerId) {
+        if (customerId == null || customerId.isEmpty()) return;
+        try {
+            double debt = dbHelper.getCustomerDebt(customerId);
+            if (debt > 0.01) {
+                com.google.android.material.snackbar.Snackbar.make(
+                    findViewById(android.R.id.content),
+                    String.format(java.util.Locale.getDefault(),
+                        "⚠️ على هذا العميل دين بقيمة %.2f %s", debt, currency),
+                    com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(0xFFF57C00)
+                    .setTextColor(0xFFFFFFFF)
+                    .show();
+            }
+        } catch (Exception ignored) {}
     }
 
     private void applyDiscount(String input) {

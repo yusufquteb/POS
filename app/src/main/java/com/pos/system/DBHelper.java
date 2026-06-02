@@ -969,10 +969,11 @@ public class DBHelper extends SQLiteOpenHelper {
         HashMap<String, String> row = list.get(0);
         result.putAll(row);
         // تحويل الحقول الرقمية
-        try { result.put("total",    Double.parseDouble(row.getOrDefault("total",    "0"))); } catch (Exception ignored) {}
-        try { result.put("discount", Double.parseDouble(row.getOrDefault("discount", "0"))); } catch (Exception ignored) {}
-        try { result.put("tax",      Double.parseDouble(row.getOrDefault("tax",      "0"))); } catch (Exception ignored) {}
-        try { result.put("customer_id", Integer.parseInt(row.getOrDefault("customer_id", "0"))); } catch (Exception ignored) {}
+        try { result.put("subtotal",    Double.parseDouble(row.getOrDefault("subtotal",  "0"))); } catch (Exception ignored) {}
+        try { result.put("total",       Double.parseDouble(row.getOrDefault("total",     "0"))); } catch (Exception ignored) {}
+        try { result.put("discount",    Double.parseDouble(row.getOrDefault("discount",  "0"))); } catch (Exception ignored) {}
+        try { result.put("tax",         Double.parseDouble(row.getOrDefault("tax",       "0"))); } catch (Exception ignored) {}
+        try { result.put("customer_id", Integer.parseInt(row.getOrDefault("customer_id","0"))); } catch (Exception ignored) {}
         return result;
     }
 

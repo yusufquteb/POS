@@ -3,6 +3,7 @@ package com.pos.system;
 import com.pos.system.BaseActivity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -97,7 +98,8 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         
         // بيانات الفاتورة
         if (tvInvoiceNumber != null) {
-            tvInvoiceNumber.setText("فاتورة #" + invoiceId);
+            String invNum = safeObjStr(invoice, "invoice_number", String.valueOf(invoiceId));
+            tvInvoiceNumber.setText("فاتورة #" + invNum);
         }
         
         if (tvDate != null && invoice.containsKey("created_at")) {
@@ -113,11 +115,11 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
             tvCustomerPhone.setText("الهاتف: " + invoice.get("customer_phone"));
         }
         
-        // الإجماليات
-        double subtotal = invoice.containsKey("total") ? (double) invoice.get("total") : 0;
-        double discount = invoice.containsKey("discount") ? (double) invoice.get("discount") : 0;
-        double tax = invoice.containsKey("tax") ? (double) invoice.get("tax") : 0;
-        double finalTotal = invoice.containsKey("final_total") ? (double) invoice.get("final_total") : 0;
+        // الإجماليات — subtotal (قبل الخصم/الضريبة)، total (الإجمالي النهائي)
+        double subtotal   = safeDouble(invoice.get("subtotal"));
+        double discount   = safeDouble(invoice.get("discount"));
+        double tax        = safeDouble(invoice.get("tax"));
+        double finalTotal = safeDouble(invoice.get("total"));
         
         if (tvSubtotal != null) {
             tvSubtotal.setText(String.format("%.2f ج.م", subtotal));
@@ -164,8 +166,17 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     }
     
     private void printInvoice() {
-        // سيتم التنفيذ لاحقاً
-        showSnackbar("ℹ الطباعة قيد التطوير", false);
+        try {
+            HashMap<String, Object> invoice = dbHelper.getInvoiceById(invoiceId);
+            if (invoice == null) { showSnackbar("⚠️ لم يتم العثور على الفاتورة", true); return; }
+            int customerId = invoice.containsKey("customer_id") ? safeInt(invoice.get("customer_id")) : 0;
+            boolean ok = new InvoicePrinter(this).printInvoice(invoiceId, customerId);
+            showSnackbar(ok ? "✓ تمت الطباعة بنجاح"
+                            : "⚠️ فشلت الطباعة — تحقق من إعدادات الطابعة", !ok);
+        } catch (Exception e) {
+            android.util.Log.e("InvDetails", "printInvoice: " + e.getMessage(), e);
+            showSnackbar("❌ خطأ في الطباعة", true);
+        }
     }
     
     private void sendViaWhatsApp() {
@@ -209,55 +220,69 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     private String buildWhatsAppMessage(HashMap<String, Object> invoice,
                                        ArrayList<HashMap<String, Object>> items,
                                        HashMap<String, Object> customer) {
-        StringBuilder sb = new StringBuilder();
-        
         HashMap<String, String> storeSettings = dbHelper.getStoreSettings();
-        String storeName = storeSettings.containsKey("name") ? storeSettings.get("name") : "متجرنا";
-        
+        String storeName = storeSettings != null ? storeSettings.getOrDefault("name", "متجرنا") : "متجرنا";
+        String currency  = storeSettings != null ? storeSettings.getOrDefault("currency", "ج.م")  : "ج.م";
+
+        String invoiceNum = safeObjStr(invoice, "invoice_number", String.valueOf(invoiceId));
+        String createdAt  = safeObjStr(invoice, "created_at", "");
+        String payMethod  = paymentLabel(safeObjStr(invoice, "payment_method", "نقدي"));
+
+        double subtotal   = safeDouble(invoice.get("subtotal"));
+        double discount   = safeDouble(invoice.get("discount"));
+        double tax        = safeDouble(invoice.get("tax"));
+        double finalTotal = safeDouble(invoice.get("total"));
+
+        StringBuilder sb = new StringBuilder();
         sb.append("🛒 *فاتورة من ").append(storeName).append("*\n\n");
-        sb.append("📋 رقم الفاتورة: ").append(invoiceId).append("\n");
-        sb.append("📅 التاريخ: ").append(formatDate(invoice.get("created_at").toString())).append("\n");
-        sb.append("👤 العميل: ").append(customer.get("name")).append("\n\n");
-        
+        sb.append("📋 رقم الفاتورة: ").append(invoiceNum).append("\n");
+        if (!createdAt.isEmpty())
+            sb.append("📅 التاريخ: ").append(formatDate(createdAt)).append("\n");
+        if (customer != null)
+            sb.append("👤 العميل: ").append(safeObjStr(customer, "name", "")).append("\n");
+        sb.append("\n");
+
         sb.append("*المنتجات:*\n");
         sb.append("━━━━━━━━━━━━━━━━━━━━\n");
-        
+
         for (HashMap<String, Object> item : items) {
-            String name = item.get("product_name").toString();
-            int qty = (int) item.get("quantity");
-            double price = (double) item.get("price");
-            double itemTotal = price * qty;
-            
+            String name      = safeObjStr(item, "name", "---");
+            int    qty       = safeInt(item.get("qty"));
+            double price     = safeDouble(item.get("price"));
+            double lineTotal = safeDouble(item.get("total"));
+            if (lineTotal <= 0) lineTotal = price * qty;
+
             sb.append("• ").append(name).append("\n");
-            sb.append("  الكمية: ").append(qty);
-            sb.append(" × ").append(String.format("%.2f", price));
-            sb.append(" = ").append(String.format("%.2f ج.م", itemTotal)).append("\n\n");
+            sb.append("  ").append(qty).append(" × ")
+              .append(String.format(Locale.getDefault(), "%.2f", price))
+              .append(" = ")
+              .append(String.format(Locale.getDefault(), "%.2f %s", lineTotal, currency))
+              .append("\n\n");
         }
-        
+
         sb.append("━━━━━━━━━━━━━━━━━━━━\n");
-        
-        double subtotal = (double) invoice.get("total");
-        double discount = invoice.containsKey("discount") ? (double) invoice.get("discount") : 0;
-        double tax = invoice.containsKey("tax") ? (double) invoice.get("tax") : 0;
-        double finalTotal = (double) invoice.get("final_total");
-        
-        sb.append("المجموع الفرعي: ").append(String.format("%.2f ج.م", subtotal)).append("\n");
-        
-        if (discount > 0) {
-            sb.append("الخصم: -").append(String.format("%.2f ج.م", discount)).append("\n");
-        }
-        
-        if (tax > 0) {
-            sb.append("الضريبة: +").append(String.format("%.2f ج.م", tax)).append("\n");
-        }
-        
+        sb.append(String.format(Locale.getDefault(), "المجموع الفرعي: %.2f %s\n", subtotal, currency));
+        if (discount > 0)
+            sb.append(String.format(Locale.getDefault(), "الخصم: -%.2f %s\n", discount, currency));
+        if (tax > 0)
+            sb.append(String.format(Locale.getDefault(), "الضريبة: +%.2f %s\n", tax, currency));
         sb.append("━━━━━━━━━━━━━━━━━━━━\n");
-        sb.append("*الإجمالي: ").append(String.format("%.2f ج.م*", finalTotal)).append("\n\n");
-        
+        sb.append(String.format(Locale.getDefault(), "*الإجمالي: %.2f %s*\n", finalTotal, currency));
+        sb.append("💳 طريقة الدفع: ").append(payMethod).append("\n\n");
         sb.append("شكراً لتعاملكم معنا 🙏\n");
         sb.append("نتمنى لكم يوماً سعيداً 😊");
-        
+
         return sb.toString();
+    }
+
+    private String paymentLabel(String code) {
+        if (code == null) return "نقدي";
+        switch (code.toLowerCase(Locale.ROOT)) {
+            case "vodafone":  return "فودافون كاش";
+            case "instapay":  return "انستاباي";
+            case "card":      return "بطاقة بنكية";
+            default:          return "نقدي";
+        }
     }
     
     private String formatDate(String dateTime) {
@@ -301,14 +326,14 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             HashMap<String, Object> item = items.get(position);
-            
-            String name = item.containsKey("product_name") ? item.get("product_name").toString() : "";
-            int qty = item.containsKey("quantity") ? (int) item.get("quantity") : 0;
-            double price = item.containsKey("price") ? (double) item.get("price") : 0;
-            double total = price * qty;
-            
+            String name  = safeObjStr(item, "name", "---");
+            int    qty   = safeInt(item.get("qty"));
+            double price = safeDouble(item.get("price"));
+            double lineTotal = safeDouble(item.get("total"));
+            if (lineTotal <= 0) lineTotal = price * qty;
             holder.tvName.setText(name);
-            holder.tvDetails.setText(String.format("الكمية: %d × %.2f = %.2f ج.م", qty, price, total));
+            holder.tvDetails.setText(
+                String.format(Locale.getDefault(), "الكمية: %d × %.2f = %.2f", qty, price, lineTotal));
         }
         
         @Override
@@ -331,8 +356,35 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (dbHelper != null) {
-            dbHelper.close();
-        }
+        if (dbHelper != null) dbHelper.close();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  Safe type helpers
+    // ─────────────────────────────────────────────────────────────────────────
+
+    private double safeDouble(Object o) {
+        if (o instanceof Double)  return (double) o;
+        if (o instanceof Float)   return ((Float) o).doubleValue();
+        if (o instanceof Integer) return ((Integer) o).doubleValue();
+        if (o instanceof Long)    return ((Long) o).doubleValue();
+        if (o instanceof String)  { try { return Double.parseDouble((String) o); } catch (Exception ignored) {} }
+        return 0.0;
+    }
+
+    private int safeInt(Object o) {
+        if (o instanceof Integer) return (int) o;
+        if (o instanceof Long)    return ((Long) o).intValue();
+        if (o instanceof Double)  return ((Double) o).intValue();
+        if (o instanceof String)  { try { return Integer.parseInt((String) o); } catch (Exception ignored) {} }
+        return 0;
+    }
+
+    private String safeObjStr(HashMap<String, Object> map, String key, String fallback) {
+        if (map == null) return fallback;
+        Object v = map.get(key);
+        if (v == null) return fallback;
+        String s = v.toString().trim();
+        return s.isEmpty() ? fallback : s;
     }
 }
