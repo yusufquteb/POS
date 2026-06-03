@@ -130,11 +130,52 @@ public class BackupManager {
             context.getExternalFilesDir(null),
             BACKUP_FOLDER
         );
-        
+
         if (!backupFolder.exists()) {
             return new File[0];
         }
-        
+
         return backupFolder.listFiles((dir, name) -> name.endsWith(".db"));
+    }
+
+    /**
+     * يتحقق من سلامة ملف النسخة الاحتياطية بفتحه كـ SQLite وقراءة الجداول الأساسية.
+     * يُعيد true إذا كانت النسخة صالحة.
+     */
+    public boolean verifyBackup(File backupFile) {
+        if (backupFile == null || !backupFile.exists() || backupFile.length() == 0) {
+            Log.e(TAG, "verifyBackup: file missing or empty");
+            return false;
+        }
+        android.database.sqlite.SQLiteDatabase testDb = null;
+        try {
+            testDb = android.database.sqlite.SQLiteDatabase.openDatabase(
+                backupFile.getAbsolutePath(), null,
+                android.database.sqlite.SQLiteDatabase.OPEN_READONLY);
+
+            // تحقق من وجود الجداول الأساسية
+            String[] required = {"products", "invoices", "customers", "invoice_items"};
+            for (String table : required) {
+                android.database.Cursor c = testDb.rawQuery(
+                    "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=?",
+                    new String[]{table});
+                boolean exists = c.moveToFirst() && c.getInt(0) > 0;
+                c.close();
+                if (!exists) {
+                    Log.e(TAG, "verifyBackup: missing table: " + table);
+                    return false;
+                }
+            }
+
+            Log.d(TAG, "verifyBackup: OK — " + backupFile.getName()
+                + " (" + backupFile.length() / 1024 + " KB)");
+            return true;
+
+        } catch (Exception e) {
+            Log.e(TAG, "verifyBackup: " + e.getMessage(), e);
+            return false;
+        } finally {
+            if (testDb != null) try { testDb.close(); } catch (Exception ignored) {}
+        }
     }
 }

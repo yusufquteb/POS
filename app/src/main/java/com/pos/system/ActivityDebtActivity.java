@@ -3,19 +3,21 @@ package com.pos.system;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import com.pos.system.FeatureGate;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,45 +25,53 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * ActivityDebtActivity - صفحة إدارة ديون العملاء / Customer Debt Management
+ * ActivityDebtActivity - إدارة ديون العملاء والموردين
  *
- * ✅ إحصائيات: إجمالي الديون + عدد العملاء المدينين
- * ✅ بحث فوري بالاسم أو الهاتف
- * ✅ قائمة RecyclerView بالعملاء المدينين
- * ✅ نقر على عميل → حوار تسوية الدين
- * ✅ حالة فارغة عند عدم وجود ديون
- *
- * @version 2.0
+ * تبويب 1: ديون العملاء — ما يدين به العملاء للمتجر
+ * تبويب 2: ديون الموردين — ما يدين به المتجر للموردين
  */
 public class ActivityDebtActivity extends BaseActivity {
 
-    private RecyclerView rvDebts;
-    private TextView tvTotalDebt;
-    private TextView tvDebtCount;
-    private View tvEmpty;
+    private static final int TAB_CUSTOMERS  = 0;
+    private static final int TAB_SUPPLIERS  = 1;
+
+    private TabLayout     tabLayout;
+    private RecyclerView  rvDebts;
+    private RecyclerView  rvSupplierDebts;
+    private TextView      tvTotalDebt;
+    private TextView      tvDebtCount;
+    private TextView      tvStatsLabel;
+    private TextView      tvCountLabel;
+    private TextView      tvEmptyTitle;
+    private TextView      tvEmptySubtitle;
+    private ImageView     ivEmptyIcon;
+    private View          tvEmpty;
     private TextInputEditText etSearch;
+
     private String currency = "ج.م";
-    private DebtAdapter adapter;
     private DBHelper dbHelper;
+    private int currentTab = TAB_CUSTOMERS;
 
-    /** القائمة الكاملة (غير مفلترة) */
-    private final List<HashMap<String, String>> allDebtsList = new ArrayList<>();
-    /** القائمة المعروضة بعد الفلتر */
-    private final List<HashMap<String, String>> filteredList  = new ArrayList<>();
+    private CustomerDebtAdapter customerAdapter;
+    private SupplierDebtAdapter supplierAdapter;
 
-    // ─────────────────────────────────────────────────────────────────────────
+    private final List<HashMap<String, String>> allCustomerDebts  = new ArrayList<>();
+    private final List<HashMap<String, String>> filteredCustomers = new ArrayList<>();
+    private final List<HashMap<String, String>> allSupplierDebts  = new ArrayList<>();
+    private final List<HashMap<String, String>> filteredSuppliers = new ArrayList<>();
+
+    // ─────────────────────────────────────────────────────────────
     //  Lifecycle
-    // ─────────────────────────────────────────────────────────────────────────
+    // ─────────────────────────────────────────────────────────────
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_debt);
-
         applyWindowInsets(findViewById(android.R.id.content));
 
         if (!FeatureGate.isUnlocked(this)) {
-            FeatureGate.requirePremium(this, "إدارة ديون العملاء");
+            FeatureGate.requirePremium(this, "إدارة الديون");
             return;
         }
 
@@ -70,11 +80,13 @@ public class ActivityDebtActivity extends BaseActivity {
             HashMap<String, String> s = dbHelper.getStoreSettings();
             if (s != null) currency = s.getOrDefault("currency", "ج.م");
         } catch (Exception ignored) {}
+
         initViews();
         setupToolbar();
+        setupTabs();
         setupSearch();
-        setupRecyclerView();
-        loadDebts();
+        setupRecyclerViews();
+        loadAllData();
     }
 
     @Override
@@ -83,16 +95,23 @@ public class ActivityDebtActivity extends BaseActivity {
         if (dbHelper != null) dbHelper.close();
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Initialisation
-    // ─────────────────────────────────────────────────────────────────────────
+    // ─────────────────────────────────────────────────────────────
+    //  Init
+    // ─────────────────────────────────────────────────────────────
 
     private void initViews() {
-        rvDebts     = findViewById(R.id.rv_debts);
-        tvTotalDebt = findViewById(R.id.tv_total_debt);
-        tvDebtCount = findViewById(R.id.tv_debt_count);
-        tvEmpty     = findViewById(R.id.tv_empty);
-        etSearch    = findViewById(R.id.et_search);
+        tabLayout        = findViewById(R.id.tab_layout);
+        rvDebts          = findViewById(R.id.rv_debts);
+        rvSupplierDebts  = findViewById(R.id.rv_supplier_debts);
+        tvTotalDebt      = findViewById(R.id.tv_total_debt);
+        tvDebtCount      = findViewById(R.id.tv_debt_count);
+        tvStatsLabel     = findViewById(R.id.tv_stats_label);
+        tvCountLabel     = findViewById(R.id.tv_count_label);
+        tvEmpty          = findViewById(R.id.tv_empty);
+        tvEmptyTitle     = findViewById(R.id.tv_empty_title);
+        tvEmptySubtitle  = findViewById(R.id.tv_empty_subtitle);
+        ivEmptyIcon      = findViewById(R.id.iv_empty_icon);
+        etSearch         = findViewById(R.id.et_search);
     }
 
     private void setupToolbar() {
@@ -103,81 +122,317 @@ public class ActivityDebtActivity extends BaseActivity {
         }
     }
 
+    private void setupTabs() {
+        if (tabLayout == null) return;
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override public void onTabSelected(TabLayout.Tab tab) {
+                currentTab = tab.getPosition();
+                clearSearch();
+                switchTab(currentTab);
+            }
+            @Override public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override public void onTabReselected(TabLayout.Tab tab) {}
+        });
+    }
+
     private void setupSearch() {
         if (etSearch == null) return;
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterList(s.toString().trim());
+                filterCurrentTab(s.toString().trim());
             }
         });
     }
 
-    private void setupRecyclerView() {
-        if (rvDebts == null) return;
-        rvDebts.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new DebtAdapter();
-        rvDebts.setAdapter(adapter);
+    private void setupRecyclerViews() {
+        if (rvDebts != null) {
+            rvDebts.setLayoutManager(new LinearLayoutManager(this));
+            customerAdapter = new CustomerDebtAdapter();
+            rvDebts.setAdapter(customerAdapter);
+        }
+        if (rvSupplierDebts != null) {
+            rvSupplierDebts.setLayoutManager(new LinearLayoutManager(this));
+            supplierAdapter = new SupplierDebtAdapter();
+            rvSupplierDebts.setAdapter(supplierAdapter);
+        }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Data loading
-    // ─────────────────────────────────────────────────────────────────────────
+    // ─────────────────────────────────────────────────────────────
+    //  Data
+    // ─────────────────────────────────────────────────────────────
 
-    private void loadDebts() {
-        allDebtsList.clear();
+    private void loadAllData() {
+        allCustomerDebts.clear();
+        allSupplierDebts.clear();
         try {
-            List<HashMap<String, String>> result = dbHelper.getCustomersWithDebt();
-            if (result != null) allDebtsList.addAll(result);
+            List<HashMap<String, String>> c = dbHelper.getCustomersWithDebt();
+            if (c != null) allCustomerDebts.addAll(c);
         } catch (Exception ignored) {}
-
-        updateStatsCard();
-
-        // أعد تطبيق الفلتر الحالي بعد إعادة التحميل
-        String currentQuery = (etSearch != null && etSearch.getText() != null)
-                ? etSearch.getText().toString().trim() : "";
-        filterList(currentQuery);
+        try {
+            List<HashMap<String, String>> s = dbHelper.getSuppliersWithDebt();
+            if (s != null) allSupplierDebts.addAll(s);
+        } catch (Exception ignored) {}
+        switchTab(currentTab);
     }
 
-    private void filterList(String query) {
-        filteredList.clear();
-        if (query.isEmpty()) {
-            filteredList.addAll(allDebtsList);
-        } else {
-            String lq = query.toLowerCase(Locale.getDefault());
-            for (HashMap<String, String> item : allDebtsList) {
-                String name  = safeGet(item, "name").toLowerCase(Locale.getDefault());
-                String phone = safeGet(item, "phone").toLowerCase(Locale.getDefault());
-                if (name.contains(lq) || phone.contains(lq)) {
-                    filteredList.add(item);
-                }
-            }
-        }
-        updateListUI();
-    }
+    private void switchTab(int tab) {
+        boolean isCustomers = (tab == TAB_CUSTOMERS);
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  UI helpers
-    // ─────────────────────────────────────────────────────────────────────────
+        if (rvDebts         != null) rvDebts.setVisibility(isCustomers ? View.VISIBLE : View.GONE);
+        if (rvSupplierDebts != null) rvSupplierDebts.setVisibility(isCustomers ? View.GONE : View.VISIBLE);
 
-    private void updateStatsCard() {
-        double total = 0;
-        for (HashMap<String, String> item : allDebtsList) {
-            try { total += Double.parseDouble(safeGet(item, "debt")); }
-            catch (NumberFormatException ignored) {}
-        }
+        if (tvStatsLabel != null)
+            tvStatsLabel.setText(isCustomers ? "إجمالي ديون العملاء" : "إجمالي ديون الموردين");
+        if (tvCountLabel != null)
+            tvCountLabel.setText(isCustomers ? "عميل مدين" : "مورد مدين");
+        if (ivEmptyIcon != null)
+            ivEmptyIcon.setImageResource(isCustomers ? R.drawable.ic_customers : R.drawable.ic_local_shipping);
+
+        double total = isCustomers ? calcTotal(allCustomerDebts) : calcTotal(allSupplierDebts);
         if (tvTotalDebt != null)
             tvTotalDebt.setText(String.format(Locale.getDefault(), "%.2f %s", total, currency));
         if (tvDebtCount != null)
-            tvDebtCount.setText(String.valueOf(allDebtsList.size()));
+            tvDebtCount.setText(String.valueOf(isCustomers ? allCustomerDebts.size() : allSupplierDebts.size()));
+
+        filterCurrentTab("");
     }
 
-    private void updateListUI() {
-        boolean empty = filteredList.isEmpty();
-        if (rvDebts != null) rvDebts.setVisibility(empty ? View.GONE  : View.VISIBLE);
-        if (tvEmpty != null) tvEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
-        if (adapter != null) adapter.notifyDataSetChanged();
+    private void filterCurrentTab(String query) {
+        if (currentTab == TAB_CUSTOMERS) {
+            filteredCustomers.clear();
+            for (HashMap<String, String> item : allCustomerDebts) {
+                if (matches(item, query)) filteredCustomers.add(item);
+            }
+            boolean empty = filteredCustomers.isEmpty();
+            if (rvDebts    != null) rvDebts.setVisibility(empty ? View.GONE  : View.VISIBLE);
+            if (tvEmpty    != null) tvEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
+            if (empty && tvEmptySubtitle != null)
+                tvEmptySubtitle.setText("جميع العملاء سدّدوا ديونهم");
+            if (customerAdapter != null) customerAdapter.notifyDataSetChanged();
+        } else {
+            filteredSuppliers.clear();
+            for (HashMap<String, String> item : allSupplierDebts) {
+                if (matches(item, query)) filteredSuppliers.add(item);
+            }
+            boolean empty = filteredSuppliers.isEmpty();
+            if (rvSupplierDebts != null) rvSupplierDebts.setVisibility(empty ? View.GONE  : View.VISIBLE);
+            if (tvEmpty         != null) tvEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
+            if (empty && tvEmptySubtitle != null)
+                tvEmptySubtitle.setText("لا توجد ديون على الموردين");
+            if (supplierAdapter != null) supplierAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private boolean matches(HashMap<String, String> item, String query) {
+        if (query.isEmpty()) return true;
+        String q = query.toLowerCase(Locale.getDefault());
+        return safeGet(item, "name").toLowerCase(Locale.getDefault()).contains(q)
+            || safeGet(item, "phone").contains(q);
+    }
+
+    private double calcTotal(List<HashMap<String, String>> list) {
+        double t = 0;
+        for (HashMap<String, String> item : list) {
+            try { t += Double.parseDouble(safeGet(item, "debt")); }
+            catch (NumberFormatException ignored) {}
+        }
+        return t;
+    }
+
+    private void clearSearch() {
+        if (etSearch != null) etSearch.setText("");
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  Customer Debt Dialog
+    // ─────────────────────────────────────────────────────────────
+
+    private void showCustomerDebtDialog(HashMap<String, String> customer) {
+        String customerId   = safeGet(customer, "id");
+        String customerName = safeGet(customer, "name");
+        String phone        = safeGet(customer, "phone");
+        double currentDebt  = dbHelper.getCustomerDebt(customerId);
+
+        String[] options = {"سداد دين", "تسجيل دين جديد", "عرض سجل الحركات", "اتصال"};
+        if (phone.isEmpty()) options = new String[]{"سداد دين", "تسجيل دين جديد", "عرض سجل الحركات"};
+
+        final String[] finalOptions = options;
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(customerName)
+            .setMessage(String.format(Locale.getDefault(),
+                "الرصيد الحالي: %.2f %s", currentDebt, currency))
+            .setItems(finalOptions, (d, which) -> {
+                if (which == 0) showSettleDialog(customerId, customerName, currentDebt, true);
+                else if (which == 1) showAddDebtDialog(customerId, customerName, true);
+                else if (which == 2) showPaymentHistory(customerId, customerName, true);
+                else if (which == 3 && !phone.isEmpty()) dialPhone(phone);
+            })
+            .setNegativeButton("إلغاء", null)
+            .show();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  Supplier Debt Dialog
+    // ─────────────────────────────────────────────────────────────
+
+    private void showSupplierDebtDialog(HashMap<String, String> supplier) {
+        String supplierId   = safeGet(supplier, "id");
+        String supplierName = safeGet(supplier, "name");
+        String phone        = safeGet(supplier, "phone");
+        double currentDebt  = dbHelper.getSupplierDebt(supplierId);
+
+        String[] options = {"سداد دين للمورد", "تسجيل مشتريات بالآجل", "عرض سجل الحركات", "اتصال"};
+        if (phone.isEmpty()) options = new String[]{"سداد دين للمورد", "تسجيل مشتريات بالآجل", "عرض سجل الحركات"};
+
+        final String[] finalOptions = options;
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(supplierName)
+            .setMessage(String.format(Locale.getDefault(),
+                "المستحق للمورد: %.2f %s", currentDebt, currency))
+            .setItems(finalOptions, (d, which) -> {
+                if (which == 0) showSettleDialog(supplierId, supplierName, currentDebt, false);
+                else if (which == 1) showAddDebtDialog(supplierId, supplierName, false);
+                else if (which == 2) showPaymentHistory(supplierId, supplierName, false);
+                else if (which == 3 && !phone.isEmpty()) dialPhone(phone);
+            })
+            .setNegativeButton("إلغاء", null)
+            .show();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  Shared Dialogs
+    // ─────────────────────────────────────────────────────────────
+
+    private void showSettleDialog(String id, String name, double currentDebt, boolean isCustomer) {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_settle_debt, null, false);
+        TextView tvName  = view.findViewById(R.id.tv_dialog_customer_name);
+        TextView tvDebt  = view.findViewById(R.id.tv_dialog_current_debt);
+        TextInputEditText etAmount = view.findViewById(R.id.et_payment_amount);
+        TextInputEditText etNote   = view.findViewById(R.id.et_payment_note);
+
+        if (tvName != null) tvName.setText(name);
+        if (tvDebt != null) tvDebt.setText(String.format(Locale.getDefault(),
+            isCustomer ? "الدين الحالي: %.2f %s" : "المستحق للمورد: %.2f %s",
+            currentDebt, currency));
+
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(isCustomer ? "سداد دين العميل" : "سداد دين للمورد")
+            .setView(view)
+            .setPositiveButton("تأكيد السداد", (d, w) -> {
+                double amount = parseAmount(etAmount);
+                if (amount <= 0) { showToast("يرجى إدخال مبلغ صحيح"); return; }
+                if (amount > currentDebt) { showToast("المبلغ أكبر من الدين الحالي"); return; }
+                String note = etNote != null && etNote.getText() != null
+                    ? etNote.getText().toString().trim() : "";
+
+                boolean ok = isCustomer
+                    ? dbHelper.settleCustomerDebt(id, amount, note)
+                    : dbHelper.settleSupplierDebt(id, amount, note);
+
+                if (ok) {
+                    showSnackbar(String.format(Locale.getDefault(),
+                        "✓ تم السداد %.2f %s", amount, currency));
+                    loadAllData();
+                } else {
+                    showToast("فشل في تسجيل السداد");
+                }
+            })
+            .setNegativeButton("إلغاء", null)
+            .show();
+    }
+
+    private void showAddDebtDialog(String id, String name, boolean isCustomer) {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_settle_debt, null, false);
+        TextView tvName = view.findViewById(R.id.tv_dialog_customer_name);
+        TextView tvDebt = view.findViewById(R.id.tv_dialog_current_debt);
+        TextInputEditText etAmount = view.findViewById(R.id.et_payment_amount);
+        TextInputEditText etNote   = view.findViewById(R.id.et_payment_note);
+
+        if (tvName != null) tvName.setText(name);
+        double curr = isCustomer ? dbHelper.getCustomerDebt(id) : dbHelper.getSupplierDebt(id);
+        if (tvDebt != null) tvDebt.setText(String.format(Locale.getDefault(),
+            "الرصيد الحالي: %.2f %s", curr, currency));
+
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(isCustomer ? "تسجيل دين جديد على العميل" : "تسجيل مشتريات بالآجل من المورد")
+            .setView(view)
+            .setPositiveButton("تسجيل", (d, w) -> {
+                double amount = parseAmount(etAmount);
+                if (amount <= 0) { showToast("يرجى إدخال مبلغ صحيح"); return; }
+                String note = etNote != null && etNote.getText() != null
+                    ? etNote.getText().toString().trim() : "";
+
+                boolean ok = isCustomer
+                    ? dbHelper.addCustomerDebt(id, amount, note)
+                    : dbHelper.addSupplierDebt(id, amount, note);
+
+                if (ok) {
+                    showSnackbar(String.format(Locale.getDefault(),
+                        "✓ تم تسجيل الدين %.2f %s", amount, currency));
+                    loadAllData();
+                } else {
+                    showToast("فشل في تسجيل الدين");
+                }
+            })
+            .setNegativeButton("إلغاء", null)
+            .show();
+    }
+
+    private void showPaymentHistory(String id, String name, boolean isCustomer) {
+        List<HashMap<String, String>> payments = isCustomer
+            ? dbHelper.getCustomerDebtPayments(id)
+            : dbHelper.getSupplierDebtPayments(id);
+
+        if (payments.isEmpty()) {
+            new MaterialAlertDialogBuilder(this)
+                .setTitle("سجل الحركات — " + name)
+                .setMessage("لا توجد حركات مسجلة بعد.")
+                .setPositiveButton("حسناً", null)
+                .show();
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (HashMap<String, String> p : payments) {
+            String type   = safeGet(p, "type");
+            String amount = safeGet(p, "amount");
+            String note   = safeGet(p, "note");
+            String date   = safeGet(p, "created_at");
+            if (date.length() > 16) date = date.substring(0, 16);
+
+            boolean isPayment = "payment".equals(type);
+            sb.append(isPayment ? "✓ سداد  " : "✗ دين   ");
+            try {
+                sb.append(String.format(Locale.getDefault(), "%.2f %s",
+                    Double.parseDouble(amount), currency));
+            } catch (Exception e) { sb.append(amount).append(" ").append(currency); }
+            sb.append("  |  ").append(date);
+            if (!note.isEmpty()) sb.append("\n   ملاحظة: ").append(note);
+            sb.append("\n\n");
+        }
+
+        new MaterialAlertDialogBuilder(this)
+            .setTitle("سجل الحركات — " + name)
+            .setMessage(sb.toString().trim())
+            .setPositiveButton("إغلاق", null)
+            .show();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  Helpers
+    // ─────────────────────────────────────────────────────────────
+
+    private double parseAmount(TextInputEditText et) {
+        if (et == null || et.getText() == null) return 0;
+        try { return Double.parseDouble(et.getText().toString().trim()); }
+        catch (NumberFormatException e) { return 0; }
+    }
+
+    private void dialPhone(String phone) {
+        try { startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone))); }
+        catch (Exception ignored) {}
     }
 
     private String safeGet(HashMap<String, String> map, String key) {
@@ -186,161 +441,104 @@ public class ActivityDebtActivity extends BaseActivity {
         return v != null ? v : "";
     }
 
-    private String getEditText(TextInputEditText et) {
-        if (et == null || et.getText() == null) return "";
-        return et.getText().toString().trim();
+    private void showSnackbar(String msg) {
+        View root = rvDebts != null ? rvDebts : findViewById(android.R.id.content);
+        if (root != null) Snackbar.make(root, msg, Snackbar.LENGTH_LONG).show();
+        else showToast(msg);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Settle-debt dialog
-    // ─────────────────────────────────────────────────────────────────────────
+    // ─────────────────────────────────────────────────────────────
+    //  Customer Adapter
+    // ─────────────────────────────────────────────────────────────
 
-    private void showSettleDebtDialog(HashMap<String, String> customer) {
-        String customerId   = safeGet(customer, "id");
-        String customerName = safeGet(customer, "name");
+    private class CustomerDebtAdapter extends RecyclerView.Adapter<CustomerDebtAdapter.VH> {
 
-        // اجلب أحدث قيمة للدين مباشرة من قاعدة البيانات
-        double currentDebt;
-        try {
-            currentDebt = dbHelper.getCustomerDebt(customerId);
-        } catch (Exception e) {
-            try { currentDebt = Double.parseDouble(safeGet(customer, "debt")); }
-            catch (NumberFormatException nfe) { currentDebt = 0; }
-        }
-        final double finalDebt = currentDebt;
-
-        // بناء واجهة الحوار
-        View dialogView = LayoutInflater.from(this)
-                .inflate(R.layout.dialog_settle_debt, null, false);
-
-        TextView tvDialogName      = dialogView.findViewById(R.id.tv_dialog_customer_name);
-        TextView tvDialogDebt      = dialogView.findViewById(R.id.tv_dialog_current_debt);
-        TextInputEditText etAmount = dialogView.findViewById(R.id.et_payment_amount);
-
-        if (tvDialogName != null)
-            tvDialogName.setText(customerName);
-        if (tvDialogDebt != null)
-            tvDialogDebt.setText(String.format(Locale.getDefault(),
-                    "الدين الحالي / Current Debt:  %.2f %s", finalDebt, currency));
-
-        new MaterialAlertDialogBuilder(this)
-                .setTitle("تسوية دين العميل\nSettle Customer Debt")
-                .setView(dialogView)
-                .setPositiveButton("تسوية الدين / Settle", (dialog, which) -> {
-                    String amountStr = getEditText(etAmount);
-                    if (amountStr.isEmpty()) {
-                        showToast("يرجى إدخال مبلغ الدفع\nPlease enter payment amount");
-                        return;
-                    }
-                    double amount;
-                    try {
-                        amount = Double.parseDouble(amountStr);
-                    } catch (NumberFormatException e) {
-                        showToast("المبلغ غير صحيح\nInvalid amount");
-                        return;
-                    }
-                    if (amount <= 0) {
-                        showToast("يجب أن يكون المبلغ أكبر من صفر\nAmount must be greater than zero");
-                        return;
-                    }
-                    if (amount > finalDebt) {
-                        showToast("المبلغ أكبر من الدين الحالي\nAmount exceeds current debt");
-                        return;
-                    }
-                    performSettlement(customerId, amount);
-                })
-                .setNegativeButton("إلغاء / Cancel", null)
-                .show();
-    }
-
-    private void performSettlement(String customerId, double amount) {
-        try {
-            boolean success = dbHelper.settleCustomerDebt(customerId, amount);
-            View rootView = rvDebts != null ? rvDebts : findViewById(android.R.id.content);
-            if (success) {
-                loadDebts();   // أعد تحميل القائمة والإحصائيات
-                if (rootView != null) {
-                    Snackbar.make(rootView,
-                            String.format(Locale.getDefault(),
-                                    "✓ تمت التسوية (%.2f %s) / Debt settled", amount, currency),
-                            Snackbar.LENGTH_LONG).show();
-                } else {
-                    showToast("✓ تمت التسوية بنجاح");
-                }
-            } else {
-                if (rootView != null) {
-                    Snackbar.make(rootView,
-                            "فشل في تسوية الدين / Failed to settle debt",
-                            Snackbar.LENGTH_SHORT).show();
-                } else {
-                    showToast("فشل في تسوية الدين");
-                }
-            }
-        } catch (Exception e) {
-            showToast("خطأ أثناء التسوية\nError during settlement");
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────────────────
-    //  RecyclerView Adapter  (inline item layout: item_debt)
-    // ─────────────────────────────────────────────────────────────────────────
-
-    private class DebtAdapter extends RecyclerView.Adapter<DebtAdapter.VH> {
-
-        @NonNull
-        @Override
+        @NonNull @Override
         public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_debt, parent, false);
+                .inflate(R.layout.item_debt, parent, false);
             return new VH(v);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull VH holder, int position) {
-            HashMap<String, String> item = filteredList.get(position);
-
+        public void onBindViewHolder(@NonNull VH h, int pos) {
+            HashMap<String, String> item = filteredCustomers.get(pos);
             String name  = safeGet(item, "name");
             String phone = safeGet(item, "phone");
 
-            if (holder.tvName  != null) holder.tvName.setText(name);
-            if (holder.tvPhone != null)
-                holder.tvPhone.setText(phone.isEmpty() ? "لا يوجد رقم / No phone" : phone);
-            if (holder.tvDebt  != null) {
+            if (h.tvName  != null) h.tvName.setText(name);
+            if (h.tvPhone != null) h.tvPhone.setText(phone.isEmpty() ? "لا يوجد رقم" : phone);
+            if (h.tvDebt  != null) {
                 try {
-                    double debt = Double.parseDouble(safeGet(item, "debt"));
-                    holder.tvDebt.setText(
-                            String.format(Locale.getDefault(), "%.2f %s", debt, currency));
-                } catch (NumberFormatException e) {
-                    holder.tvDebt.setText("0.00 " + currency);
-                }
+                    h.tvDebt.setText(String.format(Locale.getDefault(),
+                        "%.2f %s", Double.parseDouble(safeGet(item, "debt")), currency));
+                } catch (NumberFormatException e) { h.tvDebt.setText("0.00 " + currency); }
             }
-
-            // نقر على الصف → حوار التسوية
-            holder.itemView.setOnClickListener(v -> showSettleDebtDialog(item));
-
-            // زر الاتصال (إن وُجد في التخطيط)
-            if (holder.btnCall != null) {
-                if (phone.isEmpty()) {
-                    holder.btnCall.setVisibility(View.GONE);
-                } else {
-                    holder.btnCall.setVisibility(View.VISIBLE);
-                    holder.btnCall.setOnClickListener(v -> {
-                        try {
-                            startActivity(new Intent(Intent.ACTION_DIAL,
-                                    Uri.parse("tel:" + phone)));
-                        } catch (Exception ignored) {}
-                    });
-                }
+            h.itemView.setOnClickListener(v -> showCustomerDebtDialog(item));
+            if (h.btnCall != null) {
+                h.btnCall.setVisibility(phone.isEmpty() ? View.GONE : View.VISIBLE);
+                h.btnCall.setOnClickListener(v -> dialPhone(phone));
             }
         }
 
-        @Override
-        public int getItemCount() { return filteredList.size(); }
+        @Override public int getItemCount() { return filteredCustomers.size(); }
 
         class VH extends RecyclerView.ViewHolder {
             TextView tvName, tvPhone, tvDebt;
             View btnCall;
+            VH(View v) {
+                super(v);
+                tvName  = v.findViewById(R.id.tv_customer_name);
+                tvPhone = v.findViewById(R.id.tv_customer_phone);
+                tvDebt  = v.findViewById(R.id.tv_customer_debt);
+                btnCall = v.findViewById(R.id.btn_call);
+            }
+        }
+    }
 
+    // ─────────────────────────────────────────────────────────────
+    //  Supplier Debt Adapter  (reuses item_debt layout)
+    // ─────────────────────────────────────────────────────────────
+
+    private class SupplierDebtAdapter extends RecyclerView.Adapter<SupplierDebtAdapter.VH> {
+
+        @NonNull @Override
+        public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_debt, parent, false);
+            return new VH(v);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull VH h, int pos) {
+            HashMap<String, String> item = filteredSuppliers.get(pos);
+            String name    = safeGet(item, "name");
+            String company = safeGet(item, "company");
+            String phone   = safeGet(item, "phone");
+
+            if (h.tvName  != null) h.tvName.setText(name);
+            if (h.tvPhone != null) {
+                String sub = company.isEmpty() ? phone : (company + (phone.isEmpty() ? "" : " · " + phone));
+                h.tvPhone.setText(sub.isEmpty() ? "مورد" : sub);
+            }
+            if (h.tvDebt != null) {
+                try {
+                    h.tvDebt.setText(String.format(Locale.getDefault(),
+                        "%.2f %s", Double.parseDouble(safeGet(item, "debt")), currency));
+                } catch (NumberFormatException e) { h.tvDebt.setText("0.00 " + currency); }
+            }
+            h.itemView.setOnClickListener(v -> showSupplierDebtDialog(item));
+            if (h.btnCall != null) {
+                h.btnCall.setVisibility(phone.isEmpty() ? View.GONE : View.VISIBLE);
+                h.btnCall.setOnClickListener(v -> dialPhone(phone));
+            }
+        }
+
+        @Override public int getItemCount() { return filteredSuppliers.size(); }
+
+        class VH extends RecyclerView.ViewHolder {
+            TextView tvName, tvPhone, tvDebt;
+            View btnCall;
             VH(View v) {
                 super(v);
                 tvName  = v.findViewById(R.id.tv_customer_name);

@@ -69,21 +69,43 @@
 
         </LinearLayout>
 
-        <!-- Call Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_call"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="0dp"
-            android:minWidth="40dp"
-            android:minHeight="40dp"
-            app:icon="@drawable/ic_phone"
-            app:iconGravity="textStart"
-            app:iconSize="20dp"
-            app:iconPadding="0dp"
-            app:cornerRadius="20dp"
-            style="@style/Widget.Material3.Button.TonalButton"
-            android:contentDescription="@string/customer_phone"/>
+        <!-- Debt badge + Call button -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center|end">
+
+            <TextView
+                android:id="@+id/tv_supplier_debt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_error"
+                android:fontFamily="@font/cairo_bold"
+                android:background="@drawable/bg_debt_badge"
+                android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_call"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:padding="0dp"
+                android:minWidth="40dp"
+                android:minHeight="40dp"
+                app:icon="@drawable/ic_phone"
+                app:iconGravity="textStart"
+                app:iconSize="20dp"
+                app:iconPadding="0dp"
+                app:cornerRadius="20dp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:contentDescription="@string/customer_phone"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

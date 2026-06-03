@@ -209,6 +209,34 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- PIN Lock Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_pin_lock" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="24dp"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@drawable/ic_lock"
+                        android:tint="?attr/colorPrimary"
+                        android:contentDescription="قفل الكاشير" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="قفل الكاشير (PIN)" android:textSize="16sp" android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="تعيين رمز PIN لحماية الوصول" android:textSize="13sp"
+                            android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginTop="4dp"
+                            android:fontFamily="@font/cairo_regular" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- About Section -->
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="@string/settings_section_about" android:textSize="14sp"

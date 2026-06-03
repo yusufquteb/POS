@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="قفل الكاشير" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- Icon -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔐"
+            android:textSize="56sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tv_pin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="أدخل رمز PIN"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/tv_pin_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="أدخل الرمز المكون من 4 أرقام"
+            android:textSize="14sp"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:layout_marginBottom="32dp" />
+
+        <!-- PIN Dots -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="40dp">
+
+            <View
+                android:id="@+id/dot1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/pin_dot_empty" />
+
+            <View
+                android:id="@+id/dot2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/pin_dot_empty" />
+
+            <View
+                android:id="@+id/dot3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/pin_dot_empty" />
+
+            <View
+                android:id="@+id/dot4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/pin_dot_empty" />
+
+        </LinearLayout>
+
+        <!-- Error Message -->
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="رمز PIN غير صحيح"
+            android:textColor="?attr/colorError"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone" />
+
+        <!-- Numpad -->
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="4">
+
+            <!-- Row 1: 1 2 3 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_1"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="1"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_2"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="2"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_3"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="3"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <!-- Row 2: 4 5 6 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_4"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="4"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_5"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="5"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_6"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="6"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <!-- Row 3: 7 8 9 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_7"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="7"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_8"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="8"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_9"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="9"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <!-- Row 4: [clear] 0 [back] -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_clear"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="مسح"
+                android:textSize="13sp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_0"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="0"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.TonalButton"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_back"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="6dp"
+                android:text="⌫"
+                android:textSize="22sp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:cornerRadius="12dp" />
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

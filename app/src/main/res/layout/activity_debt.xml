@@ -18,9 +18,35 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="ديون العملاء"
+            app:title="إدارة الديون"
             app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
             app:navigationIcon="@drawable/ic_arrow_back" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="3dp"
+            app:tabTextAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:fontFamily="@font/cairo_semibold"
+            app:tabRippleColor="?attr/colorPrimaryContainer">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ديون العملاء"
+                android:icon="@drawable/ic_person" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ديون الموردين"
+                android:icon="@drawable/ic_local_shipping" />
+
+        </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -62,9 +88,10 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_stats_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="إجمالي الديون"
+                            android:text="إجمالي ديون العملاء"
                             android:textSize="13sp"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_regular"
@@ -74,7 +101,7 @@
                             android:id="@+id/tv_total_debt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0.00 ر.س"
+                            android:text="0.00"
                             android:textSize="28sp"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnPrimaryContainer"
@@ -108,6 +135,7 @@
                             android:gravity="center" />
 
                         <TextView
+                            android:id="@+id/tv_count_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="عميل مدين"
@@ -137,7 +165,7 @@
                 app:boxCornerRadiusTopEnd="28dp"
                 app:boxCornerRadiusBottomStart="28dp"
                 app:boxCornerRadiusBottomEnd="28dp"
-                android:hint="البحث عن عميل...">
+                android:hint="بحث...">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_search"
@@ -150,7 +178,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- ── Debt list ── -->
+            <!-- ── Customer debt list ── -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_debts"
                 android:layout_width="match_parent"
@@ -158,6 +186,16 @@
                 android:paddingTop="4dp"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false" />
+
+            <!-- ── Supplier debt list ── -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_supplier_debts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone" />
 
             <!-- ── Empty state ── -->
             <LinearLayout
@@ -170,6 +208,7 @@
                 android:visibility="gone">
 
                 <ImageView
+                    android:id="@+id/iv_empty_icon"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/ic_customers"
@@ -177,6 +216,7 @@
                     android:contentDescription="لا توجد ديون" />
 
                 <TextView
+                    android:id="@+id/tv_empty_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="لا توجد ديون"
@@ -188,6 +228,7 @@
                     android:fontFamily="@font/cairo_bold" />
 
                 <TextView
+                    android:id="@+id/tv_empty_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="جميع العملاء سدّدوا ديونهم"

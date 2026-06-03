@@ -252,7 +252,7 @@
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
 
-			<!-- بطاقة الأرباح -->
+			<!-- بطاقة الأرباح الكاملة -->
 			<com.google.android.material.card.MaterialCardView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -264,15 +264,49 @@
 					android:layout_height="wrap_content"
 					android:padding="16dp"
 					android:orientation="vertical">
+
+					<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_marginBottom="12dp"
+						android:text="📊 تحليل الربحية"
+						android:textSize="18sp" android:textStyle="bold"/>
+
+					<!-- تكلفة البضاعة المباعة COGS -->
 					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
 						android:orientation="horizontal" android:layout_marginBottom="8dp">
 						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
-							android:layout_weight="1" android:text="@string/expenses_title" android:textSize="14sp"/>
+							android:layout_weight="1" android:text="تكلفة البضاعة المباعة (COGS):" android:textSize="13sp"/>
+						<TextView android:id="@+id/tv_cogs"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:text="0.00" android:textSize="14sp" android:textStyle="bold" android:textColor="?attr/colorError"/>
+					</LinearLayout>
+
+					<!-- مجمل الربح Gross Profit -->
+					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+						android:orientation="horizontal" android:layout_marginBottom="8dp">
+						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
+							android:layout_weight="1" android:text="مجمل الربح (قبل المصروفات):" android:textSize="13sp"/>
+						<TextView android:id="@+id/tv_gross_profit"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:text="0.00" android:textSize="14sp" android:textStyle="bold" android:textColor="?attr/colorPrimary"/>
+					</LinearLayout>
+
+					<!-- خط فاصل -->
+					<View android:layout_width="match_parent" android:layout_height="1dp"
+						android:background="?attr/colorOutlineVariant" android:layout_marginBottom="8dp"/>
+
+					<!-- المصروفات -->
+					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+						android:orientation="horizontal" android:layout_marginBottom="8dp">
+						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
+							android:layout_weight="1" android:text="@string/expenses_title" android:textSize="13sp"/>
 						<TextView android:id="@+id/tv_total_expenses"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="0.00" android:textSize="16sp" android:textStyle="bold" android:textColor="?attr/colorError"/>
+							android:text="0.00" android:textSize="14sp" android:textStyle="bold" android:textColor="?attr/colorError"/>
 					</LinearLayout>
-					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+					<!-- صافي الربح Net Profit -->
+					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+						android:orientation="horizontal">
 						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
 							android:layout_weight="1" android:text="@string/reports_profit" android:textSize="15sp" android:textStyle="bold"/>
 						<TextView android:id="@+id/tv_net_profit"

@@ -22,8 +22,10 @@ public class LowStockWorker extends Worker {
 
     private static final String CHANNEL_ID      = "low_stock_channel";
     private static final String REORDER_CHANNEL = "reorder_channel";
+    private static final String EXPIRY_CHANNEL  = "expiry_channel";
     private static final int    NOTIF_LOW_STOCK = 1001;
     private static final int    NOTIF_REORDER   = 1002;
+    private static final int    NOTIF_EXPIRY    = 1003;
 
     public LowStockWorker(@NonNull Context context, @NonNull WorkerParameters params) {
         super(context, params);
@@ -35,11 +37,18 @@ public class LowStockWorker extends Worker {
         try {
             DBHelper db = new DBHelper(getApplicationContext());
 
+            // 1. تنبيه المخزون المنخفض + اقتراح الطلبات
             List<HashMap<String, String>> lowStock = db.getLowStockProducts();
             if (lowStock != null && !lowStock.isEmpty()) {
                 showLowStockNotification(lowStock.size());
                 int poCount = createSmartReorderSuggestions(db, lowStock);
                 if (poCount > 0) showReorderNotification(poCount);
+            }
+
+            // 2. تنبيه المنتجات قاربت على انتهاء الصلاحية (7 أيام)
+            List<HashMap<String, String>> expiring = db.getExpiringProducts(7);
+            if (expiring != null && !expiring.isEmpty()) {
+                showExpiryNotification(expiring);
             }
 
             db.close();
@@ -146,6 +155,43 @@ public class LowStockWorker extends Worker {
             .setContentText(msg)
             .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pi)
+            .setAutoCancel(true)
+            .build());
+    }
+
+    private void showExpiryNotification(List<HashMap<String, String>> expiring) {
+        Context ctx = getApplicationContext();
+        NotificationManager nm = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+        createChannel(nm, EXPIRY_CHANNEL, "تنبيهات انتهاء الصلاحية");
+
+        Intent intent = new Intent(ctx, com.pos.system.ActivityProductsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pi = PendingIntent.getActivity(ctx, 2, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        // بناء قائمة بأسماء المنتجات
+        StringBuilder names = new StringBuilder();
+        int limit = Math.min(expiring.size(), 5);
+        for (int i = 0; i < limit; i++) {
+            HashMap<String, String> p = expiring.get(i);
+            String name  = p.getOrDefault("name", "");
+            String expiry = p.getOrDefault("expiry", "");
+            names.append("• ").append(name);
+            if (!expiry.isEmpty()) names.append(" (").append(expiry).append(")");
+            names.append("\n");
+        }
+        if (expiring.size() > 5) names.append("و ").append(expiring.size() - 5).append(" منتجات أخرى...");
+
+        String title = "⚠️ " + expiring.size() + " منتج تنتهي صلاحيته قريباً";
+        nm.notify(NOTIF_EXPIRY, new NotificationCompat.Builder(ctx, EXPIRY_CHANNEL)
+            .setSmallIcon(R.drawable.ic_warning)
+            .setContentTitle(title)
+            .setContentText(names.toString().trim())
+            .setStyle(new NotificationCompat.BigTextStyle()
+                .bigText(names.toString().trim())
+                .setBigContentTitle(title))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pi)
             .setAutoCancel(true)
             .build());

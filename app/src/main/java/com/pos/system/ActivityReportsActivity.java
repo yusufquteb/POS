@@ -47,7 +47,7 @@ public class ActivityReportsActivity extends BaseActivity {
     // Stats Views
     private TextView tvTotalSales, tvInvoiceCount, tvAverageInvoice;
     private TextView tvProductsCount, tvInventoryValue, tvLowStock;
-    private TextView tvTotalExpenses, tvNetProfit;
+    private TextView tvTotalExpenses, tvNetProfit, tvCogs, tvGrossProfit;
 
     // Top Products List
     private RecyclerView rvTopProducts;
@@ -93,6 +93,8 @@ public class ActivityReportsActivity extends BaseActivity {
         tvLowStock       = findViewById(R.id.tv_low_stock);
         tvTotalExpenses  = findViewById(R.id.tv_total_expenses);
         tvNetProfit      = findViewById(R.id.tv_net_profit);
+        tvCogs           = findViewById(R.id.tv_cogs);
+        tvGrossProfit    = findViewById(R.id.tv_gross_profit);
 
         rvTopProducts = findViewById(R.id.rv_top_products);
         if (rvTopProducts != null) {
@@ -203,30 +205,34 @@ public class ActivityReportsActivity extends BaseActivity {
 
     private void loadSalesStats(String start, String end) {
         try {
-            // ✅ الحقل الصحيح هو "total" وليس "final_total"
             android.database.Cursor c = dbHelper.getReadableDatabase().rawQuery(
                 "SELECT COALESCE(SUM(total),0), COUNT(*), COALESCE(AVG(total),0) " +
                 "FROM invoices WHERE DATE(created_at) BETWEEN ? AND ?",
                 new String[]{start, end});
             if (c.moveToFirst()) {
-                double total   = c.getDouble(0);
-                int    count   = c.getInt(1);
-                double avg     = c.getDouble(2);
-                setText(tvTotalSales,     fmt(total));
-                setText(tvInvoiceCount,   String.valueOf(count));
-                setText(tvAverageInvoice, fmt(avg));
+                setText(tvTotalSales,     fmt(c.getDouble(0)));
+                setText(tvInvoiceCount,   String.valueOf(c.getInt(1)));
+                setText(tvAverageInvoice, fmt(c.getDouble(2)));
             }
             c.close();
 
-            // المصروفات والربح الصافي
-            HashMap<String, Object> summary = dbHelper.getReportSummary(start, end);
-            double expenses = toDouble(summary.get("total_expenses"));
-            double sales    = toDouble(summary.get("total_sales"));
-            double profit   = sales - expenses;
+            // تقرير الربح الكامل مع COGS
+            HashMap<String, Double> profit = dbHelper.getFullProfitReport(start, end);
+            double revenue      = profit.get("revenue");
+            double cogs         = profit.get("cogs");
+            double grossProfit  = profit.get("gross_profit");
+            double expenses     = profit.get("expenses");
+            double netProfit    = profit.get("net_profit");
+
             setText(tvTotalExpenses, fmt(expenses));
+            if (tvCogs != null)        { tvCogs.setText(fmt(cogs));        tvCogs.setTextColor(Color.parseColor("#C62828")); }
+            if (tvGrossProfit != null) {
+                tvGrossProfit.setText(fmt(grossProfit));
+                tvGrossProfit.setTextColor(grossProfit >= 0 ? Color.parseColor("#1565C0") : Color.parseColor("#C62828"));
+            }
             if (tvNetProfit != null) {
-                tvNetProfit.setText(fmt(profit));
-                tvNetProfit.setTextColor(profit >= 0 ? Color.parseColor("#2E7D32") : Color.parseColor("#C62828"));
+                tvNetProfit.setText(fmt(netProfit));
+                tvNetProfit.setTextColor(netProfit >= 0 ? Color.parseColor("#2E7D32") : Color.parseColor("#C62828"));
             }
         } catch (Exception e) {
             Log.e(TAG, "loadSalesStats: " + e.getMessage(), e);

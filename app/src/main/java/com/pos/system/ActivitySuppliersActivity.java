@@ -243,8 +243,29 @@ public class ActivitySuppliersActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(@NonNull VH holder, int position) {
             HashMap<String, Object> item = data.get(position);
-            if (holder.tvName  != null) holder.tvName.setText(str(item, "name"));
-            if (holder.tvPhone != null) holder.tvPhone.setText(str(item, "phone"));
+            if (holder.tvName    != null) holder.tvName.setText(str(item, "name"));
+            if (holder.tvPhone   != null) holder.tvPhone.setText(str(item, "phone"));
+            if (holder.tvCompany != null) {
+                String company = str(item, "company");
+                holder.tvCompany.setText(company);
+                holder.tvCompany.setVisibility(company.isEmpty() ? View.GONE : View.VISIBLE);
+            }
+            if (holder.tvDebt != null) {
+                double debt = 0;
+                try { debt = Double.parseDouble(str(item, "debt")); } catch (Exception ignored) {}
+                if (debt > 0) {
+                    String currency = "ج.م";
+                    try {
+                        HashMap<String, String> s = dbHelper.getStoreSettings();
+                        if (s != null) currency = s.getOrDefault("currency", "ج.م");
+                    } catch (Exception ignored) {}
+                    holder.tvDebt.setText(String.format(java.util.Locale.getDefault(),
+                        "%.2f %s", debt, currency));
+                    holder.tvDebt.setVisibility(View.VISIBLE);
+                } else {
+                    holder.tvDebt.setVisibility(View.GONE);
+                }
+            }
             holder.itemView.setOnClickListener(v -> showDataSheet(item));
             if (holder.btnCall != null) {
                 holder.btnCall.setOnClickListener(v -> {
@@ -265,13 +286,15 @@ public class ActivitySuppliersActivity extends BaseActivity {
         @Override public int getItemCount() { return data.size(); }
 
         class VH extends RecyclerView.ViewHolder {
-            TextView tvName, tvPhone;
+            TextView tvName, tvPhone, tvCompany, tvDebt;
             View btnCall;
             VH(View v) {
                 super(v);
-                tvName  = v.findViewById(R.id.tv_name);
-                tvPhone = v.findViewById(R.id.tv_phone);
-                btnCall = v.findViewById(R.id.btn_call);
+                tvName    = v.findViewById(R.id.tv_name);
+                tvPhone   = v.findViewById(R.id.tv_phone);
+                tvCompany = v.findViewById(R.id.tv_company);
+                tvDebt    = v.findViewById(R.id.tv_supplier_debt);
+                btnCall   = v.findViewById(R.id.btn_call);
             }
         }
     }
