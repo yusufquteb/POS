@@ -212,7 +212,4 @@ public class ActivityPinLockActivity extends BaseActivity {
         ctx.getSharedPreferences(PREFS_NAME, android.content.Context.MODE_PRIVATE).edit().remove(KEY_PIN).apply();
     }
 
-    private void showToast(String msg) {
-        android.widget.Toast.makeText(this, msg, android.widget.Toast.LENGTH_SHORT).show();
-    }
 }
