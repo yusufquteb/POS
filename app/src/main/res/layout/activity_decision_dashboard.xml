@@ -57,7 +57,7 @@
 
                     <TextView android:id="@+id/tv_reorder_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="المنتجات التي وصلت حد إعادة الطلب" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="8dp" />
 
-                    <RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_reorder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
 
                     <TextView android:id="@+id/tv_expiry_risk_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="منتجات تنتهي صلاحيتها خلال 7 أيام" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="8dp" />
 
-                    <RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_expiry_risk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="لم تُباع خلال 30 يوم الماضية" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="8dp" />
 
-                    <RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_dead_stock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="هامش الربح الأقل خلال آخر 30 يوم" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="8dp" />
 
-                    <RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_low_margin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
