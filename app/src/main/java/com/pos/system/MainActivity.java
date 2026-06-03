@@ -51,6 +51,16 @@ public class MainActivity extends BaseActivity
     private TextView tvTotalProducts;
     private TextView tvLowStockCount;
 
+    // Decision Cards
+    private MaterialCardView cardExpiryAlert;
+    private MaterialCardView cardDeadStock;
+    private MaterialCardView cardBestSeller;
+    private MaterialCardView cardBestCustomer;
+    private TextView tvExpiryCount;
+    private TextView tvDeadStockCount;
+    private TextView tvBestSellerName;
+    private TextView tvBestCustomerName;
+
     // Action Cards
     private MaterialCardView cardPOS;
     private MaterialCardView cardProducts;
@@ -146,12 +156,25 @@ public class MainActivity extends BaseActivity
         cardAlert      = findViewById(R.id.card_alert);
         tvAlertMessage = findViewById(R.id.tv_alert_message);
 
+        cardExpiryAlert   = findViewById(R.id.card_expiry_alert);
+        cardDeadStock     = findViewById(R.id.card_dead_stock);
+        cardBestSeller    = findViewById(R.id.card_best_seller);
+        cardBestCustomer  = findViewById(R.id.card_best_customer);
+        tvExpiryCount     = findViewById(R.id.tv_expiry_count);
+        tvDeadStockCount  = findViewById(R.id.tv_dead_stock_count);
+        tvBestSellerName  = findViewById(R.id.tv_best_seller_name);
+        tvBestCustomerName = findViewById(R.id.tv_best_customer_name);
+
         fabQuickSale = findViewById(R.id.fab_quick_sale);
     }
 
     private void setupCardClicks() {
-        if (cardTodaySales != null) cardTodaySales.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
-        if (cardLowStock   != null) cardLowStock.setOnClickListener(v -> showLowStockDialog());
+        if (cardTodaySales  != null) cardTodaySales.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
+        if (cardLowStock    != null) cardLowStock.setOnClickListener(v -> showLowStockDialog());
+        if (cardExpiryAlert != null) cardExpiryAlert.setOnClickListener(v -> openActivity(ActivityProductsActivity.class));
+        if (cardDeadStock   != null) cardDeadStock.setOnClickListener(v -> openActivity(ActivityProductsActivity.class));
+        if (cardBestSeller  != null) cardBestSeller.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
+        if (cardBestCustomer != null) cardBestCustomer.setOnClickListener(v -> openActivity(ActivityCustomersActivity.class));
 
         setCardClick(cardPOS,            ActivityCartActivity.class);
         setCardClick(cardProducts,       ActivityProductsActivity.class);
@@ -229,6 +252,23 @@ public class MainActivity extends BaseActivity
             List<HashMap<String, String>> lowStock = dbHelper.getLowStockProducts(5);
             if (tvLowStockCount != null)
                 tvLowStockCount.setText(lowStock != null ? String.valueOf(lowStock.size()) : "0");
+
+            // Decision Cards
+            List<HashMap<String, String>> expiring = dbHelper.getExpiringProducts(30);
+            if (tvExpiryCount != null)
+                tvExpiryCount.setText(expiring != null ? String.valueOf(expiring.size()) : "0");
+
+            List<HashMap<String, String>> deadStock = dbHelper.getDeadStockProducts(60);
+            if (tvDeadStockCount != null)
+                tvDeadStockCount.setText(deadStock != null ? String.valueOf(deadStock.size()) : "0");
+
+            HashMap<String, String> topSeller = dbHelper.getTopSellerThisWeek();
+            if (tvBestSellerName != null)
+                tvBestSellerName.setText(topSeller != null ? topSeller.getOrDefault("name", "—") : "—");
+
+            HashMap<String, String> topCustomer = dbHelper.getTopCustomerThisMonth();
+            if (tvBestCustomerName != null)
+                tvBestCustomerName.setText(topCustomer != null ? topCustomer.getOrDefault("name", "—") : "—");
 
         } catch (Exception e) {
             e.printStackTrace();

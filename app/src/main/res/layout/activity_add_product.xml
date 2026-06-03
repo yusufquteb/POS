@@ -439,6 +439,27 @@
 							android:focusableInTouchMode="false"
 							android:cursorVisible="false" />
 					</com.google.android.material.textfield.TextInputLayout>
+
+					<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/textinputlayout_batch"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="12dp"
+						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+						app:hint="رقم الدفعة / الباتش"
+						app:boxCornerRadiusTopStart="12dp"
+						app:boxCornerRadiusTopEnd="12dp"
+						app:boxCornerRadiusBottomStart="12dp"
+						app:boxCornerRadiusBottomEnd="12dp">
+						<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/et_batch_number"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:textSize="13sp"
+							android:imeOptions="actionNext"
+							android:inputType="text"
+							android:fontFamily="@font/cairo_regular" />
+					</com.google.android.material.textfield.TextInputLayout>
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
 			<com.google.android.material.card.MaterialCardView

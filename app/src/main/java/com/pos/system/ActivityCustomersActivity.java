@@ -269,7 +269,32 @@ public class ActivityCustomersActivity extends BaseActivity {
         public void onBindViewHolder(@NonNull VH holder, int position) {
             HashMap<String, Object> item = data.get(position);
             if (holder.tvName  != null) holder.tvName.setText(str(item, "name"));
-            if (holder.tvPhone != null) holder.tvPhone.setText(str(item, "phone"));
+            if (holder.tvPhone != null) {
+                String phone = str(item, "phone");
+                holder.tvPhone.setText(phone.isEmpty() ? getString(R.string.customers_no_phone) : phone);
+            }
+
+            // إجمالي المشتريات
+            if (holder.tvTotalSpent != null) {
+                double spent = safeDouble(item.get("total_spent"));
+                if (spent > 0) {
+                    holder.tvTotalSpent.setText(String.format("إجمالي: %.0f ج.م", spent));
+                    holder.tvTotalSpent.setVisibility(android.view.View.VISIBLE);
+                } else {
+                    holder.tvTotalSpent.setVisibility(android.view.View.GONE);
+                }
+            }
+
+            // شارة الديون
+            if (holder.tvDebtBadge != null) {
+                double debt = safeDouble(item.get("debt"));
+                if (debt > 0.01) {
+                    holder.tvDebtBadge.setText(String.format("دين: %.0f ج.م", debt));
+                    holder.tvDebtBadge.setVisibility(android.view.View.VISIBLE);
+                } else {
+                    holder.tvDebtBadge.setVisibility(android.view.View.GONE);
+                }
+            }
 
             holder.itemView.setOnClickListener(v -> showDataSheet(item));
 
@@ -291,16 +316,27 @@ public class ActivityCustomersActivity extends BaseActivity {
             return val != null ? val.toString() : "";
         }
 
+        private double safeDouble(Object o) {
+            if (o instanceof Double)  return (double) o;
+            if (o instanceof Float)   return ((Float) o).doubleValue();
+            if (o instanceof Integer) return ((Integer) o).doubleValue();
+            if (o instanceof Long)    return ((Long) o).doubleValue();
+            if (o instanceof String)  { try { return Double.parseDouble((String) o); } catch (Exception ignored) {} }
+            return 0.0;
+        }
+
         @Override public int getItemCount() { return data.size(); }
 
         class VH extends RecyclerView.ViewHolder {
-            TextView tvName, tvPhone;
+            TextView tvName, tvPhone, tvTotalSpent, tvDebtBadge;
             View btnCall;
             VH(View v) {
                 super(v);
-                tvName  = v.findViewById(R.id.tv_name);
-                tvPhone = v.findViewById(R.id.tv_phone);
-                btnCall = v.findViewById(R.id.btn_call);
+                tvName       = v.findViewById(R.id.tv_name);
+                tvPhone      = v.findViewById(R.id.tv_phone);
+                tvTotalSpent = v.findViewById(R.id.tv_total_spent);
+                tvDebtBadge  = v.findViewById(R.id.tv_debt_badge);
+                btnCall      = v.findViewById(R.id.btn_call);
             }
         }
     }

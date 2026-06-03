@@ -59,6 +59,38 @@
                 android:fontFamily="@font/cairo_regular"
                 android:text="@string/customers_no_phone"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_total_spent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:fontFamily="@font/cairo_regular"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/tv_debt_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:textSize="11sp"
+                    android:textColor="?attr/colorOnError"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/cairo_bold"
+                    android:background="@drawable/bg_chip_error"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <!-- Call Button -->

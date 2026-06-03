@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
 
     public static final String DATABASE_NAME    = "SmartPOS.db";
-    public static final int    DATABASE_VERSION = 3;
+    public static final int    DATABASE_VERSION = 4;
 
     private final Context mContext;
 
@@ -124,6 +124,12 @@ public class DBHelper extends SQLiteOpenHelper {
             createShiftsTable(db);
             createPurchaseOrdersTable(db);
         }
+        if (oldVersion < 4) {
+            try { db.execSQL("ALTER TABLE " + TABLE_PRODUCTS + " ADD COLUMN batch_number TEXT DEFAULT ''"); } catch (Exception ignored) {}
+            try { db.execSQL("ALTER TABLE " + TABLE_PRODUCTS + " ADD COLUMN supplier_reference TEXT DEFAULT ''"); } catch (Exception ignored) {}
+            try { db.execSQL("ALTER TABLE " + TABLE_CUSTOMERS + " ADD COLUMN last_purchase_at TEXT DEFAULT ''"); } catch (Exception ignored) {}
+            try { db.execSQL("ALTER TABLE " + TABLE_CUSTOMERS + " ADD COLUMN total_spent REAL DEFAULT 0.0"); } catch (Exception ignored) {}
+        }
     }
 
     @Override
@@ -156,6 +162,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "reorder_level INTEGER DEFAULT 5, " +
             "category TEXT, " +
             "notes TEXT, " +
+            "batch_number TEXT DEFAULT '', " +
+            "supplier_reference TEXT DEFAULT '', " +
             "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_SUPPLIERS + " (" +
@@ -175,6 +183,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "address TEXT, " +
             "debt REAL DEFAULT 0.0, " +
             "notes TEXT, " +
+            "last_purchase_at TEXT DEFAULT '', " +
+            "total_spent REAL DEFAULT 0.0, " +
             "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_INVOICES + " (" +
@@ -293,20 +303,22 @@ public class DBHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues cv = new ContentValues();
-            cv.put("barcode",       safeGet(product, "barcode"));
-            cv.put("name",          safeGet(product, "name"));
-            cv.put("brand",         safeGet(product, "brand"));
-            cv.put("unit",          safeGet(product, "unit"));
-            cv.put("cost",          safeDouble(product, "cost"));
-            cv.put("price",         safeDouble(product, "price"));
-            cv.put("qty",           safeInt(product, "qty"));
-            cv.put("location",      safeGet(product, "location"));
-            cv.put("supplier",      safeGet(product, "supplier"));
-            cv.put("expiry",        safeGet(product, "expiry"));
-            cv.put("image_path",    safeGet(product, "image_path"));
-            cv.put("reorder_level", safeInt(product, "reorder_level", 5));
-            cv.put("category",      safeGet(product, "category"));
-            cv.put("notes",         safeGet(product, "notes"));
+            cv.put("barcode",            safeGet(product, "barcode"));
+            cv.put("name",               safeGet(product, "name"));
+            cv.put("brand",              safeGet(product, "brand"));
+            cv.put("unit",               safeGet(product, "unit"));
+            cv.put("cost",               safeDouble(product, "cost"));
+            cv.put("price",              safeDouble(product, "price"));
+            cv.put("qty",                safeInt(product, "qty"));
+            cv.put("location",           safeGet(product, "location"));
+            cv.put("supplier",           safeGet(product, "supplier"));
+            cv.put("expiry",             safeGet(product, "expiry"));
+            cv.put("image_path",         safeGet(product, "image_path"));
+            cv.put("reorder_level",      safeInt(product, "reorder_level", 5));
+            cv.put("category",           safeGet(product, "category"));
+            cv.put("notes",              safeGet(product, "notes"));
+            cv.put("batch_number",       safeGet(product, "batch_number"));
+            cv.put("supplier_reference", safeGet(product, "supplier_reference"));
             return db.insertWithOnConflict(TABLE_PRODUCTS, null, cv, SQLiteDatabase.CONFLICT_REPLACE);
         } catch (Exception e) {
             Log.e(TAG, "addProduct: " + e.getMessage(), e);
@@ -321,24 +333,25 @@ public class DBHelper extends SQLiteOpenHelper {
                                  double cost, double price, int qty,
                                  String location, String supplier, String expiry,
                                  String imagePath, int reorderLevel,
-                                 String category, String notes) {
+                                 String category, String notes, String batchNumber) {
         try {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues cv = new ContentValues();
-            cv.put("barcode",       barcode != null ? barcode : "");
-            cv.put("name",          name    != null ? name    : "");
-            cv.put("brand",         brand   != null ? brand   : "");
-            cv.put("unit",          unit    != null ? unit    : "");
-            cv.put("cost",          cost);
-            cv.put("price",         price);
-            cv.put("qty",           qty);
-            cv.put("location",      location   != null ? location   : "");
-            cv.put("supplier",      supplier   != null ? supplier   : "");
-            cv.put("expiry",        expiry     != null ? expiry     : "");
-            cv.put("image_path",    imagePath  != null ? imagePath  : "");
-            cv.put("reorder_level", reorderLevel);
-            cv.put("category",      category   != null ? category   : "");
-            cv.put("notes",         notes      != null ? notes      : "");
+            cv.put("barcode",            barcode     != null ? barcode     : "");
+            cv.put("name",               name        != null ? name        : "");
+            cv.put("brand",              brand       != null ? brand       : "");
+            cv.put("unit",               unit        != null ? unit        : "");
+            cv.put("cost",               cost);
+            cv.put("price",              price);
+            cv.put("qty",                qty);
+            cv.put("location",           location    != null ? location    : "");
+            cv.put("supplier",           supplier    != null ? supplier    : "");
+            cv.put("expiry",             expiry      != null ? expiry      : "");
+            cv.put("image_path",         imagePath   != null ? imagePath   : "");
+            cv.put("reorder_level",      reorderLevel);
+            cv.put("category",           category    != null ? category    : "");
+            cv.put("notes",              notes       != null ? notes       : "");
+            cv.put("batch_number",       batchNumber != null ? batchNumber : "");
             return db.insertWithOnConflict(TABLE_PRODUCTS, null, cv, SQLiteDatabase.CONFLICT_REPLACE) != -1;
         } catch (Exception e) {
             Log.e(TAG, "insertProduct: " + e.getMessage(), e);
@@ -376,20 +389,22 @@ public class DBHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues cv = new ContentValues();
-            cv.put("barcode",       safeGet(product, "barcode"));
-            cv.put("name",          safeGet(product, "name"));
-            cv.put("brand",         safeGet(product, "brand"));
-            cv.put("unit",          safeGet(product, "unit"));
-            cv.put("cost",          safeDouble(product, "cost"));
-            cv.put("price",         safeDouble(product, "price"));
-            cv.put("qty",           safeInt(product, "qty"));
-            cv.put("location",      safeGet(product, "location"));
-            cv.put("supplier",      safeGet(product, "supplier"));
-            cv.put("expiry",        safeGet(product, "expiry"));
-            cv.put("image_path",    safeGet(product, "image_path"));
-            cv.put("reorder_level", safeInt(product, "reorder_level", 5));
-            cv.put("category",      safeGet(product, "category"));
-            cv.put("notes",         safeGet(product, "notes"));
+            cv.put("barcode",            safeGet(product, "barcode"));
+            cv.put("name",               safeGet(product, "name"));
+            cv.put("brand",              safeGet(product, "brand"));
+            cv.put("unit",               safeGet(product, "unit"));
+            cv.put("cost",               safeDouble(product, "cost"));
+            cv.put("price",              safeDouble(product, "price"));
+            cv.put("qty",                safeInt(product, "qty"));
+            cv.put("location",           safeGet(product, "location"));
+            cv.put("supplier",           safeGet(product, "supplier"));
+            cv.put("expiry",             safeGet(product, "expiry"));
+            cv.put("image_path",         safeGet(product, "image_path"));
+            cv.put("reorder_level",      safeInt(product, "reorder_level", 5));
+            cv.put("category",           safeGet(product, "category"));
+            cv.put("notes",              safeGet(product, "notes"));
+            cv.put("batch_number",       safeGet(product, "batch_number"));
+            cv.put("supplier_reference", safeGet(product, "supplier_reference"));
             return db.update(TABLE_PRODUCTS, cv, "id=?", new String[]{id});
         } catch (Exception e) {
             Log.e(TAG, "updateProduct: " + e.getMessage(), e);
@@ -754,6 +769,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public long addInvoice(HashMap<String, Object> invoice, List<HashMap<String, String>> items) {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
+        String custId = invoice.containsKey("customer_id") ?
+            String.valueOf(((Number) invoice.get("customer_id")).intValue()) : "0";
+        long invoiceId = -1;
         try {
             ContentValues cv = new ContentValues();
             cv.put("invoice_number", String.valueOf(invoice.get("invoice_number")));
@@ -773,7 +791,7 @@ public class DBHelper extends SQLiteOpenHelper {
             cv.put("notes",          invoice.containsKey("notes") ?
                     String.valueOf(invoice.get("notes")) : "");
 
-            long invoiceId = db.insert(TABLE_INVOICES, null, cv);
+            invoiceId = db.insert(TABLE_INVOICES, null, cv);
             if (invoiceId == -1) throw new Exception("Failed to insert invoice");
 
             for (HashMap<String, String> item : items) {
@@ -797,13 +815,13 @@ public class DBHelper extends SQLiteOpenHelper {
             }
 
             db.setTransactionSuccessful();
-            return invoiceId;
         } catch (Exception e) {
             Log.e(TAG, "addInvoice: " + e.getMessage(), e);
-            return -1;
         } finally {
             db.endTransaction();
         }
+        if (invoiceId > 0) updateCustomerStats(custId);
+        return invoiceId;
     }
 
     /**
@@ -816,6 +834,7 @@ public class DBHelper extends SQLiteOpenHelper {
                                               double tax, double total, String paymentMethod) {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
+        long invoiceId = -1;
         try {
             ContentValues cv = new ContentValues();
             cv.put("invoice_number", invoiceNumber);
@@ -829,7 +848,7 @@ public class DBHelper extends SQLiteOpenHelper {
             cv.put("status",         "completed");
             cv.put("notes",          "");
 
-            long invoiceId = db.insert(TABLE_INVOICES, null, cv);
+            invoiceId = db.insert(TABLE_INVOICES, null, cv);
             if (invoiceId == -1) throw new Exception("Failed to insert invoice");
 
             for (T item : cartItems) {
@@ -860,13 +879,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 }
             }
             db.setTransactionSuccessful();
-            return invoiceId;
         } catch (Exception e) {
             Log.e(TAG, "createInvoiceWithDetails: " + e.getMessage(), e);
-            return -1;
         } finally {
             db.endTransaction();
         }
+        if (invoiceId > 0) updateCustomerStats(customerId);
+        return invoiceId;
     }
 
     /**
@@ -1727,24 +1746,26 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean updateProduct(String id, String barcode, String name, String brand,
                                  String unit, double cost, double price, int qty,
                                  String location, String supplier, String expiry,
-                                 String imagePath, int reorderLevel, String category, String notes) {
+                                 String imagePath, int reorderLevel, String category, String notes,
+                                 String batchNumber) {
         try {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues cv = new ContentValues();
-            cv.put("barcode",       barcode       != null ? barcode       : "");
-            cv.put("name",          name          != null ? name          : "");
-            cv.put("brand",         brand         != null ? brand         : "");
-            cv.put("unit",          unit          != null ? unit          : "");
-            cv.put("cost",          cost);
-            cv.put("price",         price);
-            cv.put("qty",           qty);
-            cv.put("location",      location      != null ? location      : "");
-            cv.put("supplier",      supplier      != null ? supplier      : "");
-            cv.put("expiry",        expiry        != null ? expiry        : "");
-            cv.put("image_path",    imagePath     != null ? imagePath     : "");
-            cv.put("reorder_level", reorderLevel);
-            cv.put("category",      category      != null ? category      : "");
-            cv.put("notes",         notes         != null ? notes         : "");
+            cv.put("barcode",            barcode     != null ? barcode     : "");
+            cv.put("name",               name        != null ? name        : "");
+            cv.put("brand",              brand       != null ? brand       : "");
+            cv.put("unit",               unit        != null ? unit        : "");
+            cv.put("cost",               cost);
+            cv.put("price",              price);
+            cv.put("qty",                qty);
+            cv.put("location",           location    != null ? location    : "");
+            cv.put("supplier",           supplier    != null ? supplier    : "");
+            cv.put("expiry",             expiry      != null ? expiry      : "");
+            cv.put("image_path",         imagePath   != null ? imagePath   : "");
+            cv.put("reorder_level",      reorderLevel);
+            cv.put("category",           category    != null ? category    : "");
+            cv.put("notes",              notes       != null ? notes       : "");
+            cv.put("batch_number",       batchNumber != null ? batchNumber : "");
             return db.update(TABLE_PRODUCTS, cv, "id=?", new String[]{id}) > 0;
         } catch (Exception e) {
             Log.e(TAG, "updateProduct(params): " + e.getMessage(), e);
@@ -2200,5 +2221,76 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.e(TAG, "receivePurchaseOrder: " + e.getMessage()); return false;
         } finally { db.endTransaction(); }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Analytics Methods — Phase 4
+    // ════════════════════════════════════════════════════════════
+
+    /** المنتجات التي تنتهي صلاحيتها خلال X يوم */
+    public List<HashMap<String, String>> getExpiringProducts(int days) {
+        return queryProducts(
+            "SELECT * FROM " + TABLE_PRODUCTS +
+            " WHERE expiry != '' AND expiry IS NOT NULL" +
+            " AND DATE(expiry) BETWEEN DATE('now') AND DATE('now', '+' || ? || ' days')" +
+            " AND qty > 0 ORDER BY expiry ASC",
+            new String[]{String.valueOf(days)});
+    }
+
+    /** المنتجات التي لم تُباع خلال X يوم (مخزون راكد) */
+    public List<HashMap<String, String>> getDeadStockProducts(int days) {
+        return queryProducts(
+            "SELECT p.* FROM " + TABLE_PRODUCTS + " p" +
+            " WHERE p.qty > 0" +
+            " AND p.id NOT IN (" +
+            "  SELECT DISTINCT CAST(ii.product_id AS INTEGER) FROM " + TABLE_INVOICE_ITEMS + " ii" +
+            "  JOIN " + TABLE_INVOICES + " i ON ii.invoice_id = i.id" +
+            "  WHERE DATE(i.created_at) >= DATE('now', '-' || ? || ' days')" +
+            "  AND ii.product_id != '' AND ii.product_id IS NOT NULL" +
+            " ) ORDER BY p.qty DESC",
+            new String[]{String.valueOf(days)});
+    }
+
+    /** أكثر منتج مبيعاً هذا الأسبوع */
+    public HashMap<String, String> getTopSellerThisWeek() {
+        List<HashMap<String, String>> list = queryTable(
+            "SELECT ii.name, ii.product_id, SUM(ii.qty) as total_qty, SUM(ii.total) as total_sales" +
+            " FROM " + TABLE_INVOICE_ITEMS + " ii" +
+            " JOIN " + TABLE_INVOICES + " i ON ii.invoice_id = i.id" +
+            " WHERE DATE(i.created_at) >= DATE('now', '-7 days')" +
+            " GROUP BY ii.product_id, ii.name ORDER BY total_qty DESC LIMIT 1",
+            null);
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    /** أفضل عميل هذا الشهر (حسب إجمالي المشتريات) */
+    public HashMap<String, String> getTopCustomerThisMonth() {
+        List<HashMap<String, String>> list = queryTable(
+            "SELECT c.id, c.name, c.phone, CAST(SUM(i.total) AS TEXT) as month_spent" +
+            " FROM " + TABLE_CUSTOMERS + " c" +
+            " JOIN " + TABLE_INVOICES + " i ON CAST(i.customer_id AS INTEGER) = c.id" +
+            " WHERE strftime('%Y-%m', i.created_at) = strftime('%Y-%m', 'now')" +
+            " AND c.id != 0" +
+            " GROUP BY c.id ORDER BY SUM(i.total) DESC LIMIT 1",
+            null);
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    /** تحديث إحصائيات العميل بعد كل فاتورة */
+    public void updateCustomerStats(String customerId) {
+        if (customerId == null || customerId.isEmpty() || "0".equals(customerId)) return;
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            db.execSQL(
+                "UPDATE " + TABLE_CUSTOMERS +
+                " SET total_spent = (SELECT COALESCE(SUM(total), 0) FROM " + TABLE_INVOICES +
+                "  WHERE CAST(customer_id AS INTEGER) = CAST(? AS INTEGER))," +
+                " last_purchase_at = (SELECT MAX(created_at) FROM " + TABLE_INVOICES +
+                "  WHERE CAST(customer_id AS INTEGER) = CAST(? AS INTEGER))" +
+                " WHERE id = CAST(? AS INTEGER)",
+                new String[]{customerId, customerId, customerId});
+        } catch (Exception e) {
+            Log.e(TAG, "updateCustomerStats: " + e.getMessage());
+        }
     }
 }
