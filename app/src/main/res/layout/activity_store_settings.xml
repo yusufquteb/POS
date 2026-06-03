@@ -179,7 +179,7 @@
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
 						app:startIconDrawable="@drawable/ic_location"
 						app:startIconTint="?attr/colorPrimary"
-						app:hint="الدولة"
+						android:hint="الدولة"
 						app:boxCornerRadiusTopStart="12dp"
 						app:boxCornerRadiusTopEnd="12dp"
 						app:boxCornerRadiusBottomStart="12dp"
