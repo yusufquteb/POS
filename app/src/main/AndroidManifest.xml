@@ -274,6 +274,22 @@
             android:windowSoftInputMode="adjustResize"
             android:label="قفل الكاشير"/>
 
+        <!-- ════════ Expiry Dashboard ════════ -->
+        <activity
+            android:name=".ActivityExpiryDashboardActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="إدارة الصلاحية"/>
+
+        <!-- ════════ Decision Dashboard ════════ -->
+        <activity
+            android:name=".ActivityDecisionDashboardActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="لوحة القرارات الذكية"/>
+
         <!-- ════════ FileProvider ════════ -->
         <provider
             android:name="androidx.core.content.FileProvider"
