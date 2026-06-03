@@ -40,12 +40,12 @@ public class CountryConfig {
         ALL.add(new CountryConfig("AE", "الإمارات",     "د.إ",  "AED",  5.0, 2, "+971"));
         ALL.add(new CountryConfig("KW", "الكويت",       "د.ك",  "KWD",  0.0, 3, "+965"));
         ALL.add(new CountryConfig("QA", "قطر",          "ر.ق",  "QAR",  0.0, 2, "+974"));
-        ALL.add(new CountryConfig("BH", "البحرين",      "د.ب",  "BHD",  0.0, 3, "+973"));
-        ALL.add(new CountryConfig("OM", "عُمان",        "ر.ع",  "OMR",  0.0, 3, "+968"));
-        ALL.add(new CountryConfig("JO", "الأردن",       "د.أ",  "JOD",  0.0, 3, "+962"));
-        ALL.add(new CountryConfig("MA", "المغرب",       "د.م",  "MAD",  0.0, 2, "+212"));
-        ALL.add(new CountryConfig("DZ", "الجزائر",      "د.ج",  "DZD",  0.0, 2, "+213"));
-        ALL.add(new CountryConfig("TN", "تونس",         "د.ت",  "TND",  0.0, 3, "+216"));
+        ALL.add(new CountryConfig("BH", "البحرين",      "د.ب",  "BHD", 10.0, 3, "+973")); // VAT 10% منذ 2019
+        ALL.add(new CountryConfig("OM", "عُمان",        "ر.ع",  "OMR",  5.0, 3, "+968")); // VAT 5% منذ 2021
+        ALL.add(new CountryConfig("JO", "الأردن",       "د.أ",  "JOD", 16.0, 3, "+962")); // GST 16%
+        ALL.add(new CountryConfig("MA", "المغرب",       "د.م",  "MAD", 20.0, 2, "+212")); // TVA 20%
+        ALL.add(new CountryConfig("DZ", "الجزائر",      "د.ج",  "DZD", 19.0, 2, "+213")); // TVA 19%
+        ALL.add(new CountryConfig("TN", "تونس",         "د.ت",  "TND", 19.0, 3, "+216")); // TVA 19%
     }
 
     /** الحصول على إعدادات دولة بالكود */

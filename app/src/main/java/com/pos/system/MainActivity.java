@@ -75,6 +75,12 @@ public class MainActivity extends BaseActivity
     private MaterialCardView cardDebts;
     private MaterialCardView cardPurchaseOrders;
 
+    // Debt Cards
+    private MaterialCardView cardCustomerDebt;
+    private MaterialCardView cardSupplierDebt;
+    private TextView tvCustomerDebtTotal;
+    private TextView tvSupplierDebtTotal;
+
     // Alert Card
     private MaterialCardView cardAlert;
     private TextView         tvAlertMessage;
@@ -153,6 +159,11 @@ public class MainActivity extends BaseActivity
         cardDebts          = findViewById(R.id.card_debts);
         cardPurchaseOrders = findViewById(R.id.card_purchase_orders);
 
+        cardCustomerDebt    = findViewById(R.id.card_customer_debt);
+        cardSupplierDebt    = findViewById(R.id.card_supplier_debt);
+        tvCustomerDebtTotal = findViewById(R.id.tv_customer_debt_total);
+        tvSupplierDebtTotal = findViewById(R.id.tv_supplier_debt_total);
+
         cardAlert      = findViewById(R.id.card_alert);
         tvAlertMessage = findViewById(R.id.tv_alert_message);
 
@@ -187,6 +198,8 @@ public class MainActivity extends BaseActivity
         setCardClick(cardReturns,        ActivityReturnActivity.class);
         setCardClick(cardShifts,         ActivityShiftActivity.class);
         setCardClick(cardDebts,          ActivityDebtActivity.class);
+        if (cardCustomerDebt != null) cardCustomerDebt.setOnClickListener(v -> openActivity(ActivityDebtActivity.class));
+        if (cardSupplierDebt != null) cardSupplierDebt.setOnClickListener(v -> openActivity(ActivityDebtActivity.class));
         setCardClick(cardPurchaseOrders, ActivityPurchaseOrderActivity.class);
     }
 
@@ -239,6 +252,8 @@ public class MainActivity extends BaseActivity
                 final java.util.List<HashMap<String, String>> deadStock = dbHelper.getDeadStockProducts(60);
                 final HashMap<String, String> topSeller   = dbHelper.getTopSellerThisWeek();
                 final HashMap<String, String> topCustomer = dbHelper.getTopCustomerThisMonth();
+                final double totalCustomerDebt  = dbHelper.getTotalCustomerDebt();
+                final double totalSupplierDebt  = dbHelper.getTotalSupplierDebt();
                 final String currency = getCurrencySymbol();
 
                 runOnUiThread(() -> {
@@ -260,6 +275,8 @@ public class MainActivity extends BaseActivity
                         if (tvDeadStockCount != null) tvDeadStockCount.setText(deadStock != null ? String.valueOf(deadStock.size()) : "0");
                         if (tvBestSellerName  != null) tvBestSellerName.setText(topSeller   != null ? topSeller.getOrDefault("name",   "—") : "—");
                         if (tvBestCustomerName != null) tvBestCustomerName.setText(topCustomer != null ? topCustomer.getOrDefault("name", "—") : "—");
+                        if (tvCustomerDebtTotal != null) tvCustomerDebtTotal.setText(String.format("%.2f %s", totalCustomerDebt, currency));
+                        if (tvSupplierDebtTotal != null) tvSupplierDebtTotal.setText(String.format("%.2f %s", totalSupplierDebt, currency));
                     } catch (Exception ignored) {}
                 });
             } catch (Exception e) {

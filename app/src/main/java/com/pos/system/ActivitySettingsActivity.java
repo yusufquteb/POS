@@ -42,6 +42,7 @@ public class ActivitySettingsActivity extends BaseActivity {
     private MaterialCardView cardStore;
     private MaterialCardView cardPrinter;
     private MaterialCardView cardBackup;
+    private MaterialCardView cardPinLock;
 
     private MaterialCardView cardAccount;
     private TextView         tvUserName;
@@ -79,6 +80,7 @@ public class ActivitySettingsActivity extends BaseActivity {
         cardStore   = findViewById(R.id.card_store);
         cardPrinter = findViewById(R.id.card_printer);
         cardBackup  = findViewById(R.id.card_backup);
+        cardPinLock = findViewById(R.id.card_pin_lock);
 
         cardAccount  = findViewById(R.id.card_account);
         tvUserName   = findViewById(R.id.tv_user_name);
@@ -150,6 +152,7 @@ public class ActivitySettingsActivity extends BaseActivity {
         if (cardStore    != null) cardStore.setOnClickListener(v -> openActivity(ActivityStoreSettingsActivity.class));
         if (cardPrinter  != null) cardPrinter.setOnClickListener(v -> openActivity(ActivityPrinterSettingsActivity.class));
         if (cardBackup   != null) cardBackup.setOnClickListener(v -> openActivity(ActivityBackupActivity.class));
+        if (cardPinLock  != null) cardPinLock.setOnClickListener(v -> showPinOptions());
         if (cardAbout    != null) cardAbout.setOnClickListener(v -> showAboutDialog());
         if (cardPremium  != null) cardPremium.setOnClickListener(v -> showPremiumDialog());
         if (cardRateApp  != null) cardRateApp.setOnClickListener(v -> rateApp());
@@ -328,6 +331,40 @@ public class ActivitySettingsActivity extends BaseActivity {
                 })
                 .setNegativeButton(R.string.cancel, null)
                 .show();
+    }
+
+    /** خيارات قفل الكاشير بـ PIN */
+    private void showPinOptions() {
+        boolean pinEnabled = ActivityPinLockActivity.isPinEnabled(this);
+        String[] options = pinEnabled
+            ? new String[]{"تغيير رمز PIN", "إلغاء رمز PIN"}
+            : new String[]{"تعيين رمز PIN جديد"};
+
+        new MaterialAlertDialogBuilder(this)
+            .setTitle("قفل الكاشير (PIN)")
+            .setItems(options, (d, which) -> {
+                if (!pinEnabled || which == 0) {
+                    Intent i = new Intent(this, ActivityPinLockActivity.class);
+                    i.putExtra(ActivityPinLockActivity.EXTRA_MODE, ActivityPinLockActivity.MODE_SET);
+                    startActivity(i);
+                } else {
+                    confirmClearPin();
+                }
+            })
+            .setNegativeButton(R.string.cancel, null)
+            .show();
+    }
+
+    private void confirmClearPin() {
+        new MaterialAlertDialogBuilder(this)
+            .setTitle("إلغاء رمز PIN")
+            .setMessage("هل تريد إلغاء قفل الكاشير؟ سيتمكن أي شخص من الوصول بدون رمز.")
+            .setPositiveButton("إلغاء الرمز", (d, w) -> {
+                ActivityPinLockActivity.clearPin(this);
+                showToast("تم إلغاء رمز PIN");
+            })
+            .setNegativeButton(R.string.cancel, null)
+            .show();
     }
 
     private void openActivity(Class<?> cls) {

@@ -80,7 +80,7 @@ public final class FeatureGate {
     // ── Upgrade dialogs ───────────────────────────────────────────────────────
 
     /**
-     * Shows a non-dismissible upgrade dialog and finishes the activity on dismiss.
+     * Shows upgrade Bottom Sheet — does NOT finish the calling activity.
      * Call at the top of onCreate() for premium-only screens.
      */
     public static void requirePremium(Activity activity, String featureNameAr) {
@@ -92,18 +92,16 @@ public final class FeatureGate {
                 "هذه الميزة متاحة لمشتركي SmartPOS Premium.\n\n" +
                 "✓ إدارة المرتجعات والاستبدال\n" +
                 "✓ إدارة الشيفتات وجرد الخزينة\n" +
-                "✓ إدارة ديون العملاء\n" +
+                "✓ إدارة ديون العملاء والموردين\n" +
                 "✓ أوامر الشراء من الموردين\n" +
                 "✓ نسخ احتياطي على السحابة\n" +
                 "✓ تقارير غير محدودة\n\n" +
                 "اشترك الآن بـ 99 ج.م / شهر"
             )
-            .setPositiveButton("اشترك الآن", (d, w) -> {
-                activity.startActivity(new Intent(activity, ActivitySettingsActivity.class));
-                activity.finish();
-            })
-            .setNegativeButton("رجوع", (d, w) -> activity.finish())
-            .setCancelable(false)
+            .setPositiveButton("اشترك الآن", (d, w) ->
+                activity.startActivity(new Intent(activity, ActivitySettingsActivity.class)))
+            .setNegativeButton("رجوع", null)  // لا يُغلق الشاشة — فقط يغلق الديالوج
+            .setCancelable(true)
             .show();
     }
 
@@ -154,13 +152,63 @@ public final class FeatureGate {
         return elapsed < FREE_TRIAL_DAYS;
     }
 
+    /**
+     * يحصل على تاريخ بدء التجربة من ثلاثة مصادر بالترتيب:
+     * 1. SharedPreferences الرئيسي
+     * 2. SharedPreferences مرتبط بـ ANDROID_ID (يبقى بعد مسح التطبيق على نفس الجهاز)
+     * 3. قاعدة البيانات
+     * إذا لم يُوجد في أيٍّ منها يُنشأ جديد ويُحفظ في الثلاثة.
+     */
     private static long getOrCreateTrialStart(Context ctx) {
-        SharedPreferences prefs = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        long start = prefs.getLong(KEY_TRIAL, 0L);
-        if (start == 0L) {
-            start = System.currentTimeMillis();
-            prefs.edit().putLong(KEY_TRIAL, start).apply();
+        // المصدر 1: SharedPreferences الرئيسي
+        SharedPreferences mainPrefs = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        long start = mainPrefs.getLong(KEY_TRIAL, 0L);
+        if (start > 0L) return start;
+
+        // المصدر 2: SharedPreferences مرتبط بـ ANDROID_ID
+        String deviceId = getDeviceId(ctx);
+        SharedPreferences devicePrefs = ctx.getSharedPreferences(
+            "spos_" + deviceId, Context.MODE_PRIVATE);
+        start = devicePrefs.getLong("t0", 0L);
+        if (start > 0L) {
+            mainPrefs.edit().putLong(KEY_TRIAL, start).apply();
+            return start;
         }
+
+        // المصدر 3: قاعدة البيانات
+        try {
+            DBHelper db = new DBHelper(ctx);
+            String stored = db.getStoreSetting("trial_start_ts");
+            db.close();
+            if (stored != null && !stored.isEmpty()) {
+                start = Long.parseLong(stored);
+                mainPrefs.edit().putLong(KEY_TRIAL, start).apply();
+                devicePrefs.edit().putLong("t0", start).apply();
+                return start;
+            }
+        } catch (Exception ignored) {}
+
+        // لا يوجد في أي مصدر — إنشاء جديد
+        start = System.currentTimeMillis();
+        mainPrefs.edit().putLong(KEY_TRIAL, start).apply();
+        devicePrefs.edit().putLong("t0", start).apply();
+        try {
+            DBHelper db = new DBHelper(ctx);
+            db.saveTrialStart(start);
+            db.close();
+        } catch (Exception ignored) {}
         return start;
+    }
+
+    private static String getDeviceId(Context ctx) {
+        try {
+            String id = android.provider.Settings.Secure.getString(
+                ctx.getContentResolver(),
+                android.provider.Settings.Secure.ANDROID_ID);
+            if (id != null && !id.isEmpty()) {
+                return String.valueOf(Math.abs(id.hashCode()) % 100000);
+            }
+        } catch (Exception ignored) {}
+        return "00000";
     }
 }
