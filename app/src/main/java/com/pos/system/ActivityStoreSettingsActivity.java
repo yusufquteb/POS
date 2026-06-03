@@ -24,6 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * ActivityStoreSettingsActivity - محسّنة
@@ -38,10 +39,12 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
 
     private static final String TAG = "StoreSettingsActivity";
 
-    private DBHelper         dbHelper;
+    private DBHelper          dbHelper;
     private TextInputEditText etName, etPhone, etAddress, etTaxNumber;
+    private android.widget.AutoCompleteTextView spCountry;
     private ImageView         imgLogo;
     private String            selectedLogoPath = "";
+    private String            selectedCountryCode = "EG";
     private Uri               photoUri;
 
     // ✅ ActivityResultLauncher للكاميرا
@@ -105,6 +108,27 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
         etAddress   = findViewById(R.id.et_store_address);
         etTaxNumber = findViewById(R.id.et_tax_number);
         imgLogo     = findViewById(R.id.img_store_logo);
+        spCountry   = findViewById(R.id.sp_country);
+        setupCountryDropdown();
+    }
+
+    private void setupCountryDropdown() {
+        if (spCountry == null) return;
+        List<CountryConfig> countries = CountryConfig.all();
+        List<String> labels = new java.util.ArrayList<>();
+        for (CountryConfig c : countries) labels.add(c.nameAr + " — " + c.currency);
+        android.widget.ArrayAdapter<String> adapter = new android.widget.ArrayAdapter<>(
+            this, android.R.layout.simple_dropdown_item_1line, labels);
+        spCountry.setAdapter(adapter);
+        spCountry.setOnItemClickListener((parent, view, position, id) -> {
+            selectedCountryCode = countries.get(position).code;
+            CountryConfig cfg = CountryConfig.forCode(selectedCountryCode);
+            // Auto-fill tax rate from country
+            if (etTaxNumber != null && cfg.vatRate > 0)
+                etTaxNumber.setText(String.valueOf((int) cfg.vatRate));
+            else if (etTaxNumber != null && cfg.vatRate == 0)
+                etTaxNumber.setText("0");
+        });
     }
 
     private void setupClickListeners() {
@@ -127,7 +151,15 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
             setTextSafe(etName,      settings.get("name"));
             setTextSafe(etPhone,     settings.get("phone"));
             setTextSafe(etAddress,   settings.get("address"));
-            setTextSafe(etTaxNumber, settings.get("tax"));
+            String taxRate = settings.get("tax_rate");
+            if (taxRate == null || taxRate.isEmpty()) taxRate = settings.get("tax");
+            setTextSafe(etTaxNumber, taxRate);
+
+            // Country picker
+            String storedCode = settings.get("country_code");
+            if (storedCode != null && !storedCode.isEmpty()) selectedCountryCode = storedCode;
+            CountryConfig cfg = CountryConfig.forCode(selectedCountryCode);
+            if (spCountry != null) spCountry.setText(cfg.nameAr + " — " + cfg.currency, false);
 
             String logo = settings.get("logo");
             if (logo != null && !logo.isEmpty()) {
@@ -253,6 +285,11 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
 
             boolean success = dbHelper.updateStoreSettings(
                 name, phone, tax, selectedLogoPath, address);
+            // Save country + currency
+            CountryConfig cfg = CountryConfig.forCode(selectedCountryCode);
+            dbHelper.saveStoreSetting("country_code", selectedCountryCode);
+            dbHelper.saveStoreSetting("currency",     cfg.currency);
+            dbHelper.saveStoreSetting("tax_rate",     tax);
 
             showSnackbar(
                 success ? getString(R.string.store_updated) : getString(R.string.operation_failed),

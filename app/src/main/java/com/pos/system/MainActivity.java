@@ -228,51 +228,44 @@ public class MainActivity extends BaseActivity
     }
 
     private void loadDashboardData() {
-        try {
-            HashMap<String, Object> stats = dbHelper.getInvoicesStatistics();
-            double todaySales    = 0;
-            int    todayInvoices = 0;
+        java.util.concurrent.ExecutorService exec =
+            java.util.concurrent.Executors.newSingleThreadExecutor();
+        exec.execute(() -> {
+            try {
+                final HashMap<String, Object> stats = dbHelper.getInvoicesStatistics();
+                final int totalProducts = dbHelper.getProductsCount();
+                final java.util.List<HashMap<String, String>> lowStock = dbHelper.getLowStockProducts(5);
+                final java.util.List<HashMap<String, String>> expiring = dbHelper.getExpiringProducts(30);
+                final java.util.List<HashMap<String, String>> deadStock = dbHelper.getDeadStockProducts(60);
+                final HashMap<String, String> topSeller   = dbHelper.getTopSellerThisWeek();
+                final HashMap<String, String> topCustomer = dbHelper.getTopCustomerThisMonth();
+                final String currency = getCurrencySymbol();
 
-            if (stats != null) {
-                Object s = stats.get("today_total");
-                Object c = stats.get("today_count");
-                if (s != null) todaySales    = ((Number) s).doubleValue();
-                if (c != null) todayInvoices = ((Number) c).intValue();
+                runOnUiThread(() -> {
+                    if (isFinishing() || isDestroyed()) return;
+                    try {
+                        double todaySales    = 0;
+                        int    todayInvoices = 0;
+                        if (stats != null) {
+                            Object s = stats.get("today_total");
+                            Object c = stats.get("today_count");
+                            if (s != null) todaySales    = ((Number) s).doubleValue();
+                            if (c != null) todayInvoices = ((Number) c).intValue();
+                        }
+                        if (tvTodaySales    != null) tvTodaySales.setText(String.format("%.2f %s", todaySales, currency));
+                        if (tvTodayInvoices != null) tvTodayInvoices.setText(String.valueOf(todayInvoices));
+                        if (tvTotalProducts != null) tvTotalProducts.setText(String.valueOf(totalProducts));
+                        if (tvLowStockCount != null) tvLowStockCount.setText(lowStock != null ? String.valueOf(lowStock.size()) : "0");
+                        if (tvExpiryCount   != null) tvExpiryCount.setText(expiring  != null ? String.valueOf(expiring.size())  : "0");
+                        if (tvDeadStockCount != null) tvDeadStockCount.setText(deadStock != null ? String.valueOf(deadStock.size()) : "0");
+                        if (tvBestSellerName  != null) tvBestSellerName.setText(topSeller   != null ? topSeller.getOrDefault("name",   "—") : "—");
+                        if (tvBestCustomerName != null) tvBestCustomerName.setText(topCustomer != null ? topCustomer.getOrDefault("name", "—") : "—");
+                    } catch (Exception ignored) {}
+                });
+            } catch (Exception e) {
+                android.util.Log.e("MainActivity", "loadDashboardData bg: " + e.getMessage(), e);
             }
-
-            if (tvTodaySales != null) {
-                String currency = getCurrencySymbol();
-                tvTodaySales.setText(String.format("%.2f %s", todaySales, currency));
-            }
-            if (tvTodayInvoices != null) tvTodayInvoices.setText(String.valueOf(todayInvoices));
-
-            int totalProducts = dbHelper.getProductsCount();
-            if (tvTotalProducts != null) tvTotalProducts.setText(String.valueOf(totalProducts));
-
-            List<HashMap<String, String>> lowStock = dbHelper.getLowStockProducts(5);
-            if (tvLowStockCount != null)
-                tvLowStockCount.setText(lowStock != null ? String.valueOf(lowStock.size()) : "0");
-
-            // Decision Cards
-            List<HashMap<String, String>> expiring = dbHelper.getExpiringProducts(30);
-            if (tvExpiryCount != null)
-                tvExpiryCount.setText(expiring != null ? String.valueOf(expiring.size()) : "0");
-
-            List<HashMap<String, String>> deadStock = dbHelper.getDeadStockProducts(60);
-            if (tvDeadStockCount != null)
-                tvDeadStockCount.setText(deadStock != null ? String.valueOf(deadStock.size()) : "0");
-
-            HashMap<String, String> topSeller = dbHelper.getTopSellerThisWeek();
-            if (tvBestSellerName != null)
-                tvBestSellerName.setText(topSeller != null ? topSeller.getOrDefault("name", "—") : "—");
-
-            HashMap<String, String> topCustomer = dbHelper.getTopCustomerThisMonth();
-            if (tvBestCustomerName != null)
-                tvBestCustomerName.setText(topCustomer != null ? topCustomer.getOrDefault("name", "—") : "—");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     private String getCurrencySymbol() {

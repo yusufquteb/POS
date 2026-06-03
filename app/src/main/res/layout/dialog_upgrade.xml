@@ -11,7 +11,7 @@
 		android:layout_height="wrap_content"
 		android:padding="24dp"
 		android:orientation="vertical"
-		android:background="@android:color/white">
+		android:background="?attr/colorSurface">
 		<TextView
 			android:id="@+id/textview76"
 			android:focusable="false"
@@ -244,7 +244,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="16dp"
-			app:cardBackgroundColor="#F3E5F5"
+			app:cardBackgroundColor="?attr/colorSurfaceVariant"
 			app:cardCornerRadius="12dp"
 			app:cardElevation="0dp">
 			<LinearLayout

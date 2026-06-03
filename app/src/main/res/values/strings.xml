@@ -649,4 +649,9 @@
     <string name="shift_total_sales_label">المبيعات: %1$s</string>
     <string name="shift_invoice_count_label">الفواتير: %1$s</string>
 
+    <!-- CSV Import -->
+    <string name="import_csv">استيراد من CSV</string>
+    <string name="import_results">تم استيراد %1$d منتج\nتم تخطي %2$d سطر</string>
+    <string name="importing">جارٍ الاستيراد…</string>
+
 </resources>

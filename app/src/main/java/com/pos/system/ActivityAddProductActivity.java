@@ -70,7 +70,7 @@ public class ActivityAddProductActivity extends BaseActivity {
     // ═══ Views ═══
     private TextInputEditText etBarcode, etName, etBrand, etUnit,
                               etCost, etPrice, etQty, etExpiry,
-                              etReorderLevel, etNotes, etBatchNumber;
+                              etReorderLevel, etNotes, etBatchNumber, etSupplierRef;
     private AutoCompleteTextView etSupplier, spinnerLocation, spinnerCategory;
     private TextView tvProfit, tvProfitPercentage;
     private ImageView imgProduct;
@@ -200,6 +200,7 @@ public class ActivityAddProductActivity extends BaseActivity {
         etExpiry        = findViewById(R.id.et_expiry);
         etReorderLevel  = findViewById(R.id.et_reorder_level);
         etBatchNumber   = findViewById(R.id.et_batch_number);
+        etSupplierRef   = findViewById(R.id.et_supplier_reference);
         etNotes         = findViewById(R.id.et_notes);
 
         etSupplier      = findViewById(R.id.et_supplier);
@@ -348,6 +349,7 @@ public class ActivityAddProductActivity extends BaseActivity {
             setText(etReorderLevel, product.get("reorder_level"));
             setText(etNotes,        product.get("notes"));
             setText(etBatchNumber,  product.get("batch_number"));
+            setText(etSupplierRef,  product.get("supplier_reference"));
             setText(etSupplier,     product.get("supplier"));
             setText(spinnerLocation,product.get("location"));
             setText(spinnerCategory,product.get("category"));
@@ -443,7 +445,8 @@ public class ActivityAddProductActivity extends BaseActivity {
                 getInt(etReorderLevel, 5),
                 getText(spinnerCategory),
                 getText(etNotes),
-                getText(etBatchNumber)
+                getText(etBatchNumber),
+                getText(etSupplierRef)
             );
 
             if (result) {
@@ -485,7 +488,8 @@ public class ActivityAddProductActivity extends BaseActivity {
                 getInt(etReorderLevel, 5),
                 getText(spinnerCategory),
                 getText(etNotes),
-                getText(etBatchNumber)
+                getText(etBatchNumber),
+                getText(etSupplierRef)
             );
 
             if (result) {
@@ -633,6 +637,7 @@ public class ActivityAddProductActivity extends BaseActivity {
         if (etExpiry != null)       etExpiry.setText("");
         if (etReorderLevel != null) etReorderLevel.setText("");
         if (etBatchNumber != null)  etBatchNumber.setText("");
+        if (etSupplierRef != null)  etSupplierRef.setText("");
         if (etNotes != null)        etNotes.setText("");
         if (etSupplier != null)     etSupplier.setText("");
         if (spinnerLocation != null) spinnerLocation.setText("");

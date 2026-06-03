@@ -31,7 +31,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_margin="16dp"
-			app:cardBackgroundColor="#FFFFFF"
+			app:cardBackgroundColor="?attr/colorSurface"
 			app:cardCornerRadius="16dp"
 			app:cardElevation="2dp"
 			app:strokeWidth="0dp">
@@ -64,6 +64,6 @@
 		android:layout_margin="24dp"
 		android:layout_gravity="bottom|end"
 		app:srcCompat="@drawable/ic_add"
-		app:backgroundTint="#6750A4"
+		app:backgroundTint="?attr/colorPrimary"
 		app:tint="#FFFFFF" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

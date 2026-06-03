@@ -41,10 +41,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="16dp"
-				app:cardBackgroundColor="#FFFFFF"
+				app:cardBackgroundColor="?attr/colorSurface"
 				app:cardCornerRadius="20dp"
 				app:cardElevation="2dp"
-				app:strokeColor="#E8DEF8"
+				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
 				<LinearLayout
 					android:id="@+id/layout_select_logo"
@@ -61,7 +61,7 @@
 						android:layout_height="110dp"
 						app:cardCornerRadius="55dp"
 						app:cardElevation="4dp"
-						app:strokeColor="#6750A4"
+						app:strokeColor="?attr/colorPrimary"
 						app:strokeWidth="2dp">
 						<ImageView
 							android:id="@+id/img_store_logo"
@@ -87,10 +87,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="24dp"
-				app:cardBackgroundColor="#FFFFFF"
+				app:cardBackgroundColor="?attr/colorSurface"
 				app:cardCornerRadius="20dp"
 				app:cardElevation="2dp"
-				app:strokeColor="#E8DEF8"
+				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
 				<LinearLayout
 					android:id="@+id/linear64"
@@ -114,7 +114,7 @@
 						android:layout_marginBottom="14dp"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						app:startIconDrawable="@drawable/ic_person"
-						app:startIconTint="#6750A4"
+						app:startIconTint="?attr/colorPrimary"
 						app:boxCornerRadiusTopStart="12dp"
 						app:boxCornerRadiusTopEnd="12dp"
 						app:boxCornerRadiusBottomStart="12dp"
@@ -135,7 +135,7 @@
 						android:layout_marginBottom="14dp"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						app:startIconDrawable="@drawable/ic_phone"
-						app:startIconTint="#6750A4"
+						app:startIconTint="?attr/colorPrimary"
 						app:boxCornerRadiusTopStart="12dp"
 						app:boxCornerRadiusTopEnd="12dp"
 						app:boxCornerRadiusBottomStart="12dp"
@@ -156,7 +156,7 @@
 						android:layout_marginBottom="14dp"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						app:startIconDrawable="@drawable/ic_location"
-						app:startIconTint="#6750A4"
+						app:startIconTint="?attr/colorPrimary"
 						app:boxCornerRadiusTopStart="12dp"
 						app:boxCornerRadiusTopEnd="12dp"
 						app:boxCornerRadiusBottomStart="12dp"
@@ -170,6 +170,31 @@
 							android:inputType="textMultiLine"
 							android:fontFamily="@font/cairo_regular" />
 					</com.google.android.material.textfield.TextInputLayout>
+
+					<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/layout_country"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="14dp"
+						style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+						app:startIconDrawable="@drawable/ic_location"
+						app:startIconTint="?attr/colorPrimary"
+						app:hint="الدولة"
+						app:boxCornerRadiusTopStart="12dp"
+						app:boxCornerRadiusTopEnd="12dp"
+						app:boxCornerRadiusBottomStart="12dp"
+						app:boxCornerRadiusBottomEnd="12dp">
+						<AutoCompleteTextView
+							android:id="@+id/sp_country"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:textSize="14sp"
+							android:fontFamily="@font/cairo_regular"
+							android:inputType="none"
+							android:focusable="false"
+							android:cursorVisible="false" />
+					</com.google.android.material.textfield.TextInputLayout>
+
 					<com.google.android.material.textfield.TextInputLayout
 						android:id="@+id/layout_tax_number"
 						android:layout_width="match_parent"
@@ -177,7 +202,7 @@
 						android:layout_marginBottom="24dp"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						app:startIconDrawable="@drawable/ic_notes"
-						app:startIconTint="#6750A4"
+						app:startIconTint="?attr/colorPrimary"
 						app:boxCornerRadiusTopStart="12dp"
 						app:boxCornerRadiusTopEnd="12dp"
 						app:boxCornerRadiusBottomStart="12dp"
@@ -199,7 +224,7 @@
 						android:textSize="16sp"
 						android:textColor="?attr/colorOnPrimary"
 						android:fontFamily="@font/cairo_bold"
-						app:backgroundTint="#6750A4"
+						app:backgroundTint="?attr/colorPrimary"
 						app:cornerRadius="14dp"
 						app:icon="@drawable/ic_save"
 						app:iconTint="#FFFFFF"

@@ -45,11 +45,11 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="12dp"
-			app:cardBackgroundColor="#E8F5E9"
+			app:cardBackgroundColor="?attr/colorTertiaryContainer"
 			android:visibility="gone"
 			app:cardElevation="0dp"
 			app:strokeWidth="1dp"
-			app:strokeColor="#4CAF50">
+			app:strokeColor="?attr/colorTertiary">
 			<TextView
 				android:id="@+id/tv_customer_info"
 				android:focusable="false"

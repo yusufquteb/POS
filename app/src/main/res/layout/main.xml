@@ -30,9 +30,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="كاشير POS"
-                app:titleTextColor="@android:color/white"
+                app:titleTextColor="?attr/colorOnPrimary"
                 app:navigationIcon="@drawable/ic_menu"
-                app:navigationIconTint="@android:color/white"
+                app:navigationIconTint="?attr/colorOnPrimary"
                 android:background="?attr/colorPrimary" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -78,7 +78,7 @@
                             android:text="مرحباً بك 👋"
                             android:textSize="22sp"
                             android:textStyle="bold"
-                            android:textColor="#FFFFFF"
+                            android:textColor="?attr/colorOnPrimary"
                             android:layout_marginBottom="4dp" />
 
                         <TextView
@@ -121,7 +121,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="0.00"
-                                        android:textColor="#FFFFFF"
+                                        android:textColor="?attr/colorOnPrimary"
                                         android:textSize="20sp"
                                         android:textStyle="bold" />
                                 </LinearLayout>
@@ -152,7 +152,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="0"
-                                        android:textColor="#FFFFFF"
+                                        android:textColor="?attr/colorOnPrimary"
                                         android:textSize="20sp"
                                         android:textStyle="bold" />
                                 </LinearLayout>
@@ -386,7 +386,7 @@
                         android:layout_margin="5dp"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="3dp"
-                        app:cardBackgroundColor="#EEF2FF"
+                        app:cardBackgroundColor="?attr/colorPrimaryContainer"
                         android:clickable="true"
                         android:focusable="true"
                         app:rippleColor="?attr/colorPrimary">
@@ -407,7 +407,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_pos"
-                                    app:tint="#FFFFFF"
+                                    app:tint="?attr/colorOnPrimary"
                                     android:padding="12dp" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
@@ -417,7 +417,7 @@
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
-                                android:textColor="#3730A3" />
+                                android:textColor="?attr/colorOnPrimaryContainer" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -430,7 +430,7 @@
                         android:layout_margin="5dp"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="3dp"
-                        app:cardBackgroundColor="#F0FDF4"
+                        app:cardBackgroundColor="?attr/colorTertiaryContainer"
                         android:clickable="true"
                         android:focusable="true"
                         app:rippleColor="?attr/colorPrimary">
@@ -444,14 +444,14 @@
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
                                 app:cardCornerRadius="16dp"
-                                app:cardBackgroundColor="#16A34A"
+                                app:cardBackgroundColor="?attr/colorTertiary"
                                 app:strokeWidth="0dp"
                                 android:layout_marginBottom="10dp">
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_add_product"
-                                    app:tint="#FFFFFF"
+                                    app:tint="?attr/colorOnTertiary"
                                     android:padding="12dp" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
@@ -461,7 +461,7 @@
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
-                                android:textColor="#15803D" />
+                                android:textColor="?attr/colorOnTertiaryContainer" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -474,7 +474,7 @@
                         android:layout_margin="5dp"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="3dp"
-                        app:cardBackgroundColor="#FFF7ED"
+                        app:cardBackgroundColor="?attr/colorSecondaryContainer"
                         android:clickable="true"
                         android:focusable="true"
                         app:rippleColor="?attr/colorPrimary">
@@ -488,14 +488,14 @@
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
                                 app:cardCornerRadius="16dp"
-                                app:cardBackgroundColor="#EA580C"
+                                app:cardBackgroundColor="?attr/colorSecondary"
                                 app:strokeWidth="0dp"
                                 android:layout_marginBottom="10dp">
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_expenses"
-                                    app:tint="#FFFFFF"
+                                    app:tint="?attr/colorOnSecondary"
                                     android:padding="12dp" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
@@ -505,7 +505,7 @@
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
-                                android:textColor="#C2410C" />
+                                android:textColor="?attr/colorOnSecondaryContainer" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -527,7 +527,7 @@
                         android:layout_margin="5dp"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="3dp"
-                        app:cardBackgroundColor="#FFF1F2"
+                        app:cardBackgroundColor="?attr/colorErrorContainer"
                         android:clickable="true"
                         android:focusable="true"
                         app:rippleColor="?attr/colorPrimary">
@@ -541,14 +541,14 @@
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
                                 app:cardCornerRadius="16dp"
-                                app:cardBackgroundColor="#E11D48"
+                                app:cardBackgroundColor="?attr/colorError"
                                 app:strokeWidth="0dp"
                                 android:layout_marginBottom="10dp">
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_invoices"
-                                    app:tint="#FFFFFF"
+                                    app:tint="?attr/colorOnError"
                                     android:padding="12dp" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
@@ -558,7 +558,7 @@
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
-                                android:textColor="#BE123C" />
+                                android:textColor="?attr/colorOnErrorContainer" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -664,8 +664,8 @@
             android:layout_margin="16dp"
             android:text="بيع سريع"
             app:icon="@drawable/ic_pos"
-            android:textColor="@android:color/white"
-            app:iconTint="@android:color/white"
+            android:textColor="?attr/colorOnPrimary"
+            app:iconTint="?attr/colorOnPrimary"
             app:backgroundTint="?attr/colorPrimary" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

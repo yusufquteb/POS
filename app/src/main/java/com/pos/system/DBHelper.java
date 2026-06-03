@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
 
     public static final String DATABASE_NAME    = "SmartPOS.db";
-    public static final int    DATABASE_VERSION = 4;
+    public static final int    DATABASE_VERSION = 5;
 
     private final Context mContext;
 
@@ -130,6 +130,10 @@ public class DBHelper extends SQLiteOpenHelper {
             try { db.execSQL("ALTER TABLE " + TABLE_CUSTOMERS + " ADD COLUMN last_purchase_at TEXT DEFAULT ''"); } catch (Exception ignored) {}
             try { db.execSQL("ALTER TABLE " + TABLE_CUSTOMERS + " ADD COLUMN total_spent REAL DEFAULT 0.0"); } catch (Exception ignored) {}
         }
+        if (oldVersion < 5) {
+            try { db.execSQL("ALTER TABLE " + TABLE_INVOICES + " ADD COLUMN created_by TEXT DEFAULT 'admin'"); } catch (Exception ignored) {}
+            try { db.execSQL("ALTER TABLE " + TABLE_PRODUCTS + " ADD COLUMN updated_by TEXT DEFAULT 'admin'"); } catch (Exception ignored) {}
+        }
     }
 
     @Override
@@ -199,6 +203,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "payment_method TEXT DEFAULT 'نقدي', " +
             "status TEXT DEFAULT 'completed', " +
             "notes TEXT, " +
+            "created_by TEXT DEFAULT 'admin', " +
             "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_INVOICE_ITEMS + " (" +
@@ -333,25 +338,27 @@ public class DBHelper extends SQLiteOpenHelper {
                                  double cost, double price, int qty,
                                  String location, String supplier, String expiry,
                                  String imagePath, int reorderLevel,
-                                 String category, String notes, String batchNumber) {
+                                 String category, String notes, String batchNumber,
+                                 String supplierReference) {
         try {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues cv = new ContentValues();
-            cv.put("barcode",            barcode     != null ? barcode     : "");
-            cv.put("name",               name        != null ? name        : "");
-            cv.put("brand",              brand       != null ? brand       : "");
-            cv.put("unit",               unit        != null ? unit        : "");
+            cv.put("barcode",            barcode            != null ? barcode            : "");
+            cv.put("name",               name               != null ? name               : "");
+            cv.put("brand",              brand              != null ? brand              : "");
+            cv.put("unit",               unit               != null ? unit               : "");
             cv.put("cost",               cost);
             cv.put("price",              price);
             cv.put("qty",                qty);
-            cv.put("location",           location    != null ? location    : "");
-            cv.put("supplier",           supplier    != null ? supplier    : "");
-            cv.put("expiry",             expiry      != null ? expiry      : "");
-            cv.put("image_path",         imagePath   != null ? imagePath   : "");
+            cv.put("location",           location           != null ? location           : "");
+            cv.put("supplier",           supplier           != null ? supplier           : "");
+            cv.put("expiry",             expiry             != null ? expiry             : "");
+            cv.put("image_path",         imagePath          != null ? imagePath          : "");
             cv.put("reorder_level",      reorderLevel);
-            cv.put("category",           category    != null ? category    : "");
-            cv.put("notes",              notes       != null ? notes       : "");
-            cv.put("batch_number",       batchNumber != null ? batchNumber : "");
+            cv.put("category",           category           != null ? category           : "");
+            cv.put("notes",              notes              != null ? notes              : "");
+            cv.put("batch_number",       batchNumber        != null ? batchNumber        : "");
+            cv.put("supplier_reference", supplierReference  != null ? supplierReference  : "");
             return db.insertWithOnConflict(TABLE_PRODUCTS, null, cv, SQLiteDatabase.CONFLICT_REPLACE) != -1;
         } catch (Exception e) {
             Log.e(TAG, "insertProduct: " + e.getMessage(), e);
@@ -1747,25 +1754,26 @@ public class DBHelper extends SQLiteOpenHelper {
                                  String unit, double cost, double price, int qty,
                                  String location, String supplier, String expiry,
                                  String imagePath, int reorderLevel, String category, String notes,
-                                 String batchNumber) {
+                                 String batchNumber, String supplierReference) {
         try {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues cv = new ContentValues();
-            cv.put("barcode",            barcode     != null ? barcode     : "");
-            cv.put("name",               name        != null ? name        : "");
-            cv.put("brand",              brand       != null ? brand       : "");
-            cv.put("unit",               unit        != null ? unit        : "");
+            cv.put("barcode",            barcode           != null ? barcode           : "");
+            cv.put("name",               name              != null ? name              : "");
+            cv.put("brand",              brand             != null ? brand             : "");
+            cv.put("unit",               unit              != null ? unit              : "");
             cv.put("cost",               cost);
             cv.put("price",              price);
             cv.put("qty",                qty);
-            cv.put("location",           location    != null ? location    : "");
-            cv.put("supplier",           supplier    != null ? supplier    : "");
-            cv.put("expiry",             expiry      != null ? expiry      : "");
-            cv.put("image_path",         imagePath   != null ? imagePath   : "");
+            cv.put("location",           location          != null ? location          : "");
+            cv.put("supplier",           supplier          != null ? supplier          : "");
+            cv.put("expiry",             expiry            != null ? expiry            : "");
+            cv.put("image_path",         imagePath         != null ? imagePath         : "");
             cv.put("reorder_level",      reorderLevel);
-            cv.put("category",           category    != null ? category    : "");
-            cv.put("notes",              notes       != null ? notes       : "");
-            cv.put("batch_number",       batchNumber != null ? batchNumber : "");
+            cv.put("category",           category          != null ? category          : "");
+            cv.put("notes",              notes             != null ? notes             : "");
+            cv.put("batch_number",       batchNumber       != null ? batchNumber       : "");
+            cv.put("supplier_reference", supplierReference != null ? supplierReference : "");
             return db.update(TABLE_PRODUCTS, cv, "id=?", new String[]{id}) > 0;
         } catch (Exception e) {
             Log.e(TAG, "updateProduct(params): " + e.getMessage(), e);

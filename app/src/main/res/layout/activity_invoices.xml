@@ -87,12 +87,12 @@
 				android:id="@+id/cardview8"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				app:cardBackgroundColor="#FFFFFF"
+				app:cardBackgroundColor="?attr/colorSurface"
 				android:layout_weight="1"
 				android:layout_marginStart="6dp"
 				app:cardCornerRadius="16dp"
 				app:cardElevation="2dp"
-				app:strokeColor="#E8DEF8"
+				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
 				<LinearLayout
 					android:id="@+id/linear15"
@@ -149,8 +149,8 @@
 				app:boxCornerRadiusTopEnd="14dp"
 				app:boxCornerRadiusBottomStart="14dp"
 				app:boxCornerRadiusBottomEnd="14dp"
-				app:boxStrokeColor="#E8DEF8"
-				app:boxBackgroundColor="#FFFFFF">
+				app:boxStrokeColor="?attr/colorOutlineVariant"
+				app:boxBackgroundColor="?attr/colorSurface">
 				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/et_search"
 					android:layout_width="match_parent"

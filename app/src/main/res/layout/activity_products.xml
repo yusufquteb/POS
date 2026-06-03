@@ -15,12 +15,12 @@
 		<com.google.android.material.appbar.MaterialToolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
-			android:background="@color/purple_500"
+			android:background="?attr/colorPrimary"
 			android:layout_height="?attr/actionBarSize"
 			app:title="المنتجات"
-			app:titleTextColor="@android:color/white"
+			app:titleTextColor="?attr/colorOnPrimary"
 			app:navigationIcon="@drawable/ic_back"
-			app:navigationIconTint="@android:color/white" />
+			app:navigationIconTint="?attr/colorOnPrimary" />
 		<com.google.android.material.card.MaterialCardView
 			android:id="@+id/cardview4"
 			android:layout_width="match_parent"
@@ -103,6 +103,17 @@
 			</LinearLayout>
 		</LinearLayout>
 	</androidx.core.widget.NestedScrollView>
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
+		android:id="@+id/fab_import_csv"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="20dp"
+		android:layout_marginBottom="88dp"
+		android:layout_gravity="bottom|end"
+		app:srcCompat="@drawable/ic_cloud_upload"
+		app:backgroundTint="?attr/colorSecondaryContainer"
+		app:tint="?attr/colorOnSecondaryContainer"
+		app:fabSize="mini" />
 	<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 		android:id="@+id/fab_add_product"
 		android:layout_width="wrap_content"
@@ -110,5 +121,7 @@
 		android:layout_margin="16dp"
 		android:layout_gravity="bottom|end"
 		app:icon="@drawable/ic_add"
-		app:backgroundTint="@color/purple_500" />
+		app:backgroundTint="?attr/colorPrimary"
+		app:iconTint="?attr/colorOnPrimary"
+		android:textColor="?attr/colorOnPrimary" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -21,9 +21,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
+import android.net.Uri;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,12 +52,22 @@ public class ActivityProductsActivity extends BaseActivity {
     private ProductsAdapter                     adapter;
     private DBHelper                            dbHelper;
     private ExtendedFloatingActionButton        fabAddProduct;
+    private FloatingActionButton                fabImportCsv;
     private TextInputEditText                   etSearch;
     private View                                emptyState;
     private TextView                            tvProductsCount;
 
     private final List<HashMap<String, String>> productsList    = new ArrayList<>();
     private final List<HashMap<String, String>> allProductsList = new ArrayList<>();
+
+    // ✅ SAF file picker for CSV import
+    private final ActivityResultLauncher<String[]> csvPickerLauncher =
+        registerForActivityResult(
+            new ActivityResultContracts.OpenDocument(),
+            uri -> {
+                if (uri != null) importProductsFromCsv(uri);
+            }
+        );
 
     // ✅ ActivityResultLauncher بدلاً من startActivityForResult
     private final ActivityResultLauncher<Intent> addProductLauncher =
@@ -93,6 +108,7 @@ public class ActivityProductsActivity extends BaseActivity {
     private void initViews() {
         recyclerProducts = findViewById(R.id.recycler_products);
         fabAddProduct    = findViewById(R.id.fab_add_product);
+        fabImportCsv     = findViewById(R.id.fab_import_csv);
         etSearch         = findViewById(R.id.et_search);
         emptyState       = findViewById(R.id.empty_state);
         tvProductsCount  = findViewById(R.id.tv_products_count);
@@ -123,6 +139,11 @@ public class ActivityProductsActivity extends BaseActivity {
         fabAddProduct.setOnClickListener(v ->
             addProductLauncher.launch(new Intent(this, ActivityAddProductActivity.class))
         );
+        if (fabImportCsv != null) {
+            fabImportCsv.setOnClickListener(v ->
+                csvPickerLauncher.launch(new String[]{"text/csv", "text/plain", "*/*"})
+            );
+        }
     }
 
     private void setupSearch() {
@@ -253,6 +274,67 @@ public class ActivityProductsActivity extends BaseActivity {
     private String safeGet(HashMap<String, String> map, String key) {
         String v = map.get(key);
         return (v != null && !v.isEmpty()) ? v : "-";
+    }
+
+    // ─────────────────────────────────────────────
+    // CSV Import (SAF)
+    // Format: barcode,name,cost,price,qty,category  (header row optional)
+    // ─────────────────────────────────────────────
+    private void importProductsFromCsv(Uri uri) {
+        showSnackbar(getString(R.string.importing), false);
+        java.util.concurrent.Executors.newSingleThreadExecutor().execute(() -> {
+            int imported = 0, skipped = 0;
+            try (InputStream is = getContentResolver().openInputStream(uri);
+                 BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+                String line;
+                boolean firstLine = true;
+                while ((line = reader.readLine()) != null) {
+                    line = line.trim();
+                    if (line.isEmpty()) continue;
+                    String[] cols = line.split(",", -1);
+                    if (firstLine) {
+                        firstLine = false;
+                        String first = cols[0].toLowerCase();
+                        if (first.contains("barcode") || first.contains("باركود")
+                                || first.contains("name") || first.contains("اسم")) continue;
+                    }
+                    if (cols.length < 2) { skipped++; continue; }
+                    String barcode  = cols[0].trim();
+                    String name     = cols[1].trim();
+                    if (barcode.isEmpty() || name.isEmpty()) { skipped++; continue; }
+                    double cost     = cols.length > 2 ? csvParseDouble(cols[2]) : 0;
+                    double price    = cols.length > 3 ? csvParseDouble(cols[3]) : 0;
+                    int    qty      = cols.length > 4 ? csvParseInt(cols[4])    : 0;
+                    String category = cols.length > 5 ? cols[5].trim()          : "";
+                    boolean ok = dbHelper.insertProduct(
+                        barcode, name, "", "", cost, price, qty,
+                        "", "", "", "", 5, category, "", "", "");
+                    if (ok) imported++; else skipped++;
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "importProductsFromCsv error: " + e.getMessage(), e);
+            }
+            final int finalImported = imported, finalSkipped = skipped;
+            runOnUiThread(() -> {
+                if (isFinishing() || isDestroyed()) return;
+                loadProducts();
+                new MaterialAlertDialogBuilder(this)
+                    .setTitle(getString(R.string.import_csv))
+                    .setMessage(getString(R.string.import_results, finalImported, finalSkipped))
+                    .setPositiveButton(getString(R.string.ok), null)
+                    .show();
+            });
+        });
+    }
+
+    private double csvParseDouble(String s) {
+        try { return s != null && !s.trim().isEmpty() ? Double.parseDouble(s.trim()) : 0; }
+        catch (NumberFormatException e) { return 0; }
+    }
+
+    private int csvParseInt(String s) {
+        try { return s != null && !s.trim().isEmpty() ? Integer.parseInt(s.trim()) : 0; }
+        catch (NumberFormatException e) { return 0; }
     }
 
     // ─────────────────────────────────────────────

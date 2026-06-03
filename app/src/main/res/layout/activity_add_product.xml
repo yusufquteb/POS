@@ -42,12 +42,12 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
-				app:cardBackgroundColor="#FFFFFF"
+				app:cardBackgroundColor="?attr/colorSurface"
 				android:foreground="?attr/selectableItemBackground"
 				android:focusable="true"
 				app:cardCornerRadius="20dp"
 				app:cardElevation="2dp"
-				app:strokeColor="#E8DEF8"
+				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
 				<LinearLayout
 					android:id="@+id/linear22"
@@ -62,7 +62,7 @@
 						android:layout_height="110dp"
 						app:cardCornerRadius="55dp"
 						app:cardElevation="0dp"
-						app:strokeColor="#DDDDDD"
+						app:strokeColor="?attr/colorOutlineVariant"
 						app:strokeWidth="1dp">
 						<FrameLayout
 							android:id="@+id/frame_layout23"
@@ -105,10 +105,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
-				app:cardBackgroundColor="#FFFFFF"
+				app:cardBackgroundColor="?attr/colorSurface"
 				app:cardCornerRadius="20dp"
 				app:cardElevation="2dp"
-				app:strokeColor="#E8DEF8"
+				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
 				<LinearLayout
 					android:id="@+id/linear24"
@@ -231,10 +231,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
-				app:cardBackgroundColor="#FFFFFF"
+				app:cardBackgroundColor="?attr/colorSurface"
 				app:cardCornerRadius="20dp"
 				app:cardElevation="2dp"
-				app:strokeColor="#E8DEF8"
+				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
 				<LinearLayout
 					android:id="@+id/linear26"
@@ -303,7 +303,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginTop="12dp"
-						app:cardBackgroundColor="#F3EFF9"
+						app:cardBackgroundColor="?attr/colorSurfaceVariant"
 						app:cardCornerRadius="12dp"
 						app:cardElevation="0dp"
 						app:strokeWidth="0dp">
@@ -467,10 +467,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
-				app:cardBackgroundColor="#FFFFFF"
+				app:cardBackgroundColor="?attr/colorSurface"
 				app:cardCornerRadius="20dp"
 				app:cardElevation="2dp"
-				app:strokeColor="#E8DEF8"
+				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
 				<LinearLayout
 					android:id="@+id/linear33"
@@ -603,6 +603,27 @@
 							app:iconPadding="0dp"
 							app:cornerRadius="14dp" />
 					</LinearLayout>
+
+					<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/textinputlayout_supplier_ref"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="12dp"
+						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+						app:hint="رقم مرجع المورد"
+						app:boxCornerRadiusTopStart="12dp"
+						app:boxCornerRadiusTopEnd="12dp"
+						app:boxCornerRadiusBottomStart="12dp"
+						app:boxCornerRadiusBottomEnd="12dp">
+						<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/et_supplier_reference"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:textSize="13sp"
+							android:imeOptions="actionNext"
+							android:inputType="text"
+							android:fontFamily="@font/cairo_regular" />
+					</com.google.android.material.textfield.TextInputLayout>
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
 			<com.google.android.material.card.MaterialCardView
@@ -610,10 +631,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
-				app:cardBackgroundColor="#FFFFFF"
+				app:cardBackgroundColor="?attr/colorSurface"
 				app:cardCornerRadius="20dp"
 				app:cardElevation="2dp"
-				app:strokeColor="#E8DEF8"
+				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
 				<LinearLayout
 					android:id="@+id/linear37"
@@ -652,10 +673,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
-				app:cardBackgroundColor="#FFFFFF"
+				app:cardBackgroundColor="?attr/colorSurface"
 				app:cardCornerRadius="20dp"
 				app:cardElevation="2dp"
-				app:strokeColor="#E8DEF8"
+				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
 				<LinearLayout
 					android:id="@+id/linear38"
