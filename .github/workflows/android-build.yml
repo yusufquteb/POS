@@ -2,7 +2,7 @@ name: Android Build
 
 on:
   push:
-    branches: [ "main", "claude/project-upload-build-tracking-TExJ0" ]
+    branches: [ "main", "claude/project-upload-build-tracking-TExJ0", "claude/retail-pos-audit-roadmap-2KPKR" ]
   pull_request:
     branches: [ "main" ]
 

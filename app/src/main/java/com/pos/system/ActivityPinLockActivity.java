@@ -203,13 +203,13 @@ public class ActivityPinLockActivity extends BaseActivity {
 
     /** Convenience: check if a PIN has been set on this device. */
     public static boolean isPinEnabled(android.content.Context ctx) {
-        String p = ctx.getSharedPreferences(PREFS_NAME, MODE_PRIVATE).getString(KEY_PIN, null);
+        String p = ctx.getSharedPreferences(PREFS_NAME, android.content.Context.MODE_PRIVATE).getString(KEY_PIN, null);
         return p != null && !p.isEmpty();
     }
 
     /** Clear the stored PIN (e.g., from Settings). */
     public static void clearPin(android.content.Context ctx) {
-        ctx.getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit().remove(KEY_PIN).apply();
+        ctx.getSharedPreferences(PREFS_NAME, android.content.Context.MODE_PRIVATE).edit().remove(KEY_PIN).apply();
     }
 
     private void showToast(String msg) {
