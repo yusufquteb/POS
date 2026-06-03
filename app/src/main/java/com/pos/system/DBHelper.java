@@ -46,25 +46,27 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
 
     public static final String DATABASE_NAME    = "SmartPOS.db";
-    public static final int    DATABASE_VERSION = 5;
+    public static final int    DATABASE_VERSION = 6;
 
     private final Context mContext;
 
     // أسماء الجداول
-    private static final String TABLE_PRODUCTS         = "products";
-    private static final String TABLE_SUPPLIERS        = "suppliers";
-    private static final String TABLE_CUSTOMERS        = "customers";
-    private static final String TABLE_INVOICES         = "invoices";
-    private static final String TABLE_INVOICE_ITEMS    = "invoice_items";
-    private static final String TABLE_LOCATIONS        = "locations";
-    private static final String TABLE_CATEGORIES       = "categories";
-    private static final String TABLE_STORE_SETTINGS   = "store_settings";
-    private static final String TABLE_PRINTER_SETTINGS = "printer_settings";
-    private static final String TABLE_EXPENSES         = "expenses";
-    private static final String TABLE_BACKUP_LOG       = "backup_log";
-    private static final String TABLE_SHIFTS           = "shifts";
-    private static final String TABLE_PURCHASE_ORDERS  = "purchase_orders";
-    private static final String TABLE_PURCHASE_ORDER_ITEMS = "purchase_order_items";
+    private static final String TABLE_PRODUCTS                = "products";
+    private static final String TABLE_SUPPLIERS               = "suppliers";
+    private static final String TABLE_CUSTOMERS               = "customers";
+    private static final String TABLE_INVOICES                = "invoices";
+    private static final String TABLE_INVOICE_ITEMS           = "invoice_items";
+    private static final String TABLE_LOCATIONS               = "locations";
+    private static final String TABLE_CATEGORIES              = "categories";
+    private static final String TABLE_STORE_SETTINGS          = "store_settings";
+    private static final String TABLE_PRINTER_SETTINGS        = "printer_settings";
+    private static final String TABLE_EXPENSES                = "expenses";
+    private static final String TABLE_BACKUP_LOG              = "backup_log";
+    private static final String TABLE_SHIFTS                  = "shifts";
+    private static final String TABLE_PURCHASE_ORDERS         = "purchase_orders";
+    private static final String TABLE_PURCHASE_ORDER_ITEMS    = "purchase_order_items";
+    private static final String TABLE_CUSTOMER_DEBT_PAYMENTS  = "customer_debt_payments";
+    private static final String TABLE_SUPPLIER_DEBT_PAYMENTS  = "supplier_debt_payments";
 
     // ════════════════════════════════════════════════════════════
     // Constructor
@@ -134,6 +136,15 @@ public class DBHelper extends SQLiteOpenHelper {
             try { db.execSQL("ALTER TABLE " + TABLE_INVOICES + " ADD COLUMN created_by TEXT DEFAULT 'admin'"); } catch (Exception ignored) {}
             try { db.execSQL("ALTER TABLE " + TABLE_PRODUCTS + " ADD COLUMN updated_by TEXT DEFAULT 'admin'"); } catch (Exception ignored) {}
         }
+        if (oldVersion < 6) {
+            try {
+                db.execSQL("ALTER TABLE " + TABLE_SUPPLIERS + " ADD COLUMN debt REAL DEFAULT 0.0");
+            } catch (android.database.sqlite.SQLiteException e) {
+                if (e.getMessage() == null || !e.getMessage().contains("duplicate column name")) throw e;
+            }
+            createCustomerDebtPaymentsTable(db);
+            createSupplierDebtPaymentsTable(db);
+        }
     }
 
     @Override
@@ -176,6 +187,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "company TEXT, " +
             "phone TEXT, " +
             "address TEXT, " +
+            "debt REAL DEFAULT 0.0, " +
             "notes TEXT, " +
             "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
@@ -267,6 +279,8 @@ public class DBHelper extends SQLiteOpenHelper {
         createLoyaltyTable(db);
         createShiftsTable(db);
         createPurchaseOrdersTable(db);
+        createCustomerDebtPaymentsTable(db);
+        createSupplierDebtPaymentsTable(db);
     }
 
     private void dropAllTables(SQLiteDatabase db) {
@@ -1966,13 +1980,81 @@ public class DBHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public boolean settleCustomerDebt(String customerId, double amount) {
+    /** سداد جزء من دين العميل مع تسجيل حركة الدفع */
+    public boolean settleCustomerDebt(String customerId, double amount, String note) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
         try {
-            SQLiteDatabase db = getWritableDatabase();
             db.execSQL("UPDATE " + TABLE_CUSTOMERS + " SET debt = MAX(0, debt - ?) WHERE id = ?",
                 new Object[]{amount, customerId});
+            String customerName = "";
+            Cursor c = db.rawQuery("SELECT name FROM " + TABLE_CUSTOMERS + " WHERE id=?",
+                new String[]{customerId});
+            if (c.moveToFirst()) customerName = c.getString(0);
+            c.close();
+            ContentValues cv = new ContentValues();
+            cv.put("customer_id",   Integer.parseInt(customerId));
+            cv.put("customer_name", customerName);
+            cv.put("amount",        amount);
+            cv.put("type",          "payment");
+            cv.put("note",          note != null ? note : "");
+            db.insert(TABLE_CUSTOMER_DEBT_PAYMENTS, null, cv);
+            db.setTransactionSuccessful();
             return true;
-        } catch (Exception e) { Log.e(TAG, "settleCustomerDebt: " + e.getMessage()); return false; }
+        } catch (Exception e) {
+            Log.e(TAG, "settleCustomerDebt: " + e.getMessage());
+            return false;
+        } finally { db.endTransaction(); }
+    }
+
+    /** backward compatible */
+    public boolean settleCustomerDebt(String customerId, double amount) {
+        return settleCustomerDebt(customerId, amount, "");
+    }
+
+    /** تسجيل دين جديد على العميل مع حركة */
+    public boolean addCustomerDebt(String customerId, double amount, String note) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.execSQL("UPDATE " + TABLE_CUSTOMERS + " SET debt = debt + ? WHERE id = ?",
+                new Object[]{amount, customerId});
+            String customerName = "";
+            Cursor c = db.rawQuery("SELECT name FROM " + TABLE_CUSTOMERS + " WHERE id=?",
+                new String[]{customerId});
+            if (c.moveToFirst()) customerName = c.getString(0);
+            c.close();
+            ContentValues cv = new ContentValues();
+            cv.put("customer_id",   Integer.parseInt(customerId));
+            cv.put("customer_name", customerName);
+            cv.put("amount",        amount);
+            cv.put("type",          "debt");
+            cv.put("note",          note != null ? note : "");
+            db.insert(TABLE_CUSTOMER_DEBT_PAYMENTS, null, cv);
+            db.setTransactionSuccessful();
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "addCustomerDebt: " + e.getMessage());
+            return false;
+        } finally { db.endTransaction(); }
+    }
+
+    public List<HashMap<String, String>> getCustomerDebtPayments(String customerId) {
+        return queryTable(
+            "SELECT * FROM " + TABLE_CUSTOMER_DEBT_PAYMENTS +
+            " WHERE customer_id=? ORDER BY created_at DESC",
+            new String[]{customerId});
+    }
+
+    public double getTotalCustomerDebt() {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT SUM(debt) FROM " + TABLE_CUSTOMERS + " WHERE debt > 0", null);
+            double total = 0;
+            if (c.moveToFirst() && !c.isNull(0)) total = c.getDouble(0);
+            c.close();
+            return total;
+        } catch (Exception e) { return 0; }
     }
 
     public List<HashMap<String, String>> getCustomersWithDebt() {
@@ -1990,6 +2072,131 @@ public class DBHelper extends SQLiteOpenHelper {
             c.close();
         } catch (Exception e) { Log.e(TAG, "getCustomersWithDebt: " + e.getMessage()); }
         return list;
+    }
+
+    private void createCustomerDebtPaymentsTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_CUSTOMER_DEBT_PAYMENTS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "customer_id INTEGER NOT NULL, " +
+            "customer_name TEXT DEFAULT '', " +
+            "amount REAL NOT NULL, " +
+            "type TEXT DEFAULT 'payment', " +
+            "note TEXT DEFAULT '', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // SUPPLIER DEBT MANAGEMENT
+    // ════════════════════════════════════════════════════════════
+
+    public double getSupplierDebt(String supplierId) {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT debt FROM " + TABLE_SUPPLIERS + " WHERE id=?",
+                new String[]{supplierId});
+            if (c.moveToFirst()) { double d = c.getDouble(0); c.close(); return d; }
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getSupplierDebt: " + e.getMessage()); }
+        return 0;
+    }
+
+    /** تسجيل دين جديد على المتجر لصالح المورد (اشتراء بالآجل) */
+    public boolean addSupplierDebt(String supplierId, double amount, String note) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.execSQL("UPDATE " + TABLE_SUPPLIERS + " SET debt = debt + ? WHERE id = ?",
+                new Object[]{amount, supplierId});
+            String supplierName = "";
+            Cursor c = db.rawQuery("SELECT name FROM " + TABLE_SUPPLIERS + " WHERE id=?",
+                new String[]{supplierId});
+            if (c.moveToFirst()) supplierName = c.getString(0);
+            c.close();
+            ContentValues cv = new ContentValues();
+            cv.put("supplier_id",   Integer.parseInt(supplierId));
+            cv.put("supplier_name", supplierName);
+            cv.put("amount",        amount);
+            cv.put("type",          "debt");
+            cv.put("note",          note != null ? note : "");
+            db.insert(TABLE_SUPPLIER_DEBT_PAYMENTS, null, cv);
+            db.setTransactionSuccessful();
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "addSupplierDebt: " + e.getMessage());
+            return false;
+        } finally { db.endTransaction(); }
+    }
+
+    /** سداد جزء من الدين للمورد مع تسجيل حركة الدفع */
+    public boolean settleSupplierDebt(String supplierId, double amount, String note) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.execSQL("UPDATE " + TABLE_SUPPLIERS + " SET debt = MAX(0, debt - ?) WHERE id = ?",
+                new Object[]{amount, supplierId});
+            String supplierName = "";
+            Cursor c = db.rawQuery("SELECT name FROM " + TABLE_SUPPLIERS + " WHERE id=?",
+                new String[]{supplierId});
+            if (c.moveToFirst()) supplierName = c.getString(0);
+            c.close();
+            ContentValues cv = new ContentValues();
+            cv.put("supplier_id",   Integer.parseInt(supplierId));
+            cv.put("supplier_name", supplierName);
+            cv.put("amount",        amount);
+            cv.put("type",          "payment");
+            cv.put("note",          note != null ? note : "");
+            db.insert(TABLE_SUPPLIER_DEBT_PAYMENTS, null, cv);
+            db.setTransactionSuccessful();
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "settleSupplierDebt: " + e.getMessage());
+            return false;
+        } finally { db.endTransaction(); }
+    }
+
+    public List<HashMap<String, String>> getSuppliersWithDebt() {
+        List<HashMap<String, String>> list = new ArrayList<>();
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT * FROM " + TABLE_SUPPLIERS + " WHERE debt > 0 ORDER BY debt DESC", null);
+            while (c.moveToNext()) {
+                HashMap<String, String> m = new HashMap<>();
+                for (int i = 0; i < c.getColumnCount(); i++)
+                    m.put(c.getColumnName(i), c.getString(i) != null ? c.getString(i) : "");
+                list.add(m);
+            }
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getSuppliersWithDebt: " + e.getMessage()); }
+        return list;
+    }
+
+    public List<HashMap<String, String>> getSupplierDebtPayments(String supplierId) {
+        return queryTable(
+            "SELECT * FROM " + TABLE_SUPPLIER_DEBT_PAYMENTS +
+            " WHERE supplier_id=? ORDER BY created_at DESC",
+            new String[]{supplierId});
+    }
+
+    public double getTotalSupplierDebt() {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT SUM(debt) FROM " + TABLE_SUPPLIERS + " WHERE debt > 0", null);
+            double total = 0;
+            if (c.moveToFirst() && !c.isNull(0)) total = c.getDouble(0);
+            c.close();
+            return total;
+        } catch (Exception e) { return 0; }
+    }
+
+    private void createSupplierDebtPaymentsTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_SUPPLIER_DEBT_PAYMENTS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "supplier_id INTEGER NOT NULL, " +
+            "supplier_name TEXT DEFAULT '', " +
+            "amount REAL NOT NULL, " +
+            "type TEXT DEFAULT 'payment', " +
+            "note TEXT DEFAULT '', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
     }
 
     // ════════════════════════════════════════════════════════════

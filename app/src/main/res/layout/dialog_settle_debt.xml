@@ -61,15 +61,27 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Hint text -->
-    <TextView
+    <!-- Note field -->
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="أدخل المبلغ المدفوع لتسوية الدين كلياً أو جزئياً"
-        android:textSize="12sp"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:fontFamily="@font/cairo_regular"
-        android:gravity="center" />
+        android:layout_marginTop="12dp"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
+        android:hint="ملاحظة (اختياري)">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_payment_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:textSize="14sp"
+            android:fontFamily="@font/cairo_regular" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
