@@ -237,7 +237,9 @@ public class MainActivity extends BaseActivity
                 if (tvStoreName  != null) tvStoreName.setText(settings.getOrDefault("name", "متجري"));
                 if (tvStorePhone != null) tvStorePhone.setText(settings.getOrDefault("phone", ""));
             }
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "updateDrawerHeader error", e);
+        }
     }
 
     private void loadDashboardData() {
@@ -405,8 +407,12 @@ public class MainActivity extends BaseActivity
         try {
             loadDashboardData();
             checkAlerts();
-            // ✅ استئناف تحديث كامل التنزيل
             if (appUpdateManager != null) appUpdateManager.onResume();
+            // Refresh drawer header so store name changes appear immediately
+            if (navView != null) {
+                View headerView = navView.getHeaderView(0);
+                if (headerView != null) updateDrawerHeader(headerView);
+            }
         } catch (Exception e) {
             android.util.Log.e("MainActivity", "onResume: " + e.getMessage(), e);
         }

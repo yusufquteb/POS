@@ -1,16 +1,10 @@
 package com.pos.system;
 
-import com.pos.system.BaseActivity;
-
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.Settings;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,23 +12,13 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.documentfile.provider.DocumentFile;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.snackbar.Snackbar;
-
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.snackbar.Snackbar;
 
 import com.pos.system.managers.CloudBackupManager;
-import com.pos.system.FeatureGate;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,29 +30,19 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * ActivityBackupActivity - محسّنة
- *
- * ✅ الإصلاحات:
- * - استبدال startActivityForResult/onActivityResult بـ ActivityResultLauncher
- * - نقل النصوص المضمّنة إلى strings.xml
- * - استبدال e.printStackTrace() بـ Log.e()
- * - إصلاح إغلاق الـ Streams
- */
 public class ActivityBackupActivity extends BaseActivity {
 
-    private static final String TAG                    = "BackupActivity";
-    private static final int    PERMISSION_REQUEST_CODE = 100;
+    private static final String TAG = "BackupActivity";
 
-    private DBHelper         dbHelper;
-    private ListView         listBackups;
-    private View             emptyState;
+    private DBHelper              dbHelper;
+    private ListView              listBackups;
+    private View                  emptyState;
     private final ArrayList<File> backupFiles = new ArrayList<>();
-    private CloudBackupManager cloudBackupManager;
-    private Button  btnSelectFolder, btnCloudBackupNow;
-    private TextView tvCloudStatus, tvCloudLastBackup;
+    private CloudBackupManager    cloudBackupManager;
+    private Button                btnSelectFolder, btnCloudBackupNow;
+    private TextView              tvCloudStatus, tvCloudLastBackup;
 
-    private final androidx.activity.result.ActivityResultLauncher<Uri> folderPickerLauncher =
+    private final ActivityResultLauncher<Uri> folderPickerLauncher =
         registerForActivityResult(new ActivityResultContracts.OpenDocumentTree(), uri -> {
             if (uri != null) {
                 cloudBackupManager.saveFolderUri(uri);
@@ -77,23 +51,6 @@ public class ActivityBackupActivity extends BaseActivity {
             }
         });
 
-
-    // ✅ ActivityResultLauncher لإدارة صلاحية الملفات (Android 11+)
-    private final ActivityResultLauncher<Intent> manageStorageLauncher =
-        registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if (Environment.isExternalStorageManager()) {
-                        loadBackupFiles();
-                    } else {
-                        showSnackbar(getString(R.string.storage_permission_required), true);
-                    }
-                }
-            }
-        );
-
-    // ✅ ActivityResultLauncher لاختيار ملف النسخة الاحتياطية
     private final ActivityResultLauncher<Intent> pickBackupLauncher =
         registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -106,7 +63,6 @@ public class ActivityBackupActivity extends BaseActivity {
             }
         );
 
-    // ─────────────────────────────────────────────
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,15 +74,9 @@ public class ActivityBackupActivity extends BaseActivity {
         setupToolbar();
         setupButtons();
         setupCloudBackup();
-
-        if (checkPermissions()) {
-            loadBackupFiles();
-        } else {
-            requestStoragePermission();
-        }
+        loadBackupFiles();
     }
 
-    // ─────────────────────────────────────────────
     private void initViews() {
         listBackups = findViewById(R.id.list_backups);
         if (listBackups == null) listBackups = findViewById(android.R.id.list);
@@ -146,17 +96,13 @@ public class ActivityBackupActivity extends BaseActivity {
         if (btnRestore != null) btnRestore.setOnClickListener(v -> pickBackupFile());
     }
 
-    // ─────────────────────────────────────────────
-
-    // ─────────────────────────────────────────────
-    // Cloud Backup (SAF-based)
-    // ─────────────────────────────────────────────
+    // ── Cloud Backup (SAF-based) ──────────────────────────────────────
 
     private void setupCloudBackup() {
-        btnSelectFolder    = findViewById(R.id.btn_select_cloud_folder);
-        btnCloudBackupNow  = findViewById(R.id.btn_cloud_backup_now);
-        tvCloudStatus      = findViewById(R.id.tv_cloud_status);
-        tvCloudLastBackup  = findViewById(R.id.tv_cloud_last_backup);
+        btnSelectFolder   = findViewById(R.id.btn_select_cloud_folder);
+        btnCloudBackupNow = findViewById(R.id.btn_cloud_backup_now);
+        tvCloudStatus     = findViewById(R.id.tv_cloud_status);
+        tvCloudLastBackup = findViewById(R.id.tv_cloud_last_backup);
 
         if (btnSelectFolder != null)
             btnSelectFolder.setOnClickListener(v -> {
@@ -176,12 +122,20 @@ public class ActivityBackupActivity extends BaseActivity {
     private void updateCloudUI() {
         if (cloudBackupManager == null) return;
         boolean configured = cloudBackupManager.isFolderConfigured();
+
         if (tvCloudStatus != null) {
             tvCloudStatus.setText(configured ? "مُفعّل ✓" : "غير مُفعّل");
-            tvCloudStatus.setTextColor(configured ? 0xFF388E3C : 0xFFF57C00);
+
+            TypedValue successVal = new TypedValue();
+            TypedValue warningVal = new TypedValue();
+            getTheme().resolveAttribute(R.attr.colorSuccess, successVal, true);
+            getTheme().resolveAttribute(R.attr.colorWarning, warningVal, true);
+            tvCloudStatus.setTextColor(configured ? successVal.data : warningVal.data);
         }
+
         if (btnCloudBackupNow != null)
             btnCloudBackupNow.setVisibility(configured ? View.VISIBLE : View.GONE);
+
         if (tvCloudLastBackup != null) {
             String last = cloudBackupManager.getLastBackupDate();
             if (last != null) {
@@ -206,79 +160,26 @@ public class ActivityBackupActivity extends BaseActivity {
             .show();
     }
 
-    private boolean checkPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            return Environment.isExternalStorageManager();
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-        }
-        return true;
-    }
+    // ── Local Backup ──────────────────────────────────────────────────
 
-    private void requestStoragePermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            try {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                intent.setData(Uri.parse("package:" + getPackageName()));
-                manageStorageLauncher.launch(intent);
-            } catch (Exception e) {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                manageStorageLauncher.launch(intent);
-            }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(this,
-                new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                }, PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                loadBackupFiles();
-            } else {
-                showSnackbar(getString(R.string.storage_permission_required), true);
-            }
-        }
-    }
-
-    // ─────────────────────────────────────────────
     private File getBackupDirectory() {
-        File dir;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            dir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOCUMENTS), "SmartPOS_Backups");
-            if (!dir.exists() || !dir.canWrite()) {
-                dir = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_DOWNLOADS), "SmartPOS_Backups");
-            }
-        } else {
-            dir = new File(Environment.getExternalStorageDirectory(), "SmartPOS_Backups");
-        }
+        File dir = new File(getExternalFilesDir(null), "SmartPOS_Backups");
         if (!dir.exists()) dir.mkdirs();
         return dir;
     }
 
-    // ─────────────────────────────────────────────
     private void loadBackupFiles() {
         backupFiles.clear();
         try {
-            File backupDir = getBackupDirectory();
-            File[] files = backupDir.listFiles(
+            File   backupDir = getBackupDirectory();
+            File[] files     = backupDir.listFiles(
                 (d, name) -> name.endsWith(".db") || name.endsWith(".backup"));
             if (files != null && files.length > 0) {
                 backupFiles.addAll(Arrays.asList(files));
                 backupFiles.sort((f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
             }
         } catch (Exception e) {
-            Log.e(TAG, "loadBackupFiles error: " + e.getMessage(), e);
+            Log.e(TAG, "loadBackupFiles error", e);
             showSnackbar(getString(R.string.unknown_error), true);
         }
         updateUI();
@@ -291,7 +192,6 @@ public class ActivityBackupActivity extends BaseActivity {
             listBackups.setAdapter(new BackupsAdapter());
     }
 
-    // ─────────────────────────────────────────────
     private void createBackup() {
         new MaterialAlertDialogBuilder(this)
             .setTitle(getString(R.string.create_backup))
@@ -306,7 +206,7 @@ public class ActivityBackupActivity extends BaseActivity {
             if (dbHelper != null) dbHelper.close();
 
             String dbPath = getDatabasePath(DBHelper.DATABASE_NAME).getAbsolutePath();
-            File dbFile = new File(dbPath);
+            File   dbFile = new File(dbPath);
             if (!dbFile.exists()) {
                 showSnackbar(getString(R.string.file_not_found), true);
                 dbHelper = new DBHelper(this);
@@ -320,31 +220,29 @@ public class ActivityBackupActivity extends BaseActivity {
                 return;
             }
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.getDefault());
-            File backupFile = new File(backupDir, "backup_" + sdf.format(new Date()) + ".db");
+            SimpleDateFormat sdf        = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.getDefault());
+            File             backupFile = new File(backupDir, "backup_" + sdf.format(new Date()) + ".db");
 
             copyFile(dbFile, backupFile);
 
-            showSnackbar(getString(R.string.backup_created) + "\n" + backupDir.getAbsolutePath(),
-                false);
+            showSnackbar(getString(R.string.backup_created) + "\n" + backupDir.getAbsolutePath(), false);
             loadBackupFiles();
 
         } catch (Exception e) {
-            Log.e(TAG, "performBackup error: " + e.getMessage(), e);
+            Log.e(TAG, "performBackup error", e);
             showSnackbar(getString(R.string.backup_failed), true);
         } finally {
             dbHelper = new DBHelper(this);
         }
     }
 
-    // ─────────────────────────────────────────────
+    // ── Restore ───────────────────────────────────────────────────────
+
     private void pickBackupFile() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        pickBackupLauncher.launch(
-            Intent.createChooser(intent, getString(R.string.restore_backup))
-        );
+        pickBackupLauncher.launch(Intent.createChooser(intent, getString(R.string.restore_backup)));
     }
 
     private void confirmRestore(Uri uri) {
@@ -357,7 +255,7 @@ public class ActivityBackupActivity extends BaseActivity {
     }
 
     private void performRestore(Uri uri) {
-        InputStream   inputStream  = null;
+        InputStream      inputStream  = null;
         FileOutputStream outputStream = null;
         try {
             if (dbHelper != null) dbHelper.close();
@@ -375,7 +273,7 @@ public class ActivityBackupActivity extends BaseActivity {
             }
 
             byte[] buffer = new byte[1024];
-            int length;
+            int    length;
             while ((length = inputStream.read(buffer)) > 0) {
                 outputStream.write(buffer, 0, length);
             }
@@ -383,7 +281,6 @@ public class ActivityBackupActivity extends BaseActivity {
 
             showSnackbar(getString(R.string.backup_restored), false);
 
-            // إعادة تشغيل
             new MaterialAlertDialogBuilder(this)
                 .setTitle(getString(R.string.restart_app))
                 .setMessage(getString(R.string.restart_required))
@@ -399,21 +296,19 @@ public class ActivityBackupActivity extends BaseActivity {
                 .show();
 
         } catch (Exception e) {
-            Log.e(TAG, "performRestore error: " + e.getMessage(), e);
+            Log.e(TAG, "performRestore error", e);
             showSnackbar(getString(R.string.restore_failed), true);
         } finally {
-            // ✅ إغلاق Streams مع Log بدل printStackTrace
             try { if (inputStream  != null) inputStream.close();  } catch (Exception e) {
-                Log.w(TAG, "Error closing inputStream: " + e.getMessage());
+                Log.w(TAG, "Error closing inputStream", e);
             }
             try { if (outputStream != null) outputStream.close(); } catch (Exception e) {
-                Log.w(TAG, "Error closing outputStream: " + e.getMessage());
+                Log.w(TAG, "Error closing outputStream", e);
             }
             dbHelper = new DBHelper(this);
         }
     }
 
-    // ─────────────────────────────────────────────
     private void copyFile(File src, File dst) throws Exception {
         try (FileInputStream fis  = new FileInputStream(src);
              FileOutputStream fos = new FileOutputStream(dst)) {
@@ -424,25 +319,13 @@ public class ActivityBackupActivity extends BaseActivity {
         }
     }
 
-    // ─────────────────────────────────────────────
-    private void showSnackbar(String msg, boolean error) {
-        try {
-            Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG)
-                .setBackgroundTint(error ? 0xFFB3261E : 0xFF2E7D32)
-                .show();
-        } catch (Exception e) {
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        }
-    }
+    // ── Adapter ───────────────────────────────────────────────────────
 
-    // ─────────────────────────────────────────────
-    // Adapter
-    // ─────────────────────────────────────────────
     private class BackupsAdapter extends BaseAdapter {
 
-        @Override public int    getCount()     { return backupFiles.size(); }
-        @Override public Object getItem(int i) { return backupFiles.get(i); }
-        @Override public long   getItemId(int i) { return i; }
+        @Override public int    getCount()        { return backupFiles.size(); }
+        @Override public Object getItem(int i)    { return backupFiles.get(i); }
+        @Override public long   getItemId(int i)  { return i; }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -492,7 +375,6 @@ public class ActivityBackupActivity extends BaseActivity {
             .show();
     }
 
-    // ─────────────────────────────────────────────
     @Override
     protected void onDestroy() {
         super.onDestroy();

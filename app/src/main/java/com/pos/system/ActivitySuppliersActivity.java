@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,8 @@ import java.util.HashMap;
  * @version 3.0
  */
 public class ActivitySuppliersActivity extends BaseActivity {
+
+    private static final String TAG = "SuppliersActivity";
 
     private DBHelper dbHelper;
     private RecyclerView recyclerView;
@@ -159,7 +162,9 @@ public class ActivitySuppliersActivity extends BaseActivity {
                 obj.putAll(row);
                 fullList.add(obj);
             }
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            Log.e(TAG, "refreshData error", e);
+        }
         updateAdapter(fullList);
     }
 
