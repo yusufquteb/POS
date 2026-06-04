@@ -209,10 +209,7 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    private void openActivity(Class<?> cls) {
-        startActivity(new Intent(this, cls));
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-    }
+
 
     private void setupFAB() {
         if (fabQuickSale != null) {

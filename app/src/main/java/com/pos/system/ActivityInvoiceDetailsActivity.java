@@ -295,16 +295,6 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         }
     }
     
-    private void showSnackbar(String msg, boolean error) {
-        try {
-            Snackbar s = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG);
-            s.setBackgroundTint(error ? 0xFFB3261E : 0xFF2E7D32);
-            s.show();
-        } catch (Exception e) {
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        }
-    }
-    
     /**
      * ✅ RecyclerView Adapter محسّن للعناصر
      */

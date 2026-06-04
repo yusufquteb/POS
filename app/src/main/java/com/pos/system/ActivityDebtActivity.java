@@ -441,12 +441,6 @@ public class ActivityDebtActivity extends BaseActivity {
         return v != null ? v : "";
     }
 
-    private void showSnackbar(String msg) {
-        View root = rvDebts != null ? rvDebts : findViewById(android.R.id.content);
-        if (root != null) Snackbar.make(root, msg, Snackbar.LENGTH_LONG).show();
-        else showToast(msg);
-    }
-
     // ─────────────────────────────────────────────────────────────
     //  Customer Adapter
     // ─────────────────────────────────────────────────────────────
