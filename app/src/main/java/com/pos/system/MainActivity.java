@@ -306,7 +306,7 @@ public class MainActivity extends BaseActivity
                 if (cardAlert != null) cardAlert.setVisibility(View.GONE);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            android.util.Log.e(TAG, "checkAlerts error", e);
         }
         showTrialBannerIfNeeded();
     }
@@ -373,7 +373,7 @@ public class MainActivity extends BaseActivity
             else if (id == R.id.nav_about)           showAboutDialog();
             else if (id == R.id.nav_logout)          confirmLogout();
         } catch (Exception e) {
-            e.printStackTrace();
+            android.util.Log.e(TAG, "Navigation error", e);
         }
         if (drawerLayout != null) drawerLayout.closeDrawer(GravityCompat.START);
         return true;

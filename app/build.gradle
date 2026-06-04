@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -73,11 +74,19 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
+    kapt {
+        correctErrorTypes true
+    }
+
     lint {
         abortOnError false
-        checkReleaseBuilds false
-        disable 'MissingTranslation', 'ExtraTranslation', 'UnusedResources'
+        checkReleaseBuilds true
+        disable 'MissingTranslation', 'ExtraTranslation', 'UnusedResources', 'VectorPath'
+        enable 'HardcodedText', 'SetTextI18n', 'Recycle', 'UseSparseArrays'
         warningsAsErrors false
+        htmlReport true
+        htmlOutput file("build/reports/lint-results.html")
+        xmlReport true
     }
 }
 
@@ -125,4 +134,24 @@ dependencies {
 
     // ─── JSON & Data ─────────────────────────────────────────────
     implementation 'com.google.code.gson:gson:2.10.1'
+
+    // ─── Architecture Components (ViewModel + LiveData) ──────────
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.8.7'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.8.7'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.8.7'
+
+    // ─── Room Database ────────────────────────────────────────────
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+
+    // ─── Hilt Dependency Injection ────────────────────────────────
+    implementation 'com.google.dagger:hilt-android:2.51.1'
+    annotationProcessor 'com.google.dagger:hilt-compiler:2.51.1'
+
+    // ─── Testing ─────────────────────────────────────────────────
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.11.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation 'androidx.room:room-testing:2.6.1'
 }

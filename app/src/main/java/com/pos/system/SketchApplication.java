@@ -13,22 +13,15 @@ import com.pos.system.managers.LanguageManager;
 import com.pos.system.managers.ThemeManager;
 import com.pos.system.workers.LowStockWorker;
 
+import dagger.hilt.android.HiltAndroidApp;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.concurrent.TimeUnit;
 
-/**
- * SketchApplication - Application Class الرئيسية
- *
- * إصلاحات:
- * 1. تهيئة LanguageManager (كانت مفقودة → crash فوري)
- * 2. تهيئة ThemeManager (كانت مفقودة → theme لا يُطبَّق)
- * 3. تحسين Crash Handler
- *
- * @version 2.1 (Fixed)
- */
+@HiltAndroidApp
 public class SketchApplication extends Application {
 
     private static final String TAG = "SketchApplication";
