@@ -1,7 +1,9 @@
 package com.pos.system;
 
 import android.content.Context;
+import android.util.Base64;
 import android.util.Log;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -174,8 +176,16 @@ public class InvoicePrinter {
         sb.append(centerText("شكراً لتعاملكم معنا", width)).append("\n");
         sb.append(centerText("نتمنى لكم يوماً سعيداً", width)).append("\n");
 
-        // 10. QR code
-        String qrData = "INV-" + invoiceNumber + "-" + total;
+        // 10. QR code — ZATCA TLV for SA, generic for others
+        String countryCode = storeSettings != null
+            ? safeStr(storeSettings, "country_code", "EG") : "EG";
+        String qrData;
+        if ("SA".equalsIgnoreCase(countryCode)) {
+            qrData = buildZatcaQr(storeName, taxNumber, invoiceDate, total,
+                safeDouble(invoice.get("tax")));
+        } else {
+            qrData = "INV-" + invoiceNumber + "-" + total;
+        }
         sb.append("\n[C]<qrcode size='20'>").append(qrData).append("</qrcode>\n");
 
         // 11. Paper cut
@@ -320,5 +330,51 @@ public class InvoicePrinter {
         if (map == null) return fallback;
         String v = map.get(key);
         return (v != null && !v.isEmpty()) ? v : fallback;
+    }
+
+    /**
+     * ZATCA Phase-1 TLV QR (Base64-encoded).
+     * Format: Tag(1B) + Len(1B) + Value per field.
+     * Tag 1: Seller name, Tag 2: VAT number, Tag 3: Timestamp,
+     * Tag 4: Invoice total (incl. VAT), Tag 5: VAT amount.
+     */
+    private String buildZatcaQr(String sellerName, String vatNumber,
+                                  String timestamp, double total, double vatAmount) {
+        try {
+            byte[] name    = tlvField((byte) 1, sellerName.isEmpty() ? "المتجر" : sellerName);
+            byte[] vat     = tlvField((byte) 2, vatNumber.isEmpty()  ? "300000000000003" : vatNumber);
+            byte[] ts      = tlvField((byte) 3, timestamp.isEmpty()
+                ? new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).format(new Date())
+                : timestamp);
+            byte[] tot     = tlvField((byte) 4, String.format(Locale.US, "%.2f", total));
+            byte[] vatAmt  = tlvField((byte) 5, String.format(Locale.US, "%.2f", vatAmount));
+
+            byte[] tlv = concat(name, vat, ts, tot, vatAmt);
+            return Base64.encodeToString(tlv, Base64.NO_WRAP);
+        } catch (Exception e) {
+            Log.e(TAG, "ZATCA QR error: " + e.getMessage(), e);
+            return "INV-" + total;
+        }
+    }
+
+    private byte[] tlvField(byte tag, String value) {
+        byte[] valueBytes = value.getBytes(StandardCharsets.UTF_8);
+        byte[] result = new byte[2 + valueBytes.length];
+        result[0] = tag;
+        result[1] = (byte) valueBytes.length;
+        System.arraycopy(valueBytes, 0, result, 2, valueBytes.length);
+        return result;
+    }
+
+    private byte[] concat(byte[]... arrays) {
+        int total = 0;
+        for (byte[] a : arrays) total += a.length;
+        byte[] result = new byte[total];
+        int pos = 0;
+        for (byte[] a : arrays) {
+            System.arraycopy(a, 0, result, pos, a.length);
+            pos += a.length;
+        }
+        return result;
     }
 }

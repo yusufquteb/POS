@@ -2638,6 +2638,59 @@ public class DBHelper extends SQLiteOpenHelper {
         return list.isEmpty() ? null : list.get(0);
     }
 
+    /** المنتجات التي انتهت صلاحيتها بالفعل (وما زال لديها مخزون) */
+    public List<HashMap<String, String>> getExpiredProducts() {
+        return queryProducts(
+            "SELECT * FROM " + TABLE_PRODUCTS +
+            " WHERE expiry != '' AND expiry IS NOT NULL" +
+            " AND DATE(expiry) < DATE('now')" +
+            " AND qty > 0 ORDER BY expiry ASC",
+            null);
+    }
+
+    /** ربحية كل منتج خلال فترة معينة (مرتبة من الأضعف للأقوى هامشاً) */
+    public List<HashMap<String, String>> getProfitByProduct(String startDate, String endDate) {
+        return queryTable(
+            "SELECT ii.name, ii.product_id," +
+            " CAST(SUM(ii.qty) AS TEXT) as total_qty," +
+            " CAST(ROUND(SUM(ii.total), 2) AS TEXT) as revenue," +
+            " CAST(ROUND(COALESCE(SUM(p.cost * ii.qty), 0), 2) AS TEXT) as cogs," +
+            " CAST(ROUND(SUM(ii.total) - COALESCE(SUM(p.cost * ii.qty), 0), 2) AS TEXT) as profit," +
+            " CAST(CASE WHEN SUM(ii.total) > 0 THEN" +
+            "   ROUND(((SUM(ii.total) - COALESCE(SUM(p.cost * ii.qty), 0)) / SUM(ii.total)) * 100, 1)" +
+            " ELSE 0 END AS TEXT) as margin_pct" +
+            " FROM invoice_items ii" +
+            " JOIN invoices i ON ii.invoice_id = i.id" +
+            " LEFT JOIN products p ON CAST(ii.product_id AS INTEGER) = p.id" +
+            " WHERE DATE(i.created_at) BETWEEN ? AND ?" +
+            " GROUP BY ii.product_id, ii.name HAVING SUM(ii.total) > 0" +
+            " ORDER BY CAST(margin_pct AS REAL) ASC LIMIT 20",
+            new String[]{startDate, endDate});
+    }
+
+    /** ملخص قرارات لوحة التحكم الذكية */
+    public HashMap<String, Integer> getDecisionSummary() {
+        HashMap<String, Integer> r = new HashMap<>();
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c;
+            c = db.rawQuery("SELECT COUNT(*) FROM products WHERE expiry!='' AND expiry IS NOT NULL AND DATE(expiry)<DATE('now') AND qty>0", null);
+            r.put("expired",     c.moveToFirst() ? c.getInt(0) : 0); c.close();
+            c = db.rawQuery("SELECT COUNT(*) FROM products WHERE expiry!='' AND expiry IS NOT NULL AND DATE(expiry) BETWEEN DATE('now') AND DATE('now','+7 days') AND qty>0", null);
+            r.put("expiring_7",  c.moveToFirst() ? c.getInt(0) : 0); c.close();
+            c = db.rawQuery("SELECT COUNT(*) FROM products WHERE qty<=reorder_level AND qty>0", null);
+            r.put("low_stock",   c.moveToFirst() ? c.getInt(0) : 0); c.close();
+            c = db.rawQuery(
+                "SELECT COUNT(*) FROM products WHERE qty>0 AND id NOT IN (" +
+                "SELECT DISTINCT CAST(product_id AS INTEGER) FROM invoice_items ii" +
+                " JOIN invoices i ON ii.invoice_id=i.id" +
+                " WHERE DATE(i.created_at)>=DATE('now','-30 days')" +
+                " AND product_id!='' AND product_id IS NOT NULL)", null);
+            r.put("dead_stock",  c.moveToFirst() ? c.getInt(0) : 0); c.close();
+        } catch (Exception e) { Log.e(TAG, "getDecisionSummary: " + e.getMessage(), e); }
+        return r;
+    }
+
     /** تحديث إحصائيات العميل بعد كل فاتورة */
     public void updateCustomerStats(String customerId) {
         if (customerId == null || customerId.isEmpty() || "0".equals(customerId)) return;

@@ -182,8 +182,8 @@ public class MainActivity extends BaseActivity
     private void setupCardClicks() {
         if (cardTodaySales  != null) cardTodaySales.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
         if (cardLowStock    != null) cardLowStock.setOnClickListener(v -> showLowStockDialog());
-        if (cardExpiryAlert != null) cardExpiryAlert.setOnClickListener(v -> openActivity(ActivityProductsActivity.class));
-        if (cardDeadStock   != null) cardDeadStock.setOnClickListener(v -> openActivity(ActivityProductsActivity.class));
+        if (cardExpiryAlert != null) cardExpiryAlert.setOnClickListener(v -> openActivity(ActivityExpiryDashboardActivity.class));
+        if (cardDeadStock   != null) cardDeadStock.setOnClickListener(v -> openActivity(ActivityDecisionDashboardActivity.class));
         if (cardBestSeller  != null) cardBestSeller.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
         if (cardBestCustomer != null) cardBestCustomer.setOnClickListener(v -> openActivity(ActivityCustomersActivity.class));
 
