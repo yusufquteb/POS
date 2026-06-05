@@ -1,59 +1,43 @@
 package com.pos.system;
 
 import android.content.Context;
-import android.content.res.Configuration;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.google.android.material.snackbar.Snackbar;
 import com.pos.system.managers.LanguageManager;
 import com.pos.system.managers.ThemeManager;
 
-/**
- * BaseActivity - الأساس لجميع الـ Activities
- *
- * يُطبِّق تلقائياً:
- * 1. الثيم (فاتح/داكن/ألوان) → setTheme قبل super.onCreate()
- * 2. اللغة (عربي/إنجليزي + RTL/LTR) → attachBaseContext
- * 3. تغيير الثيم/اللغة → recreate() يُطبِّق التغيير فوراً
- */
 public class BaseActivity extends AppCompatActivity {
 
     protected static final String TAG = "POS_System";
 
-    // آخر حالة ثيم ولغة - للكشف عن التغيير في onResume
-    private int  lastThemeResId;
+    private int    lastThemeResId;
     private String lastLanguage;
 
-    // ══════════════════════════════════════════════════════
-    // 1. تطبيق اللغة قبل inflate أي layout
-    // ══════════════════════════════════════════════════════
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LanguageManager.updateResources(newBase));
     }
 
-    // ══════════════════════════════════════════════════════
-    // 2. تطبيق الثيم قبل setContentView
-    // ══════════════════════════════════════════════════════
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // ✅ تطبيق الثيم قبل أي شيء آخر
         ThemeManager.applyThemeToActivity(this);
-
         super.onCreate(savedInstanceState);
 
-        // حفظ الحالة الحالية للكشف عن التغيير
+        // Enable true edge-to-edge so content draws behind system bars
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+
         lastThemeResId = ThemeManager.getThemeResId();
         lastLanguage   = LanguageManager.getCurrentLanguage();
     }
 
-    // ══════════════════════════════════════════════════════
-    // 3. إعادة إنشاء Activity إذا تغيّر الثيم أو اللغة
-    //    (يُغطّي الصفحات التي تبقى في backstack)
-    // ══════════════════════════════════════════════════════
     @Override
     protected void onResume() {
         super.onResume();
@@ -61,30 +45,19 @@ public class BaseActivity extends AppCompatActivity {
         int    currentTheme = ThemeManager.getThemeResId();
         String currentLang  = LanguageManager.getCurrentLanguage();
 
-        boolean themeChanged = (currentTheme != lastThemeResId);
-        boolean langChanged  = !currentLang.equals(lastLanguage);
-
-        if (themeChanged || langChanged) {
-            // تحديث الحالة المحفوظة ثم إعادة إنشاء
+        if (currentTheme != lastThemeResId || !currentLang.equals(lastLanguage)) {
             lastThemeResId = currentTheme;
             lastLanguage   = currentLang;
             recreate();
         }
     }
 
-    // ══════════════════════════════════════════════════════
-    // Helpers
-    // ══════════════════════════════════════════════════════
-    protected void showToast(String message) {
-        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show();
-    }
-
-    protected void showLongToast(String message) {
-        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
-    }
+    // ── Edge-to-Edge insets ──────────────────────────────────────────
 
     /**
-     * تطبيق Window Insets للـ Edge-to-Edge display
+     * Apply system bar insets to a root view so content is not hidden
+     * behind the status bar or navigation bar.
+     * Call after setContentView() when the root view needs padding.
      */
     protected void applyWindowInsets(View view) {
         if (view == null) return;
@@ -98,6 +71,81 @@ public class BaseActivity extends AppCompatActivity {
             );
             return insets;
         });
+    }
+
+    /**
+     * Apply only bottom insets (navigation bar) — use for FABs and
+     * bottom-anchored content inside CoordinatorLayout.
+     */
+    protected void applyBottomInsets(View view) {
+        if (view == null) return;
+        ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(
+                v.getPaddingLeft(),
+                v.getPaddingTop(),
+                v.getPaddingRight(),
+                bars.bottom
+            );
+            return insets;
+        });
+    }
+
+    // ── Snackbar ─────────────────────────────────────────────────────
+
+    /**
+     * Theme-aware Snackbar using Material 3 color roles.
+     * isError=true → uses colorError / onError pair.
+     * isError=false → uses colorPrimary / onPrimary pair.
+     */
+    protected void showSnackbar(String message, boolean isError) {
+        View root = findViewById(android.R.id.content);
+        if (root == null) {
+            showToast(message);
+            return;
+        }
+        Snackbar sb = Snackbar.make(root, message, Snackbar.LENGTH_LONG);
+
+        int bgAttr   = isError ? com.google.android.material.R.attr.colorError
+                                : com.google.android.material.R.attr.colorPrimary;
+        int textAttr = isError ? com.google.android.material.R.attr.colorOnError
+                                : com.google.android.material.R.attr.colorOnPrimary;
+
+        TypedValue bgVal   = new TypedValue();
+        TypedValue textVal = new TypedValue();
+        if (getTheme().resolveAttribute(bgAttr, bgVal, true)) {
+            sb.setBackgroundTint(bgVal.data);
+        }
+        if (getTheme().resolveAttribute(textAttr, textVal, true)) {
+            sb.setTextColor(textVal.data);
+        }
+        sb.show();
+    }
+
+    protected void showSnackbar(String message) {
+        showSnackbar(message, false);
+    }
+
+    // ── Navigation ───────────────────────────────────────────────────
+
+    protected void openActivity(Class<?> cls) {
+        startActivity(new Intent(this, cls));
+    }
+
+    protected void openActivity(Class<?> cls, android.os.Bundle extras) {
+        Intent i = new Intent(this, cls);
+        if (extras != null) i.putExtras(extras);
+        startActivity(i);
+    }
+
+    // ── UI Helpers ───────────────────────────────────────────────────
+
+    protected void showToast(String message) {
+        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showLongToast(String message) {
+        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
     }
 
     protected void hideKeyboard() {

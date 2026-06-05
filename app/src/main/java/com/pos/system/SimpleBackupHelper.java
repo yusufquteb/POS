@@ -3,6 +3,7 @@ package com.pos.system;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import androidx.core.content.FileProvider;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,11 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * مساعد النسخ الاحتياطي البسيط
- * يعمل بدون مكتبات Google Drive المعقدة
- */
 public class SimpleBackupHelper {
+
+    private static final String TAG = "SimpleBackupHelper";
     
     private Activity activity;
     private String dbPath;
@@ -82,7 +81,7 @@ public class SimpleBackupHelper {
             activity.startActivity(Intent.createChooser(shareIntent, "مشاركة النسخة الاحتياطية"));
             
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error sharing backup", e);
         }
     }
 
@@ -155,7 +154,7 @@ public class SimpleBackupHelper {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error cleaning old backups", e);
         }
     }
 }

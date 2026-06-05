@@ -25,6 +25,8 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -38,6 +40,8 @@ import java.util.Date;
 
 public class FileUtil {
 
+    private static final String TAG = "FileUtil";
+
     private static void createNewFile(String path) {
         int lastSep = path.lastIndexOf(File.separator);
         if (lastSep > 0) {
@@ -50,7 +54,7 @@ public class FileUtil {
         try {
             if (!file.exists()) file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Failed to create file: " + path, e);
         }
     }
 
@@ -69,13 +73,13 @@ public class FileUtil {
                 sb.append(new String(buff, 0, length));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error reading file: " + path, e);
         } finally {
             if (fr != null) {
                 try {
                     fr.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (IOException e) {
+                    Log.e(TAG, "Error closing FileReader", e);
                 }
             }
         }
@@ -92,13 +96,13 @@ public class FileUtil {
             fileWriter.write(str);
             fileWriter.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error writing file: " + path, e);
         } finally {
             try {
                 if (fileWriter != null)
                     fileWriter.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, "Error closing FileWriter", e);
             }
         }
     }
@@ -121,20 +125,20 @@ public class FileUtil {
                 fos.write(buff, 0, length);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error copying file from " + sourcePath + " to " + destPath, e);
         } finally {
             if (fis != null) {
                 try {
                     fis.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Error closing FileInputStream", e);
                 }
             }
             if (fos != null) {
                 try {
                     fos.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Error closing FileOutputStream", e);
                 }
             }
         }
@@ -347,8 +351,8 @@ public class FileUtil {
         FileUtil.createNewFile(destPath);
         try (FileOutputStream out = new FileOutputStream(new File(destPath))) {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            Log.e(TAG, "Error saving bitmap to: " + destPath, e);
         }
     }
 

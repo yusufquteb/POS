@@ -42,6 +42,21 @@
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
+        <!-- Semantic design tokens -->
+        <item name="colorSuccess">@color/color_success</item>
+        <item name="colorSuccessContainer">@color/color_success_container</item>
+        <item name="colorWarning">@color/color_warning</item>
+        <item name="colorWarningContainer">@color/color_warning_container</item>
+        <item name="colorInfo">@color/color_info</item>
+        <item name="colorInfoContainer">@color/color_info_container</item>
+        <item name="colorLowStock">@color/color_low_stock</item>
+        <item name="colorOutOfStock">@color/color_out_of_stock</item>
+        <item name="colorProfit">@color/color_profit</item>
+        <item name="colorLoss">@color/color_error</item>
+        <item name="colorShiftOpen">@color/shift_open_text</item>
+        <item name="colorShiftOpenContainer">@color/shift_open_bg</item>
+        <item name="colorShiftClosed">@color/shift_closed_text</item>
+        <item name="colorShiftClosedContainer">@color/shift_closed_bg</item>
     </style>
 
     <style name="AppTheme_Dark" parent="Theme.Material3.Dark.NoActionBar">

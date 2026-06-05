@@ -367,10 +367,6 @@ public class ActivitySettingsActivity extends BaseActivity {
             .show();
     }
 
-    private void openActivity(Class<?> cls) {
-        startActivity(new Intent(this, cls));
-    }
-
     @Override
     protected void onResume() {
         super.onResume();

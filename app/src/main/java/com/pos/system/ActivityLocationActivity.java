@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -30,6 +31,7 @@ import java.util.HashMap;
 
 public class ActivityLocationActivity extends BaseActivity {
 
+    private static final String TAG = "LocationActivity";
     private DBHelper dbHelper;
     private RecyclerView recyclerView;
     private LocationAdapter adapter;
@@ -132,8 +134,8 @@ public class ActivityLocationActivity extends BaseActivity {
                     }
                 }
             } catch (Exception e) {
+                Log.e(TAG, "Error updating location", e);
                 Toast.makeText(this, "حدث خطأ: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
             }
         });
         
@@ -178,8 +180,8 @@ public class ActivityLocationActivity extends BaseActivity {
                             Toast.makeText(this, "فشل في حذف الموقع", Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
+                        Log.e(TAG, "Error deleting location", e);
                         Toast.makeText(this, "حدث خطأ أثناء الحذف", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
                     }
                 })
                 .setCancelable(false)
@@ -205,8 +207,8 @@ public class ActivityLocationActivity extends BaseActivity {
                 fullList.add(map);
             }
         } catch (Exception e) {
+            Log.e(TAG, "Error loading locations", e);
             Toast.makeText(this, "خطأ في تحميل البيانات", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
         } finally {
             if (cursor != null) {
                 cursor.close();

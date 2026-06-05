@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Design token attributes — reference these in layouts and drawables
+         instead of hard-coded colors, so dark/light mode is handled automatically -->
+
+    <!-- Status-semantic colors -->
+    <attr name="colorSuccess" format="color"/>
+    <attr name="colorSuccessContainer" format="color"/>
+    <attr name="colorWarning" format="color"/>
+    <attr name="colorWarningContainer" format="color"/>
+    <attr name="colorInfo" format="color"/>
+    <attr name="colorInfoContainer" format="color"/>
+
+    <!-- Inventory-specific tokens -->
+    <attr name="colorLowStock" format="color"/>
+    <attr name="colorOutOfStock" format="color"/>
+    <attr name="colorProfit" format="color"/>
+    <attr name="colorLoss" format="color"/>
+
+    <!-- Shift status tokens -->
+    <attr name="colorShiftOpen" format="color"/>
+    <attr name="colorShiftOpenContainer" format="color"/>
+    <attr name="colorShiftClosed" format="color"/>
+    <attr name="colorShiftClosedContainer" format="color"/>
+
+</resources>

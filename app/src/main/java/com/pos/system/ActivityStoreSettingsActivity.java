@@ -18,7 +18,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
@@ -322,17 +321,6 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
         } catch (Exception e) {
             Log.e(TAG, "saveLogoToInternalStorage error: " + e.getMessage(), e);
             return "";
-        }
-    }
-
-    // ─────────────────────────────────────────────
-    private void showSnackbar(String message, boolean isError) {
-        try {
-            Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
-                .setBackgroundTint(isError ? 0xFFB3261E : 0xFF2E7D32)
-                .show();
-        } catch (Exception e) {
-            Log.e(TAG, "showSnackbar error: " + e.getMessage(), e);
         }
     }
 

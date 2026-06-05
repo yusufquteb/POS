@@ -338,13 +338,6 @@ public class ActivityProductsActivity extends BaseActivity {
     }
 
     // ─────────────────────────────────────────────
-    private void showSnackbar(String message, boolean isError) {
-        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT)
-            .setBackgroundTint(isError ? 0xFFB3261E : 0xFF2E7D32)
-            .show();
-    }
-
-    // ─────────────────────────────────────────────
     // Adapter
     // ─────────────────────────────────────────────
     private class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
