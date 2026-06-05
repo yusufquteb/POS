@@ -93,8 +93,6 @@ public class MainActivity extends BaseActivity
         // BaseActivity يطبق الثيم واللغة تلقائياً
         super.onCreate(savedInstanceState);
 
-        GlobalExceptionHandler.setup(this);
-        // إصلاح: تأكد من اسم الـ layout الصحيح (activity_main وليس main)
         setContentView(R.layout.activity_main);
 
         try {
@@ -103,7 +101,7 @@ public class MainActivity extends BaseActivity
             loadDashboardData();
             checkAlerts();
         } catch (Exception e) {
-            GlobalExceptionHandler.handle(this, e);
+            android.util.Log.e(TAG, "MainActivity init error", e);
         }
     }
 
