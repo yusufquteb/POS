@@ -82,6 +82,9 @@ public class ActivityUsersActivity extends BaseActivity {
 
     private void showAddUserDialog() {
         View dv = getLayoutInflater().inflate(R.layout.dialog_add_user, null);
+        TextInputLayout tilName     = dv.findViewById(R.id.til_name);
+        TextInputLayout tilUsername = dv.findViewById(R.id.til_username);
+        TextInputLayout tilPin      = dv.findViewById(R.id.til_pin);
         TextInputEditText etName     = dv.findViewById(R.id.et_name);
         TextInputEditText etUsername = dv.findViewById(R.id.et_username);
         TextInputEditText etPin      = dv.findViewById(R.id.et_pin);
@@ -97,13 +100,30 @@ public class ActivityUsersActivity extends BaseActivity {
             .setTitle("إضافة مستخدم جديد")
             .setView(dv)
             .setPositiveButton("حفظ", (d, w) -> {
+                if (tilName != null) tilName.setError(null);
+                if (tilUsername != null) tilUsername.setError(null);
+                if (tilPin != null) tilPin.setError(null);
+
                 String name     = etName     != null && etName.getText()     != null ? etName.getText().toString().trim()     : "";
                 String username = etUsername != null && etUsername.getText() != null ? etUsername.getText().toString().trim() : "";
                 String pin      = etPin      != null && etPin.getText()      != null ? etPin.getText().toString().trim()      : "";
-                if (name.isEmpty() || username.isEmpty() || pin.isEmpty()) {
-                    showSnackbar("جميع الحقول مطلوبة", true); return;
+
+                if (name.isEmpty()) {
+                    if (tilName != null) tilName.setError("الاسم مطلوب");
+                    return;
                 }
-                if (pin.length() < 4) { showToast("الـ PIN يجب أن يكون 4 أرقام على الأقل"); return; }
+                if (username.isEmpty()) {
+                    if (tilUsername != null) tilUsername.setError("اسم المستخدم مطلوب");
+                    return;
+                }
+                if (pin.isEmpty()) {
+                    if (tilPin != null) tilPin.setError("كلمة المرور مطلوبة");
+                    return;
+                }
+                if (pin.length() < 4) {
+                    if (tilPin != null) tilPin.setError("الـ PIN يجب أن يكون 4 أرقام على الأقل");
+                    return;
+                }
 
                 String[] roleVals = {UserManager.ROLE_CASHIER, UserManager.ROLE_MANAGER, UserManager.ROLE_ADMIN};
                 String role = roleVals[spRole != null ? spRole.getSelectedItemPosition() : 0];

@@ -200,7 +200,7 @@ public class ActivityChecksActivity extends BaseActivity {
                         success = isCustomerTab ? dbHelper.deleteCustomerCheck(id) : (dbHelper.getWritableDatabase().delete("supplier_checks", "id=?", new String[]{String.valueOf(id)}) > 0);
                     }
                     boolean finalSuccess = success;
-                    runOnUiThread(() -> { if (finalSuccess) { showToast("تم بنجاح"); loadData(); } else showToast("حدث خطأ"); });
+                    runOnUiThread(() -> { if (finalSuccess) { showToast("تم بنجاح"); loadData(); } else showSnackbar("حدث خطأ", true); });
                 });
             })
             .setNegativeButton("إلغاء", null)

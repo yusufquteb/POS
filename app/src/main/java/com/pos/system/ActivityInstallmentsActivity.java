@@ -205,7 +205,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                                     String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
                                     executor.execute(() -> {
                                         boolean ok = dbHelper.payInstallment(pid, today);
-                                        runOnUiThread(() -> { if (ok) { showToast("تم الدفع بنجاح"); loadData(); } else showToast("خطأ في الدفع"); });
+                                        runOnUiThread(() -> { if (ok) { showToast("تم الدفع بنجاح"); loadData(); } else showSnackbar("خطأ في الدفع", true); });
                                     });
                                 })
                                 .show())
@@ -272,7 +272,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                         .setPositiveButton("تأكيد الدفع", (d, w) ->
                             executor.execute(() -> {
                                 boolean ok = dbHelper.payInstallment(pid, today);
-                                runOnUiThread(() -> { if (ok) { showToast("تم الدفع"); loadData(); } else showToast("خطأ"); });
+                                runOnUiThread(() -> { if (ok) { showToast("تم الدفع"); loadData(); } else showSnackbar("خطأ", true); });
                             }))
                         .setNegativeButton("إلغاء", null)
                         .show();

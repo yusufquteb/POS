@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.pos.system.databinding.ActivityCashDrawerBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -124,7 +125,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
                 if (name.isEmpty()) { showSnackbar("الاسم مطلوب", true); return; }
                 executor.execute(() -> {
                     long id = dbHelper.addCashDrawer(name);
-                    runOnUiThread(() -> { if (id > 0) { showToast("تمت الإضافة"); loadDrawers(); } else showToast("خطأ"); });
+                    runOnUiThread(() -> { if (id > 0) { showToast("تمت الإضافة"); loadDrawers(); } else showSnackbar("خطأ", true); });
                 });
             })
             .setNegativeButton("إلغاء", null)

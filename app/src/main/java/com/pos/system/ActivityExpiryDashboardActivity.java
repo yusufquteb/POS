@@ -121,7 +121,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
             rvExpiry.setVisibility(empty ? View.GONE : View.VISIBLE);
             layoutEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
         } catch (Exception e) {
-            showToast("خطأ في تحميل البيانات");
+            showSnackbar("خطأ في تحميل البيانات", true);
         }
     }
 

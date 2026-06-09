@@ -112,7 +112,7 @@ public class ActivityDecisionDashboardActivity extends BaseActivity {
                 lowMargin.subList(0, Math.min(5, lowMargin.size())), "margin"));
 
         } catch (Exception e) {
-            showToast("خطأ في تحميل البيانات");
+            showSnackbar("خطأ في تحميل البيانات", true);
         }
     }
 

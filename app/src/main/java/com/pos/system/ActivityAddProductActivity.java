@@ -332,7 +332,7 @@ public class ActivityAddProductActivity extends BaseActivity {
         try {
             HashMap<String, String> product = dbHelper.getProductById(productId);
             if (product == null) {
-                showToast("لم يتم العثور على المنتج");
+                showSnackbar("لم يتم العثور على المنتج", true);
                 finish();
                 return;
             }
@@ -368,7 +368,7 @@ public class ActivityAddProductActivity extends BaseActivity {
             calculateProfit();
 
         } catch (Exception e) {
-            showToast("خطأ في تحميل بيانات المنتج");
+            showSnackbar("خطأ في تحميل بيانات المنتج", true);
         }
     }
 
@@ -572,7 +572,7 @@ public class ActivityAddProductActivity extends BaseActivity {
                 selectedImagePath = saveImageToInternalStorage(bitmap);
             }
         } catch (Exception e) {
-            showToast("خطأ في تحميل الصورة");
+            showSnackbar("خطأ في تحميل الصورة", true);
         }
     }
 

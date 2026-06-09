@@ -325,7 +325,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
                     showToast("✓ تم إنشاء أمر الشراء");
                 }
             } else {
-                showToast("فشل في إنشاء أمر الشراء\nFailed to create purchase order");
+                showSnackbar("فشل في إنشاء أمر الشراء\nFailed to create purchase order", true);
             }
         } catch (Exception e) {
             showToast("خطأ / Error: " + e.getMessage());
@@ -389,7 +389,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
                     showToast("✓ تم تأكيد الاستلام");
                 }
             } else {
-                showToast("فشل في تحديث الأمر\nFailed to update order");
+                showSnackbar("فشل في تحديث الأمر\nFailed to update order", true);
             }
         } catch (Exception e) {
             showToast("خطأ / Error: " + e.getMessage());

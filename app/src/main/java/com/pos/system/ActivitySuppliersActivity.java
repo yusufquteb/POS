@@ -220,7 +220,7 @@ public class ActivitySuppliersActivity extends BaseActivity {
                     dbHelper.deleteSupplier(getLong(item, "id"));
                     refreshData();
                     showToast("✓ تم الحذف");
-                } catch (Exception e) { showToast("خطأ في الحذف"); }
+                } catch (Exception e) { showSnackbar("خطأ في الحذف", true); }
             })
             .setNegativeButton("إلغاء", (d, w) -> {
                 if (adapter != null) adapter.notifyItemChanged(pos);
