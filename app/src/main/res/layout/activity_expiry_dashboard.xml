@@ -48,14 +48,14 @@
                 android:layout_weight="1"
                 android:textSize="@dimen/text_sm"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:text="جاري التحميل..." />
+                android:text="@string/str_02483e" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_mark_all_reviewed"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="تصفية"
+                android:text="@string/str_af017a"
                 android:textSize="@dimen/text_xs" />
 
         </LinearLayout>
@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_md"
-                android:text="لا توجد منتجات في هذه الفئة"
+                android:text="@string/str_df60d2"
                 android:textSize="@dimen/text_base"
                 android:textStyle="bold" />
 
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="جميع المنتجات بحالة جيدة"
+                android:text="@string/str_f53a5e"
                 android:textSize="@dimen/text_sm"
                 android:textColor="?attr/colorOnSurfaceVariant" />
 

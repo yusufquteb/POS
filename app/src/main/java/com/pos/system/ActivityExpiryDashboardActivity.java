@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import com.pos.system.databinding.ActivityExpiryDashboardBinding;
 
 /**
  * لوحة إدارة الصلاحية — ثلاثة تبويبات:
@@ -29,14 +30,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class ActivityExpiryDashboardActivity extends BaseActivity {
 
+    private ActivityExpiryDashboardBinding binding;
+
+
     private static final int TAB_EXPIRED    = 0;
     private static final int TAB_CRITICAL   = 1;  // 7 days
     private static final int TAB_WARNING    = 2;  // 30 days
 
-    private static final int COLOR_EXPIRED  = 0xFFC62828;
-    private static final int COLOR_CRITICAL = 0xFFE65100;
-    private static final int COLOR_WARNING  = 0xFFF57F17;
-    private static final int COLOR_OK       = 0xFF2E7D32;
+    private int COLOR_EXPIRED;
+    private int COLOR_CRITICAL;
+    private int COLOR_WARNING;
+    private int COLOR_OK;
 
     private DBHelper      dbHelper;
     private TabLayout     tabLayout;
@@ -49,18 +53,24 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expiry_dashboard);
+        binding = ActivityExpiryDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
+        COLOR_EXPIRED  = androidx.core.content.ContextCompat.getColor(this, R.color.color_error);
+        COLOR_CRITICAL = androidx.core.content.ContextCompat.getColor(this, R.color.color_warning);
+        COLOR_WARNING  = androidx.core.content.ContextCompat.getColor(this, R.color.color_gold);
+        COLOR_OK       = androidx.core.content.ContextCompat.getColor(this, R.color.color_success);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        tabLayout    = findViewById(R.id.tab_layout);
-        rvExpiry     = findViewById(R.id.rv_expiry);
-        layoutEmpty  = findViewById(R.id.layout_empty);
-        tvSummary    = findViewById(R.id.tv_summary);
+        tabLayout    = binding.tabLayout;
+        rvExpiry     = binding.rvExpiry;
+        layoutEmpty  = binding.layoutEmpty;
+        tvSummary    = binding.tvSummary;
 
         tabLayout.addTab(tabLayout.newTab().setText("منتهية ⛔"));
         tabLayout.addTab(tabLayout.newTab().setText("7 أيام ⚠️"));
@@ -79,7 +89,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
             @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        findViewById(R.id.btn_mark_all_reviewed).setOnClickListener(v -> showSortDialog());
+        binding.btnMarkAllReviewed.setOnClickListener(v -> showSortDialog());
 
         loadSummary();
         loadCurrentTab();
@@ -142,7 +152,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
     private static class ExpiryAdapter extends RecyclerView.Adapter<ExpiryAdapter.VH> {
 
         private final List<HashMap<String, String>> data = new ArrayList<>();
-        private int barColor = 0xFFC62828;
+        private int barColor = 0;
         private int tabType  = TAB_EXPIRED;
 
         void setData(List<HashMap<String, String>> list, int color, int tab) {
@@ -186,7 +196,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
                 if (tabType == TAB_EXPIRED) {
                     long ago = Math.abs(days);
                     h.tvBadge.setText("منتهية منذ " + ago + " يوم");
-                    h.tvBadge.setBackgroundColor(0xFFC62828);
+                    h.tvBadge.setBackgroundColor(barColor);
                 } else {
                     h.tvBadge.setText("تنتهي: " + expiry + " (" + days + " يوم)");
                     h.tvBadge.setBackgroundColor(barColor);

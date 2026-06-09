@@ -10,7 +10,7 @@
         android:id="@+id/til_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="المبلغ *"
+        android:hint="@string/str_8ec735"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_amount"
@@ -22,7 +22,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="السبب / الملاحظة"
+        android:hint="@string/str_04e48f"
         android:layout_marginTop="@dimen/spacing_sm"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText

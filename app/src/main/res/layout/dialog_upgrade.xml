@@ -17,7 +17,7 @@
 			android:focusable="false"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="✨ ترقية إلى Premium"
+			android:text="@string/str_dc428c"
 			android:textSize="@dimen/text_headline"
 			android:textStyle="bold"
 			android:textColor="?attr/colorOnSurface"
@@ -29,7 +29,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/spacing_xs"
 			android:layout_marginBottom="@dimen/spacing_xl"
-			android:text="استمتع بجميع الميزات المتقدمة"
+			android:text="@string/str_f64223"
 			android:textSize="@dimen/text_md"
 			android:textColor="?attr/colorOnSurfaceVariant"
 			android:layout_gravity="center_horizontal" />
@@ -65,7 +65,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="عمليات غير محدودة"
+						android:text="@string/str_180857"
 						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
@@ -74,7 +74,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="لا حدود للعمليات اليومية"
+						android:text="@string/str_01903c"
 						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
@@ -105,7 +105,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="نسخ احتياطي تلقائي"
+						android:text="@string/str_e259dc"
 						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
@@ -114,7 +114,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="نسخ يومي آمن لبياناتك"
+						android:text="@string/str_29cb04"
 						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
@@ -145,7 +145,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="تقارير متقدمة"
+						android:text="@string/str_1e1073"
 						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
@@ -154,7 +154,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="تحليلات شاملة لمبيعاتك"
+						android:text="@string/str_f8791a"
 						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
@@ -185,7 +185,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="دعم فني أولوية"
+						android:text="@string/str_e6d4d7"
 						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
@@ -194,7 +194,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="دعم سريع وأولوية في الرد"
+						android:text="@string/str_d8474d"
 						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
@@ -224,7 +224,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="بدون إعلانات"
+						android:text="@string/str_b213d7"
 						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
@@ -233,7 +233,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="تجربة نظيفة بدون إزعاج"
+						android:text="@string/str_88942d"
 						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
@@ -273,7 +273,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="ابدأ من"
+						android:text="@string/str_5c6f33"
 						android:textSize="@dimen/text_xs"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 					<TextView
@@ -281,7 +281,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="$4.99 / شهر"
+						android:text="@string/str_a714bb"
 						android:textSize="@dimen/text_xl"
 						android:textStyle="bold" />
 				</LinearLayout>
@@ -293,7 +293,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="@dimen/spacing_sm"
-			android:text="✅ ضمان استرجاع المال خلال 7 أيام"
+			android:text="@string/str_e563f9"
 			android:textSize="@dimen/text_xs"
 			android:textColor="@color/color_success"
 			android:layout_gravity="center_horizontal" />

@@ -17,13 +17,14 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.button.MaterialButton;
+import android.widget.Button;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import com.pos.system.databinding.ActivityReportsBinding;
 
 /**
  * ActivityReportsActivity - التقارير والإحصائيات
@@ -38,6 +39,9 @@ import java.util.*;
  * ✅ تفعيل date picker مخصص
  */
 public class ActivityReportsActivity extends BaseActivity {
+
+    private ActivityReportsBinding binding;
+
 
     private static final String TAG = "ReportsActivity";
 
@@ -55,7 +59,7 @@ public class ActivityReportsActivity extends BaseActivity {
     private List<Map<String,String>> topProducts = new ArrayList<>();
 
     // Buttons
-    private MaterialButton btnExportPdf, btnShareReport, btnWhatsapp;
+    private Button btnExportPdf, btnShareReport, btnWhatsapp;
     private ChipGroup chipGroupPeriod;
 
     // Date range
@@ -65,8 +69,9 @@ public class ActivityReportsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reports);
-        applyWindowInsets(findViewById(android.R.id.content));
+        binding = ActivityReportsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         loadCurrency();
@@ -85,18 +90,18 @@ public class ActivityReportsActivity extends BaseActivity {
     }
 
     private void initViews() {
-        tvTotalSales     = findViewById(R.id.tv_total_sales);
-        tvInvoiceCount   = findViewById(R.id.tv_invoice_count);
-        tvAverageInvoice = findViewById(R.id.tv_average_invoice);
-        tvProductsCount  = findViewById(R.id.tv_products_count);
-        tvInventoryValue = findViewById(R.id.tv_inventory_value);
-        tvLowStock       = findViewById(R.id.tv_low_stock);
-        tvTotalExpenses  = findViewById(R.id.tv_total_expenses);
-        tvNetProfit      = findViewById(R.id.tv_net_profit);
-        tvCogs           = findViewById(R.id.tv_cogs);
-        tvGrossProfit    = findViewById(R.id.tv_gross_profit);
+        tvTotalSales     = binding.tvTotalSales;
+        tvInvoiceCount   = binding.tvInvoiceCount;
+        tvAverageInvoice = binding.tvAverageInvoice;
+        tvProductsCount  = binding.tvProductsCount;
+        tvInventoryValue = binding.tvInventoryValue;
+        tvLowStock       = binding.tvLowStock;
+        tvTotalExpenses  = binding.tvTotalExpenses;
+        tvNetProfit      = binding.tvNetProfit;
+        tvCogs           = binding.tvCogs;
+        tvGrossProfit    = binding.tvGrossProfit;
 
-        rvTopProducts = findViewById(R.id.rv_top_products);
+        rvTopProducts = binding.rvTopProducts;
         if (rvTopProducts != null) {
             topAdapter = new TopProductsAdapter();
             rvTopProducts.setLayoutManager(new LinearLayoutManager(this));
@@ -104,14 +109,14 @@ public class ActivityReportsActivity extends BaseActivity {
             rvTopProducts.setNestedScrollingEnabled(false);
         }
 
-        chipGroupPeriod = findViewById(R.id.chip_group_period);
-        btnExportPdf    = findViewById(R.id.btn_export_pdf);
-        btnShareReport  = findViewById(R.id.btn_share_report);
-        btnWhatsapp     = findViewById(R.id.btn_whatsapp_report);
+        chipGroupPeriod = binding.chipGroupPeriod;
+        btnExportPdf    = binding.btnExportPdf;
+        btnShareReport  = binding.btnShareReport;
+        btnWhatsapp     = binding.btnWhatsappReport;
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) { setSupportActionBar(toolbar); toolbar.setNavigationOnClickListener(v -> finish()); }
     }
 
@@ -225,14 +230,17 @@ public class ActivityReportsActivity extends BaseActivity {
             double netProfit    = profit.get("net_profit");
 
             setText(tvTotalExpenses, fmt(expenses));
-            if (tvCogs != null)        { tvCogs.setText(fmt(cogs));        tvCogs.setTextColor(Color.parseColor("#C62828")); }
+            int clrError   = androidx.core.content.ContextCompat.getColor(this, R.color.color_error);
+            int clrInfo    = androidx.core.content.ContextCompat.getColor(this, R.color.color_info);
+            int clrSuccess = androidx.core.content.ContextCompat.getColor(this, R.color.color_success);
+            if (tvCogs != null)        { tvCogs.setText(fmt(cogs));        tvCogs.setTextColor(clrError); }
             if (tvGrossProfit != null) {
                 tvGrossProfit.setText(fmt(grossProfit));
-                tvGrossProfit.setTextColor(grossProfit >= 0 ? Color.parseColor("#1565C0") : Color.parseColor("#C62828"));
+                tvGrossProfit.setTextColor(grossProfit >= 0 ? clrInfo : clrError);
             }
             if (tvNetProfit != null) {
                 tvNetProfit.setText(fmt(netProfit));
-                tvNetProfit.setTextColor(netProfit >= 0 ? Color.parseColor("#2E7D32") : Color.parseColor("#C62828"));
+                tvNetProfit.setTextColor(netProfit >= 0 ? clrSuccess : clrError);
             }
         } catch (Exception e) {
             Log.e(TAG, "loadSalesStats: " + e.getMessage(), e);
@@ -274,7 +282,7 @@ public class ActivityReportsActivity extends BaseActivity {
 
             if (topAdapter != null) topAdapter.notifyDataSetChanged();
 
-            View emptyTop = findViewById(R.id.tv_no_top_products);
+            View emptyTop = binding.tvNoTopProducts;
             if (emptyTop != null) emptyTop.setVisibility(topProducts.isEmpty() ? View.VISIBLE : View.GONE);
         } catch (Exception e) {
             Log.e(TAG, "loadTopProducts: " + e.getMessage(), e);
@@ -294,7 +302,7 @@ public class ActivityReportsActivity extends BaseActivity {
             paint.setAntiAlias(true);
 
             // Header
-            paint.setColor(Color.parseColor("#1565C0"));
+            paint.setColor(androidx.core.content.ContextCompat.getColor(this, R.color.color_info));
             canvas.drawRect(0, 0, 595, 80, paint);
             paint.setColor(Color.WHITE);
             paint.setTextSize(22); paint.setFakeBoldText(true);

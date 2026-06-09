@@ -9,7 +9,7 @@
         android:id="@+id/layout_quantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="الكمية">
+        android:hint="@string/purchase_order_item_qty">
         
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_quantity"
@@ -23,5 +23,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_sm"
-        android:text="المتوفر: 0" />
+        android:text="@string/str_e119b1" />
 </LinearLayout>

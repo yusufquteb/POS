@@ -40,7 +40,7 @@
             android:background="?attr/colorSurfaceVariant"
             android:textSize="@dimen/text_md"
             android:gravity="center"
-            android:text="إجمالي المعلق: 0.00"/>
+            android:text="@string/str_b46910"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="لا توجد شيكات"
+                    android:text="@string/str_9d6cab"
                     android:textSize="@dimen/text_lg"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
@@ -82,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="أضف أول شيك لتتبع مدفوعاتك"
+                    android:text="@string/str_17af27"
                     android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"
@@ -92,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="إضافة شيك" />
+                    android:text="@string/str_c6584b" />
             </LinearLayout>
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/spacing_base"
-        android:text="إضافة شيك"
+        android:text="@string/str_c6584b"
         app:icon="@android:drawable/ic_input_add"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

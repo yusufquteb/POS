@@ -75,7 +75,7 @@
                             android:id="@+id/tv_welcome_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="مرحباً بك 👋"
+                            android:text="@string/str_9bdbe7"
                             android:textSize="@dimen/text_xxl"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnPrimary"
@@ -84,7 +84,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="إدارة متجرك بسهولة وسرعة"
+                            android:text="@string/str_f52102"
                             android:textSize="@dimen/text_sm"
                             android:textColor="?attr/colorPrimaryContainer"
                             android:layout_marginBottom="@dimen/spacing_base" />
@@ -113,7 +113,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="مبيعات اليوم"
+                                        android:text="@string/str_b7b53a"
                                         android:textColor="?attr/colorPrimaryContainer"
                                         android:textSize="@dimen/text_xs" />
                                     <TextView
@@ -144,7 +144,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="الفواتير اليوم"
+                                        android:text="@string/str_b35ae1"
                                         android:textColor="?attr/colorPrimaryContainer"
                                         android:textSize="@dimen/text_xs" />
                                     <TextView
@@ -192,7 +192,7 @@
                             android:id="@+id/btn_view_alerts"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="عرض"
+                            android:text="@string/str_6e63a5"
                             android:textSize="@dimen/text_xs"
                             style="@style/Widget.Material3.Button.TonalButton" />
                     </LinearLayout>
@@ -238,7 +238,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="الإعدادات"
+                                android:text="@string/str_1f6002"
                                 android:textSize="@dimen/text_xs"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
@@ -275,7 +275,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="احتياطي"
+                                android:text="@string/str_7ba18c"
                                 android:textSize="@dimen/text_xs"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
@@ -312,7 +312,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="الموردين"
+                                android:text="@string/str_731c89"
                                 android:textSize="@dimen/text_xs"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
@@ -349,7 +349,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="العملاء"
+                                android:text="@string/str_8dee68"
                                 android:textSize="@dimen/text_xs"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
@@ -364,7 +364,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="خدماتنا"
+                    android:text="@string/str_3f5a95"
                     android:textSize="@dimen/text_lg"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
@@ -418,7 +418,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="شاشة البيع"
+                                android:text="@string/str_97f4d5"
                                 android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
@@ -463,7 +463,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="إضافة منتج"
+                                android:text="@string/str_1f1871"
                                 android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
@@ -508,7 +508,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="المصروفات"
+                                android:text="@string/str_698fe7"
                                 android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
@@ -562,7 +562,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="الفواتير"
+                                android:text="@string/str_250c74"
                                 android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
@@ -607,7 +607,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="التقارير"
+                                android:text="@string/str_4d4e10"
                                 android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
@@ -652,7 +652,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="المنتجات"
+                                android:text="@string/str_b25ceb"
                                 android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
@@ -672,7 +672,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:layout_margin="@dimen/spacing_base"
-            android:text="بيع سريع"
+            android:text="@string/str_19dcb9"
             app:icon="@drawable/ic_pos"
             android:textColor="?attr/colorOnPrimary"
             app:iconTint="?attr/colorOnPrimary"

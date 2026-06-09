@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityPurchaseOrderBinding;
 
 /**
  * ActivityPurchaseOrderActivity - صفحة أوامر الشراء / Purchase Orders
@@ -34,6 +35,9 @@ import java.util.Locale;
  * @version 1.0
  */
 public class ActivityPurchaseOrderActivity extends BaseActivity {
+
+    private ActivityPurchaseOrderBinding binding;
+
 
     private RecyclerView rvOrders;
     private ExtendedFloatingActionButton fabAddOrder;
@@ -51,9 +55,10 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_purchase_order);
+        binding = ActivityPurchaseOrderBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        applyWindowInsets(findViewById(android.R.id.content));
+        applyWindowInsets(binding.getRoot());
 
         if (!FeatureGate.isUnlocked(this)) {
             FeatureGate.requirePremium(this, "أوامر الشراء", true);
@@ -83,13 +88,13 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
     // ─────────────────────────────────────────────────────────────────────────
 
     private void initViews() {
-        rvOrders    = findViewById(R.id.rv_orders);
-        fabAddOrder = findViewById(R.id.fab_add_order);
-        tvEmpty     = findViewById(R.id.tv_empty);
+        rvOrders    = binding.rvOrders;
+        fabAddOrder = binding.fabAddOrder;
+        tvEmpty     = binding.tvEmpty;
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> finish());

@@ -21,12 +21,16 @@ import java.util.HashMap;
 import java.util.List;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import com.pos.system.databinding.ActivityInvoicesBinding;
 
 /**
  * ActivityInvoicesActivity - صفحة الفواتير
  * @version 3.1 - Direct Cursor query (cache-safe)
  */
 public class ActivityInvoicesActivity extends BaseActivity {
+
+    private ActivityInvoicesBinding binding;
+
 
     private DBHelper dbHelper;
     private InvoicesAdapter adapter;
@@ -53,8 +57,9 @@ public class ActivityInvoicesActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_invoices);
-        applyWindowInsets(findViewById(android.R.id.content));
+        binding = ActivityInvoicesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         initViews();
@@ -64,9 +69,9 @@ public class ActivityInvoicesActivity extends BaseActivity {
     }
 
     private void initViews() {
-        recyclerView   = findViewById(R.id.recycler_invoices);
-        etSearch       = findViewById(R.id.et_search);
-        btnScanBarcode = findViewById(R.id.btn_scan_barcode);
+        recyclerView   = binding.recyclerInvoices;
+        etSearch       = binding.etSearch;
+        btnScanBarcode = binding.btnScanBarcode;
 
         if (recyclerView != null) {
             adapter = new InvoicesAdapter(invoicesList);
@@ -76,7 +81,7 @@ public class ActivityInvoicesActivity extends BaseActivity {
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> finish());

@@ -14,12 +14,12 @@
         android:textStyle="bold"
         android:textColor="?attr/colorOnSurface"
         android:paddingBottom="@dimen/spacing_base"
-        android:text="إضافة"/>
+        android:text="@string/str_b9508a"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="الاسم *"
+        android:hint="@string/str_717eee"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="@dimen/spacing_md">
         <com.google.android.material.textfield.TextInputEditText
@@ -32,7 +32,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="رقم الهاتف"
+        android:hint="@string/str_0947ad"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="@dimen/spacing_md">
         <com.google.android.material.textfield.TextInputEditText
@@ -45,7 +45,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="العنوان"
+        android:hint="@string/str_6dc658"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="@dimen/spacing_md">
         <com.google.android.material.textfield.TextInputEditText
@@ -58,7 +58,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ملاحظات"
+        android:hint="@string/str_3c4208"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="@dimen/spacing_base">
         <com.google.android.material.textfield.TextInputEditText
@@ -73,8 +73,8 @@
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="حفظ"
-        android:textColor="@android:color/white"
+        android:text="@string/save"
+        android:textColor="?attr/colorOnPrimary"
         app:backgroundTint="?attr/colorPrimary"/>
 
 </LinearLayout>

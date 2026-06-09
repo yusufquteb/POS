@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="لا يوجد مستخدمون"
+                android:text="@string/str_75e7b6"
                 android:textSize="@dimen/text_lg"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="أضف مستخدمين للتحكم في صلاحيات الوصول"
+                android:text="@string/str_9b299b"
                 android:textSize="@dimen/text_md"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:gravity="center"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="إضافة مستخدم" />
+                android:text="@string/str_54a211" />
         </LinearLayout>
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/spacing_base"
-        android:text="مستخدم جديد"
+        android:text="@string/str_f38edf"
         app:icon="@android:drawable/ic_input_add"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

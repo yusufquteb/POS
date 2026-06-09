@@ -17,7 +17,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="@dimen/spacing_base"
-			android:text="بيانات العميل"
+			android:text="@string/str_6fda8a"
 			android:textSize="@dimen/text_lg"
 			android:textStyle="bold" />
 		<com.google.android.material.textfield.TextInputLayout
@@ -64,7 +64,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/spacing_md"
-			android:text="➕ إضافة عميل جديد"
+			android:text="@string/str_645ac2"
 			android:textSize="@dimen/text_xs"
 			android:visibility="gone"
 			style="@style/Widget.Material3.Button.TonalButton" />
@@ -88,7 +88,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/spacing_md"
-				android:text="💰 تفاصيل الدفع"
+				android:text="@string/str_5e6d48"
 				android:textSize="@dimen/text_base"
 				android:textStyle="bold" />
 			<LinearLayout
@@ -102,7 +102,7 @@
 					android:focusable="false"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
-					android:text="الإجمالي:"
+					android:text="@string/str_327511"
 					android:textSize="@dimen/text_base"
 					android:layout_weight="1" />
 				<TextView
@@ -110,7 +110,7 @@
 					android:focusable="false"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="0.00 ج.م"
+					android:text="@string/str_388b15"
 					android:textSize="@dimen/text_base"
 					android:textStyle="bold" />
 			</LinearLayout>
@@ -165,7 +165,7 @@
 						android:focusable="false"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
-						android:text="الإجمالي النهائي:"
+						android:text="@string/str_b6d0dd"
 						android:textSize="@dimen/text_lg"
 						android:textStyle="bold"
 						android:layout_weight="1" />
@@ -174,7 +174,7 @@
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="0.00 ج.م"
+						android:text="@string/str_388b15"
 						android:textSize="@dimen/text_xl"
 						android:textStyle="bold" />
 				</LinearLayout>
@@ -203,7 +203,7 @@
 				android:padding="@dimen/spacing_md"
 				android:background="@drawable/bg_rounded_light"
 				android:gravity="center_horizontal|center_vertical"
-				android:text="الباقي: 0.00 ج.م"
+				android:text="@string/str_798c98"
 				android:textSize="@dimen/text_lg"
 				android:textStyle="bold" />
 			<TextView
@@ -213,7 +213,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_base"
 				android:layout_marginBottom="@dimen/spacing_sm"
-				android:text="طريقة الدفع:"
+				android:text="@string/str_33d29c"
 				android:textSize="@dimen/text_xs"
 				android:textStyle="bold" />
 			<RadioGroup

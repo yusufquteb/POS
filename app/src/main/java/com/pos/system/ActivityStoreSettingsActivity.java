@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
+import com.pos.system.databinding.ActivityStoreSettingsBinding;
 
 /**
  * ActivityStoreSettingsActivity - محسّنة
@@ -35,6 +36,9 @@ import java.util.List;
  * - إصلاح مشكلة الصورة الفاتحة مع ARGB_8888
  */
 public class ActivityStoreSettingsActivity extends BaseActivity {
+
+    private ActivityStoreSettingsBinding binding;
+
 
     private static final String TAG = "StoreSettingsActivity";
 
@@ -87,7 +91,9 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_settings);
+        binding = ActivityStoreSettingsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         try {
             dbHelper = new DBHelper(this);
@@ -102,12 +108,12 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
 
     // ─────────────────────────────────────────────
     private void initViews() {
-        etName      = findViewById(R.id.et_store_name);
-        etPhone     = findViewById(R.id.et_store_phone);
-        etAddress   = findViewById(R.id.et_store_address);
-        etTaxNumber = findViewById(R.id.et_tax_number);
-        imgLogo     = findViewById(R.id.img_store_logo);
-        spCountry   = findViewById(R.id.sp_country);
+        etName      = binding.etStoreName;
+        etPhone     = binding.etStorePhone;
+        etAddress   = binding.etStoreAddress;
+        etTaxNumber = binding.etTaxNumber;
+        imgLogo     = binding.imgStoreLogo;
+        spCountry   = binding.spCountry;
         setupCountryDropdown();
     }
 
@@ -131,13 +137,13 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
     }
 
     private void setupClickListeners() {
-        View toolbar = findViewById(R.id.toolbar);
+        View toolbar = binding.toolbar;
         if (toolbar != null) toolbar.setOnClickListener(v -> finish());
 
-        View layoutLogo = findViewById(R.id.layout_select_logo);
+        View layoutLogo = binding.layoutSelectLogo;
         if (layoutLogo != null) layoutLogo.setOnClickListener(v -> showImagePickerDialog());
 
-        View btnSave = findViewById(R.id.btn_save_settings);
+        View btnSave = binding.btnSaveSettings;
         if (btnSave != null) btnSave.setOnClickListener(v -> saveSettings());
     }
 

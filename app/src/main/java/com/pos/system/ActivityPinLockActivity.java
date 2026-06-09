@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+import com.pos.system.databinding.ActivityPinLockBinding;
 
 /**
  * PIN Cashier Lock — 4-digit PIN screen.
@@ -22,6 +23,9 @@ import com.google.android.material.button.MaterialButton;
  *   startActivity(i);
  */
 public class ActivityPinLockActivity extends BaseActivity {
+
+    private ActivityPinLockBinding binding;
+
 
     public static final String EXTRA_MODE         = "pin_mode";
     public static final String EXTRA_TARGET_CLASS = "target_class";
@@ -44,23 +48,25 @@ public class ActivityPinLockActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pin_lock);
+        binding = ActivityPinLockBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         mode = getIntent().getIntExtra(EXTRA_MODE, MODE_VERIFY);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        tvTitle    = findViewById(R.id.tv_pin_title);
-        tvSubtitle = findViewById(R.id.tv_pin_subtitle);
-        tvError    = findViewById(R.id.tv_error);
+        tvTitle    = binding.tvPinTitle;
+        tvSubtitle = binding.tvPinSubtitle;
+        tvError    = binding.tvError;
 
         dots = new View[]{
-            findViewById(R.id.dot1),
-            findViewById(R.id.dot2),
-            findViewById(R.id.dot3),
-            findViewById(R.id.dot4)
+            binding.dot1,
+            binding.dot2,
+            binding.dot3,
+            binding.dot4
         };
 
         setupMode();
@@ -98,8 +104,8 @@ public class ActivityPinLockActivity extends BaseActivity {
             if (btn != null) btn.setOnClickListener(v -> onDigit(d));
         }
 
-        MaterialButton btnBack  = findViewById(R.id.btn_back);
-        MaterialButton btnClear = findViewById(R.id.btn_clear);
+        MaterialButton btnBack  = binding.btnBack;
+        MaterialButton btnClear = binding.btnClear;
         if (btnBack  != null) btnBack.setOnClickListener(v -> onBackspace());
         if (btnClear != null) btnClear.setOnClickListener(v -> onClear());
     }

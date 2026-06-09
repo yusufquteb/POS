@@ -48,7 +48,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="العدد"
+                android:hint="@string/str_e20e94"
                 android:textSize="@dimen/text_md"
                 android:gravity="center"
                 android:background="@android:drawable/edit_text"/>

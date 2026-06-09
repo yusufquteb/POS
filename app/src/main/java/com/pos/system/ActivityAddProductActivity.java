@@ -44,6 +44,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityAddProductBinding;
 
 /**
  * ActivityAddProductActivity - صفحة إضافة وتعديل المنتجات
@@ -59,6 +60,9 @@ import java.util.Locale;
  * @version 3.0
  */
 public class ActivityAddProductActivity extends BaseActivity {
+
+    private ActivityAddProductBinding binding;
+
 
     private static final String TAG = "AddProduct";
 
@@ -144,10 +148,11 @@ public class ActivityAddProductActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product);
+        binding = ActivityAddProductBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // رفع المحتوى فوق NavigationBar
-        applyWindowInsets(findViewById(R.id._main));
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         try { HashMap<String, String> s = dbHelper.getStoreSettings(); if (s != null) currency = s.getOrDefault("currency", "ج.م"); } catch (Exception ignored) {}
@@ -190,45 +195,44 @@ public class ActivityAddProductActivity extends BaseActivity {
     // ═══════════════════════════════════════════════════════════
 
     private void initViews() {
-        etBarcode       = findViewById(R.id.et_barcode);
-        etName          = findViewById(R.id.et_name);
-        etBrand         = findViewById(R.id.et_brand);
-        etUnit          = findViewById(R.id.et_unit);
-        etCost          = findViewById(R.id.et_cost);
-        etPrice         = findViewById(R.id.et_price);
-        etQty           = findViewById(R.id.et_qty);
-        etExpiry        = findViewById(R.id.et_expiry);
-        etReorderLevel  = findViewById(R.id.et_reorder_level);
-        etBatchNumber   = findViewById(R.id.et_batch_number);
-        etSupplierRef   = findViewById(R.id.et_supplier_reference);
-        etNotes         = findViewById(R.id.et_notes);
+        etBarcode       = binding.etBarcode;
+        etName          = binding.etName;
+        etBrand         = binding.etBrand;
+        etUnit          = binding.etUnit;
+        etCost          = binding.etCost;
+        etPrice         = binding.etPrice;
+        etQty           = binding.etQty;
+        etExpiry        = binding.etExpiry;
+        etReorderLevel  = binding.etReorderLevel;
+        etBatchNumber   = binding.etBatchNumber;
+        etSupplierRef   = binding.etSupplierReference;
+        etNotes         = binding.etNotes;
 
-        etSupplier      = findViewById(R.id.et_supplier);
-        spinnerLocation = findViewById(R.id.spinner_location);
-        spinnerCategory = findViewById(R.id.spinner_category);
+        etSupplier      = binding.etSupplier;
+        spinnerLocation = binding.spinnerLocation;
+        spinnerCategory = binding.spinnerCategory;
 
-        tvProfit            = findViewById(R.id.tv_profit);
-        tvProfitPercentage  = findViewById(R.id.tv_profit_percentage);
-        imgProduct          = findViewById(R.id.img_product);
+        tvProfit            = binding.tvProfit;
+        tvProfitPercentage  = binding.tvProfitPercentage;
+        imgProduct          = binding.imgProduct;
 
-        layoutBarcode = findViewById(R.id.layout_barcode);
-        layoutName    = findViewById(R.id.layout_name);
-        layoutPrice   = findViewById(R.id.layout_price);
-        layoutQty     = findViewById(R.id.layout_qty);
+        layoutBarcode = binding.layoutBarcode;
+        layoutName    = binding.layoutName;
+        layoutPrice   = binding.layoutPrice;
+        layoutQty     = binding.layoutQty;
 
-        btnSave         = findViewById(R.id.btn_save);
-        btnSaveAndNew   = findViewById(R.id.btn_save_and_new);
+        btnSave         = binding.btnSave;
+        btnSaveAndNew   = binding.btnSaveAndNew;
         // ✅ إصلاح: البحث عن زر السكان بـ id الصحيح في الـ XML
-        btnScan         = findViewById(R.id.btn_scan_barcode);
+        btnScan         = binding.btnScanBarcode;
 
-        fabCamera    = findViewById(R.id.fab_camera);
-        progressBar  = findViewById(R.id.progress_bar);
-        recyclerProducts = findViewById(R.id.recycler_products);
+        fabCamera    = binding.fabCamera;
+        progressBar  = binding.progressBar;
+        recyclerProducts = binding.recyclerProducts;
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar1);
-        if (toolbar == null) toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar1;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> onBackPressed());

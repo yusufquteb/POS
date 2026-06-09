@@ -10,7 +10,7 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="إضافة مصروف"
+        android:text="@string/str_e7b7c8"
         android:textSize="@dimen/text_lg"
         android:textStyle="bold"
         android:textColor="?attr/colorOnSurface"
@@ -19,7 +19,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="المبلغ *"
+        android:hint="@string/str_8ec735"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="@dimen/spacing_md">
         <com.google.android.material.textfield.TextInputEditText
@@ -32,7 +32,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="الفئة"
+        android:hint="@string/str_dc7312"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="@dimen/spacing_md">
         <com.google.android.material.textfield.TextInputEditText
@@ -44,7 +44,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="التاريخ"
+        android:hint="@string/str_8456f2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="@dimen/spacing_md">
         <com.google.android.material.textfield.TextInputEditText
@@ -57,7 +57,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="وصف"
+        android:hint="@string/str_ac07b9"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="@dimen/spacing_base">
         <com.google.android.material.textfield.TextInputEditText
@@ -72,8 +72,8 @@
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="حفظ"
-        android:textColor="@android:color/white"
+        android:text="@string/save"
+        android:textColor="?attr/colorOnPrimary"
         app:backgroundTint="?attr/colorPrimary"/>
 
 </LinearLayout>

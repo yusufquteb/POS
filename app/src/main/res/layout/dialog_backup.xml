@@ -12,7 +12,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/spacing_base"
-		android:text="💾 النسخ الاحتياطي"
+		android:text="@string/str_5a61fe"
 		android:textSize="@dimen/text_xl"
 		android:textStyle="bold" />
 	<TextView
@@ -21,13 +21,13 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/spacing_xl"
-		android:text="احفظ نسخة من قاعدة البيانات لحماية بياناتك"
+		android:text="@string/str_04be0b"
 		android:textSize="@dimen/text_md" />
 	<Button
 		android:id="@+id/btn_create_backup"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="إنشاء نسخة احتياطية"
+		android:text="@string/str_86ca10"
 		android:textSize="@dimen/text_xs"
 		style="@style/Widget.Material3.Button"
 		app:icon="@android:drawable/ic_menu_save" />
@@ -36,7 +36,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/spacing_sm"
-		android:text="استعادة نسخة احتياطية"
+		android:text="@string/str_05ca28"
 		android:textSize="@dimen/text_xs"
 		style="@style/Widget.Material3.Button.TonalButton"
 		app:icon="@android:drawable/ic_menu_revert" />
@@ -48,7 +48,7 @@
 		android:layout_marginTop="@dimen/spacing_base"
 		android:padding="@dimen/spacing_sm"
 		android:background="@drawable/bg_rounded_light"
-		android:text="⚠ تأكد من حفظ النسخة الاحتياطية في مكان آمن"
+		android:text="@string/str_f59a7c"
 		android:textSize="@dimen/text_xs"
 		android:textColor="@color/color_warning" />
 </LinearLayout>

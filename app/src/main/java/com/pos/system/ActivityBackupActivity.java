@@ -29,8 +29,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityBackupBinding;
 
 public class ActivityBackupActivity extends BaseActivity {
+
+    private ActivityBackupBinding binding;
+
 
     private static final String TAG = "BackupActivity";
 
@@ -66,7 +70,9 @@ public class ActivityBackupActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_backup);
+        binding = ActivityBackupBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         cloudBackupManager = new CloudBackupManager(this);
@@ -78,31 +84,31 @@ public class ActivityBackupActivity extends BaseActivity {
     }
 
     private void initViews() {
-        listBackups = findViewById(R.id.list_backups);
+        listBackups = binding.listBackups;
         if (listBackups == null) listBackups = findViewById(android.R.id.list);
-        emptyState = findViewById(R.id.empty_state);
+        emptyState = binding.emptyState;
     }
 
     private void setupToolbar() {
-        View toolbar = findViewById(R.id.toolbar);
+        View toolbar = binding.toolbar;
         if (toolbar != null) toolbar.setOnClickListener(v -> finish());
     }
 
     private void setupButtons() {
-        View btnCreate = findViewById(R.id.btn_create_backup);
+        View btnCreate = binding.btnCreateBackup;
         if (btnCreate != null) btnCreate.setOnClickListener(v -> createBackup());
 
-        View btnRestore = findViewById(R.id.btn_restore_backup);
+        View btnRestore = binding.btnRestoreBackup;
         if (btnRestore != null) btnRestore.setOnClickListener(v -> pickBackupFile());
     }
 
     // ── Cloud Backup (SAF-based) ──────────────────────────────────────
 
     private void setupCloudBackup() {
-        btnSelectFolder   = findViewById(R.id.btn_select_cloud_folder);
-        btnCloudBackupNow = findViewById(R.id.btn_cloud_backup_now);
-        tvCloudStatus     = findViewById(R.id.tv_cloud_status);
-        tvCloudLastBackup = findViewById(R.id.tv_cloud_last_backup);
+        btnSelectFolder   = binding.btnSelectCloudFolder;
+        btnCloudBackupNow = binding.btnCloudBackupNow;
+        tvCloudStatus     = binding.tvCloudStatus;
+        tvCloudLastBackup = binding.tvCloudLastBackup;
 
         if (btnSelectFolder != null)
             btnSelectFolder.setOnClickListener(v -> {
@@ -151,12 +157,12 @@ public class ActivityBackupActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("نسخ احتياطي على السحابة")
             .setMessage("هل تريد إنشاء نسخة احتياطية في المجلد المحدد؟")
-            .setPositiveButton("نعم", (d, w) -> {
+            .setPositiveButton(R.string.yes, (d, w) -> {
                 boolean ok = cloudBackupManager.backup();
                 showSnackbar(ok ? "✓ تم النسخ الاحتياطي بنجاح" : "فشل النسخ الاحتياطي", !ok);
                 updateCloudUI();
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 

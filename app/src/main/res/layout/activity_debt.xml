@@ -35,171 +35,171 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ديون العملاء"
+                android:text="@string/str_3be404"
                 android:icon="@drawable/ic_person" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ديون الموردين"
+                android:text="@string/str_74c215"
                 android:icon="@drawable/ic_local_shipping" />
 
         </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <!-- ── Stats banner ── -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/spacing_xl">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="@dimen/spacing_base"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="?attr/colorPrimaryContainer">
 
-            <!-- ── Stats banner ── -->
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="@dimen/spacing_base"
-                android:layout_marginBottom="@dimen/spacing_sm"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp"
-                app:cardBackgroundColor="?attr/colorPrimaryContainer">
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_lg"
+                android:gravity="center_vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg"
-                    android:gravity="center_vertical">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_stats_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="إجمالي ديون العملاء"
-                            android:textSize="@dimen/text_sm"
-                            android:textColor="?attr/colorOnPrimaryContainer"
-                            android:fontFamily="@font/cairo_regular"
-                            android:alpha="0.8" />
-
-                        <TextView
-                            android:id="@+id/tv_total_debt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0.00"
-                            android:textSize="@dimen/text_display"
-                            android:textStyle="bold"
-                            android:textColor="?attr/colorOnPrimaryContainer"
-                            android:fontFamily="@font/cairo_bold"
-                            android:layout_marginTop="@dimen/spacing_xs" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="56dp"
-                        android:background="?attr/colorOnPrimaryContainer"
-                        android:alpha="0.2"
-                        android:layout_marginHorizontal="16dp" />
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tv_stats_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:text="@string/str_e07341"
+                        android:textSize="@dimen/text_sm"
+                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:fontFamily="@font/cairo_regular"
+                        android:alpha="0.8" />
 
-                        <TextView
-                            android:id="@+id/tv_debt_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textSize="@dimen/text_display"
-                            android:textStyle="bold"
-                            android:textColor="?attr/colorOnPrimaryContainer"
-                            android:fontFamily="@font/cairo_bold"
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tv_count_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="عميل مدين"
-                            android:textSize="@dimen/text_xs"
-                            android:textColor="?attr/colorOnPrimaryContainer"
-                            android:fontFamily="@font/cairo_regular"
-                            android:alpha="0.8"
-                            android:gravity="center" />
-
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_total_debt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textSize="@dimen/text_display"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:fontFamily="@font/cairo_bold"
+                        android:layout_marginTop="@dimen/spacing_xs" />
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="56dp"
+                    android:background="?attr/colorOnPrimaryContainer"
+                    android:alpha="0.2"
+                    android:layout_marginHorizontal="16dp" />
 
-            <!-- ── Search field (pill style) ── -->
-            <com.google.android.material.textfield.TextInputLayout
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_debt_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="@dimen/text_display"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:fontFamily="@font/cairo_bold"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tv_count_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str_262427"
+                        android:textSize="@dimen/text_xs"
+                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:fontFamily="@font/cairo_regular"
+                        android:alpha="0.8"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── Search field (pill style) ── -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginBottom="@dimen/spacing_xs"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            app:startIconDrawable="@drawable/ic_search"
+            app:startIconTint="?attr/colorOnSurfaceVariant"
+            app:boxCornerRadiusTopStart="28dp"
+            app:boxCornerRadiusTopEnd="28dp"
+            app:boxCornerRadiusBottomStart="28dp"
+            app:boxCornerRadiusBottomEnd="28dp"
+            android:hint="@string/str_180565">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:layout_marginBottom="@dimen/spacing_xs"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                app:startIconDrawable="@drawable/ic_search"
-                app:startIconTint="?attr/colorOnSurfaceVariant"
-                app:boxCornerRadiusTopStart="28dp"
-                app:boxCornerRadiusTopEnd="28dp"
-                app:boxCornerRadiusBottomStart="28dp"
-                app:boxCornerRadiusBottomEnd="28dp"
-                android:hint="بحث...">
+                android:textSize="@dimen/text_md"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:fontFamily="@font/cairo_regular" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_md"
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"
-                    android:fontFamily="@font/cairo_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+        <!-- ── List area: both RVs and empty state overlaid in a FrameLayout ── -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <!-- ── Customer debt list ── -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_debts"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:paddingTop="@dimen/spacing_xs"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false" />
+                android:paddingBottom="@dimen/spacing_xl"
+                android:clipToPadding="false" />
 
             <!-- ── Supplier debt list ── -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_supplier_debts"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:paddingTop="@dimen/spacing_xs"
+                android:paddingBottom="@dimen/spacing_xl"
                 android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
                 android:visibility="gone" />
 
             <!-- ── Empty state ── -->
             <LinearLayout
                 android:id="@+id/tv_empty"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="64dp"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -217,7 +217,7 @@
                     android:id="@+id/tv_empty_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="لا توجد ديون"
+                    android:text="@string/str_efc0d2"
                     android:textSize="@dimen/text_xl"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant"
@@ -229,7 +229,7 @@
                     android:id="@+id/tv_empty_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="جميع العملاء سدّدوا ديونهم"
+                    android:text="@string/str_e0eeb8"
                     android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"
@@ -238,8 +238,8 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+        </FrameLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

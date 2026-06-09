@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import androidx.annotation.NonNull;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.pos.system.DBHelper;
+import com.pos.system.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.File;
@@ -119,7 +120,7 @@ public class SafeBackupManager {
                         callback.onError(e);
                     }
                 })
-                .setNegativeButton("إلغاء", null)
+                .setNegativeButton(R.string.cancel, null)
                 .setNeutralButton("تحديد الكل", (d, w) -> {
                     // لا شيء - سيتم التعامل معه في onShow
                 })

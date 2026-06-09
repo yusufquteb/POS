@@ -23,6 +23,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.pos.system.databinding.ActivityCustomersBinding;
 
 /**
  * ActivityCustomersActivity - صفحة العملاء
@@ -37,6 +38,9 @@ import java.util.HashMap;
  */
 public class ActivityCustomersActivity extends BaseActivity {
 
+    private ActivityCustomersBinding binding;
+
+
     private DBHelper dbHelper;
     private RecyclerView recyclerView;
     private CustomerAdapter adapter;
@@ -47,17 +51,18 @@ public class ActivityCustomersActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customers);
+        binding = ActivityCustomersBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // رفع المحتوى فوق NavigationBar
-        applyWindowInsets(findViewById(android.R.id.content));
+        applyWindowInsets(binding.getRoot());
 
         dbHelper    = new DBHelper(this);
-        recyclerView = findViewById(R.id.recycler_view);
-        emptyState   = findViewById(R.id.empty_state);
-        etSearch     = findViewById(R.id.et_search);
+        recyclerView = binding.recyclerView;
+        emptyState   = binding.emptyState;
+        etSearch     = binding.etSearch;
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> finish());
@@ -68,7 +73,7 @@ public class ActivityCustomersActivity extends BaseActivity {
 
         Snackbar.make(recyclerView, getString(R.string.swipe_delete_edit), Snackbar.LENGTH_LONG).show();
 
-        View fabAdd = findViewById(R.id.fab_add);
+        View fabAdd = binding.fabAdd;
         if (fabAdd != null) fabAdd.setOnClickListener(v -> {
             if (!FeatureGate.canAddCustomer(this)) {
                 FeatureGate.showCustomerLimitDialog(this);
@@ -231,7 +236,7 @@ public class ActivityCustomersActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("حذف العميل")
             .setMessage("هل تريد حذف: " + item.getOrDefault("name", "") + "؟")
-            .setPositiveButton("حذف", (d, w) -> {
+            .setPositiveButton(R.string.delete, (d, w) -> {
                 try {
                     long id = getLong(item, "id");
                     dbHelper.deleteCustomer(id);
@@ -241,7 +246,7 @@ public class ActivityCustomersActivity extends BaseActivity {
                     showSnackbar("خطأ في الحذف", true);
                 }
             })
-            .setNegativeButton("إلغاء", (d, w) -> {
+            .setNegativeButton(R.string.cancel, (d, w) -> {
                 if (adapter != null) adapter.notifyItemChanged(pos);
             })
             .show();

@@ -120,7 +120,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("إضافة عقد تقسيط")
             .setView(dv)
-            .setPositiveButton("حفظ", (d, w) -> {
+            .setPositiveButton(R.string.save, (d, w) -> {
                 if (tilCustomerName != null) tilCustomerName.setError(null);
                 if (tilTotalAmount != null) tilTotalAmount.setError(null);
 
@@ -162,7 +162,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                     });
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -209,13 +209,13 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                                     });
                                 })
                                 .show())
-                        .setNegativeButton("إغلاق", null)
+                        .setNegativeButton(R.string.close, null)
                         .show();
                 } else {
                     new MaterialAlertDialogBuilder(this)
                         .setTitle("تفاصيل العقد")
                         .setMessage(sb.toString())
-                        .setPositiveButton("إغلاق", null)
+                        .setPositiveButton(R.string.close, null)
                         .show();
                 }
             });
@@ -251,7 +251,9 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                     " | أقساط: " + item.getOrDefault("installment_count", "0"));
                 String status = item.getOrDefault("status", "active");
                 h.tvStatus.setText(statusAr(status));
-                h.tvStatus.setTextColor("completed".equals(status) ? 0xFF4CAF50 : "overdue".equals(status) ? 0xFFF44336 : 0xFF2196F3);
+                android.content.Context ctx = h.itemView.getContext();
+                h.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(ctx,
+                    "completed".equals(status) ? R.color.color_success : "overdue".equals(status) ? R.color.color_error : R.color.color_info));
                 h.itemView.setOnClickListener(v -> showContractDetails(item));
             } else {
                 h.tvTitle.setText(item.getOrDefault("customer_name", "—"));
@@ -261,7 +263,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                     parseD(item.getOrDefault("amount", "0")), currency));
                 h.tvInfo.setText("استحقاق: " + item.getOrDefault("due_date", "—"));
                 h.tvStatus.setText("متأخر");
-                h.tvStatus.setTextColor(0xFFF44336);
+                h.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(h.itemView.getContext(), R.color.color_error));
                 h.itemView.setOnClickListener(v -> {
                     long pid = Long.parseLong(item.getOrDefault("id", "0"));
                     String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
@@ -274,7 +276,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                                 boolean ok = dbHelper.payInstallment(pid, today);
                                 runOnUiThread(() -> { if (ok) { showToast("تم الدفع"); loadData(); } else showSnackbar("خطأ", true); });
                             }))
-                        .setNegativeButton("إلغاء", null)
+                        .setNegativeButton(R.string.cancel, null)
                         .show();
                 });
             }

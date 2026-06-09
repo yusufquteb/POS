@@ -38,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_base"
-        android:text="نظام نقاط بيع متكامل لإدارة متجرك بكل سهولة واحترافية"
+        android:text="@string/str_8b51e1"
         android:textSize="@dimen/text_base"
         android:textColor="@color/text_secondary"
         android:textAlignment="center"

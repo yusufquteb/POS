@@ -12,6 +12,7 @@ import com.pos.system.managers.BillingManager;
 import com.pos.system.managers.LanguageManager;
 import com.pos.system.managers.ReviewManager;
 import com.pos.system.managers.ThemeManager;
+import com.pos.system.databinding.ActivitySettingsBinding;
 
 /**
  * ActivitySettingsActivity - صفحة الإعدادات
@@ -30,6 +31,9 @@ import com.pos.system.managers.ThemeManager;
  * @since 2026-02-17
  */
 public class ActivitySettingsActivity extends BaseActivity {
+
+    private ActivitySettingsBinding binding;
+
 
     // Views
     private MaterialCardView cardTheme;
@@ -60,7 +64,9 @@ public class ActivitySettingsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // BaseActivity يطبق الثيم واللغة تلقائياً
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        binding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         initializeViews();
         setupToolbar();
@@ -69,28 +75,28 @@ public class ActivitySettingsActivity extends BaseActivity {
     }
 
     private void initializeViews() {
-        cardTheme      = findViewById(R.id.card_theme);
-        tvCurrentTheme = findViewById(R.id.tv_current_theme);
-        View tvCurrentColor = findViewById(R.id.tv_current_color);
+        cardTheme      = binding.cardTheme;
+        tvCurrentTheme = binding.tvCurrentTheme;
+        View tvCurrentColor = binding.tvCurrentColor;
         if (tvCurrentColor != null) tvCurrentColor.setVisibility(View.GONE);
 
-        cardLanguage      = findViewById(R.id.card_language);
-        tvCurrentLanguage = findViewById(R.id.tv_current_language);
+        cardLanguage      = binding.cardLanguage;
+        tvCurrentLanguage = binding.tvCurrentLanguage;
 
-        cardStore   = findViewById(R.id.card_store);
-        cardPrinter = findViewById(R.id.card_printer);
-        cardBackup  = findViewById(R.id.card_backup);
-        cardPinLock = findViewById(R.id.card_pin_lock);
+        cardStore   = binding.cardStore;
+        cardPrinter = binding.cardPrinter;
+        cardBackup  = binding.cardBackup;
+        cardPinLock = binding.cardPinLock;
 
-        cardAccount  = findViewById(R.id.card_account);
-        tvUserName   = findViewById(R.id.tv_user_name);
-        tvUserEmail  = findViewById(R.id.tv_user_email);
+        cardAccount  = binding.cardAccount;
+        tvUserName   = binding.tvUserName;
+        tvUserEmail  = binding.tvUserEmail;
 
-        cardAbout   = findViewById(R.id.card_about);
-        cardPremium = findViewById(R.id.card_premium);
-        cardRateApp = findViewById(R.id.card_rate_app);
-        btnLogout   = findViewById(R.id.btn_logout);
-        tvAppVersion = findViewById(R.id.tv_app_version);
+        cardAbout   = binding.cardAbout;
+        cardPremium = binding.cardPremium;
+        cardRateApp = binding.cardRateApp;
+        btnLogout   = binding.btnLogout;
+        tvAppVersion = binding.tvAppVersion;
 
         // إدارة المشتريات والتقييم
         DBHelper db = new DBHelper(this);
@@ -99,7 +105,7 @@ public class ActivitySettingsActivity extends BaseActivity {
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> finish());

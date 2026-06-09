@@ -13,7 +13,7 @@
             android:id="@+id/til_customer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="اسم العميل *"
+            android:hint="@string/str_bb8278"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_customer_name"
@@ -25,7 +25,7 @@
             android:id="@+id/til_total_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="المبلغ الإجمالي *"
+            android:hint="@string/str_c302ce"
             android:layout_marginTop="@dimen/spacing_sm"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
@@ -38,7 +38,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="الدفعة الأولى (مقدم)"
+            android:hint="@string/str_6d01fe"
             android:layout_marginTop="@dimen/spacing_sm"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
@@ -51,7 +51,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="عدد الأقساط *"
+            android:hint="@string/str_82d8b8"
             android:layout_marginTop="@dimen/spacing_sm"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
@@ -64,7 +64,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="تاريخ البداية (yyyy-MM-dd)"
+            android:hint="@string/str_c7c20e"
             android:layout_marginTop="@dimen/spacing_sm"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
@@ -76,7 +76,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ملاحظات"
+            android:hint="@string/str_3c4208"
             android:layout_marginTop="@dimen/spacing_sm"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText

@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityProductsBinding;
 
 /**
  * ActivityProductsActivity - محسّنة
@@ -45,6 +46,9 @@ import java.util.Locale;
  * - إصلاح try/catch فارغة في onBindViewHolder
  */
 public class ActivityProductsActivity extends BaseActivity {
+
+    private ActivityProductsBinding binding;
+
 
     private static final String TAG = "ProductsActivity";
 
@@ -94,7 +98,9 @@ public class ActivityProductsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products);
+        binding = ActivityProductsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         initViews();
@@ -106,16 +112,16 @@ public class ActivityProductsActivity extends BaseActivity {
     }
 
     private void initViews() {
-        recyclerProducts = findViewById(R.id.recycler_products);
-        fabAddProduct    = findViewById(R.id.fab_add_product);
-        fabImportCsv     = findViewById(R.id.fab_import_csv);
-        etSearch         = findViewById(R.id.et_search);
-        emptyState       = findViewById(R.id.empty_state);
-        tvProductsCount  = findViewById(R.id.tv_products_count);
+        recyclerProducts = binding.recyclerProducts;
+        fabAddProduct    = binding.fabAddProduct;
+        fabImportCsv     = binding.fabImportCsv;
+        etSearch         = binding.etSearch;
+        emptyState       = binding.emptyState;
+        tvProductsCount  = binding.tvProductsCount;
     }
 
     private void setupToolbar() {
-        View toolbar = findViewById(R.id.toolbar);
+        View toolbar = binding.toolbar;
         if (toolbar != null) toolbar.setOnClickListener(v -> finish());
     }
 
@@ -388,11 +394,11 @@ public class ActivityProductsActivity extends BaseActivity {
                 }
 
                 if (qty == 0) {
-                    holder.tvQty.setTextColor(0xFFD32F2F);
+                    holder.tvQty.setTextColor(androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(), R.color.color_error));
                 } else if (qty <= reorderLevel) {
-                    holder.tvQty.setTextColor(0xFFF57C00);
+                    holder.tvQty.setTextColor(androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(), R.color.color_warning));
                 } else {
-                    holder.tvQty.setTextColor(0xFF388E3C);
+                    holder.tvQty.setTextColor(androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(), R.color.color_success));
                 }
             } catch (NumberFormatException e) {
                 Log.w(TAG, "Invalid qty format: " + product.get("qty"));

@@ -12,7 +12,7 @@
         android:id="@+id/tv_items_added"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="البنود المضافة: 0"
+        android:text="@string/str_84964c"
         android:textSize="@dimen/text_sm"
         android:textColor="?attr/colorPrimary"
         android:layout_marginBottom="@dimen/spacing_md" />

@@ -13,22 +13,22 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:src="@drawable/ic_store"
-        android:tint="#FFFFFF"
+        android:tint="?attr/colorOnPrimary"
         android:layout_marginBottom="@dimen/spacing_md" />
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="نظام POS"
+        android:text="@string/str_5d10b4"
         android:textSize="@dimen/text_xl"
         android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+        android:textColor="?attr/colorOnPrimary" />
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_xs"
-        android:text="نظام إدارة المبيعات المتكامل"
+        android:text="@string/str_501c36"
         android:textSize="@dimen/text_md"
         android:textColor="?attr/colorPrimaryContainer" />
 </LinearLayout>

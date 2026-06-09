@@ -28,7 +28,7 @@
             android:layout_marginStart="@dimen/spacing_base"
             android:layout_marginTop="@dimen/spacing_base"
             android:layout_marginEnd="@dimen/spacing_base"
-            android:text="نوع الاتصال"
+            android:text="@string/str_59e2b0"
             android:textSize="@dimen/text_lg"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary" />
@@ -84,7 +84,7 @@
             android:layout_marginStart="@dimen/spacing_base"
             android:layout_marginEnd="@dimen/spacing_base"
             android:layout_marginBottom="@dimen/spacing_sm"
-            android:text="🔍 فحص الطابعة"
+            android:text="@string/str_436e9b"
             android:textSize="@dimen/text_base"
             style="@style/Widget.Material3.Button.TonalButton"
             app:cornerRadius="12dp"
@@ -98,7 +98,7 @@
             android:layout_marginStart="@dimen/spacing_base"
             android:layout_marginTop="@dimen/spacing_sm"
             android:layout_marginEnd="@dimen/spacing_base"
-            android:text="إعدادات الورق"
+            android:text="@string/str_043b75"
             android:textSize="@dimen/text_lg"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary" />
@@ -119,7 +119,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="عرض الورق"
+                    android:text="@string/str_9b8862"
                     android:textSize="@dimen/text_md"
                     android:textColor="@android:color/darker_gray" />
 
@@ -149,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_base"
             android:layout_marginEnd="@dimen/spacing_base"
-            android:text="خيارات الطباعة"
+            android:text="@string/str_559ce8"
             android:textSize="@dimen/text_lg"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary" />
@@ -184,14 +184,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="🖨️ الطباعة التلقائية"
+                            android:text="@string/str_b84489"
                             android:textSize="@dimen/text_base"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="طباعة الفاتورة تلقائياً بعد البيع"
+                            android:text="@string/str_cb4137"
                             android:textSize="@dimen/text_xs"
                             android:textColor="@android:color/darker_gray" />
 
@@ -227,14 +227,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="🏪 إظهار الشعار"
+                            android:text="@string/str_d58f84"
                             android:textSize="@dimen/text_base"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="عرض شعار المتجر في الفواتير"
+                            android:text="@string/str_72d3cc"
                             android:textSize="@dimen/text_xs"
                             android:textColor="@android:color/darker_gray" />
 
@@ -266,7 +266,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="@dimen/spacing_sm"
-                android:text="📄 اختبار"
+                android:text="@string/str_795b6e"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:cornerRadius="12dp" />
 
@@ -276,7 +276,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/spacing_sm"
-                android:text="💾 حفظ"
+                android:text="@string/str_2016d4"
                 app:cornerRadius="12dp" />
 
         </LinearLayout>
@@ -299,7 +299,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="💡 نصائح مهمة"
+                    android:text="@string/str_419036"
                     android:textSize="@dimen/text_md"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnPrimaryContainer" />
@@ -308,7 +308,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_sm"
-                    android:text="• اضغط على 'فحص الطابعة' للتأكد من الاتصال\n• تأكد من تشغيل الطابعة قبل الفحص\n• للبلوتوث: اقترن بالطابعة أولاً من إعدادات الجهاز\n• للواي فاي: تأكد من الاتصال بنفس الشبكة"
+                    android:text="@string/str_532bd8"
                     android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnSurface"
                     android:lineSpacingExtra="4dp" />

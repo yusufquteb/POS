@@ -149,7 +149,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                         else showSnackbar("خطأ في بدء الجلسة", true);
                     });
                 }))
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -181,7 +181,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                     });
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -257,7 +257,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                                 int diff = counted - sysQty;
                                 if (h.tvDiff != null) {
                                     h.tvDiff.setText("الفرق: " + (diff >= 0 ? "+" : "") + diff);
-                                    h.tvDiff.setTextColor(diff == 0 ? 0xFF9E9E9E : diff > 0 ? 0xFF4CAF50 : 0xFFF44336);
+                                    h.tvDiff.setTextColor(androidx.core.content.ContextCompat.getColor(h.itemView.getContext(), diff == 0 ? R.color.gray_400 : diff > 0 ? R.color.color_success : R.color.color_error));
                                 }
                             }
                         }
@@ -269,7 +269,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                     int cq = Integer.parseInt(existing.getOrDefault("counted_qty","0"));
                     int diff = cq - sysQty;
                     h.tvDiff.setText("الفرق: " + (diff >= 0 ? "+" : "") + diff);
-                    h.tvDiff.setTextColor(diff == 0 ? 0xFF9E9E9E : diff > 0 ? 0xFF4CAF50 : 0xFFF44336);
+                    h.tvDiff.setTextColor(androidx.core.content.ContextCompat.getColor(h.itemView.getContext(), diff == 0 ? R.color.gray_400 : diff > 0 ? R.color.color_success : R.color.color_error));
                     h.tvDiff.setVisibility(View.VISIBLE);
                 } else if (h.tvDiff != null) {
                     h.tvDiff.setVisibility(View.INVISIBLE);

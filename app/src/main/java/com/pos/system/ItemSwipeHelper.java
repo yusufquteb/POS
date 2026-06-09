@@ -50,18 +50,18 @@ public abstract class ItemSwipeHelper extends ItemTouchHelper.SimpleCallback {
         this.context = context;
         
         // الألوان
-        backgroundDelete = new ColorDrawable(0xFFE53935); // أحمر للحذف
-        backgroundEdit = new ColorDrawable(0xFF6B46C1);   // بنفسجي للتعديل
-        
+        backgroundDelete = new ColorDrawable(ContextCompat.getColor(context, R.color.color_error));
+        backgroundEdit   = new ColorDrawable(ContextCompat.getColor(context, R.color.purple_500));
+
         // الأيقونات
         deleteIcon = ContextCompat.getDrawable(context, android.R.drawable.ic_menu_delete);
         editIcon = ContextCompat.getDrawable(context, android.R.drawable.ic_menu_edit);
-        
+
         if (deleteIcon != null) {
-            deleteIcon.setColorFilter(0xFFFFFFFF, PorterDuff.Mode.SRC_ATOP);
+            deleteIcon.setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_ATOP);
         }
         if (editIcon != null) {
-            editIcon.setColorFilter(0xFFFFFFFF, PorterDuff.Mode.SRC_ATOP);
+            editIcon.setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_ATOP);
         }
         
         iconMargin = (int) (context.getResources().getDisplayMetrics().density * 16);
