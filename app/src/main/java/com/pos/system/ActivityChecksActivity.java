@@ -193,7 +193,6 @@ public class ActivityChecksActivity extends BaseActivity {
             .show();
     }
 
-    }
 
     @Override
     protected void onDestroy() {

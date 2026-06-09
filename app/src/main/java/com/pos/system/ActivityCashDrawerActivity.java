@@ -177,7 +177,6 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         } catch (Exception e) { return "ج.م"; }
     }
 
-    }
 
     @Override protected void onDestroy() { super.onDestroy(); executor.shutdown(); }
 

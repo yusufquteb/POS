@@ -213,7 +213,6 @@ public class ActivityStockCountActivity extends BaseActivity {
             .show();
     }
 
-    }
 
     @Override protected void onDestroy() { super.onDestroy(); executor.shutdown(); }
 

@@ -175,7 +175,6 @@ public class ActivityUsersActivity extends BaseActivity {
             .show();
     }
 
-    }
 
     @Override protected void onDestroy() { super.onDestroy(); executor.shutdown(); }
 

@@ -205,7 +205,6 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         });
     }
 
-    }
 
     @Override
     protected void onDestroy() {
