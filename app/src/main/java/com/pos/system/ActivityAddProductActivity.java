@@ -233,7 +233,6 @@ public class ActivityAddProductActivity extends BaseActivity {
 
     private void setupToolbar() {
         MaterialToolbar toolbar = binding.toolbar1;
-        if (toolbar == null) toolbar = binding.toolbar;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> onBackPressed());

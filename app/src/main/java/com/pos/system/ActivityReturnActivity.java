@@ -57,7 +57,7 @@ public class ActivityReturnActivity extends BaseActivity {
 
     // ─── Views ──────────────────────────────────────────────────
     private RecyclerView rvInvoices;
-    private TextView tvEmpty;
+    private LinearLayout tvEmpty;
     private TextView tvReturnsCount;
     private TextView tvTotalRefunded;
 

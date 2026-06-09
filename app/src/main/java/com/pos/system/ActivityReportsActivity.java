@@ -17,7 +17,7 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.button.MaterialButton;
+import android.widget.Button;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
@@ -59,7 +59,7 @@ public class ActivityReportsActivity extends BaseActivity {
     private List<Map<String,String>> topProducts = new ArrayList<>();
 
     // Buttons
-    private MaterialButton btnExportPdf, btnShareReport, btnWhatsapp;
+    private Button btnExportPdf, btnShareReport, btnWhatsapp;
     private ChipGroup chipGroupPeriod;
 
     // Date range

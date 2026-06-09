@@ -152,7 +152,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
     private static class ExpiryAdapter extends RecyclerView.Adapter<ExpiryAdapter.VH> {
 
         private final List<HashMap<String, String>> data = new ArrayList<>();
-        private int barColor = COLOR_EXPIRED;
+        private int barColor = 0;
         private int tabType  = TAB_EXPIRED;
 
         void setData(List<HashMap<String, String>> list, int color, int tab) {
@@ -196,7 +196,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
                 if (tabType == TAB_EXPIRED) {
                     long ago = Math.abs(days);
                     h.tvBadge.setText("منتهية منذ " + ago + " يوم");
-                    h.tvBadge.setBackgroundColor(COLOR_EXPIRED);
+                    h.tvBadge.setBackgroundColor(barColor);
                 } else {
                     h.tvBadge.setText("تنتهي: " + expiry + " (" + days + " يوم)");
                     h.tvBadge.setBackgroundColor(barColor);
