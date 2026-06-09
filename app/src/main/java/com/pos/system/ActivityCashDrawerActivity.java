@@ -116,13 +116,18 @@ public class ActivityCashDrawerActivity extends BaseActivity {
 
     private void showAddDrawerDialog() {
         View dv = getLayoutInflater().inflate(R.layout.dialog_simple_input, null);
+        TextInputLayout tilInput = dv.findViewById(R.id.til_input);
         TextInputEditText et = dv.findViewById(R.id.et_input);
         new MaterialAlertDialogBuilder(this)
             .setTitle("إضافة خزينة جديدة")
             .setView(dv)
             .setPositiveButton("حفظ", (d, w) -> {
+                if (tilInput != null) tilInput.setError(null);
                 String name = et != null && et.getText() != null ? et.getText().toString().trim() : "";
-                if (name.isEmpty()) { showSnackbar("الاسم مطلوب", true); return; }
+                if (name.isEmpty()) {
+                    if (tilInput != null) tilInput.setError("الاسم مطلوب");
+                    return;
+                }
                 executor.execute(() -> {
                     long id = dbHelper.addCashDrawer(name);
                     runOnUiThread(() -> { if (id > 0) { showToast("تمت الإضافة"); loadDrawers(); } else showSnackbar("خطأ", true); });
@@ -135,6 +140,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     private void showTransactionDialog(String type) {
         if (selectedDrawer == null) { showToast("يرجى اختيار خزينة أولاً"); return; }
         View dv = getLayoutInflater().inflate(R.layout.dialog_cash_transaction, null);
+        TextInputLayout tilAmount = dv.findViewById(R.id.til_amount);
         TextInputEditText etAmount = dv.findViewById(R.id.et_amount);
         TextInputEditText etReason = dv.findViewById(R.id.et_reason);
         String title = "in".equals(type) ? "إيداع في الخزينة" : "سحب من الخزينة";
@@ -142,10 +148,14 @@ public class ActivityCashDrawerActivity extends BaseActivity {
             .setTitle(title)
             .setView(dv)
             .setPositiveButton("تأكيد", (d, w) -> {
-                String amtStr = etAmount != null && etAmount.getText() != null ? etAmount.getText().toString().trim() : "0";
+                if (tilAmount != null) tilAmount.setError(null);
+                String amtStr = etAmount != null && etAmount.getText() != null ? etAmount.getText().toString().trim() : "";
                 String reason = etReason != null && etReason.getText() != null ? etReason.getText().toString().trim() : "";
                 double amt = 0;
-                try { amt = Double.parseDouble(amtStr); } catch (Exception e) { showSnackbar("مبلغ غير صحيح", true); return; }
+                try { amt = Double.parseDouble(amtStr.isEmpty() ? "0" : amtStr); } catch (Exception e) {
+                    if (tilAmount != null) tilAmount.setError("مبلغ غير صحيح");
+                    return;
+                }
                 if (amt <= 0) { showToast("المبلغ يجب أن يكون أكبر من صفر"); return; }
                 long drawerId = Long.parseLong(selectedDrawer.getOrDefault("id", "0"));
                 double finalAmt = amt;
