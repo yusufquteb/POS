@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="@dimen/spacing_base"
     android:layoutDirection="rtl">
 
     <TextView
@@ -13,15 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="البنود المضافة: 0"
-        android:textSize="13sp"
+        android:textSize="@dimen/text_sm"
         android:textColor="?attr/colorPrimary"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="@dimen/spacing_md" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/purchase_order_item_name"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/spacing_sm"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_po_product_name"

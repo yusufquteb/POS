@@ -336,7 +336,7 @@ public class ActivityDebtActivity extends BaseActivity {
                         "✓ تم السداد %.2f %s", amount, currency));
                     loadAllData();
                 } else {
-                    showToast("فشل في تسجيل السداد");
+                    showSnackbar("فشل في تسجيل السداد", true);
                 }
             })
             .setNegativeButton("إلغاء", null)
@@ -373,7 +373,7 @@ public class ActivityDebtActivity extends BaseActivity {
                         "✓ تم تسجيل الدين %.2f %s", amount, currency));
                     loadAllData();
                 } else {
-                    showToast("فشل في تسجيل الدين");
+                    showSnackbar("فشل في تسجيل الدين", true);
                 }
             })
             .setNegativeButton("إلغاء", null)

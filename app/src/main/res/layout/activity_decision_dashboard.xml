@@ -28,16 +28,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="@dimen/spacing_md">
 
             <!-- ① ماذا أشتري الآن؟ -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_reorder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="@dimen/spacing_md"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="3dp"
+                app:cardElevation="2dp"
                 app:cardBackgroundColor="?attr/colorSurface"
                 app:strokeColor="?attr/colorOutlineVariant"
                 app:strokeWidth="1dp">
@@ -46,16 +46,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/spacing_base">
 
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛒" android:textSize="22sp" android:layout_marginEnd="8dp" />
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ماذا أشتري الآن؟" android:textSize="15sp" android:textStyle="bold" />
-                        <TextView android:id="@+id/tv_reorder_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/color_warning" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛒" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ماذا أشتري الآن؟" android:textSize="@dimen/text_base" android:textStyle="bold" />
+                        <TextView android:id="@+id/tv_reorder_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="@dimen/text_xl" android:textStyle="bold" android:textColor="@color/color_warning" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 
-                    <TextView android:id="@+id/tv_reorder_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="المنتجات التي وصلت حد إعادة الطلب" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="8dp" />
+                    <TextView android:id="@+id/tv_reorder_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="المنتجات التي وصلت حد إعادة الطلب" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_reorder"
@@ -70,7 +70,7 @@
                         style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_sm"
                         android:text="إنشاء أمر شراء تلقائي" />
 
                 </LinearLayout>
@@ -81,9 +81,9 @@
                 android:id="@+id/card_expiry_risk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="@dimen/spacing_md"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="3dp"
+                app:cardElevation="2dp"
                 app:cardBackgroundColor="?attr/colorSurface"
                 app:strokeColor="?attr/colorOutlineVariant"
                 app:strokeWidth="1dp">
@@ -92,16 +92,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/spacing_base">
 
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠️" android:textSize="22sp" android:layout_marginEnd="8dp" />
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ماذا سيتلف؟" android:textSize="15sp" android:textStyle="bold" />
-                        <TextView android:id="@+id/tv_expiry_risk_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/color_error" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠️" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ماذا سيتلف؟" android:textSize="@dimen/text_base" android:textStyle="bold" />
+                        <TextView android:id="@+id/tv_expiry_risk_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="@dimen/text_xl" android:textStyle="bold" android:textColor="@color/color_error" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 
-                    <TextView android:id="@+id/tv_expiry_risk_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="منتجات تنتهي صلاحيتها خلال 7 أيام" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="8dp" />
+                    <TextView android:id="@+id/tv_expiry_risk_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="منتجات تنتهي صلاحيتها خلال 7 أيام" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_expiry_risk"
@@ -116,7 +116,7 @@
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_sm"
                         android:text="عرض كل منتجات الصلاحية" />
 
                 </LinearLayout>
@@ -127,9 +127,9 @@
                 android:id="@+id/card_dead_stock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="@dimen/spacing_md"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="3dp"
+                app:cardElevation="2dp"
                 app:cardBackgroundColor="?attr/colorSurface"
                 app:strokeColor="?attr/colorOutlineVariant"
                 app:strokeWidth="1dp">
@@ -138,16 +138,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/spacing_base">
 
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😴" android:textSize="22sp" android:layout_marginEnd="8dp" />
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ما الذي لا يتحرك؟" android:textSize="15sp" android:textStyle="bold" />
-                        <TextView android:id="@+id/tv_dead_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="20sp" android:textStyle="bold" android:textColor="?attr/colorOnSurfaceVariant" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😴" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ما الذي لا يتحرك؟" android:textSize="@dimen/text_base" android:textStyle="bold" />
+                        <TextView android:id="@+id/tv_dead_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="@dimen/text_xl" android:textStyle="bold" android:textColor="?attr/colorOnSurfaceVariant" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="لم تُباع خلال 30 يوم الماضية" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="8dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="لم تُباع خلال 30 يوم الماضية" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_dead_stock"
@@ -165,9 +165,9 @@
                 android:id="@+id/card_low_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="@dimen/spacing_md"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="3dp"
+                app:cardElevation="2dp"
                 app:cardBackgroundColor="?attr/colorSurface"
                 app:strokeColor="?attr/colorOutlineVariant"
                 app:strokeWidth="1dp">
@@ -176,14 +176,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/spacing_base">
 
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📉" android:textSize="22sp" android:layout_marginEnd="8dp" />
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="أضعف المنتجات ربحاً" android:textSize="15sp" android:textStyle="bold" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📉" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="أضعف المنتجات ربحاً" android:textSize="@dimen/text_base" android:textStyle="bold" />
                     </LinearLayout>
 
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="هامش الربح الأقل خلال آخر 30 يوم" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="8dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="هامش الربح الأقل خلال آخر 30 يوم" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_low_margin"

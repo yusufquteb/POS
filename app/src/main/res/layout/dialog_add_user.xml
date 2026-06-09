@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layoutDirection="rtl"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_base">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="الاسم الكامل *"
@@ -21,10 +22,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="اسم المستخدم *"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_sm"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_username"
@@ -34,10 +36,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_pin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="كلمة المرور / PIN *"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_sm"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_pin"
@@ -50,9 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="الدور"
-            android:textSize="14sp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="@dimen/text_md"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:layout_marginBottom="@dimen/spacing_xs"/>
 
         <Spinner
             android:id="@+id/sp_role"

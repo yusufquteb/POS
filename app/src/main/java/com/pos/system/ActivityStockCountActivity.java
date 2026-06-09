@@ -6,11 +6,11 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.pos.system.databinding.ActivityStockCountBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,15 +19,8 @@ import java.util.concurrent.Executors;
 
 public class ActivityStockCountActivity extends BaseActivity {
 
+    private ActivityStockCountBinding binding;
     private DBHelper   dbHelper;
-    private RecyclerView recyclerView;
-    private ExtendedFloatingActionButton fabStart;
-    private TextView   tvSessionStatus;
-    private TextView   tvEmpty;
-    private MaterialButton btnComplete;
-    private MaterialButton btnCancel;
-    private EditText   etSearch;
-    private View       tilSearch;
 
     private final List<HashMap<String, String>> allProducts  = new ArrayList<>();
     private final List<HashMap<String, String>> filteredList = new ArrayList<>();
@@ -39,7 +32,9 @@ public class ActivityStockCountActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stock_count);
+        binding = ActivityStockCountBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.coordinatorRoot);
         dbHelper = new DBHelper(this);
         initViews();
         setupToolbar();
@@ -47,42 +42,38 @@ public class ActivityStockCountActivity extends BaseActivity {
     }
 
     private void setupToolbar() {
-        androidx.appcompat.widget.Toolbar tb = findViewById(R.id.toolbar);
-        if (tb != null) {
-            setSupportActionBar(tb);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle("جرد المخزون");
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+        setSupportActionBar(binding.toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("جرد المخزون");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
     @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; }
 
     private void initViews() {
-        recyclerView    = findViewById(R.id.recycler_view);
-        fabStart        = findViewById(R.id.fab_start);
-        tvSessionStatus = findViewById(R.id.tv_session_status);
-        tvEmpty         = findViewById(R.id.tv_empty);
-        btnComplete     = findViewById(R.id.btn_complete);
-        btnCancel       = findViewById(R.id.btn_cancel);
-        tilSearch       = findViewById(R.id.til_search);
-        etSearch        = findViewById(R.id.et_search);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CountAdapter();
-        recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setItemAnimator(null);
 
-        if (fabStart != null) fabStart.setOnClickListener(v -> startNewSession());
-        if (btnComplete != null) btnComplete.setOnClickListener(v -> confirmComplete());
-        if (btnCancel != null) btnCancel.setOnClickListener(v -> confirmCancel());
-        if (etSearch != null) {
-            etSearch.addTextChangedListener(new TextWatcher() {
-                @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                @Override public void onTextChanged(CharSequence s, int start, int before, int count) { filterProducts(s.toString()); }
-                @Override public void afterTextChanged(Editable s) {}
-            });
-        }
+        binding.fabStart.setOnClickListener(v -> startNewSession());
+
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
+                if (dy > 0) binding.fabStart.shrink();
+                else if (dy < 0) binding.fabStart.extend();
+            }
+        });
+
+        binding.btnComplete.setOnClickListener(v -> confirmComplete());
+        binding.btnCancel.setOnClickListener(v -> confirmCancel());
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { filterProducts(s.toString()); }
+            @Override public void afterTextChanged(Editable s) {}
+        });
     }
 
     private void checkActiveSession() {
@@ -101,14 +92,13 @@ public class ActivityStockCountActivity extends BaseActivity {
     }
 
     private void showSessionUI(boolean hasSession) {
-        if (tvSessionStatus != null)
-            tvSessionStatus.setText(hasSession
-                ? "جلسة جرد مفتوحة: " + (activeSession != null ? activeSession.getOrDefault("session_number","") : "")
-                : "لا توجد جلسة جرد مفتوحة");
-        if (fabStart != null)   fabStart.setVisibility(hasSession ? View.GONE : View.VISIBLE);
-        if (btnComplete != null) btnComplete.setVisibility(hasSession ? View.VISIBLE : View.GONE);
-        if (btnCancel != null)   btnCancel.setVisibility(hasSession ? View.VISIBLE : View.GONE);
-        if (tilSearch != null)   tilSearch.setVisibility(hasSession ? View.VISIBLE : View.GONE);
+        binding.tvSessionStatus.setText(hasSession
+            ? "جلسة جرد مفتوحة: " + (activeSession != null ? activeSession.getOrDefault("session_number","") : "")
+            : "لا توجد جلسة جرد مفتوحة");
+        binding.fabStart.setVisibility(hasSession ? View.GONE : View.VISIBLE);
+        binding.btnComplete.setVisibility(hasSession ? View.VISIBLE : View.GONE);
+        binding.btnCancel.setVisibility(hasSession ? View.VISIBLE : View.GONE);
+        binding.tilSearch.setVisibility(hasSession ? View.VISIBLE : View.GONE);
     }
 
     private void loadProductsForCount() {
@@ -131,7 +121,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                 filteredList.add(p);
             }
         }
-        if (tvEmpty != null) tvEmpty.setVisibility(filteredList.isEmpty() ? View.VISIBLE : View.GONE);
+        binding.tvEmpty.setVisibility(filteredList.isEmpty() ? View.VISIBLE : View.GONE);
         adapter.notifyDataSetChanged();
     }
 
@@ -141,7 +131,7 @@ public class ActivityStockCountActivity extends BaseActivity {
             runOnUiThread(() -> {
                 filteredList.clear();
                 filteredList.addAll(sessions);
-                if (tvEmpty != null) tvEmpty.setVisibility(filteredList.isEmpty() ? View.VISIBLE : View.GONE);
+                binding.tvEmpty.setVisibility(filteredList.isEmpty() ? View.VISIBLE : View.GONE);
                 adapter.notifyDataSetChanged();
             });
         });
@@ -156,7 +146,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                     long id = dbHelper.createStockCountSession("admin");
                     runOnUiThread(() -> {
                         if (id > 0) { showToast("تم بدء جلسة الجرد"); checkActiveSession(); }
-                        else showToast("خطأ في بدء الجلسة");
+                        else showSnackbar("خطأ في بدء الجلسة", true);
                     });
                 }))
             .setNegativeButton("إلغاء", null)
@@ -187,7 +177,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                     boolean ok = dbHelper.completeStockCount(sessionId);
                     runOnUiThread(() -> {
                         if (ok) { showToast("تم إتمام الجرد وتحديث المخزون بنجاح"); activeSession = null; countedItems.clear(); checkActiveSession(); }
-                        else showToast("خطأ في إتمام الجرد");
+                        else showSnackbar("خطأ في إتمام الجرد", true);
                     });
                 });
             })
@@ -205,7 +195,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                     boolean ok = dbHelper.cancelStockCount(sessionId);
                     runOnUiThread(() -> {
                         if (ok) { showToast("تم إلغاء الجرد"); activeSession = null; countedItems.clear(); checkActiveSession(); }
-                        else showToast("خطأ في الإلغاء");
+                        else showSnackbar("خطأ في الإلغاء", true);
                     });
                 });
             })

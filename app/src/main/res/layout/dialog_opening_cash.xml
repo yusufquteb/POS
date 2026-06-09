@@ -6,17 +6,17 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layoutDirection="rtl"
-    android:paddingHorizontal="8dp"
-    android:paddingBottom="8dp">
+    android:paddingHorizontal="@dimen/spacing_sm"
+    android:paddingBottom="@dimen/spacing_sm">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/shift_open_desc"
-        android:textSize="14sp"
+        android:textSize="@dimen/text_md"
         android:textColor="?attr/colorOnSurfaceVariant"
         android:fontFamily="@font/cairo_regular"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="@dimen/spacing_base" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

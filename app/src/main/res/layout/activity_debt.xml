@@ -58,15 +58,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="24dp">
+            android:paddingBottom="@dimen/spacing_xl">
 
             <!-- ── Stats banner ── -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="@dimen/spacing_base"
+                android:layout_marginBottom="@dimen/spacing_sm"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="20dp"
+                    android:padding="@dimen/spacing_lg"
                     android:gravity="center_vertical">
 
                     <LinearLayout
@@ -90,7 +90,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="إجمالي ديون العملاء"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/text_sm"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_regular"
                             android:alpha="0.8" />
@@ -100,11 +100,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0.00"
-                            android:textSize="28sp"
+                            android:textSize="@dimen/text_display"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_bold"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginTop="@dimen/spacing_xs" />
 
                     </LinearLayout>
 
@@ -126,7 +126,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textSize="32sp"
+                            android:textSize="@dimen/text_display"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_bold"
@@ -137,7 +137,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="عميل مدين"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/text_xs"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_regular"
                             android:alpha="0.8"
@@ -154,8 +154,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:layout_marginBottom="@dimen/spacing_xs"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:startIconDrawable="@drawable/ic_search"
                 app:startIconTint="?attr/colorOnSurfaceVariant"
@@ -169,7 +169,7 @@
                     android:id="@+id/et_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:fontFamily="@font/cairo_regular" />
@@ -181,7 +181,7 @@
                 android:id="@+id/rv_debts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="4dp"
+                android:paddingTop="@dimen/spacing_xs"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false" />
 
@@ -190,7 +190,7 @@
                 android:id="@+id/rv_supplier_debts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="4dp"
+                android:paddingTop="@dimen/spacing_xs"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
                 android:visibility="gone" />
@@ -218,11 +218,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="لا توجد ديون"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_xl"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/spacing_base"
                     android:fontFamily="@font/cairo_bold" />
 
                 <TextView
@@ -230,10 +230,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="جميع العملاء سدّدوا ديونهم"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/spacing_sm"
                     android:fontFamily="@font/cairo_regular" />
 
             </LinearLayout>

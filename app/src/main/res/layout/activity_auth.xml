@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
+            android:padding="@dimen/spacing_xl"
             android:gravity="center">
 
             <!-- Spacer -->
@@ -45,10 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textSize="32sp"
+                android:textSize="@dimen/text_display"
                 android:textStyle="bold"
                 android:textColor="?attr/colorPrimary"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_base"
                 android:fontFamily="@font/cairo_bold" />
 
             <!-- Subtitle -->
@@ -56,9 +56,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="نظام نقاط البيع الاحترافي"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_base"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:fontFamily="@font/cairo_regular" />
 
             <View
@@ -73,19 +73,19 @@
                 app:cardCornerRadius="24dp"
                 app:cardElevation="4dp"
                 app:strokeWidth="0dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="@dimen/spacing_base">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="24dp">
+                    android:padding="@dimen/spacing_xl">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="تسجيل الدخول"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/text_headline"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface"
                         android:fontFamily="@font/cairo_bold" />
@@ -94,9 +94,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="اختر طريقة تسجيل الدخول المفضلة"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/text_md"
                         android:textColor="?attr/colorOnSurfaceVariant"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/spacing_xs"
                         android:fontFamily="@font/cairo_regular" />
 
                     <View
@@ -109,7 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:text="تسجيل الدخول عبر Google"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_base"
                         android:textColor="@android:color/white"
                         app:icon="@drawable/ic_google"
                         app:iconTint="@android:color/white"
@@ -126,8 +126,8 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginTop="@dimen/spacing_lg"
+                        android:layout_marginBottom="@dimen/spacing_lg">
 
                         <View
                             android:layout_width="0dp"
@@ -140,8 +140,8 @@
                             android:layout_height="wrap_content"
                             android:text="أو"
                             android:textColor="?attr/colorOnSurfaceVariant"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginEnd="12dp"
+                            android:layout_marginStart="@dimen/spacing_md"
+                            android:layout_marginEnd="@dimen/spacing_md"
                             android:fontFamily="@font/cairo_regular" />
 
                         <View
@@ -158,7 +158,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:text="تسجيل الدخول بالبريد الإلكتروني"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_base"
                         app:icon="@drawable/ic_email"
                         app:iconGravity="textStart"
                         app:iconPadding="12dp"
@@ -180,19 +180,19 @@
                 app:cardCornerRadius="24dp"
                 app:cardElevation="4dp"
                 app:strokeWidth="0dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="@dimen/spacing_base">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="24dp">
+                    android:padding="@dimen/spacing_xl">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="تسجيل الدخول"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/text_headline"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface"
                         android:fontFamily="@font/cairo_bold" />
@@ -230,7 +230,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="كلمة المرور"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/spacing_base"
                         app:startIconDrawable="@drawable/ic_lock"
                         app:endIconMode="password_toggle"
                         app:boxCornerRadiusTopStart="12dp"
@@ -255,8 +255,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:text="تسجيل الدخول"
-                        android:textSize="16sp"
-                        android:layout_marginTop="24dp"
+                        android:textSize="@dimen/text_base"
+                        android:layout_marginTop="@dimen/spacing_xl"
                         app:cornerRadius="16dp"
                         android:fontFamily="@font/cairo_semibold"
                         app:elevation="4dp" />
@@ -268,10 +268,10 @@
                         android:layout_height="wrap_content"
                         android:text="ليس لديك حساب؟ إنشاء حساب"
                         android:textColor="?attr/colorPrimary"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/text_md"
                         android:layout_gravity="center"
-                        android:layout_marginTop="16dp"
-                        android:padding="8dp"
+                        android:layout_marginTop="@dimen/spacing_base"
+                        android:padding="@dimen/spacing_sm"
                         android:fontFamily="@font/cairo_semibold"
                         android:clickable="true"
                         android:focusable="true"
@@ -287,9 +287,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="تخطي"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_md"
                 style="@style/Widget.Material3.Button.TextButton"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_base"
                 android:fontFamily="@font/cairo_regular" />
 
             <!-- Spacer -->

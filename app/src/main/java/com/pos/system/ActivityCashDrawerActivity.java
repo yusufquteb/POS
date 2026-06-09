@@ -3,13 +3,14 @@ package com.pos.system;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.pos.system.databinding.ActivityCashDrawerBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,16 +20,8 @@ import java.util.concurrent.Executors;
 
 public class ActivityCashDrawerActivity extends BaseActivity {
 
+    private ActivityCashDrawerBinding binding;
     private DBHelper   dbHelper;
-    private RecyclerView rvDrawers;
-    private RecyclerView rvTransactions;
-    private ExtendedFloatingActionButton fabAdd;
-    private View       tvEmpty;
-    private MaterialCardView cardBalance;
-    private TextView   tvBalanceLabel;
-    private TextView   tvBalance;
-    private MaterialButton btnDeposit;
-    private MaterialButton btnWithdraw;
 
     private final List<HashMap<String, String>> drawersList = new ArrayList<>();
     private final List<HashMap<String, String>> txList      = new ArrayList<>();
@@ -40,7 +33,9 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cash_drawer);
+        binding = ActivityCashDrawerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.coordinatorRoot);
         dbHelper = new DBHelper(this);
         initViews();
         setupToolbar();
@@ -48,53 +43,51 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     }
 
     private void setupToolbar() {
-        androidx.appcompat.widget.Toolbar tb = findViewById(R.id.toolbar);
-        if (tb != null) {
-            setSupportActionBar(tb);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle("الخزينة");
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+        setSupportActionBar(binding.toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("الخزينة");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
     @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; }
 
     private void initViews() {
-        rvDrawers      = findViewById(R.id.rv_drawers);
-        rvTransactions = findViewById(R.id.rv_transactions);
-        fabAdd         = findViewById(R.id.fab_add);
-        tvEmpty        = findViewById(R.id.tv_empty);
-        cardBalance    = findViewById(R.id.card_balance);
-        tvBalanceLabel = findViewById(R.id.tv_balance_label);
-        tvBalance      = findViewById(R.id.tv_balance);
-        btnDeposit     = findViewById(R.id.btn_deposit);
-        btnWithdraw    = findViewById(R.id.btn_withdraw);
-
-        rvDrawers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        binding.rvDrawers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         drawersAdapter = new DrawersAdapter();
-        rvDrawers.setAdapter(drawersAdapter);
+        binding.rvDrawers.setAdapter(drawersAdapter);
+        binding.rvDrawers.setItemAnimator(null);
 
-        rvTransactions.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvTransactions.setLayoutManager(new LinearLayoutManager(this));
         txAdapter = new TxAdapter();
-        rvTransactions.setAdapter(txAdapter);
+        binding.rvTransactions.setAdapter(txAdapter);
+        binding.rvTransactions.setItemAnimator(null);
 
-        if (fabAdd != null)
-            fabAdd.setOnClickListener(v -> showAddDrawerDialog());
-        if (btnDeposit != null)
-            btnDeposit.setOnClickListener(v -> showTransactionDialog("in"));
-        if (btnWithdraw != null)
-            btnWithdraw.setOnClickListener(v -> showTransactionDialog("out"));
+        binding.fabAdd.setOnClickListener(v -> showAddDrawerDialog());
+        binding.btnEmptyAddDrawer.setOnClickListener(v -> showAddDrawerDialog());
+
+        binding.rvDrawers.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
+                if (dy > 0) binding.fabAdd.shrink();
+                else if (dy < 0) binding.fabAdd.extend();
+            }
+        });
+
+        binding.btnDeposit.setOnClickListener(v -> showTransactionDialog("in"));
+        binding.btnWithdraw.setOnClickListener(v -> showTransactionDialog("out"));
     }
 
     private void loadDrawers() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         executor.execute(() -> {
             List<HashMap<String, String>> drawers = dbHelper.getAllCashDrawers();
             runOnUiThread(() -> {
+                binding.progressBar.setVisibility(View.GONE);
                 drawersList.clear();
                 drawersList.addAll(drawers);
                 drawersAdapter.notifyDataSetChanged();
-                if (tvEmpty != null) tvEmpty.setVisibility(drawersList.isEmpty() ? View.VISIBLE : View.GONE);
+                binding.tvEmpty.setVisibility(drawersList.isEmpty() ? View.VISIBLE : View.GONE);
                 if (!drawersList.isEmpty() && selectedDrawer == null) selectDrawer(drawersList.get(0));
             });
         });
@@ -103,12 +96,10 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     private void selectDrawer(HashMap<String, String> drawer) {
         selectedDrawer = drawer;
         long drawerId = Long.parseLong(drawer.getOrDefault("id", "0"));
-        if (tvBalanceLabel != null)
-            tvBalanceLabel.setText(drawer.getOrDefault("name", "الخزينة"));
-        if (tvBalance != null)
-            tvBalance.setText(String.format(Locale.US, "%.2f %s",
-                Double.parseDouble(drawer.getOrDefault("current_balance", "0")), getCurrency()));
-        if (cardBalance != null) cardBalance.setVisibility(View.VISIBLE);
+        binding.tvBalanceLabel.setText(drawer.getOrDefault("name", "الخزينة"));
+        binding.tvBalance.setText(String.format(Locale.US, "%.2f %s",
+            Double.parseDouble(drawer.getOrDefault("current_balance", "0")), getCurrency()));
+        binding.cardBalance.setVisibility(View.VISIBLE);
         loadTransactions(drawerId);
     }
 
@@ -125,16 +116,21 @@ public class ActivityCashDrawerActivity extends BaseActivity {
 
     private void showAddDrawerDialog() {
         View dv = getLayoutInflater().inflate(R.layout.dialog_simple_input, null);
+        TextInputLayout tilInput = dv.findViewById(R.id.til_input);
         TextInputEditText et = dv.findViewById(R.id.et_input);
         new MaterialAlertDialogBuilder(this)
             .setTitle("إضافة خزينة جديدة")
             .setView(dv)
             .setPositiveButton("حفظ", (d, w) -> {
+                if (tilInput != null) tilInput.setError(null);
                 String name = et != null && et.getText() != null ? et.getText().toString().trim() : "";
-                if (name.isEmpty()) { showToast("الاسم مطلوب"); return; }
+                if (name.isEmpty()) {
+                    if (tilInput != null) tilInput.setError("الاسم مطلوب");
+                    return;
+                }
                 executor.execute(() -> {
                     long id = dbHelper.addCashDrawer(name);
-                    runOnUiThread(() -> { if (id > 0) { showToast("تمت الإضافة"); loadDrawers(); } else showToast("خطأ"); });
+                    runOnUiThread(() -> { if (id > 0) { showToast("تمت الإضافة"); loadDrawers(); } else showSnackbar("خطأ", true); });
                 });
             })
             .setNegativeButton("إلغاء", null)
@@ -144,6 +140,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     private void showTransactionDialog(String type) {
         if (selectedDrawer == null) { showToast("يرجى اختيار خزينة أولاً"); return; }
         View dv = getLayoutInflater().inflate(R.layout.dialog_cash_transaction, null);
+        TextInputLayout tilAmount = dv.findViewById(R.id.til_amount);
         TextInputEditText etAmount = dv.findViewById(R.id.et_amount);
         TextInputEditText etReason = dv.findViewById(R.id.et_reason);
         String title = "in".equals(type) ? "إيداع في الخزينة" : "سحب من الخزينة";
@@ -151,10 +148,14 @@ public class ActivityCashDrawerActivity extends BaseActivity {
             .setTitle(title)
             .setView(dv)
             .setPositiveButton("تأكيد", (d, w) -> {
-                String amtStr = etAmount != null && etAmount.getText() != null ? etAmount.getText().toString().trim() : "0";
+                if (tilAmount != null) tilAmount.setError(null);
+                String amtStr = etAmount != null && etAmount.getText() != null ? etAmount.getText().toString().trim() : "";
                 String reason = etReason != null && etReason.getText() != null ? etReason.getText().toString().trim() : "";
                 double amt = 0;
-                try { amt = Double.parseDouble(amtStr); } catch (Exception e) { showToast("مبلغ غير صحيح"); return; }
+                try { amt = Double.parseDouble(amtStr.isEmpty() ? "0" : amtStr); } catch (Exception e) {
+                    if (tilAmount != null) tilAmount.setError("مبلغ غير صحيح");
+                    return;
+                }
                 if (amt <= 0) { showToast("المبلغ يجب أن يكون أكبر من صفر"); return; }
                 long drawerId = Long.parseLong(selectedDrawer.getOrDefault("id", "0"));
                 double finalAmt = amt;
@@ -162,7 +163,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
                     boolean ok = dbHelper.cashDrawerTransaction(drawerId, type, finalAmt, reason, "admin", "", "manual");
                     runOnUiThread(() -> {
                         if (ok) { showToast(("in".equals(type) ? "تم الإيداع" : "تم السحب") + " بنجاح"); loadDrawers(); }
-                        else showToast("خطأ: رصيد غير كافٍ أو خطأ في العملية");
+                        else showSnackbar("خطأ: رصيد غير كافٍ أو خطأ في العملية", true);
                     });
                 });
             })

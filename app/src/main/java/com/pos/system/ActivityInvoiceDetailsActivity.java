@@ -49,7 +49,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         invoiceId = getIntent().getLongExtra("invoice_id", 0);
         
         if (invoiceId == 0) {
-            showToast("خطأ في تحميل الفاتورة");
+            showSnackbar("خطأ في تحميل الفاتورة", true);
             finish();
             return;
         }
@@ -91,7 +91,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         HashMap<String, Object> invoice = dbHelper.getInvoiceById(invoiceId);
         
         if (invoice == null) {
-            showToast("لم يتم العثور على الفاتورة");
+            showSnackbar("لم يتم العثور على الفاتورة", true);
             finish();
             return;
         }

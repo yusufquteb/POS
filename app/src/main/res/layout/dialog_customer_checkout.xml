@@ -9,16 +9,16 @@
 		android:id="@+id/linear4"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="24dp"
+		android:padding="@dimen/spacing_xl"
 		android:orientation="vertical">
 		<TextView
 			android:id="@+id/textview6"
 			android:focusable="false"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="16dp"
+			android:layout_marginBottom="@dimen/spacing_base"
 			android:text="بيانات العميل"
-			android:textSize="18sp"
+			android:textSize="@dimen/text_lg"
 			android:textStyle="bold" />
 		<com.google.android.material.textfield.TextInputLayout
 			android:id="@+id/textinputlayout5"
@@ -34,7 +34,7 @@
 				android:focusable="false"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textSize="12sp"
+				android:textSize="@dimen/text_xs"
 				android:inputType="phone"
 				android:maxLength="11"
 				android:digits="0123456789"
@@ -44,7 +44,7 @@
 			android:id="@+id/card_customer_info"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="12dp"
+			android:layout_marginTop="@dimen/spacing_md"
 			app:cardBackgroundColor="?attr/colorTertiaryContainer"
 			android:visibility="gone"
 			app:cardElevation="0dp"
@@ -55,25 +55,25 @@
 				android:focusable="false"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:padding="16dp"
-				android:textSize="14sp"
+				android:padding="@dimen/spacing_base"
+				android:textSize="@dimen/text_md"
 				android:textColor="@color/color_success" />
 		</com.google.android.material.card.MaterialCardView>
 		<Button
 			android:id="@+id/btn_add_customer"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="12dp"
+			android:layout_marginTop="@dimen/spacing_md"
 			android:text="➕ إضافة عميل جديد"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:visibility="gone"
 			style="@style/Widget.Material3.Button.TonalButton" />
 		<View
 			android:id="@+id/divider"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:layout_marginTop="20dp"
-			android:layout_marginBottom="16dp"
+			android:layout_marginTop="@dimen/spacing_lg"
+			android:layout_marginBottom="@dimen/spacing_base"
 			android:background="?android:attr/listDivider"
 			android:visibility="gone" />
 		<LinearLayout
@@ -87,15 +87,15 @@
 				android:focusable="false"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="12dp"
+				android:layout_marginBottom="@dimen/spacing_md"
 				android:text="💰 تفاصيل الدفع"
-				android:textSize="16sp"
+				android:textSize="@dimen/text_base"
 				android:textStyle="bold" />
 			<LinearLayout
 				android:id="@+id/linear5"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="8dp"
+				android:layout_marginBottom="@dimen/spacing_sm"
 				android:orientation="horizontal">
 				<TextView
 					android:id="@+id/textview8"
@@ -103,7 +103,7 @@
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:text="الإجمالي:"
-					android:textSize="16sp"
+					android:textSize="@dimen/text_base"
 					android:layout_weight="1" />
 				<TextView
 					android:id="@+id/tv_subtotal"
@@ -111,7 +111,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="0.00 ج.م"
-					android:textSize="16sp"
+					android:textSize="@dimen/text_base"
 					android:textStyle="bold" />
 			</LinearLayout>
 			<com.google.android.material.textfield.TextInputLayout
@@ -127,14 +127,14 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:text="0"
-					android:textSize="12sp"
+					android:textSize="@dimen/text_xs"
 					android:inputType="numberDecimal" />
 			</com.google.android.material.textfield.TextInputLayout>
 			<com.google.android.material.textfield.TextInputLayout
 				android:id="@+id/textinputlayout7"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="8dp"
+				android:layout_marginTop="@dimen/spacing_sm"
 				app:prefixText="+"
 				app:suffixText="ج.م"
 				style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
@@ -144,21 +144,21 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:text="0"
-					android:textSize="12sp"
+					android:textSize="@dimen/text_xs"
 					android:inputType="numberDecimal" />
 			</com.google.android.material.textfield.TextInputLayout>
 			<com.google.android.material.card.MaterialCardView
 				android:id="@+id/cardview2"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="12dp"
+				android:layout_marginTop="@dimen/spacing_md"
 				app:cardBackgroundColor="?attr/colorPrimaryContainer"
 				app:cardElevation="2dp">
 				<LinearLayout
 					android:id="@+id/linear6"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="horizontal">
 					<TextView
 						android:id="@+id/textview9"
@@ -166,7 +166,7 @@
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:text="الإجمالي النهائي:"
-						android:textSize="18sp"
+						android:textSize="@dimen/text_lg"
 						android:textStyle="bold"
 						android:layout_weight="1" />
 					<TextView
@@ -175,7 +175,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="0.00 ج.م"
-						android:textSize="20sp"
+						android:textSize="@dimen/text_xl"
 						android:textStyle="bold" />
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
@@ -183,7 +183,7 @@
 				android:id="@+id/textinputlayout8"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="16dp"
+				android:layout_marginTop="@dimen/spacing_base"
 				app:prefixText="ج.م"
 				style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 				<com.google.android.material.textfield.TextInputEditText
@@ -191,7 +191,7 @@
 					android:focusable="false"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="12sp"
+					android:textSize="@dimen/text_xs"
 					android:inputType="numberDecimal" />
 			</com.google.android.material.textfield.TextInputLayout>
 			<TextView
@@ -199,22 +199,22 @@
 				android:focusable="false"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="12dp"
-				android:padding="12dp"
+				android:layout_marginTop="@dimen/spacing_md"
+				android:padding="@dimen/spacing_md"
 				android:background="@drawable/bg_rounded_light"
 				android:gravity="center_horizontal|center_vertical"
 				android:text="الباقي: 0.00 ج.م"
-				android:textSize="18sp"
+				android:textSize="@dimen/text_lg"
 				android:textStyle="bold" />
 			<TextView
 				android:id="@+id/textview10"
 				android:focusable="false"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="16dp"
-				android:layout_marginBottom="8dp"
+				android:layout_marginTop="@dimen/spacing_base"
+				android:layout_marginBottom="@dimen/spacing_sm"
 				android:text="طريقة الدفع:"
-				android:textSize="12sp"
+				android:textSize="@dimen/text_xs"
 				android:textStyle="bold" />
 			<RadioGroup
 				android:id="@+id/rg_payment_method"

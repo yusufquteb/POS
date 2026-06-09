@@ -4,9 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layoutDirection="rtl"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_base">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="المبلغ *"
@@ -22,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="السبب / الملاحظة"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/spacing_sm"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_reason"

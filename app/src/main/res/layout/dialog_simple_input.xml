@@ -4,8 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layoutDirection="rtl"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_base">
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="أدخل القيمة"

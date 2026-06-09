@@ -17,8 +17,8 @@
 		android:orientation="horizontal"
 		android:background="?attr/colorSurface"
 		android:elevation="4dp"
-		android:paddingStart="16dp"
-		android:paddingEnd="16dp"
+		android:paddingStart="@dimen/spacing_base"
+		android:paddingEnd="@dimen/spacing_base"
 		android:focusable="true">
 		<ImageView
 			android:id="@+id/imageview3"
@@ -33,11 +33,11 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:text="النسخ الاحتياطي"
-			android:textSize="18sp"
+			android:textSize="@dimen/text_lg"
 			android:textStyle="bold"
 			android:textColor="?attr/colorOnSurface"
 			android:layout_weight="1"
-			android:layout_marginStart="16dp" />
+			android:layout_marginStart="@dimen/spacing_base" />
 	</LinearLayout>
 
 	<!-- Local Backup Buttons -->
@@ -46,7 +46,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="1dp"
-		android:padding="16dp"
+		android:padding="@dimen/spacing_base"
 		android:gravity="center_horizontal|center_vertical"
 		android:orientation="horizontal"
 		android:background="?attr/colorSurface">
@@ -56,20 +56,20 @@
 			android:layout_height="48dp"
 			style="@style/ButtonStyle"
 			android:text="إنشاء نسخة"
-			android:textSize="14sp"
+			android:textSize="@dimen/text_md"
 			android:textStyle="bold"
 			android:layout_weight="1"
-			android:layout_marginEnd="8dp" />
+			android:layout_marginEnd="@dimen/spacing_sm" />
 		<Button
 			android:id="@+id/btn_restore_backup"
 			android:layout_width="0dp"
 			android:layout_height="48dp"
 			style="@style/ButtonStyle_Tonal"
 			android:text="استعادة نسخة"
-			android:textSize="14sp"
+			android:textSize="@dimen/text_md"
 			android:textStyle="bold"
 			android:layout_weight="1"
-			android:layout_marginStart="8dp" />
+			android:layout_marginStart="@dimen/spacing_sm" />
 	</LinearLayout>
 
 	<!-- Cloud Backup Card -->
@@ -78,7 +78,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="1dp"
-		android:padding="16dp"
+		android:padding="@dimen/spacing_base"
 		android:background="?attr/colorSurface"
 		android:orientation="vertical">
 		<LinearLayout
@@ -91,7 +91,7 @@
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
 				android:text="☁️ النسخ الاحتياطي على السحابة"
-				android:textSize="14sp"
+				android:textSize="@dimen/text_md"
 				android:textStyle="bold"
 				android:textColor="?attr/colorOnSurface"/>
 			<TextView
@@ -99,7 +99,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="غير مُفعّل"
-				android:textSize="11sp"
+				android:textSize="@dimen/text_xs"
 				android:textColor="@color/color_warning"
 				android:textStyle="bold"/>
 		</LinearLayout>
@@ -107,15 +107,15 @@
 			android:id="@+id/tv_cloud_last_backup"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="4dp"
+			android:layout_marginTop="@dimen/spacing_xs"
 			android:text=""
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:textColor="?attr/colorOnSurfaceVariant"
 			android:visibility="gone"/>
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="12dp"
+			android:layout_marginTop="@dimen/spacing_md"
 			android:orientation="horizontal">
 			<Button
 				android:id="@+id/btn_select_cloud_folder"
@@ -124,7 +124,7 @@
 				android:layout_weight="1"
 				style="@style/ButtonStyle_Outlined"
 				android:text="اختيار مجلد"
-				android:textSize="12sp"
+				android:textSize="@dimen/text_xs"
 				android:layout_marginEnd="6dp"/>
 			<Button
 				android:id="@+id/btn_cloud_backup_now"
@@ -133,7 +133,7 @@
 				android:layout_weight="1"
 				style="@style/ButtonStyle"
 				android:text="نسخ الآن"
-				android:textSize="12sp"
+				android:textSize="@dimen/text_xs"
 				android:visibility="gone"
 				android:layout_marginStart="6dp"/>
 		</LinearLayout>
@@ -145,9 +145,9 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="1dp"
-		android:padding="16dp"
+		android:padding="@dimen/spacing_base"
 		android:text="النسخ الاحتياطية المحفوظة"
-		android:textSize="14sp"
+		android:textSize="@dimen/text_md"
 		android:textStyle="bold"
 		android:textColor="?attr/colorOnSurfaceVariant"
 		android:background="?attr/colorSurface" />
@@ -169,7 +169,7 @@
 			android:id="@+id/empty_state"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:padding="32dp"
+			android:padding="@dimen/spacing_xxl"
 			android:gravity="center_horizontal|center_vertical"
 			android:orientation="vertical"
 			android:visibility="gone">
@@ -185,19 +185,19 @@
 				android:id="@+id/textview27"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="16dp"
+				android:layout_marginTop="@dimen/spacing_base"
 				android:text="لا توجد نسخ احتياطية"
-				android:textSize="18sp"
+				android:textSize="@dimen/text_lg"
 				android:textStyle="bold"
 				android:textColor="?attr/colorOnSurface" />
 			<TextView
 				android:id="@+id/textview28"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="8dp"
+				android:layout_marginTop="@dimen/spacing_sm"
 				android:gravity="center_horizontal|center_vertical"
 				android:text="قم بإنشاء نسخة احتياطية من البيانات\nللحفاظ على معلوماتك آمنة"
-				android:textSize="14sp"
+				android:textSize="@dimen/text_md"
 				android:textColor="?attr/colorOnSurfaceVariant" />
 		</LinearLayout>
 	</FrameLayout>
@@ -208,7 +208,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="1dp"
-		android:padding="16dp"
+		android:padding="@dimen/spacing_base"
 		android:background="?attr/colorPrimaryContainer"
 		android:orientation="vertical">
 		<TextView
@@ -216,16 +216,16 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:text="ℹ️ معلومات هامة:"
-			android:textSize="13sp"
+			android:textSize="@dimen/text_sm"
 			android:textStyle="bold"
 			android:textColor="?attr/colorOnPrimaryContainer" />
 		<TextView
 			android:id="@+id/textview30"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="8dp"
+			android:layout_marginTop="@dimen/spacing_sm"
 			android:text="• يتم حفظ النسخ في: SmartPOS_Backups\n• استعادة النسخة ستحذف البيانات الحالية\n• احتفظ بنسخ منتظمة من بياناتك"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:textColor="?attr/colorOnPrimaryContainer"
 			android:lineSpacingExtra="4dp" />
 	</LinearLayout>

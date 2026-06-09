@@ -238,7 +238,7 @@ public class ActivityCustomersActivity extends BaseActivity {
                     refreshData();
                     showToast("✓ تم الحذف");
                 } catch (Exception e) {
-                    showToast("خطأ في الحذف");
+                    showSnackbar("خطأ في الحذف", true);
                 }
             })
             .setNegativeButton("إلغاء", (d, w) -> {

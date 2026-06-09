@@ -25,18 +25,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/spacing_base"
+            android:layout_marginTop="@dimen/spacing_base"
+            android:layout_marginEnd="@dimen/spacing_base"
             android:text="نوع الاتصال"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_lg"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/spacing_base"
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp">
 
@@ -45,15 +45,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/spacing_base">
 
                 <RadioButton
                     android:id="@+id/rb_usb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="🔌 USB"
-                    android:textSize="16sp"
-                    android:padding="12dp"
+                    android:textSize="@dimen/text_base"
+                    android:padding="@dimen/spacing_md"
                     android:checked="true" />
 
                 <RadioButton
@@ -61,16 +61,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="📶 Bluetooth"
-                    android:textSize="16sp"
-                    android:padding="12dp" />
+                    android:textSize="@dimen/text_base"
+                    android:padding="@dimen/spacing_md" />
 
                 <RadioButton
                     android:id="@+id/rb_wifi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="📡 WiFi"
-                    android:textSize="16sp"
-                    android:padding="12dp" />
+                    android:textSize="@dimen/text_base"
+                    android:padding="@dimen/spacing_md" />
 
             </RadioGroup>
 
@@ -81,11 +81,11 @@
             android:id="@+id/btn_check_printer"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/spacing_base"
+            android:layout_marginEnd="@dimen/spacing_base"
+            android:layout_marginBottom="@dimen/spacing_sm"
             android:text="🔍 فحص الطابعة"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_base"
             style="@style/Widget.Material3.Button.TonalButton"
             app:cornerRadius="12dp"
             app:icon="@android:drawable/ic_menu_search"
@@ -95,18 +95,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/spacing_base"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginEnd="@dimen/spacing_base"
             android:text="إعدادات الورق"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_lg"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/spacing_base"
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp">
 
@@ -114,19 +114,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/spacing_base">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="عرض الورق"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textColor="@android:color/darker_gray" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/spacing_sm"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
                     <AutoCompleteTextView
@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:text="80mm"
                         android:inputType="none"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/text_base" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -147,17 +147,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/spacing_base"
+            android:layout_marginEnd="@dimen/spacing_base"
             android:text="خيارات الطباعة"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_lg"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/spacing_base"
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp">
 
@@ -165,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/spacing_base">
 
                 <!-- الطباعة التلقائية -->
                 <LinearLayout
@@ -173,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="8dp">
+                    android:padding="@dimen/spacing_sm">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -185,14 +185,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="🖨️ الطباعة التلقائية"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/text_base"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="طباعة الفاتورة تلقائياً بعد البيع"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/text_xs"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
@@ -216,7 +216,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="8dp">
+                    android:padding="@dimen/spacing_sm">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -228,14 +228,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="🏪 إظهار الشعار"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/text_base"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="عرض شعار المتجر في الفواتير"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/text_xs"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
@@ -257,7 +257,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/spacing_base"
             android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
@@ -265,7 +265,7 @@
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_weight="1"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/spacing_sm"
                 android:text="📄 اختبار"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:cornerRadius="12dp" />
@@ -275,7 +275,7 @@
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_weight="1"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="@dimen/spacing_sm"
                 android:text="💾 حفظ"
                 app:cornerRadius="12dp" />
 
@@ -285,7 +285,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/spacing_base"
             app:cardCornerRadius="12dp"
             app:cardBackgroundColor="?attr/colorSurfaceVariant"
             app:cardElevation="0dp">
@@ -294,22 +294,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="@dimen/spacing_md">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="💡 نصائح مهمة"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnPrimaryContainer" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/spacing_sm"
                     android:text="• اضغط على 'فحص الطابعة' للتأكد من الاتصال\n• تأكد من تشغيل الطابعة قبل الفحص\n• للبلوتوث: اقترن بالطابعة أولاً من إعدادات الجهاز\n• للواي فاي: تأكد من الاتصال بنفس الشبكة"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnSurface"
                     android:lineSpacingExtra="4dp" />
 

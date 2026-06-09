@@ -24,13 +24,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_base"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/tv_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="@dimen/text_base"
                 android:textStyle="bold"
                 android:textColor="?attr/colorPrimary"/>
         </LinearLayout>
@@ -39,15 +39,15 @@
             android:id="@+id/tv_check_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
+            android:textSize="@dimen/text_sm"
             android:textColor="?android:attr/textColorSecondary"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="@dimen/spacing_xs"/>
 
         <TextView
             android:id="@+id/tv_bank_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
+            android:textSize="@dimen/text_sm"
             android:textColor="?android:attr/textColorSecondary"/>
 
         <LinearLayout
@@ -60,17 +60,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/text_xs"/>
             <TextView
                 android:id="@+id/tv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
+                android:textSize="@dimen/text_sm"
                 android:textStyle="bold"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"/>
+                android:paddingStart="@dimen/spacing_sm"
+                android:paddingEnd="@dimen/spacing_sm"
+                android:paddingTop="@dimen/spacing_xxs"
+                android:paddingBottom="@dimen/spacing_xxs"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_base">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_lg"
         android:textStyle="bold"
         android:textColor="?attr/colorOnSurface"
-        android:paddingBottom="16dp"
+        android:paddingBottom="@dimen/spacing_base"
         android:text="إضافة"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:hint="الاسم *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="@dimen/spacing_md">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_name"
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:hint="رقم الهاتف"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="@dimen/spacing_md">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_phone"
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:hint="العنوان"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="@dimen/spacing_md">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_address"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:hint="ملاحظات"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="@dimen/spacing_base">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_notes"
             android:layout_width="match_parent"

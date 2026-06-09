@@ -27,7 +27,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/spacing_base"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp">
             <com.google.android.material.textfield.TextInputLayout
@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:hint="@string/customers_search_hint"
                     android:imeOptions="actionSearch"
                     android:fontFamily="@font/cairo_regular" />
@@ -83,18 +83,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/customers_empty"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_lg"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_base"
                 android:fontFamily="@font/cairo_bold"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/customers_add_first"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_md"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/spacing_sm"
                 android:fontFamily="@font/cairo_regular"/>
         </LinearLayout>
     </LinearLayout>
@@ -105,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/spacing_base"
         android:text="@string/customer_add"
         app:icon="@drawable/ic_add"
         android:fontFamily="@font/cairo_semibold"/>

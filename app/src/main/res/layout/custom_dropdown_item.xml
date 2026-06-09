@@ -9,11 +9,11 @@
 		android:focusable="false"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="16dp"
+		android:padding="@dimen/spacing_base"
 		android:background="?attr/selectableItemBackground"
 		android:gravity="right|center_vertical"
 		android:text="test"
-		android:textSize="16sp"
+		android:textSize="@dimen/text_base"
 		android:textStyle="bold"
 		android:textColor="?attr/colorOnSurface" />
 </FrameLayout>

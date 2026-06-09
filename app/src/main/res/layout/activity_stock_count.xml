@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/coordinator_root"
     android:layoutDirection="rtl">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -27,7 +28,7 @@
             android:id="@+id/tv_session_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:padding="@dimen/spacing_md"
             android:background="?attr/colorSurfaceVariant"
             android:gravity="center"
             android:text="لا توجد جلسة جرد مفتوحة"/>
@@ -37,13 +38,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="@dimen/spacing_sm">
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_complete"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="@dimen/spacing_xs"
                 android:text="إتمام الجرد"
                 android:visibility="gone"
                 app:backgroundTint="@color/md_theme_light_primary"/>
@@ -52,7 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="@dimen/spacing_xs"
                 android:text="إلغاء الجرد"
                 android:visibility="gone"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
@@ -62,9 +63,9 @@
             android:id="@+id/til_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:layout_marginEnd="@dimen/spacing_sm"
+            android:layout_marginBottom="@dimen/spacing_xs"
             android:hint="بحث بالاسم أو الباركود"
             android:visibility="gone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -82,7 +83,7 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="4dp"
+                android:padding="@dimen/spacing_xs"
                 android:clipToPadding="false"/>
             <TextView
                 android:id="@+id/tv_empty"
@@ -92,6 +93,15 @@
                 android:text="لا توجد جلسات جرد سابقة"
                 android:visibility="gone"
                 android:textColor="?android:attr/textColorSecondary"/>
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:indicatorSize="48dp"
+                app:trackThickness="4dp" />
         </FrameLayout>
     </LinearLayout>
 
@@ -100,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/spacing_base"
         android:text="بدء جرد جديد"
         app:icon="@android:drawable/ic_input_add"/>
 

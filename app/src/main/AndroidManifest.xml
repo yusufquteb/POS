@@ -325,6 +325,7 @@
         <activity
             android:name=".ActivityUsersActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".ActivitySettingsActivity"
             android:screenOrientation="portrait"
             android:label="إدارة المستخدمين"/>

@@ -363,7 +363,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             showToast("فعّل البلوتوث ثم ارجع للتطبيق");
         } catch (Exception e) {
             Log.e(TAG, "Error opening Bluetooth settings", e);
-            showToast("خطأ في فتح الإعدادات");
+            showSnackbar("خطأ في فتح الإعدادات", true);
         }
     }
     
@@ -405,7 +405,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             showToast("فعّل الواي فاي وارجع للتطبيق");
         } catch (Exception e) {
             Log.e(TAG, "Error opening WiFi settings", e);
-            showToast("خطأ في فتح الإعدادات");
+            showSnackbar("خطأ في فتح الإعدادات", true);
         }
     }
     
@@ -630,7 +630,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             if (resultCode == RESULT_OK) {
                 showToast("✓ تم تفعيل البلوتوث");
             } else {
-                showToast("لم يتم تفعيل البلوتوث");
+                showSnackbar("لم يتم تفعيل البلوتوث", true);
                 if (rbUsb != null) rbUsb.setChecked(true);
             }
             isRequestingBluetoothEnable = false;

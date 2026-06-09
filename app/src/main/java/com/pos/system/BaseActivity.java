@@ -101,7 +101,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void showSnackbar(String message, boolean isError) {
         View root = findViewById(android.R.id.content);
         if (root == null) {
-            showToast(message);
+            android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show();
             return;
         }
         Snackbar sb = Snackbar.make(root, message, Snackbar.LENGTH_LONG);
@@ -141,11 +141,21 @@ public class BaseActivity extends AppCompatActivity {
     // ── UI Helpers ───────────────────────────────────────────────────
 
     protected void showToast(String message) {
-        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show();
+        View root = findViewById(android.R.id.content);
+        if (root != null) {
+            Snackbar.make(root, message, Snackbar.LENGTH_SHORT).show();
+        } else {
+            android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show();
+        }
     }
 
     protected void showLongToast(String message) {
-        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
+        View root = findViewById(android.R.id.content);
+        if (root != null) {
+            Snackbar.make(root, message, Snackbar.LENGTH_LONG).show();
+        } else {
+            android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
+        }
     }
 
     protected void hideKeyboard() {

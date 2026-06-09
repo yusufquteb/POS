@@ -198,7 +198,7 @@ public class ActivityReturnActivity extends BaseActivity {
         try {
             invoiceId = Long.parseLong(invoice.getOrDefault("id", "0"));
         } catch (NumberFormatException e) {
-            showToast("فاتورة غير صالحة");
+            showSnackbar("فاتورة غير صالحة", true);
             return;
         }
 
@@ -484,7 +484,7 @@ public class ActivityReturnActivity extends BaseActivity {
                 loadData();
                 showSuccessSnackbar(returnNumber, totalRefund, refundMethod);
             } else {
-                showToast("فشل في تسجيل المرتجع، يرجى المحاولة مرة أخرى");
+                showSnackbar("فشل في تسجيل المرتجع، يرجى المحاولة مرة أخرى", true);
             }
         } catch (Exception e) {
             Log.e(TAG, "processReturn error: " + e.getMessage(), e);

@@ -171,10 +171,10 @@ public class ActivityExpensesActivity extends BaseActivity {
                         showToast("✓ تمت إضافة المصروف");
                         loadExpenses();
                     } else {
-                        showToast("فشل في إضافة المصروف");
+                        showSnackbar("فشل في إضافة المصروف", true);
                     }
                 } catch (NumberFormatException e) {
-                    showToast("المبلغ غير صحيح");
+                    showSnackbar("المبلغ غير صحيح", true);
                 }
             })
             .setNegativeButton("إلغاء", null)
@@ -204,10 +204,10 @@ public class ActivityExpensesActivity extends BaseActivity {
                         updateUI();
                         showToast("✓ تم الحذف");
                     } else {
-                        showToast("فشل في الحذف");
+                        showSnackbar("فشل في الحذف", true);
                     }
                 } catch (Exception e) {
-                    showToast("خطأ في الحذف");
+                    showSnackbar("خطأ في الحذف", true);
                     if (adapter != null) adapter.notifyItemChanged(position);
                 }
             })

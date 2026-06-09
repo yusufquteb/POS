@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_base">
     
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_quantity"
@@ -22,6 +22,6 @@
         android:id="@+id/tv_available"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:text="المتوفر: 0" />
 </LinearLayout>

@@ -6,14 +6,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layoutDirection="rtl"
-    android:padding="24dp">
+    android:padding="@dimen/spacing_xl">
 
     <!-- Customer name -->
     <TextView
         android:id="@+id/tv_dialog_customer_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_xl"
         android:textStyle="bold"
         android:textColor="?attr/colorOnSurface"
         android:fontFamily="@font/cairo_bold"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:textSize="14sp"
+        android:textSize="@dimen/text_md"
         android:textColor="?attr/colorOnSurfaceVariant"
         android:fontFamily="@font/cairo_regular"
         android:gravity="center" />
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:imeOptions="actionDone"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_base"
             android:fontFamily="@font/cairo_regular" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,7 +65,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/spacing_md"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         app:boxCornerRadiusTopStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:imeOptions="actionDone"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_md"
             android:fontFamily="@font/cairo_regular" />
 
     </com.google.android.material.textfield.TextInputLayout>

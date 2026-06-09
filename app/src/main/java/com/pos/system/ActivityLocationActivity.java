@@ -121,7 +121,7 @@ public class ActivityLocationActivity extends BaseActivity {
                         refreshData();
                         dialog.dismiss();
                     } else {
-                        showToast("فشل في إضافة الموقع");
+                        showSnackbar("فشل في إضافة الموقع", true);
                     }
                 } else {
                     int result = db.update("locations", cv, "id=?", new String[]{editData.get("id").toString()});
@@ -130,7 +130,7 @@ public class ActivityLocationActivity extends BaseActivity {
                         refreshData();
                         dialog.dismiss();
                     } else {
-                        showToast("فشل في تحديث البيانات");
+                        showSnackbar("فشل في تحديث البيانات", true);
                     }
                 }
             } catch (Exception e) {
@@ -177,11 +177,11 @@ public class ActivityLocationActivity extends BaseActivity {
                             showToast("تم حذف الموقع");
                             refreshData();
                         } else {
-                            showToast("فشل في حذف الموقع");
+                            showSnackbar("فشل في حذف الموقع", true);
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Error deleting location", e);
-                        showToast("حدث خطأ أثناء الحذف");
+                        showSnackbar("حدث خطأ أثناء الحذف", true);
                     }
                 })
                 .setCancelable(false)
@@ -208,7 +208,7 @@ public class ActivityLocationActivity extends BaseActivity {
             }
         } catch (Exception e) {
             Log.e(TAG, "Error loading locations", e);
-            showToast("خطأ في تحميل البيانات");
+            showSnackbar("خطأ في تحميل البيانات", true);
         } finally {
             if (cursor != null) {
                 cursor.close();

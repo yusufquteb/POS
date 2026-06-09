@@ -20,11 +20,11 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/spacing_sm"
                 android:src="@drawable/ic_filter"
                 android:tint="?attr/colorOnSurface"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="8dp"
+                android:padding="@dimen/spacing_sm"
                 android:contentDescription="@string/action_filter"/>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -39,7 +39,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/spacing_base"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="?attr/colorPrimaryContainer">
@@ -47,12 +47,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="@dimen/spacing_lg">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/total_expenses"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnPrimaryContainer"
                     android:fontFamily="@font/cairo_regular"/>
                 <TextView
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.00"
-                    android:textSize="28sp"
+                    android:textSize="@dimen/text_display"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnPrimaryContainer"
                     android:fontFamily="@font/cairo_bold"/>
@@ -69,9 +69,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/filter_date"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnPrimaryContainer"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/spacing_xs"
                     android:fontFamily="@font/cairo_regular"
                     android:visibility="gone"/>
             </LinearLayout>
@@ -105,10 +105,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/no_data"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_lg"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_base"
                 android:fontFamily="@font/cairo_bold"/>
         </LinearLayout>
     </LinearLayout>
@@ -119,7 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/spacing_base"
         android:text="@string/expense_add"
         app:icon="@drawable/ic_add"
         android:fontFamily="@font/cairo_semibold"/>

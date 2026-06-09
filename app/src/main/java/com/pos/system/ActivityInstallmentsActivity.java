@@ -3,12 +3,14 @@ package com.pos.system;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.pos.system.databinding.ActivityInstallmentsBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,12 +20,8 @@ import java.util.concurrent.Executors;
 
 public class ActivityInstallmentsActivity extends BaseActivity {
 
+    private ActivityInstallmentsBinding binding;
     private DBHelper   dbHelper;
-    private TabLayout  tabLayout;
-    private RecyclerView recyclerView;
-    private ExtendedFloatingActionButton fabAdd;
-    private View       tvEmpty;
-    private TextView   tvSummary;
 
     private final List<HashMap<String, String>> dataList = new ArrayList<>();
     private InstallmentsAdapter adapter;
@@ -33,7 +31,9 @@ public class ActivityInstallmentsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_installments);
+        binding = ActivityInstallmentsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.coordinatorRoot);
         dbHelper = new DBHelper(this);
         initViews();
         setupToolbar();
@@ -41,32 +41,24 @@ public class ActivityInstallmentsActivity extends BaseActivity {
     }
 
     private void setupToolbar() {
-        androidx.appcompat.widget.Toolbar tb = findViewById(R.id.toolbar);
-        if (tb != null) {
-            setSupportActionBar(tb);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle("الأقساط");
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+        setSupportActionBar(binding.toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("الأقساط");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
     @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; }
 
     private void initViews() {
-        tabLayout    = findViewById(R.id.tab_layout);
-        recyclerView = findViewById(R.id.recycler_view);
-        fabAdd       = findViewById(R.id.fab_add);
-        tvEmpty      = findViewById(R.id.tv_empty);
-        tvSummary    = findViewById(R.id.tv_summary);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new InstallmentsAdapter();
-        recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setItemAnimator(null);
 
-        tabLayout.addTab(tabLayout.newTab().setText("العقود"));
-        tabLayout.addTab(tabLayout.newTab().setText("المتأخرة"));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("العقود"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("المتأخرة"));
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) {
                 currentTab = tab.getPosition();
                 loadData();
@@ -75,10 +67,20 @@ public class ActivityInstallmentsActivity extends BaseActivity {
             @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        if (fabAdd != null) fabAdd.setOnClickListener(v -> showAddContractDialog());
+        binding.fabAdd.setOnClickListener(v -> showAddContractDialog());
+        binding.btnEmptyAddInstallment.setOnClickListener(v -> showAddContractDialog());
+
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
+                if (dy > 0) binding.fabAdd.shrink();
+                else if (dy < 0) binding.fabAdd.extend();
+            }
+        });
     }
 
     private void loadData() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         executor.execute(() -> {
             List<HashMap<String, String>> data = currentTab == 0
                 ? dbHelper.getAllInstallmentContracts()
@@ -87,12 +89,12 @@ public class ActivityInstallmentsActivity extends BaseActivity {
             final List<HashMap<String, String>> fd = data;
             final double ft = total;
             runOnUiThread(() -> {
+                binding.progressBar.setVisibility(View.GONE);
                 dataList.clear();
                 dataList.addAll(fd);
                 adapter.notifyDataSetChanged();
-                if (tvEmpty != null) tvEmpty.setVisibility(dataList.isEmpty() ? View.VISIBLE : View.GONE);
-                if (tvSummary != null)
-                    tvSummary.setText("إجمالي المستحق: " + String.format(Locale.US, "%.2f %s", ft, getCurrency()));
+                binding.tvEmpty.setVisibility(dataList.isEmpty() ? View.VISIBLE : View.GONE);
+                binding.tvSummary.setText("إجمالي المستحق: " + String.format(Locale.US, "%.2f %s", ft, getCurrency()));
             });
         });
     }
@@ -106,6 +108,8 @@ public class ActivityInstallmentsActivity extends BaseActivity {
 
     private void showAddContractDialog() {
         View dv = getLayoutInflater().inflate(R.layout.dialog_add_installment, null);
+        TextInputLayout tilCustomerName  = dv.findViewById(R.id.til_customer_name);
+        TextInputLayout tilTotalAmount   = dv.findViewById(R.id.til_total_amount);
         TextInputEditText etCustomerName    = dv.findViewById(R.id.et_customer_name);
         TextInputEditText etTotalAmount     = dv.findViewById(R.id.et_total_amount);
         TextInputEditText etDownPayment     = dv.findViewById(R.id.et_down_payment);
@@ -117,21 +121,34 @@ public class ActivityInstallmentsActivity extends BaseActivity {
             .setTitle("إضافة عقد تقسيط")
             .setView(dv)
             .setPositiveButton("حفظ", (d, w) -> {
+                if (tilCustomerName != null) tilCustomerName.setError(null);
+                if (tilTotalAmount != null) tilTotalAmount.setError(null);
+
                 String name   = etCustomerName != null && etCustomerName.getText() != null ? etCustomerName.getText().toString().trim() : "";
-                String totStr = etTotalAmount  != null && etTotalAmount.getText()  != null ? etTotalAmount.getText().toString().trim()  : "0";
+                String totStr = etTotalAmount  != null && etTotalAmount.getText()  != null ? etTotalAmount.getText().toString().trim()  : "";
                 String dwnStr = etDownPayment  != null && etDownPayment.getText()  != null ? etDownPayment.getText().toString().trim()  : "0";
                 String cntStr = etInstallmentCount != null && etInstallmentCount.getText() != null ? etInstallmentCount.getText().toString().trim() : "1";
                 String start  = etStartDate    != null && etStartDate.getText()    != null ? etStartDate.getText().toString().trim()    : "";
                 String notes  = etNotes        != null && etNotes.getText()        != null ? etNotes.getText().toString().trim()        : "";
 
-                if (name.isEmpty()) { showToast("اسم العميل مطلوب"); return; }
+                if (name.isEmpty()) {
+                    if (tilCustomerName != null) tilCustomerName.setError("اسم العميل مطلوب");
+                    return;
+                }
+                if (totStr.isEmpty()) {
+                    if (tilTotalAmount != null) tilTotalAmount.setError("المبلغ الإجمالي مطلوب");
+                    return;
+                }
                 double tot = 0, dwn = 0;
                 int cnt = 1;
                 try {
                     tot = Double.parseDouble(totStr);
                     dwn = Double.parseDouble(dwnStr.isEmpty() ? "0" : dwnStr);
                     cnt = Integer.parseInt(cntStr.isEmpty() ? "1" : cntStr);
-                } catch (Exception ex) { showToast("بيانات غير صحيحة"); return; }
+                } catch (Exception ex) {
+                    if (tilTotalAmount != null) tilTotalAmount.setError("بيانات غير صحيحة");
+                    return;
+                }
                 if (tot <= 0) { showToast("المبلغ الإجمالي يجب أن يكون أكبر من صفر"); return; }
                 if (dwn >= tot) { showToast("الدفعة الأولى لا تصح أن تساوي أو تتجاوز الإجمالي"); return; }
                 if (cnt <= 0 || cnt > 120) { showToast("عدد الأقساط يجب أن يكون بين 1 و 120"); return; }
@@ -141,7 +158,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                     long id = dbHelper.createInstallmentContract(0, name, finalTot, finalDwn, finalCnt, start, notes);
                     runOnUiThread(() -> {
                         if (id > 0) { showToast("تم إنشاء العقد بنجاح"); loadData(); }
-                        else showToast("حدث خطأ أثناء الحفظ");
+                        else showSnackbar("حدث خطأ أثناء الحفظ", true);
                     });
                 });
             })
@@ -188,7 +205,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                                     String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
                                     executor.execute(() -> {
                                         boolean ok = dbHelper.payInstallment(pid, today);
-                                        runOnUiThread(() -> { if (ok) { showToast("تم الدفع بنجاح"); loadData(); } else showToast("خطأ في الدفع"); });
+                                        runOnUiThread(() -> { if (ok) { showToast("تم الدفع بنجاح"); loadData(); } else showSnackbar("خطأ في الدفع", true); });
                                     });
                                 })
                                 .show())
@@ -255,7 +272,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                         .setPositiveButton("تأكيد الدفع", (d, w) ->
                             executor.execute(() -> {
                                 boolean ok = dbHelper.payInstallment(pid, today);
-                                runOnUiThread(() -> { if (ok) { showToast("تم الدفع"); loadData(); } else showToast("خطأ"); });
+                                runOnUiThread(() -> { if (ok) { showToast("تم الدفع"); loadData(); } else showSnackbar("خطأ", true); });
                             }))
                         .setNegativeButton("إلغاء", null)
                         .show();

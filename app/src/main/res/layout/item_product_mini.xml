@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
+    android:layout_margin="@dimen/spacing_xs"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
     app:strokeWidth="1dp"
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="12dp"
+        android:padding="@dimen/spacing_md"
         android:gravity="center_vertical">
 
         <!-- Product Info -->
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Product Name"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_base"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"
                 android:maxLines="1"
@@ -42,9 +42,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="123456789"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_xs"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:layout_marginTop="2dp" />
+                android:layout_marginTop="@dimen/spacing_xxs" />
 
         </LinearLayout>
 
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
 
@@ -75,10 +75,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.00"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/text_base"
                     android:textStyle="bold"
                     android:textColor="?attr/colorPrimary"
-                    android:layout_marginStart="2dp" />
+                    android:layout_marginStart="@dimen/spacing_xxs" />
 
             </LinearLayout>
 
@@ -88,13 +88,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="@dimen/spacing_xs">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Qty: "
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
                 <TextView
@@ -102,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_xs"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
