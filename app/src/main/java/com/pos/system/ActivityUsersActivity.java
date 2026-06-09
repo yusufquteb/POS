@@ -20,7 +20,7 @@ public class ActivityUsersActivity extends BaseActivity {
     private DBHelper   dbHelper;
     private RecyclerView recyclerView;
     private ExtendedFloatingActionButton fabAdd;
-    private TextView   tvEmpty;
+    private View       tvEmpty;
 
     private final List<HashMap<String, String>> usersList = new ArrayList<>();
     private UsersAdapter adapter;

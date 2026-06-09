@@ -22,7 +22,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
     private TabLayout  tabLayout;
     private RecyclerView recyclerView;
     private ExtendedFloatingActionButton fabAdd;
-    private TextView   tvEmpty;
+    private View       tvEmpty;
     private TextView   tvSummary;
 
     private final List<HashMap<String, String>> dataList = new ArrayList<>();
