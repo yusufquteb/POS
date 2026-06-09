@@ -63,9 +63,13 @@ public class BaseActivity extends AppCompatActivity {
         if (view == null) return;
         ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
             Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            // CoordinatorLayout + AppBarLayout: AppBarLayout handles status-bar top via
+            // android:fitsSystemWindows="true". Applying paddingTop here would push the
+            // entire AppBarLayout down and leave a gap beneath the status bar.
+            boolean isCoordinator = v instanceof androidx.coordinatorlayout.widget.CoordinatorLayout;
             v.setPadding(
                 v.getPaddingLeft(),
-                bars.top,
+                isCoordinator ? 0 : bars.top,
                 v.getPaddingRight(),
                 bars.bottom
             );
