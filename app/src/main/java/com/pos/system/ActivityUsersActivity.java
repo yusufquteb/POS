@@ -175,8 +175,6 @@ public class ActivityUsersActivity extends BaseActivity {
             .show();
     }
 
-    private void showToast(String msg) {
-        android.widget.Toast.makeText(this, msg, android.widget.Toast.LENGTH_SHORT).show();
     }
 
     @Override protected void onDestroy() { super.onDestroy(); executor.shutdown(); }

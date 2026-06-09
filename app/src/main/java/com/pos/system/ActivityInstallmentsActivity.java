@@ -205,8 +205,6 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         });
     }
 
-    private void showToast(String msg) {
-        android.widget.Toast.makeText(this, msg, android.widget.Toast.LENGTH_SHORT).show();
     }
 
     @Override
