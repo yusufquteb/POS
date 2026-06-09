@@ -29,7 +29,7 @@
             android:id="@+id/rv_drawers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="@dimen/spacing_sm"
             android:clipToPadding="false"/>
 
         <!-- Balance Card -->
@@ -37,7 +37,7 @@
             android:id="@+id/card_balance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_margin="@dimen/spacing_md"
             android:visibility="gone"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
@@ -46,34 +46,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/spacing_base">
                 <TextView
                     android:id="@+id/tv_balance_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="الخزينة الرئيسية"
                     android:textColor="#CCFFFFFF"
-                    android:textSize="14sp"/>
+                    android:textSize="@dimen/text_md"/>
                 <TextView
                     android:id="@+id/tv_balance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0.00 ج.م"
                     android:textColor="@android:color/white"
-                    android:textSize="28sp"
+                    android:textSize="@dimen/text_display"
                     android:textStyle="bold"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="@dimen/spacing_xs"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="12dp">
+                    android:layout_marginTop="@dimen/spacing_md">
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_deposit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="@dimen/spacing_xs"
                         android:text="إيداع"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:textColor="@android:color/white"
@@ -83,7 +83,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="@dimen/spacing_xs"
                         android:text="سحب"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:textColor="@android:color/white"
@@ -96,12 +96,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="آخر الحركات"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_md"
             android:textStyle="bold"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
+            android:paddingStart="@dimen/spacing_base"
+            android:paddingEnd="@dimen/spacing_base"
+            android:paddingTop="@dimen/spacing_xs"
+            android:paddingBottom="@dimen/spacing_xs"
             android:textColor="?android:attr/textColorSecondary"/>
 
         <FrameLayout
@@ -112,7 +112,7 @@
                 android:id="@+id/rv_transactions"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp"
+                android:padding="@dimen/spacing_sm"
                 android:clipToPadding="false"/>
             <LinearLayout
                 android:id="@+id/tv_empty"
@@ -120,7 +120,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="32dp"
+                android:padding="@dimen/spacing_xxl"
                 android:visibility="gone">
                 <TextView
                     android:layout_width="wrap_content"
@@ -128,25 +128,25 @@
                     android:layout_gravity="center_horizontal"
                     android:text="💰"
                     android:textSize="56sp"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginBottom="@dimen/spacing_base" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="لا توجد خزائن"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_lg"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
-                    android:layout_marginBottom="8dp" />
+                    android:layout_marginBottom="@dimen/spacing_sm" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="أضف خزينة لتتبع النقد والمعاملات"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"
-                    android:layout_marginBottom="24dp" />
+                    android:layout_marginBottom="@dimen/spacing_xl" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_empty_add_drawer"
                     android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/spacing_base"
         android:text="خزينة جديدة"
         app:icon="@android:drawable/ic_input_add"/>
 

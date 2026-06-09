@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="12dp"
+    android:padding="@dimen/spacing_md"
     android:gravity="center_vertical">
     <TextView
         android:id="@+id/tv_rank"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:gravity="center"
-        android:textSize="14sp"
+        android:textSize="@dimen/text_md"
         android:textStyle="bold"
         android:textColor="?attr/colorPrimary"
         android:fontFamily="@font/cairo_bold"/>
@@ -19,23 +19,23 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="8dp"
-        android:textSize="14sp"
+        android:layout_marginStart="@dimen/spacing_sm"
+        android:textSize="@dimen/text_md"
         android:textColor="?attr/colorOnSurface"
         android:fontFamily="@font/cairo_regular"/>
     <TextView
         android:id="@+id/tv_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:textSize="13sp"
+        android:layout_marginEnd="@dimen/spacing_md"
+        android:textSize="@dimen/text_sm"
         android:textColor="?attr/colorOnSurfaceVariant"
         android:fontFamily="@font/cairo_regular"/>
     <TextView
         android:id="@+id/tv_revenue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="13sp"
+        android:textSize="@dimen/text_sm"
         android:textStyle="bold"
         android:textColor="?attr/colorPrimary"
         android:fontFamily="@font/cairo_bold"/>

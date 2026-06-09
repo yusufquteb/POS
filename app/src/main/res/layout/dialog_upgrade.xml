@@ -9,7 +9,7 @@
 		android:id="@+id/linear59"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="24dp"
+		android:padding="@dimen/spacing_xl"
 		android:orientation="vertical"
 		android:background="?attr/colorSurface">
 		<TextView
@@ -18,7 +18,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="✨ ترقية إلى Premium"
-			android:textSize="24sp"
+			android:textSize="@dimen/text_headline"
 			android:textStyle="bold"
 			android:textColor="?attr/colorOnSurface"
 			android:layout_gravity="center_horizontal" />
@@ -27,23 +27,23 @@
 			android:focusable="false"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="4dp"
-			android:layout_marginBottom="24dp"
+			android:layout_marginTop="@dimen/spacing_xs"
+			android:layout_marginBottom="@dimen/spacing_xl"
 			android:text="استمتع بجميع الميزات المتقدمة"
-			android:textSize="14sp"
+			android:textSize="@dimen/text_md"
 			android:textColor="?attr/colorOnSurfaceVariant"
 			android:layout_gravity="center_horizontal" />
 		<LinearLayout
 			android:id="@+id/linear60"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="24dp"
+			android:layout_marginBottom="@dimen/spacing_xl"
 			android:orientation="vertical">
 			<LinearLayout
 				android:id="@+id/linear61"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="12dp"
+				android:layout_marginBottom="@dimen/spacing_md"
 				android:orientation="horizontal">
 				<TextView
 					android:id="@+id/textview78"
@@ -52,21 +52,21 @@
 					android:layout_height="32dp"
 					android:gravity="center_horizontal|center_vertical"
 					android:text="♾️"
-					android:textSize="20sp" />
+					android:textSize="@dimen/text_xl" />
 				<LinearLayout
 					android:id="@+id/linear62"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:orientation="vertical"
 					android:layout_weight="1"
-					android:layout_marginStart="12dp">
+					android:layout_marginStart="@dimen/spacing_md">
 					<TextView
 						android:id="@+id/textview79"
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="عمليات غير محدودة"
-						android:textSize="16sp"
+						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
 					<TextView
@@ -75,7 +75,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="لا حدود للعمليات اليومية"
-						android:textSize="13sp"
+						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
@@ -83,7 +83,7 @@
 				android:id="@+id/linear63"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="12dp"
+				android:layout_marginBottom="@dimen/spacing_md"
 				android:orientation="horizontal">
 				<TextView
 					android:id="@+id/textview81"
@@ -92,21 +92,21 @@
 					android:layout_height="32dp"
 					android:gravity="center_horizontal|center_vertical"
 					android:text="☁️"
-					android:textSize="20sp" />
+					android:textSize="@dimen/text_xl" />
 				<LinearLayout
 					android:id="@+id/linear64"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:orientation="vertical"
 					android:layout_weight="1"
-					android:layout_marginStart="12dp">
+					android:layout_marginStart="@dimen/spacing_md">
 					<TextView
 						android:id="@+id/textview82"
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="نسخ احتياطي تلقائي"
-						android:textSize="16sp"
+						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
 					<TextView
@@ -115,7 +115,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="نسخ يومي آمن لبياناتك"
-						android:textSize="13sp"
+						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
@@ -123,7 +123,7 @@
 				android:id="@+id/linear65"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="12dp"
+				android:layout_marginBottom="@dimen/spacing_md"
 				android:orientation="horizontal">
 				<TextView
 					android:id="@+id/textview84"
@@ -132,21 +132,21 @@
 					android:layout_height="32dp"
 					android:gravity="center_horizontal|center_vertical"
 					android:text="📊"
-					android:textSize="20sp" />
+					android:textSize="@dimen/text_xl" />
 				<LinearLayout
 					android:id="@+id/linear66"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:orientation="vertical"
 					android:layout_weight="1"
-					android:layout_marginStart="12dp">
+					android:layout_marginStart="@dimen/spacing_md">
 					<TextView
 						android:id="@+id/textview85"
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="تقارير متقدمة"
-						android:textSize="16sp"
+						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
 					<TextView
@@ -155,7 +155,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="تحليلات شاملة لمبيعاتك"
-						android:textSize="13sp"
+						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
@@ -163,7 +163,7 @@
 				android:id="@+id/linear67"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="12dp"
+				android:layout_marginBottom="@dimen/spacing_md"
 				android:orientation="horizontal">
 				<TextView
 					android:id="@+id/textview87"
@@ -172,21 +172,21 @@
 					android:layout_height="32dp"
 					android:gravity="center_horizontal|center_vertical"
 					android:text="🎯"
-					android:textSize="20sp" />
+					android:textSize="@dimen/text_xl" />
 				<LinearLayout
 					android:id="@+id/linear68"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:orientation="vertical"
 					android:layout_weight="1"
-					android:layout_marginStart="12dp">
+					android:layout_marginStart="@dimen/spacing_md">
 					<TextView
 						android:id="@+id/textview88"
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="دعم فني أولوية"
-						android:textSize="16sp"
+						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
 					<TextView
@@ -195,7 +195,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="دعم سريع وأولوية في الرد"
-						android:textSize="13sp"
+						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
@@ -211,21 +211,21 @@
 					android:layout_height="32dp"
 					android:gravity="center_horizontal|center_vertical"
 					android:text="🚫"
-					android:textSize="20sp" />
+					android:textSize="@dimen/text_xl" />
 				<LinearLayout
 					android:id="@+id/linear70"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:orientation="vertical"
 					android:layout_weight="1"
-					android:layout_marginStart="12dp">
+					android:layout_marginStart="@dimen/spacing_md">
 					<TextView
 						android:id="@+id/textview91"
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="بدون إعلانات"
-						android:textSize="16sp"
+						android:textSize="@dimen/text_base"
 						android:textStyle="bold"
 						android:textColor="?attr/colorOnSurface" />
 					<TextView
@@ -234,7 +234,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="تجربة نظيفة بدون إزعاج"
-						android:textSize="13sp"
+						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 				</LinearLayout>
 			</LinearLayout>
@@ -243,7 +243,7 @@
 			android:id="@+id/cardview20"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="16dp"
+			android:layout_marginBottom="@dimen/spacing_base"
 			app:cardBackgroundColor="?attr/colorSurfaceVariant"
 			app:cardCornerRadius="12dp"
 			app:cardElevation="0dp">
@@ -251,7 +251,7 @@
 				android:id="@+id/linear71"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:padding="16dp"
+				android:padding="@dimen/spacing_base"
 				android:gravity="center_vertical"
 				android:orientation="horizontal">
 				<TextView
@@ -260,21 +260,21 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="💎"
-					android:textSize="32sp" />
+					android:textSize="@dimen/text_display" />
 				<LinearLayout
 					android:id="@+id/linear72"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:orientation="vertical"
 					android:layout_weight="1"
-					android:layout_marginStart="12dp">
+					android:layout_marginStart="@dimen/spacing_md">
 					<TextView
 						android:id="@+id/textview94"
 						android:focusable="false"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="ابدأ من"
-						android:textSize="12sp"
+						android:textSize="@dimen/text_xs"
 						android:textColor="?attr/colorOnSurfaceVariant" />
 					<TextView
 						android:id="@+id/textview95"
@@ -282,7 +282,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="$4.99 / شهر"
-						android:textSize="20sp"
+						android:textSize="@dimen/text_xl"
 						android:textStyle="bold" />
 				</LinearLayout>
 			</LinearLayout>
@@ -292,9 +292,9 @@
 			android:focusable="false"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="8dp"
+			android:layout_marginBottom="@dimen/spacing_sm"
 			android:text="✅ ضمان استرجاع المال خلال 7 أيام"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:textColor="@color/color_success"
 			android:layout_gravity="center_horizontal" />
 	</LinearLayout>

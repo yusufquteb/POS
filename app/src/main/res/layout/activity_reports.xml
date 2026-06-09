@@ -27,28 +27,28 @@
 			android:id="@+id/linear15"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:padding="16dp"
+			android:padding="@dimen/spacing_base"
 			android:orientation="vertical">
 			<com.google.android.material.card.MaterialCardView
 				android:id="@+id/cardview5"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="16dp"
+				android:layout_marginBottom="@dimen/spacing_base"
 				app:cardElevation="2dp"
 				app:cardCornerRadius="12dp">
 				<LinearLayout
 					android:id="@+id/linear16"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 					<TextView
 						android:id="@+id/textview11"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="12dp"
+						android:layout_marginBottom="@dimen/spacing_md"
 						android:text="📅 الفترة الزمنية"
-						android:textSize="16sp"
+						android:textSize="@dimen/text_base"
 						android:textStyle="bold" />
 					<com.google.android.material.chip.ChipGroup
 						android:id="@+id/chip_group_period"
@@ -83,7 +83,7 @@
 				android:id="@+id/cardview6"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="16dp"
+				android:layout_marginBottom="@dimen/spacing_base"
 				app:cardBackgroundColor="?attr/colorPrimaryContainer"
 				app:cardElevation="2dp"
 				app:cardCornerRadius="12dp">
@@ -91,56 +91,56 @@
 					android:id="@+id/linear17"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 					<TextView
 						android:id="@+id/textview12"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="16dp"
+						android:layout_marginBottom="@dimen/spacing_base"
 						android:text="💰 إحصائيات المبيعات"
-						android:textSize="18sp"
+						android:textSize="@dimen/text_lg"
 						android:textStyle="bold" />
 					<LinearLayout
 						android:id="@+id/linear18"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="12dp"
+						android:layout_marginBottom="@dimen/spacing_md"
 						android:orientation="horizontal">
 						<TextView
 							android:id="@+id/textview13"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:text="إجمالي المبيعات:"
-							android:textSize="14sp"
+							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
 							android:id="@+id/tv_total_sales"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="0.00 ج.م"
-							android:textSize="16sp"
+							android:textSize="@dimen/text_base"
 							android:textStyle="bold" />
 					</LinearLayout>
 					<LinearLayout
 						android:id="@+id/linear19"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="12dp"
+						android:layout_marginBottom="@dimen/spacing_md"
 						android:orientation="horizontal">
 						<TextView
 							android:id="@+id/textview14"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:text="عدد الفواتير:"
-							android:textSize="14sp"
+							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
 							android:id="@+id/tv_invoice_count"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="0"
-							android:textSize="16sp"
+							android:textSize="@dimen/text_base"
 							android:textStyle="bold" />
 					</LinearLayout>
 					<LinearLayout
@@ -153,14 +153,14 @@
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:text="متوسط الفاتورة:"
-							android:textSize="14sp"
+							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
 							android:id="@+id/tv_average_invoice"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="0.00 ج.م"
-							android:textSize="16sp"
+							android:textSize="@dimen/text_base"
 							android:textStyle="bold" />
 					</LinearLayout>
 				</LinearLayout>
@@ -169,63 +169,63 @@
 				android:id="@+id/cardview7"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="16dp"
+				android:layout_marginBottom="@dimen/spacing_base"
 				app:cardElevation="2dp"
 				app:cardCornerRadius="12dp">
 				<LinearLayout
 					android:id="@+id/linear21"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 					<TextView
 						android:id="@+id/textview16"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="16dp"
+						android:layout_marginBottom="@dimen/spacing_base"
 						android:text="📦 إحصائيات المخزون"
-						android:textSize="18sp"
+						android:textSize="@dimen/text_lg"
 						android:textStyle="bold" />
 					<LinearLayout
 						android:id="@+id/linear22"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="12dp"
+						android:layout_marginBottom="@dimen/spacing_md"
 						android:orientation="horizontal">
 						<TextView
 							android:id="@+id/textview17"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:text="عدد المنتجات:"
-							android:textSize="14sp"
+							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
 							android:id="@+id/tv_products_count"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="0"
-							android:textSize="16sp"
+							android:textSize="@dimen/text_base"
 							android:textStyle="bold" />
 					</LinearLayout>
 					<LinearLayout
 						android:id="@+id/linear23"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="12dp"
+						android:layout_marginBottom="@dimen/spacing_md"
 						android:orientation="horizontal">
 						<TextView
 							android:id="@+id/textview18"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:text="قيمة المخزون:"
-							android:textSize="14sp"
+							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
 							android:id="@+id/tv_inventory_value"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="0.00 ج.م"
-							android:textSize="16sp"
+							android:textSize="@dimen/text_base"
 							android:textStyle="bold" />
 					</LinearLayout>
 					<LinearLayout
@@ -238,14 +238,14 @@
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:text="تنبيهات المخزون:"
-							android:textSize="14sp"
+							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
 							android:id="@+id/tv_low_stock"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="0"
-							android:textSize="16sp"
+							android:textSize="@dimen/text_base"
 							android:textStyle="bold"
 							android:textColor="@color/color_warning" />
 					</LinearLayout>
@@ -256,62 +256,62 @@
 			<com.google.android.material.card.MaterialCardView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="12dp"
+				android:layout_marginBottom="@dimen/spacing_md"
 				app:cardElevation="2dp"
 				app:cardCornerRadius="12dp">
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 
 					<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-						android:layout_marginBottom="12dp"
+						android:layout_marginBottom="@dimen/spacing_md"
 						android:text="📊 تحليل الربحية"
-						android:textSize="18sp" android:textStyle="bold"/>
+						android:textSize="@dimen/text_lg" android:textStyle="bold"/>
 
 					<!-- تكلفة البضاعة المباعة COGS -->
 					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-						android:orientation="horizontal" android:layout_marginBottom="8dp">
+						android:orientation="horizontal" android:layout_marginBottom="@dimen/spacing_sm">
 						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
-							android:layout_weight="1" android:text="تكلفة البضاعة المباعة (COGS):" android:textSize="13sp"/>
+							android:layout_weight="1" android:text="تكلفة البضاعة المباعة (COGS):" android:textSize="@dimen/text_sm"/>
 						<TextView android:id="@+id/tv_cogs"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="0.00" android:textSize="14sp" android:textStyle="bold" android:textColor="?attr/colorError"/>
+							android:text="0.00" android:textSize="@dimen/text_md" android:textStyle="bold" android:textColor="?attr/colorError"/>
 					</LinearLayout>
 
 					<!-- مجمل الربح Gross Profit -->
 					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-						android:orientation="horizontal" android:layout_marginBottom="8dp">
+						android:orientation="horizontal" android:layout_marginBottom="@dimen/spacing_sm">
 						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
-							android:layout_weight="1" android:text="مجمل الربح (قبل المصروفات):" android:textSize="13sp"/>
+							android:layout_weight="1" android:text="مجمل الربح (قبل المصروفات):" android:textSize="@dimen/text_sm"/>
 						<TextView android:id="@+id/tv_gross_profit"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="0.00" android:textSize="14sp" android:textStyle="bold" android:textColor="?attr/colorPrimary"/>
+							android:text="0.00" android:textSize="@dimen/text_md" android:textStyle="bold" android:textColor="?attr/colorPrimary"/>
 					</LinearLayout>
 
 					<!-- خط فاصل -->
 					<View android:layout_width="match_parent" android:layout_height="1dp"
-						android:background="?attr/colorOutlineVariant" android:layout_marginBottom="8dp"/>
+						android:background="?attr/colorOutlineVariant" android:layout_marginBottom="@dimen/spacing_sm"/>
 
 					<!-- المصروفات -->
 					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-						android:orientation="horizontal" android:layout_marginBottom="8dp">
+						android:orientation="horizontal" android:layout_marginBottom="@dimen/spacing_sm">
 						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
-							android:layout_weight="1" android:text="@string/expenses_title" android:textSize="13sp"/>
+							android:layout_weight="1" android:text="@string/expenses_title" android:textSize="@dimen/text_sm"/>
 						<TextView android:id="@+id/tv_total_expenses"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="0.00" android:textSize="14sp" android:textStyle="bold" android:textColor="?attr/colorError"/>
+							android:text="0.00" android:textSize="@dimen/text_md" android:textStyle="bold" android:textColor="?attr/colorError"/>
 					</LinearLayout>
 
 					<!-- صافي الربح Net Profit -->
 					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
 						android:orientation="horizontal">
 						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
-							android:layout_weight="1" android:text="@string/reports_profit" android:textSize="15sp" android:textStyle="bold"/>
+							android:layout_weight="1" android:text="@string/reports_profit" android:textSize="@dimen/text_base" android:textStyle="bold"/>
 						<TextView android:id="@+id/tv_net_profit"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="0.00" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/color_success"/>
+							android:text="0.00" android:textSize="@dimen/text_lg" android:textStyle="bold" android:textColor="@color/color_success"/>
 					</LinearLayout>
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
@@ -327,15 +327,15 @@
 					android:id="@+id/linear25"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 					<TextView
 						android:id="@+id/textview20"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="16dp"
+						android:layout_marginBottom="@dimen/spacing_base"
 						android:text="🏆 المنتجات الأكثر مبيعاً"
-						android:textSize="18sp"
+						android:textSize="@dimen/text_lg"
 						android:textStyle="bold" />
 					<androidx.recyclerview.widget.RecyclerView
 						android:id="@+id/rv_top_products"
@@ -349,9 +349,9 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:text="@string/no_sales_period"
-						android:textSize="14sp"
+						android:textSize="@dimen/text_md"
 						android:gravity="center"
-						android:padding="16dp"
+						android:padding="@dimen/spacing_base"
 						android:textColor="?attr/colorOnSurfaceVariant"
 						android:visibility="gone"/>
 				</LinearLayout>
@@ -362,7 +362,7 @@
 		android:id="@+id/linear26"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="16dp"
+		android:padding="@dimen/spacing_base"
 		android:background="?attr/colorSurface"
 		android:orientation="horizontal"
 		android:layout_gravity="bottom"
@@ -372,28 +372,28 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:text="تصدير PDF"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:layout_weight="1"
-			android:layout_marginEnd="4dp"
+			android:layout_marginEnd="@dimen/spacing_xs"
 			style="@style/Widget.Material3.Button" />
 		<Button
 			android:id="@+id/btn_share_report"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:text="مشاركة"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:layout_weight="1"
-			android:layout_marginStart="4dp"
-			android:layout_marginEnd="4dp"
+			android:layout_marginStart="@dimen/spacing_xs"
+			android:layout_marginEnd="@dimen/spacing_xs"
 			style="@style/Widget.Material3.Button.TonalButton" />
 		<Button
 			android:id="@+id/btn_whatsapp_report"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:text="واتساب"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:layout_weight="1"
-			android:layout_marginStart="4dp"
+			android:layout_marginStart="@dimen/spacing_xs"
 			android:drawableStart="@drawable/ic_whatsapp"
 			android:drawablePadding="4dp"
 			style="@style/Widget.Material3.Button.OutlinedButton" />

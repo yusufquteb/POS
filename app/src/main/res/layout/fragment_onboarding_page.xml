@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="32dp">
+    android:padding="@dimen/spacing_xxl">
 
     <ImageView
         android:id="@+id/iv_onboarding_icon"
@@ -23,9 +23,9 @@
         android:id="@+id/tv_onboarding_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/spacing_xxl"
         android:text="@string/app_name"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_headline"
         android:textStyle="bold"
         android:textColor="@color/text_primary"
         android:textAlignment="center"
@@ -37,9 +37,9 @@
         android:id="@+id/tv_onboarding_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/spacing_base"
         android:text="نظام نقاط بيع متكامل لإدارة متجرك بكل سهولة واحترافية"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_base"
         android:textColor="@color/text_secondary"
         android:textAlignment="center"
         android:lineSpacingMultiplier="1.4"

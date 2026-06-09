@@ -5,14 +5,14 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
-	android:padding="24dp"
+	android:padding="@dimen/spacing_xl"
 	android:background="?attr/colorSurface">
 	<ImageView
 		android:id="@+id/dialog_icon"
 		android:focusable="false"
 		android:layout_width="48dp"
 		android:layout_height="48dp"
-		android:layout_marginBottom="16dp"
+		android:layout_marginBottom="@dimen/spacing_base"
 		android:src="@drawable/ic_info"
 		android:scaleType="center"
 		android:layout_gravity="center_horizontal|center_vertical"
@@ -22,9 +22,9 @@
 		android:focusable="false"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="12dp"
+		android:layout_marginBottom="@dimen/spacing_md"
 		android:gravity="center_horizontal|center_vertical"
-		android:textSize="20sp"
+		android:textSize="@dimen/text_xl"
 		android:textStyle="bold"
 		android:textColor="?attr/colorOnSurface" />
 	<TextView
@@ -32,9 +32,9 @@
 		android:focusable="false"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="24dp"
+		android:layout_marginBottom="@dimen/spacing_xl"
 		android:gravity="center_horizontal|center_vertical"
-		android:textSize="16sp"
+		android:textSize="@dimen/text_base"
 		android:textStyle="bold"
 		android:textColor="?attr/colorOnSurfaceVariant" />
 	<LinearLayout
@@ -47,7 +47,7 @@
 			android:id="@+id/btn_negative"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:textStyle="bold"
 			android:layout_weight="1"
 			style="@style/Widget.Material3.Button.TextButton" />
@@ -55,7 +55,7 @@
 			android:id="@+id/btn_positive"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:textStyle="bold"
 			android:layout_weight="1"
 			style="@style/Widget.Material3.Button.TonalButton" />

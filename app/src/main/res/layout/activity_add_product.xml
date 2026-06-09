@@ -52,7 +52,7 @@
 					android:id="@+id/linear22"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="20dp"
+					android:padding="@dimen/spacing_lg"
 					android:gravity="center_horizontal|center_vertical"
 					android:orientation="vertical">
 					<com.google.android.material.card.MaterialCardView
@@ -79,7 +79,7 @@
 								android:id="@+id/fab_camera"
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
-								android:layout_margin="4dp"
+								android:layout_margin="@dimen/spacing_xs"
 								android:layout_gravity="bottom|end"
 								app:fabSize="mini"
 								app:srcCompat="@drawable/ic_camera"
@@ -94,7 +94,7 @@
 						android:layout_height="wrap_content"
 						android:layout_marginTop="10dp"
 						android:text="@string/add_product_image_hint"
-						android:textSize="13sp"
+						android:textSize="@dimen/text_sm"
 						android:textColor="?attr/colorPrimary"
 						android:fontFamily="@font/cairo_regular" />
 				</LinearLayout>
@@ -113,7 +113,7 @@
 					android:id="@+id/linear24"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 					<TextView
 						android:id="@+id/textview10"
@@ -121,7 +121,7 @@
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="14dp"
 						android:text="@string/add_product_section_basic"
-						android:textSize="15sp"
+						android:textSize="@dimen/text_base"
 						android:textColor="?attr/colorPrimary"
 						android:fontFamily="@font/cairo_bold" />
 					<LinearLayout
@@ -146,7 +146,7 @@
 								android:id="@+id/et_barcode"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
-								android:textSize="13sp"
+								android:textSize="@dimen/text_sm"
 								android:imeOptions="actionNext"
 								android:inputType="number"
 								android:fontFamily="@font/cairo_regular" />
@@ -155,8 +155,8 @@
 							android:id="@+id/btn_scan_barcode"
 							android:layout_width="52dp"
 							android:layout_height="52dp"
-							android:textSize="12sp"
-							android:layout_marginStart="8dp"
+							android:textSize="@dimen/text_xs"
+							android:layout_marginStart="@dimen/spacing_sm"
 							style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
 							app:icon="@drawable/ic_qr_code_scanner"
 							app:iconPadding="0dp"
@@ -166,7 +166,7 @@
 						android:id="@+id/layout_name"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						app:startIconDrawable="@drawable/ic_label"
 						app:startIconTint="?attr/colorPrimary"
@@ -178,7 +178,7 @@
 							android:id="@+id/et_name"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:textSize="13sp"
+							android:textSize="@dimen/text_sm"
 							android:imeOptions="actionNext"
 							android:inputType="textCapWords"
 							android:fontFamily="@font/cairo_regular" />
@@ -187,7 +187,7 @@
 						android:id="@+id/textinputlayout10"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						app:startIconDrawable="@drawable/ic_scale"
 						app:startIconTint="?attr/colorPrimary"
@@ -199,7 +199,7 @@
 							android:id="@+id/et_unit"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:textSize="13sp"
+							android:textSize="@dimen/text_sm"
 							android:imeOptions="actionNext"
 							android:fontFamily="@font/cairo_regular" />
 					</com.google.android.material.textfield.TextInputLayout>
@@ -207,7 +207,7 @@
 						android:id="@+id/textinputlayout11"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						app:startIconDrawable="@drawable/ic_bookmark"
 						app:startIconTint="?attr/colorPrimary"
@@ -219,7 +219,7 @@
 							android:id="@+id/et_brand"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:textSize="13sp"
+							android:textSize="@dimen/text_sm"
 							android:imeOptions="actionNext"
 							android:fontFamily="@font/cairo_regular" />
 					</com.google.android.material.textfield.TextInputLayout>
@@ -239,7 +239,7 @@
 					android:id="@+id/linear26"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 					<TextView
 						android:id="@+id/textview11"
@@ -247,7 +247,7 @@
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="14dp"
 						android:text="@string/add_product_section_pricing"
-						android:textSize="15sp"
+						android:textSize="@dimen/text_base"
 						android:textColor="?attr/colorPrimary"
 						android:fontFamily="@font/cairo_bold" />
 					<LinearLayout
@@ -271,7 +271,7 @@
 								android:id="@+id/et_cost"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
-								android:textSize="13sp"
+								android:textSize="@dimen/text_sm"
 								android:inputType="numberDecimal"
 								android:imeOptions="actionNext"
 								android:fontFamily="@font/cairo_regular" />
@@ -291,7 +291,7 @@
 								android:id="@+id/et_price"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
-								android:textSize="13sp"
+								android:textSize="@dimen/text_sm"
 								android:inputType="numberDecimal"
 								android:imeOptions="actionNext"
 								android:fontFamily="@font/cairo_regular" />
@@ -301,7 +301,7 @@
 						android:id="@+id/cardview10"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						app:cardBackgroundColor="?attr/colorSurfaceVariant"
 						app:cardCornerRadius="12dp"
 						app:cardElevation="0dp"
@@ -310,7 +310,7 @@
 							android:id="@+id/linear28"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:padding="12dp"
+							android:padding="@dimen/spacing_md"
 							android:orientation="horizontal">
 							<LinearLayout
 								android:id="@+id/linear29"
@@ -324,7 +324,7 @@
 									android:layout_width="wrap_content"
 									android:layout_height="wrap_content"
 									android:text="@string/add_product_profit"
-									android:textSize="12sp"
+									android:textSize="@dimen/text_xs"
 									android:textColor="?attr/colorOnSurfaceVariant"
 									android:fontFamily="@font/cairo_regular" />
 								<TextView
@@ -332,7 +332,7 @@
 									android:layout_width="wrap_content"
 									android:layout_height="wrap_content"
 									android:text="0.00 ج.م"
-									android:textSize="16sp"
+									android:textSize="@dimen/text_base"
 									android:textColor="@color/color_success"
 									android:fontFamily="@font/cairo_bold" />
 							</LinearLayout>
@@ -354,7 +354,7 @@
 									android:layout_width="wrap_content"
 									android:layout_height="wrap_content"
 									android:text="@string/add_product_profit_percent"
-									android:textSize="12sp"
+									android:textSize="@dimen/text_xs"
 									android:textColor="?attr/colorOnSurfaceVariant"
 									android:fontFamily="@font/cairo_regular" />
 								<TextView
@@ -362,7 +362,7 @@
 									android:layout_width="wrap_content"
 									android:layout_height="wrap_content"
 									android:text="0%"
-									android:textSize="16sp"
+									android:textSize="@dimen/text_base"
 									android:textColor="@color/color_success"
 									android:fontFamily="@font/cairo_bold" />
 							</LinearLayout>
@@ -372,7 +372,7 @@
 						android:id="@+id/linear32"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						android:orientation="horizontal"
 						android:weightSum="2">
 						<com.google.android.material.textfield.TextInputLayout
@@ -390,7 +390,7 @@
 								android:id="@+id/et_qty"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
-								android:textSize="13sp"
+								android:textSize="@dimen/text_sm"
 								android:imeOptions="actionNext"
 								android:inputType="number"
 								android:fontFamily="@font/cairo_regular" />
@@ -410,7 +410,7 @@
 								android:id="@+id/et_reorder_level"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
-								android:textSize="13sp"
+								android:textSize="@dimen/text_sm"
 								android:imeOptions="actionNext"
 								android:inputType="number"
 								android:fontFamily="@font/cairo_regular" />
@@ -420,7 +420,7 @@
 						android:id="@+id/textinputlayout16"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						app:startIconDrawable="@drawable/ic_date"
 						app:startIconTint="?attr/colorPrimary"
@@ -432,7 +432,7 @@
 							android:id="@+id/et_expiry"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:textSize="13sp"
+							android:textSize="@dimen/text_sm"
 							android:fontFamily="@font/cairo_regular"
 							android:focusable="false"
 							android:focusableInTouchMode="false"
@@ -443,7 +443,7 @@
 						android:id="@+id/textinputlayout_batch"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						android:hint="رقم الدفعة / الباتش"
 						app:boxCornerRadiusTopStart="12dp"
@@ -454,7 +454,7 @@
 							android:id="@+id/et_batch_number"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:textSize="13sp"
+							android:textSize="@dimen/text_sm"
 							android:imeOptions="actionNext"
 							android:inputType="text"
 							android:fontFamily="@font/cairo_regular" />
@@ -475,7 +475,7 @@
 					android:id="@+id/linear33"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 					<TextView
 						android:id="@+id/textview14"
@@ -483,7 +483,7 @@
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="14dp"
 						android:text="@string/add_product_section_supply"
-						android:textSize="15sp"
+						android:textSize="@dimen/text_base"
 						android:textColor="?attr/colorPrimary"
 						android:fontFamily="@font/cairo_bold" />
 					<LinearLayout
@@ -508,7 +508,7 @@
 								android:id="@+id/spinner_location"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
-								android:textSize="13sp"
+								android:textSize="@dimen/text_sm"
 								android:textColor="?attr/colorOnSurface"
 								android:inputType="none"
 								android:fontFamily="@font/cairo_regular" />
@@ -517,8 +517,8 @@
 							android:id="@+id/btn_add_location"
 							android:layout_width="52dp"
 							android:layout_height="52dp"
-							android:textSize="12sp"
-							android:layout_marginStart="8dp"
+							android:textSize="@dimen/text_xs"
+							android:layout_marginStart="@dimen/spacing_sm"
 							style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
 							app:icon="@drawable/ic_add_location"
 							app:iconPadding="0dp"
@@ -528,7 +528,7 @@
 						android:id="@+id/linear35"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						android:gravity="center_vertical"
 						android:orientation="horizontal">
 						<com.google.android.material.textfield.TextInputLayout
@@ -547,7 +547,7 @@
 								android:id="@+id/et_supplier"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
-								android:textSize="13sp"
+								android:textSize="@dimen/text_sm"
 								android:textColor="?attr/colorOnSurface"
 								android:inputType="none"
 								android:fontFamily="@font/cairo_regular" />
@@ -556,8 +556,8 @@
 							android:id="@+id/btn_add_supplier"
 							android:layout_width="52dp"
 							android:layout_height="52dp"
-							android:textSize="12sp"
-							android:layout_marginStart="8dp"
+							android:textSize="@dimen/text_xs"
+							android:layout_marginStart="@dimen/spacing_sm"
 							style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
 							app:icon="@drawable/ic_person_add"
 							app:iconPadding="0dp"
@@ -567,7 +567,7 @@
 						android:id="@+id/linear36"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						android:gravity="center_vertical"
 						android:orientation="horizontal">
 						<com.google.android.material.textfield.TextInputLayout
@@ -586,7 +586,7 @@
 								android:id="@+id/spinner_category"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
-								android:textSize="13sp"
+								android:textSize="@dimen/text_sm"
 								android:textColor="?attr/colorOnSurface"
 								android:inputType="none"
 								android:fontFamily="@font/cairo_regular" />
@@ -595,8 +595,8 @@
 							android:id="@+id/btn_add_category"
 							android:layout_width="52dp"
 							android:layout_height="52dp"
-							android:textSize="12sp"
-							android:layout_marginStart="8dp"
+							android:textSize="@dimen/text_xs"
+							android:layout_marginStart="@dimen/spacing_sm"
 							style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
 							app:icon="@drawable/ic_add"
 							app:iconPadding="0dp"
@@ -607,7 +607,7 @@
 						android:id="@+id/textinputlayout_supplier_ref"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
+						android:layout_marginTop="@dimen/spacing_md"
 						style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
 						android:hint="رقم مرجع المورد"
 						app:boxCornerRadiusTopStart="12dp"
@@ -618,7 +618,7 @@
 							android:id="@+id/et_supplier_reference"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:textSize="13sp"
+							android:textSize="@dimen/text_sm"
 							android:imeOptions="actionNext"
 							android:inputType="text"
 							android:fontFamily="@font/cairo_regular" />
@@ -639,7 +639,7 @@
 					android:id="@+id/linear37"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 					<com.google.android.material.textfield.TextInputLayout
 						android:id="@+id/layout_notes"
@@ -659,7 +659,7 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:gravity="top"
-							android:textSize="13sp"
+							android:textSize="@dimen/text_sm"
 							android:imeOptions="actionDone"
 							android:fontFamily="@font/cairo_regular"
 							android:minLines="3"
@@ -681,13 +681,13 @@
 					android:id="@+id/linear38"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="16dp"
+					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 					<LinearLayout
 						android:id="@+id/linear39"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="12dp"
+						android:layout_marginBottom="@dimen/spacing_md"
 						android:gravity="center_vertical"
 						android:orientation="horizontal">
 						<TextView
@@ -695,7 +695,7 @@
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:text="@string/add_product_section_saved"
-							android:textSize="15sp"
+							android:textSize="@dimen/text_base"
 							android:textColor="?attr/colorPrimary"
 							android:layout_weight="1"
 							android:fontFamily="@font/cairo_bold" />
@@ -704,7 +704,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="@string/swipe_hint"
-							android:textSize="11sp"
+							android:textSize="@dimen/text_xs"
 							android:textColor="?attr/colorOnSurfaceVariant"
 							android:fontFamily="@font/cairo_light" />
 					</LinearLayout>
@@ -722,17 +722,17 @@
 				android:id="@+id/linear40"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="8dp"
+				android:layout_marginBottom="@dimen/spacing_sm"
 				android:orientation="horizontal">
 				<com.google.android.material.button.MaterialButton
 					android:id="@+id/btn_save_and_new"
 					android:layout_width="0dp"
 					android:layout_height="56dp"
 					android:text="@string/add_product_save_and_new"
-					android:textSize="13sp"
+					android:textSize="@dimen/text_sm"
 					android:layout_weight="1"
 					android:fontFamily="@font/cairo_semibold"
-					android:layout_marginEnd="8dp"
+					android:layout_marginEnd="@dimen/spacing_sm"
 					style="@style/Widget.Material3.Button.OutlinedButton"
 					app:cornerRadius="16dp" />
 				<com.google.android.material.button.MaterialButton
@@ -740,7 +740,7 @@
 					android:layout_width="0dp"
 					android:layout_height="56dp"
 					android:text="@string/add_product_save"
-					android:textSize="15sp"
+					android:textSize="@dimen/text_base"
 					android:layout_weight="1"
 					android:fontFamily="@font/cairo_bold"
 					app:backgroundTint="?attr/colorPrimary"
@@ -756,7 +756,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				android:layout_marginTop="16dp"
+				android:layout_marginTop="@dimen/spacing_base"
 				android:visibility="gone"
 				android:indeterminateTint="#6750A4" />
 			

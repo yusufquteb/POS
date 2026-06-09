@@ -6,14 +6,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layoutDirection="rtl"
-    android:paddingHorizontal="8dp"
-    android:paddingBottom="8dp">
+    android:paddingHorizontal="@dimen/spacing_sm"
+    android:paddingBottom="@dimen/spacing_sm">
 
     <!-- Summary Card -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/spacing_base"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
         app:cardBackgroundColor="?attr/colorSurfaceVariant"
@@ -23,17 +23,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/spacing_base">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/shift_close_summary_title"
-                android:textSize="13sp"
+                android:textSize="@dimen/text_sm"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:fontFamily="@font/cairo_bold"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="@dimen/spacing_md" />
 
             <!-- Opened At -->
             <LinearLayout
@@ -41,14 +41,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="@dimen/spacing_sm">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/shift_opened_at_title"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_sm"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular" />
 
@@ -56,7 +56,7 @@
                     android:id="@+id/tv_summary_opened_at"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_sm"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
                     android:fontFamily="@font/cairo_semibold" />
@@ -69,14 +69,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="@dimen/spacing_sm">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/shift_opening_cash_title"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_sm"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular" />
 
@@ -84,7 +84,7 @@
                     android:id="@+id/tv_summary_opening_cash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_sm"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
                     android:fontFamily="@font/cairo_semibold" />
@@ -97,14 +97,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="@dimen/spacing_sm">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/shift_total_sales_title"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_sm"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular" />
 
@@ -112,7 +112,7 @@
                     android:id="@+id/tv_summary_total_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_sm"
                     android:textStyle="bold"
                     android:textColor="@color/color_success"
                     android:fontFamily="@font/cairo_semibold" />
@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/shift_invoice_count_title"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_sm"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular" />
 
@@ -139,7 +139,7 @@
                     android:id="@+id/tv_summary_invoice_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_sm"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
                     android:fontFamily="@font/cairo_semibold" />

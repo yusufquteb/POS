@@ -23,42 +23,42 @@
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_md"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/tv_barcode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_xs"
                 android:textColor="?android:attr/textColorSecondary"/>
             <TextView
                 android:id="@+id/tv_system_qty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/text_xs"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginStart="8dp">
+            android:layout_marginStart="@dimen/spacing_sm">
             <EditText
                 android:id="@+id/et_counted"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="العدد"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_md"
                 android:gravity="center"
                 android:background="@android:drawable/edit_text"/>
             <TextView
                 android:id="@+id/tv_diff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11sp"
+                android:textSize="@dimen/text_xs"
                 android:textStyle="bold"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="@dimen/spacing_xxs"
                 android:visibility="invisible"/>
         </LinearLayout>
     </LinearLayout>

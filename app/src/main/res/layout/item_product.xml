@@ -18,7 +18,7 @@
 			android:id="@+id/linear15"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:padding="16dp"
+			android:padding="@dimen/spacing_base"
 			android:gravity="center_vertical"
 			android:orientation="horizontal">
 			<LinearLayout
@@ -33,7 +33,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="📦"
-					android:textSize="24sp" />
+					android:textSize="@dimen/text_headline" />
 			</LinearLayout>
 			<LinearLayout
 				android:id="@+id/linear17"
@@ -41,14 +41,14 @@
 				android:layout_height="wrap_content"
 				android:orientation="vertical"
 				android:layout_weight="1"
-				android:layout_marginStart="16dp">
+				android:layout_marginStart="@dimen/spacing_base">
 				<TextView
 					android:id="@+id/tv_name"
 					android:focusable="false"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="اسم المنتج"
-					android:textSize="16sp"
+					android:textSize="@dimen/text_base"
 					android:textStyle="bold"
 					android:textColor="?attr/colorOnSurface"
 					android:maxLines="1"
@@ -58,9 +58,9 @@
 					android:focusable="false"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="2dp"
+					android:layout_marginTop="@dimen/spacing_xxs"
 					android:text="الماركة"
-					android:textSize="13sp"
+					android:textSize="@dimen/text_sm"
 					android:textColor="?attr/colorOnSurfaceVariant"
 					android:visibility="gone" />
 				<TextView
@@ -68,9 +68,9 @@
 					android:focusable="false"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="4dp"
+					android:layout_marginTop="@dimen/spacing_xs"
 					android:text="1234567890"
-					android:textSize="12sp"
+					android:textSize="@dimen/text_xs"
 					android:textColor="?attr/colorOnSurfaceVariant" />
 			</LinearLayout>
 			<LinearLayout
@@ -85,16 +85,16 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="0.00 ر.س"
-					android:textSize="16sp"
+					android:textSize="@dimen/text_base"
 					android:textStyle="bold" />
 				<TextView
 					android:id="@+id/tv_qty"
 					android:focusable="false"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="4dp"
+					android:layout_marginTop="@dimen/spacing_xs"
 					android:text="الكمية: 0"
-					android:textSize="13sp"
+					android:textSize="@dimen/text_sm"
 					android:textColor="@color/color_success" />
 			</LinearLayout>
 		</LinearLayout>

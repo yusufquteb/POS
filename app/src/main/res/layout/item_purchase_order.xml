@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/spacing_base">
 
         <!-- ── Row 1: PO number + status chip ── -->
         <LinearLayout
@@ -32,14 +32,14 @@
                 android:src="@drawable/ic_local_shipping"
                 android:tint="?attr/colorPrimary"
                 android:contentDescription="أمر شراء"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="@dimen/spacing_sm" />
 
             <TextView
                 android:id="@+id/tv_po_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_base"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"
                 android:fontFamily="@font/cairo_bold" />
@@ -49,9 +49,9 @@
                 android:id="@+id/tv_po_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="12dp"
+                android:paddingHorizontal="@dimen/spacing_md"
                 android:paddingVertical="5dp"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_xs"
                 android:textStyle="bold"
                 android:fontFamily="@font/cairo_semibold"
                 android:background="@drawable/bg_chip_open"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="@dimen/spacing_sm">
 
             <ImageView
                 android:layout_width="16dp"
@@ -87,7 +87,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_md"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:fontFamily="@font/cairo_regular" />
 
@@ -113,7 +113,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15sp"
+                android:textSize="@dimen/text_base"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"
                 android:fontFamily="@font/cairo_bold" />
@@ -124,13 +124,13 @@
                 android:src="@drawable/ic_calendar"
                 android:tint="?attr/colorOutline"
                 android:contentDescription="تاريخ"
-                android:layout_marginEnd="4dp" />
+                android:layout_marginEnd="@dimen/spacing_xs" />
 
             <TextView
                 android:id="@+id/tv_po_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_xs"
                 android:textColor="?attr/colorOutline"
                 android:fontFamily="@font/cairo_regular" />
 

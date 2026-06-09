@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/spacing_base">
 
                 <!-- ─────────────────────────────────────── -->
                 <!-- كارد الإحصائيات السريعة -->
@@ -59,7 +59,7 @@
                     android:id="@+id/card_welcome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="@dimen/spacing_base"
                     app:cardBackgroundColor="?attr/colorPrimary"
                     app:cardCornerRadius="24dp"
                     app:cardElevation="4dp"
@@ -68,7 +68,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp"
+                        android:padding="@dimen/spacing_lg"
                         android:orientation="vertical">
 
                         <TextView
@@ -76,18 +76,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="مرحباً بك 👋"
-                            android:textSize="22sp"
+                            android:textSize="@dimen/text_xxl"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnPrimary"
-                            android:layout_marginBottom="4dp" />
+                            android:layout_marginBottom="@dimen/spacing_xs" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="إدارة متجرك بسهولة وسرعة"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/text_sm"
                             android:textColor="?attr/colorPrimaryContainer"
-                            android:layout_marginBottom="16dp" />
+                            android:layout_marginBottom="@dimen/spacing_base" />
 
                         <!-- إحصائيات اليوم -->
                         <LinearLayout
@@ -115,14 +115,14 @@
                                         android:layout_height="wrap_content"
                                         android:text="مبيعات اليوم"
                                         android:textColor="?attr/colorPrimaryContainer"
-                                        android:textSize="11sp" />
+                                        android:textSize="@dimen/text_xs" />
                                     <TextView
                                         android:id="@+id/tv_today_sales"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="0.00"
                                         android:textColor="?attr/colorOnPrimary"
-                                        android:textSize="20sp"
+                                        android:textSize="@dimen/text_xl"
                                         android:textStyle="bold" />
                                 </LinearLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -146,14 +146,14 @@
                                         android:layout_height="wrap_content"
                                         android:text="الفواتير اليوم"
                                         android:textColor="?attr/colorPrimaryContainer"
-                                        android:textSize="11sp" />
+                                        android:textSize="@dimen/text_xs" />
                                     <TextView
                                         android:id="@+id/tv_today_invoices"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="0"
                                         android:textColor="?attr/colorOnPrimary"
-                                        android:textSize="20sp"
+                                        android:textSize="@dimen/text_xl"
                                         android:textStyle="bold" />
                                 </LinearLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -169,7 +169,7 @@
                     android:id="@+id/card_alerts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="@dimen/spacing_base"
                     android:visibility="gone"
                     app:cardBackgroundColor="?attr/colorErrorContainer"
                     app:cardCornerRadius="16dp"
@@ -179,7 +179,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="16dp"
+                        android:padding="@dimen/spacing_base"
                         android:gravity="center_vertical">
                         <TextView
                             android:id="@+id/tv_alert_message"
@@ -187,13 +187,13 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="?attr/colorOnErrorContainer"
-                            android:textSize="13sp" />
+                            android:textSize="@dimen/text_sm" />
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_view_alerts"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="عرض"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/text_xs"
                             style="@style/Widget.Material3.Button.TonalButton" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -206,7 +206,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:columnCount="4"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginBottom="@dimen/spacing_lg">
 
                     <!-- 1. الإعدادات -->
                     <com.google.android.material.card.MaterialCardView
@@ -214,7 +214,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
+                        android:layout_margin="@dimen/spacing_xs"
                         app:cardCornerRadius="24dp"
                         app:cardElevation="2dp"
                         app:cardBackgroundColor="?attr/colorSurfaceVariant"
@@ -238,7 +238,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="الإعدادات"
-                                android:textSize="11sp"
+                                android:textSize="@dimen/text_xs"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
                         </LinearLayout>
@@ -250,7 +250,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
+                        android:layout_margin="@dimen/spacing_xs"
                         app:cardCornerRadius="24dp"
                         app:cardElevation="2dp"
                         app:cardBackgroundColor="?attr/colorSurfaceVariant"
@@ -274,7 +274,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="احتياطي"
-                                android:textSize="11sp"
+                                android:textSize="@dimen/text_xs"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
                         </LinearLayout>
@@ -286,7 +286,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
+                        android:layout_margin="@dimen/spacing_xs"
                         app:cardCornerRadius="24dp"
                         app:cardElevation="2dp"
                         app:cardBackgroundColor="?attr/colorSurfaceVariant"
@@ -310,7 +310,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="الموردين"
-                                android:textSize="11sp"
+                                android:textSize="@dimen/text_xs"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
                         </LinearLayout>
@@ -322,7 +322,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
+                        android:layout_margin="@dimen/spacing_xs"
                         app:cardCornerRadius="24dp"
                         app:cardElevation="2dp"
                         app:cardBackgroundColor="?attr/colorSurfaceVariant"
@@ -346,7 +346,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="العملاء"
-                                android:textSize="11sp"
+                                android:textSize="@dimen/text_xs"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
                         </LinearLayout>
@@ -361,11 +361,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="خدماتنا"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_lg"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginStart="4dp" />
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:layout_marginStart="@dimen/spacing_xs" />
 
                 <!-- ═══════════════════════════════════════ -->
                 <!-- ٦ كاردات الخدمات - الصف الأول -->
@@ -375,7 +375,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:columnCount="3"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="@dimen/spacing_sm">
 
                     <!-- شاشة البيع -->
                     <com.google.android.material.card.MaterialCardView
@@ -395,7 +395,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="16dp">
+                            android:padding="@dimen/spacing_base">
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
@@ -408,13 +408,13 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_pos"
                                     app:tint="?attr/colorOnPrimary"
-                                    android:padding="12dp" />
+                                    android:padding="@dimen/spacing_md" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="شاشة البيع"
-                                android:textSize="13sp"
+                                android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnPrimaryContainer" />
@@ -439,7 +439,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="16dp">
+                            android:padding="@dimen/spacing_base">
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
@@ -452,13 +452,13 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_add_product"
                                     app:tint="?attr/colorOnTertiary"
-                                    android:padding="12dp" />
+                                    android:padding="@dimen/spacing_md" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="إضافة منتج"
-                                android:textSize="13sp"
+                                android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnTertiaryContainer" />
@@ -483,7 +483,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="16dp">
+                            android:padding="@dimen/spacing_base">
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
@@ -496,13 +496,13 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_expenses"
                                     app:tint="?attr/colorOnSecondary"
-                                    android:padding="12dp" />
+                                    android:padding="@dimen/spacing_md" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="المصروفات"
-                                android:textSize="13sp"
+                                android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSecondaryContainer" />
@@ -516,7 +516,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:columnCount="3"
-                    android:layout_marginBottom="24dp">
+                    android:layout_marginBottom="@dimen/spacing_xl">
 
                     <!-- الفواتير -->
                     <com.google.android.material.card.MaterialCardView
@@ -536,7 +536,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="16dp">
+                            android:padding="@dimen/spacing_base">
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
@@ -549,13 +549,13 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_invoices"
                                     app:tint="?attr/colorOnError"
-                                    android:padding="12dp" />
+                                    android:padding="@dimen/spacing_md" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="الفواتير"
-                                android:textSize="13sp"
+                                android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnErrorContainer" />
@@ -580,7 +580,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="16dp">
+                            android:padding="@dimen/spacing_base">
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
@@ -593,13 +593,13 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_reports"
                                     app:tint="?attr/colorOnSecondary"
-                                    android:padding="12dp" />
+                                    android:padding="@dimen/spacing_md" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="التقارير"
-                                android:textSize="13sp"
+                                android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnSecondaryContainer" />
@@ -624,7 +624,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="16dp">
+                            android:padding="@dimen/spacing_base">
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
@@ -637,13 +637,13 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_products"
                                     app:tint="?attr/colorOnPrimary"
-                                    android:padding="12dp" />
+                                    android:padding="@dimen/spacing_md" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="المنتجات"
-                                android:textSize="13sp"
+                                android:textSize="@dimen/text_sm"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorOnPrimaryContainer" />
@@ -661,7 +661,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/spacing_base"
             android:text="بيع سريع"
             app:icon="@drawable/ic_pos"
             android:textColor="?attr/colorOnPrimary"

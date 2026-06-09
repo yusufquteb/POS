@@ -45,8 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="@dimen/spacing_base"
+                android:layout_marginBottom="@dimen/spacing_sm"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp"
@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="20dp"
+                    android:padding="@dimen/spacing_lg"
                     android:gravity="center_vertical">
 
                     <!-- Total orders -->
@@ -81,11 +81,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="إجمالي الأوامر"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/text_xs"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_regular"
                             android:alpha="0.8"
-                            android:layout_marginTop="2dp" />
+                            android:layout_marginTop="@dimen/spacing_xxs" />
 
                     </LinearLayout>
 
@@ -119,11 +119,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="معلّق"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/text_xs"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_regular"
                             android:alpha="0.8"
-                            android:layout_marginTop="2dp" />
+                            android:layout_marginTop="@dimen/spacing_xxs" />
 
                     </LinearLayout>
 
@@ -137,9 +137,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp">
+                android:paddingHorizontal="@dimen/spacing_lg"
+                android:paddingTop="@dimen/spacing_base"
+                android:paddingBottom="@dimen/spacing_sm">
 
                 <ImageView
                     android:layout_width="18dp"
@@ -152,9 +152,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="@dimen/spacing_sm"
                     android:text="@string/purchase_orders_title"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/text_base"
                     android:textColor="?attr/colorOnSurface"
                     android:fontFamily="@font/cairo_semibold" />
 
@@ -168,8 +168,8 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:paddingTop="64dp"
-                android:paddingBottom="48dp"
-                android:paddingHorizontal="32dp"
+                android:paddingBottom="@dimen/spacing_xxxl"
+                android:paddingHorizontal="@dimen/spacing_xxl"
                 android:visibility="gone">
 
                 <ImageView
@@ -182,9 +182,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/spacing_base"
                     android:text="@string/purchase_order_no_orders"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_lg"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_bold"
@@ -193,9 +193,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/spacing_sm"
                     android:text="اضغط + لإضافة أمر شراء جديد"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular"
                     android:gravity="center" />
@@ -220,7 +220,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/spacing_base"
         android:text="@string/purchase_order_add"
         android:fontFamily="@font/cairo_semibold"
         android:contentDescription="@string/purchase_order_add"

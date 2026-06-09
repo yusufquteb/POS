@@ -5,16 +5,16 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
-	android:padding="24dp"
+	android:padding="@dimen/spacing_xl"
 	android:background="?attr/colorSurface">
 	<TextView
 		android:id="@+id/dialog_title"
 		android:focusable="false"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="16dp"
+		android:layout_marginBottom="@dimen/spacing_base"
 		android:text="إدارة المنتج"
-		android:textSize="20sp"
+		android:textSize="@dimen/text_xl"
 		android:textStyle="bold"
 		android:textColor="?attr/colorOnSurface" />
 	<TextView
@@ -22,9 +22,9 @@
 		android:focusable="false"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="24dp"
+		android:layout_marginBottom="@dimen/spacing_xl"
 		android:text="هل تريد تعديل أو حذف هذا المنتج؟"
-		android:textSize="16sp"
+		android:textSize="@dimen/text_base"
 		android:textStyle="bold"
 		android:textColor="?attr/colorOnSurfaceVariant" />
 	<LinearLayout
@@ -38,17 +38,17 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="حذف"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:textStyle="bold"
 			android:textColor="?attr/colorError"
 			style="@style/Widget.Material3.Button.TextButton"
-			android:layout_marginEnd="8dp" />
+			android:layout_marginEnd="@dimen/spacing_sm" />
 		<Button
 			android:id="@+id/btn_dialog_edit"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="تعديل"
-			android:textSize="12sp"
+			android:textSize="@dimen/text_xs"
 			android:textStyle="bold"
 			style="@style/Widget.Material3.Button.TonalButton" />
 	</LinearLayout>

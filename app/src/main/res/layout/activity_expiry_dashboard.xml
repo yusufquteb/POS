@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp"
+            android:padding="@dimen/spacing_md"
             android:background="?attr/colorSurfaceVariant">
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="13sp"
+                android:textSize="@dimen/text_sm"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:text="جاري التحميل..." />
 
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="تصفية"
-                android:textSize="12sp" />
+                android:textSize="@dimen/text_xs" />
 
         </LinearLayout>
 
@@ -66,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:padding="8dp"
+            android:padding="@dimen/spacing_sm"
             android:clipToPadding="false" />
 
         <!-- Empty State -->
@@ -89,9 +89,9 @@
                 android:id="@+id/tv_empty_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/spacing_md"
                 android:text="لا توجد منتجات في هذه الفئة"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_base"
                 android:textStyle="bold" />
 
             <TextView
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="جميع المنتجات بحالة جيدة"
-                android:textSize="13sp"
+                android:textSize="@dimen/text_sm"
                 android:textColor="?attr/colorOnSurfaceVariant" />
 
         </LinearLayout>

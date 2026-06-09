@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="12dp"
+        android:padding="@dimen/spacing_md"
         android:gravity="center_vertical">
 
         <LinearLayout
@@ -26,7 +26,7 @@
                 android:id="@+id/tv_invoice_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:textSize="@dimen/text_base"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"/>
 
@@ -34,17 +34,17 @@
                 android:id="@+id/tv_customer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
+                android:textSize="@dimen/text_sm"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="@dimen/spacing_xxs"/>
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_xs"
                 android:textColor="?attr/colorOutline"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="@dimen/spacing_xxs"/>
         </LinearLayout>
 
         <LinearLayout
@@ -57,7 +57,7 @@
                 android:id="@+id/tv_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_base"
                 android:textStyle="bold"
                 android:textColor="?attr/colorPrimary"/>
 
@@ -65,8 +65,8 @@
                 android:id="@+id/tv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp"
+                android:textSize="@dimen/text_xs"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:textColor="@color/color_success"/>
         </LinearLayout>
 

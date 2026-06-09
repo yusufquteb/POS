@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="32dp"
+    android:padding="@dimen/spacing_xxl"
     android:gravity="center">
 
     <!-- Image -->
@@ -24,7 +24,7 @@
         android:id="@+id/tv_onboarding_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="28sp"
+        android:textSize="@dimen/text_display"
         android:textStyle="bold"
         android:textColor="?attr/colorOnSurface"
         android:gravity="center"
@@ -35,10 +35,10 @@
         android:id="@+id/tv_onboarding_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_base"
         android:textColor="?attr/colorOnSurfaceVariant"
         android:gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/spacing_base"
         android:lineSpacingExtra="4dp"
         android:fontFamily="@font/cairo_regular" />
 

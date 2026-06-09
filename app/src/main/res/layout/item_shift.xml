@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/spacing_base">
 
         <!-- ── Header: date + status chip ── -->
         <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="@dimen/spacing_md">
 
             <ImageView
                 android:layout_width="20dp"
@@ -33,14 +33,14 @@
                 android:src="@drawable/ic_schedule"
                 android:tint="?attr/colorPrimary"
                 android:contentDescription="وردية"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="@dimen/spacing_sm" />
 
             <TextView
                 android:id="@+id/tv_shift_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15sp"
+                android:textSize="@dimen/text_base"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"
                 android:fontFamily="@font/cairo_bold"
@@ -52,12 +52,12 @@
                 android:id="@+id/tv_shift_status_chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_xs"
                 android:textStyle="bold"
                 android:fontFamily="@font/cairo_semibold"
-                android:paddingHorizontal="12dp"
+                android:paddingHorizontal="@dimen/spacing_md"
                 android:paddingVertical="5dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="@dimen/spacing_sm"
                 android:background="@drawable/bg_chip_open"
                 android:textColor="@color/shift_open_text" />
 
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?attr/colorOutlineVariant"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="@dimen/spacing_md" />
 
         <!-- ── Stats 2×2 grid ── -->
         <LinearLayout
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="@dimen/spacing_sm">
 
             <!-- Opening Cash -->
             <LinearLayout
@@ -84,13 +84,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_marginEnd="4dp">
+                android:layout_marginEnd="@dimen/spacing_xs">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/shift_opening_cash_title"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular" />
 
@@ -98,11 +98,11 @@
                     android:id="@+id/tv_shift_opening_cash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
                     android:fontFamily="@font/cairo_bold"
-                    android:layout_marginTop="2dp" />
+                    android:layout_marginTop="@dimen/spacing_xxs" />
 
             </LinearLayout>
 
@@ -112,13 +112,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_marginStart="4dp">
+                android:layout_marginStart="@dimen/spacing_xs">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/shift_closing_cash_title"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular" />
 
@@ -126,11 +126,11 @@
                     android:id="@+id/tv_shift_closing_cash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
                     android:fontFamily="@font/cairo_bold"
-                    android:layout_marginTop="2dp" />
+                    android:layout_marginTop="@dimen/spacing_xxs" />
 
             </LinearLayout>
 
@@ -149,13 +149,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_marginEnd="4dp">
+                android:layout_marginEnd="@dimen/spacing_xs">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/shift_total_sales_title"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular" />
 
@@ -163,11 +163,11 @@
                     android:id="@+id/tv_shift_total_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/text_base"
                     android:textStyle="bold"
                     android:textColor="@color/color_success"
                     android:fontFamily="@font/cairo_bold"
-                    android:layout_marginTop="2dp" />
+                    android:layout_marginTop="@dimen/spacing_xxs" />
 
             </LinearLayout>
 
@@ -177,13 +177,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_marginStart="4dp">
+                android:layout_marginStart="@dimen/spacing_xs">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/shift_invoice_count_title"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular" />
 
@@ -191,11 +191,11 @@
                     android:id="@+id/tv_shift_invoice_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_md"
                     android:textStyle="bold"
                     android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/cairo_bold"
-                    android:layout_marginTop="2dp" />
+                    android:layout_marginTop="@dimen/spacing_xxs" />
 
             </LinearLayout>
 
@@ -206,7 +206,7 @@
             android:id="@+id/tv_shift_opened_at"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_xs"
             android:textColor="?attr/colorOutline"
             android:fontFamily="@font/cairo_regular" />
 
@@ -214,10 +214,10 @@
             android:id="@+id/tv_shift_closed_at"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_xs"
             android:textColor="?attr/colorOutline"
             android:fontFamily="@font/cairo_regular"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="@dimen/spacing_xxs"
             android:visibility="gone" />
 
     </LinearLayout>
