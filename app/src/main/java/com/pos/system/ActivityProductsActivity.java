@@ -145,6 +145,11 @@ public class ActivityProductsActivity extends BaseActivity {
         fabAddProduct.setOnClickListener(v ->
             addProductLauncher.launch(new Intent(this, ActivityAddProductActivity.class))
         );
+        if (binding.btnEmptyCta != null) {
+            binding.btnEmptyCta.setOnClickListener(v ->
+                addProductLauncher.launch(new Intent(this, ActivityAddProductActivity.class))
+            );
+        }
         if (fabImportCsv != null) {
             fabImportCsv.setOnClickListener(v ->
                 csvPickerLauncher.launch(new String[]{"text/csv", "text/plain", "*/*"})

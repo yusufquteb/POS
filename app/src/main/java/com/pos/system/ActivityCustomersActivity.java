@@ -81,6 +81,9 @@ public class ActivityCustomersActivity extends BaseActivity {
                 showDataSheet(null);
             }
         });
+        if (binding.btnEmptyCta != null) binding.btnEmptyCta.setOnClickListener(v -> {
+            if (fabAdd != null) fabAdd.performClick();
+        });
 
         if (etSearch != null) {
             etSearch.addTextChangedListener(new TextWatcher() {

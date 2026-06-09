@@ -101,6 +101,14 @@
                     android:text="@string/str_b326d5"
                     android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_empty_cta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_lg"
+                    android:text="@string/product_add"
+                    app:icon="@drawable/ic_add"
+                    android:fontFamily="@font/cairo_semibold"/>
             </LinearLayout>
 
         </FrameLayout>

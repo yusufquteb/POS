@@ -72,6 +72,9 @@ public class ActivitySuppliersActivity extends BaseActivity {
 
         View fabAdd = binding.fabAdd;
         if (fabAdd != null) fabAdd.setOnClickListener(v -> showDataSheet(null));
+        if (binding.btnEmptyCta != null) binding.btnEmptyCta.setOnClickListener(v -> {
+            if (fabAdd != null) fabAdd.performClick();
+        });
 
         if (etSearch != null) {
             etSearch.addTextChangedListener(new TextWatcher() {

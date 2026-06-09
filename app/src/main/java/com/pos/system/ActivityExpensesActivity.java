@@ -104,6 +104,7 @@ public class ActivityExpensesActivity extends BaseActivity {
 
     private void setupFAB() {
         if (fabAddExpense != null) fabAddExpense.setOnClickListener(v -> showAddExpenseDialog());
+        if (binding.btnEmptyCta != null) binding.btnEmptyCta.setOnClickListener(v -> showAddExpenseDialog());
     }
 
     private void loadExpenses() {

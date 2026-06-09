@@ -912,6 +912,10 @@
     <string name="nav_section_reports">التقارير</string>
     <string name="nav_section_management">الإدارة</string>
 
+    <!-- Empty state subtitles -->
+    <string name="expenses_add_first">سجّل مصاريفك لتتبع التكاليف بدقة</string>
+    <string name="products_add_first">أضف منتجاتك لتبدأ البيع</string>
+
     <!-- Drawer item labels -->
     <string name="nav_checks">الشيكات</string>
     <string name="nav_installments">الأقساط</string>
