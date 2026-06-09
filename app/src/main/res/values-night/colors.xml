@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Dark-mode semantic overrides: containers become dark to avoid light blobs on dark surfaces -->
+    <color name="color_success">#22C55E</color>
+    <color name="color_success_container">#052E16</color>
+    <color name="color_warning">#F59E0B</color>
+    <color name="color_warning_container">#451A03</color>
+    <color name="color_error">#F87171</color>
+    <color name="color_error_container">#450A0A</color>
+    <color name="color_info">#A78BFA</color>
+    <color name="color_info_container">#2A1065</color>
+    <color name="color_low_stock">#F59E0B</color>
+    <color name="color_out_of_stock">#F87171</color>
+    <color name="color_profit">#22C55E</color>
+
+    <!-- Shift status (dark mode) -->
+    <color name="shift_open_bg">#052E16</color>
+    <color name="shift_open_text">#22C55E</color>
+    <color name="shift_closed_bg">#1D1630</color>
+    <color name="shift_closed_text">#C4B5FD</color>
+
+    <!-- Legacy aliases — dark mode values -->
+    <color name="divider">#2A2140</color>
+    <color name="background">#0F0B17</color>
+    <color name="text_primary">#F5F3FF</color>
+    <color name="text_secondary">#C4B5FD</color>
+
+</resources>
