@@ -2,9 +2,8 @@
 <resources>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- BASE THEMES - Material Expressive                       -->
+    <!-- LIGHT THEME                                             -->
     <!-- ═══════════════════════════════════════════════════════ -->
-
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:fontFamily">@font/cairo</item>
         <item name="fontFamily">@font/cairo</item>
@@ -42,7 +41,7 @@
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
-        <!-- Semantic design tokens -->
+        <!-- Semantic tokens -->
         <item name="colorSuccess">@color/color_success</item>
         <item name="colorSuccessContainer">@color/color_success_container</item>
         <item name="colorWarning">@color/color_warning</item>
@@ -59,6 +58,9 @@
         <item name="colorShiftClosedContainer">@color/shift_closed_bg</item>
     </style>
 
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- DARK THEME (used by ThemeManager for forced dark mode)  -->
+    <!-- ═══════════════════════════════════════════════════════ -->
     <style name="AppTheme_Dark" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:fontFamily">@font/cairo</item>
         <item name="fontFamily">@font/cairo</item>
@@ -96,12 +98,25 @@
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
+        <item name="colorSuccess">@color/color_success</item>
+        <item name="colorSuccessContainer">@color/color_success_container</item>
+        <item name="colorWarning">@color/color_warning</item>
+        <item name="colorWarningContainer">@color/color_warning_container</item>
+        <item name="colorInfo">@color/color_info</item>
+        <item name="colorInfoContainer">@color/color_info_container</item>
+        <item name="colorLowStock">@color/color_low_stock</item>
+        <item name="colorOutOfStock">@color/color_out_of_stock</item>
+        <item name="colorProfit">@color/color_profit</item>
+        <item name="colorLoss">@color/color_error</item>
+        <item name="colorShiftOpen">@color/shift_open_text</item>
+        <item name="colorShiftOpenContainer">@color/shift_open_bg</item>
+        <item name="colorShiftClosed">@color/shift_closed_text</item>
+        <item name="colorShiftClosedContainer">@color/shift_closed_bg</item>
     </style>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SHAPE SYSTEM - Material Expressive                      -->
+    <!-- SHAPE SYSTEM                                            -->
     <!-- ═══════════════════════════════════════════════════════ -->
-
     <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">12dp</item>
@@ -128,132 +143,6 @@
     </style>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- COLOR VARIANTS - Light                                  -->
-    <!-- ═══════════════════════════════════════════════════════ -->
-    <style name="AppTheme_Blue"   parent="AppTheme">
-        <item name="colorPrimary">@color/blue_primary</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/blue_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/blue_on_primary_container</item>
-        <item name="colorSecondary">@color/blue_secondary</item>
-        <item name="colorSecondaryContainer">@color/blue_secondary_container</item>
-        <item name="colorTertiary">@color/blue_tertiary</item>
-        <item name="colorTertiaryContainer">@color/blue_tertiary_container</item>
-    </style>
-
-    <style name="AppTheme_Purple" parent="AppTheme">
-        <item name="colorPrimary">@color/purple_primary</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/purple_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/purple_on_primary_container</item>
-        <item name="colorSecondary">@color/purple_secondary</item>
-        <item name="colorSecondaryContainer">@color/purple_secondary_container</item>
-        <item name="colorTertiary">@color/purple_tertiary</item>
-        <item name="colorTertiaryContainer">@color/purple_tertiary_container</item>
-    </style>
-
-    <style name="AppTheme_Green" parent="AppTheme">
-        <item name="colorPrimary">@color/green_primary</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/green_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/green_on_primary_container</item>
-        <item name="colorSecondary">@color/green_secondary</item>
-        <item name="colorSecondaryContainer">@color/green_secondary_container</item>
-        <item name="colorTertiary">@color/green_tertiary</item>
-        <item name="colorTertiaryContainer">@color/green_tertiary_container</item>
-    </style>
-
-    <style name="AppTheme_Orange" parent="AppTheme">
-        <item name="colorPrimary">@color/orange_primary</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/orange_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/orange_on_primary_container</item>
-        <item name="colorSecondary">@color/orange_secondary</item>
-        <item name="colorSecondaryContainer">@color/orange_secondary_container</item>
-        <item name="colorTertiary">@color/orange_tertiary</item>
-        <item name="colorTertiaryContainer">@color/orange_tertiary_container</item>
-    </style>
-
-    <style name="AppTheme_Teal" parent="AppTheme">
-        <item name="colorPrimary">@color/teal_primary</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/teal_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/teal_on_primary_container</item>
-        <item name="colorSecondary">@color/teal_secondary</item>
-        <item name="colorSecondaryContainer">@color/teal_secondary_container</item>
-        <item name="colorTertiary">@color/teal_tertiary</item>
-        <item name="colorTertiaryContainer">@color/teal_tertiary_container</item>
-    </style>
-
-    <style name="AppTheme_Egypt" parent="AppTheme">
-        <item name="colorPrimary">@color/egypt_primary</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/egypt_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/egypt_on_primary_container</item>
-        <item name="colorSecondary">@color/egypt_secondary</item>
-        <item name="colorSecondaryContainer">@color/egypt_secondary_container</item>
-        <item name="colorTertiary">@color/egypt_tertiary</item>
-        <item name="colorTertiaryContainer">@color/egypt_tertiary_container</item>
-    </style>
-
-    <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- COLOR VARIANTS - Dark                                   -->
-    <!-- ═══════════════════════════════════════════════════════ -->
-    <style name="AppTheme_Blue_Dark"   parent="AppTheme_Dark">
-        <item name="colorPrimary">@color/blue_dark_primary</item>
-        <item name="colorOnPrimary">@color/blue_dark_on_primary</item>
-        <item name="colorPrimaryContainer">@color/blue_dark_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/blue_dark_on_primary_container</item>
-        <item name="colorSecondary">@color/blue_dark_secondary</item>
-        <item name="colorTertiary">@color/blue_dark_tertiary</item>
-    </style>
-
-    <style name="AppTheme_Purple_Dark" parent="AppTheme_Dark">
-        <item name="colorPrimary">@color/purple_dark_primary</item>
-        <item name="colorOnPrimary">@color/purple_dark_on_primary</item>
-        <item name="colorPrimaryContainer">@color/purple_dark_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/purple_dark_on_primary_container</item>
-        <item name="colorSecondary">@color/purple_dark_secondary</item>
-        <item name="colorTertiary">@color/purple_dark_tertiary</item>
-    </style>
-
-    <style name="AppTheme_Green_Dark" parent="AppTheme_Dark">
-        <item name="colorPrimary">@color/green_dark_primary</item>
-        <item name="colorOnPrimary">@color/green_dark_on_primary</item>
-        <item name="colorPrimaryContainer">@color/green_dark_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/green_dark_on_primary_container</item>
-        <item name="colorSecondary">@color/green_dark_secondary</item>
-        <item name="colorTertiary">@color/green_dark_tertiary</item>
-    </style>
-
-    <style name="AppTheme_Orange_Dark" parent="AppTheme_Dark">
-        <item name="colorPrimary">@color/orange_dark_primary</item>
-        <item name="colorOnPrimary">@color/orange_dark_on_primary</item>
-        <item name="colorPrimaryContainer">@color/orange_dark_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/orange_dark_on_primary_container</item>
-        <item name="colorSecondary">@color/orange_dark_secondary</item>
-        <item name="colorTertiary">@color/orange_dark_tertiary</item>
-    </style>
-
-    <style name="AppTheme_Teal_Dark" parent="AppTheme_Dark">
-        <item name="colorPrimary">@color/teal_dark_primary</item>
-        <item name="colorOnPrimary">@color/teal_dark_on_primary</item>
-        <item name="colorPrimaryContainer">@color/teal_dark_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/teal_dark_on_primary_container</item>
-        <item name="colorSecondary">@color/teal_dark_secondary</item>
-        <item name="colorTertiary">@color/teal_dark_tertiary</item>
-    </style>
-
-    <style name="AppTheme_Egypt_Dark" parent="AppTheme_Dark">
-        <item name="colorPrimary">@color/egypt_dark_primary</item>
-        <item name="colorOnPrimary">@color/egypt_dark_on_primary</item>
-        <item name="colorPrimaryContainer">@color/egypt_dark_primary_container</item>
-        <item name="colorOnPrimaryContainer">@color/egypt_dark_on_primary_container</item>
-        <item name="colorSecondary">@color/egypt_dark_secondary</item>
-        <item name="colorTertiary">@color/egypt_dark_tertiary</item>
-    </style>
-
-    <!-- ═══════════════════════════════════════════════════════ -->
     <!-- SPECIAL THEMES                                          -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <style name="Theme.App.Starting" parent="Theme.Material3.Light.NoActionBar">
@@ -273,7 +162,7 @@
     </style>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- WIDGET STYLES - Expressive                              -->
+    <!-- WIDGET STYLES                                           -->
     <!-- ═══════════════════════════════════════════════════════ -->
 
     <style name="CardStyle.Expressive" parent="Widget.Material3.CardView.Elevated">
@@ -296,7 +185,6 @@
         <item name="strokeWidth">1dp</item>
     </style>
 
-    <!-- Legacy aliases -->
     <style name="CardStyle" parent="CardStyle.Expressive"/>
     <style name="Widget.MyFirstWords.CardView" parent="CardStyle.Expressive"/>
 

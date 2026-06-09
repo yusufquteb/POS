@@ -34,7 +34,6 @@ public class ActivitySettingsActivity extends BaseActivity {
     // Views
     private MaterialCardView cardTheme;
     private TextView         tvCurrentTheme;
-    private TextView         tvCurrentColor;
 
     private MaterialCardView cardLanguage;
     private TextView         tvCurrentLanguage;
@@ -72,7 +71,8 @@ public class ActivitySettingsActivity extends BaseActivity {
     private void initializeViews() {
         cardTheme      = findViewById(R.id.card_theme);
         tvCurrentTheme = findViewById(R.id.tv_current_theme);
-        tvCurrentColor = findViewById(R.id.tv_current_color);
+        View tvCurrentColor = findViewById(R.id.tv_current_color);
+        if (tvCurrentColor != null) tvCurrentColor.setVisibility(View.GONE);
 
         cardLanguage      = findViewById(R.id.card_language);
         tvCurrentLanguage = findViewById(R.id.tv_current_language);
@@ -114,7 +114,6 @@ public class ActivitySettingsActivity extends BaseActivity {
 
     private void updateThemeInfo() {
         if (tvCurrentTheme != null) tvCurrentTheme.setText(ThemeManager.getThemeModeName());
-        if (tvCurrentColor != null) tvCurrentColor.setText(ThemeManager.getColorSchemeName());
     }
 
     private void updateLanguageInfo() {
@@ -163,19 +162,8 @@ public class ActivitySettingsActivity extends BaseActivity {
     // Dialogs
     // ════════════════════════════════════════════════════════════
 
-    /** اختيار المظهر: وضع / ألوان */
     private void showThemeDialog() {
-        String[] options = {
-            getString(R.string.theme_mode),
-            getString(R.string.theme_color)
-        };
-        new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.settings_theme)
-                .setItems(options, (d, which) -> {
-                    if (which == 0) showThemeModeDialog();
-                    else            showColorSchemeDialog();
-                })
-                .show();
+        showThemeModeDialog();
     }
 
     /** اختيار الوضع: فاتح / داكن / تلقائي */
@@ -189,22 +177,6 @@ public class ActivitySettingsActivity extends BaseActivity {
                     ThemeManager.setThemeMode(which);
                     d.dismiss();
                     // إعادة إنشاء Activity لتطبيق التغيير على الفور
-                    recreate();
-                })
-                .setNegativeButton(R.string.cancel, null)
-                .show();
-    }
-
-    /** اختيار مجموعة الألوان */
-    private void showColorSchemeDialog() {
-        String[] colors        = ThemeManager.getAvailableColorSchemes();
-        int      currentScheme = ThemeManager.getColorScheme();
-
-        new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.theme_color)
-                .setSingleChoiceItems(colors, currentScheme, (d, which) -> {
-                    ThemeManager.setColorScheme(which);
-                    d.dismiss();
                     recreate();
                 })
                 .setNegativeButton(R.string.cancel, null)
