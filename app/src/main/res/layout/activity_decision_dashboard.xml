@@ -61,7 +61,9 @@
                         android:id="@+id/rv_reorder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false" />
+                        android:nestedScrollingEnabled="false"
+                        android:clipToPadding="false"
+                        android:paddingBottom="80dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_create_po"
@@ -105,7 +107,9 @@
                         android:id="@+id/rv_expiry_risk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false" />
+                        android:nestedScrollingEnabled="false"
+                        android:clipToPadding="false"
+                        android:paddingBottom="80dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_view_expiry"
@@ -149,7 +153,9 @@
                         android:id="@+id/rv_dead_stock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false" />
+                        android:nestedScrollingEnabled="false"
+                        android:clipToPadding="false"
+                        android:paddingBottom="80dp" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -183,7 +189,9 @@
                         android:id="@+id/rv_low_margin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false" />
+                        android:nestedScrollingEnabled="false"
+                        android:clipToPadding="false"
+                        android:paddingBottom="80dp" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

@@ -7,8 +7,7 @@
 	android:orientation="vertical"
 	android:background="?attr/colorSurface"
 	android:layoutDirection="rtl"
-	android:id="@+id/_main"
-	android:fitsSystemWindows="true">
+	android:id="@+id/_main">
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/app_bar_layout"
 		android:layout_width="match_parent"
@@ -714,6 +713,8 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:nestedScrollingEnabled="false"
+						android:clipToPadding="false"
+						android:paddingBottom="80dp"
 						app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
