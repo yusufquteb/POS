@@ -169,8 +169,8 @@ public class ActivityLocationActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("حذف الموقع")
                 .setMessage("هل أنت متأكد من حذف هذا الموقع؟")
-                .setNegativeButton("إلغاء", (d, w) -> refreshData())
-                .setPositiveButton("حذف", (d, w) -> {
+                .setNegativeButton(R.string.cancel, (d, w) -> refreshData())
+                .setPositiveButton(R.string.delete, (d, w) -> {
                     try {
                         int id = (int) fullList.get(position).get("id");
                         int result = dbHelper.getWritableDatabase().delete("locations", "id=?", new String[]{String.valueOf(id)});

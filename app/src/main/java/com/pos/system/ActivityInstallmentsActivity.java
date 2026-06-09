@@ -120,7 +120,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("إضافة عقد تقسيط")
             .setView(dv)
-            .setPositiveButton("حفظ", (d, w) -> {
+            .setPositiveButton(R.string.save, (d, w) -> {
                 if (tilCustomerName != null) tilCustomerName.setError(null);
                 if (tilTotalAmount != null) tilTotalAmount.setError(null);
 
@@ -162,7 +162,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                     });
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -209,13 +209,13 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                                     });
                                 })
                                 .show())
-                        .setNegativeButton("إغلاق", null)
+                        .setNegativeButton(R.string.close, null)
                         .show();
                 } else {
                     new MaterialAlertDialogBuilder(this)
                         .setTitle("تفاصيل العقد")
                         .setMessage(sb.toString())
-                        .setPositiveButton("إغلاق", null)
+                        .setPositiveButton(R.string.close, null)
                         .show();
                 }
             });
@@ -276,7 +276,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                                 boolean ok = dbHelper.payInstallment(pid, today);
                                 runOnUiThread(() -> { if (ok) { showToast("تم الدفع"); loadData(); } else showSnackbar("خطأ", true); });
                             }))
-                        .setNegativeButton("إلغاء", null)
+                        .setNegativeButton(R.string.cancel, null)
                         .show();
                 });
             }

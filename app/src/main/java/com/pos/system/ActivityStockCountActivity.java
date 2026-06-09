@@ -149,7 +149,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                         else showSnackbar("خطأ في بدء الجلسة", true);
                     });
                 }))
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -181,7 +181,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                     });
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 

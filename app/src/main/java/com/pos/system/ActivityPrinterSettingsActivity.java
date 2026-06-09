@@ -182,7 +182,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                 new MaterialAlertDialogBuilder(this)
                     .setTitle("الطباعة عبر USB")
                     .setMessage("الطباعة عبر USB غير متاحة في هذا الإصدار.\nيرجى استخدام البلوتوث في الوقت الحالي.")
-                    .setPositiveButton("حسناً", (d, w) -> {
+                    .setPositiveButton(R.string.ok, (d, w) -> {
                         if (rgConnection != null) rgConnection.check(R.id.rb_bluetooth);
                     })
                     .setCancelable(false)
@@ -290,7 +290,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("⚠️ غير مدعوم")
             .setMessage("البلوتوث غير مدعوم في هذا الجهاز")
-            .setPositiveButton("حسناً", (d, w) -> {
+            .setPositiveButton(R.string.ok, (d, w) -> {
                 if (rbUsb != null) rbUsb.setChecked(true);
             })
             .setCancelable(false)
@@ -307,7 +307,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             .setPositiveButton("منح الصلاحيات", (d, w) -> {
                 printerManager.requestBluetoothPermissions();
             })
-            .setNegativeButton("إلغاء", (d, w) -> {
+            .setNegativeButton(R.string.cancel, (d, w) -> {
                 if (rbUsb != null) rbUsb.setChecked(true);
             })
             .setCancelable(false)
@@ -327,7 +327,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             .setNeutralButton("فتح الإعدادات", (d, w) -> {
                 openBluetoothSettings();
             })
-            .setNegativeButton("إلغاء", (d, w) -> {
+            .setNegativeButton(R.string.cancel, (d, w) -> {
                 if (rbUsb != null) rbUsb.setChecked(true);
             })
             .setCancelable(false)
@@ -382,7 +382,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             .setPositiveButton("فتح الإعدادات", (d, w) -> {
                 openWiFiSettings();
             })
-            .setNegativeButton("إلغاء", (d, w) -> {
+            .setNegativeButton(R.string.cancel, (d, w) -> {
                 if (rbUsb != null) rbUsb.setChecked(true);
             })
             .setCancelable(false)
@@ -429,7 +429,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("✓ تم العثور على طابعات")
             .setMessage(message.toString())
-            .setPositiveButton("حسناً", (d, w) -> saveSettings())
+            .setPositiveButton(R.string.ok, (d, w) -> saveSettings())
             .setNeutralButton("اختبار الطباعة", (d, w) -> testPrint())
             .show();
     }
@@ -440,7 +440,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
             .setTitle(title)
             .setMessage(result.message)
-            .setPositiveButton("حسناً", null);
+            .setPositiveButton(R.string.ok, null);
         
         if (currentPrinterType.equals(Constants.PrinterType.BLUETOOTH)) {
             builder.setNeutralButton("فتح إعدادات البلوتوث", (d, w) -> 
@@ -577,7 +577,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                     .setTitle("⚠️ تنبيه")
                     .setMessage("لم يتم فحص الطابعة!\n\nاضغط 'فحص الطابعة' أولاً")
                     .setPositiveButton("فحص الآن", (d, w) -> checkPrinterConnection())
-                    .setNegativeButton("إلغاء", null)
+                    .setNegativeButton(R.string.cancel, null)
                     .show();
                 return;
             }
@@ -595,7 +595,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             new MaterialAlertDialogBuilder(this)
                 .setTitle("⚠️ خطأ")
                 .setMessage(message)
-                .setPositiveButton("حسناً", null)
+                .setPositiveButton(R.string.ok, null)
                 .show();
         } catch (Exception e) {
             showToast(message);

@@ -121,7 +121,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("إضافة خزينة جديدة")
             .setView(dv)
-            .setPositiveButton("حفظ", (d, w) -> {
+            .setPositiveButton(R.string.save, (d, w) -> {
                 if (tilInput != null) tilInput.setError(null);
                 String name = et != null && et.getText() != null ? et.getText().toString().trim() : "";
                 if (name.isEmpty()) {
@@ -133,7 +133,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
                     runOnUiThread(() -> { if (id > 0) { showToast("تمت الإضافة"); loadDrawers(); } else showSnackbar("خطأ", true); });
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -167,7 +167,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
                     });
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 

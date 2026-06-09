@@ -119,7 +119,7 @@ public class SafeBackupManager {
                         callback.onError(e);
                     }
                 })
-                .setNegativeButton("إلغاء", null)
+                .setNegativeButton(R.string.cancel, null)
                 .setNeutralButton("تحديد الكل", (d, w) -> {
                     // لا شيء - سيتم التعامل معه في onShow
                 })

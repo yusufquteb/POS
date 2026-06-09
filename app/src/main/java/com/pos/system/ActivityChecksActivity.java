@@ -132,7 +132,7 @@ public class ActivityChecksActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle(isCustomerTab ? "إضافة شيك عميل" : "إضافة شيك مورد")
             .setView(dialogView)
-            .setPositiveButton("حفظ", (d, w) -> {
+            .setPositiveButton(R.string.save, (d, w) -> {
                 if (tilName != null) tilName.setError(null);
                 if (tilAmount != null) tilAmount.setError(null);
 
@@ -167,13 +167,13 @@ public class ActivityChecksActivity extends BaseActivity {
                         result = dbHelper.addSupplierCheck(0, name, checkNum, bank, finalAmount, issueDate, dueDate, notes);
                     }
                     if (result > 0) {
-                        runOnUiThread(() -> { showToast("تم الحفظ بنجاح"); loadData(); });
+                        runOnUiThread(() -> { showToast(getString(R.string.saved_successfully)); loadData(); });
                     } else {
                         runOnUiThread(() -> showSnackbar("حدث خطأ", true));
                     }
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -203,7 +203,7 @@ public class ActivityChecksActivity extends BaseActivity {
                     runOnUiThread(() -> { if (finalSuccess) { showToast("تم بنجاح"); loadData(); } else showSnackbar("حدث خطأ", true); });
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 

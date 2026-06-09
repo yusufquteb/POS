@@ -215,14 +215,14 @@ public class ActivitySuppliersActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("حذف المورد")
             .setMessage("هل تريد حذف: " + item.getOrDefault("name", "") + "؟")
-            .setPositiveButton("حذف", (d, w) -> {
+            .setPositiveButton(R.string.delete, (d, w) -> {
                 try {
                     dbHelper.deleteSupplier(getLong(item, "id"));
                     refreshData();
                     showToast("✓ تم الحذف");
                 } catch (Exception e) { showSnackbar("خطأ في الحذف", true); }
             })
-            .setNegativeButton("إلغاء", (d, w) -> {
+            .setNegativeButton(R.string.cancel, (d, w) -> {
                 if (adapter != null) adapter.notifyItemChanged(pos);
             })
             .show();

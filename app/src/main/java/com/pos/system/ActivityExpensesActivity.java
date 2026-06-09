@@ -177,7 +177,7 @@ public class ActivityExpensesActivity extends BaseActivity {
                     showSnackbar("المبلغ غير صحيح", true);
                 }
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -193,7 +193,7 @@ public class ActivityExpensesActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("حذف المصروف")
             .setMessage("هل أنت متأكد من حذف هذا المصروف؟")
-            .setPositiveButton("نعم", (dialog, which) -> {
+            .setPositiveButton(R.string.yes, (dialog, which) -> {
                 try {
                     long id = Long.parseLong(expense.getOrDefault("id", "0"));
                     boolean deleted = dbHelper.deleteExpense(id);
@@ -211,7 +211,7 @@ public class ActivityExpensesActivity extends BaseActivity {
                     if (adapter != null) adapter.notifyItemChanged(position);
                 }
             })
-            .setNegativeButton("لا", (dialog, which) -> {
+            .setNegativeButton(R.string.no, (dialog, which) -> {
                 if (adapter != null) adapter.notifyItemChanged(position);
             })
             .show();
@@ -333,7 +333,7 @@ public class ActivityExpensesActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("تفاصيل المصروف")
             .setMessage(details)
-            .setPositiveButton("حسناً", null)
+            .setPositiveButton(R.string.ok, null)
             .show();
     }
 }

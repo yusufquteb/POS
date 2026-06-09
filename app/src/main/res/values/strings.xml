@@ -225,19 +225,19 @@
 
     <!-- Errors -->
     <string name="error_title">Error</string>
-    <string name="error_unknown">An unexpected error occurred</string>
+    <string name="error_unknown">خطأ غير معروف</string>
     <string name="error_network">Network connection error</string>
     <string name="error_no_internet">No internet connection</string>
     <string name="error_invalid_input">Invalid data</string>
     <string name="error_required_field">This field is required</string>
     <string name="error_icon">Error Icon</string>
-    <string name="error_loading">Loading error</string>
+    <string name="error_loading">خطأ في تحميل البيانات</string>
     <string name="scanner_error">Error starting barcode scanner</string>
     <string name="validation_email_empty">Please enter your email</string>
     <string name="validation_email_invalid">Invalid email address</string>
     <string name="validation_password_empty">Please enter your password</string>
     <string name="validation_password_short">Password must be at least 6 characters</string>
-    <string name="validation_name_empty">Please enter a name</string>
+    <string name="validation_name_empty">الاسم مطلوب</string>
     <string name="validation_barcode_empty">Please enter a barcode</string>
     <string name="validation_price_empty">Please enter a price</string>
     <string name="validation_quantity_empty">Please enter a quantity</string>
@@ -262,17 +262,17 @@
     <string name="success_restore">Backup restored successfully</string>
     <string name="success_print">Printed successfully</string>
     <string name="operation_failed">Operation failed, please try again</string>
-    <string name="saved_successfully">Saved successfully</string>
-    <string name="deleted_successfully">Deleted successfully</string>
+    <string name="saved_successfully">تم الحفظ بنجاح</string>
+    <string name="deleted_successfully">تم الحذف بنجاح</string>
     <string name="unknown_error">An unknown error occurred</string>
     <string name="store_updated">Store information updated</string>
     <string name="notification_new_sale">New sale completed</string>
     <string name="notification_low_stock">Low stock alert</string>
 
     <!-- Actions -->
-    <string name="action_save">Save</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="action_delete">Delete</string>
+    <string name="action_save">حفظ</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_delete">حذف</string>
     <string name="action_edit">Edit</string>
     <string name="action_add">Add</string>
     <string name="action_search">Search</string>
@@ -283,7 +283,7 @@
     <string name="action_print">Print</string>
     <string name="action_export">Export</string>
     <string name="action_import">Import</string>
-    <string name="action_ok">OK</string>
+    <string name="action_ok">حسناً</string>
     <string name="action_yes">Yes</string>
     <string name="action_no">No</string>
     <string name="action_continue">Continue</string>
@@ -365,13 +365,13 @@
     <string name="supplier">Supplier</string>
     <string name="barcode">Barcode</string>
     <string name="edit">Edit</string>
-    <string name="delete">Delete</string>
+    <string name="delete">حذف</string>
     <string name="remove">Remove</string>
-    <string name="save">Save</string>
-    <string name="close">Close</string>
-    <string name="cancel">Cancel</string>
-    <string name="ok">OK</string>
-    <string name="yes">Yes</string>
+    <string name="save">حفظ</string>
+    <string name="close">إغلاق</string>
+    <string name="cancel">إلغاء</string>
+    <string name="ok">حسناً</string>
+    <string name="yes">نعم</string>
     <string name="no">No</string>
     <string name="today_sales">Today\'s Sales</string>
     <string name="today_invoices">Today\'s Invoices</string>

@@ -152,12 +152,12 @@ public class ActivityBackupActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("نسخ احتياطي على السحابة")
             .setMessage("هل تريد إنشاء نسخة احتياطية في المجلد المحدد؟")
-            .setPositiveButton("نعم", (d, w) -> {
+            .setPositiveButton(R.string.yes, (d, w) -> {
                 boolean ok = cloudBackupManager.backup();
                 showSnackbar(ok ? "✓ تم النسخ الاحتياطي بنجاح" : "فشل النسخ الاحتياطي", !ok);
                 updateCloudUI();
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 

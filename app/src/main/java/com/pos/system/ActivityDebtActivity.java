@@ -269,7 +269,7 @@ public class ActivityDebtActivity extends BaseActivity {
                 else if (which == 2) showPaymentHistory(customerId, customerName, true);
                 else if (which == 3 && !phone.isEmpty()) dialPhone(phone);
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -297,7 +297,7 @@ public class ActivityDebtActivity extends BaseActivity {
                 else if (which == 2) showPaymentHistory(supplierId, supplierName, false);
                 else if (which == 3 && !phone.isEmpty()) dialPhone(phone);
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -339,7 +339,7 @@ public class ActivityDebtActivity extends BaseActivity {
                     showSnackbar("فشل في تسجيل السداد", true);
                 }
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -376,7 +376,7 @@ public class ActivityDebtActivity extends BaseActivity {
                     showSnackbar("فشل في تسجيل الدين", true);
                 }
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -389,7 +389,7 @@ public class ActivityDebtActivity extends BaseActivity {
             new MaterialAlertDialogBuilder(this)
                 .setTitle("سجل الحركات — " + name)
                 .setMessage("لا توجد حركات مسجلة بعد.")
-                .setPositiveButton("حسناً", null)
+                .setPositiveButton(R.string.ok, null)
                 .show();
             return;
         }
@@ -416,7 +416,7 @@ public class ActivityDebtActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("سجل الحركات — " + name)
             .setMessage(sb.toString().trim())
-            .setPositiveButton("إغلاق", null)
+            .setPositiveButton(R.string.close, null)
             .show();
     }
 

@@ -99,7 +99,7 @@ public class ActivityUsersActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("إضافة مستخدم جديد")
             .setView(dv)
-            .setPositiveButton("حفظ", (d, w) -> {
+            .setPositiveButton(R.string.save, (d, w) -> {
                 if (tilName != null) tilName.setError(null);
                 if (tilUsername != null) tilUsername.setError(null);
                 if (tilPin != null) tilPin.setError(null);
@@ -136,7 +136,7 @@ public class ActivityUsersActivity extends BaseActivity {
                     });
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -154,7 +154,7 @@ public class ActivityUsersActivity extends BaseActivity {
                 else if (w == 1 && !isAdmin) deactivateUser(user);
                 else if (w == 2 && !isAdmin) confirmDeleteUser(user);
             })
-            .setNegativeButton("إغلاق", null)
+            .setNegativeButton(R.string.close, null)
             .show();
     }
 
@@ -165,7 +165,7 @@ public class ActivityUsersActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("تغيير PIN - " + user.getOrDefault("name",""))
             .setView(dv)
-            .setPositiveButton("حفظ", (d, w) -> {
+            .setPositiveButton(R.string.save, (d, w) -> {
                 String pin = et != null && et.getText() != null ? et.getText().toString().trim() : "";
                 if (pin.length() < 4) { showToast("PIN يجب أن يكون 4 أرقام على الأقل"); return; }
                 long uid = Long.parseLong(user.getOrDefault("id","0"));
@@ -174,7 +174,7 @@ public class ActivityUsersActivity extends BaseActivity {
                     runOnUiThread(() -> showToast(ok ? "تم تغيير PIN بنجاح" : "خطأ في التغيير"));
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -191,14 +191,14 @@ public class ActivityUsersActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("حذف المستخدم")
             .setMessage("هل أنت متأكد من حذف المستخدم " + user.getOrDefault("name","") + "؟")
-            .setPositiveButton("حذف", (d, w) -> {
+            .setPositiveButton(R.string.delete, (d, w) -> {
                 long uid = Long.parseLong(user.getOrDefault("id","0"));
                 executor.execute(() -> {
                     boolean ok = dbHelper.deleteUser(uid);
                     runOnUiThread(() -> { if (ok) { showToast("تم الحذف"); loadUsers(); } else showToast("لا يمكن حذف المستخدم"); });
                 });
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 

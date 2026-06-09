@@ -449,7 +449,7 @@ public class ActivityReturnActivity extends BaseActivity {
                             refundMethod
                     );
                 })
-                .setNegativeButton("إلغاء", null)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 

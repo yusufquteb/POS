@@ -388,7 +388,7 @@ public class DebugActivity extends BaseActivity {
             new MaterialAlertDialogBuilder(this)
                 .setTitle("📋 سجل الأخطاء")
                 .setMessage(history.toString())
-                .setPositiveButton("حسناً", null)
+                .setPositiveButton(R.string.ok, null)
                 .setNeutralButton("مسح السجل", (d, w) -> clearHistory())
                 .show();
                 
@@ -404,11 +404,11 @@ public class DebugActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("⚠️ تأكيد")
             .setMessage("هل تريد مسح جميع الأخطاء المحفوظة؟")
-            .setPositiveButton("نعم", (d, w) -> {
+            .setPositiveButton(R.string.yes, (d, w) -> {
                 GlobalExceptionHandler.clearErrorReports(this);
                 showToast("✓ تم المسح");
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
     

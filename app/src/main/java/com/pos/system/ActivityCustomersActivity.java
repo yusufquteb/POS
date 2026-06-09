@@ -231,7 +231,7 @@ public class ActivityCustomersActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle("حذف العميل")
             .setMessage("هل تريد حذف: " + item.getOrDefault("name", "") + "؟")
-            .setPositiveButton("حذف", (d, w) -> {
+            .setPositiveButton(R.string.delete, (d, w) -> {
                 try {
                     long id = getLong(item, "id");
                     dbHelper.deleteCustomer(id);
@@ -241,7 +241,7 @@ public class ActivityCustomersActivity extends BaseActivity {
                     showSnackbar("خطأ في الحذف", true);
                 }
             })
-            .setNegativeButton("إلغاء", (d, w) -> {
+            .setNegativeButton(R.string.cancel, (d, w) -> {
                 if (adapter != null) adapter.notifyItemChanged(pos);
             })
             .show();

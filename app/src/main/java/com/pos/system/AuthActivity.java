@@ -304,7 +304,7 @@ public class AuthActivity extends BaseActivity {
                     saveGuestMode();
                     navigateToMain();
                 })
-                .setNegativeButton("إلغاء", null)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
@@ -523,8 +523,8 @@ public class AuthActivity extends BaseActivity {
             new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
                     .setTitle("تأكيد الخروج")
                     .setMessage("هل تريد الخروج من التطبيق؟")
-                    .setPositiveButton("نعم", (d, w) -> finish())
-                    .setNegativeButton("لا", null)
+                    .setPositiveButton(R.string.yes, (d, w) -> finish())
+                    .setNegativeButton(R.string.no, null)
                     .show();
         }
     }
