@@ -221,15 +221,16 @@ public class ActivityUsersActivity extends BaseActivity {
             String role = user.getOrDefault("role", UserManager.ROLE_CASHIER);
             h.tvRole.setText(UserManager.getRoleDisplayName(role));
             int roleColor;
+            android.content.Context ctx = h.itemView.getContext();
             switch (role) {
-                case UserManager.ROLE_ADMIN:   roleColor = 0xFFE91E63; break;
-                case UserManager.ROLE_MANAGER: roleColor = 0xFF2196F3; break;
-                default:                       roleColor = 0xFF4CAF50; break;
+                case UserManager.ROLE_ADMIN:   roleColor = androidx.core.content.ContextCompat.getColor(ctx, R.color.color_error); break;
+                case UserManager.ROLE_MANAGER: roleColor = androidx.core.content.ContextCompat.getColor(ctx, R.color.color_info); break;
+                default:                       roleColor = androidx.core.content.ContextCompat.getColor(ctx, R.color.color_success); break;
             }
             h.tvRole.setTextColor(roleColor);
             boolean active = "1".equals(user.getOrDefault("is_active","1"));
             h.tvStatus.setText(active ? "نشط" : "معطّل");
-            h.tvStatus.setTextColor(active ? 0xFF4CAF50 : 0xFF9E9E9E);
+            h.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, active ? R.color.color_success : R.color.gray_400));
             h.itemView.setOnClickListener(v -> showUserOptions(user));
         }
 

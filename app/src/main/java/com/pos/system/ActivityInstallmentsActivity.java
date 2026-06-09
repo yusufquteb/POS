@@ -251,7 +251,9 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                     " | أقساط: " + item.getOrDefault("installment_count", "0"));
                 String status = item.getOrDefault("status", "active");
                 h.tvStatus.setText(statusAr(status));
-                h.tvStatus.setTextColor("completed".equals(status) ? 0xFF4CAF50 : "overdue".equals(status) ? 0xFFF44336 : 0xFF2196F3);
+                android.content.Context ctx = h.itemView.getContext();
+                h.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(ctx,
+                    "completed".equals(status) ? R.color.color_success : "overdue".equals(status) ? R.color.color_error : R.color.color_info));
                 h.itemView.setOnClickListener(v -> showContractDetails(item));
             } else {
                 h.tvTitle.setText(item.getOrDefault("customer_name", "—"));
@@ -261,7 +263,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                     parseD(item.getOrDefault("amount", "0")), currency));
                 h.tvInfo.setText("استحقاق: " + item.getOrDefault("due_date", "—"));
                 h.tvStatus.setText("متأخر");
-                h.tvStatus.setTextColor(0xFFF44336);
+                h.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(h.itemView.getContext(), R.color.color_error));
                 h.itemView.setOnClickListener(v -> {
                     long pid = Long.parseLong(item.getOrDefault("id", "0"));
                     String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());

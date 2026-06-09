@@ -225,14 +225,17 @@ public class ActivityReportsActivity extends BaseActivity {
             double netProfit    = profit.get("net_profit");
 
             setText(tvTotalExpenses, fmt(expenses));
-            if (tvCogs != null)        { tvCogs.setText(fmt(cogs));        tvCogs.setTextColor(Color.parseColor("#C62828")); }
+            int clrError   = androidx.core.content.ContextCompat.getColor(this, R.color.color_error);
+            int clrInfo    = androidx.core.content.ContextCompat.getColor(this, R.color.color_info);
+            int clrSuccess = androidx.core.content.ContextCompat.getColor(this, R.color.color_success);
+            if (tvCogs != null)        { tvCogs.setText(fmt(cogs));        tvCogs.setTextColor(clrError); }
             if (tvGrossProfit != null) {
                 tvGrossProfit.setText(fmt(grossProfit));
-                tvGrossProfit.setTextColor(grossProfit >= 0 ? Color.parseColor("#1565C0") : Color.parseColor("#C62828"));
+                tvGrossProfit.setTextColor(grossProfit >= 0 ? clrInfo : clrError);
             }
             if (tvNetProfit != null) {
                 tvNetProfit.setText(fmt(netProfit));
-                tvNetProfit.setTextColor(netProfit >= 0 ? Color.parseColor("#2E7D32") : Color.parseColor("#C62828"));
+                tvNetProfit.setTextColor(netProfit >= 0 ? clrSuccess : clrError);
             }
         } catch (Exception e) {
             Log.e(TAG, "loadSalesStats: " + e.getMessage(), e);
@@ -294,7 +297,7 @@ public class ActivityReportsActivity extends BaseActivity {
             paint.setAntiAlias(true);
 
             // Header
-            paint.setColor(Color.parseColor("#1565C0"));
+            paint.setColor(androidx.core.content.ContextCompat.getColor(this, R.color.color_info));
             canvas.drawRect(0, 0, 595, 80, paint);
             paint.setColor(Color.WHITE);
             paint.setTextSize(22); paint.setFakeBoldText(true);

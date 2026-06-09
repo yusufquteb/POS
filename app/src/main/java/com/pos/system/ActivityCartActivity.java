@@ -286,8 +286,8 @@ public class ActivityCartActivity extends BaseActivity {
                     String.format(java.util.Locale.getDefault(),
                         "⚠️ على هذا العميل دين بقيمة %.2f %s", debt, currency),
                     com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(0xFFF57C00)
-                    .setTextColor(0xFFFFFFFF)
+                    .setBackgroundTint(androidx.core.content.ContextCompat.getColor(this, R.color.color_warning))
+                    .setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
                     .show();
             }
         } catch (Exception ignored) {}

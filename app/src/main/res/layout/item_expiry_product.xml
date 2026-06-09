@@ -99,8 +99,8 @@
                 android:paddingHorizontal="@dimen/spacing_sm"
                 android:paddingVertical="@dimen/spacing_xxs"
                 android:textSize="@dimen/text_xs"
-                android:textColor="@android:color/white"
-                android:background="@color/color_error"
+                android:textColor="?attr/colorOnError"
+                android:background="?attr/colorError"
                 android:gravity="center"
                 android:text="منتهية" />
 

@@ -215,10 +215,13 @@ public class ActivityCashDrawerActivity extends BaseActivity {
             HashMap<String, String> tx = txList.get(pos);
             String type = tx.getOrDefault("type", "in");
             h.tvType.setText("in".equals(type) ? "إيداع ↑" : "سحب ↓");
-            h.tvType.setTextColor("in".equals(type) ? 0xFF4CAF50 : 0xFFF44336);
+            android.content.Context ctx = h.itemView.getContext();
+            int colorIn  = androidx.core.content.ContextCompat.getColor(ctx, R.color.color_success);
+            int colorOut = androidx.core.content.ContextCompat.getColor(ctx, R.color.color_error);
+            h.tvType.setTextColor("in".equals(type) ? colorIn : colorOut);
             h.tvAmount.setText(String.format(Locale.US, "%.2f %s",
                 Double.parseDouble(tx.getOrDefault("amount","0")), getCurrency()));
-            h.tvAmount.setTextColor("in".equals(type) ? 0xFF4CAF50 : 0xFFF44336);
+            h.tvAmount.setTextColor("in".equals(type) ? colorIn : colorOut);
             h.tvReason.setText(tx.getOrDefault("reason", "—"));
             h.tvBalance.setText("الرصيد: " + String.format(Locale.US, "%.2f",
                 Double.parseDouble(tx.getOrDefault("balance_after","0"))));

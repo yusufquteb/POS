@@ -389,11 +389,11 @@ public class ActivityProductsActivity extends BaseActivity {
                 }
 
                 if (qty == 0) {
-                    holder.tvQty.setTextColor(0xFFD32F2F);
+                    holder.tvQty.setTextColor(androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(), R.color.color_error));
                 } else if (qty <= reorderLevel) {
-                    holder.tvQty.setTextColor(0xFFF57C00);
+                    holder.tvQty.setTextColor(androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(), R.color.color_warning));
                 } else {
-                    holder.tvQty.setTextColor(0xFF388E3C);
+                    holder.tvQty.setTextColor(androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(), R.color.color_success));
                 }
             } catch (NumberFormatException e) {
                 Log.w(TAG, "Invalid qty format: " + product.get("qty"));

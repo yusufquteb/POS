@@ -335,9 +335,9 @@ public class MainActivity extends BaseActivity
                     : "تبقّى " + days + " يوم في الفترة التجريبية";
                 Snackbar.make(root, msg, Snackbar.LENGTH_LONG)
                     .setAction("ترقية", v -> openActivity(ActivitySettingsActivity.class))
-                    .setBackgroundTint(0xFF1565C0)
-                    .setTextColor(0xFFFFFFFF)
-                    .setActionTextColor(0xFFFFD54F)
+                    .setBackgroundTint(androidx.core.content.ContextCompat.getColor(this, R.color.color_info))
+                    .setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
+                    .setActionTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.color_gold))
                     .show();
             }
         } catch (Exception ignored) {}

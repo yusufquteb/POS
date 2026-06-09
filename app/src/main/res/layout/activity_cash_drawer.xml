@@ -52,14 +52,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="الخزينة الرئيسية"
-                    android:textColor="#CCFFFFFF"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="@dimen/text_md"/>
                 <TextView
                     android:id="@+id/tv_balance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0.00 ج.م"
-                    android:textColor="@android:color/white"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="@dimen/text_display"
                     android:textStyle="bold"
                     android:layout_marginTop="@dimen/spacing_xs"/>
@@ -76,8 +76,8 @@
                         android:layout_marginEnd="@dimen/spacing_xs"
                         android:text="إيداع"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:textColor="@android:color/white"
-                        app:strokeColor="@android:color/white"/>
+                        android:textColor="?attr/colorOnPrimary"
+                        app:strokeColor="?attr/colorOnPrimary"/>
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_withdraw"
                         android:layout_width="0dp"
@@ -86,8 +86,8 @@
                         android:layout_marginStart="@dimen/spacing_xs"
                         android:text="سحب"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:textColor="@android:color/white"
-                        app:strokeColor="@android:color/white"/>
+                        android:textColor="?attr/colorOnPrimary"
+                        app:strokeColor="?attr/colorOnPrimary"/>
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
