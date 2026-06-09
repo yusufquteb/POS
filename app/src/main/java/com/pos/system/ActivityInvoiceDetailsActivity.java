@@ -147,6 +147,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         
         // تحميل العناصر
         ArrayList<HashMap<String, Object>> items = dbHelper.getInvoiceItems(invoiceId);
+        if (items == null) items = new ArrayList<>();
         if (listItems != null) {
             ItemsAdapter adapter = new ItemsAdapter(items);
             listItems.setAdapter(adapter);
@@ -184,7 +185,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
             HashMap<String, Object> invoice = dbHelper.getInvoiceById(invoiceId);
             if (invoice == null) return;
             
-            int customerId = invoice.containsKey("customer_id") ? (int) invoice.get("customer_id") : 0;
+            int customerId = invoice.containsKey("customer_id") ? safeInt(invoice.get("customer_id")) : 0;
             HashMap<String, Object> customer = dbHelper.getCustomerById(customerId);
             
             if (customer == null || !customer.containsKey("phone")) {

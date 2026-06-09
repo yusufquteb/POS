@@ -71,7 +71,7 @@ public class ActivityDebtActivity extends BaseActivity {
         applyWindowInsets(findViewById(android.R.id.content));
 
         if (!FeatureGate.isUnlocked(this)) {
-            FeatureGate.requirePremium(this, "إدارة الديون");
+            FeatureGate.requirePremium(this, "إدارة الديون", true);
             return;
         }
 

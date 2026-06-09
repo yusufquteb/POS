@@ -73,7 +73,7 @@ public class ActivityReturnActivity extends BaseActivity {
         applyWindowInsets(findViewById(android.R.id.content));
 
         if (!FeatureGate.isUnlocked(this)) {
-            FeatureGate.requirePremium(this, "إدارة المرتجعات");
+            FeatureGate.requirePremium(this, "إدارة المرتجعات", true);
             return;
         }
 
