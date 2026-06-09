@@ -72,7 +72,8 @@ public class ActivityAddProductActivity extends BaseActivity {
     public static final String EXTRA_PRODUCT_DATA = "product_data";
 
     // ═══ Views ═══
-    private TextInputEditText etBarcode, etName, etBrand, etUnit,
+    private AutoCompleteTextView etName;
+    private TextInputEditText etBarcode, etBrand, etUnit,
                               etCost, etPrice, etQty, etExpiry,
                               etReorderLevel, etNotes, etBatchNumber, etSupplierRef;
     private AutoCompleteTextView etSupplier, spinnerLocation, spinnerCategory;
@@ -313,6 +314,95 @@ public class ActivityAddProductActivity extends BaseActivity {
         };
         if (etCost != null)  etCost.addTextChangedListener(profitWatcher);
         if (etPrice != null) etPrice.addTextChangedListener(profitWatcher);
+
+        setupSuggestions();
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // Product suggestions from assets/products.json
+    // ═══════════════════════════════════════════════════════════
+
+    private void setupSuggestions() {
+        // Load catalogue in background to avoid blocking onCreate
+        java.util.concurrent.Executors.newSingleThreadExecutor().execute(() ->
+            ProductSuggestionHelper.load(this));
+
+        // ── Name: live autocomplete ──────────────────────────
+        if (etName != null) {
+            SuggestionAdapter adapter = new SuggestionAdapter();
+            etName.setAdapter(adapter);
+            etName.addTextChangedListener(new TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    adapter.filter(s != null ? s.toString() : "");
+                }
+                @Override public void afterTextChanged(Editable s) {}
+            });
+            etName.setOnItemClickListener((parent, view, position, id) -> {
+                ProductSuggestionHelper.Suggestion s = adapter.getItem(position);
+                if (s == null) return;
+                etName.setText(s.name);
+                etName.setSelection(s.name.length());
+                if (etBrand != null && getText(etBrand).isEmpty()) etBrand.setText(s.brand);
+                if (etUnit  != null && getText(etUnit).isEmpty())  etUnit.setText(s.unit);
+                if (etBarcode != null && getText(etBarcode).isEmpty()) etBarcode.setText(s.barcode);
+            });
+        }
+
+        // ── Barcode: auto-fill when exact match found ────────
+        if (etBarcode != null) {
+            etBarcode.addTextChangedListener(new TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                @Override public void afterTextChanged(Editable s) {
+                    String code = s != null ? s.toString().trim() : "";
+                    if (code.length() < 5) return;
+                    ProductSuggestionHelper.Suggestion match =
+                        ProductSuggestionHelper.findByBarcode(ActivityAddProductActivity.this, code);
+                    if (match == null) return;
+                    if (etName  != null && getText(etName).isEmpty())  { etName.setText(match.name);   etName.setSelection(match.name.length()); }
+                    if (etBrand != null && getText(etBrand).isEmpty()) etBrand.setText(match.brand);
+                    if (etUnit  != null && getText(etUnit).isEmpty())  etUnit.setText(match.unit);
+                    if (!match.name.isEmpty()) showSnackbar(getString(R.string.suggestion_applied), false);
+                }
+            });
+        }
+    }
+
+    private final class SuggestionAdapter extends ArrayAdapter<ProductSuggestionHelper.Suggestion> {
+        private final List<ProductSuggestionHelper.Suggestion> items = new ArrayList<>();
+
+        SuggestionAdapter() {
+            super(ActivityAddProductActivity.this,
+                android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
+        }
+
+        void filter(String query) {
+            items.clear();
+            items.addAll(ProductSuggestionHelper.searchByName(ActivityAddProductActivity.this, query));
+            clear();
+            addAll(items);
+            if (!items.isEmpty()) notifyDataSetChanged();
+        }
+
+        @Override public int getCount() { return items.size(); }
+        @Override public ProductSuggestionHelper.Suggestion getItem(int pos) {
+            return pos >= 0 && pos < items.size() ? items.get(pos) : null;
+        }
+
+        @NonNull @Override
+        public android.view.View getView(int position, android.view.View convertView, @NonNull ViewGroup parent) {
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext())
+                    .inflate(android.R.layout.simple_dropdown_item_1line, parent, false);
+            }
+            ProductSuggestionHelper.Suggestion s = getItem(position);
+            if (s != null) {
+                ((TextView) convertView.findViewById(android.R.id.text1)).setText(
+                    s.brand.isEmpty() ? s.name : s.name + " — " + s.brand);
+            }
+            return convertView;
+        }
     }
 
     private void setupRecyclerView() {

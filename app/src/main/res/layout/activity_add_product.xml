@@ -174,13 +174,14 @@
 						app:boxCornerRadiusTopEnd="12dp"
 						app:boxCornerRadiusBottomStart="12dp"
 						app:boxCornerRadiusBottomEnd="12dp">
-						<com.google.android.material.textfield.TextInputEditText
+						<com.google.android.material.textfield.MaterialAutoCompleteTextView
 							android:id="@+id/et_name"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:textSize="@dimen/text_sm"
 							android:imeOptions="actionNext"
 							android:inputType="textCapWords"
+							android:completionThreshold="2"
 							android:fontFamily="@font/cairo_regular" />
 					</com.google.android.material.textfield.TextInputLayout>
 					<com.google.android.material.textfield.TextInputLayout

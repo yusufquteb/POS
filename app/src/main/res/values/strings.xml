@@ -376,6 +376,7 @@
     <string name="today_sales">مبيعات اليوم</string>
     <string name="today_invoices">فواتير اليوم</string>
     <string name="business_insights_title">إحصاءات الأعمال</string>
+    <string name="suggestion_applied">تم تعبئة بيانات المنتج تلقائياً</string>
     <string name="total_products">Total Products</string>
     <string name="quick_actions">Quick Actions</string>
     <string name="quick_sale">Quick Sale</string>
