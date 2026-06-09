@@ -45,24 +45,12 @@ public class MainActivity extends BaseActivity
     // Dashboard Cards
     private MaterialCardView cardTodaySales;
     private MaterialCardView cardTodayInvoices;
-    private MaterialCardView cardTotalProducts;
     private MaterialCardView cardLowStock;
 
     // Stats TextViews
     private TextView tvTodaySales;
     private TextView tvTodayInvoices;
-    private TextView tvTotalProducts;
     private TextView tvLowStockCount;
-
-    // Decision Cards
-    private MaterialCardView cardExpiryAlert;
-    private MaterialCardView cardDeadStock;
-    private MaterialCardView cardBestSeller;
-    private MaterialCardView cardBestCustomer;
-    private TextView tvExpiryCount;
-    private TextView tvDeadStockCount;
-    private TextView tvBestSellerName;
-    private TextView tvBestCustomerName;
 
     // Action Cards
     private MaterialCardView cardPOS;
@@ -82,12 +70,6 @@ public class MainActivity extends BaseActivity
     private MaterialCardView cardCashDrawer;
     private MaterialCardView cardStockCount;
     private MaterialCardView cardUsers;
-
-    // Debt Cards
-    private MaterialCardView cardCustomerDebt;
-    private MaterialCardView cardSupplierDebt;
-    private TextView tvCustomerDebtTotal;
-    private TextView tvSupplierDebtTotal;
 
     // Alert Card
     private MaterialCardView cardAlert;
@@ -145,12 +127,10 @@ public class MainActivity extends BaseActivity
 
         cardTodaySales    = binding.cardTodaySales;
         cardTodayInvoices = binding.cardTodayInvoices;
-        cardTotalProducts = binding.cardTotalProducts;
         cardLowStock      = binding.cardLowStock;
 
         tvTodaySales    = binding.tvTodaySales;
         tvTodayInvoices = binding.tvTodayInvoices;
-        tvTotalProducts = binding.tvTotalProducts;
         tvLowStockCount = binding.tvLowStockCount;
 
         cardPOS            = binding.cardPos;
@@ -171,22 +151,8 @@ public class MainActivity extends BaseActivity
         cardStockCount    = binding.cardStockCount;
         cardUsers         = binding.cardUsers;
 
-        cardCustomerDebt    = binding.cardCustomerDebt;
-        cardSupplierDebt    = binding.cardSupplierDebt;
-        tvCustomerDebtTotal = binding.tvCustomerDebtTotal;
-        tvSupplierDebtTotal = binding.tvSupplierDebtTotal;
-
         cardAlert      = binding.cardAlert;
         tvAlertMessage = binding.tvAlertMessage;
-
-        cardExpiryAlert   = binding.cardExpiryAlert;
-        cardDeadStock     = binding.cardDeadStock;
-        cardBestSeller    = binding.cardBestSeller;
-        cardBestCustomer  = binding.cardBestCustomer;
-        tvExpiryCount     = binding.tvExpiryCount;
-        tvDeadStockCount  = binding.tvDeadStockCount;
-        tvBestSellerName  = binding.tvBestSellerName;
-        tvBestCustomerName = binding.tvBestCustomerName;
 
         fabQuickSale = binding.fabQuickSale;
     }
@@ -194,10 +160,6 @@ public class MainActivity extends BaseActivity
     private void setupCardClicks() {
         if (cardTodaySales  != null) cardTodaySales.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
         if (cardLowStock    != null) cardLowStock.setOnClickListener(v -> showLowStockDialog());
-        if (cardExpiryAlert != null) cardExpiryAlert.setOnClickListener(v -> openActivity(ActivityExpiryDashboardActivity.class));
-        if (cardDeadStock   != null) cardDeadStock.setOnClickListener(v -> openActivity(ActivityDecisionDashboardActivity.class));
-        if (cardBestSeller  != null) cardBestSeller.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
-        if (cardBestCustomer != null) cardBestCustomer.setOnClickListener(v -> openActivity(ActivityCustomersActivity.class));
 
         setCardClick(cardPOS,            ActivityCartActivity.class);
         setCardClick(cardProducts,       ActivityProductsActivity.class);
@@ -218,6 +180,7 @@ public class MainActivity extends BaseActivity
         setCardClick(cardCashDrawer,    ActivityCashDrawerActivity.class);
         setCardClick(cardStockCount,    ActivityStockCountActivity.class);
         setCardClick(cardUsers,         ActivityUsersActivity.class);
+        setCardClick(binding.cardInsights, ActivityBusinessInsightsActivity.class);
     }
 
     private void setCardClick(MaterialCardView card, Class<?> cls) {
@@ -262,14 +225,7 @@ public class MainActivity extends BaseActivity
         exec.execute(() -> {
             try {
                 final HashMap<String, Object> stats = dbHelper.getInvoicesStatistics();
-                final int totalProducts = dbHelper.getProductsCount();
                 final java.util.List<HashMap<String, String>> lowStock = dbHelper.getLowStockProducts(5);
-                final java.util.List<HashMap<String, String>> expiring = dbHelper.getExpiringProducts(30);
-                final java.util.List<HashMap<String, String>> deadStock = dbHelper.getDeadStockProducts(60);
-                final HashMap<String, String> topSeller   = dbHelper.getTopSellerThisWeek();
-                final HashMap<String, String> topCustomer = dbHelper.getTopCustomerThisMonth();
-                final double totalCustomerDebt  = dbHelper.getTotalCustomerDebt();
-                final double totalSupplierDebt  = dbHelper.getTotalSupplierDebt();
                 final String currency = getCurrencySymbol();
 
                 runOnUiThread(() -> {
@@ -285,14 +241,7 @@ public class MainActivity extends BaseActivity
                         }
                         if (tvTodaySales    != null) tvTodaySales.setText(String.format("%.2f %s", todaySales, currency));
                         if (tvTodayInvoices != null) tvTodayInvoices.setText(String.valueOf(todayInvoices));
-                        if (tvTotalProducts != null) tvTotalProducts.setText(String.valueOf(totalProducts));
                         if (tvLowStockCount != null) tvLowStockCount.setText(lowStock != null ? String.valueOf(lowStock.size()) : "0");
-                        if (tvExpiryCount   != null) tvExpiryCount.setText(expiring  != null ? String.valueOf(expiring.size())  : "0");
-                        if (tvDeadStockCount != null) tvDeadStockCount.setText(deadStock != null ? String.valueOf(deadStock.size()) : "0");
-                        if (tvBestSellerName  != null) tvBestSellerName.setText(topSeller   != null ? topSeller.getOrDefault("name",   "—") : "—");
-                        if (tvBestCustomerName != null) tvBestCustomerName.setText(topCustomer != null ? topCustomer.getOrDefault("name", "—") : "—");
-                        if (tvCustomerDebtTotal != null) tvCustomerDebtTotal.setText(String.format("%.2f %s", totalCustomerDebt, currency));
-                        if (tvSupplierDebtTotal != null) tvSupplierDebtTotal.setText(String.format("%.2f %s", totalSupplierDebt, currency));
                     } catch (Exception ignored) {}
                 });
             } catch (Exception e) {

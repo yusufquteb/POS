@@ -373,8 +373,9 @@
     <string name="ok">حسناً</string>
     <string name="yes">نعم</string>
     <string name="no">No</string>
-    <string name="today_sales">Today\'s Sales</string>
-    <string name="today_invoices">Today\'s Invoices</string>
+    <string name="today_sales">مبيعات اليوم</string>
+    <string name="today_invoices">فواتير اليوم</string>
+    <string name="business_insights_title">إحصاءات الأعمال</string>
     <string name="total_products">Total Products</string>
     <string name="quick_actions">Quick Actions</string>
     <string name="quick_sale">Quick Sale</string>
