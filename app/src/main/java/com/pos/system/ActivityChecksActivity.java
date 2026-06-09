@@ -5,11 +5,10 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
+import com.pos.system.databinding.ActivityChecksBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,14 +19,8 @@ public class ActivityChecksActivity extends BaseActivity {
 
     private static final String TAG = "ActivityChecksActivity";
 
+    private ActivityChecksBinding binding;
     private DBHelper dbHelper;
-    private TabLayout tabLayout;
-    private RecyclerView recyclerView;
-    private ExtendedFloatingActionButton fabAdd;
-    private View tvEmpty;
-    private TextView tvTotalAmount;
-
-    private View progressBar;
 
     private List<HashMap<String, String>> checksList = new ArrayList<>();
     private ChecksAdapter adapter;
@@ -37,8 +30,9 @@ public class ActivityChecksActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_checks);
-        applyWindowInsets(findViewById(R.id.coordinator_root));
+        binding = ActivityChecksBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.coordinatorRoot);
 
         dbHelper = new DBHelper(this);
         initViews();
@@ -47,20 +41,13 @@ public class ActivityChecksActivity extends BaseActivity {
     }
 
     private void initViews() {
-        tabLayout = findViewById(R.id.tab_layout);
-        recyclerView = findViewById(R.id.recycler_view);
-        fabAdd = findViewById(R.id.fab_add);
-        tvEmpty = findViewById(R.id.tv_empty);
-        tvTotalAmount = findViewById(R.id.tv_total_amount);
-        progressBar = findViewById(R.id.progress_bar);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ChecksAdapter();
-        recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(adapter);
 
-        tabLayout.addTab(tabLayout.newTab().setText("شيكات العملاء"));
-        tabLayout.addTab(tabLayout.newTab().setText("شيكات الموردين"));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("شيكات العملاء"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("شيكات الموردين"));
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) {
                 isCustomerTab = tab.getPosition() == 0;
                 loadData();
@@ -69,17 +56,14 @@ public class ActivityChecksActivity extends BaseActivity {
             @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        if (fabAdd != null) fabAdd.setOnClickListener(v -> showAddCheckDialog());
+        binding.fabAdd.setOnClickListener(v -> showAddCheckDialog());
     }
 
     private void setupToolbar(String title) {
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle(title);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+        setSupportActionBar(binding.toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -90,7 +74,7 @@ public class ActivityChecksActivity extends BaseActivity {
     }
 
     private void loadData() {
-        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+        binding.progressBar.setVisibility(View.VISIBLE);
         executor.execute(() -> {
             List<HashMap<String, String>> data = isCustomerTab ?
                 dbHelper.getAllCustomerChecks() : dbHelper.getAllSupplierChecks();
@@ -103,13 +87,13 @@ public class ActivityChecksActivity extends BaseActivity {
             final double finalTotal = total;
             final List<HashMap<String, String>> finalData = data;
             runOnUiThread(() -> {
-                if (progressBar != null) progressBar.setVisibility(View.GONE);
+                binding.progressBar.setVisibility(View.GONE);
                 checksList.clear();
                 checksList.addAll(finalData);
                 adapter.notifyDataSetChanged();
-                tvEmpty.setVisibility(checksList.isEmpty() ? View.VISIBLE : View.GONE);
+                binding.tvEmpty.setVisibility(checksList.isEmpty() ? View.VISIBLE : View.GONE);
                 String currency = getCurrency();
-                tvTotalAmount.setText("إجمالي المعلق: " + String.format("%.2f %s", finalTotal, currency));
+                binding.tvTotalAmount.setText("إجمالي المعلق: " + String.format("%.2f %s", finalTotal, currency));
             });
         });
     }
@@ -144,11 +128,11 @@ public class ActivityChecksActivity extends BaseActivity {
                 String notes = etNotes != null && etNotes.getText() != null ? etNotes.getText().toString().trim() : "";
 
                 if (name.isEmpty() || amountStr.isEmpty()) {
-                    showToast("الاسم والمبلغ مطلوبان");
+                    showSnackbar("الاسم والمبلغ مطلوبان", true);
                     return;
                 }
                 double amount = 0;
-                try { amount = Double.parseDouble(amountStr); } catch (Exception ex) { showToast("مبلغ غير صحيح"); return; }
+                try { amount = Double.parseDouble(amountStr); } catch (Exception ex) { showSnackbar("مبلغ غير صحيح", true); return; }
 
                 double finalAmount = amount;
                 executor.execute(() -> {
@@ -161,7 +145,7 @@ public class ActivityChecksActivity extends BaseActivity {
                     if (result > 0) {
                         runOnUiThread(() -> { showToast("تم الحفظ بنجاح"); loadData(); });
                     } else {
-                        runOnUiThread(() -> showToast("حدث خطأ"));
+                        runOnUiThread(() -> showSnackbar("حدث خطأ", true));
                     }
                 });
             })

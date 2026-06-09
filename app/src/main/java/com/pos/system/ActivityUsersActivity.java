@@ -6,8 +6,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.pos.system.databinding.ActivityUsersBinding;
 import com.pos.system.managers.UserManager;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,11 +17,8 @@ import java.util.concurrent.Executors;
 
 public class ActivityUsersActivity extends BaseActivity {
 
+    private ActivityUsersBinding binding;
     private DBHelper   dbHelper;
-    private RecyclerView recyclerView;
-    private ExtendedFloatingActionButton fabAdd;
-    private View       tvEmpty;
-    private View       progressBar;
 
     private final List<HashMap<String, String>> usersList = new ArrayList<>();
     private UsersAdapter adapter;
@@ -30,8 +27,9 @@ public class ActivityUsersActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_users);
-        applyWindowInsets(findViewById(R.id.coordinator_root));
+        binding = ActivityUsersBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.coordinatorRoot);
         dbHelper = new DBHelper(this);
         initViews();
         setupToolbar();
@@ -39,41 +37,33 @@ public class ActivityUsersActivity extends BaseActivity {
     }
 
     private void setupToolbar() {
-        androidx.appcompat.widget.Toolbar tb = findViewById(R.id.toolbar);
-        if (tb != null) {
-            setSupportActionBar(tb);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle("إدارة المستخدمين");
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+        setSupportActionBar(binding.toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("إدارة المستخدمين");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
     @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; }
 
     private void initViews() {
-        recyclerView = findViewById(R.id.recycler_view);
-        fabAdd       = findViewById(R.id.fab_add);
-        tvEmpty      = findViewById(R.id.tv_empty);
-        progressBar  = findViewById(R.id.progress_bar);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UsersAdapter();
-        recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(adapter);
 
-        if (fabAdd != null) fabAdd.setOnClickListener(v -> showAddUserDialog());
+        binding.fabAdd.setOnClickListener(v -> showAddUserDialog());
     }
 
     private void loadUsers() {
-        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+        binding.progressBar.setVisibility(View.VISIBLE);
         executor.execute(() -> {
             List<HashMap<String, String>> list = dbHelper.getAllUsers();
             runOnUiThread(() -> {
-                if (progressBar != null) progressBar.setVisibility(View.GONE);
+                binding.progressBar.setVisibility(View.GONE);
                 usersList.clear();
                 usersList.addAll(list);
                 adapter.notifyDataSetChanged();
-                if (tvEmpty != null) tvEmpty.setVisibility(usersList.isEmpty() ? View.VISIBLE : View.GONE);
+                binding.tvEmpty.setVisibility(usersList.isEmpty() ? View.VISIBLE : View.GONE);
             });
         });
     }
@@ -99,7 +89,7 @@ public class ActivityUsersActivity extends BaseActivity {
                 String username = etUsername != null && etUsername.getText() != null ? etUsername.getText().toString().trim() : "";
                 String pin      = etPin      != null && etPin.getText()      != null ? etPin.getText().toString().trim()      : "";
                 if (name.isEmpty() || username.isEmpty() || pin.isEmpty()) {
-                    showToast("جميع الحقول مطلوبة"); return;
+                    showSnackbar("جميع الحقول مطلوبة", true); return;
                 }
                 if (pin.length() < 4) { showToast("الـ PIN يجب أن يكون 4 أرقام على الأقل"); return; }
 
@@ -110,7 +100,7 @@ public class ActivityUsersActivity extends BaseActivity {
                     long id = dbHelper.addUser(name, username, pin, role);
                     runOnUiThread(() -> {
                         if (id > 0) { showToast("تمت إضافة المستخدم"); loadUsers(); }
-                        else showToast("خطأ: اسم المستخدم موجود مسبقاً");
+                        else showSnackbar("خطأ: اسم المستخدم موجود مسبقاً", true);
                     });
                 });
             })

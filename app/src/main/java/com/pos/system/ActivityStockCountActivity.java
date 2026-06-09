@@ -159,7 +159,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                     long id = dbHelper.createStockCountSession("admin");
                     runOnUiThread(() -> {
                         if (id > 0) { showToast("تم بدء جلسة الجرد"); checkActiveSession(); }
-                        else showToast("خطأ في بدء الجلسة");
+                        else showSnackbar("خطأ في بدء الجلسة", true);
                     });
                 }))
             .setNegativeButton("إلغاء", null)
@@ -190,7 +190,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                     boolean ok = dbHelper.completeStockCount(sessionId);
                     runOnUiThread(() -> {
                         if (ok) { showToast("تم إتمام الجرد وتحديث المخزون بنجاح"); activeSession = null; countedItems.clear(); checkActiveSession(); }
-                        else showToast("خطأ في إتمام الجرد");
+                        else showSnackbar("خطأ في إتمام الجرد", true);
                     });
                 });
             })
@@ -208,7 +208,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                     boolean ok = dbHelper.cancelStockCount(sessionId);
                     runOnUiThread(() -> {
                         if (ok) { showToast("تم إلغاء الجرد"); activeSession = null; countedItems.clear(); checkActiveSession(); }
-                        else showToast("خطأ في الإلغاء");
+                        else showSnackbar("خطأ في الإلغاء", true);
                     });
                 });
             })
