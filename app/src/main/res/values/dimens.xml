@@ -117,4 +117,9 @@
     <dimen name="avatar_lg">56dp</dimen>
     <dimen name="avatar_xl">80dp</dimen>
 
+    <!-- FAB clearance -->
+    <dimen name="fab_clearance">80dp</dimen>
+    <!-- Extra-large card radius -->
+    <dimen name="card_corner_radius_xl">24dp</dimen>
+
 </resources>

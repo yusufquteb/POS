@@ -341,7 +341,9 @@
 						android:id="@+id/rv_top_products"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:nestedScrollingEnabled="false"/>
+						android:nestedScrollingEnabled="false"
+						android:clipToPadding="false"
+						android:paddingBottom="80dp"/>
 					<TextView
 						android:id="@+id/tv_no_top_products"
 						android:layout_width="match_parent"

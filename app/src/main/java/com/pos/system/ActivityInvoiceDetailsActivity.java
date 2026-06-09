@@ -49,7 +49,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         invoiceId = getIntent().getLongExtra("invoice_id", 0);
         
         if (invoiceId == 0) {
-            Toast.makeText(this, "خطأ في تحميل الفاتورة", Toast.LENGTH_SHORT).show();
+            showToast("خطأ في تحميل الفاتورة");
             finish();
             return;
         }
@@ -91,7 +91,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         HashMap<String, Object> invoice = dbHelper.getInvoiceById(invoiceId);
         
         if (invoice == null) {
-            Toast.makeText(this, "لم يتم العثور على الفاتورة", Toast.LENGTH_SHORT).show();
+            showToast("لم يتم العثور على الفاتورة");
             finish();
             return;
         }
@@ -147,6 +147,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         
         // تحميل العناصر
         ArrayList<HashMap<String, Object>> items = dbHelper.getInvoiceItems(invoiceId);
+        if (items == null) items = new ArrayList<>();
         if (listItems != null) {
             ItemsAdapter adapter = new ItemsAdapter(items);
             listItems.setAdapter(adapter);
@@ -184,7 +185,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
             HashMap<String, Object> invoice = dbHelper.getInvoiceById(invoiceId);
             if (invoice == null) return;
             
-            int customerId = invoice.containsKey("customer_id") ? (int) invoice.get("customer_id") : 0;
+            int customerId = invoice.containsKey("customer_id") ? safeInt(invoice.get("customer_id")) : 0;
             HashMap<String, Object> customer = dbHelper.getCustomerById(customerId);
             
             if (customer == null || !customer.containsKey("phone")) {

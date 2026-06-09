@@ -80,11 +80,23 @@ public final class FeatureGate {
     // ── Upgrade dialogs ───────────────────────────────────────────────────────
 
     /**
-     * Shows upgrade Bottom Sheet — does NOT finish the calling activity.
+     * Shows upgrade dialog — does NOT finish the calling activity.
      * Call at the top of onCreate() for premium-only screens.
      */
     public static void requirePremium(Activity activity, String featureNameAr) {
+        requirePremium(activity, featureNameAr, false);
+    }
+
+    /**
+     * Shows upgrade dialog.
+     * @param finishOnDismiss true when called from onCreate() — activity finishes
+     *                        when the user dismisses without subscribing.
+     */
+    public static void requirePremium(Activity activity, String featureNameAr, boolean finishOnDismiss) {
         if (isUnlocked(activity)) return;
+
+        android.content.DialogInterface.OnClickListener backAction =
+            (d, w) -> { if (finishOnDismiss) activity.finish(); };
 
         new MaterialAlertDialogBuilder(activity)
             .setTitle("🔒 " + featureNameAr)
@@ -100,7 +112,8 @@ public final class FeatureGate {
             )
             .setPositiveButton("اشترك الآن", (d, w) ->
                 activity.startActivity(new Intent(activity, ActivitySettingsActivity.class)))
-            .setNegativeButton("رجوع", null)  // لا يُغلق الشاشة — فقط يغلق الديالوج
+            .setNegativeButton("رجوع", backAction)
+            .setOnCancelListener(d -> { if (finishOnDismiss) activity.finish(); })
             .setCancelable(true)
             .show();
     }

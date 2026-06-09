@@ -56,7 +56,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
         applyWindowInsets(findViewById(android.R.id.content));
 
         if (!FeatureGate.isUnlocked(this)) {
-            FeatureGate.requirePremium(this, "أوامر الشراء");
+            FeatureGate.requirePremium(this, "أوامر الشراء", true);
             return;
         }
 

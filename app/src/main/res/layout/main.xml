@@ -215,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="4dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="2dp"
                         app:cardBackgroundColor="?attr/colorSurfaceVariant"
                         android:clickable="true"
@@ -251,7 +251,7 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="4dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="2dp"
                         app:cardBackgroundColor="?attr/colorSurfaceVariant"
                         android:clickable="true"
@@ -287,7 +287,7 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="4dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="2dp"
                         app:cardBackgroundColor="?attr/colorSurfaceVariant"
                         android:clickable="true"
@@ -323,7 +323,7 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="4dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="2dp"
                         app:cardBackgroundColor="?attr/colorSurfaceVariant"
                         android:clickable="true"
@@ -384,7 +384,7 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="5dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="?attr/colorPrimaryContainer"
                         android:clickable="true"
@@ -428,7 +428,7 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="5dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="?attr/colorTertiaryContainer"
                         android:clickable="true"
@@ -472,7 +472,7 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="5dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="?attr/colorSecondaryContainer"
                         android:clickable="true"
@@ -525,7 +525,7 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="5dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="3dp"
                         app:cardBackgroundColor="?attr/colorErrorContainer"
                         android:clickable="true"
@@ -569,9 +569,9 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="5dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="3dp"
-                        app:cardBackgroundColor="#F5F3FF"
+                        app:cardBackgroundColor="?attr/colorSecondaryContainer"
                         android:clickable="true"
                         android:focusable="true"
                         app:rippleColor="?attr/colorPrimary">
@@ -585,14 +585,14 @@
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
                                 app:cardCornerRadius="16dp"
-                                app:cardBackgroundColor="#7C3AED"
+                                app:cardBackgroundColor="?attr/colorSecondary"
                                 app:strokeWidth="0dp"
                                 android:layout_marginBottom="10dp">
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_reports"
-                                    app:tint="#FFFFFF"
+                                    app:tint="?attr/colorOnSecondary"
                                     android:padding="12dp" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
@@ -602,7 +602,7 @@
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
-                                android:textColor="#6D28D9" />
+                                android:textColor="?attr/colorOnSecondaryContainer" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -613,9 +613,9 @@
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:layout_margin="5dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="3dp"
-                        app:cardBackgroundColor="#EFF6FF"
+                        app:cardBackgroundColor="?attr/colorPrimaryContainer"
                         android:clickable="true"
                         android:focusable="true"
                         app:rippleColor="?attr/colorPrimary">
@@ -629,14 +629,14 @@
                                 android:layout_width="52dp"
                                 android:layout_height="52dp"
                                 app:cardCornerRadius="16dp"
-                                app:cardBackgroundColor="#2563EB"
+                                app:cardBackgroundColor="?attr/colorPrimary"
                                 app:strokeWidth="0dp"
                                 android:layout_marginBottom="10dp">
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_products"
-                                    app:tint="#FFFFFF"
+                                    app:tint="?attr/colorOnPrimary"
                                     android:padding="12dp" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
@@ -646,7 +646,7 @@
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:textAlignment="center"
-                                android:textColor="#1D4ED8" />
+                                android:textColor="?attr/colorOnPrimaryContainer" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 

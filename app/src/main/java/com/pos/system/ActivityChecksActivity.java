@@ -24,7 +24,7 @@ public class ActivityChecksActivity extends BaseActivity {
     private TabLayout tabLayout;
     private RecyclerView recyclerView;
     private ExtendedFloatingActionButton fabAdd;
-    private TextView tvEmpty;
+    private View tvEmpty;
     private TextView tvTotalAmount;
 
     private List<HashMap<String, String>> checksList = new ArrayList<>();

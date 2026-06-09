@@ -7,8 +7,7 @@
 	android:orientation="vertical"
 	android:background="?attr/colorSurface"
 	android:layoutDirection="rtl"
-	android:id="@+id/_main"
-	android:fitsSystemWindows="true">
+	android:id="@+id/_main">
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/app_bar_layout"
 		android:layout_width="match_parent"
@@ -172,7 +171,7 @@
 				app:icon="@drawable/ic_qr_code_scanner"
 				app:iconSize="24dp"
 				app:iconPadding="0dp"
-				app:cornerRadius="14dp"
+				app:cornerRadius="16dp"
 				app:backgroundTint="?attr/colorPrimary" />
 		</LinearLayout>
 		<androidx.recyclerview.widget.RecyclerView

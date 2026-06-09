@@ -67,7 +67,7 @@ public class ActivityShiftActivity extends BaseActivity {
         setContentView(R.layout.activity_shift);
 
         if (!FeatureGate.isUnlocked(this)) {
-            FeatureGate.requirePremium(this, "إدارة الشيفتات");
+            FeatureGate.requirePremium(this, "إدارة الشيفتات", true);
             return;
         }
 

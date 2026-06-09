@@ -23,7 +23,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     private RecyclerView rvDrawers;
     private RecyclerView rvTransactions;
     private ExtendedFloatingActionButton fabAdd;
-    private TextView   tvEmpty;
+    private View       tvEmpty;
     private MaterialCardView cardBalance;
     private TextView   tvBalanceLabel;
     private TextView   tvBalance;

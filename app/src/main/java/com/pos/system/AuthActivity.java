@@ -397,14 +397,14 @@ public class AuthActivity extends BaseActivity {
      * عرض رسالة خطأ
      */
     private void showError(String message) {
-        Toast.makeText(this, "⚠️ " + message, Toast.LENGTH_LONG).show();
+        showToast("⚠️ " + message);
     }
 
     /**
      * عرض رسالة نجاح
      */
     private void showSuccess(String message) {
-        Toast.makeText(this, "✓ " + message, Toast.LENGTH_SHORT).show();
+        showToast("✓ " + message);
     }
 
     /**

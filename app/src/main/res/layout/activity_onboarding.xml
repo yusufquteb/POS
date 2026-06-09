@@ -52,7 +52,7 @@
         android:layout_marginBottom="36dp"
         android:text="التالي"
         android:textSize="17sp"
-        app:cornerRadius="14dp"
+        app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -68,7 +68,7 @@
         android:text="ابدأ الآن 🚀"
         android:textSize="17sp"
         android:visibility="gone"
-        app:cornerRadius="14dp"
+        app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

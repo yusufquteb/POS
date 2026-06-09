@@ -52,15 +52,46 @@
                 android:padding="8dp"
                 android:clipToPadding="false"/>
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/tv_empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:text="لا توجد أقساط"
-                android:visibility="gone"
-                android:textSize="16sp"
-                android:textColor="?android:attr/textColorSecondary"/>
+                android:padding="32dp"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="📅"
+                    android:textSize="56sp"
+                    android:layout_marginBottom="16dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="لا توجد أقساط"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"
+                    android:layout_marginBottom="8dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="سجّل أول قسط لمتابعة المدفوعات"
+                    android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:gravity="center"
+                    android:layout_marginBottom="24dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_empty_add_installment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="إضافة قسط" />
+            </LinearLayout>
         </FrameLayout>
     </LinearLayout>
 
