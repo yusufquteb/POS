@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
 
     public static final String DATABASE_NAME    = "SmartPOS.db";
-    public static final int    DATABASE_VERSION = 7;
+    public static final int    DATABASE_VERSION = 8;
 
     private final Context mContext;
 
@@ -68,6 +68,17 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_CUSTOMER_DEBT_PAYMENTS  = "customer_debt_payments";
     private static final String TABLE_SUPPLIER_DEBT_PAYMENTS  = "supplier_debt_payments";
     private static final String TABLE_EXPENSE_CATEGORIES      = "expense_categories";
+    private static final String TABLE_USERS                     = "users";
+    private static final String TABLE_USER_PERMISSIONS          = "user_permissions";
+    private static final String TABLE_AUDIT_LOG                 = "audit_log";
+    private static final String TABLE_CUSTOMER_CHECKS           = "customer_checks";
+    private static final String TABLE_SUPPLIER_CHECKS           = "supplier_checks";
+    private static final String TABLE_INSTALLMENT_CONTRACTS     = "installment_contracts";
+    private static final String TABLE_INSTALLMENT_PAYMENTS      = "installment_payments";
+    private static final String TABLE_CASH_DRAWERS              = "cash_drawers";
+    private static final String TABLE_CASH_TRANSACTIONS         = "cash_transactions";
+    private static final String TABLE_STOCK_COUNT_SESSIONS      = "stock_count_sessions";
+    private static final String TABLE_STOCK_COUNT_ITEMS         = "stock_count_items";
 
     // ════════════════════════════════════════════════════════════
     // Constructor
@@ -141,6 +152,17 @@ public class DBHelper extends SQLiteOpenHelper {
         if (oldVersion < 7) {
             createExpenseCategoriesTable(db);
             createIndexes(db);
+        }
+        if (oldVersion < 8) {
+            createUsersTable(db);
+            createAuditLogTable(db);
+            createCustomerChecksTable(db);
+            createSupplierChecksTable(db);
+            createInstallmentContractsTable(db);
+            createCashDrawersTable(db);
+            createStockCountTable(db);
+            insertDefaultAdminUser(db);
+            insertDefaultCashDrawer(db);
         }
     }
 
@@ -292,6 +314,15 @@ public class DBHelper extends SQLiteOpenHelper {
         createSupplierDebtPaymentsTable(db);
         createExpenseCategoriesTable(db);
         createIndexes(db);
+        createUsersTable(db);
+        createAuditLogTable(db);
+        createCustomerChecksTable(db);
+        createSupplierChecksTable(db);
+        createInstallmentContractsTable(db);
+        createCashDrawersTable(db);
+        createStockCountTable(db);
+        insertDefaultAdminUser(db);
+        insertDefaultCashDrawer(db);
     }
 
     private void createExpenseCategoriesTable(SQLiteDatabase db) {
@@ -2707,5 +2738,682 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.e(TAG, "updateCustomerStats: " + e.getMessage());
         }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // USERS & PERMISSIONS
+    // ════════════════════════════════════════════════════════════
+
+    private void createUsersTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_USERS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "name TEXT NOT NULL, " +
+            "username TEXT UNIQUE NOT NULL, " +
+            "pin TEXT NOT NULL, " +
+            "role TEXT DEFAULT 'cashier', " +
+            "is_active INTEGER DEFAULT 1, " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_USER_PERMISSIONS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "user_id INTEGER NOT NULL, " +
+            "permission TEXT NOT NULL, " +
+            "allowed INTEGER DEFAULT 1, " +
+            "UNIQUE(user_id, permission), " +
+            "FOREIGN KEY(user_id) REFERENCES " + TABLE_USERS + "(id) ON DELETE CASCADE)");
+    }
+
+    private void insertDefaultAdminUser(SQLiteDatabase db) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("name", "المدير");
+            cv.put("username", "admin");
+            cv.put("pin", "1234");
+            cv.put("role", "admin");
+            cv.put("is_active", 1);
+            db.insertWithOnConflict(TABLE_USERS, null, cv, SQLiteDatabase.CONFLICT_IGNORE);
+        } catch (Exception e) { Log.e(TAG, "insertDefaultAdminUser: " + e.getMessage()); }
+    }
+
+    public long addUser(String name, String username, String pin, String role) {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put("name", name);
+            cv.put("username", username);
+            cv.put("pin", pin);
+            cv.put("role", role != null ? role : "cashier");
+            cv.put("is_active", 1);
+            return db.insertWithOnConflict(TABLE_USERS, null, cv, SQLiteDatabase.CONFLICT_ABORT);
+        } catch (Exception e) { Log.e(TAG, "addUser: " + e.getMessage()); return -1; }
+    }
+
+    public HashMap<String, String> getUserByPin(String pin) {
+        List<HashMap<String, String>> list = queryTable(
+            "SELECT * FROM " + TABLE_USERS + " WHERE pin=? AND is_active=1 LIMIT 1",
+            new String[]{pin});
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public HashMap<String, String> getUserByUsername(String username) {
+        List<HashMap<String, String>> list = queryTable(
+            "SELECT * FROM " + TABLE_USERS + " WHERE username=? AND is_active=1 LIMIT 1",
+            new String[]{username});
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public List<HashMap<String, String>> getAllUsers() {
+        return queryTable("SELECT * FROM " + TABLE_USERS + " ORDER BY role ASC, name ASC", null);
+    }
+
+    public boolean updateUser(long id, String name, String role, int isActive) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("name", name);
+            cv.put("role", role);
+            cv.put("is_active", isActive);
+            return getWritableDatabase().update(TABLE_USERS, cv, "id=?",
+                new String[]{String.valueOf(id)}) > 0;
+        } catch (Exception e) { Log.e(TAG, "updateUser: " + e.getMessage()); return false; }
+    }
+
+    public boolean updateUserPin(long userId, String newPin) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("pin", newPin);
+            return getWritableDatabase().update(TABLE_USERS, cv, "id=?",
+                new String[]{String.valueOf(userId)}) > 0;
+        } catch (Exception e) { Log.e(TAG, "updateUserPin: " + e.getMessage()); return false; }
+    }
+
+    public boolean deleteUser(long id) {
+        try {
+            return getWritableDatabase().delete(TABLE_USERS, "id=? AND role!='admin'",
+                new String[]{String.valueOf(id)}) > 0;
+        } catch (Exception e) { Log.e(TAG, "deleteUser: " + e.getMessage()); return false; }
+    }
+
+    public boolean hasPermission(long userId, String permission) {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            // Admin has all permissions
+            Cursor roleC = db.rawQuery("SELECT role FROM " + TABLE_USERS + " WHERE id=?",
+                new String[]{String.valueOf(userId)});
+            if (roleC.moveToFirst() && "admin".equals(roleC.getString(0))) {
+                roleC.close(); return true;
+            }
+            roleC.close();
+            // Check specific permission
+            Cursor c = db.rawQuery(
+                "SELECT allowed FROM " + TABLE_USER_PERMISSIONS +
+                " WHERE user_id=? AND permission=?",
+                new String[]{String.valueOf(userId), permission});
+            boolean allowed = false;
+            if (c.moveToFirst()) allowed = c.getInt(0) == 1;
+            c.close();
+            return allowed;
+        } catch (Exception e) { Log.e(TAG, "hasPermission: " + e.getMessage()); return false; }
+    }
+
+    public void setPermission(long userId, String permission, boolean allowed) {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put("user_id", userId);
+            cv.put("permission", permission);
+            cv.put("allowed", allowed ? 1 : 0);
+            db.insertWithOnConflict(TABLE_USER_PERMISSIONS, null, cv, SQLiteDatabase.CONFLICT_REPLACE);
+        } catch (Exception e) { Log.e(TAG, "setPermission: " + e.getMessage()); }
+    }
+
+    public int getUsersCount() {
+        try {
+            Cursor c = getReadableDatabase().rawQuery("SELECT COUNT(*) FROM " + TABLE_USERS + " WHERE is_active=1", null);
+            int count = c.moveToFirst() ? c.getInt(0) : 0;
+            c.close();
+            return count;
+        } catch (Exception e) { return 0; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // AUDIT LOG
+    // ════════════════════════════════════════════════════════════
+
+    private void createAuditLogTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_AUDIT_LOG + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "user_id INTEGER DEFAULT 0, " +
+            "user_name TEXT DEFAULT 'admin', " +
+            "action TEXT NOT NULL, " +
+            "table_name TEXT DEFAULT '', " +
+            "record_id TEXT DEFAULT '', " +
+            "description TEXT, " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        try { db.execSQL("CREATE INDEX IF NOT EXISTS idx_audit_date ON " + TABLE_AUDIT_LOG + "(created_at)"); } catch (Exception ignored) {}
+        try { db.execSQL("CREATE INDEX IF NOT EXISTS idx_audit_action ON " + TABLE_AUDIT_LOG + "(action)"); } catch (Exception ignored) {}
+    }
+
+    public void logAction(long userId, String userName, String action, String tableName,
+                           String recordId, String description) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("user_id", userId);
+            cv.put("user_name", userName != null ? userName : "admin");
+            cv.put("action", action);
+            cv.put("table_name", tableName != null ? tableName : "");
+            cv.put("record_id", recordId != null ? recordId : "");
+            cv.put("description", description != null ? description : "");
+            getWritableDatabase().insert(TABLE_AUDIT_LOG, null, cv);
+        } catch (Exception e) { Log.e(TAG, "logAction: " + e.getMessage()); }
+    }
+
+    public List<HashMap<String, String>> getAuditLog(int limit) {
+        return queryTable("SELECT * FROM " + TABLE_AUDIT_LOG +
+            " ORDER BY created_at DESC LIMIT " + limit, null);
+    }
+
+    public List<HashMap<String, String>> getAuditLogForUser(long userId) {
+        return queryTable("SELECT * FROM " + TABLE_AUDIT_LOG +
+            " WHERE user_id=? ORDER BY created_at DESC LIMIT 200",
+            new String[]{String.valueOf(userId)});
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // CUSTOMER CHECKS (شيكات العملاء)
+    // ════════════════════════════════════════════════════════════
+
+    private void createCustomerChecksTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_CUSTOMER_CHECKS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "customer_id INTEGER DEFAULT 0, " +
+            "customer_name TEXT DEFAULT '', " +
+            "check_number TEXT DEFAULT '', " +
+            "bank_name TEXT DEFAULT '', " +
+            "amount REAL DEFAULT 0.0, " +
+            "issue_date TEXT DEFAULT '', " +
+            "due_date TEXT DEFAULT '', " +
+            "status TEXT DEFAULT 'pending', " +
+            "notes TEXT DEFAULT '', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        try { db.execSQL("CREATE INDEX IF NOT EXISTS idx_cust_checks_due ON " + TABLE_CUSTOMER_CHECKS + "(due_date)"); } catch (Exception ignored) {}
+        try { db.execSQL("CREATE INDEX IF NOT EXISTS idx_cust_checks_status ON " + TABLE_CUSTOMER_CHECKS + "(status)"); } catch (Exception ignored) {}
+    }
+
+    private void createSupplierChecksTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_SUPPLIER_CHECKS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "supplier_id INTEGER DEFAULT 0, " +
+            "supplier_name TEXT DEFAULT '', " +
+            "check_number TEXT DEFAULT '', " +
+            "bank_name TEXT DEFAULT '', " +
+            "amount REAL DEFAULT 0.0, " +
+            "issue_date TEXT DEFAULT '', " +
+            "due_date TEXT DEFAULT '', " +
+            "status TEXT DEFAULT 'pending', " +
+            "notes TEXT DEFAULT '', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+    }
+
+    public long addCustomerCheck(int customerId, String customerName, String checkNumber,
+                                  String bankName, double amount, String issueDate,
+                                  String dueDate, String notes) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("customer_id", customerId);
+            cv.put("customer_name", customerName != null ? customerName : "");
+            cv.put("check_number", checkNumber != null ? checkNumber : "");
+            cv.put("bank_name", bankName != null ? bankName : "");
+            cv.put("amount", amount);
+            cv.put("issue_date", issueDate != null ? issueDate : getCurrentDateTime().substring(0,10));
+            cv.put("due_date", dueDate != null ? dueDate : "");
+            cv.put("status", "pending");
+            cv.put("notes", notes != null ? notes : "");
+            return getWritableDatabase().insert(TABLE_CUSTOMER_CHECKS, null, cv);
+        } catch (Exception e) { Log.e(TAG, "addCustomerCheck: " + e.getMessage()); return -1; }
+    }
+
+    public List<HashMap<String, String>> getAllCustomerChecks() {
+        return queryTable("SELECT cc.*, c.phone as customer_phone FROM " + TABLE_CUSTOMER_CHECKS +
+            " cc LEFT JOIN " + TABLE_CUSTOMERS + " c ON cc.customer_id=c.id" +
+            " ORDER BY cc.due_date ASC", null);
+    }
+
+    public List<HashMap<String, String>> getCustomerChecks(int customerId) {
+        return queryTable("SELECT * FROM " + TABLE_CUSTOMER_CHECKS +
+            " WHERE customer_id=? ORDER BY due_date ASC",
+            new String[]{String.valueOf(customerId)});
+    }
+
+    public List<HashMap<String, String>> getDueCustomerChecks(int days) {
+        return queryTable("SELECT cc.*, c.phone as customer_phone FROM " + TABLE_CUSTOMER_CHECKS +
+            " cc LEFT JOIN " + TABLE_CUSTOMERS + " c ON cc.customer_id=c.id" +
+            " WHERE cc.status='pending' AND cc.due_date!='' " +
+            " AND DATE(cc.due_date) <= DATE('now', '+' || ? || ' days')" +
+            " ORDER BY cc.due_date ASC",
+            new String[]{String.valueOf(days)});
+    }
+
+    public boolean updateCustomerCheckStatus(long id, String status) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("status", status);
+            return getWritableDatabase().update(TABLE_CUSTOMER_CHECKS, cv, "id=?",
+                new String[]{String.valueOf(id)}) > 0;
+        } catch (Exception e) { Log.e(TAG, "updateCustomerCheckStatus: " + e.getMessage()); return false; }
+    }
+
+    public boolean deleteCustomerCheck(long id) {
+        try {
+            return getWritableDatabase().delete(TABLE_CUSTOMER_CHECKS, "id=?",
+                new String[]{String.valueOf(id)}) > 0;
+        } catch (Exception e) { Log.e(TAG, "deleteCustomerCheck: " + e.getMessage()); return false; }
+    }
+
+    public double getTotalPendingCustomerChecks() {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT COALESCE(SUM(amount),0) FROM " + TABLE_CUSTOMER_CHECKS + " WHERE status='pending'", null);
+            double val = c.moveToFirst() ? c.getDouble(0) : 0;
+            c.close(); return val;
+        } catch (Exception e) { return 0; }
+    }
+
+    public long addSupplierCheck(int supplierId, String supplierName, String checkNumber,
+                                  String bankName, double amount, String issueDate,
+                                  String dueDate, String notes) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("supplier_id", supplierId);
+            cv.put("supplier_name", supplierName != null ? supplierName : "");
+            cv.put("check_number", checkNumber != null ? checkNumber : "");
+            cv.put("bank_name", bankName != null ? bankName : "");
+            cv.put("amount", amount);
+            cv.put("issue_date", issueDate != null ? issueDate : getCurrentDateTime().substring(0,10));
+            cv.put("due_date", dueDate != null ? dueDate : "");
+            cv.put("status", "pending");
+            cv.put("notes", notes != null ? notes : "");
+            return getWritableDatabase().insert(TABLE_SUPPLIER_CHECKS, null, cv);
+        } catch (Exception e) { Log.e(TAG, "addSupplierCheck: " + e.getMessage()); return -1; }
+    }
+
+    public List<HashMap<String, String>> getAllSupplierChecks() {
+        return queryTable("SELECT * FROM " + TABLE_SUPPLIER_CHECKS + " ORDER BY due_date ASC", null);
+    }
+
+    public boolean updateSupplierCheckStatus(long id, String status) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("status", status);
+            return getWritableDatabase().update(TABLE_SUPPLIER_CHECKS, cv, "id=?",
+                new String[]{String.valueOf(id)}) > 0;
+        } catch (Exception e) { return false; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // INSTALLMENTS (الأقساط)
+    // ════════════════════════════════════════════════════════════
+
+    private void createInstallmentContractsTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_INSTALLMENT_CONTRACTS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "contract_number TEXT UNIQUE NOT NULL, " +
+            "customer_id INTEGER DEFAULT 0, " +
+            "customer_name TEXT DEFAULT '', " +
+            "invoice_id INTEGER DEFAULT 0, " +
+            "invoice_number TEXT DEFAULT '', " +
+            "total_amount REAL DEFAULT 0.0, " +
+            "down_payment REAL DEFAULT 0.0, " +
+            "remaining_amount REAL DEFAULT 0.0, " +
+            "paid_amount REAL DEFAULT 0.0, " +
+            "installment_count INTEGER DEFAULT 1, " +
+            "installment_amount REAL DEFAULT 0.0, " +
+            "start_date TEXT DEFAULT '', " +
+            "end_date TEXT DEFAULT '', " +
+            "status TEXT DEFAULT 'active', " +
+            "notes TEXT DEFAULT '', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_INSTALLMENT_PAYMENTS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "contract_id INTEGER NOT NULL, " +
+            "installment_number INTEGER DEFAULT 1, " +
+            "due_date TEXT DEFAULT '', " +
+            "paid_date TEXT DEFAULT '', " +
+            "amount REAL DEFAULT 0.0, " +
+            "status TEXT DEFAULT 'pending', " +
+            "notes TEXT DEFAULT '', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+            "FOREIGN KEY(contract_id) REFERENCES " + TABLE_INSTALLMENT_CONTRACTS + "(id) ON DELETE CASCADE)");
+        try { db.execSQL("CREATE INDEX IF NOT EXISTS idx_installment_customer ON " + TABLE_INSTALLMENT_CONTRACTS + "(customer_id)"); } catch (Exception ignored) {}
+        try { db.execSQL("CREATE INDEX IF NOT EXISTS idx_installment_status ON " + TABLE_INSTALLMENT_CONTRACTS + "(status)"); } catch (Exception ignored) {}
+    }
+
+    public long createInstallmentContract(int customerId, String customerName,
+                                           double totalAmount, double downPayment,
+                                           int installmentCount, String startDate, String notes) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        long contractId = -1;
+        try {
+            String contractNumber = "INST-" + new java.text.SimpleDateFormat("yyyyMMdd-HHmmss",
+                java.util.Locale.US).format(new java.util.Date());
+            double remaining = totalAmount - downPayment;
+            double installmentAmount = installmentCount > 0 ? remaining / installmentCount : remaining;
+
+            ContentValues cv = new ContentValues();
+            cv.put("contract_number", contractNumber);
+            cv.put("customer_id", customerId);
+            cv.put("customer_name", customerName != null ? customerName : "");
+            cv.put("total_amount", totalAmount);
+            cv.put("down_payment", downPayment);
+            cv.put("remaining_amount", remaining);
+            cv.put("paid_amount", downPayment);
+            cv.put("installment_count", installmentCount);
+            cv.put("installment_amount", installmentAmount);
+            cv.put("start_date", startDate != null ? startDate : getCurrentDateTime().substring(0,10));
+            cv.put("status", "active");
+            cv.put("notes", notes != null ? notes : "");
+            contractId = db.insert(TABLE_INSTALLMENT_CONTRACTS, null, cv);
+            if (contractId < 0) throw new Exception("Failed to create contract");
+
+            // Create installment payment schedule
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US);
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            if (startDate != null && !startDate.isEmpty()) {
+                try { cal.setTime(sdf.parse(startDate)); } catch (Exception ex) { /* use current date */ }
+            }
+            for (int i = 1; i <= installmentCount; i++) {
+                cal.add(java.util.Calendar.MONTH, 1);
+                ContentValues pcv = new ContentValues();
+                pcv.put("contract_id", contractId);
+                pcv.put("installment_number", i);
+                pcv.put("due_date", sdf.format(cal.getTime()));
+                pcv.put("amount", installmentAmount);
+                pcv.put("status", "pending");
+                db.insert(TABLE_INSTALLMENT_PAYMENTS, null, pcv);
+            }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.e(TAG, "createInstallmentContract: " + e.getMessage());
+        } finally { db.endTransaction(); }
+        return contractId;
+    }
+
+    public List<HashMap<String, String>> getAllInstallmentContracts() {
+        return queryTable("SELECT * FROM " + TABLE_INSTALLMENT_CONTRACTS +
+            " ORDER BY created_at DESC", null);
+    }
+
+    public List<HashMap<String, String>> getCustomerInstallments(int customerId) {
+        return queryTable("SELECT * FROM " + TABLE_INSTALLMENT_CONTRACTS +
+            " WHERE customer_id=? ORDER BY created_at DESC",
+            new String[]{String.valueOf(customerId)});
+    }
+
+    public List<HashMap<String, String>> getContractPayments(long contractId) {
+        return queryTable("SELECT * FROM " + TABLE_INSTALLMENT_PAYMENTS +
+            " WHERE contract_id=? ORDER BY installment_number ASC",
+            new String[]{String.valueOf(contractId)});
+    }
+
+    public boolean payInstallment(long paymentId, String paidDate) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            // Mark payment as paid
+            ContentValues pcv = new ContentValues();
+            pcv.put("status", "paid");
+            pcv.put("paid_date", paidDate != null ? paidDate : getCurrentDateTime().substring(0,10));
+            db.update(TABLE_INSTALLMENT_PAYMENTS, pcv, "id=?", new String[]{String.valueOf(paymentId)});
+
+            // Get payment amount and contract id
+            Cursor c = db.rawQuery("SELECT amount, contract_id FROM " + TABLE_INSTALLMENT_PAYMENTS +
+                " WHERE id=?", new String[]{String.valueOf(paymentId)});
+            if (c.moveToFirst()) {
+                double amount = c.getDouble(0);
+                long contractId = c.getLong(1);
+                c.close();
+                // Update contract paid_amount and remaining
+                db.execSQL("UPDATE " + TABLE_INSTALLMENT_CONTRACTS +
+                    " SET paid_amount = paid_amount + ?, remaining_amount = remaining_amount - ?" +
+                    " WHERE id=?", new Object[]{amount, amount, contractId});
+                // Check if contract is fully paid
+                Cursor cc = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_INSTALLMENT_PAYMENTS +
+                    " WHERE contract_id=? AND status='pending'", new String[]{String.valueOf(contractId)});
+                if (cc.moveToFirst() && cc.getInt(0) == 0) {
+                    ContentValues ccv = new ContentValues();
+                    ccv.put("status", "completed");
+                    db.update(TABLE_INSTALLMENT_CONTRACTS, ccv, "id=?", new String[]{String.valueOf(contractId)});
+                }
+                cc.close();
+            } else { c.close(); }
+            db.setTransactionSuccessful();
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "payInstallment: " + e.getMessage()); return false;
+        } finally { db.endTransaction(); }
+    }
+
+    public List<HashMap<String, String>> getOverdueInstallments() {
+        return queryTable(
+            "SELECT ip.*, ic.customer_name, ic.contract_number FROM " + TABLE_INSTALLMENT_PAYMENTS +
+            " ip JOIN " + TABLE_INSTALLMENT_CONTRACTS + " ic ON ip.contract_id=ic.id" +
+            " WHERE ip.status='pending' AND ip.due_date < DATE('now')" +
+            " ORDER BY ip.due_date ASC", null);
+    }
+
+    public double getTotalInstallmentsReceivable() {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT COALESCE(SUM(remaining_amount),0) FROM " + TABLE_INSTALLMENT_CONTRACTS +
+                " WHERE status='active'", null);
+            double val = c.moveToFirst() ? c.getDouble(0) : 0;
+            c.close(); return val;
+        } catch (Exception e) { return 0; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // CASH DRAWERS (الخزائن)
+    // ════════════════════════════════════════════════════════════
+
+    private void createCashDrawersTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_CASH_DRAWERS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "name TEXT NOT NULL, " +
+            "current_balance REAL DEFAULT 0.0, " +
+            "is_main INTEGER DEFAULT 0, " +
+            "is_active INTEGER DEFAULT 1, " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_CASH_TRANSACTIONS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "drawer_id INTEGER NOT NULL, " +
+            "type TEXT DEFAULT 'in', " +
+            "amount REAL DEFAULT 0.0, " +
+            "balance_after REAL DEFAULT 0.0, " +
+            "reason TEXT DEFAULT '', " +
+            "user_name TEXT DEFAULT 'admin', " +
+            "reference_id TEXT DEFAULT '', " +
+            "reference_type TEXT DEFAULT 'manual', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+            "FOREIGN KEY(drawer_id) REFERENCES " + TABLE_CASH_DRAWERS + "(id))");
+    }
+
+    private void insertDefaultCashDrawer(SQLiteDatabase db) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("name", "الخزينة الرئيسية");
+            cv.put("current_balance", 0.0);
+            cv.put("is_main", 1);
+            cv.put("is_active", 1);
+            db.insertWithOnConflict(TABLE_CASH_DRAWERS, null, cv, SQLiteDatabase.CONFLICT_IGNORE);
+        } catch (Exception e) { Log.e(TAG, "insertDefaultCashDrawer: " + e.getMessage()); }
+    }
+
+    public List<HashMap<String, String>> getAllCashDrawers() {
+        return queryTable("SELECT * FROM " + TABLE_CASH_DRAWERS + " WHERE is_active=1 ORDER BY is_main DESC", null);
+    }
+
+    public HashMap<String, String> getMainCashDrawer() {
+        List<HashMap<String, String>> list = queryTable(
+            "SELECT * FROM " + TABLE_CASH_DRAWERS + " WHERE is_main=1 AND is_active=1 LIMIT 1", null);
+        if (list.isEmpty()) {
+            list = queryTable("SELECT * FROM " + TABLE_CASH_DRAWERS + " WHERE is_active=1 LIMIT 1", null);
+        }
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public boolean cashDrawerTransaction(long drawerId, String type, double amount,
+                                          String reason, String userName, String refId, String refType) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            Cursor c = db.rawQuery("SELECT current_balance FROM " + TABLE_CASH_DRAWERS + " WHERE id=?",
+                new String[]{String.valueOf(drawerId)});
+            double currentBalance = 0;
+            if (c.moveToFirst()) currentBalance = c.getDouble(0);
+            c.close();
+
+            double newBalance = "in".equals(type) ? currentBalance + amount : currentBalance - amount;
+            if (newBalance < 0 && "out".equals(type)) throw new Exception("Insufficient balance");
+
+            ContentValues cv = new ContentValues();
+            cv.put("current_balance", newBalance);
+            db.update(TABLE_CASH_DRAWERS, cv, "id=?", new String[]{String.valueOf(drawerId)});
+
+            ContentValues tcv = new ContentValues();
+            tcv.put("drawer_id", drawerId);
+            tcv.put("type", type);
+            tcv.put("amount", amount);
+            tcv.put("balance_after", newBalance);
+            tcv.put("reason", reason != null ? reason : "");
+            tcv.put("user_name", userName != null ? userName : "admin");
+            tcv.put("reference_id", refId != null ? refId : "");
+            tcv.put("reference_type", refType != null ? refType : "manual");
+            db.insert(TABLE_CASH_TRANSACTIONS, null, tcv);
+
+            db.setTransactionSuccessful();
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "cashDrawerTransaction: " + e.getMessage()); return false;
+        } finally { db.endTransaction(); }
+    }
+
+    public List<HashMap<String, String>> getCashTransactions(long drawerId, int limit) {
+        return queryTable("SELECT * FROM " + TABLE_CASH_TRANSACTIONS +
+            " WHERE drawer_id=? ORDER BY created_at DESC LIMIT " + limit,
+            new String[]{String.valueOf(drawerId)});
+    }
+
+    public long addCashDrawer(String name) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("name", name);
+            cv.put("current_balance", 0.0);
+            cv.put("is_main", 0);
+            cv.put("is_active", 1);
+            return getWritableDatabase().insert(TABLE_CASH_DRAWERS, null, cv);
+        } catch (Exception e) { Log.e(TAG, "addCashDrawer: " + e.getMessage()); return -1; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // STOCK COUNT / INVENTORY COUNT (الجرد)
+    // ════════════════════════════════════════════════════════════
+
+    private void createStockCountTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_STOCK_COUNT_SESSIONS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "session_number TEXT UNIQUE NOT NULL, " +
+            "status TEXT DEFAULT 'open', " +
+            "started_by TEXT DEFAULT 'admin', " +
+            "notes TEXT DEFAULT '', " +
+            "started_at DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+            "completed_at DATETIME)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_STOCK_COUNT_ITEMS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "session_id INTEGER NOT NULL, " +
+            "product_id INTEGER NOT NULL, " +
+            "product_name TEXT DEFAULT '', " +
+            "barcode TEXT DEFAULT '', " +
+            "system_qty INTEGER DEFAULT 0, " +
+            "counted_qty INTEGER DEFAULT 0, " +
+            "difference INTEGER DEFAULT 0, " +
+            "notes TEXT DEFAULT '', " +
+            "FOREIGN KEY(session_id) REFERENCES " + TABLE_STOCK_COUNT_SESSIONS + "(id))");
+    }
+
+    public long createStockCountSession(String startedBy) {
+        try {
+            String sessionNumber = "SC-" + new java.text.SimpleDateFormat("yyyyMMdd-HHmmss",
+                java.util.Locale.US).format(new java.util.Date());
+            ContentValues cv = new ContentValues();
+            cv.put("session_number", sessionNumber);
+            cv.put("status", "open");
+            cv.put("started_by", startedBy != null ? startedBy : "admin");
+            return getWritableDatabase().insert(TABLE_STOCK_COUNT_SESSIONS, null, cv);
+        } catch (Exception e) { Log.e(TAG, "createStockCountSession: " + e.getMessage()); return -1; }
+    }
+
+    public HashMap<String, String> getActiveStockCountSession() {
+        List<HashMap<String, String>> list = queryTable(
+            "SELECT * FROM " + TABLE_STOCK_COUNT_SESSIONS + " WHERE status='open' LIMIT 1", null);
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public List<HashMap<String, String>> getAllStockCountSessions() {
+        return queryTable("SELECT * FROM " + TABLE_STOCK_COUNT_SESSIONS +
+            " ORDER BY started_at DESC", null);
+    }
+
+    public long addStockCountItem(long sessionId, int productId, String productName,
+                                   String barcode, int systemQty, int countedQty, String notes) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("session_id", sessionId);
+            cv.put("product_id", productId);
+            cv.put("product_name", productName != null ? productName : "");
+            cv.put("barcode", barcode != null ? barcode : "");
+            cv.put("system_qty", systemQty);
+            cv.put("counted_qty", countedQty);
+            cv.put("difference", countedQty - systemQty);
+            cv.put("notes", notes != null ? notes : "");
+            return getWritableDatabase().insertWithOnConflict(TABLE_STOCK_COUNT_ITEMS, null, cv,
+                SQLiteDatabase.CONFLICT_REPLACE);
+        } catch (Exception e) { Log.e(TAG, "addStockCountItem: " + e.getMessage()); return -1; }
+    }
+
+    public List<HashMap<String, String>> getStockCountItems(long sessionId) {
+        return queryTable("SELECT * FROM " + TABLE_STOCK_COUNT_ITEMS +
+            " WHERE session_id=? ORDER BY product_name ASC",
+            new String[]{String.valueOf(sessionId)});
+    }
+
+    public boolean completeStockCount(long sessionId) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            List<HashMap<String, String>> items = getStockCountItems(sessionId);
+            for (HashMap<String, String> item : items) {
+                int countedQty = Integer.parseInt(item.getOrDefault("counted_qty", "0"));
+                String productId = item.getOrDefault("product_id", "0");
+                ContentValues cv = new ContentValues();
+                cv.put("qty", countedQty);
+                db.update(TABLE_PRODUCTS, cv, "id=?", new String[]{productId});
+            }
+            ContentValues cv = new ContentValues();
+            cv.put("status", "completed");
+            cv.put("completed_at", getCurrentDateTime());
+            db.update(TABLE_STOCK_COUNT_SESSIONS, cv, "id=?", new String[]{String.valueOf(sessionId)});
+            db.setTransactionSuccessful();
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "completeStockCount: " + e.getMessage()); return false;
+        } finally { db.endTransaction(); }
+    }
+
+    public boolean cancelStockCount(long sessionId) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("status", "cancelled");
+            return getWritableDatabase().update(TABLE_STOCK_COUNT_SESSIONS, cv, "id=?",
+                new String[]{String.valueOf(sessionId)}) > 0;
+        } catch (Exception e) { return false; }
     }
 }
