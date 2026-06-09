@@ -45,6 +45,7 @@ public class ActivityPinLockActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_lock);
+        applyWindowInsets(findViewById(android.R.id.content));
 
         mode = getIntent().getIntExtra(EXTRA_MODE, MODE_VERIFY);
 

@@ -67,6 +67,7 @@ public class AuthActivity extends BaseActivity {
         // تطبيق الثيم
         
         setContentView(R.layout.activity_auth);
+        applyWindowInsets(findViewById(android.R.id.content));
 
         // التحقق من تسجيل الدخول السابق
         if (isUserLoggedIn()) {

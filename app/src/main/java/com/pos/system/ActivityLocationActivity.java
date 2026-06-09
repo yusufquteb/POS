@@ -42,6 +42,7 @@ public class ActivityLocationActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+        applyWindowInsets(findViewById(R.id._main));
 
         dbHelper = new DBHelper(this);
         recyclerView = findViewById(R.id.recycler_view);

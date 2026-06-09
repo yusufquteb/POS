@@ -88,6 +88,7 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_settings);
+        applyWindowInsets(findViewById(R.id._main));
 
         try {
             dbHelper = new DBHelper(this);

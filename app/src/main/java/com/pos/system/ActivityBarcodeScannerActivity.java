@@ -59,7 +59,8 @@ public class ActivityBarcodeScannerActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_scanner);
-        
+        applyWindowInsets(findViewById(R.id._main));
+
         initViews();
         setupListeners();
         

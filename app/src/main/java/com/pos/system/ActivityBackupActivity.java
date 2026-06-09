@@ -67,6 +67,7 @@ public class ActivityBackupActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup);
+        applyWindowInsets(findViewById(R.id._main));
 
         dbHelper = new DBHelper(this);
         cloudBackupManager = new CloudBackupManager(this);

@@ -67,6 +67,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             applyTheme();
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_printer_settings);
+            applyWindowInsets(findViewById(android.R.id.content));
 
             setupStatusBar();
             

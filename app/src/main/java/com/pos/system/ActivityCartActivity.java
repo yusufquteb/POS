@@ -82,7 +82,7 @@ public class ActivityCartActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        // CoordinatorLayout with fitsSystemWindows=true handles insets automatically
+        applyWindowInsets(findViewById(android.R.id.content));
 
         dbHelper  = new DBHelper(this);
         cartItems = new ArrayList<>();

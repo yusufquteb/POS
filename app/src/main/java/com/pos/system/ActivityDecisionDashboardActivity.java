@@ -38,6 +38,7 @@ public class ActivityDecisionDashboardActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decision_dashboard);
+        applyWindowInsets(findViewById(android.R.id.content));
 
         dbHelper = new DBHelper(this);
 

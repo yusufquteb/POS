@@ -44,7 +44,8 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice_details);
-        
+        applyWindowInsets(findViewById(R.id._main));
+
         dbHelper = new DBHelper(this);
         invoiceId = getIntent().getLongExtra("invoice_id", 0);
         

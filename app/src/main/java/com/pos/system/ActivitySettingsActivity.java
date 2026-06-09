@@ -61,6 +61,7 @@ public class ActivitySettingsActivity extends BaseActivity {
         // BaseActivity يطبق الثيم واللغة تلقائياً
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        applyWindowInsets(findViewById(R.id.appbar));
 
         initializeViews();
         setupToolbar();
