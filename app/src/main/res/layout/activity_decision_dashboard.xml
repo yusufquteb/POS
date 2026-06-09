@@ -51,7 +51,7 @@
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛒" android:textSize="22sp" android:layout_marginEnd="8dp" />
                         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ماذا أشتري الآن؟" android:textSize="15sp" android:textStyle="bold" />
-                        <TextView android:id="@+id/tv_reorder_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="20sp" android:textStyle="bold" android:textColor="#E65100" />
+                        <TextView android:id="@+id/tv_reorder_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/color_warning" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 
@@ -97,7 +97,7 @@
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠️" android:textSize="22sp" android:layout_marginEnd="8dp" />
                         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ماذا سيتلف؟" android:textSize="15sp" android:textStyle="bold" />
-                        <TextView android:id="@+id/tv_expiry_risk_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="20sp" android:textStyle="bold" android:textColor="#C62828" />
+                        <TextView android:id="@+id/tv_expiry_risk_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/color_error" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 
@@ -143,7 +143,7 @@
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😴" android:textSize="22sp" android:layout_marginEnd="8dp" />
                         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ما الذي لا يتحرك؟" android:textSize="15sp" android:textStyle="bold" />
-                        <TextView android:id="@+id/tv_dead_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="20sp" android:textStyle="bold" android:textColor="#5D4037" />
+                        <TextView android:id="@+id/tv_dead_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="20sp" android:textStyle="bold" android:textColor="?attr/colorOnSurfaceVariant" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 

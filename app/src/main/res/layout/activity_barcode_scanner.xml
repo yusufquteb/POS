@@ -25,7 +25,7 @@
 			android:padding="12dp"
 			android:src="@drawable/ic_arrow_back"
 			android:scaleType="center"
-			app:tint="#FFFFFF" />
+			app:tint="@android:color/white" />
 		<TextView
 			android:id="@+id/textview3"
 			android:layout_width="0dp"
@@ -33,7 +33,7 @@
 			android:text="مسح الباركود"
 			android:textSize="20sp"
 			android:textStyle="bold"
-			android:textColor="#FFFFFF"
+			android:textColor="@android:color/white"
 			android:layout_weight="1"
 			android:layout_marginStart="16dp" />
 		<ImageView
@@ -43,7 +43,7 @@
 			android:padding="12dp"
 			android:src="@drawable/ic_flash_on"
 			android:scaleType="center"
-			app:tint="#FFFFFF" />
+			app:tint="@android:color/white" />
 	</LinearLayout>
 	<View
 		android:id="@+id/view7"
@@ -65,7 +65,7 @@
 			android:layout_height="wrap_content"
 			android:text="وجه الكاميرا نحو الكود"
 			android:textSize="16sp"
-			android:textColor="#FFFFFF" />
+			android:textColor="@android:color/white" />
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/btn_manual_input"
 			android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
 			android:textColor="?attr/colorOnSurface"
 			app:backgroundTint="#FFFFFF"
 			app:icon="@drawable/ic_keyboard"
-			app:iconTint="#1D1B20"
+			app:iconTint="?attr/colorOnSurface"
 			app:cornerRadius="28dp" />
 	</LinearLayout>
 </RelativeLayout>
