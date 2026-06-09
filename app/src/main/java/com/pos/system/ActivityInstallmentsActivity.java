@@ -23,6 +23,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private ExtendedFloatingActionButton fabAdd;
     private View       tvEmpty;
+    private View       progressBar;
     private TextView   tvSummary;
 
     private final List<HashMap<String, String>> dataList = new ArrayList<>();
@@ -60,6 +61,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         fabAdd       = findViewById(R.id.fab_add);
         tvEmpty      = findViewById(R.id.tv_empty);
         tvSummary    = findViewById(R.id.tv_summary);
+        progressBar  = findViewById(R.id.progress_bar);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new InstallmentsAdapter();
@@ -80,6 +82,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
     }
 
     private void loadData() {
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
         executor.execute(() -> {
             List<HashMap<String, String>> data = currentTab == 0
                 ? dbHelper.getAllInstallmentContracts()
@@ -88,6 +91,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
             final List<HashMap<String, String>> fd = data;
             final double ft = total;
             runOnUiThread(() -> {
+                if (progressBar != null) progressBar.setVisibility(View.GONE);
                 dataList.clear();
                 dataList.addAll(fd);
                 adapter.notifyDataSetChanged();

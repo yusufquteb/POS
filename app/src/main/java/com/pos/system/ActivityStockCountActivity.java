@@ -24,6 +24,7 @@ public class ActivityStockCountActivity extends BaseActivity {
     private ExtendedFloatingActionButton fabStart;
     private TextView   tvSessionStatus;
     private TextView   tvEmpty;
+    private View       progressBar;
     private MaterialButton btnComplete;
     private MaterialButton btnCancel;
     private EditText   etSearch;
@@ -65,6 +66,7 @@ public class ActivityStockCountActivity extends BaseActivity {
         fabStart        = findViewById(R.id.fab_start);
         tvSessionStatus = findViewById(R.id.tv_session_status);
         tvEmpty         = findViewById(R.id.tv_empty);
+        progressBar     = findViewById(R.id.progress_bar);
         btnComplete     = findViewById(R.id.btn_complete);
         btnCancel       = findViewById(R.id.btn_cancel);
         tilSearch       = findViewById(R.id.til_search);

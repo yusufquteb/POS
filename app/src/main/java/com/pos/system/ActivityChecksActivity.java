@@ -27,6 +27,8 @@ public class ActivityChecksActivity extends BaseActivity {
     private View tvEmpty;
     private TextView tvTotalAmount;
 
+    private View progressBar;
+
     private List<HashMap<String, String>> checksList = new ArrayList<>();
     private ChecksAdapter adapter;
     private boolean isCustomerTab = true;
@@ -50,6 +52,7 @@ public class ActivityChecksActivity extends BaseActivity {
         fabAdd = findViewById(R.id.fab_add);
         tvEmpty = findViewById(R.id.tv_empty);
         tvTotalAmount = findViewById(R.id.tv_total_amount);
+        progressBar = findViewById(R.id.progress_bar);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ChecksAdapter();
@@ -87,6 +90,7 @@ public class ActivityChecksActivity extends BaseActivity {
     }
 
     private void loadData() {
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
         executor.execute(() -> {
             List<HashMap<String, String>> data = isCustomerTab ?
                 dbHelper.getAllCustomerChecks() : dbHelper.getAllSupplierChecks();
@@ -99,6 +103,7 @@ public class ActivityChecksActivity extends BaseActivity {
             final double finalTotal = total;
             final List<HashMap<String, String>> finalData = data;
             runOnUiThread(() -> {
+                if (progressBar != null) progressBar.setVisibility(View.GONE);
                 checksList.clear();
                 checksList.addAll(finalData);
                 adapter.notifyDataSetChanged();

@@ -233,7 +233,8 @@
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_settings"
                                 app:tint="?attr/colorPrimary"
-                                android:layout_marginBottom="6dp" />
+                                android:layout_marginBottom="6dp"
+                                    android:importantForAccessibility="no" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -269,7 +270,8 @@
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_backup"
                                 app:tint="?attr/colorPrimary"
-                                android:layout_marginBottom="6dp" />
+                                android:layout_marginBottom="6dp"
+                                    android:importantForAccessibility="no" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -305,7 +307,8 @@
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_suppliers"
                                 app:tint="?attr/colorPrimary"
-                                android:layout_marginBottom="6dp" />
+                                android:layout_marginBottom="6dp"
+                                    android:importantForAccessibility="no" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -341,7 +344,8 @@
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_customers"
                                 app:tint="?attr/colorPrimary"
-                                android:layout_marginBottom="6dp" />
+                                android:layout_marginBottom="6dp"
+                                    android:importantForAccessibility="no" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -408,7 +412,8 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_pos"
                                     app:tint="?attr/colorOnPrimary"
-                                    android:padding="@dimen/spacing_md" />
+                                    android:padding="@dimen/spacing_md"
+                                    android:importantForAccessibility="no" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -452,7 +457,8 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_add_product"
                                     app:tint="?attr/colorOnTertiary"
-                                    android:padding="@dimen/spacing_md" />
+                                    android:padding="@dimen/spacing_md"
+                                    android:importantForAccessibility="no" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -496,7 +502,8 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_expenses"
                                     app:tint="?attr/colorOnSecondary"
-                                    android:padding="@dimen/spacing_md" />
+                                    android:padding="@dimen/spacing_md"
+                                    android:importantForAccessibility="no" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -549,7 +556,8 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_invoices"
                                     app:tint="?attr/colorOnError"
-                                    android:padding="@dimen/spacing_md" />
+                                    android:padding="@dimen/spacing_md"
+                                    android:importantForAccessibility="no" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -593,7 +601,8 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_reports"
                                     app:tint="?attr/colorOnSecondary"
-                                    android:padding="@dimen/spacing_md" />
+                                    android:padding="@dimen/spacing_md"
+                                    android:importantForAccessibility="no" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -637,7 +646,8 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_products"
                                     app:tint="?attr/colorOnPrimary"
-                                    android:padding="@dimen/spacing_md" />
+                                    android:padding="@dimen/spacing_md"
+                                    android:importantForAccessibility="no" />
                             </com.google.android.material.card.MaterialCardView>
                             <TextView
                                 android:layout_width="wrap_content"

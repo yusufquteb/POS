@@ -24,6 +24,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     private RecyclerView rvTransactions;
     private ExtendedFloatingActionButton fabAdd;
     private View       tvEmpty;
+    private View       progressBar;
     private MaterialCardView cardBalance;
     private TextView   tvBalanceLabel;
     private TextView   tvBalance;
@@ -66,6 +67,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         rvTransactions = findViewById(R.id.rv_transactions);
         fabAdd         = findViewById(R.id.fab_add);
         tvEmpty        = findViewById(R.id.tv_empty);
+        progressBar    = findViewById(R.id.progress_bar);
         cardBalance    = findViewById(R.id.card_balance);
         tvBalanceLabel = findViewById(R.id.tv_balance_label);
         tvBalance      = findViewById(R.id.tv_balance);
@@ -89,9 +91,11 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     }
 
     private void loadDrawers() {
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
         executor.execute(() -> {
             List<HashMap<String, String>> drawers = dbHelper.getAllCashDrawers();
             runOnUiThread(() -> {
+                if (progressBar != null) progressBar.setVisibility(View.GONE);
                 drawersList.clear();
                 drawersList.addAll(drawers);
                 drawersAdapter.notifyDataSetChanged();

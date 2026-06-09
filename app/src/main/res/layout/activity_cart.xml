@@ -60,7 +60,8 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_person"
-                            android:tint="?attr/colorOnSurfaceVariant"/>
+                            android:tint="?attr/colorOnSurfaceVariant"
+                android:importantForAccessibility="no" />
                         <TextView
                             android:id="@+id/tv_selected_customer"
                             android:layout_width="0dp"

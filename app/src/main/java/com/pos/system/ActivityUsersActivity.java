@@ -21,6 +21,7 @@ public class ActivityUsersActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private ExtendedFloatingActionButton fabAdd;
     private View       tvEmpty;
+    private View       progressBar;
 
     private final List<HashMap<String, String>> usersList = new ArrayList<>();
     private UsersAdapter adapter;
@@ -54,6 +55,7 @@ public class ActivityUsersActivity extends BaseActivity {
         recyclerView = findViewById(R.id.recycler_view);
         fabAdd       = findViewById(R.id.fab_add);
         tvEmpty      = findViewById(R.id.tv_empty);
+        progressBar  = findViewById(R.id.progress_bar);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UsersAdapter();
@@ -63,9 +65,11 @@ public class ActivityUsersActivity extends BaseActivity {
     }
 
     private void loadUsers() {
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
         executor.execute(() -> {
             List<HashMap<String, String>> list = dbHelper.getAllUsers();
             runOnUiThread(() -> {
+                if (progressBar != null) progressBar.setVisibility(View.GONE);
                 usersList.clear();
                 usersList.addAll(list);
                 adapter.notifyDataSetChanged();
