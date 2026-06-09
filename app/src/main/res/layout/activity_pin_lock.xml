@@ -29,12 +29,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <!-- Icon -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🔐"
-            android:textSize="@dimen/text_icon"
-            android:layout_marginBottom="@dimen/spacing_md" />
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_lock"
+            android:tint="?attr/colorPrimary"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:contentDescription="@null" />
 
         <!-- Title -->
         <TextView

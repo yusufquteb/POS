@@ -80,11 +80,12 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📦"
-                    android:textSize="@dimen/text_stat" />
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_inventory"
+                    android:tint="?attr/colorOnSurfaceVariant"
+                    android:contentDescription="@null" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

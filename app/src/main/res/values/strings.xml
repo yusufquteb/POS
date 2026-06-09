@@ -903,4 +903,19 @@
     <string name="str_5d10b4">نظام POS</string>
     <string name="str_501c36">نظام إدارة المبيعات المتكامل</string>
     <string name="str_b530ab">متجري</string>
+
+    <!-- Drawer section headers -->
+    <string name="nav_section_sales">المبيعات</string>
+    <string name="nav_section_finance">المالية</string>
+    <string name="nav_section_inventory">المخزون</string>
+    <string name="nav_section_contacts">جهات الاتصال</string>
+    <string name="nav_section_reports">التقارير</string>
+    <string name="nav_section_management">الإدارة</string>
+
+    <!-- Drawer item labels -->
+    <string name="nav_checks">الشيكات</string>
+    <string name="nav_installments">الأقساط</string>
+    <string name="nav_cash_drawer">الخزينة</string>
+    <string name="nav_stock_count">جرد المخزون</string>
+    <string name="nav_users">المستخدمون</string>
 </resources>

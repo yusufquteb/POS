@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -12,10 +11,8 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import com.pos.system.managers.ReviewManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.pos.system.databinding.ActivityMainBinding;
@@ -338,13 +335,34 @@ public class MainActivity extends BaseActivity
             else if (id == R.id.nav_cash_drawer)     openActivity(ActivityCashDrawerActivity.class);
             else if (id == R.id.nav_stock_count)     openActivity(ActivityStockCountActivity.class);
             else if (id == R.id.nav_users)           openActivity(ActivityUsersActivity.class);
+            else if (id == R.id.nav_printer)         openActivity(ActivityPrinterSettingsActivity.class);
             else if (id == R.id.nav_about)           showAboutDialog();
+            else if (id == R.id.nav_rate)            rateApp();
+            else if (id == R.id.nav_share)           shareApp();
             else if (id == R.id.nav_logout)          confirmLogout();
         } catch (Exception e) {
             android.util.Log.e(TAG, "Navigation error", e);
         }
         if (drawerLayout != null) drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void rateApp() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                android.net.Uri.parse("market://details?id=" + getPackageName())));
+        } catch (android.content.ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                android.net.Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
+        }
+    }
+
+    private void shareApp() {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT,
+            getString(R.string.about_message) + "\nhttps://play.google.com/store/apps/details?id=" + getPackageName());
+        startActivity(Intent.createChooser(share, getString(R.string.nav_share)));
     }
 
     private void showAboutDialog() {

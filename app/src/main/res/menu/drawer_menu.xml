@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <!-- Sales -->
+    <group
+        android:id="@+id/group_sales"
+        android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_shifts"
-            android:icon="@drawable/ic_time"
-            android:title="@string/shifts_title" />
+            android:id="@+id/nav_pos"
+            android:icon="@drawable/ic_pos"
+            android:title="@string/nav_pos" />
+
+        <item
+            android:id="@+id/nav_invoices"
+            android:icon="@drawable/ic_invoices"
+            android:title="@string/nav_invoices" />
 
         <item
             android:id="@+id/nav_returns"
@@ -14,9 +22,53 @@
             android:title="@string/return_sale" />
 
         <item
+            android:id="@+id/nav_shifts"
+            android:icon="@drawable/ic_time"
+            android:title="@string/shifts_title" />
+
+    </group>
+
+    <!-- Finance -->
+    <group
+        android:id="@+id/group_finance"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_expenses"
+            android:icon="@drawable/ic_expenses"
+            android:title="@string/nav_expenses" />
+
+        <item
             android:id="@+id/nav_debts"
             android:icon="@drawable/ic_money"
             android:title="@string/debt_title" />
+
+        <item
+            android:id="@+id/nav_checks"
+            android:icon="@drawable/ic_money"
+            android:title="@string/nav_checks" />
+
+        <item
+            android:id="@+id/nav_installments"
+            android:icon="@drawable/ic_money"
+            android:title="@string/nav_installments" />
+
+        <item
+            android:id="@+id/nav_cash_drawer"
+            android:icon="@drawable/ic_money"
+            android:title="@string/nav_cash_drawer" />
+
+    </group>
+
+    <!-- Inventory -->
+    <group
+        android:id="@+id/group_inventory"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_products"
+            android:icon="@drawable/ic_products"
+            android:title="@string/nav_products" />
 
         <item
             android:id="@+id/nav_purchase_orders"
@@ -24,29 +76,50 @@
             android:title="@string/purchase_orders_title" />
 
         <item
-            android:id="@+id/nav_checks"
-            android:icon="@drawable/ic_money"
-            android:title="الشيكات" />
-
-        <item
-            android:id="@+id/nav_installments"
-            android:icon="@drawable/ic_money"
-            android:title="الأقساط" />
-
-        <item
-            android:id="@+id/nav_cash_drawer"
-            android:icon="@drawable/ic_money"
-            android:title="الخزينة" />
-
-        <item
             android:id="@+id/nav_stock_count"
             android:icon="@drawable/ic_inventory"
-            android:title="جرد المخزون" />
+            android:title="@string/nav_stock_count" />
+
+    </group>
+
+    <!-- Contacts -->
+    <group
+        android:id="@+id/group_contacts"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_customers"
+            android:icon="@drawable/ic_customers"
+            android:title="@string/nav_customers" />
+
+        <item
+            android:id="@+id/nav_suppliers"
+            android:icon="@drawable/ic_suppliers"
+            android:title="@string/nav_suppliers" />
+
+    </group>
+
+    <!-- Reports -->
+    <group
+        android:id="@+id/group_reports"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_reports"
+            android:icon="@drawable/ic_reports"
+            android:title="@string/nav_reports" />
+
+    </group>
+
+    <!-- Management -->
+    <group
+        android:id="@+id/group_management"
+        android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_users"
             android:icon="@drawable/ic_people"
-            android:title="المستخدمون" />
+            android:title="@string/nav_users" />
 
         <item
             android:id="@+id/nav_settings"
@@ -65,12 +138,8 @@
 
     </group>
 
-    <group android:id="@+id/group_about">
-
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_info"
-            android:title="@string/about_app" />
+    <!-- App -->
+    <group android:id="@+id/group_app">
 
         <item
             android:id="@+id/nav_rate"
@@ -81,6 +150,16 @@
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_share"
             android:title="@string/nav_share" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info"
+            android:title="@string/about_app" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout" />
 
     </group>
 

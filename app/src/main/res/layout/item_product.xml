@@ -27,13 +27,12 @@
 				android:layout_height="48dp"
 				android:background="@drawable/circle_purple_light"
 				android:gravity="center_horizontal|center_vertical">
-				<TextView
-					android:id="@+id/textview16"
-					android:focusable="false"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="📦"
-					android:textSize="@dimen/text_headline" />
+				<ImageView
+					android:layout_width="32dp"
+					android:layout_height="32dp"
+					android:src="@drawable/ic_inventory"
+					android:tint="?attr/colorPrimary"
+					android:contentDescription="@null" />
 			</LinearLayout>
 			<LinearLayout
 				android:id="@+id/linear17"

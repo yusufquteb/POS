@@ -9,11 +9,12 @@
     android:padding="@dimen/spacing_base"
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🏪"
-        android:textSize="@dimen/text_display_xl" />
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_store"
+        android:tint="?attr/colorOnPrimary"
+        android:contentDescription="@null" />
 
     <TextView
         android:id="@+id/tv_store_name"
