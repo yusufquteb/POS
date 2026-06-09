@@ -172,8 +172,6 @@ public class MainActivity extends BaseActivity
         setCardClick(cardReturns,        ActivityReturnActivity.class);
         setCardClick(cardShifts,         ActivityShiftActivity.class);
         setCardClick(cardDebts,          ActivityDebtActivity.class);
-        if (cardCustomerDebt != null) cardCustomerDebt.setOnClickListener(v -> openActivity(ActivityDebtActivity.class));
-        if (cardSupplierDebt != null) cardSupplierDebt.setOnClickListener(v -> openActivity(ActivityDebtActivity.class));
         setCardClick(cardPurchaseOrders, ActivityPurchaseOrderActivity.class);
         setCardClick(cardChecks,        ActivityChecksActivity.class);
         setCardClick(cardInstallments,  ActivityInstallmentsActivity.class);
