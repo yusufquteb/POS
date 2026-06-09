@@ -542,31 +542,69 @@
                 <!-- Navigation Grid — 3 columns, flat cards   -->
                 <!-- ══════════════════════════════════════════ -->
 
-                <!-- Row 1: POS · Products · Invoices -->
+                <!-- POS — Primary action, full width -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_pos"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="@dimen/spacing_sm"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    app:cardCornerRadius="@dimen/card_corner_radius"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="?attr/colorPrimary">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/spacing_lg"
+                        android:paddingEnd="@dimen/spacing_lg">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🛒"
+                            android:textSize="36sp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/spacing_md"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/pos"
+                                android:textSize="@dimen/text_xl"
+                                android:textStyle="bold"
+                                android:textColor="?attr/colorOnPrimary"
+                                android:fontFamily="@font/cairo_bold" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ابدأ عملية بيع جديدة"
+                                android:textSize="@dimen/text_sm"
+                                android:textColor="?attr/colorOnPrimary"
+                                android:alpha="0.8"
+                                android:fontFamily="@font/cairo_regular" />
+                        </LinearLayout>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            android:tint="?attr/colorOnPrimary"
+                            android:alpha="0.7"
+                            android:importantForAccessibility="no" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Row 1: Products · Invoices -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_sm"
                     android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/card_pos"
-                        android:layout_width="0dp" android:layout_height="80dp"
-                        android:layout_margin="3dp" android:layout_weight="1"
-                        app:cardCornerRadius="@dimen/card_corner_radius"
-                        app:cardElevation="0dp"
-                        app:cardBackgroundColor="?attr/colorSurfaceVariant">
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
-                            android:gravity="center" android:orientation="vertical" android:padding="4dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:text="🛒" android:textSize="@dimen/text_xxl" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp" android:text="@string/pos"
-                                android:textSize="@dimen/text_xs" android:textStyle="bold"
-                                android:gravity="center" android:maxLines="1" android:ellipsize="end" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                    android:weightSum="2">
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/card_products"

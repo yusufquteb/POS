@@ -19,6 +19,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -190,24 +191,72 @@ public class ActivityCartActivity extends BaseActivity {
 
     private void showAddProductDialog() {
         try {
-            List<HashMap<String, String>> products = dbHelper.getAllProducts();
-            if (products == null || products.isEmpty()) { snack(getString(R.string.no_products)); return; }
-            String[] entries = new String[products.size()];
-            for (int i = 0; i < products.size(); i++) {
-                HashMap<String, String> p = products.get(i);
-                entries[i] = p.getOrDefault("name", "") + "  (" +
-                    getString(R.string.stock_available) + ": " + p.getOrDefault("qty", "0") +
-                    " | " + formatCurrency(parseDouble(p.getOrDefault("price", "0"))) + ")";
-            }
-            new MaterialAlertDialogBuilder(this)
-                .setTitle(getString(R.string.cart_add_product))
-                .setItems(entries, (d, w) -> {
-                    HashMap<String, String> p = products.get(w);
-                    if (parseInt(p.getOrDefault("qty", "0")) <= 0) { snack(getString(R.string.out_of_stock)); return; }
-                    showQuantityDialog(p);
-                })
-                .setNegativeButton(getString(R.string.cancel), null)
-                .show();
+            List<HashMap<String, String>> allProducts = dbHelper.getAllProducts();
+            if (allProducts == null || allProducts.isEmpty()) { snack(getString(R.string.no_products)); return; }
+
+            BottomSheetDialog sheet = new BottomSheetDialog(this);
+            View sv = LayoutInflater.from(this).inflate(R.layout.dialog_product_picker, null);
+            sheet.setContentView(sv);
+
+            RecyclerView rv = sv.findViewById(R.id.rv_products);
+            TextInputEditText etSearch = sv.findViewById(R.id.et_product_search);
+            TextView tvNoResults = sv.findViewById(R.id.tv_no_results);
+
+            List<HashMap<String, String>> filtered = new ArrayList<>(allProducts);
+
+            RecyclerView.Adapter<RecyclerView.ViewHolder> adapter = new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+                @NonNull @Override
+                public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View v = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_product_mini, parent, false);
+                    return new RecyclerView.ViewHolder(v) {};
+                }
+                @Override
+                public void onBindViewHolder(@NonNull RecyclerView.ViewHolder h, int pos) {
+                    HashMap<String, String> p = filtered.get(pos);
+                    TextView tvName  = h.itemView.findViewById(R.id.tv_product_name);
+                    TextView tvPrice = h.itemView.findViewById(R.id.tv_price);
+                    TextView tvQty   = h.itemView.findViewById(R.id.tv_qty);
+                    TextView tvBarcode = h.itemView.findViewById(R.id.tv_barcode);
+                    if (tvName  != null) tvName.setText(p.getOrDefault("name", ""));
+                    if (tvPrice != null) tvPrice.setText(formatCurrency(parseDouble(p.getOrDefault("price", "0"))));
+                    int qty = parseInt(p.getOrDefault("qty", "0"));
+                    if (tvQty   != null) {
+                        tvQty.setText(getString(R.string.stock_available) + ": " + qty);
+                        tvQty.setTextColor(androidx.core.content.ContextCompat.getColor(
+                            h.itemView.getContext(), qty <= 0 ? R.color.color_error : R.color.color_success));
+                    }
+                    if (tvBarcode != null) tvBarcode.setVisibility(View.GONE);
+                    h.itemView.setOnClickListener(v -> {
+                        sheet.dismiss();
+                        if (qty <= 0) { snack(getString(R.string.out_of_stock)); return; }
+                        showQuantityDialog(p);
+                    });
+                }
+                @Override public int getItemCount() { return filtered.size(); }
+            };
+
+            rv.setLayoutManager(new LinearLayoutManager(this));
+            rv.setAdapter(adapter);
+
+            etSearch.addTextChangedListener(new android.text.TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence s, int a, int b, int c) {}
+                @Override public void onTextChanged(CharSequence s, int a, int b, int c) {}
+                @Override public void afterTextChanged(android.text.Editable s) {
+                    String q = s.toString().trim().toLowerCase();
+                    filtered.clear();
+                    for (HashMap<String, String> p : allProducts) {
+                        String name = p.getOrDefault("name", "").toLowerCase();
+                        String barcode = p.getOrDefault("barcode", "").toLowerCase();
+                        if (q.isEmpty() || name.contains(q) || barcode.contains(q)) filtered.add(p);
+                    }
+                    adapter.notifyDataSetChanged();
+                    rv.setVisibility(filtered.isEmpty() ? View.GONE : View.VISIBLE);
+                    tvNoResults.setVisibility(filtered.isEmpty() ? View.VISIBLE : View.GONE);
+                }
+            });
+
+            sheet.show();
         } catch (Exception e) { showToast(getString(R.string.error_loading)); }
     }
 
