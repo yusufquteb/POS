@@ -101,7 +101,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void showSnackbar(String message, boolean isError) {
         View root = findViewById(android.R.id.content);
         if (root == null) {
-            showToast(message);
+            android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show();
             return;
         }
         Snackbar sb = Snackbar.make(root, message, Snackbar.LENGTH_LONG);
