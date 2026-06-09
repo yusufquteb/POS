@@ -254,7 +254,7 @@ public class DebugActivity extends BaseActivity {
             // قتل العملية للتأكد من إعادة التشغيل الكامل
             android.os.Process.killProcess(android.os.Process.myPid());
         } catch (Exception e) {
-            Toast.makeText(this, "فشلت إعادة التشغيل", Toast.LENGTH_SHORT).show();
+            showToast("فشلت إعادة التشغيل");
         }
     }
     
@@ -284,9 +284,9 @@ public class DebugActivity extends BaseActivity {
             ClipData clip = ClipData.newPlainText("Error Report", fullReport);
             clipboard.setPrimaryClip(clip);
             
-            Toast.makeText(this, "✓ تم النسخ للحافظة", Toast.LENGTH_SHORT).show();
+            showToast("✓ تم النسخ للحافظة");
         } catch (Exception e) {
-            Toast.makeText(this, "فشل النسخ", Toast.LENGTH_SHORT).show();
+            showToast("فشل النسخ");
         }
     }
     
@@ -303,7 +303,7 @@ public class DebugActivity extends BaseActivity {
             
             startActivity(Intent.createChooser(intent, "إرسال عبر البريد"));
         } catch (Exception e) {
-            Toast.makeText(this, "لا يوجد تطبيق بريد", Toast.LENGTH_SHORT).show();
+            showToast("لا يوجد تطبيق بريد");
         }
     }
     
@@ -312,7 +312,7 @@ public class DebugActivity extends BaseActivity {
      */
     private void sendWhatsApp() {
         if (DEV_WHATSAPP == null || DEV_WHATSAPP.isEmpty()) {
-            Toast.makeText(this, "رقم الدعم غير محدد", Toast.LENGTH_SHORT).show();
+            showToast("رقم الدعم غير محدد");
             return;
         }
         try {
@@ -324,7 +324,7 @@ public class DebugActivity extends BaseActivity {
                 Uri.parse("https://wa.me/" + DEV_WHATSAPP + "?text=" + msg));
             startActivity(intent);
         } catch (Exception e) {
-            Toast.makeText(this, "لا يوجد واتساب", Toast.LENGTH_SHORT).show();
+            showToast("لا يوجد واتساب");
         }
     }
     
@@ -333,7 +333,7 @@ public class DebugActivity extends BaseActivity {
      */
     private void sendTelegram() {
         if (DEV_TELEGRAM == null || DEV_TELEGRAM.isEmpty()) {
-            Toast.makeText(this, "معرف التليجرام غير محدد", Toast.LENGTH_SHORT).show();
+            showToast("معرف التليجرام غير محدد");
             return;
         }
         try {
@@ -344,7 +344,7 @@ public class DebugActivity extends BaseActivity {
                 Uri.parse("https://t.me/" + DEV_TELEGRAM + "?text=" + msg));
             startActivity(intent);
         } catch (Exception e) {
-            Toast.makeText(this, "لا يوجد تليجرام", Toast.LENGTH_SHORT).show();
+            showToast("لا يوجد تليجرام");
         }
     }
     
@@ -393,7 +393,7 @@ public class DebugActivity extends BaseActivity {
                 .show();
                 
         } catch (Exception e) {
-            Toast.makeText(this, "فشل عرض السجل", Toast.LENGTH_SHORT).show();
+            showToast("فشل عرض السجل");
         }
     }
     
@@ -406,7 +406,7 @@ public class DebugActivity extends BaseActivity {
             .setMessage("هل تريد مسح جميع الأخطاء المحفوظة؟")
             .setPositiveButton("نعم", (d, w) -> {
                 GlobalExceptionHandler.clearErrorReports(this);
-                Toast.makeText(this, "✓ تم المسح", Toast.LENGTH_SHORT).show();
+                showToast("✓ تم المسح");
             })
             .setNegativeButton("إلغاء", null)
             .show();

@@ -90,7 +90,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             
         } catch (Exception e) {
             Log.e(TAG, "❌ FATAL ERROR", e);
-            Toast.makeText(this, "خطأ: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            showToast("خطأ: " + e.getMessage());
             finish();
         }
     }
@@ -200,7 +200,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             
         } catch (Exception e) {
             Log.e(TAG, "Connection type change error", e);
-            Toast.makeText(this, "خطأ: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            showToast("خطأ: " + e.getMessage());
         }
     }
     
@@ -229,7 +229,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         }
         
         // كل شيء OK
-        Toast.makeText(this, "✓ Bluetooth جاهز", Toast.LENGTH_SHORT).show();
+        showToast("✓ Bluetooth جاهز");
     }
     
     /**
@@ -245,7 +245,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         }
         
         // 2. رسالة توضيحية
-        Toast.makeText(this, "✓ WiFi - يتطلب إدخال IP يدوياً", Toast.LENGTH_LONG).show();
+        showToast("✓ WiFi - يتطلب إدخال IP يدوياً");
     }
     
     /**
@@ -360,10 +360,10 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         try {
             Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
             startActivity(intent);
-            Toast.makeText(this, "فعّل البلوتوث ثم ارجع للتطبيق", Toast.LENGTH_LONG).show();
+            showToast("فعّل البلوتوث ثم ارجع للتطبيق");
         } catch (Exception e) {
             Log.e(TAG, "Error opening Bluetooth settings", e);
-            Toast.makeText(this, "خطأ في فتح الإعدادات", Toast.LENGTH_SHORT).show();
+            showToast("خطأ في فتح الإعدادات");
         }
     }
     
@@ -402,10 +402,10 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                 Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
                 startActivity(intent);
             }
-            Toast.makeText(this, "فعّل الواي فاي وارجع للتطبيق", Toast.LENGTH_LONG).show();
+            showToast("فعّل الواي فاي وارجع للتطبيق");
         } catch (Exception e) {
             Log.e(TAG, "Error opening WiFi settings", e);
-            Toast.makeText(this, "خطأ في فتح الإعدادات", Toast.LENGTH_SHORT).show();
+            showToast("خطأ في فتح الإعدادات");
         }
     }
     
@@ -555,7 +555,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                     }
                 }
                 
-                Toast.makeText(this, "✓ تم حفظ الإعدادات", Toast.LENGTH_SHORT).show();
+                showToast("✓ تم حفظ الإعدادات");
                 Log.d(TAG, "✅ Saved: " + connectionType + ", " + paperWidth);
             } else {
                 showError("فشل الحفظ");
@@ -581,7 +581,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                 return;
             }
             
-            Toast.makeText(this, "✓ تم إرسال صفحة اختبار", Toast.LENGTH_SHORT).show();
+            showToast("✓ تم إرسال صفحة اختبار");
             
         } catch (Exception e) {
             Log.e(TAG, "Test print error", e);
@@ -597,7 +597,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                 .setPositiveButton("حسناً", null)
                 .show();
         } catch (Exception e) {
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            showToast(message);
         }
     }
     
@@ -609,14 +609,14 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         if (requestCode == PrinterManager.REQUEST_BLUETOOTH_PERMISSIONS) {
             if (grantResults.length > 0 && 
                 grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "✓ تم منح الصلاحيات", Toast.LENGTH_SHORT).show();
+                showToast("✓ تم منح الصلاحيات");
                 
                 // التحقق من تفعيل البلوتوث
                 if (!printerManager.isBluetoothEnabled()) {
                     showBluetoothDisabledDialog();
                 }
             } else {
-                Toast.makeText(this, "تم رفض الصلاحيات", Toast.LENGTH_SHORT).show();
+                showToast("تم رفض الصلاحيات");
                 if (rbUsb != null) rbUsb.setChecked(true);
             }
         }
@@ -628,9 +628,9 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         
         if (requestCode == PrinterManager.REQUEST_ENABLE_BLUETOOTH) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "✓ تم تفعيل البلوتوث", Toast.LENGTH_SHORT).show();
+                showToast("✓ تم تفعيل البلوتوث");
             } else {
-                Toast.makeText(this, "لم يتم تفعيل البلوتوث", Toast.LENGTH_SHORT).show();
+                showToast("لم يتم تفعيل البلوتوث");
                 if (rbUsb != null) rbUsb.setChecked(true);
             }
             isRequestingBluetoothEnable = false;

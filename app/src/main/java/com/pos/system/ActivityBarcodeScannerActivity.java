@@ -142,7 +142,7 @@ public class ActivityBarcodeScannerActivity extends BaseActivity {
                 if (!barcode.isEmpty()) {
                     returnResult(barcode);
                 } else {
-                    Toast.makeText(this, "⚠ الرجاء إدخال الباركود", Toast.LENGTH_SHORT).show();
+                    showToast("⚠ الرجاء إدخال الباركود");
                     // Resume scanning if input was cancelled
                     if (!isFinishing()) {
                         isScanning = true;
@@ -182,7 +182,7 @@ public class ActivityBarcodeScannerActivity extends BaseActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startScanning();
             } else {
-                Toast.makeText(this, "⚠ يجب السماح باستخدام الكاميرا لمسح الباركود", Toast.LENGTH_LONG).show();
+                showToast("⚠ يجب السماح باستخدام الكاميرا لمسح الباركود");
                 showManualInputDialog();
             }
         }

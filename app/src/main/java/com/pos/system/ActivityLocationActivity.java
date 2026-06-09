@@ -104,7 +104,7 @@ public class ActivityLocationActivity extends BaseActivity {
             String name = etName.getText() != null ? etName.getText().toString().trim() : "";
             
             if (name.isEmpty()) {
-                Toast.makeText(this, "يرجى إدخال اسم الموقع", Toast.LENGTH_SHORT).show();
+                showToast("يرجى إدخال اسم الموقع");
                 return;
             }
 
@@ -117,25 +117,25 @@ public class ActivityLocationActivity extends BaseActivity {
                 if (editData == null) {
                     long result = db.insert("locations", null, cv);
                     if (result != -1) {
-                        Toast.makeText(this, "تمت إضافة الموقع", Toast.LENGTH_SHORT).show();
+                        showToast("تمت إضافة الموقع");
                         refreshData();
                         dialog.dismiss();
                     } else {
-                        Toast.makeText(this, "فشل في إضافة الموقع", Toast.LENGTH_SHORT).show();
+                        showToast("فشل في إضافة الموقع");
                     }
                 } else {
                     int result = db.update("locations", cv, "id=?", new String[]{editData.get("id").toString()});
                     if (result > 0) {
-                        Toast.makeText(this, "تم تحديث البيانات", Toast.LENGTH_SHORT).show();
+                        showToast("تم تحديث البيانات");
                         refreshData();
                         dialog.dismiss();
                     } else {
-                        Toast.makeText(this, "فشل في تحديث البيانات", Toast.LENGTH_SHORT).show();
+                        showToast("فشل في تحديث البيانات");
                     }
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Error updating location", e);
-                Toast.makeText(this, "حدث خطأ: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                showToast("حدث خطأ: " + e.getMessage());
             }
         });
         
@@ -174,14 +174,14 @@ public class ActivityLocationActivity extends BaseActivity {
                         int id = (int) fullList.get(position).get("id");
                         int result = dbHelper.getWritableDatabase().delete("locations", "id=?", new String[]{String.valueOf(id)});
                         if (result > 0) {
-                            Toast.makeText(this, "تم حذف الموقع", Toast.LENGTH_SHORT).show();
+                            showToast("تم حذف الموقع");
                             refreshData();
                         } else {
-                            Toast.makeText(this, "فشل في حذف الموقع", Toast.LENGTH_SHORT).show();
+                            showToast("فشل في حذف الموقع");
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Error deleting location", e);
-                        Toast.makeText(this, "حدث خطأ أثناء الحذف", Toast.LENGTH_SHORT).show();
+                        showToast("حدث خطأ أثناء الحذف");
                     }
                 })
                 .setCancelable(false)
@@ -208,7 +208,7 @@ public class ActivityLocationActivity extends BaseActivity {
             }
         } catch (Exception e) {
             Log.e(TAG, "Error loading locations", e);
-            Toast.makeText(this, "خطأ في تحميل البيانات", Toast.LENGTH_SHORT).show();
+            showToast("خطأ في تحميل البيانات");
         } finally {
             if (cursor != null) {
                 cursor.close();
