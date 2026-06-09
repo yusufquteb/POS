@@ -24,6 +24,31 @@
             android:title="@string/purchase_orders_title" />
 
         <item
+            android:id="@+id/nav_checks"
+            android:icon="@drawable/ic_money"
+            android:title="الشيكات" />
+
+        <item
+            android:id="@+id/nav_installments"
+            android:icon="@drawable/ic_money"
+            android:title="الأقساط" />
+
+        <item
+            android:id="@+id/nav_cash_drawer"
+            android:icon="@drawable/ic_money"
+            android:title="الخزينة" />
+
+        <item
+            android:id="@+id/nav_stock_count"
+            android:icon="@drawable/ic_inventory"
+            android:title="جرد المخزون" />
+
+        <item
+            android:id="@+id/nav_users"
+            android:icon="@drawable/ic_people"
+            android:title="المستخدمون" />
+
+        <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
             android:title="@string/nav_settings" />

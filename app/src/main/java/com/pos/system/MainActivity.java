@@ -74,6 +74,11 @@ public class MainActivity extends BaseActivity
     private MaterialCardView cardShifts;
     private MaterialCardView cardDebts;
     private MaterialCardView cardPurchaseOrders;
+    private MaterialCardView cardChecks;
+    private MaterialCardView cardInstallments;
+    private MaterialCardView cardCashDrawer;
+    private MaterialCardView cardStockCount;
+    private MaterialCardView cardUsers;
 
     // Debt Cards
     private MaterialCardView cardCustomerDebt;
@@ -156,6 +161,11 @@ public class MainActivity extends BaseActivity
         cardShifts         = findViewById(R.id.card_shifts);
         cardDebts          = findViewById(R.id.card_debts);
         cardPurchaseOrders = findViewById(R.id.card_purchase_orders);
+        cardChecks        = findViewById(R.id.card_checks);
+        cardInstallments  = findViewById(R.id.card_installments);
+        cardCashDrawer    = findViewById(R.id.card_cash_drawer);
+        cardStockCount    = findViewById(R.id.card_stock_count);
+        cardUsers         = findViewById(R.id.card_users);
 
         cardCustomerDebt    = findViewById(R.id.card_customer_debt);
         cardSupplierDebt    = findViewById(R.id.card_supplier_debt);
@@ -199,6 +209,11 @@ public class MainActivity extends BaseActivity
         if (cardCustomerDebt != null) cardCustomerDebt.setOnClickListener(v -> openActivity(ActivityDebtActivity.class));
         if (cardSupplierDebt != null) cardSupplierDebt.setOnClickListener(v -> openActivity(ActivityDebtActivity.class));
         setCardClick(cardPurchaseOrders, ActivityPurchaseOrderActivity.class);
+        setCardClick(cardChecks,        ActivityChecksActivity.class);
+        setCardClick(cardInstallments,  ActivityInstallmentsActivity.class);
+        setCardClick(cardCashDrawer,    ActivityCashDrawerActivity.class);
+        setCardClick(cardStockCount,    ActivityStockCountActivity.class);
+        setCardClick(cardUsers,         ActivityUsersActivity.class);
     }
 
     private void setCardClick(MaterialCardView card, Class<?> cls) {
@@ -367,6 +382,11 @@ public class MainActivity extends BaseActivity
             else if (id == R.id.nav_returns)         openActivity(ActivityReturnActivity.class);
             else if (id == R.id.nav_debts)           openActivity(ActivityDebtActivity.class);
             else if (id == R.id.nav_purchase_orders) openActivity(ActivityPurchaseOrderActivity.class);
+            else if (id == R.id.nav_checks)          openActivity(ActivityChecksActivity.class);
+            else if (id == R.id.nav_installments)    openActivity(ActivityInstallmentsActivity.class);
+            else if (id == R.id.nav_cash_drawer)     openActivity(ActivityCashDrawerActivity.class);
+            else if (id == R.id.nav_stock_count)     openActivity(ActivityStockCountActivity.class);
+            else if (id == R.id.nav_users)           openActivity(ActivityUsersActivity.class);
             else if (id == R.id.nav_about)           showAboutDialog();
             else if (id == R.id.nav_logout)          confirmLogout();
         } catch (Exception e) {
