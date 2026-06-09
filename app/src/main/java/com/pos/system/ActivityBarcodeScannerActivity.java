@@ -18,11 +18,15 @@ import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.google.zxing.ResultPoint;
 import java.util.List;
+import com.pos.system.databinding.ActivityBarcodeScannerBinding;
 
 /**
  * شاشة مسح الباركود - متوافقة مع Sketchware
  */
 public class ActivityBarcodeScannerActivity extends BaseActivity {
+
+    private ActivityBarcodeScannerBinding binding;
+
     
     private static final int CAMERA_PERMISSION_CODE = 200;
     private DecoratedBarcodeView barcodeView;
@@ -58,8 +62,9 @@ public class ActivityBarcodeScannerActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_barcode_scanner);
-        applyWindowInsets(findViewById(R.id._main));
+        binding = ActivityBarcodeScannerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         initViews();
         setupListeners();
@@ -72,10 +77,10 @@ public class ActivityBarcodeScannerActivity extends BaseActivity {
     }
 
     private void initViews() {
-        barcodeView = findViewById(R.id.barcode_scanner);
-        btn_close = findViewById(R.id.btn_close);
-        btn_flash = findViewById(R.id.btn_flash);
-        btn_manual_input = findViewById(R.id.btn_manual_input);
+        barcodeView = binding.barcodeScanner;
+        btn_close = binding.btnClose;
+        btn_flash = binding.btnFlash;
+        btn_manual_input = binding.btnManualInput;
     }
 
     private void setupListeners() {

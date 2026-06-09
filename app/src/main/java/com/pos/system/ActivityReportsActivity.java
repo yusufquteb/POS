@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import com.pos.system.databinding.ActivityReportsBinding;
 
 /**
  * ActivityReportsActivity - التقارير والإحصائيات
@@ -38,6 +39,9 @@ import java.util.*;
  * ✅ تفعيل date picker مخصص
  */
 public class ActivityReportsActivity extends BaseActivity {
+
+    private ActivityReportsBinding binding;
+
 
     private static final String TAG = "ReportsActivity";
 
@@ -65,8 +69,9 @@ public class ActivityReportsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reports);
-        applyWindowInsets(findViewById(android.R.id.content));
+        binding = ActivityReportsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         loadCurrency();
@@ -85,18 +90,18 @@ public class ActivityReportsActivity extends BaseActivity {
     }
 
     private void initViews() {
-        tvTotalSales     = findViewById(R.id.tv_total_sales);
-        tvInvoiceCount   = findViewById(R.id.tv_invoice_count);
-        tvAverageInvoice = findViewById(R.id.tv_average_invoice);
-        tvProductsCount  = findViewById(R.id.tv_products_count);
-        tvInventoryValue = findViewById(R.id.tv_inventory_value);
-        tvLowStock       = findViewById(R.id.tv_low_stock);
-        tvTotalExpenses  = findViewById(R.id.tv_total_expenses);
-        tvNetProfit      = findViewById(R.id.tv_net_profit);
-        tvCogs           = findViewById(R.id.tv_cogs);
-        tvGrossProfit    = findViewById(R.id.tv_gross_profit);
+        tvTotalSales     = binding.tvTotalSales;
+        tvInvoiceCount   = binding.tvInvoiceCount;
+        tvAverageInvoice = binding.tvAverageInvoice;
+        tvProductsCount  = binding.tvProductsCount;
+        tvInventoryValue = binding.tvInventoryValue;
+        tvLowStock       = binding.tvLowStock;
+        tvTotalExpenses  = binding.tvTotalExpenses;
+        tvNetProfit      = binding.tvNetProfit;
+        tvCogs           = binding.tvCogs;
+        tvGrossProfit    = binding.tvGrossProfit;
 
-        rvTopProducts = findViewById(R.id.rv_top_products);
+        rvTopProducts = binding.rvTopProducts;
         if (rvTopProducts != null) {
             topAdapter = new TopProductsAdapter();
             rvTopProducts.setLayoutManager(new LinearLayoutManager(this));
@@ -104,14 +109,14 @@ public class ActivityReportsActivity extends BaseActivity {
             rvTopProducts.setNestedScrollingEnabled(false);
         }
 
-        chipGroupPeriod = findViewById(R.id.chip_group_period);
-        btnExportPdf    = findViewById(R.id.btn_export_pdf);
-        btnShareReport  = findViewById(R.id.btn_share_report);
-        btnWhatsapp     = findViewById(R.id.btn_whatsapp_report);
+        chipGroupPeriod = binding.chipGroupPeriod;
+        btnExportPdf    = binding.btnExportPdf;
+        btnShareReport  = binding.btnShareReport;
+        btnWhatsapp     = binding.btnWhatsappReport;
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) { setSupportActionBar(toolbar); toolbar.setNavigationOnClickListener(v -> finish()); }
     }
 
@@ -277,7 +282,7 @@ public class ActivityReportsActivity extends BaseActivity {
 
             if (topAdapter != null) topAdapter.notifyDataSetChanged();
 
-            View emptyTop = findViewById(R.id.tv_no_top_products);
+            View emptyTop = binding.tvNoTopProducts;
             if (emptyTop != null) emptyTop.setVisibility(topProducts.isEmpty() ? View.VISIBLE : View.GONE);
         } catch (Exception e) {
             Log.e(TAG, "loadTopProducts: " + e.getMessage(), e);

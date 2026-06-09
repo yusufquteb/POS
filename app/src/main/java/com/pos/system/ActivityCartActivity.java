@@ -29,6 +29,7 @@ import java.util.Locale;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import com.pos.system.managers.ReviewManager;
+import com.pos.system.databinding.ActivityCartBinding;
 
 /**
  * ActivityCartActivity - نقطة البيع (POS)
@@ -39,6 +40,9 @@ import com.pos.system.managers.ReviewManager;
  * - دعم ثنائي اللغة بالكامل
  */
 public class ActivityCartActivity extends BaseActivity {
+
+    private ActivityCartBinding binding;
+
 
     private static final String TAG = "CartActivity";
 
@@ -81,8 +85,9 @@ public class ActivityCartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
-        applyWindowInsets(findViewById(android.R.id.content));
+        binding = ActivityCartBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper  = new DBHelper(this);
         cartItems = new ArrayList<>();
@@ -115,27 +120,27 @@ public class ActivityCartActivity extends BaseActivity {
     }
 
     private void initViews() {
-        recyclerCart       = findViewById(R.id.recycler_cart);
-        emptyView          = findViewById(R.id.empty_view);
-        cardTotals         = findViewById(R.id.card_totals);
-        tvSubtotal         = findViewById(R.id.tv_subtotal);
-        tvDiscount         = findViewById(R.id.tv_discount);
-        tvTax              = findViewById(R.id.tv_tax);
-        rowTax             = findViewById(R.id.row_tax);
-        tvTotal            = findViewById(R.id.tv_total);
-        etDiscount         = findViewById(R.id.et_discount);
-        tvSelectedCustomer = findViewById(R.id.tv_selected_customer);
-        btnSelectCustomer  = findViewById(R.id.btn_select_customer);
-        btnAddProduct      = findViewById(R.id.btn_add_product);
-        btnCheckout        = findViewById(R.id.btn_checkout);
-        btnClear           = findViewById(R.id.btn_clear);
-        btnScanBarcode     = findViewById(R.id.btn_scan_barcode);
-        chipGroupPayment   = findViewById(R.id.chip_group_payment);
+        recyclerCart       = binding.recyclerCart;
+        emptyView          = binding.emptyView;
+        cardTotals         = binding.cardTotals;
+        tvSubtotal         = binding.tvSubtotal;
+        tvDiscount         = binding.tvDiscount;
+        tvTax              = binding.tvTax;
+        rowTax             = binding.rowTax;
+        tvTotal            = binding.tvTotal;
+        etDiscount         = binding.etDiscount;
+        tvSelectedCustomer = binding.tvSelectedCustomer;
+        btnSelectCustomer  = binding.btnSelectCustomer;
+        btnAddProduct      = binding.btnAddProduct;
+        btnCheckout        = binding.btnCheckout;
+        btnClear           = binding.btnClear;
+        btnScanBarcode     = binding.btnScanBarcode;
+        chipGroupPayment   = binding.chipGroupPayment;
         if (rowTax != null) rowTax.setVisibility(taxEnabled ? View.VISIBLE : View.GONE);
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) { setSupportActionBar(toolbar); toolbar.setNavigationOnClickListener(v -> finish()); }
     }
 

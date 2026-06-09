@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import com.pos.system.managers.ReviewManager;
 import com.google.android.material.snackbar.Snackbar;
+import com.pos.system.databinding.ActivityMainBinding;
 
 /**
  * MainActivity - الصفحة الرئيسية
@@ -30,6 +31,8 @@ import com.google.android.material.snackbar.Snackbar;
  */
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ActivityMainBinding binding;
 
     private static final String TAG = "MainActivity";
 
@@ -98,7 +101,8 @@ public class MainActivity extends BaseActivity
         // BaseActivity يطبق الثيم واللغة تلقائياً
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         try {
             initializeComponents();
@@ -128,7 +132,7 @@ public class MainActivity extends BaseActivity
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> {
             if (drawerLayout != null) drawerLayout.openDrawer(GravityCompat.START);
@@ -136,55 +140,55 @@ public class MainActivity extends BaseActivity
     }
 
     private void initializeViews() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navView      = findViewById(R.id.nav_view);
+        drawerLayout = binding.drawerLayout;
+        navView      = binding.navView;
 
-        cardTodaySales    = findViewById(R.id.card_today_sales);
-        cardTodayInvoices = findViewById(R.id.card_today_invoices);
-        cardTotalProducts = findViewById(R.id.card_total_products);
-        cardLowStock      = findViewById(R.id.card_low_stock);
+        cardTodaySales    = binding.cardTodaySales;
+        cardTodayInvoices = binding.cardTodayInvoices;
+        cardTotalProducts = binding.cardTotalProducts;
+        cardLowStock      = binding.cardLowStock;
 
-        tvTodaySales    = findViewById(R.id.tv_today_sales);
-        tvTodayInvoices = findViewById(R.id.tv_today_invoices);
-        tvTotalProducts = findViewById(R.id.tv_total_products);
-        tvLowStockCount = findViewById(R.id.tv_low_stock_count);
+        tvTodaySales    = binding.tvTodaySales;
+        tvTodayInvoices = binding.tvTodayInvoices;
+        tvTotalProducts = binding.tvTotalProducts;
+        tvLowStockCount = binding.tvLowStockCount;
 
-        cardPOS            = findViewById(R.id.card_pos);
-        cardProducts       = findViewById(R.id.card_products);
-        cardInvoices       = findViewById(R.id.card_invoices);
-        cardCustomers      = findViewById(R.id.card_customers);
-        cardSuppliers      = findViewById(R.id.card_suppliers);
-        cardReports        = findViewById(R.id.card_reports);
-        cardExpenses       = findViewById(R.id.card_expenses);
-        cardSettings       = findViewById(R.id.card_settings);
-        cardReturns        = findViewById(R.id.card_returns);
-        cardShifts         = findViewById(R.id.card_shifts);
-        cardDebts          = findViewById(R.id.card_debts);
-        cardPurchaseOrders = findViewById(R.id.card_purchase_orders);
-        cardChecks        = findViewById(R.id.card_checks);
-        cardInstallments  = findViewById(R.id.card_installments);
-        cardCashDrawer    = findViewById(R.id.card_cash_drawer);
-        cardStockCount    = findViewById(R.id.card_stock_count);
-        cardUsers         = findViewById(R.id.card_users);
+        cardPOS            = binding.cardPos;
+        cardProducts       = binding.cardProducts;
+        cardInvoices       = binding.cardInvoices;
+        cardCustomers      = binding.cardCustomers;
+        cardSuppliers      = binding.cardSuppliers;
+        cardReports        = binding.cardReports;
+        cardExpenses       = binding.cardExpenses;
+        cardSettings       = binding.cardSettings;
+        cardReturns        = binding.cardReturns;
+        cardShifts         = binding.cardShifts;
+        cardDebts          = binding.cardDebts;
+        cardPurchaseOrders = binding.cardPurchaseOrders;
+        cardChecks        = binding.cardChecks;
+        cardInstallments  = binding.cardInstallments;
+        cardCashDrawer    = binding.cardCashDrawer;
+        cardStockCount    = binding.cardStockCount;
+        cardUsers         = binding.cardUsers;
 
-        cardCustomerDebt    = findViewById(R.id.card_customer_debt);
-        cardSupplierDebt    = findViewById(R.id.card_supplier_debt);
-        tvCustomerDebtTotal = findViewById(R.id.tv_customer_debt_total);
-        tvSupplierDebtTotal = findViewById(R.id.tv_supplier_debt_total);
+        cardCustomerDebt    = binding.cardCustomerDebt;
+        cardSupplierDebt    = binding.cardSupplierDebt;
+        tvCustomerDebtTotal = binding.tvCustomerDebtTotal;
+        tvSupplierDebtTotal = binding.tvSupplierDebtTotal;
 
-        cardAlert      = findViewById(R.id.card_alert);
-        tvAlertMessage = findViewById(R.id.tv_alert_message);
+        cardAlert      = binding.cardAlert;
+        tvAlertMessage = binding.tvAlertMessage;
 
-        cardExpiryAlert   = findViewById(R.id.card_expiry_alert);
-        cardDeadStock     = findViewById(R.id.card_dead_stock);
-        cardBestSeller    = findViewById(R.id.card_best_seller);
-        cardBestCustomer  = findViewById(R.id.card_best_customer);
-        tvExpiryCount     = findViewById(R.id.tv_expiry_count);
-        tvDeadStockCount  = findViewById(R.id.tv_dead_stock_count);
-        tvBestSellerName  = findViewById(R.id.tv_best_seller_name);
-        tvBestCustomerName = findViewById(R.id.tv_best_customer_name);
+        cardExpiryAlert   = binding.cardExpiryAlert;
+        cardDeadStock     = binding.cardDeadStock;
+        cardBestSeller    = binding.cardBestSeller;
+        cardBestCustomer  = binding.cardBestCustomer;
+        tvExpiryCount     = binding.tvExpiryCount;
+        tvDeadStockCount  = binding.tvDeadStockCount;
+        tvBestSellerName  = binding.tvBestSellerName;
+        tvBestCustomerName = binding.tvBestCustomerName;
 
-        fabQuickSale = findViewById(R.id.fab_quick_sale);
+        fabQuickSale = binding.fabQuickSale;
     }
 
     private void setupCardClicks() {

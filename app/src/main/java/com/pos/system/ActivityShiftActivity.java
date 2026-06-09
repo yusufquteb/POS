@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityShiftBinding;
 
 /**
  * ActivityShiftActivity — إدارة الوردية (الشيفت)
@@ -34,6 +35,9 @@ import java.util.Locale;
  * - عرض سجل الورديات السابقة
  */
 public class ActivityShiftActivity extends BaseActivity {
+
+    private ActivityShiftBinding binding;
+
 
     // ─── Views ───────────────────────────────────────────────
     private MaterialToolbar    toolbar;
@@ -64,7 +68,8 @@ public class ActivityShiftActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shift);
+        binding = ActivityShiftBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         if (!FeatureGate.isUnlocked(this)) {
             FeatureGate.requirePremium(this, "إدارة الشيفتات", true);
@@ -83,7 +88,7 @@ public class ActivityShiftActivity extends BaseActivity {
         bindViews();
         setupToolbar();
         setupRecyclerView();
-        applyWindowInsets(findViewById(R.id.coordinator_shift));
+        applyWindowInsets(binding.getRoot());
         refreshUI();
     }
 
@@ -97,21 +102,21 @@ public class ActivityShiftActivity extends BaseActivity {
     //  Setup
     // ═══════════════════════════════════════════════════════════
     private void bindViews() {
-        toolbar           = findViewById(R.id.toolbar);
-        cardShiftStatus   = findViewById(R.id.card_shift_status);
-        tvShiftStatusLabel = findViewById(R.id.tv_shift_status_label);
-        tvShiftStatusBadge = findViewById(R.id.tv_shift_status_badge);
-        tvOpeningCash     = findViewById(R.id.tv_opening_cash);
-        tvOpenedAt        = findViewById(R.id.tv_opened_at);
-        tvCurrentSales    = findViewById(R.id.tv_current_sales);
-        tvInvoiceCount    = findViewById(R.id.tv_invoice_count);
-        layoutShiftOpen   = findViewById(R.id.layout_shift_open);
-        layoutNoShift     = findViewById(R.id.layout_no_shift);
-        etOpeningCash     = findViewById(R.id.et_opening_cash);
-        btnOpenShift      = findViewById(R.id.btn_open_shift);
-        btnCloseShift     = findViewById(R.id.btn_close_shift);
-        rvShifts          = findViewById(R.id.rv_shifts);
-        tvNoShifts        = findViewById(R.id.tv_no_shifts);
+        toolbar           = binding.toolbar;
+        cardShiftStatus   = binding.cardShiftStatus;
+        tvShiftStatusLabel = binding.tvShiftStatusLabel;
+        tvShiftStatusBadge = binding.tvShiftStatusBadge;
+        tvOpeningCash     = binding.tvOpeningCash;
+        tvOpenedAt        = binding.tvOpenedAt;
+        tvCurrentSales    = binding.tvCurrentSales;
+        tvInvoiceCount    = binding.tvInvoiceCount;
+        layoutShiftOpen   = binding.layoutShiftOpen;
+        layoutNoShift     = binding.layoutNoShift;
+        etOpeningCash     = binding.etOpeningCash;
+        btnOpenShift      = binding.btnOpenShift;
+        btnCloseShift     = binding.btnCloseShift;
+        rvShifts          = binding.rvShifts;
+        tvNoShifts        = binding.tvNoShifts;
     }
 
     private void setupToolbar() {
@@ -284,7 +289,7 @@ public class ActivityShiftActivity extends BaseActivity {
     }
 
     private void snack(String msg) {
-        View root = findViewById(R.id.coordinator_shift);
+        View root = binding.coordinatorShift;
         if (root != null) Snackbar.make(root, msg, Snackbar.LENGTH_SHORT).show();
         else showToast(msg);
     }

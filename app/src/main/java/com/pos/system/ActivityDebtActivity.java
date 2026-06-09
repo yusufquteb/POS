@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityDebtBinding;
 
 /**
  * ActivityDebtActivity - إدارة ديون العملاء والموردين
@@ -31,6 +32,9 @@ import java.util.Locale;
  * تبويب 2: ديون الموردين — ما يدين به المتجر للموردين
  */
 public class ActivityDebtActivity extends BaseActivity {
+
+    private ActivityDebtBinding binding;
+
 
     private static final int TAB_CUSTOMERS  = 0;
     private static final int TAB_SUPPLIERS  = 1;
@@ -67,8 +71,9 @@ public class ActivityDebtActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_debt);
-        applyWindowInsets(findViewById(android.R.id.content));
+        binding = ActivityDebtBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         if (!FeatureGate.isUnlocked(this)) {
             FeatureGate.requirePremium(this, "إدارة الديون", true);
@@ -100,22 +105,22 @@ public class ActivityDebtActivity extends BaseActivity {
     // ─────────────────────────────────────────────────────────────
 
     private void initViews() {
-        tabLayout        = findViewById(R.id.tab_layout);
-        rvDebts          = findViewById(R.id.rv_debts);
-        rvSupplierDebts  = findViewById(R.id.rv_supplier_debts);
-        tvTotalDebt      = findViewById(R.id.tv_total_debt);
-        tvDebtCount      = findViewById(R.id.tv_debt_count);
-        tvStatsLabel     = findViewById(R.id.tv_stats_label);
-        tvCountLabel     = findViewById(R.id.tv_count_label);
-        tvEmpty          = findViewById(R.id.tv_empty);
-        tvEmptyTitle     = findViewById(R.id.tv_empty_title);
-        tvEmptySubtitle  = findViewById(R.id.tv_empty_subtitle);
-        ivEmptyIcon      = findViewById(R.id.iv_empty_icon);
-        etSearch         = findViewById(R.id.et_search);
+        tabLayout        = binding.tabLayout;
+        rvDebts          = binding.rvDebts;
+        rvSupplierDebts  = binding.rvSupplierDebts;
+        tvTotalDebt      = binding.tvTotalDebt;
+        tvDebtCount      = binding.tvDebtCount;
+        tvStatsLabel     = binding.tvStatsLabel;
+        tvCountLabel     = binding.tvCountLabel;
+        tvEmpty          = binding.tvEmpty;
+        tvEmptyTitle     = binding.tvEmptyTitle;
+        tvEmptySubtitle  = binding.tvEmptySubtitle;
+        ivEmptyIcon      = binding.ivEmptyIcon;
+        etSearch         = binding.etSearch;
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> finish());

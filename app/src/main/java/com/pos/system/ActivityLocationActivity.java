@@ -28,8 +28,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.pos.system.databinding.ActivityLocationBinding;
 
 public class ActivityLocationActivity extends BaseActivity {
+
+    private ActivityLocationBinding binding;
+
 
     private static final String TAG = "LocationActivity";
     private DBHelper dbHelper;
@@ -41,20 +45,21 @@ public class ActivityLocationActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location);
-        applyWindowInsets(findViewById(R.id._main));
+        binding = ActivityLocationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
-        recyclerView = findViewById(R.id.recycler_view);
-        emptyState = findViewById(R.id.empty_state);
-        SearchView searchView = findViewById(R.id.search_view);
+        recyclerView = binding.recyclerView;
+        emptyState = binding.emptyState;
+        SearchView searchView = binding.searchView;
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         refreshData();
 
         Snackbar.make(recyclerView, "اسحب لليسار للحذف، ولليمين للتعديل", Snackbar.LENGTH_LONG).show();
 
-        findViewById(R.id.fab_add).setOnClickListener(v -> showDataSheet(null));
+        binding.fabAdd.setOnClickListener(v -> showDataSheet(null));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

@@ -38,6 +38,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityReturnBinding;
 
 /**
  * ActivityReturnActivity - شاشة المرتجعات / الاسترداد
@@ -48,6 +49,9 @@ import java.util.Locale;
  * @version 1.0
  */
 public class ActivityReturnActivity extends BaseActivity {
+
+    private ActivityReturnBinding binding;
+
 
     private static final String TAG = "ReturnActivity";
 
@@ -69,8 +73,9 @@ public class ActivityReturnActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_return);
-        applyWindowInsets(findViewById(android.R.id.content));
+        binding = ActivityReturnBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         if (!FeatureGate.isUnlocked(this)) {
             FeatureGate.requirePremium(this, "إدارة المرتجعات", true);
@@ -101,14 +106,14 @@ public class ActivityReturnActivity extends BaseActivity {
     // ════════════════════════════════════════════════════════════
 
     private void initViews() {
-        rvInvoices      = findViewById(R.id.rv_invoices);
-        tvEmpty         = findViewById(R.id.tv_empty);
-        tvReturnsCount  = findViewById(R.id.tv_returns_count);
-        tvTotalRefunded = findViewById(R.id.tv_total_refunded);
+        rvInvoices      = binding.rvInvoices;
+        tvEmpty         = binding.tvEmpty;
+        tvReturnsCount  = binding.tvReturnsCount;
+        tvTotalRefunded = binding.tvTotalRefunded;
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> finish());

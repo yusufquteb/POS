@@ -23,6 +23,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.pos.system.databinding.ActivitySuppliersBinding;
 
 /**
  * ActivitySuppliersActivity - صفحة الموردين
@@ -32,6 +33,9 @@ import java.util.HashMap;
  * @version 3.0
  */
 public class ActivitySuppliersActivity extends BaseActivity {
+
+    private ActivitySuppliersBinding binding;
+
 
     private static final String TAG = "SuppliersActivity";
 
@@ -45,16 +49,17 @@ public class ActivitySuppliersActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_suppliers);
+        binding = ActivitySuppliersBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        applyWindowInsets(findViewById(android.R.id.content));
+        applyWindowInsets(binding.getRoot());
 
         dbHelper     = new DBHelper(this);
-        recyclerView  = findViewById(R.id.recycler_view);
-        emptyState    = findViewById(R.id.empty_state);
-        etSearch      = findViewById(R.id.et_search);
+        recyclerView  = binding.recyclerView;
+        emptyState    = binding.emptyState;
+        etSearch      = binding.etSearch;
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> finish());
@@ -65,7 +70,7 @@ public class ActivitySuppliersActivity extends BaseActivity {
 
         Snackbar.make(recyclerView, getString(R.string.swipe_delete_edit), Snackbar.LENGTH_LONG).show();
 
-        View fabAdd = findViewById(R.id.fab_add);
+        View fabAdd = binding.fabAdd;
         if (fabAdd != null) fabAdd.setOnClickListener(v -> showDataSheet(null));
 
         if (etSearch != null) {

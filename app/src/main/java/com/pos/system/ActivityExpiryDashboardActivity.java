@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import com.pos.system.databinding.ActivityExpiryDashboardBinding;
 
 /**
  * لوحة إدارة الصلاحية — ثلاثة تبويبات:
@@ -28,6 +29,9 @@ import java.util.concurrent.TimeUnit;
  * - تنتهي خلال 30 يوم (أصفر)
  */
 public class ActivityExpiryDashboardActivity extends BaseActivity {
+
+    private ActivityExpiryDashboardBinding binding;
+
 
     private static final int TAB_EXPIRED    = 0;
     private static final int TAB_CRITICAL   = 1;  // 7 days
@@ -49,8 +53,9 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expiry_dashboard);
-        applyWindowInsets(findViewById(android.R.id.content));
+        binding = ActivityExpiryDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         COLOR_EXPIRED  = androidx.core.content.ContextCompat.getColor(this, R.color.color_error);
@@ -58,14 +63,14 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
         COLOR_WARNING  = androidx.core.content.ContextCompat.getColor(this, R.color.color_gold);
         COLOR_OK       = androidx.core.content.ContextCompat.getColor(this, R.color.color_success);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        tabLayout    = findViewById(R.id.tab_layout);
-        rvExpiry     = findViewById(R.id.rv_expiry);
-        layoutEmpty  = findViewById(R.id.layout_empty);
-        tvSummary    = findViewById(R.id.tv_summary);
+        tabLayout    = binding.tabLayout;
+        rvExpiry     = binding.rvExpiry;
+        layoutEmpty  = binding.layoutEmpty;
+        tvSummary    = binding.tvSummary;
 
         tabLayout.addTab(tabLayout.newTab().setText("منتهية ⛔"));
         tabLayout.addTab(tabLayout.newTab().setText("7 أيام ⚠️"));
@@ -84,7 +89,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
             @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        findViewById(R.id.btn_mark_all_reviewed).setOnClickListener(v -> showSortDialog());
+        binding.btnMarkAllReviewed.setOnClickListener(v -> showSortDialog());
 
         loadSummary();
         loadCurrentTab();

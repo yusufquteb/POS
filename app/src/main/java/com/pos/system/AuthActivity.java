@@ -16,6 +16,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.pos.system.databinding.ActivityAuthBinding;
 
 // Firebase imports
 
@@ -34,6 +35,9 @@ import com.google.android.material.textfield.TextInputLayout;
  * @since 2026-02-17
  */
 public class AuthActivity extends BaseActivity {
+
+    private ActivityAuthBinding binding;
+
 
     private static final String TAG = "AuthActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -66,8 +70,9 @@ public class AuthActivity extends BaseActivity {
         
         // تطبيق الثيم
         
-        setContentView(R.layout.activity_auth);
-        applyWindowInsets(findViewById(android.R.id.content));
+        binding = ActivityAuthBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         // التحقق من تسجيل الدخول السابق
         if (isUserLoggedIn()) {
@@ -100,19 +105,19 @@ public class AuthActivity extends BaseActivity {
      * تهيئة Views
      */
     private void initializeViews() {
-        cardGoogleSignIn = findViewById(R.id.card_google_signin);
-        cardEmailSignIn = findViewById(R.id.card_email_signin);
-        btnGoogleSignIn = findViewById(R.id.btn_google_signin);
-        btnEmailSignIn = findViewById(R.id.btn_email_signin);
-        btnEmailLogin = findViewById(R.id.btn_email_login);
-        btnSkip = findViewById(R.id.btn_skip);
-        tilEmail = findViewById(R.id.til_email);
-        tilPassword = findViewById(R.id.til_password);
-        etEmail = findViewById(R.id.et_email);
-        etPassword = findViewById(R.id.et_password);
-        tvSwitchMode = findViewById(R.id.tv_switch_mode);
-        progressOverlay = findViewById(R.id.progress_overlay);
-        ivLogo = findViewById(R.id.iv_logo);
+        cardGoogleSignIn = binding.cardGoogleSignin;
+        cardEmailSignIn = binding.cardEmailSignin;
+        btnGoogleSignIn = binding.btnGoogleSignin;
+        btnEmailSignIn = binding.btnEmailSignin;
+        btnEmailLogin = binding.btnEmailLogin;
+        btnSkip = binding.btnSkip;
+        tilEmail = binding.tilEmail;
+        tilPassword = binding.tilPassword;
+        etEmail = binding.etEmail;
+        etPassword = binding.etPassword;
+        tvSwitchMode = binding.tvSwitchMode;
+        progressOverlay = binding.progressOverlay;
+        ivLogo = binding.ivLogo;
 
         // إخفاء البطاقة الثانية في البداية
         if (cardEmailSignIn != null) {

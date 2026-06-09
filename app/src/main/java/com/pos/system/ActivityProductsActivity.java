@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityProductsBinding;
 
 /**
  * ActivityProductsActivity - محسّنة
@@ -45,6 +46,9 @@ import java.util.Locale;
  * - إصلاح try/catch فارغة في onBindViewHolder
  */
 public class ActivityProductsActivity extends BaseActivity {
+
+    private ActivityProductsBinding binding;
+
 
     private static final String TAG = "ProductsActivity";
 
@@ -94,8 +98,9 @@ public class ActivityProductsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products);
-        applyWindowInsets(findViewById(R.id._main));
+        binding = ActivityProductsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         initViews();
@@ -107,16 +112,16 @@ public class ActivityProductsActivity extends BaseActivity {
     }
 
     private void initViews() {
-        recyclerProducts = findViewById(R.id.recycler_products);
-        fabAddProduct    = findViewById(R.id.fab_add_product);
-        fabImportCsv     = findViewById(R.id.fab_import_csv);
-        etSearch         = findViewById(R.id.et_search);
-        emptyState       = findViewById(R.id.empty_state);
-        tvProductsCount  = findViewById(R.id.tv_products_count);
+        recyclerProducts = binding.recyclerProducts;
+        fabAddProduct    = binding.fabAddProduct;
+        fabImportCsv     = binding.fabImportCsv;
+        etSearch         = binding.etSearch;
+        emptyState       = binding.emptyState;
+        tvProductsCount  = binding.tvProductsCount;
     }
 
     private void setupToolbar() {
-        View toolbar = findViewById(R.id.toolbar);
+        View toolbar = binding.toolbar;
         if (toolbar != null) toolbar.setOnClickListener(v -> finish());
     }
 

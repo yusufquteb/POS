@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityDecisionDashboardBinding;
 
 /**
  * لوحة القرارات الذكية — تجيب على 4 أسئلة رئيسية:
@@ -28,6 +29,9 @@ import java.util.Locale;
  */
 public class ActivityDecisionDashboardActivity extends BaseActivity {
 
+    private ActivityDecisionDashboardBinding binding;
+
+
     private DBHelper dbHelper;
 
     private TextView tvReorderCount, tvExpiryRiskCount, tvDeadCount;
@@ -37,28 +41,29 @@ public class ActivityDecisionDashboardActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_decision_dashboard);
-        applyWindowInsets(findViewById(android.R.id.content));
+        binding = ActivityDecisionDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        tvReorderCount    = findViewById(R.id.tv_reorder_count);
-        tvExpiryRiskCount = findViewById(R.id.tv_expiry_risk_count);
-        tvDeadCount       = findViewById(R.id.tv_dead_count);
+        tvReorderCount    = binding.tvReorderCount;
+        tvExpiryRiskCount = binding.tvExpiryRiskCount;
+        tvDeadCount       = binding.tvDeadCount;
 
-        rvReorder    = findViewById(R.id.rv_reorder);
-        rvExpiryRisk = findViewById(R.id.rv_expiry_risk);
-        rvDeadStock  = findViewById(R.id.rv_dead_stock);
-        rvLowMargin  = findViewById(R.id.rv_low_margin);
+        rvReorder    = binding.rvReorder;
+        rvExpiryRisk = binding.rvExpiryRisk;
+        rvDeadStock  = binding.rvDeadStock;
+        rvLowMargin  = binding.rvLowMargin;
 
         setupRecyclers();
 
-        btnCreatePO   = findViewById(R.id.btn_create_po);
-        btnViewExpiry = findViewById(R.id.btn_view_expiry);
+        btnCreatePO   = binding.btnCreatePo;
+        btnViewExpiry = binding.btnViewExpiry;
 
         btnCreatePO.setOnClickListener(v ->
             startActivity(new Intent(this, ActivityPurchaseOrderActivity.class)));

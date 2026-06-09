@@ -30,14 +30,17 @@ import com.pos.system.managers.PrinterManager.PrinterCheckResult;
 import com.pos.system.managers.PrinterManager.PrinterDevice;
 import java.util.ArrayList;
 import java.util.List;
+import com.pos.system.databinding.ActivityPrinterSettingsBinding;
 
 /**
  * ActivityPrinterSettingsActivity - إعدادات الطابعة (محدثة)
- * 
+ *
  * ✅ إصلاح مشكلة تعطل البلوتوث
  * ✅ إصلاح مشكلة صلاحيات الواي فاي
  */
 public class ActivityPrinterSettingsActivity extends BaseActivity {
+
+    private ActivityPrinterSettingsBinding binding;
 
     private static final String TAG = "PrinterSettings";
     private static final String PREFS_NAME = "AppSettings";
@@ -66,8 +69,9 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         try {
             applyTheme();
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_printer_settings);
-            applyWindowInsets(findViewById(android.R.id.content));
+            binding = ActivityPrinterSettingsBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+            applyWindowInsets(binding.getRoot());
 
             setupStatusBar();
             
@@ -122,23 +126,23 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
     }
 
     private void initViews() {
-        rgConnection = findViewById(R.id.rg_connection);
-        rbUsb = findViewById(R.id.rb_usb);
-        rbBluetooth = findViewById(R.id.rb_bluetooth);
-        rbWifi = findViewById(R.id.rb_wifi);
+        rgConnection = binding.rgConnection;
+        rbUsb = binding.rbUsb;
+        rbBluetooth = binding.rbBluetooth;
+        rbWifi = binding.rbWifi;
         
-        spPaperWidth = findViewById(R.id.sp_paper_width);
-        swAutoPrint = findViewById(R.id.sw_auto_print);
-        swShowLogo = findViewById(R.id.sw_show_logo);
+        spPaperWidth = binding.spPaperWidth;
+        swAutoPrint = binding.swAutoPrint;
+        swShowLogo = binding.swShowLogo;
         
-        btnSave = findViewById(R.id.btn_save);
-        btnTestPrint = findViewById(R.id.btn_test_print);
-        btnCheckPrinter = findViewById(R.id.btn_check_printer);
+        btnSave = binding.btnSave;
+        btnTestPrint = binding.btnTestPrint;
+        btnCheckPrinter = binding.btnCheckPrinter;
     }
     
     private void setupToolbar() {
         try {
-            Toolbar toolbar = findViewById(R.id.toolbar);
+            Toolbar toolbar = binding.toolbar;
             if (toolbar != null) {
                 setSupportActionBar(toolbar);
                 if (getSupportActionBar() != null) {

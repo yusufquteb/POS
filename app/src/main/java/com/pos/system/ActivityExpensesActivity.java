@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityExpensesBinding;
 
 /**
  * ActivityExpensesActivity - صفحة المصروفات
@@ -31,6 +32,9 @@ import java.util.Locale;
  * @version 3.0
  */
 public class ActivityExpensesActivity extends BaseActivity {
+
+    private ActivityExpensesBinding binding;
+
 
     private RecyclerView recyclerExpenses;
     private ExpensesAdapter adapter;
@@ -46,9 +50,10 @@ public class ActivityExpensesActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expenses);
+        binding = ActivityExpensesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        applyWindowInsets(findViewById(android.R.id.content));
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         try {
@@ -63,21 +68,21 @@ public class ActivityExpensesActivity extends BaseActivity {
     }
 
     private void initViews() {
-        recyclerExpenses = findViewById(R.id.recycler_expenses);
-        fabAddExpense    = findViewById(R.id.fab_add_expense);
-        tvTotalExpenses  = findViewById(R.id.tv_total_expenses);
-        tvFilterDate     = findViewById(R.id.tv_filter_date);
-        emptyState       = findViewById(R.id.empty_state);
+        recyclerExpenses = binding.recyclerExpenses;
+        fabAddExpense    = binding.fabAddExpense;
+        tvTotalExpenses  = binding.tvTotalExpenses;
+        tvFilterDate     = binding.tvFilterDate;
+        emptyState       = binding.emptyState;
     }
 
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = binding.toolbar;
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setNavigationOnClickListener(v -> finish());
         }
 
-        View btnFilter = findViewById(R.id.btn_filter);
+        View btnFilter = binding.btnFilter;
         if (btnFilter != null) btnFilter.setOnClickListener(v -> showFilterDialog());
     }
 

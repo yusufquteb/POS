@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
+import com.pos.system.databinding.ActivityInvoiceDetailsBinding;
 
 /**
  * ActivityInvoiceDetailsActivity - صفحة تفاصيل الفاتورة المحسّنة
@@ -30,6 +31,9 @@ import java.util.Locale;
  * - إصلاح مشكلة Adapter
  */
 public class ActivityInvoiceDetailsActivity extends BaseActivity {
+
+    private ActivityInvoiceDetailsBinding binding;
+
     
     private DBHelper dbHelper;
     private long invoiceId;
@@ -43,8 +47,9 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_invoice_details);
-        applyWindowInsets(findViewById(R.id._main));
+        binding = ActivityInvoiceDetailsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
         invoiceId = getIntent().getLongExtra("invoice_id", 0);
@@ -62,17 +67,17 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     }
     
     private void initViews() {
-        tvInvoiceNumber = findViewById(R.id.tv_invoice_number);
-        tvDate = findViewById(R.id.tv_date);
-        tvCustomerName = findViewById(R.id.tv_customer_name);
-        tvCustomerPhone = findViewById(R.id.tv_customer_phone);
-        tvSubtotal = findViewById(R.id.tv_subtotal);
-        tvDiscount = findViewById(R.id.tv_discount);
-        tvTax = findViewById(R.id.tv_tax);
-        tvFinalTotal = findViewById(R.id.tv_final_total);
-        listItems = findViewById(R.id.recycler_items);
-        layoutDiscount = findViewById(R.id.layout_discount);
-        layoutTax = findViewById(R.id.layout_tax);
+        tvInvoiceNumber = binding.tvInvoiceNumber;
+        tvDate = binding.tvDate;
+        tvCustomerName = binding.tvCustomerName;
+        tvCustomerPhone = binding.tvCustomerPhone;
+        tvSubtotal = binding.tvSubtotal;
+        tvDiscount = binding.tvDiscount;
+        tvTax = binding.tvTax;
+        tvFinalTotal = binding.tvFinalTotal;
+        listItems = binding.recyclerItems;
+        layoutDiscount = binding.layoutDiscount;
+        layoutTax = binding.layoutTax;
         
         // ✅ إعداد RecyclerView
         if (listItems != null) {
@@ -82,7 +87,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     }
     
     private void setupToolbar() {
-        View toolbar = findViewById(R.id.toolbar);
+        View toolbar = binding.toolbar;
         if (toolbar != null) {
             toolbar.setOnClickListener(v -> finish());
         }
@@ -156,12 +161,12 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     }
     
     private void setupButtons() {
-        View btnPrint = findViewById(R.id.btn_print);
+        View btnPrint = binding.btnPrint;
         if (btnPrint != null) {
             btnPrint.setOnClickListener(v -> printInvoice());
         }
         
-        View btnWhatsapp = findViewById(R.id.btn_whatsapp);
+        View btnWhatsapp = binding.btnWhatsapp;
         if (btnWhatsapp != null) {
             btnWhatsapp.setOnClickListener(v -> sendViaWhatsApp());
         }
