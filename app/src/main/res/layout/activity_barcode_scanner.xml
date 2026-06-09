@@ -77,6 +77,6 @@
 			app:backgroundTint="#FFFFFF"
 			app:icon="@drawable/ic_keyboard"
 			app:iconTint="?attr/colorOnSurface"
-			app:cornerRadius="28dp" />
+			app:cornerRadius="24dp" />
 	</LinearLayout>
 </RelativeLayout>

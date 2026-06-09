@@ -171,7 +171,7 @@
 				app:icon="@drawable/ic_qr_code_scanner"
 				app:iconSize="24dp"
 				app:iconPadding="0dp"
-				app:cornerRadius="14dp"
+				app:cornerRadius="16dp"
 				app:backgroundTint="?attr/colorPrimary" />
 		</LinearLayout>
 		<androidx.recyclerview.widget.RecyclerView

@@ -54,7 +54,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="24dp"
                 app:cardElevation="4dp"
                 app:strokeWidth="0dp">
 
@@ -351,7 +351,7 @@
                         style="@style/Widget.Material3.Button"
                         app:icon="@drawable/ic_add"
                         app:iconGravity="textStart"
-                        app:cornerRadius="28dp"
+                        app:cornerRadius="24dp"
                         android:visibility="visible" />
 
                     <com.google.android.material.button.MaterialButton
@@ -364,7 +364,7 @@
                         style="@style/Widget.Material3.Button.TonalButton"
                         app:icon="@drawable/ic_check"
                         app:iconGravity="textStart"
-                        app:cornerRadius="28dp"
+                        app:cornerRadius="24dp"
                         app:backgroundTint="?attr/colorErrorContainer"
                         android:textColor="?attr/colorOnErrorContainer"
                         android:visibility="gone" />

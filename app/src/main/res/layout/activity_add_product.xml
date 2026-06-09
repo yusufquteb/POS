@@ -44,7 +44,7 @@
 				app:cardBackgroundColor="?attr/colorSurface"
 				android:foreground="?attr/selectableItemBackground"
 				android:focusable="true"
-				app:cardCornerRadius="20dp"
+				app:cardCornerRadius="24dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
@@ -105,7 +105,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
 				app:cardBackgroundColor="?attr/colorSurface"
-				app:cardCornerRadius="20dp"
+				app:cardCornerRadius="24dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
@@ -160,7 +160,7 @@
 							style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
 							app:icon="@drawable/ic_qr_code_scanner"
 							app:iconPadding="0dp"
-							app:cornerRadius="14dp" />
+							app:cornerRadius="16dp" />
 					</LinearLayout>
 					<com.google.android.material.textfield.TextInputLayout
 						android:id="@+id/layout_name"
@@ -231,7 +231,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
 				app:cardBackgroundColor="?attr/colorSurface"
-				app:cardCornerRadius="20dp"
+				app:cardCornerRadius="24dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
@@ -467,7 +467,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
 				app:cardBackgroundColor="?attr/colorSurface"
-				app:cardCornerRadius="20dp"
+				app:cardCornerRadius="24dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
@@ -522,7 +522,7 @@
 							style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
 							app:icon="@drawable/ic_add_location"
 							app:iconPadding="0dp"
-							app:cornerRadius="14dp" />
+							app:cornerRadius="16dp" />
 					</LinearLayout>
 					<LinearLayout
 						android:id="@+id/linear35"
@@ -561,7 +561,7 @@
 							style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
 							app:icon="@drawable/ic_person_add"
 							app:iconPadding="0dp"
-							app:cornerRadius="14dp" />
+							app:cornerRadius="16dp" />
 					</LinearLayout>
 					<LinearLayout
 						android:id="@+id/linear36"
@@ -600,7 +600,7 @@
 							style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
 							app:icon="@drawable/ic_add"
 							app:iconPadding="0dp"
-							app:cornerRadius="14dp" />
+							app:cornerRadius="16dp" />
 					</LinearLayout>
 
 					<com.google.android.material.textfield.TextInputLayout
@@ -631,7 +631,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
 				app:cardBackgroundColor="?attr/colorSurface"
-				app:cardCornerRadius="20dp"
+				app:cardCornerRadius="24dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
@@ -673,7 +673,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="14dp"
 				app:cardBackgroundColor="?attr/colorSurface"
-				app:cardCornerRadius="20dp"
+				app:cardCornerRadius="24dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
@@ -734,7 +734,7 @@
 					android:fontFamily="@font/cairo_semibold"
 					android:layout_marginEnd="8dp"
 					style="@style/Widget.Material3.Button.OutlinedButton"
-					app:cornerRadius="14dp" />
+					app:cornerRadius="16dp" />
 				<com.google.android.material.button.MaterialButton
 					android:id="@+id/btn_save"
 					android:layout_width="0dp"
@@ -744,7 +744,7 @@
 					android:layout_weight="1"
 					android:fontFamily="@font/cairo_bold"
 					app:backgroundTint="?attr/colorPrimary"
-					app:cornerRadius="14dp"
+					app:cornerRadius="16dp"
 					app:icon="@drawable/ic_save"
 					app:iconTint="#FFFFFF"
 					app:rippleColor="#FFFFFF" />

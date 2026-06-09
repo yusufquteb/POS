@@ -42,7 +42,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="16dp"
 				app:cardBackgroundColor="?attr/colorSurface"
-				app:cardCornerRadius="20dp"
+				app:cardCornerRadius="24dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
@@ -88,7 +88,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="24dp"
 				app:cardBackgroundColor="?attr/colorSurface"
-				app:cardCornerRadius="20dp"
+				app:cardCornerRadius="24dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
@@ -225,7 +225,7 @@
 						android:textColor="?attr/colorOnPrimary"
 						android:fontFamily="@font/cairo_bold"
 						app:backgroundTint="?attr/colorPrimary"
-						app:cornerRadius="14dp"
+						app:cornerRadius="16dp"
 						app:icon="@drawable/ic_save"
 						app:iconTint="#FFFFFF"
 						app:iconGravity="textStart"

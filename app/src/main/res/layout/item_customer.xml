@@ -105,7 +105,7 @@
             app:iconGravity="textStart"
             app:iconSize="20dp"
             app:iconPadding="0dp"
-            app:cornerRadius="20dp"
+            app:cornerRadius="24dp"
             style="@style/Widget.Material3.Button.TonalButton"
             android:contentDescription="@string/customer_phone"/>
 
