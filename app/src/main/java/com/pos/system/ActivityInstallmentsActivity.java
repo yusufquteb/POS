@@ -34,6 +34,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_installments);
+        applyWindowInsets(findViewById(R.id.coordinator_root));
         dbHelper = new DBHelper(this);
         initViews();
         setupToolbar();

@@ -40,6 +40,7 @@ public class ActivityStockCountActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_count);
+        applyWindowInsets(findViewById(R.id.coordinator_root));
         dbHelper = new DBHelper(this);
         initViews();
         setupToolbar();

@@ -36,6 +36,7 @@ public class ActivityChecksActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checks);
+        applyWindowInsets(findViewById(R.id.coordinator_root));
 
         dbHelper = new DBHelper(this);
         initViews();
