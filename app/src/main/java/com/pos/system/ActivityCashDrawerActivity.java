@@ -63,6 +63,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         binding.rvTransactions.setItemAnimator(null);
 
         binding.fabAdd.setOnClickListener(v -> showAddDrawerDialog());
+        binding.btnEmptyAddDrawer.setOnClickListener(v -> showAddDrawerDialog());
 
         binding.rvDrawers.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

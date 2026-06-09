@@ -68,6 +68,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         });
 
         binding.fabAdd.setOnClickListener(v -> showAddContractDialog());
+        binding.btnEmptyAddInstallment.setOnClickListener(v -> showAddContractDialog());
 
         binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

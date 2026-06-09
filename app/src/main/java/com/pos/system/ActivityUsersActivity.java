@@ -55,6 +55,7 @@ public class ActivityUsersActivity extends BaseActivity {
         binding.recyclerView.setItemAnimator(null);
 
         binding.fabAdd.setOnClickListener(v -> showAddUserDialog());
+        binding.btnEmptyAddUser.setOnClickListener(v -> showAddUserDialog());
 
         binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

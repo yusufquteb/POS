@@ -60,6 +60,7 @@ public class ActivityChecksActivity extends BaseActivity {
         });
 
         binding.fabAdd.setOnClickListener(v -> showAddCheckDialog());
+        binding.btnEmptyAddCheck.setOnClickListener(v -> showAddCheckDialog());
 
         binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
