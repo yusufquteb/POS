@@ -10,6 +10,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_customer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="اسم العميل *"
@@ -21,6 +22,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_total_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="المبلغ الإجمالي *"

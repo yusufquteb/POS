@@ -3,11 +3,13 @@ package com.pos.system;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.pos.system.databinding.ActivityChecksBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +46,7 @@ public class ActivityChecksActivity extends BaseActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ChecksAdapter();
         binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setItemAnimator(null);
 
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("شيكات العملاء"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("شيكات الموردين"));
@@ -57,6 +60,14 @@ public class ActivityChecksActivity extends BaseActivity {
         });
 
         binding.fabAdd.setOnClickListener(v -> showAddCheckDialog());
+
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
+                if (dy > 0) binding.fabAdd.shrink();
+                else if (dy < 0) binding.fabAdd.extend();
+            }
+        });
     }
 
     private void setupToolbar(String title) {
@@ -107,6 +118,8 @@ public class ActivityChecksActivity extends BaseActivity {
 
     private void showAddCheckDialog() {
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_check, null);
+        TextInputLayout tilName = dialogView.findViewById(R.id.til_name);
+        TextInputLayout tilAmount = dialogView.findViewById(R.id.til_amount);
         TextInputEditText etName = dialogView.findViewById(R.id.et_name);
         TextInputEditText etCheckNumber = dialogView.findViewById(R.id.et_check_number);
         TextInputEditText etBankName = dialogView.findViewById(R.id.et_bank_name);
@@ -119,20 +132,30 @@ public class ActivityChecksActivity extends BaseActivity {
             .setTitle(isCustomerTab ? "إضافة شيك عميل" : "إضافة شيك مورد")
             .setView(dialogView)
             .setPositiveButton("حفظ", (d, w) -> {
+                if (tilName != null) tilName.setError(null);
+                if (tilAmount != null) tilAmount.setError(null);
+
                 String name = etName != null && etName.getText() != null ? etName.getText().toString().trim() : "";
                 String checkNum = etCheckNumber != null && etCheckNumber.getText() != null ? etCheckNumber.getText().toString().trim() : "";
                 String bank = etBankName != null && etBankName.getText() != null ? etBankName.getText().toString().trim() : "";
-                String amountStr = etAmount != null && etAmount.getText() != null ? etAmount.getText().toString().trim() : "0";
+                String amountStr = etAmount != null && etAmount.getText() != null ? etAmount.getText().toString().trim() : "";
                 String issueDate = etIssueDate != null && etIssueDate.getText() != null ? etIssueDate.getText().toString().trim() : "";
                 String dueDate = etDueDate != null && etDueDate.getText() != null ? etDueDate.getText().toString().trim() : "";
                 String notes = etNotes != null && etNotes.getText() != null ? etNotes.getText().toString().trim() : "";
 
-                if (name.isEmpty() || amountStr.isEmpty()) {
-                    showSnackbar("الاسم والمبلغ مطلوبان", true);
+                if (name.isEmpty()) {
+                    if (tilName != null) tilName.setError("الاسم مطلوب");
+                    return;
+                }
+                if (amountStr.isEmpty()) {
+                    if (tilAmount != null) tilAmount.setError("المبلغ مطلوب");
                     return;
                 }
                 double amount = 0;
-                try { amount = Double.parseDouble(amountStr); } catch (Exception ex) { showSnackbar("مبلغ غير صحيح", true); return; }
+                try { amount = Double.parseDouble(amountStr); } catch (Exception ex) {
+                    if (tilAmount != null) tilAmount.setError("مبلغ غير صحيح");
+                    return;
+                }
 
                 double finalAmount = amount;
                 executor.execute(() -> {

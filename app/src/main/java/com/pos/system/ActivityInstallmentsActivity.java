@@ -3,11 +3,13 @@ package com.pos.system;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.pos.system.databinding.ActivityInstallmentsBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +54,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new InstallmentsAdapter();
         binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setItemAnimator(null);
 
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("العقود"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("المتأخرة"));
@@ -65,6 +68,14 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         });
 
         binding.fabAdd.setOnClickListener(v -> showAddContractDialog());
+
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
+                if (dy > 0) binding.fabAdd.shrink();
+                else if (dy < 0) binding.fabAdd.extend();
+            }
+        });
     }
 
     private void loadData() {
@@ -96,6 +107,8 @@ public class ActivityInstallmentsActivity extends BaseActivity {
 
     private void showAddContractDialog() {
         View dv = getLayoutInflater().inflate(R.layout.dialog_add_installment, null);
+        TextInputLayout tilCustomerName  = dv.findViewById(R.id.til_customer_name);
+        TextInputLayout tilTotalAmount   = dv.findViewById(R.id.til_total_amount);
         TextInputEditText etCustomerName    = dv.findViewById(R.id.et_customer_name);
         TextInputEditText etTotalAmount     = dv.findViewById(R.id.et_total_amount);
         TextInputEditText etDownPayment     = dv.findViewById(R.id.et_down_payment);
@@ -107,21 +120,34 @@ public class ActivityInstallmentsActivity extends BaseActivity {
             .setTitle("إضافة عقد تقسيط")
             .setView(dv)
             .setPositiveButton("حفظ", (d, w) -> {
+                if (tilCustomerName != null) tilCustomerName.setError(null);
+                if (tilTotalAmount != null) tilTotalAmount.setError(null);
+
                 String name   = etCustomerName != null && etCustomerName.getText() != null ? etCustomerName.getText().toString().trim() : "";
-                String totStr = etTotalAmount  != null && etTotalAmount.getText()  != null ? etTotalAmount.getText().toString().trim()  : "0";
+                String totStr = etTotalAmount  != null && etTotalAmount.getText()  != null ? etTotalAmount.getText().toString().trim()  : "";
                 String dwnStr = etDownPayment  != null && etDownPayment.getText()  != null ? etDownPayment.getText().toString().trim()  : "0";
                 String cntStr = etInstallmentCount != null && etInstallmentCount.getText() != null ? etInstallmentCount.getText().toString().trim() : "1";
                 String start  = etStartDate    != null && etStartDate.getText()    != null ? etStartDate.getText().toString().trim()    : "";
                 String notes  = etNotes        != null && etNotes.getText()        != null ? etNotes.getText().toString().trim()        : "";
 
-                if (name.isEmpty()) { showSnackbar("اسم العميل مطلوب", true); return; }
+                if (name.isEmpty()) {
+                    if (tilCustomerName != null) tilCustomerName.setError("اسم العميل مطلوب");
+                    return;
+                }
+                if (totStr.isEmpty()) {
+                    if (tilTotalAmount != null) tilTotalAmount.setError("المبلغ الإجمالي مطلوب");
+                    return;
+                }
                 double tot = 0, dwn = 0;
                 int cnt = 1;
                 try {
                     tot = Double.parseDouble(totStr);
                     dwn = Double.parseDouble(dwnStr.isEmpty() ? "0" : dwnStr);
                     cnt = Integer.parseInt(cntStr.isEmpty() ? "1" : cntStr);
-                } catch (Exception ex) { showSnackbar("بيانات غير صحيحة", true); return; }
+                } catch (Exception ex) {
+                    if (tilTotalAmount != null) tilTotalAmount.setError("بيانات غير صحيحة");
+                    return;
+                }
                 if (tot <= 0) { showToast("المبلغ الإجمالي يجب أن يكون أكبر من صفر"); return; }
                 if (dwn >= tot) { showToast("الدفعة الأولى لا تصح أن تساوي أو تتجاوز الإجمالي"); return; }
                 if (cnt <= 0 || cnt > 120) { showToast("عدد الأقساط يجب أن يكون بين 1 و 120"); return; }

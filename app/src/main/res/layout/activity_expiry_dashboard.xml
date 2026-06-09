@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="✅"
-                android:textSize="56sp" />
+                android:textSize="@dimen/text_icon" />
 
             <TextView
                 android:id="@+id/tv_empty_title"

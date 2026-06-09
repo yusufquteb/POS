@@ -66,6 +66,12 @@
     <dimen name="text_headline">24sp</dimen>
     <dimen name="text_display">28sp</dimen>
 
+    <!-- Display scale extensions (large headlines & icons) -->
+    <dimen name="text_display_lg">36sp</dimen>
+    <dimen name="text_display_xl">40sp</dimen>
+    <dimen name="text_icon">56sp</dimen>
+    <dimen name="text_stat">64sp</dimen>
+
     <!-- ============================================ -->
     <!-- Input Fields -->
     <!-- ============================================ -->

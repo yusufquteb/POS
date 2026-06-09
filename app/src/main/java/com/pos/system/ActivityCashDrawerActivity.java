@@ -3,6 +3,7 @@ package com.pos.system;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
@@ -54,12 +55,23 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         binding.rvDrawers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         drawersAdapter = new DrawersAdapter();
         binding.rvDrawers.setAdapter(drawersAdapter);
+        binding.rvDrawers.setItemAnimator(null);
 
         binding.rvTransactions.setLayoutManager(new LinearLayoutManager(this));
         txAdapter = new TxAdapter();
         binding.rvTransactions.setAdapter(txAdapter);
+        binding.rvTransactions.setItemAnimator(null);
 
         binding.fabAdd.setOnClickListener(v -> showAddDrawerDialog());
+
+        binding.rvDrawers.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
+                if (dy > 0) binding.fabAdd.shrink();
+                else if (dy < 0) binding.fabAdd.extend();
+            }
+        });
+
         binding.btnDeposit.setOnClickListener(v -> showTransactionDialog("in"));
         binding.btnWithdraw.setOnClickListener(v -> showTransactionDialog("out"));
     }

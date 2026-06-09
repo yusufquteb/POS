@@ -3,10 +3,12 @@ package com.pos.system;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.pos.system.databinding.ActivityUsersBinding;
 import com.pos.system.managers.UserManager;
 import java.util.ArrayList;
@@ -50,8 +52,17 @@ public class ActivityUsersActivity extends BaseActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UsersAdapter();
         binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setItemAnimator(null);
 
         binding.fabAdd.setOnClickListener(v -> showAddUserDialog());
+
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
+                if (dy > 0) binding.fabAdd.shrink();
+                else if (dy < 0) binding.fabAdd.extend();
+            }
+        });
     }
 
     private void loadUsers() {

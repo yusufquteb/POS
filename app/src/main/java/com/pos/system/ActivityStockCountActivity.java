@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -54,8 +55,18 @@ public class ActivityStockCountActivity extends BaseActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CountAdapter();
         binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setItemAnimator(null);
 
         binding.fabStart.setOnClickListener(v -> startNewSession());
+
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
+                if (dy > 0) binding.fabStart.shrink();
+                else if (dy < 0) binding.fabStart.extend();
+            }
+        });
+
         binding.btnComplete.setOnClickListener(v -> confirmComplete());
         binding.btnCancel.setOnClickListener(v -> confirmCancel());
         binding.etSearch.addTextChangedListener(new TextWatcher() {
