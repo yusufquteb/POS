@@ -45,6 +45,11 @@ public class ThemeManager {
         activity.setTheme(isDarkModeActive() ? R.style.AppTheme_Dark : R.style.AppTheme);
     }
 
+    public static int getThemeResId() {
+        checkInit();
+        return isDarkModeActive() ? R.style.AppTheme_Dark : R.style.AppTheme;
+    }
+
     public static int getThemeMode() {
         checkInit();
         return prefs.getInt(KEY_THEME_MODE, MODE_AUTO);
