@@ -47,7 +47,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/spacing_md"
-						android:text="📅 الفترة الزمنية"
+						android:text="@string/str_aaa378"
 						android:textSize="@dimen/text_base"
 						android:textStyle="bold" />
 					<com.google.android.material.chip.ChipGroup
@@ -98,7 +98,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/spacing_base"
-						android:text="💰 إحصائيات المبيعات"
+						android:text="@string/str_1645b6"
 						android:textSize="@dimen/text_lg"
 						android:textStyle="bold" />
 					<LinearLayout
@@ -111,14 +111,14 @@
 							android:id="@+id/textview13"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
-							android:text="إجمالي المبيعات:"
+							android:text="@string/str_4c33ae"
 							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
 							android:id="@+id/tv_total_sales"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="0.00 ج.م"
+							android:text="@string/str_388b15"
 							android:textSize="@dimen/text_base"
 							android:textStyle="bold" />
 					</LinearLayout>
@@ -132,7 +132,7 @@
 							android:id="@+id/textview14"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
-							android:text="عدد الفواتير:"
+							android:text="@string/str_391cd6"
 							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
@@ -152,14 +152,14 @@
 							android:id="@+id/textview15"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
-							android:text="متوسط الفاتورة:"
+							android:text="@string/str_ae854a"
 							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
 							android:id="@+id/tv_average_invoice"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="0.00 ج.م"
+							android:text="@string/str_388b15"
 							android:textSize="@dimen/text_base"
 							android:textStyle="bold" />
 					</LinearLayout>
@@ -183,7 +183,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/spacing_base"
-						android:text="📦 إحصائيات المخزون"
+						android:text="@string/str_09293f"
 						android:textSize="@dimen/text_lg"
 						android:textStyle="bold" />
 					<LinearLayout
@@ -196,7 +196,7 @@
 							android:id="@+id/textview17"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
-							android:text="عدد المنتجات:"
+							android:text="@string/str_3a2495"
 							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
@@ -217,14 +217,14 @@
 							android:id="@+id/textview18"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
-							android:text="قيمة المخزون:"
+							android:text="@string/str_66fe38"
 							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
 							android:id="@+id/tv_inventory_value"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="0.00 ج.م"
+							android:text="@string/str_388b15"
 							android:textSize="@dimen/text_base"
 							android:textStyle="bold" />
 					</LinearLayout>
@@ -237,7 +237,7 @@
 							android:id="@+id/textview19"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
-							android:text="تنبيهات المخزون:"
+							android:text="@string/str_74e67c"
 							android:textSize="@dimen/text_md"
 							android:layout_weight="1" />
 						<TextView
@@ -267,14 +267,14 @@
 
 					<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/spacing_md"
-						android:text="📊 تحليل الربحية"
+						android:text="@string/str_cc6bac"
 						android:textSize="@dimen/text_lg" android:textStyle="bold"/>
 
 					<!-- تكلفة البضاعة المباعة COGS -->
 					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
 						android:orientation="horizontal" android:layout_marginBottom="@dimen/spacing_sm">
 						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
-							android:layout_weight="1" android:text="تكلفة البضاعة المباعة (COGS):" android:textSize="@dimen/text_sm"/>
+							android:layout_weight="1" android:text="@string/str_c725ca" android:textSize="@dimen/text_sm"/>
 						<TextView android:id="@+id/tv_cogs"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
 							android:text="0.00" android:textSize="@dimen/text_md" android:textStyle="bold" android:textColor="?attr/colorError"/>
@@ -284,7 +284,7 @@
 					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
 						android:orientation="horizontal" android:layout_marginBottom="@dimen/spacing_sm">
 						<TextView android:layout_width="0dp" android:layout_height="wrap_content"
-							android:layout_weight="1" android:text="مجمل الربح (قبل المصروفات):" android:textSize="@dimen/text_sm"/>
+							android:layout_weight="1" android:text="@string/str_3c1254" android:textSize="@dimen/text_sm"/>
 						<TextView android:id="@+id/tv_gross_profit"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
 							android:text="0.00" android:textSize="@dimen/text_md" android:textStyle="bold" android:textColor="?attr/colorPrimary"/>
@@ -334,7 +334,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/spacing_base"
-						android:text="🏆 المنتجات الأكثر مبيعاً"
+						android:text="@string/str_c18be3"
 						android:textSize="@dimen/text_lg"
 						android:textStyle="bold" />
 					<androidx.recyclerview.widget.RecyclerView
@@ -371,7 +371,7 @@
 			android:id="@+id/btn_export_pdf"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="تصدير PDF"
+			android:text="@string/str_a6d89e"
 			android:textSize="@dimen/text_xs"
 			android:layout_weight="1"
 			android:layout_marginEnd="@dimen/spacing_xs"
@@ -380,7 +380,7 @@
 			android:id="@+id/btn_share_report"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="مشاركة"
+			android:text="@string/str_81a50c"
 			android:textSize="@dimen/text_xs"
 			android:layout_weight="1"
 			android:layout_marginStart="@dimen/spacing_xs"
@@ -390,7 +390,7 @@
 			android:id="@+id/btn_whatsapp_report"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="واتساب"
+			android:text="@string/str_0d8c9b"
 			android:textSize="@dimen/text_xs"
 			android:layout_weight="1"
 			android:layout_marginStart="@dimen/spacing_xs"

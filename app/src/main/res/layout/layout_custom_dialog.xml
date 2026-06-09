@@ -13,7 +13,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/spacing_base"
-		android:text="إدارة المنتج"
+		android:text="@string/str_7fc05f"
 		android:textSize="@dimen/text_xl"
 		android:textStyle="bold"
 		android:textColor="?attr/colorOnSurface" />
@@ -23,7 +23,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/spacing_xl"
-		android:text="هل تريد تعديل أو حذف هذا المنتج؟"
+		android:text="@string/str_1f3c15"
 		android:textSize="@dimen/text_base"
 		android:textStyle="bold"
 		android:textColor="?attr/colorOnSurfaceVariant" />
@@ -37,7 +37,7 @@
 			android:id="@+id/btn_dialog_delete"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="حذف"
+			android:text="@string/delete"
 			android:textSize="@dimen/text_xs"
 			android:textStyle="bold"
 			android:textColor="?attr/colorError"
@@ -47,7 +47,7 @@
 			android:id="@+id/btn_dialog_edit"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="تعديل"
+			android:text="@string/str_759fdc"
 			android:textSize="@dimen/text_xs"
 			android:textStyle="bold"
 			style="@style/Widget.Material3.Button.TonalButton" />

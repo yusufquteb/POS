@@ -31,7 +31,7 @@
 			android:id="@+id/textview3"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="مسح الباركود"
+			android:text="@string/str_0f4ef4"
 			android:textSize="@dimen/text_xl"
 			android:textStyle="bold"
 			android:textColor="@android:color/white"
@@ -65,7 +65,7 @@
 			android:id="@+id/textview4"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="وجه الكاميرا نحو الكود"
+			android:text="@string/str_b88c5d"
 			android:textSize="@dimen/text_base"
 			android:textColor="@android:color/white" />
 		<com.google.android.material.button.MaterialButton
@@ -73,7 +73,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="56dp"
 			android:layout_marginTop="@dimen/spacing_lg"
-			android:text="إدخال يدوي للباركود"
+			android:text="@string/str_e589e8"
 			android:textSize="@dimen/text_xs"
 			android:textColor="?attr/colorOnSurface"
 			app:backgroundTint="#FFFFFF"

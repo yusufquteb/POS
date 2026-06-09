@@ -51,14 +51,14 @@
                     android:id="@+id/tv_balance_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="الخزينة الرئيسية"
+                    android:text="@string/str_1fdb59"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="@dimen/text_md"/>
                 <TextView
                     android:id="@+id/tv_balance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="0.00 ج.م"
+                    android:text="@string/str_388b15"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="@dimen/text_display"
                     android:textStyle="bold"
@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginEnd="@dimen/spacing_xs"
-                        android:text="إيداع"
+                        android:text="@string/str_05fb67"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:textColor="?attr/colorOnPrimary"
                         app:strokeColor="?attr/colorOnPrimary"/>
@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="@dimen/spacing_xs"
-                        android:text="سحب"
+                        android:text="@string/str_87fd04"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:textColor="?attr/colorOnPrimary"
                         app:strokeColor="?attr/colorOnPrimary"/>
@@ -95,7 +95,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="آخر الحركات"
+            android:text="@string/str_20225e"
             android:textSize="@dimen/text_md"
             android:textStyle="bold"
             android:paddingStart="@dimen/spacing_base"
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="لا توجد خزائن"
+                    android:text="@string/str_24e6db"
                     android:textSize="@dimen/text_lg"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
@@ -142,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="أضف خزينة لتتبع النقد والمعاملات"
+                    android:text="@string/str_7ba5e7"
                     android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"
@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="إضافة خزينة" />
+                    android:text="@string/str_1e0b5c" />
             </LinearLayout>
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -172,7 +172,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/spacing_base"
-        android:text="خزينة جديدة"
+        android:text="@string/str_09416b"
         app:icon="@android:drawable/ic_input_add"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

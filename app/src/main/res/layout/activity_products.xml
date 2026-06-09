@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_md"
                     android:textSize="@dimen/text_base"
-                    android:hint="بحث في المنتجات..." />
+                    android:hint="@string/str_b11092" />
             </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.card.MaterialCardView>
     </com.google.android.material.appbar.AppBarLayout>
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacing_base"
-            android:text="0 منتج"
+            android:text="@string/str_5ac2a9"
             android:textSize="@dimen/text_md"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -88,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_base"
-                    android:text="لا توجد منتجات"
+                    android:text="@string/str_53ecf7"
                     android:textSize="@dimen/text_xl"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface" />
@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_sm"
-                    android:text="ابدأ بإضافة منتج جديد"
+                    android:text="@string/str_b326d5"
                     android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant" />
             </LinearLayout>

@@ -48,7 +48,7 @@
         app:boxCornerRadiusTopEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
         app:boxCornerRadiusBottomEnd="16dp"
-        android:hint="مبلغ الدفع (ر.س)">
+        android:hint="@string/str_3a9bb2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_payment_amount"
@@ -71,7 +71,7 @@
         app:boxCornerRadiusTopEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
         app:boxCornerRadiusBottomEnd="16dp"
-        android:hint="ملاحظة (اختياري)">
+        android:hint="@string/str_5a13e5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_payment_note"

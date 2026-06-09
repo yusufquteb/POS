@@ -38,7 +38,7 @@
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:text="اسم المنتج" />
+                android:text="@string/str_1ab391" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnSurfaceVariant"
-                    android:text="دفعة: —" />
+                    android:text="@string/str_f77fa3" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
                     android:textSize="@dimen/text_xs"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:maxLines="1"
-                    android:text="المورد: —" />
+                    android:text="@string/str_420f83" />
 
             </LinearLayout>
 
@@ -89,7 +89,7 @@
                 android:textSize="@dimen/text_sm"
                 android:textStyle="bold"
                 android:gravity="end"
-                android:text="0 وحدة" />
+                android:text="@string/str_d24edc" />
 
             <TextView
                 android:id="@+id/tv_expiry_badge"
@@ -102,7 +102,7 @@
                 android:textColor="?attr/colorOnError"
                 android:background="?attr/colorError"
                 android:gravity="center"
-                android:text="منتهية" />
+                android:text="@string/str_42c40c" />
 
         </LinearLayout>
 

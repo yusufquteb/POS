@@ -222,10 +222,10 @@
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="@dimen/spacing_base">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="قفل الكاشير (PIN)" android:textSize="@dimen/text_base" android:textStyle="bold"
+                            android:text="@string/str_53a947" android:textSize="@dimen/text_base" android:textStyle="bold"
                             android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="تعيين رمز PIN لحماية الوصول" android:textSize="@dimen/text_sm"
+                            android:text="@string/str_fff68b" android:textSize="@dimen/text_sm"
                             android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginTop="@dimen/spacing_xs"
                             android:fontFamily="@font/cairo_regular" />
                     </LinearLayout>

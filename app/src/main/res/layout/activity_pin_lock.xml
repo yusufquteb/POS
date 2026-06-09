@@ -40,7 +40,7 @@
             android:id="@+id/tv_pin_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="أدخل رمز PIN"
+            android:text="@string/str_5f6a45"
             android:textSize="@dimen/text_xl"
             android:textStyle="bold"
             android:layout_marginBottom="@dimen/spacing_sm" />
@@ -50,7 +50,7 @@
             android:id="@+id/tv_pin_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="أدخل الرمز المكون من 4 أرقام"
+            android:text="@string/str_70a793"
             android:textSize="@dimen/text_md"
             android:textColor="?attr/colorOnSurfaceVariant"
             android:layout_marginBottom="@dimen/spacing_xxl" />
@@ -98,7 +98,7 @@
             android:id="@+id/tv_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="رمز PIN غير صحيح"
+            android:text="@string/str_010e53"
             android:textColor="?attr/colorError"
             android:textSize="@dimen/text_md"
             android:layout_marginBottom="@dimen/spacing_xl"
@@ -210,7 +210,7 @@
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:layout_margin="6dp"
-                android:text="مسح"
+                android:text="@string/str_ec2ce8"
                 android:textSize="@dimen/text_sm"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:cornerRadius="12dp" />

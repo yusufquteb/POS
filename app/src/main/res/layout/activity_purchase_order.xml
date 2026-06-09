@@ -80,7 +80,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="إجمالي الأوامر"
+                            android:text="@string/str_dd201c"
                             android:textSize="@dimen/text_xs"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_regular"
@@ -118,7 +118,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="معلّق"
+                            android:text="@string/str_715a47"
                             android:textSize="@dimen/text_xs"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:fontFamily="@font/cairo_regular"
@@ -194,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_sm"
-                    android:text="اضغط + لإضافة أمر شراء جديد"
+                    android:text="@string/str_6b9cfb"
                     android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:fontFamily="@font/cairo_regular"

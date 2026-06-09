@@ -35,13 +35,13 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ديون العملاء"
+                android:text="@string/str_3be404"
                 android:icon="@drawable/ic_person" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ديون الموردين"
+                android:text="@string/str_74c215"
                 android:icon="@drawable/ic_local_shipping" />
 
         </com.google.android.material.tabs.TabLayout>
@@ -83,7 +83,7 @@
                         android:id="@+id/tv_stats_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="إجمالي ديون العملاء"
+                        android:text="@string/str_e07341"
                         android:textSize="@dimen/text_sm"
                         android:textColor="?attr/colorOnPrimaryContainer"
                         android:fontFamily="@font/cairo_regular"
@@ -130,7 +130,7 @@
                         android:id="@+id/tv_count_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="عميل مدين"
+                        android:text="@string/str_262427"
                         android:textSize="@dimen/text_xs"
                         android:textColor="?attr/colorOnPrimaryContainer"
                         android:fontFamily="@font/cairo_regular"
@@ -157,7 +157,7 @@
             app:boxCornerRadiusTopEnd="28dp"
             app:boxCornerRadiusBottomStart="28dp"
             app:boxCornerRadiusBottomEnd="28dp"
-            android:hint="بحث...">
+            android:hint="@string/str_180565">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_search"
@@ -217,7 +217,7 @@
                     android:id="@+id/tv_empty_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="لا توجد ديون"
+                    android:text="@string/str_efc0d2"
                     android:textSize="@dimen/text_xl"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant"
@@ -229,7 +229,7 @@
                     android:id="@+id/tv_empty_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="جميع العملاء سدّدوا ديونهم"
+                    android:text="@string/str_e0eeb8"
                     android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"

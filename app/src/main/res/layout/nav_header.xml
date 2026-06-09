@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="نظام POS"
+        android:text="@string/str_5d10b4"
         android:textSize="@dimen/text_xl"
         android:textStyle="bold"
         android:textColor="?attr/colorOnPrimary" />
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_xs"
-        android:text="نظام إدارة المبيعات المتكامل"
+        android:text="@string/str_501c36"
         android:textSize="@dimen/text_md"
         android:textColor="?attr/colorPrimaryContainer" />
 </LinearLayout>

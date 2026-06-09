@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_sm"
-        android:text="متجري"
+        android:text="@string/str_b530ab"
         android:textColor="?attr/colorOnPrimary"
         android:textSize="@dimen/text_lg"
         android:textStyle="bold" />

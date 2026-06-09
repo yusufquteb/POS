@@ -304,7 +304,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="تنبيهات الانتهاء"
+                                android:text="@string/str_420ebd"
                                 android:textColor="?attr/colorOnErrorContainer"
                                 android:textSize="@dimen/text_xs" />
                         </LinearLayout>
@@ -342,7 +342,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="بضاعة راكدة"
+                                android:text="@string/str_0d219f"
                                 android:textColor="?attr/colorOnSecondaryContainer"
                                 android:textSize="@dimen/text_xs" />
                         </LinearLayout>
@@ -393,7 +393,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="الأكثر مبيعاً الأسبوع"
+                                android:text="@string/str_158bba"
                                 android:textColor="?attr/colorOnTertiaryContainer"
                                 android:textSize="@dimen/text_xs" />
                         </LinearLayout>
@@ -434,7 +434,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="أفضل عميل الشهر"
+                                android:text="@string/str_0ee2c0"
                                 android:textColor="?attr/colorOnPrimaryContainer"
                                 android:textSize="@dimen/text_xs" />
                         </LinearLayout>
@@ -482,7 +482,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="ديون العملاء"
+                                android:text="@string/str_3be404"
                                 android:textColor="?attr/colorOnErrorContainer"
                                 android:textSize="@dimen/text_xs" />
                         </LinearLayout>
@@ -520,7 +520,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="ديون الموردين"
+                                android:text="@string/str_74c215"
                                 android:textColor="?attr/colorOnSecondaryContainer"
                                 android:textSize="@dimen/text_xs" />
                         </LinearLayout>
@@ -582,7 +582,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="ابدأ عملية بيع جديدة"
+                                android:text="@string/str_edebbd"
                                 android:textSize="@dimen/text_sm"
                                 android:textColor="?attr/colorOnPrimary"
                                 android:alpha="0.8"
@@ -856,7 +856,7 @@
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                                 android:text="🏦" android:textSize="@dimen/text_xxl" />
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp" android:text="الشيكات"
+                                android:layout_marginTop="2dp" android:text="@string/str_38a5d2"
                                 android:textSize="@dimen/text_xs" android:textStyle="bold"
                                 android:gravity="center" android:maxLines="1" android:ellipsize="end" />
                         </LinearLayout>
@@ -874,7 +874,7 @@
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                                 android:text="📅" android:textSize="@dimen/text_xxl" />
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp" android:text="الأقساط"
+                                android:layout_marginTop="2dp" android:text="@string/str_59bee2"
                                 android:textSize="@dimen/text_xs" android:textStyle="bold"
                                 android:gravity="center" android:maxLines="1" android:ellipsize="end" />
                         </LinearLayout>
@@ -892,7 +892,7 @@
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                                 android:text="💰" android:textSize="@dimen/text_xxl" />
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp" android:text="الخزينة"
+                                android:layout_marginTop="2dp" android:text="@string/str_b316fc"
                                 android:textSize="@dimen/text_xs" android:textStyle="bold"
                                 android:gravity="center" android:maxLines="1" android:ellipsize="end" />
                         </LinearLayout>
@@ -920,7 +920,7 @@
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                                 android:text="📊" android:textSize="@dimen/text_xxl" />
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp" android:text="جرد المخزون"
+                                android:layout_marginTop="2dp" android:text="@string/str_8018fe"
                                 android:textSize="@dimen/text_xs" android:textStyle="bold"
                                 android:gravity="center" android:maxLines="1" android:ellipsize="end" />
                         </LinearLayout>
@@ -938,7 +938,7 @@
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                                 android:text="👤" android:textSize="@dimen/text_xxl" />
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp" android:text="المستخدمون"
+                                android:layout_marginTop="2dp" android:text="@string/str_39d307"
                                 android:textSize="@dimen/text_xs" android:textStyle="bold"
                                 android:gravity="center" android:maxLines="1" android:ellipsize="end" />
                         </LinearLayout>

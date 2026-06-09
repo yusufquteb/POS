@@ -50,12 +50,12 @@
 
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛒" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ماذا أشتري الآن؟" android:textSize="@dimen/text_base" android:textStyle="bold" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/str_88df6e" android:textSize="@dimen/text_base" android:textStyle="bold" />
                         <TextView android:id="@+id/tv_reorder_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="@dimen/text_xl" android:textStyle="bold" android:textColor="@color/color_warning" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_4cff5b" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 
-                    <TextView android:id="@+id/tv_reorder_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="المنتجات التي وصلت حد إعادة الطلب" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
+                    <TextView android:id="@+id/tv_reorder_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_029921" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_reorder"
@@ -71,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_sm"
-                        android:text="إنشاء أمر شراء تلقائي" />
+                        android:text="@string/str_0da6f7" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -96,12 +96,12 @@
 
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠️" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ماذا سيتلف؟" android:textSize="@dimen/text_base" android:textStyle="bold" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/str_919712" android:textSize="@dimen/text_base" android:textStyle="bold" />
                         <TextView android:id="@+id/tv_expiry_risk_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="@dimen/text_xl" android:textStyle="bold" android:textColor="@color/color_error" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_4cff5b" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 
-                    <TextView android:id="@+id/tv_expiry_risk_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="منتجات تنتهي صلاحيتها خلال 7 أيام" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
+                    <TextView android:id="@+id/tv_expiry_risk_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_945afe" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_expiry_risk"
@@ -117,7 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_sm"
-                        android:text="عرض كل منتجات الصلاحية" />
+                        android:text="@string/str_d1ab2f" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -142,12 +142,12 @@
 
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😴" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ما الذي لا يتحرك؟" android:textSize="@dimen/text_base" android:textStyle="bold" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/str_13565b" android:textSize="@dimen/text_base" android:textStyle="bold" />
                         <TextView android:id="@+id/tv_dead_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="@dimen/text_xl" android:textStyle="bold" android:textColor="?attr/colorOnSurfaceVariant" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" منتج" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_4cff5b" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="لم تُباع خلال 30 يوم الماضية" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_deda37" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_dead_stock"
@@ -180,10 +180,10 @@
 
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📉" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
-                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="أضعف المنتجات ربحاً" android:textSize="@dimen/text_base" android:textStyle="bold" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/str_2565d0" android:textSize="@dimen/text_base" android:textStyle="bold" />
                     </LinearLayout>
 
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="هامش الربح الأقل خلال آخر 30 يوم" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_b7a95b" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginBottom="@dimen/spacing_sm" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_low_margin"

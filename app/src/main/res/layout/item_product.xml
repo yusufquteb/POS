@@ -47,7 +47,7 @@
 					android:focusable="false"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="اسم المنتج"
+					android:text="@string/str_1ab391"
 					android:textSize="@dimen/text_base"
 					android:textStyle="bold"
 					android:textColor="?attr/colorOnSurface"
@@ -59,7 +59,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/spacing_xxs"
-					android:text="الماركة"
+					android:text="@string/str_55ce99"
 					android:textSize="@dimen/text_sm"
 					android:textColor="?attr/colorOnSurfaceVariant"
 					android:visibility="gone" />
@@ -84,7 +84,7 @@
 					android:focusable="false"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="0.00 ر.س"
+					android:text="@string/str_4d2f34"
 					android:textSize="@dimen/text_base"
 					android:textStyle="bold" />
 				<TextView
@@ -93,7 +93,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/spacing_xs"
-					android:text="الكمية: 0"
+					android:text="@string/str_7a3bd5"
 					android:textSize="@dimen/text_sm"
 					android:textColor="@color/color_success" />
 			</LinearLayout>

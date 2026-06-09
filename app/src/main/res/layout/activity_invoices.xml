@@ -76,7 +76,7 @@
 						android:id="@+id/tv_today_total"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="0.00 ج.م"
+						android:text="@string/str_388b15"
 						android:textSize="@dimen/text_xs"
 						android:textColor="?attr/colorPrimaryContainer"
 						android:fontFamily="@font/cairo_semibold" />
@@ -119,7 +119,7 @@
 						android:id="@+id/tv_month_total"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="0.00 ج.م"
+						android:text="@string/str_388b15"
 						android:textSize="@dimen/text_xs"
 						android:textColor="?attr/colorPrimary"
 						android:fontFamily="@font/cairo_semibold" />

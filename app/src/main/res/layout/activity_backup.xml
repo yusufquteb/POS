@@ -32,7 +32,7 @@
 			android:id="@+id/textview25"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="النسخ الاحتياطي"
+			android:text="@string/str_86fc7e"
 			android:textSize="@dimen/text_lg"
 			android:textStyle="bold"
 			android:textColor="?attr/colorOnSurface"
@@ -55,7 +55,7 @@
 			android:layout_width="0dp"
 			android:layout_height="48dp"
 			style="@style/ButtonStyle"
-			android:text="إنشاء نسخة"
+			android:text="@string/str_45e327"
 			android:textSize="@dimen/text_md"
 			android:textStyle="bold"
 			android:layout_weight="1"
@@ -65,7 +65,7 @@
 			android:layout_width="0dp"
 			android:layout_height="48dp"
 			style="@style/ButtonStyle_Tonal"
-			android:text="استعادة نسخة"
+			android:text="@string/str_8b7156"
 			android:textSize="@dimen/text_md"
 			android:textStyle="bold"
 			android:layout_weight="1"
@@ -90,7 +90,7 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:text="☁️ النسخ الاحتياطي على السحابة"
+				android:text="@string/str_08475b"
 				android:textSize="@dimen/text_md"
 				android:textStyle="bold"
 				android:textColor="?attr/colorOnSurface"/>
@@ -98,7 +98,7 @@
 				android:id="@+id/tv_cloud_status"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="غير مُفعّل"
+				android:text="@string/str_fb9895"
 				android:textSize="@dimen/text_xs"
 				android:textColor="@color/color_warning"
 				android:textStyle="bold"/>
@@ -123,7 +123,7 @@
 				android:layout_height="40dp"
 				android:layout_weight="1"
 				style="@style/ButtonStyle_Outlined"
-				android:text="اختيار مجلد"
+				android:text="@string/str_59e46f"
 				android:textSize="@dimen/text_xs"
 				android:layout_marginEnd="6dp"/>
 			<Button
@@ -132,7 +132,7 @@
 				android:layout_height="40dp"
 				android:layout_weight="1"
 				style="@style/ButtonStyle"
-				android:text="نسخ الآن"
+				android:text="@string/str_1de3d7"
 				android:textSize="@dimen/text_xs"
 				android:visibility="gone"
 				android:layout_marginStart="6dp"/>
@@ -146,7 +146,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="1dp"
 		android:padding="@dimen/spacing_base"
-		android:text="النسخ الاحتياطية المحفوظة"
+		android:text="@string/str_ffb9a3"
 		android:textSize="@dimen/text_md"
 		android:textStyle="bold"
 		android:textColor="?attr/colorOnSurfaceVariant"
@@ -186,7 +186,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_base"
-				android:text="لا توجد نسخ احتياطية"
+				android:text="@string/str_05f3f8"
 				android:textSize="@dimen/text_lg"
 				android:textStyle="bold"
 				android:textColor="?attr/colorOnSurface" />
@@ -196,7 +196,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_sm"
 				android:gravity="center_horizontal|center_vertical"
-				android:text="قم بإنشاء نسخة احتياطية من البيانات\nللحفاظ على معلوماتك آمنة"
+				android:text="@string/str_d41282"
 				android:textSize="@dimen/text_md"
 				android:textColor="?attr/colorOnSurfaceVariant" />
 		</LinearLayout>
@@ -215,7 +215,7 @@
 			android:id="@+id/textview29"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="ℹ️ معلومات هامة:"
+			android:text="@string/str_feefab"
 			android:textSize="@dimen/text_sm"
 			android:textStyle="bold"
 			android:textColor="?attr/colorOnPrimaryContainer" />
@@ -224,7 +224,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/spacing_sm"
-			android:text="• يتم حفظ النسخ في: SmartPOS_Backups\n• استعادة النسخة ستحذف البيانات الحالية\n• احتفظ بنسخ منتظمة من بياناتك"
+			android:text="@string/str_7a9cc8"
 			android:textSize="@dimen/text_xs"
 			android:textColor="?attr/colorOnPrimaryContainer"
 			android:lineSpacingExtra="4dp" />

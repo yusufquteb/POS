@@ -39,7 +39,7 @@
             android:padding="@dimen/spacing_md"
             android:background="?attr/colorSurfaceVariant"
             android:gravity="center"
-            android:text="إجمالي المستحق: 0.00"/>
+            android:text="@string/str_1d9b17"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="لا توجد أقساط"
+                    android:text="@string/str_9b3e6c"
                     android:textSize="@dimen/text_lg"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurface"
@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="سجّل أول قسط لمتابعة المدفوعات"
+                    android:text="@string/str_4db476"
                     android:textSize="@dimen/text_md"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:gravity="center"
@@ -91,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="إضافة قسط" />
+                    android:text="@string/str_118cd1" />
             </LinearLayout>
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/spacing_base"
-        android:text="عقد جديد"
+        android:text="@string/str_b10080"
         app:icon="@android:drawable/ic_input_add"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

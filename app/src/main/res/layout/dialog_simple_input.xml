@@ -9,7 +9,7 @@
         android:id="@+id/til_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="أدخل القيمة"
+        android:hint="@string/str_8d2f49"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_input"
