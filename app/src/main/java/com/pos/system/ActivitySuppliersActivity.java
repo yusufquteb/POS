@@ -279,7 +279,23 @@ public class ActivitySuppliersActivity extends BaseActivity {
                     holder.tvDebt.setVisibility(View.GONE);
                 }
             }
-            holder.itemView.setOnClickListener(v -> showDataSheet(item));
+            holder.itemView.setOnClickListener(v -> {
+                String[] options = {"عرض الحساب", "تعديل البيانات"};
+                new com.google.android.material.dialog.MaterialAlertDialogBuilder(ActivitySuppliersActivity.this)
+                    .setItems(options, (d, which) -> {
+                        if (which == 0) {
+                            long sid = 0;
+                            try { sid = Long.parseLong(str(item,"id")); } catch (Exception ignored) {}
+                            android.content.Intent i2 = new android.content.Intent(ActivitySuppliersActivity.this,
+                                ActivitySupplierAccountsActivity.class);
+                            i2.putExtra("supplier_id", sid);
+                            i2.putExtra("supplier_name", str(item, "name"));
+                            startActivity(i2);
+                        } else {
+                            showDataSheet(item);
+                        }
+                    }).show();
+            });
             if (holder.btnCall != null) {
                 holder.btnCall.setOnClickListener(v -> {
                     String phone = str(item, "phone");

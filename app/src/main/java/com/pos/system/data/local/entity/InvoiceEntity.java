@@ -35,6 +35,14 @@ public class InvoiceEntity {
     @ColumnInfo(name = "total", defaultValue = "0.0")
     public double total;
 
+    /** المبلغ المدفوع فعلياً (يمكن أن يكون أقل من الإجمالي) */
+    @ColumnInfo(name = "paid_amount", defaultValue = "0.0")
+    public double paidAmount;
+
+    /** المتبقي = total - paid_amount */
+    @ColumnInfo(name = "remaining_amount", defaultValue = "0.0")
+    public double remainingAmount;
+
     @ColumnInfo(name = "payment_method", defaultValue = "نقدي")
     public String paymentMethod = "نقدي";
 
@@ -43,6 +51,21 @@ public class InvoiceEntity {
 
     @ColumnInfo(name = "notes")
     public String notes;
+
+    /** ملاحظة تظهر أسفل الفاتورة عند الطباعة */
+    @ColumnInfo(name = "invoice_note")
+    public String invoiceNote;
+
+    /** تاريخ الفاتورة (يمكن أن يختلف عن created_at) */
+    @ColumnInfo(name = "invoice_date")
+    public String invoiceDate;
+
+    /** المورد/التاجر المرتبط بالفاتورة */
+    @ColumnInfo(name = "supplier_id", defaultValue = "0")
+    public long supplierId;
+
+    @ColumnInfo(name = "supplier_name")
+    public String supplierName;
 
     @ColumnInfo(name = "created_by", defaultValue = "admin")
     public String createdBy = "admin";

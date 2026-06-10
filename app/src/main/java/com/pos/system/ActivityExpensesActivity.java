@@ -142,6 +142,7 @@ public class ActivityExpensesActivity extends BaseActivity {
         TextInputEditText etAmount      = dialogView.findViewById(R.id.et_amount);
         TextInputEditText etDescription = dialogView.findViewById(R.id.et_description);
         TextInputEditText etDate        = dialogView.findViewById(R.id.et_date);
+        android.widget.RadioGroup rgType = dialogView.findViewById(R.id.rg_expense_type);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         if (etDate != null) etDate.setText(sdf.format(new Date()));
@@ -172,7 +173,9 @@ public class ActivityExpensesActivity extends BaseActivity {
                     double amount = Double.parseDouble(amountStr);
                     if (amount <= 0) { showToast("المبلغ يجب أن يكون أكبر من صفر"); return; }
 
-                    long result = dbHelper.addExpense(category, amount, description, date, "نقدي", "");
+                    String expenseType = (rgType != null && rgType.getCheckedRadioButtonId() == R.id.rb_expense_in)
+                        ? "IN" : "OUT";
+                    long result = dbHelper.addExpenseWithType(category, amount, description, date, "", expenseType);
                     if (result > 0) {
                         showToast("✓ تمت إضافة المصروف");
                         loadExpenses();

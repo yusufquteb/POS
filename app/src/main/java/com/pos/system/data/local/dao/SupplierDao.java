@@ -19,10 +19,10 @@ public interface SupplierDao {
     @Query("SELECT * FROM suppliers WHERE name LIKE :q OR phone LIKE :q OR company LIKE :q ORDER BY name ASC")
     List<SupplierEntity> search(String q);
 
-    @Query("SELECT * FROM suppliers WHERE id = :id")
+    @Query("SELECT * FROM suppliers WHERE id=:id")
     SupplierEntity getById(long id);
 
-    @Query("SELECT COUNT(*) FROM suppliers WHERE phone = :phone")
+    @Query("SELECT COUNT(*) FROM suppliers WHERE phone=:phone")
     int phoneExists(String phone);
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
@@ -31,9 +31,21 @@ public interface SupplierDao {
     @Update
     int update(SupplierEntity supplier);
 
-    @Query("DELETE FROM suppliers WHERE id = :id")
+    @Query("DELETE FROM suppliers WHERE id=:id")
     int delete(long id);
 
-    @Query("UPDATE suppliers SET debt = debt + :delta WHERE id = :id")
+    @Query("UPDATE suppliers SET debt = debt + :delta WHERE id=:id")
     int updateDebt(long id, double delta);
+
+    @Query("UPDATE suppliers SET debt=:debt WHERE id=:id")
+    int setDebt(long id, double debt);
+
+    @Query("SELECT COUNT(*) FROM suppliers")
+    int getTotalCount();
+
+    @Query("SELECT COALESCE(SUM(debt),0) FROM suppliers WHERE debt > 0")
+    double getTotalDebt();
+
+    @Query("DELETE FROM suppliers")
+    int deleteAll();
 }

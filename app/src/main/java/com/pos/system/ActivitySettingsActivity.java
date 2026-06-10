@@ -162,6 +162,10 @@ public class ActivitySettingsActivity extends BaseActivity {
         if (cardPremium  != null) cardPremium.setOnClickListener(v -> showPremiumDialog());
         if (cardRateApp  != null) cardRateApp.setOnClickListener(v -> rateApp());
         if (btnLogout    != null) btnLogout.setOnClickListener(v -> confirmLogout());
+
+        View btnRemoveData = findViewById(R.id.btn_remove_data);
+        if (btnRemoveData != null) btnRemoveData.setOnClickListener(v ->
+            startActivity(new Intent(this, ActivityRemoveDataActivity.class)));
     }
 
     // ════════════════════════════════════════════════════════════

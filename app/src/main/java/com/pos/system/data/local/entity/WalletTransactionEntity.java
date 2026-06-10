@@ -4,30 +4,24 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "expenses")
-public class ExpenseEntity {
+@Entity(tableName = "wallet_transactions")
+public class WalletTransactionEntity {
 
     @PrimaryKey(autoGenerate = true)
     public long id;
 
-    @ColumnInfo(name = "title")
-    public String title;
+    /** "IN" = إيداع، "OUT" = سحب */
+    @ColumnInfo(name = "type", defaultValue = "OUT")
+    public String type = "OUT";
 
     @ColumnInfo(name = "amount", defaultValue = "0.0")
     public double amount;
-
-    @ColumnInfo(name = "category")
-    public String category;
 
     @ColumnInfo(name = "note")
     public String note;
 
     @ColumnInfo(name = "date")
     public String date;
-
-    /** "OUT" = مصروف (خرج)، "IN" = إيراد (دخل بدون فاتورة) */
-    @ColumnInfo(name = "expense_type", defaultValue = "OUT")
-    public String expenseType = "OUT";
 
     @ColumnInfo(name = "created_at")
     public String createdAt;

@@ -338,6 +338,89 @@
             android:screenOrientation="portrait"
             android:label="إدارة المستخدمين"/>
 
+        <!-- ════════ Wallet ════════ -->
+        <activity
+            android:name=".ActivityWalletActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="الخزينة"/>
+
+        <!-- ════════ Customer / Supplier Accounts ════════ -->
+        <activity
+            android:name=".ActivityCustomerAccountsActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityCustomersActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="حساب العميل"/>
+
+        <activity
+            android:name=".ActivitySupplierAccountsActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivitySuppliersActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="حساب المورد"/>
+
+        <activity
+            android:name=".ActivityCustomerRemainingActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="مستحقات العملاء"/>
+
+        <activity
+            android:name=".ActivitySupplierRemainingActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="مستحقات الموردين"/>
+
+        <!-- ════════ Item Details + Price Editor ════════ -->
+        <activity
+            android:name=".ActivityItemDetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityProductsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="تفاصيل المنتج"/>
+
+        <activity
+            android:name=".ActivityEditPricesActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityProductsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="تعديل الأسعار"/>
+
+        <!-- ════════ Price Quotes ════════ -->
+        <activity
+            android:name=".ActivityPriceQuotesActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="عروض الأسعار"/>
+
+        <activity
+            android:name=".ActivityPriceQuoteActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityPriceQuotesActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:label="عرض سعر جديد"/>
+
+        <!-- ════════ Remove Data ════════ -->
+        <activity
+            android:name=".ActivityRemoveDataActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivitySettingsActivity"
+            android:screenOrientation="portrait"
+            android:label="حذف البيانات"/>
+
         <!-- ════════ FileProvider ════════ -->
         <provider
             android:name="androidx.core.content.FileProvider"

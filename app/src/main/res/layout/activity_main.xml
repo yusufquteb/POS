@@ -662,6 +662,102 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
+                    <!-- Row: Wallet + Price Quotes -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_wallet"
+                            android:layout_width="0dp" android:layout_height="80dp"
+                            android:layout_margin="3dp" android:layout_weight="1"
+                            app:cardCornerRadius="@dimen/card_corner_radius"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="?attr/colorTertiaryContainer">
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                                android:gravity="center" android:orientation="vertical" android:padding="4dp">
+                                <ImageView android:layout_width="28dp" android:layout_height="28dp"
+                                    android:src="@drawable/ic_money"
+                                    android:tint="?attr/colorOnTertiaryContainer"
+                                    android:importantForAccessibility="no" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp" android:text="الخزينة"
+                                    android:textSize="@dimen/text_xs" android:textStyle="bold"
+                                    android:textColor="?attr/colorOnTertiaryContainer"
+                                    android:gravity="center" android:maxLines="2" android:ellipsize="end" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_price_quotes"
+                            android:layout_width="0dp" android:layout_height="80dp"
+                            android:layout_margin="3dp" android:layout_weight="1"
+                            app:cardCornerRadius="@dimen/card_corner_radius"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="?attr/colorPrimaryContainer">
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                                android:gravity="center" android:orientation="vertical" android:padding="4dp">
+                                <ImageView android:layout_width="28dp" android:layout_height="28dp"
+                                    android:src="@drawable/ic_invoices"
+                                    android:tint="?attr/colorOnPrimaryContainer"
+                                    android:importantForAccessibility="no" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp" android:text="عروض الأسعار"
+                                    android:textSize="@dimen/text_xs" android:textStyle="bold"
+                                    android:textColor="?attr/colorOnPrimaryContainer"
+                                    android:gravity="center" android:maxLines="2" android:ellipsize="end" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <!-- Row: Customer Remaining + Supplier Remaining -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_customer_remaining"
+                            android:layout_width="0dp" android:layout_height="80dp"
+                            android:layout_margin="3dp" android:layout_weight="1"
+                            app:cardCornerRadius="@dimen/card_corner_radius"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="?attr/colorErrorContainer">
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                                android:gravity="center" android:orientation="vertical" android:padding="4dp">
+                                <ImageView android:layout_width="28dp" android:layout_height="28dp"
+                                    android:src="@drawable/ic_person"
+                                    android:tint="?attr/colorOnErrorContainer"
+                                    android:importantForAccessibility="no" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp" android:text="مستحقات العملاء"
+                                    android:textSize="@dimen/text_xs" android:textStyle="bold"
+                                    android:textColor="?attr/colorOnErrorContainer"
+                                    android:gravity="center" android:maxLines="2" android:ellipsize="end" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_supplier_remaining"
+                            android:layout_width="0dp" android:layout_height="80dp"
+                            android:layout_margin="3dp" android:layout_weight="1"
+                            app:cardCornerRadius="@dimen/card_corner_radius"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="?attr/colorSecondaryContainer">
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                                android:gravity="center" android:orientation="vertical" android:padding="4dp">
+                                <ImageView android:layout_width="28dp" android:layout_height="28dp"
+                                    android:src="@drawable/ic_suppliers"
+                                    android:tint="?attr/colorOnSecondaryContainer"
+                                    android:importantForAccessibility="no" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp" android:text="مستحقات الموردين"
+                                    android:textSize="@dimen/text_xs" android:textStyle="bold"
+                                    android:textColor="?attr/colorOnSecondaryContainer"
+                                    android:gravity="center" android:maxLines="2" android:ellipsize="end" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>

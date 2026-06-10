@@ -67,6 +67,10 @@ public class MainActivity extends BaseActivity
     private MaterialCardView cardCashDrawer;
     private MaterialCardView cardStockCount;
     private MaterialCardView cardUsers;
+    private MaterialCardView cardWallet;
+    private MaterialCardView cardPriceQuotes;
+    private MaterialCardView cardCustomerRemaining;
+    private MaterialCardView cardSupplierRemaining;
 
     // Alert Card
     private MaterialCardView cardAlert;
@@ -147,6 +151,10 @@ public class MainActivity extends BaseActivity
         cardCashDrawer    = binding.cardCashDrawer;
         cardStockCount    = binding.cardStockCount;
         cardUsers         = binding.cardUsers;
+        cardWallet            = binding.cardWallet;
+        cardPriceQuotes       = binding.cardPriceQuotes;
+        cardCustomerRemaining = binding.cardCustomerRemaining;
+        cardSupplierRemaining = binding.cardSupplierRemaining;
 
         cardAlert      = binding.cardAlert;
         tvAlertMessage = binding.tvAlertMessage;
@@ -172,6 +180,10 @@ public class MainActivity extends BaseActivity
         setCardClick(cardPurchaseOrders, ActivityPurchaseOrderActivity.class);
         setCardClick(cardChecks,        ActivityChecksActivity.class);
         setCardClick(cardInstallments,  ActivityInstallmentsActivity.class);
+        setCardClick(cardWallet,            ActivityWalletActivity.class);
+        setCardClick(cardPriceQuotes,       ActivityPriceQuotesActivity.class);
+        setCardClick(cardCustomerRemaining, ActivityCustomerRemainingActivity.class);
+        setCardClick(cardSupplierRemaining, ActivitySupplierRemainingActivity.class);
         setCardClick(cardCashDrawer,    ActivityCashDrawerActivity.class);
         setCardClick(cardStockCount,    ActivityStockCountActivity.class);
         setCardClick(cardUsers,         ActivityUsersActivity.class);
