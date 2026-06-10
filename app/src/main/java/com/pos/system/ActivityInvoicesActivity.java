@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +41,7 @@ public class ActivityInvoicesActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private TextInputEditText etSearch;
     private MaterialButton btnScanBarcode;
+    private boolean filterUnsettled = false;
 
     private final ActivityResultLauncher<Intent> barcodeScanLauncher =
         registerForActivityResult(
@@ -77,6 +79,15 @@ public class ActivityInvoicesActivity extends BaseActivity {
             adapter = new InvoicesAdapter(invoicesList);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
+        }
+
+        ChipGroup chipFilter = binding.chipGroupFilter;
+        if (chipFilter != null) {
+            chipFilter.setOnCheckedStateChangeListener((group, ids) -> {
+                filterUnsettled = !ids.isEmpty() && ids.get(0) == R.id.chip_filter_unsettled;
+                filterInvoices(etSearch != null && etSearch.getText() != null
+                    ? etSearch.getText().toString().trim() : "");
+            });
         }
     }
 
@@ -119,7 +130,8 @@ public class ActivityInvoicesActivity extends BaseActivity {
         try {
             db = dbHelper.getReadableDatabase();
             cursor = db.rawQuery(
-                "SELECT id, invoice_number, customer_name, total, created_at, payment_method " +
+                "SELECT id, invoice_number, customer_name, total, created_at, payment_method, " +
+                "COALESCE(remaining_amount, 0) AS remaining_amount, COALESCE(status,'') AS status " +
                 "FROM invoices ORDER BY created_at DESC", null);
 
             if (cursor != null && cursor.moveToFirst()) {
@@ -145,17 +157,18 @@ public class ActivityInvoicesActivity extends BaseActivity {
 
     private void filterInvoices(String query) {
         invoicesList.clear();
-        if (query == null || query.isEmpty()) {
-            invoicesList.addAll(allInvoicesList);
-        } else {
-            String lower = query.toLowerCase();
-            for (HashMap<String, String> inv : allInvoicesList) {
-                String num  = inv.getOrDefault("invoice_number", "").toLowerCase();
-                String cust = inv.getOrDefault("customer_name",  "").toLowerCase();
-                if (num.contains(lower) || cust.contains(lower)) {
-                    invoicesList.add(inv);
-                }
+        String lower = (query != null && !query.isEmpty()) ? query.toLowerCase() : null;
+        for (HashMap<String, String> inv : allInvoicesList) {
+            if (filterUnsettled) {
+                try {
+                    double remaining = Double.parseDouble(inv.getOrDefault("remaining_amount", "0"));
+                    if (remaining <= 0.01) continue;
+                } catch (Exception ignored) {}
             }
+            if (lower == null) { invoicesList.add(inv); continue; }
+            String num  = inv.getOrDefault("invoice_number", "").toLowerCase();
+            String cust = inv.getOrDefault("customer_name",  "").toLowerCase();
+            if (num.contains(lower) || cust.contains(lower)) invoicesList.add(inv);
         }
         if (adapter != null) adapter.notifyDataSetChanged();
     }

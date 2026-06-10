@@ -175,6 +175,35 @@
 				app:cornerRadius="16dp"
 				app:backgroundTint="?attr/colorPrimary" />
 		</LinearLayout>
+
+		<HorizontalScrollView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingStart="@dimen/spacing_md"
+			android:paddingEnd="@dimen/spacing_md"
+			android:paddingBottom="@dimen/spacing_xs"
+			android:scrollbars="none">
+			<com.google.android.material.chip.ChipGroup
+				android:id="@+id/chip_group_filter"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:singleSelection="true"
+				app:selectionRequired="true">
+				<com.google.android.material.chip.Chip
+					android:id="@+id/chip_filter_all"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="الكل"
+					android:checked="true"
+					style="@style/Widget.Material3.Chip.Filter"/>
+				<com.google.android.material.chip.Chip
+					android:id="@+id/chip_filter_unsettled"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="غير مسدَّدة"
+					style="@style/Widget.Material3.Chip.Filter"/>
+			</com.google.android.material.chip.ChipGroup>
+		</HorizontalScrollView>
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/recycler_invoices"
 			android:layout_width="match_parent"

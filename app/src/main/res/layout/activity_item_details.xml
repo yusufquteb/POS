@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="تفاصيل المنتج"
+            app:navigationIcon="@drawable/ic_arrow_back"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Product Info Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="اسم المنتج"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface"/>
+                    <TextView
+                        android:id="@+id/tv_barcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="الباركود"
+                        android:textSize="14sp"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginTop="4dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp">
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="سعر البيع" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant"/>
+                            <TextView android:id="@+id/tv_sell_price" android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:text="0.00"
+                                android:textSize="18sp" android:textStyle="bold" android:textColor="?attr/colorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="سعر الشراء" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant"/>
+                            <TextView android:id="@+id/tv_buy_price" android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:text="0.00"
+                                android:textSize="18sp" android:textStyle="bold" android:textColor="?attr/colorSecondary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="الكمية" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant"/>
+                            <TextView android:id="@+id/tv_qty" android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:text="0"
+                                android:textSize="18sp" android:textStyle="bold" android:textColor="?attr/colorTertiary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView android:id="@+id/tv_category" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="التصنيف: -"
+                        android:textSize="13sp" android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Action Buttons -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginBottom="12dp">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_edit_price"
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:layout_marginEnd="4dp"
+                    android:text="تعديل السعر"
+                    style="@style/Widget.Material3.Button"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_add_qty"
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:layout_marginStart="4dp"
+                    android:text="إضافة كمية"
+                    style="@style/Widget.Material3.Button.TonalButton"/>
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_delete"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="حذف المنتج"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:strokeColor="?attr/colorError"
+                android:textColor="?attr/colorError"/>
+
+            <!-- History Header -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="سجل الإضافات" android:textSize="16sp" android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface" android:layout_marginBottom="8dp"/>
+
+            <!-- Invoice items history -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

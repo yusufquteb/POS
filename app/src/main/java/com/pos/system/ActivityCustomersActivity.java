@@ -304,7 +304,23 @@ public class ActivityCustomersActivity extends BaseActivity {
                 }
             }
 
-            holder.itemView.setOnClickListener(v -> showDataSheet(item));
+            holder.itemView.setOnClickListener(v -> {
+                String[] options = {"عرض الحساب", "تعديل البيانات"};
+                new com.google.android.material.dialog.MaterialAlertDialogBuilder(ActivityCustomersActivity.this)
+                    .setItems(options, (d, which) -> {
+                        if (which == 0) {
+                            long cid = 0;
+                            try { cid = Long.parseLong(str(item,"id")); } catch (Exception ignored) {}
+                            android.content.Intent i2 = new android.content.Intent(ActivityCustomersActivity.this,
+                                ActivityCustomerAccountsActivity.class);
+                            i2.putExtra("customer_id", cid);
+                            i2.putExtra("customer_name", str(item, "name"));
+                            startActivity(i2);
+                        } else {
+                            showDataSheet(item);
+                        }
+                    }).show();
+            });
 
             // الاتصال
             if (holder.btnCall != null) {

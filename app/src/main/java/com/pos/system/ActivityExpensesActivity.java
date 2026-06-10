@@ -142,6 +142,7 @@ public class ActivityExpensesActivity extends BaseActivity {
         TextInputEditText etAmount      = dialogView.findViewById(R.id.et_amount);
         TextInputEditText etDescription = dialogView.findViewById(R.id.et_description);
         TextInputEditText etDate        = dialogView.findViewById(R.id.et_date);
+        android.widget.RadioGroup rgType = dialogView.findViewById(R.id.rg_expense_type);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         if (etDate != null) etDate.setText(sdf.format(new Date()));
@@ -172,9 +173,15 @@ public class ActivityExpensesActivity extends BaseActivity {
                     double amount = Double.parseDouble(amountStr);
                     if (amount <= 0) { showToast("المبلغ يجب أن يكون أكبر من صفر"); return; }
 
-                    long result = dbHelper.addExpense(category, amount, description, date, "نقدي", "");
+                    String expenseType = (rgType != null && rgType.getCheckedRadioButtonId() == R.id.rb_expense_in)
+                        ? "IN" : "OUT";
+                    long result = dbHelper.addExpenseWithType(category, amount, description, date, "", expenseType);
                     if (result > 0) {
                         showToast("✓ تمت إضافة المصروف");
+                        try {
+                            String walletType = "IN".equals(expenseType) ? "IN" : "OUT";
+                            dbHelper.addWalletTransaction(walletType, amount, "مصروف: " + category, date);
+                        } catch (Exception ignored) {}
                         loadExpenses();
                     } else {
                         showSnackbar("فشل في إضافة المصروف", true);
@@ -315,6 +322,7 @@ public class ActivityExpensesActivity extends BaseActivity {
                 } catch (Exception e) { holder.tvAmount.setText("0.00 " + currency); }
             }
             holder.itemView.setOnClickListener(v -> showExpenseDetails(expense));
+        holder.itemView.setOnLongClickListener(v -> { showEditExpenseDialog(expense); return true; });
         }
 
         @Override public int getItemCount() { return expensesList.size(); }
@@ -331,6 +339,66 @@ public class ActivityExpensesActivity extends BaseActivity {
         }
     }
 
+
+    private void showEditExpenseDialog(HashMap<String, String> expense) {
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_expense, null);
+
+        TextInputEditText etCategory    = dialogView.findViewById(R.id.et_category);
+        TextInputEditText etAmount      = dialogView.findViewById(R.id.et_amount);
+        TextInputEditText etDescription = dialogView.findViewById(R.id.et_description);
+        TextInputEditText etDate        = dialogView.findViewById(R.id.et_date);
+        android.widget.RadioGroup rgType = dialogView.findViewById(R.id.rg_expense_type);
+
+        if (etCategory    != null) etCategory.setText(expense.getOrDefault("category", ""));
+        if (etAmount      != null) etAmount.setText(expense.getOrDefault("amount", ""));
+        if (etDescription != null) etDescription.setText(expense.getOrDefault("description", ""));
+        if (etDate        != null) etDate.setText(expense.getOrDefault("date", ""));
+        if (rgType != null && "IN".equals(expense.getOrDefault("expense_type", "OUT")))
+            rgType.check(R.id.rb_expense_in);
+
+        if (etDate != null) {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+            etDate.setOnClickListener(v -> {
+                java.util.Calendar cal = java.util.Calendar.getInstance();
+                new android.app.DatePickerDialog(this, (view, year, month, day) -> {
+                    cal.set(year, month, day);
+                    etDate.setText(sdf.format(cal.getTime()));
+                }, cal.get(java.util.Calendar.YEAR), cal.get(java.util.Calendar.MONTH),
+                   cal.get(java.util.Calendar.DAY_OF_MONTH)).show();
+            });
+        }
+
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("تعديل المصروف")
+            .setView(dialogView)
+            .setPositiveButton("حفظ", (dialog, which) -> {
+                String category    = getText(etCategory);
+                String amountStr   = getText(etAmount);
+                String description = getText(etDescription);
+                String date        = getText(etDate);
+
+                if (category.isEmpty())  { showToast("يرجى إدخال التصنيف"); return; }
+                if (amountStr.isEmpty()) { showToast("يرجى إدخال المبلغ");  return; }
+                try {
+                    double amount = Double.parseDouble(amountStr);
+                    if (amount <= 0) { showToast("المبلغ يجب أن يكون أكبر من صفر"); return; }
+                    String expenseType = (rgType != null && rgType.getCheckedRadioButtonId() == R.id.rb_expense_in)
+                        ? "IN" : "OUT";
+                    long id = Long.parseLong(expense.getOrDefault("id", "0"));
+                    android.content.ContentValues cv = new android.content.ContentValues();
+                    cv.put("category",     category);
+                    cv.put("amount",       amount);
+                    cv.put("description",  description);
+                    cv.put("date",         date);
+                    cv.put("expense_type", expenseType);
+                    int updated = dbHelper.getWritableDatabase().update("expenses", cv, "id=?", new String[]{String.valueOf(id)});
+                    if (updated > 0) { showToast("✓ تم تحديث المصروف"); loadExpenses(); }
+                    else showSnackbar("فشل في التحديث", true);
+                } catch (NumberFormatException e) { showSnackbar("المبلغ غير صحيح", true); }
+            })
+            .setNegativeButton(R.string.cancel, null)
+            .show();
+    }
     private void showExpenseDetails(HashMap<String, String> expense) {
         String details = "التصنيف: " + expense.getOrDefault("category", "") + "\n" +
                          "المبلغ: "   + expense.getOrDefault("amount", "0") + " " + currency + "\n" +

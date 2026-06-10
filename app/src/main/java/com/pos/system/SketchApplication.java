@@ -45,7 +45,8 @@ public class SketchApplication extends Application {
         // ═══════════════════════════════════════════════════════
         try {
             ThemeManager.init(this);
-            Log.d(TAG, "✓ ThemeManager initialized");
+            ThemeManager.applyTheme(); // force light mode before any activity starts
+            Log.d(TAG, "✓ ThemeManager initialized (light-only)");
         } catch (Exception e) {
             Log.e(TAG, "ThemeManager init failed: " + e.getMessage());
         }

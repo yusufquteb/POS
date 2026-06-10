@@ -96,6 +96,10 @@
     <color name="shift_closed_bg">#EFEEEC</color>
     <color name="shift_closed_text">#475569</color>
 
+    <!-- Income / Expense semantic colors -->
+    <color name="income_color">#16A34A</color>
+    <color name="expense_color">#DC2626</color>
+
     <!-- Legacy aliases -->
     <color name="primary">#7C3AED</color>
     <color name="dark_primary">#A78BFA</color>

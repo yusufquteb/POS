@@ -16,6 +16,28 @@
         android:textColor="?attr/colorOnSurface"
         android:paddingBottom="@dimen/spacing_base"/>
 
+    <!-- نوع المصروف: خروج / دخول -->
+    <RadioGroup
+        android:id="@+id/rg_expense_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/spacing_md">
+        <RadioButton
+            android:id="@+id/rb_expense_out"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="مصروف (خروج)"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/rb_expense_in"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="إيراد (دخول)"/>
+    </RadioGroup>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

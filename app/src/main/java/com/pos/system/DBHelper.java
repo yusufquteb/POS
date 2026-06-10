@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
 
     public static final String DATABASE_NAME    = "SmartPOS.db";
-    public static final int    DATABASE_VERSION = 8;
+    public static final int    DATABASE_VERSION = 9;
 
     private final Context mContext;
 
@@ -79,6 +79,10 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_CASH_TRANSACTIONS         = "cash_transactions";
     private static final String TABLE_STOCK_COUNT_SESSIONS      = "stock_count_sessions";
     private static final String TABLE_STOCK_COUNT_ITEMS         = "stock_count_items";
+    private static final String TABLE_WALLET_TRANSACTIONS        = "wallet_transactions";
+    private static final String TABLE_DIRECT_PAYMENTS            = "direct_payments";
+    private static final String TABLE_PRICE_QUOTES               = "price_quotes";
+    private static final String TABLE_PRICE_QUOTE_ITEMS          = "price_quote_items";
 
     // ════════════════════════════════════════════════════════════
     // Constructor
@@ -164,6 +168,21 @@ public class DBHelper extends SQLiteOpenHelper {
             insertDefaultAdminUser(db);
             insertDefaultCashDrawer(db);
         }
+        if (oldVersion < 9) {
+            // New columns on existing tables
+            safeAlter(db, "ALTER TABLE invoices ADD COLUMN paid_amount REAL DEFAULT 0.0");
+            safeAlter(db, "ALTER TABLE invoices ADD COLUMN remaining_amount REAL DEFAULT 0.0");
+            safeAlter(db, "ALTER TABLE invoices ADD COLUMN invoice_note TEXT DEFAULT ''");
+            safeAlter(db, "ALTER TABLE invoices ADD COLUMN invoice_date TEXT DEFAULT ''");
+            safeAlter(db, "ALTER TABLE invoices ADD COLUMN supplier_id INTEGER DEFAULT 0");
+            safeAlter(db, "ALTER TABLE invoices ADD COLUMN supplier_name TEXT DEFAULT ''");
+            safeAlter(db, "ALTER TABLE expenses ADD COLUMN expense_type TEXT DEFAULT 'OUT'");
+            safeAlter(db, "ALTER TABLE invoice_items ADD COLUMN buy_cost_per_unit REAL DEFAULT 0.0");
+            // New tables
+            createWalletTransactionsTable(db);
+            createDirectPaymentsTable(db);
+            createPriceQuotesTable(db);
+        }
     }
 
     /** ALTER TABLE آمن — يتجاهل فقط خطأ "duplicate column name" */
@@ -247,6 +266,12 @@ public class DBHelper extends SQLiteOpenHelper {
             "status TEXT DEFAULT 'completed', " +
             "notes TEXT, " +
             "created_by TEXT DEFAULT 'admin', " +
+            "paid_amount REAL DEFAULT 0.0, " +
+            "remaining_amount REAL DEFAULT 0.0, " +
+            "invoice_note TEXT DEFAULT '', " +
+            "invoice_date TEXT DEFAULT '', " +
+            "supplier_id INTEGER DEFAULT 0, " +
+            "supplier_name TEXT DEFAULT '', " +
             "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_INVOICE_ITEMS + " (" +
@@ -258,6 +283,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "price REAL DEFAULT 0.0, " +
             "qty INTEGER DEFAULT 1, " +
             "total REAL DEFAULT 0.0, " +
+            "buy_cost_per_unit REAL DEFAULT 0.0, " +
             "FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE CASCADE)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_LOCATIONS + " (" +
@@ -295,6 +321,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "category TEXT, " +
             "note TEXT, " +
             "date TEXT, " +
+            "expense_type TEXT DEFAULT 'OUT', " +
             "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_BACKUP_LOG + " (" +
@@ -321,6 +348,9 @@ public class DBHelper extends SQLiteOpenHelper {
         createInstallmentContractsTable(db);
         createCashDrawersTable(db);
         createStockCountTable(db);
+        createWalletTransactionsTable(db);
+        createDirectPaymentsTable(db);
+        createPriceQuotesTable(db);
         insertDefaultAdminUser(db);
         insertDefaultCashDrawer(db);
     }
@@ -3415,5 +3445,574 @@ public class DBHelper extends SQLiteOpenHelper {
             return getWritableDatabase().update(TABLE_STOCK_COUNT_SESSIONS, cv, "id=?",
                 new String[]{String.valueOf(sessionId)}) > 0;
         } catch (Exception e) { return false; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Private table creation methods for new tables
+    // ════════════════════════════════════════════════════════════
+
+    private void createWalletTransactionsTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_WALLET_TRANSACTIONS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "type TEXT NOT NULL DEFAULT 'OUT', " +
+            "amount REAL DEFAULT 0.0, " +
+            "note TEXT DEFAULT '', " +
+            "date TEXT DEFAULT '', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+    }
+
+    private void createDirectPaymentsTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_DIRECT_PAYMENTS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "entity_type TEXT NOT NULL DEFAULT 'customer', " +
+            "entity_id INTEGER DEFAULT 0, " +
+            "entity_name TEXT DEFAULT '', " +
+            "type TEXT NOT NULL DEFAULT 'OUT', " +
+            "amount REAL DEFAULT 0.0, " +
+            "note TEXT DEFAULT '', " +
+            "date TEXT DEFAULT '', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+    }
+
+    private void createPriceQuotesTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PRICE_QUOTES + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "quote_number TEXT UNIQUE, " +
+            "customer_id INTEGER DEFAULT 0, " +
+            "customer_name TEXT DEFAULT '', " +
+            "subtotal REAL DEFAULT 0.0, " +
+            "discount REAL DEFAULT 0.0, " +
+            "tax REAL DEFAULT 0.0, " +
+            "total REAL DEFAULT 0.0, " +
+            "notes TEXT DEFAULT '', " +
+            "status TEXT DEFAULT 'active', " +
+            "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PRICE_QUOTE_ITEMS + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "quote_id INTEGER NOT NULL, " +
+            "product_id INTEGER DEFAULT 0, " +
+            "barcode TEXT DEFAULT '', " +
+            "name TEXT NOT NULL, " +
+            "price REAL DEFAULT 0.0, " +
+            "qty INTEGER DEFAULT 1, " +
+            "total REAL DEFAULT 0.0, " +
+            "FOREIGN KEY(quote_id) REFERENCES " + TABLE_PRICE_QUOTES + "(id) ON DELETE CASCADE)");
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Wallet / Treasury
+    // ════════════════════════════════════════════════════════════
+
+    public long addWalletTransaction(String type, double amount, String note, String date) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("type",   type   != null ? type   : "OUT");
+            cv.put("amount", amount);
+            cv.put("note",   note   != null ? note   : "");
+            cv.put("date",   date   != null ? date   : getCurrentDate());
+            return getWritableDatabase().insert(TABLE_WALLET_TRANSACTIONS, null, cv);
+        } catch (Exception e) { Log.e(TAG, "addWalletTransaction: " + e.getMessage()); return -1; }
+    }
+
+    public double getWalletBalance() {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT COALESCE(SUM(CASE WHEN type='IN' THEN amount ELSE -amount END),0) FROM " +
+                TABLE_WALLET_TRANSACTIONS, null);
+            double b = 0; if (c.moveToFirst()) b = c.getDouble(0); c.close(); return b;
+        } catch (Exception e) { return 0; }
+    }
+
+    public List<HashMap<String, String>> getWalletTransactions(String fromDate, String toDate) {
+        if (fromDate != null && toDate != null && !fromDate.isEmpty() && !toDate.isEmpty()) {
+            return queryTable("SELECT * FROM " + TABLE_WALLET_TRANSACTIONS +
+                " WHERE date BETWEEN ? AND ? ORDER BY created_at DESC",
+                new String[]{fromDate, toDate});
+        }
+        return queryTable("SELECT * FROM " + TABLE_WALLET_TRANSACTIONS +
+            " ORDER BY created_at DESC", null);
+    }
+
+    public double getWalletIn(String fromDate, String toDate) {
+        try {
+            String sql; String[] args = null;
+            if (fromDate != null && toDate != null && !fromDate.isEmpty()) {
+                sql = "SELECT COALESCE(SUM(amount),0) FROM " + TABLE_WALLET_TRANSACTIONS +
+                      " WHERE type='IN' AND date BETWEEN ? AND ?";
+                args = new String[]{fromDate, toDate};
+            } else {
+                sql = "SELECT COALESCE(SUM(amount),0) FROM " + TABLE_WALLET_TRANSACTIONS + " WHERE type='IN'";
+            }
+            Cursor c = getReadableDatabase().rawQuery(sql, args);
+            double v = 0; if (c.moveToFirst()) v = c.getDouble(0); c.close(); return v;
+        } catch (Exception e) { return 0; }
+    }
+
+    public double getWalletOut(String fromDate, String toDate) {
+        try {
+            String sql; String[] args = null;
+            if (fromDate != null && toDate != null && !fromDate.isEmpty()) {
+                sql = "SELECT COALESCE(SUM(amount),0) FROM " + TABLE_WALLET_TRANSACTIONS +
+                      " WHERE type='OUT' AND date BETWEEN ? AND ?";
+                args = new String[]{fromDate, toDate};
+            } else {
+                sql = "SELECT COALESCE(SUM(amount),0) FROM " + TABLE_WALLET_TRANSACTIONS + " WHERE type='OUT'";
+            }
+            Cursor c = getReadableDatabase().rawQuery(sql, args);
+            double v = 0; if (c.moveToFirst()) v = c.getDouble(0); c.close(); return v;
+        } catch (Exception e) { return 0; }
+    }
+
+    public boolean deleteWalletTransaction(long id) {
+        try { return getWritableDatabase().delete(TABLE_WALLET_TRANSACTIONS, "id=?",
+            new String[]{String.valueOf(id)}) > 0; }
+        catch (Exception e) { return false; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Direct Payments (customer/supplier)
+    // ════════════════════════════════════════════════════════════
+
+    public long addDirectPayment(String entityType, long entityId, String entityName,
+                                  String type, double amount, String note, String date) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("entity_type", entityType != null ? entityType : "customer");
+            cv.put("entity_id",   entityId);
+            cv.put("entity_name", entityName != null ? entityName : "");
+            cv.put("type",        type != null ? type : "OUT");
+            cv.put("amount",      amount);
+            cv.put("note",        note != null ? note : "");
+            cv.put("date",        date != null ? date : getCurrentDate());
+            long rowId = getWritableDatabase().insert(TABLE_DIRECT_PAYMENTS, null, cv);
+            if (rowId > 0) {
+                if ("customer".equals(entityType)) {
+                    // IN = customer paid us (reduces debt), OUT = we paid customer (increases debt)
+                    double delta = "IN".equals(type) ? -amount : amount;
+                    updateCustomerDebt(String.valueOf(entityId), delta);
+                } else if ("supplier".equals(entityType)) {
+                    double delta = "OUT".equals(type) ? -amount : amount;
+                    updateSupplierDebt(String.valueOf(entityId), delta);
+                }
+            }
+            return rowId;
+        } catch (Exception e) { Log.e(TAG, "addDirectPayment: " + e.getMessage()); return -1; }
+    }
+
+    public List<HashMap<String, String>> getDirectPayments(String entityType, long entityId) {
+        return queryTable("SELECT * FROM " + TABLE_DIRECT_PAYMENTS +
+            " WHERE entity_type=? AND entity_id=? ORDER BY created_at DESC",
+            new String[]{entityType, String.valueOf(entityId)});
+    }
+
+    public List<HashMap<String, String>> getAllDirectPayments() {
+        return queryTable("SELECT * FROM " + TABLE_DIRECT_PAYMENTS +
+            " ORDER BY created_at DESC", null);
+    }
+
+    public boolean deleteDirectPayment(long id) {
+        try { return getWritableDatabase().delete(TABLE_DIRECT_PAYMENTS, "id=?",
+            new String[]{String.valueOf(id)}) > 0; }
+        catch (Exception e) { return false; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Price Quotes
+    // ════════════════════════════════════════════════════════════
+
+    public long addPriceQuote(String customerName, long customerId, List<HashMap<String, String>> items,
+                               double subtotal, double discount, double tax, double total, String notes) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        long quoteId = -1;
+        try {
+            String quoteNumber = "QT-" + new java.text.SimpleDateFormat("yyyyMMdd-HHmmss",
+                java.util.Locale.US).format(new java.util.Date());
+            ContentValues cv = new ContentValues();
+            cv.put("quote_number",  quoteNumber);
+            cv.put("customer_id",   customerId);
+            cv.put("customer_name", customerName != null ? customerName : "");
+            cv.put("subtotal",      subtotal);
+            cv.put("discount",      discount);
+            cv.put("tax",           tax);
+            cv.put("total",         total);
+            cv.put("notes",         notes != null ? notes : "");
+            cv.put("status",        "active");
+            quoteId = db.insert(TABLE_PRICE_QUOTES, null, cv);
+            if (quoteId < 0) throw new Exception("Failed to insert quote");
+            for (HashMap<String, String> item : items) {
+                ContentValues icv = new ContentValues();
+                icv.put("quote_id",   quoteId);
+                icv.put("product_id", safeInt(item, "id", 0));
+                icv.put("barcode",    safeGet(item, "barcode"));
+                icv.put("name",       safeGet(item, "name"));
+                icv.put("price",      safeDouble(item, "price"));
+                icv.put("qty",        safeInt(item, "qty", 1));
+                icv.put("total",      safeDouble(item, "total"));
+                db.insert(TABLE_PRICE_QUOTE_ITEMS, null, icv);
+            }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.e(TAG, "addPriceQuote: " + e.getMessage()); quoteId = -1;
+        } finally { db.endTransaction(); }
+        return quoteId;
+    }
+
+    public List<HashMap<String, String>> getAllPriceQuotes() {
+        return queryTable("SELECT * FROM " + TABLE_PRICE_QUOTES + " ORDER BY created_at DESC", null);
+    }
+
+    public HashMap<String, String> getPriceQuoteById(long id) {
+        List<HashMap<String, String>> list = queryTable(
+            "SELECT * FROM " + TABLE_PRICE_QUOTES + " WHERE id=?", new String[]{String.valueOf(id)});
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public List<HashMap<String, String>> getPriceQuoteItems(long quoteId) {
+        return queryTable("SELECT * FROM " + TABLE_PRICE_QUOTE_ITEMS + " WHERE quote_id=?",
+            new String[]{String.valueOf(quoteId)});
+    }
+
+    public boolean updatePriceQuoteStatus(long quoteId, String status) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("status", status);
+            return getWritableDatabase().update(TABLE_PRICE_QUOTES, cv, "id=?",
+                new String[]{String.valueOf(quoteId)}) > 0;
+        } catch (Exception e) { return false; }
+    }
+
+    public boolean deletePriceQuote(long id) {
+        try { return getWritableDatabase().delete(TABLE_PRICE_QUOTES, "id=?",
+            new String[]{String.valueOf(id)}) > 0; }
+        catch (Exception e) { return false; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Expense type-aware methods
+    // ════════════════════════════════════════════════════════════
+
+    public long addExpenseWithType(String category, double amount, String description,
+                                    String date, String notes, String expenseType) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("title",        description != null ? description : category);
+            cv.put("amount",       amount);
+            cv.put("category",     category != null ? category : "");
+            cv.put("note",         notes != null ? notes : "");
+            cv.put("date",         date != null ? date : getCurrentDate());
+            cv.put("expense_type", expenseType != null ? expenseType : "OUT");
+            return getWritableDatabase().insert(TABLE_EXPENSES, null, cv);
+        } catch (Exception e) { Log.e(TAG, "addExpenseWithType: " + e.getMessage()); return -1; }
+    }
+
+    public double getTotalExpensesOut() {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT COALESCE(SUM(amount),0) FROM " + TABLE_EXPENSES + " WHERE expense_type='OUT'", null);
+            double v = 0; if (c.moveToFirst()) v = c.getDouble(0); c.close(); return v;
+        } catch (Exception e) { return 0; }
+    }
+
+    public double getTotalExpensesIn() {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT COALESCE(SUM(amount),0) FROM " + TABLE_EXPENSES + " WHERE expense_type='IN'", null);
+            double v = 0; if (c.moveToFirst()) v = c.getDouble(0); c.close(); return v;
+        } catch (Exception e) { return 0; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Invoice with partial payment
+    // ════════════════════════════════════════════════════════════
+
+    public <T> long createInvoiceWithPartialPayment(String invoiceNumber, String customerId,
+            String customerName, List<T> cartItems,
+            double subtotal, double discount, double tax, double total,
+            String paymentMethod, double paidAmount, double remainingAmount,
+            String invoiceNote, long supplierId, String supplierName) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        long invoiceId = -1;
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("invoice_number",   invoiceNumber);
+            cv.put("customer_id",      customerId != null ? customerId : "0");
+            cv.put("customer_name",    customerName != null ? customerName : "");
+            cv.put("subtotal",         subtotal);
+            cv.put("discount",         discount);
+            cv.put("tax",              tax);
+            cv.put("total",            total);
+            cv.put("payment_method",   paymentMethod != null ? paymentMethod : "نقدي");
+            cv.put("status",           "completed");
+            cv.put("notes",            invoiceNote != null ? invoiceNote : "");
+            cv.put("paid_amount",      paidAmount);
+            cv.put("remaining_amount", remainingAmount);
+            cv.put("invoice_note",     invoiceNote != null ? invoiceNote : "");
+            cv.put("invoice_date",     getCurrentDate());
+            cv.put("supplier_id",      supplierId);
+            cv.put("supplier_name",    supplierName != null ? supplierName : "");
+            invoiceId = db.insert(TABLE_INVOICES, null, cv);
+            if (invoiceId == -1) throw new Exception("Failed to insert invoice");
+            for (T item : cartItems) {
+                try {
+                    java.lang.reflect.Field idF    = item.getClass().getDeclaredField("id");
+                    java.lang.reflect.Field nameF  = item.getClass().getDeclaredField("name");
+                    java.lang.reflect.Field priceF = item.getClass().getDeclaredField("price");
+                    java.lang.reflect.Field qtyF   = item.getClass().getDeclaredField("quantity");
+                    idF.setAccessible(true); nameF.setAccessible(true);
+                    priceF.setAccessible(true); qtyF.setAccessible(true);
+                    String pid    = String.valueOf(idF.get(item));
+                    String pname  = String.valueOf(nameF.get(item));
+                    double pprice = ((Number) priceF.get(item)).doubleValue();
+                    int    pqty   = ((Number) qtyF.get(item)).intValue();
+                    ContentValues icv = new ContentValues();
+                    icv.put("invoice_id", invoiceId);
+                    icv.put("product_id", pid);
+                    icv.put("barcode",    "");
+                    icv.put("name",       pname);
+                    icv.put("price",      pprice);
+                    icv.put("qty",        pqty);
+                    icv.put("total",      pprice * pqty);
+                    db.insert(TABLE_INVOICE_ITEMS, null, icv);
+                } catch (Exception ex) {
+                    Log.w(TAG, "createInvoiceWithPartialPayment item: " + ex.getMessage());
+                }
+            }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.e(TAG, "createInvoiceWithPartialPayment: " + e.getMessage()); invoiceId = -1;
+        } finally { db.endTransaction(); }
+        if (invoiceId > 0) updateCustomerStats(customerId);
+        return invoiceId;
+    }
+
+    public boolean updateInvoicePayment(long invoiceId, double paidAmount, double remainingAmount) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("paid_amount",      paidAmount);
+            cv.put("remaining_amount", remainingAmount);
+            return getWritableDatabase().update(TABLE_INVOICES, cv, "id=?",
+                new String[]{String.valueOf(invoiceId)}) > 0;
+        } catch (Exception e) { return false; }
+    }
+
+    public List<HashMap<String, String>> getUnsettledInvoices() {
+        return queryTable("SELECT * FROM " + TABLE_INVOICES +
+            " WHERE remaining_amount > 0 AND status != 'returned' ORDER BY created_at DESC", null);
+    }
+
+    public List<HashMap<String, String>> getUnsettledInvoicesForCustomer(long customerId) {
+        return queryTable("SELECT * FROM " + TABLE_INVOICES +
+            " WHERE customer_id=? AND remaining_amount > 0 AND status != 'returned' ORDER BY created_at DESC",
+            new String[]{String.valueOf(customerId)});
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Bulk Price Editor
+    // ════════════════════════════════════════════════════════════
+
+    public int bulkUpdatePrice(boolean isSellPrice, boolean isIncrease, String category,
+                                double amount, boolean isPercent) {
+        try {
+            String col = isSellPrice ? "price" : "cost";
+            String catFilter = (category == null || category.isEmpty() || "الكل".equals(category))
+                ? "" : " WHERE category=?";
+            String[] args = catFilter.isEmpty() ? null : new String[]{category};
+            String expr;
+            if (isPercent) {
+                expr = isIncrease
+                    ? col + " = " + col + " * (1 + " + amount + "/100.0)"
+                    : col + " = MAX(0, " + col + " * (1 - " + amount + "/100.0))";
+            } else {
+                expr = isIncrease
+                    ? col + " = " + col + " + " + amount
+                    : col + " = MAX(0, " + col + " - " + amount + ")";
+            }
+            return getWritableDatabase().rawQuery(
+                "UPDATE " + TABLE_PRODUCTS + " SET " + expr + catFilter, args) != null ? 1 : 0;
+        } catch (Exception e) { Log.e(TAG, "bulkUpdatePrice: " + e.getMessage()); return 0; }
+    }
+
+    public int bulkUpdateSellPrice(boolean isIncrease, String category, double amount, boolean isPercent) {
+        try {
+            String catWhere = (category == null || category.isEmpty() || "الكل".equals(category))
+                ? "" : " WHERE category=?";
+            String[] args = catWhere.isEmpty() ? null : new String[]{category};
+            String newPrice;
+            if (isPercent) {
+                newPrice = isIncrease ? "price * (1 + " + amount + "/100.0)"
+                                      : "MAX(0, price * (1 - " + amount + "/100.0))";
+            } else {
+                newPrice = isIncrease ? "price + " + amount : "MAX(0, price - " + amount + ")";
+            }
+            SQLiteDatabase db = getWritableDatabase();
+            db.execSQL("UPDATE " + TABLE_PRODUCTS + " SET price = " + newPrice + catWhere, args);
+            Cursor c = db.rawQuery("SELECT changes()", null);
+            int rows = 0; if (c.moveToFirst()) rows = c.getInt(0); c.close();
+            return rows;
+        } catch (Exception e) { Log.e(TAG, "bulkUpdateSellPrice: " + e.getMessage()); return 0; }
+    }
+
+    public int bulkUpdateBuyCost(boolean isIncrease, String category, double amount, boolean isPercent) {
+        try {
+            String catWhere = (category == null || category.isEmpty() || "الكل".equals(category))
+                ? "" : " WHERE category=?";
+            String[] args = catWhere.isEmpty() ? null : new String[]{category};
+            String newCost;
+            if (isPercent) {
+                newCost = isIncrease ? "cost * (1 + " + amount + "/100.0)"
+                                     : "MAX(0, cost * (1 - " + amount + "/100.0))";
+            } else {
+                newCost = isIncrease ? "cost + " + amount : "MAX(0, cost - " + amount + ")";
+            }
+            SQLiteDatabase db = getWritableDatabase();
+            db.execSQL("UPDATE " + TABLE_PRODUCTS + " SET cost = " + newCost + catWhere, args);
+            Cursor c = db.rawQuery("SELECT changes()", null);
+            int rows = 0; if (c.moveToFirst()) rows = c.getInt(0); c.close();
+            return rows;
+        } catch (Exception e) { Log.e(TAG, "bulkUpdateBuyCost: " + e.getMessage()); return 0; }
+    }
+
+    public int getProductCountByCategory(String category) {
+        try {
+            String sql; String[] args;
+            if (category == null || category.isEmpty() || "الكل".equals(category)) {
+                sql = "SELECT COUNT(*) FROM " + TABLE_PRODUCTS; args = null;
+            } else {
+                sql = "SELECT COUNT(*) FROM " + TABLE_PRODUCTS + " WHERE category=?";
+                args = new String[]{category};
+            }
+            Cursor c = getReadableDatabase().rawQuery(sql, args);
+            int count = 0; if (c.moveToFirst()) count = c.getInt(0); c.close();
+            return count;
+        } catch (Exception e) { return 0; }
+    }
+
+    public List<String> getAllProductCategories() {
+        List<String> cats = new ArrayList<>();
+        cats.add("الكل");
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT DISTINCT category FROM " + TABLE_PRODUCTS +
+                " WHERE category IS NOT NULL AND category != '' ORDER BY category ASC", null);
+            while (c.moveToNext()) cats.add(c.getString(0));
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getAllProductCategories: " + e.getMessage()); }
+        return cats;
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Supplier debt helpers (new overload using long id)
+    // ════════════════════════════════════════════════════════════
+
+    public boolean updateSupplierDebt(String supplierId, double delta) {
+        try {
+            getWritableDatabase().execSQL(
+                "UPDATE " + TABLE_SUPPLIERS + " SET debt = debt + ? WHERE id=?",
+                new Object[]{delta, supplierId});
+            return true;
+        } catch (Exception e) { Log.e(TAG, "updateSupplierDebt: " + e.getMessage()); return false; }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Customer / Supplier transaction history
+    // ════════════════════════════════════════════════════════════
+
+    public List<HashMap<String, String>> getCustomerTransactionHistory(long customerId) {
+        // Merges invoices + direct payments for a customer
+        String sql = "SELECT 'invoice' AS tx_type, invoice_number AS ref, " +
+            "total AS amount, paid_amount, remaining_amount, '' AS note, " +
+            "payment_method, created_at, status FROM " + TABLE_INVOICES +
+            " WHERE customer_id=? " +
+            "UNION ALL " +
+            "SELECT 'payment' AS tx_type, '' AS ref, " +
+            "amount, 0 AS paid_amount, 0 AS remaining_amount, note, type AS payment_method, " +
+            "created_at, '' AS status FROM " + TABLE_DIRECT_PAYMENTS +
+            " WHERE entity_type='customer' AND entity_id=? " +
+            "ORDER BY created_at DESC";
+        return queryTable(sql, new String[]{String.valueOf(customerId), String.valueOf(customerId)});
+    }
+
+    public List<HashMap<String, String>> getSupplierTransactionHistory(long supplierId) {
+        String sql = "SELECT 'purchase' AS tx_type, po_number AS ref, " +
+            "total AS amount, 0 AS paid_amount, 0 AS remaining_amount, notes AS note, " +
+            "'آجل' AS payment_method, created_at, status FROM " + TABLE_PURCHASE_ORDERS +
+            " WHERE supplier_id=? " +
+            "UNION ALL " +
+            "SELECT 'payment' AS tx_type, '' AS ref, " +
+            "amount, 0 AS paid_amount, 0 AS remaining_amount, note, type AS payment_method, " +
+            "created_at, '' AS status FROM " + TABLE_DIRECT_PAYMENTS +
+            " WHERE entity_type='supplier' AND entity_id=? " +
+            "ORDER BY created_at DESC";
+        return queryTable(sql, new String[]{String.valueOf(supplierId), String.valueOf(supplierId)});
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Reports helpers
+    // ════════════════════════════════════════════════════════════
+
+    public double getTotalSalesForPeriod(String from, String to) {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT COALESCE(SUM(total),0) FROM " + TABLE_INVOICES +
+                " WHERE status != 'returned' AND DATE(created_at) BETWEEN ? AND ?",
+                new String[]{from, to});
+            double v = 0; if (c.moveToFirst()) v = c.getDouble(0); c.close(); return v;
+        } catch (Exception e) { return 0; }
+    }
+
+    public double getTotalProfitForPeriod(String from, String to) {
+        try {
+            Cursor c = getReadableDatabase().rawQuery(
+                "SELECT COALESCE(SUM((ii.price - ii.buy_cost_per_unit) * ii.qty),0) " +
+                "FROM " + TABLE_INVOICE_ITEMS + " ii " +
+                "JOIN " + TABLE_INVOICES + " i ON ii.invoice_id = i.id " +
+                "WHERE i.status != 'returned' AND DATE(i.created_at) BETWEEN ? AND ?",
+                new String[]{from, to});
+            double v = 0; if (c.moveToFirst()) v = c.getDouble(0); c.close(); return v;
+        } catch (Exception e) { return 0; }
+    }
+
+    public List<HashMap<String, String>> getSalesByCategory(String from, String to) {
+        String sql = "SELECT p.category, COALESCE(SUM(ii.total),0) AS total_sales, " +
+            "COALESCE(SUM(ii.qty),0) AS total_qty " +
+            "FROM " + TABLE_INVOICE_ITEMS + " ii " +
+            "JOIN " + TABLE_INVOICES + " i ON ii.invoice_id = i.id " +
+            "LEFT JOIN " + TABLE_PRODUCTS + " p ON ii.product_id = p.id " +
+            "WHERE i.status != 'returned' AND DATE(i.created_at) BETWEEN ? AND ? " +
+            "GROUP BY p.category ORDER BY total_sales DESC";
+        return queryTable(sql, new String[]{from, to});
+    }
+
+    private String getCurrentDate() {
+        return new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US)
+            .format(new java.util.Date());
+    }
+
+    public boolean updateProductPrice(String productId, double newPrice) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("price", newPrice);
+            return getWritableDatabase().update(TABLE_PRODUCTS, cv, "id=?",
+                new String[]{productId}) > 0;
+        } catch (Exception e) { Log.e(TAG, "updateProductPrice: " + e.getMessage()); return false; }
+    }
+
+    public boolean addProductQuantity(String productId, int qty) {
+        try {
+            getWritableDatabase().execSQL(
+                "UPDATE " + TABLE_PRODUCTS + " SET qty = qty + ? WHERE id = ?",
+                new Object[]{qty, productId});
+            return true;
+        } catch (Exception e) { Log.e(TAG, "addProductQuantity: " + e.getMessage()); return false; }
+    }
+
+    public List<HashMap<String, String>> getInvoiceItemsByProduct(String productId) {
+        return queryTable(
+            "SELECT ii.*, i.created_at FROM " + TABLE_INVOICE_ITEMS + " ii " +
+            "JOIN " + TABLE_INVOICES + " i ON ii.invoice_id = i.id " +
+            "WHERE ii.product_id = ? ORDER BY i.created_at DESC LIMIT 50",
+            new String[]{productId});
     }
 }

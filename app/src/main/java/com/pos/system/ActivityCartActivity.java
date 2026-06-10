@@ -382,6 +382,13 @@ public class ActivityCartActivity extends BaseActivity {
 
     private void checkout() {
         if (cartItems.isEmpty()) { snack(getString(R.string.cart_empty)); return; }
+
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_checkout_payment, null);
+        TextView tvSummary      = dialogView.findViewById(R.id.tv_summary);
+        TextView tvDebtWarning  = dialogView.findViewById(R.id.tv_debt_warning);
+        TextInputEditText etPaidAmount = dialogView.findViewById(R.id.et_paid_amount);
+        TextView tvChange       = dialogView.findViewById(R.id.tv_change);
+
         StringBuilder msg = new StringBuilder();
         msg.append(getString(R.string.subtotal)).append(": ").append(formatCurrency(subtotal)).append("\n");
         if (discountAmt > 0) msg.append(getString(R.string.discount_amount)).append(": ").append(formatCurrency(discountAmt)).append("\n");
@@ -390,26 +397,78 @@ public class ActivityCartActivity extends BaseActivity {
         msg.append(getString(R.string.final_total)).append(": ").append(formatCurrency(total)).append("\n");
         msg.append(getString(R.string.payment_method)).append(": ").append(getPaymentLabel(paymentMethod)).append("\n");
         msg.append(getString(R.string.customer_label)).append(": ").append(selectedCustomerName != null ? selectedCustomerName : getString(R.string.no_customer));
+        if (tvSummary != null) tvSummary.setText(msg.toString());
 
+        if (selectedCustomerId != null && tvDebtWarning != null) {
+            try {
+                double debt = dbHelper.getCustomerDebt(selectedCustomerId);
+                if (debt > 0.01) {
+                    tvDebtWarning.setText(String.format(Locale.getDefault(), "⚠️ دين سابق على العميل: %.2f %s", debt, currency));
+                    tvDebtWarning.setVisibility(View.VISIBLE);
+                }
+            } catch (Exception ignored) {}
+        }
+
+        if (etPaidAmount != null) etPaidAmount.setText(String.format(Locale.US, "%.2f", total));
+
+        if (etPaidAmount != null && tvChange != null) {
+            final TextView tvChangeFinal = tvChange;
+            etPaidAmount.addTextChangedListener(new android.text.TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
+                @Override public void onTextChanged(CharSequence s, int st, int b, int c) {
+                    try {
+                        double paid = Double.parseDouble(s.toString().trim());
+                        double change = paid - total;
+                        if (change >= 0) {
+                            tvChangeFinal.setText("الباقي للعميل: " + formatCurrency(change));
+                            tvChangeFinal.setTextColor(0xFF16A34A);
+                        } else {
+                            tvChangeFinal.setText("متبقي على العميل: " + formatCurrency(-change));
+                            tvChangeFinal.setTextColor(0xFFDC2626);
+                        }
+                        tvChangeFinal.setVisibility(View.VISIBLE);
+                    } catch (Exception e) { tvChangeFinal.setVisibility(View.GONE); }
+                }
+                @Override public void afterTextChanged(android.text.Editable s) {}
+            });
+        }
+
+        final TextInputEditText etPaid = etPaidAmount;
         new MaterialAlertDialogBuilder(this)
             .setTitle(getString(R.string.cart_checkout))
-            .setMessage(msg.toString())
-            .setPositiveButton(getString(R.string.confirm_sale), (d, w) -> processCheckout())
+            .setView(dialogView)
+            .setPositiveButton(getString(R.string.confirm_sale), (d, w) -> {
+                double paidAmt = total;
+                if (etPaid != null && etPaid.getText() != null) {
+                    try { paidAmt = Double.parseDouble(etPaid.getText().toString().trim()); }
+                    catch (Exception ignored) {}
+                }
+                if (paidAmt < 0) paidAmt = 0;
+                processCheckout(paidAmt);
+            })
             .setNegativeButton(getString(R.string.cancel), null)
             .show();
     }
 
-    private void processCheckout() {
+    private void processCheckout(double paidAmount) {
         try {
             String invoiceNumber = "INV-" + new java.text.SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(new java.util.Date());
             String custId   = selectedCustomerId   != null ? selectedCustomerId   : "0";
             String custName = selectedCustomerName != null ? selectedCustomerName : "";
+            double remainingAmount = Math.max(0, total - paidAmount);
 
-            long invoiceId = dbHelper.createInvoiceWithDetails(
-                invoiceNumber, custId, custName, cartItems, subtotal, discountAmt, taxAmount, total, paymentMethod);
+            long invoiceId = dbHelper.createInvoiceWithPartialPayment(
+                invoiceNumber, custId, custName, cartItems, subtotal, discountAmt, taxAmount, total,
+                paymentMethod, paidAmount, remainingAmount, "", 0L, "");
 
             if (invoiceId > 0) {
                 for (CartItem item : cartItems) dbHelper.decreaseProductQuantity(item.id, item.quantity);
+                if (paidAmount > 0) {
+                    try {
+                        String date = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
+                        dbHelper.addWalletTransaction("IN", paidAmount, "فاتورة بيع " + invoiceNumber, date);
+                    } catch (Exception ignored) {}
+                }
                 try { new ReviewManager(this).onInvoiceCreated(); } catch (Exception ignored) {}
                 showCheckoutSuccess(invoiceNumber, invoiceId);
             } else {
@@ -419,6 +478,54 @@ public class ActivityCartActivity extends BaseActivity {
             showToast(getString(R.string.checkout_error));
             android.util.Log.e(TAG, "processCheckout: " + e.getMessage(), e);
         }
+    }
+
+    private void showEditCartItemDialog(int position) {
+        if (position < 0 || position >= cartItems.size()) return;
+        CartItem item = cartItems.get(position);
+
+        android.widget.LinearLayout layout = new android.widget.LinearLayout(this);
+        layout.setOrientation(android.widget.LinearLayout.VERTICAL);
+        int pad = (int)(16 * getResources().getDisplayMetrics().density);
+        layout.setPadding(pad, pad, pad, 0);
+
+        TextInputEditText etQty = new TextInputEditText(this);
+        etQty.setHint(getString(R.string.quantity_hint));
+        etQty.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
+        etQty.setText(String.valueOf(item.quantity));
+        android.widget.LinearLayout.LayoutParams lpQty =
+            new android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+        lpQty.bottomMargin = (int)(8 * getResources().getDisplayMetrics().density);
+        etQty.setLayoutParams(lpQty);
+
+        TextInputEditText etPrice = new TextInputEditText(this);
+        etPrice.setHint(getString(R.string.product_price));
+        etPrice.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        etPrice.setText(String.format(Locale.US, "%.2f", item.price));
+
+        layout.addView(etQty);
+        layout.addView(etPrice);
+
+        new MaterialAlertDialogBuilder(this)
+            .setTitle("تعديل: " + item.name)
+            .setView(layout)
+            .setPositiveButton(R.string.save, (d, w) -> {
+                try {
+                    String qtyStr   = etQty.getText()   != null ? etQty.getText().toString().trim()   : "1";
+                    String priceStr = etPrice.getText() != null ? etPrice.getText().toString().trim() : "0";
+                    int    qty      = Integer.parseInt(qtyStr);
+                    double price    = Double.parseDouble(priceStr);
+                    if (qty <= 0)   { showToast(getString(R.string.quantity_positive)); return; }
+                    if (price < 0)  { showToast(getString(R.string.invalid_quantity));  return; }
+                    cartItems.get(position).quantity = qty;
+                    cartItems.get(position).price    = price;
+                    updateUI();
+                } catch (NumberFormatException e) { showToast(getString(R.string.invalid_quantity)); }
+            })
+            .setNegativeButton(R.string.cancel, null)
+            .show();
     }
 
     private void showCheckoutSuccess(String invoiceNumber, long invoiceId) {
@@ -526,6 +633,11 @@ public class ActivityCartActivity extends BaseActivity {
                 String n = cartItems.get(p).name;
                 cartItems.remove(p); notifyItemRemoved(p); notifyItemRangeChanged(p, cartItems.size());
                 updateUI(); snack(n + " " + getString(R.string.removed_from_cart));
+            });
+            h.itemView.setOnLongClickListener(v -> {
+                int p = h.getAdapterPosition(); if (p < 0 || p >= cartItems.size()) return true;
+                showEditCartItemDialog(p);
+                return true;
             });
         }
         @Override public int getItemCount() { return cartItems.size(); }

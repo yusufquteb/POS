@@ -123,6 +123,19 @@ public class ActivityProductsActivity extends BaseActivity {
     private void setupToolbar() {
         View toolbar = binding.toolbar;
         if (toolbar != null) toolbar.setOnClickListener(v -> finish());
+        if (binding.toolbar instanceof com.google.android.material.appbar.MaterialToolbar) {
+            com.google.android.material.appbar.MaterialToolbar mt =
+                (com.google.android.material.appbar.MaterialToolbar) binding.toolbar;
+            mt.setNavigationOnClickListener(v -> finish());
+            mt.inflateMenu(R.menu.menu_products);
+            mt.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.action_edit_prices) {
+                    startActivity(new Intent(this, ActivityEditPricesActivity.class));
+                    return true;
+                }
+                return false;
+            });
+        }
     }
 
     private void setupRecyclerView() {
@@ -262,8 +275,13 @@ public class ActivityProductsActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle(getString(R.string.product_details))
             .setMessage(details)
-            .setPositiveButton(getString(R.string.ok), null)
+            .setPositiveButton("تفاصيل كاملة", (dialog, which) -> {
+                Intent detailIntent = new Intent(this, ActivityItemDetailsActivity.class);
+                detailIntent.putExtra("product_id", safeGet(product, "id"));
+                startActivity(detailIntent);
+            })
             .setNeutralButton(getString(R.string.edit), (dialog, which) -> editProduct(product))
+            .setNegativeButton(getString(R.string.ok), null)
             .show();
     }
 

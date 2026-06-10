@@ -77,6 +77,7 @@ public class ActivitySettingsActivity extends BaseActivity {
     private void initializeViews() {
         cardTheme      = binding.cardTheme;
         tvCurrentTheme = binding.tvCurrentTheme;
+        if (cardTheme != null) cardTheme.setVisibility(View.GONE); // light-only mode
         View tvCurrentColor = binding.tvCurrentColor;
         if (tvCurrentColor != null) tvCurrentColor.setVisibility(View.GONE);
 
@@ -162,6 +163,10 @@ public class ActivitySettingsActivity extends BaseActivity {
         if (cardPremium  != null) cardPremium.setOnClickListener(v -> showPremiumDialog());
         if (cardRateApp  != null) cardRateApp.setOnClickListener(v -> rateApp());
         if (btnLogout    != null) btnLogout.setOnClickListener(v -> confirmLogout());
+
+        View btnRemoveData = findViewById(R.id.btn_remove_data);
+        if (btnRemoveData != null) btnRemoveData.setOnClickListener(v ->
+            startActivity(new Intent(this, ActivityRemoveDataActivity.class)));
     }
 
     // ════════════════════════════════════════════════════════════
