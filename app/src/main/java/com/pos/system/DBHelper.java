@@ -1697,14 +1697,26 @@ public class DBHelper extends SQLiteOpenHelper {
                 "SELECT SUM(amount) FROM " + TABLE_EXPENSES +
                 " WHERE DATE(created_at) BETWEEN ? AND ?",
                 new String[]{startDate, endDate});
-            if (expC.moveToFirst()) {
-                double expenses = expC.isNull(0) ? 0 : expC.getDouble(0);
-                summary.put("total_expenses", expenses);
-                Object sales = summary.get("total_sales");
-                summary.put("net_profit",
-                    (sales != null ? ((Number) sales).doubleValue() : 0) - expenses);
-            }
+            double expenses = 0;
+            if (expC.moveToFirst()) expenses = expC.isNull(0) ? 0 : expC.getDouble(0);
             expC.close();
+            summary.put("total_expenses", expenses);
+
+            Cursor cogsC = db.rawQuery(
+                "SELECT COALESCE(SUM(ii.qty * p.cost_price), 0)" +
+                " FROM " + TABLE_INVOICE_ITEMS + " ii" +
+                " JOIN " + TABLE_INVOICES + " i ON ii.invoice_id = i.id" +
+                " JOIN " + TABLE_PRODUCTS  + " p ON CAST(ii.product_id AS TEXT) = CAST(p.id AS TEXT)" +
+                " WHERE DATE(i.created_at) BETWEEN ? AND ?",
+                new String[]{startDate, endDate});
+            double cogs = 0;
+            if (cogsC.moveToFirst()) cogs = cogsC.isNull(0) ? 0 : cogsC.getDouble(0);
+            cogsC.close();
+            summary.put("total_cogs", cogs);
+
+            Object sales = summary.get("total_sales");
+            summary.put("net_profit",
+                (sales != null ? ((Number) sales).doubleValue() : 0) - cogs - expenses);
 
         } catch (Exception e) {
             Log.e(TAG, "getReportSummary: " + e.getMessage(), e);
@@ -2075,6 +2087,26 @@ public class DBHelper extends SQLiteOpenHelper {
                     db.execSQL("UPDATE " + TABLE_PRODUCTS + " SET qty = qty + ? WHERE id = ?",
                         new Object[]{qty, productId});
                 }
+            }
+            // Reduce customer debt if original invoice had outstanding credit
+            if (originalInvoiceId > 0 && customerId != null
+                    && !customerId.isEmpty() && !customerId.equals("0")) {
+                Cursor invC = db.rawQuery(
+                    "SELECT remaining_amount FROM " + TABLE_INVOICES + " WHERE id=?",
+                    new String[]{String.valueOf(originalInvoiceId)});
+                if (invC.moveToFirst()) {
+                    double remaining = invC.isNull(0) ? 0 : invC.getDouble(0);
+                    if (remaining > 0) {
+                        double reduction = Math.min(totalRefund, remaining);
+                        db.execSQL("UPDATE " + TABLE_INVOICES
+                            + " SET remaining_amount = remaining_amount - ? WHERE id=?",
+                            new Object[]{reduction, originalInvoiceId});
+                        db.execSQL("UPDATE " + TABLE_CUSTOMERS
+                            + " SET debt = MAX(0, debt - ?) WHERE id=?",
+                            new Object[]{reduction, customerId});
+                    }
+                }
+                invC.close();
             }
             db.setTransactionSuccessful();
             return returnId;
@@ -2639,6 +2671,19 @@ public class DBHelper extends SQLiteOpenHelper {
             ContentValues cv = new ContentValues();
             cv.put("status", "received");
             db.update(TABLE_PURCHASE_ORDERS, cv, "id=?", new String[]{String.valueOf(poId)});
+            // Record debt owed to supplier
+            Cursor poC = db.rawQuery(
+                "SELECT supplier_id, total FROM " + TABLE_PURCHASE_ORDERS + " WHERE id=?",
+                new String[]{String.valueOf(poId)});
+            if (poC.moveToFirst()) {
+                String supplierId = poC.getString(0);
+                double poTotal    = poC.isNull(1) ? 0 : poC.getDouble(1);
+                if (supplierId != null && !supplierId.isEmpty() && poTotal > 0) {
+                    db.execSQL("UPDATE " + TABLE_SUPPLIERS + " SET debt = debt + ? WHERE id=?",
+                        new Object[]{poTotal, supplierId});
+                }
+            }
+            poC.close();
             db.setTransactionSuccessful();
             return true;
         } catch (Exception e) {
@@ -3783,7 +3828,13 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.e(TAG, "createInvoiceWithPartialPayment: " + e.getMessage()); invoiceId = -1;
         } finally { db.endTransaction(); }
-        if (invoiceId > 0) updateCustomerStats(customerId);
+        if (invoiceId > 0) {
+            updateCustomerStats(customerId);
+            if (remainingAmount > 0 && customerId != null
+                    && !customerId.isEmpty() && !customerId.equals("0")) {
+                addCustomerDebt(customerId, remainingAmount, invoiceNumber);
+            }
+        }
         return invoiceId;
     }
 
