@@ -164,9 +164,45 @@ public class ActivityProductsActivity extends BaseActivity {
             );
         }
         if (fabImportCsv != null) {
-            fabImportCsv.setOnClickListener(v ->
-                csvPickerLauncher.launch(new String[]{"text/csv", "text/plain", "*/*"})
-            );
+            fabImportCsv.setOnClickListener(v -> showImportOptions());
+        }
+    }
+
+    private void showImportOptions() {
+        String[] opts = {
+            getString(R.string.import_csv_pick),
+            getString(R.string.import_csv_download_template)
+        };
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.import_csv))
+            .setItems(opts, (d, which) -> {
+                if (which == 0) csvPickerLauncher.launch(new String[]{"text/csv", "text/plain", "*/*"});
+                else            exportCsvTemplate();
+            })
+            .show();
+    }
+
+    private void exportCsvTemplate() {
+        try {
+            String header = "اسم المنتج,الكمية,سعر الشراء,سعر البيع,التصنيف,رقم الباركود,وصف المنتج\n";
+            String example = "مثال منتج,10,50.00,75.00,إلكترونيات,1234567890,وصف اختياري\n";
+            String fileName = "products_template.csv";
+            java.io.File dir = new java.io.File(getExternalFilesDir(null), "exports");
+            dir.mkdirs();
+            java.io.File file = new java.io.File(dir, fileName);
+            try (java.io.FileWriter fw = new java.io.FileWriter(file)) {
+                fw.write('﻿'); // BOM for Excel Arabic support
+                fw.write(header);
+                fw.write(example);
+            }
+            android.net.Uri uri = androidx.core.content.FileProvider.getUriForFile(
+                this, getPackageName() + ".provider", file);
+            Intent share = new Intent(Intent.ACTION_VIEW);
+            share.setDataAndType(uri, "text/csv");
+            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(Intent.createChooser(share, getString(R.string.import_csv_download_template)));
+        } catch (Exception e) {
+            showSnackbar(getString(R.string.unknown_error), true);
         }
     }
 
@@ -300,6 +336,45 @@ public class ActivityProductsActivity extends BaseActivity {
         editProductLauncher.launch(intent);
     }
 
+    private void showProductOptions(HashMap<String, String> product) {
+        String[] options = {
+            getString(R.string.product_option_edit),
+            getString(R.string.product_option_price_history)
+        };
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle(product.getOrDefault("name", ""))
+            .setItems(options, (d, which) -> {
+                if (which == 0) editProduct(product);
+                else            showPriceHistory(product);
+            })
+            .setNegativeButton(R.string.cancel, null)
+            .show();
+    }
+
+    private void showPriceHistory(HashMap<String, String> product) {
+        String id   = product.getOrDefault("id", "");
+        String name = product.getOrDefault("name", "");
+        java.util.List<HashMap<String, String>> history = dbHelper.getProductPriceHistory(id, 10);
+        if (history.isEmpty()) {
+            showSnackbar(getString(R.string.price_history_empty), false);
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (HashMap<String, String> h : history) {
+            String date   = h.getOrDefault("created_at", "");
+            String price  = h.getOrDefault("price", "0");
+            String qty    = h.getOrDefault("qty", "1");
+            if (date.length() > 10) date = date.substring(0, 10);
+            sb.append("• ").append(date).append("  —  ").append(price)
+              .append(" × ").append(qty).append("\n");
+        }
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.price_history_title, name))
+            .setMessage(sb.toString().trim())
+            .setPositiveButton(R.string.ok, null)
+            .show();
+    }
+
     private String safeGet(HashMap<String, String> map, String key) {
         String v = map.get(key);
         return (v != null && !v.isEmpty()) ? v : "-";
@@ -307,37 +382,59 @@ public class ActivityProductsActivity extends BaseActivity {
 
     // ─────────────────────────────────────────────
     // CSV Import (SAF)
-    // Format: barcode,name,cost,price,qty,category  (header row optional)
+    // Format A (legacy): barcode,name,cost,price,qty,category
+    // Format B (template): اسم المنتج,الكمية,سعر الشراء,سعر البيع,التصنيف,رقم الباركود,وصف المنتج
     // ─────────────────────────────────────────────
     private void importProductsFromCsv(Uri uri) {
         showSnackbar(getString(R.string.importing), false);
         java.util.concurrent.Executors.newSingleThreadExecutor().execute(() -> {
             int imported = 0, skipped = 0;
             try (InputStream is = getContentResolver().openInputStream(uri);
-                 BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+                 BufferedReader reader = new BufferedReader(
+                     new java.io.InputStreamReader(is, java.nio.charset.StandardCharsets.UTF_8))) {
                 String line;
                 boolean firstLine = true;
+                boolean templateFormat = false; // true = name-first (Arabic template)
                 while ((line = reader.readLine()) != null) {
-                    line = line.trim();
+                    line = line.trim().replaceAll("^﻿", ""); // strip BOM
                     if (line.isEmpty()) continue;
                     String[] cols = line.split(",", -1);
                     if (firstLine) {
                         firstLine = false;
-                        String first = cols[0].toLowerCase();
-                        if (first.contains("barcode") || first.contains("باركود")
-                                || first.contains("name") || first.contains("اسم")) continue;
+                        // Detect format by first column header
+                        String first = cols[0].trim();
+                        templateFormat = first.contains("اسم") || first.contains("name");
+                        boolean isHeader = templateFormat
+                            || first.equalsIgnoreCase("barcode") || first.contains("باركود");
+                        if (isHeader) continue; // skip header row
                     }
                     if (cols.length < 2) { skipped++; continue; }
-                    String barcode  = cols[0].trim();
-                    String name     = cols[1].trim();
-                    if (barcode.isEmpty() || name.isEmpty()) { skipped++; continue; }
-                    double cost     = cols.length > 2 ? csvParseDouble(cols[2]) : 0;
-                    double price    = cols.length > 3 ? csvParseDouble(cols[3]) : 0;
-                    int    qty      = cols.length > 4 ? csvParseInt(cols[4])    : 0;
-                    String category = cols.length > 5 ? cols[5].trim()          : "";
+                    String name, barcode, category, description;
+                    double cost, price;
+                    int    qty;
+                    if (templateFormat) {
+                        // Format B: name,qty,cost,price,category,barcode,description
+                        name        = cols[0].trim();
+                        qty         = cols.length > 1 ? csvParseInt(cols[1])    : 0;
+                        cost        = cols.length > 2 ? csvParseDouble(cols[2]) : 0;
+                        price       = cols.length > 3 ? csvParseDouble(cols[3]) : 0;
+                        category    = cols.length > 4 ? cols[4].trim()          : "";
+                        barcode     = cols.length > 5 ? cols[5].trim()          : "";
+                        description = cols.length > 6 ? cols[6].trim()          : "";
+                    } else {
+                        // Format A: barcode,name,cost,price,qty,category
+                        barcode     = cols[0].trim();
+                        name        = cols[1].trim();
+                        cost        = cols.length > 2 ? csvParseDouble(cols[2]) : 0;
+                        price       = cols.length > 3 ? csvParseDouble(cols[3]) : 0;
+                        qty         = cols.length > 4 ? csvParseInt(cols[4])    : 0;
+                        category    = cols.length > 5 ? cols[5].trim()          : "";
+                        description = "";
+                    }
+                    if (name.isEmpty()) { skipped++; continue; }
                     boolean ok = dbHelper.insertProduct(
                         barcode, name, "", "", cost, price, qty,
-                        "", "", "", "", 5, category, "", "", "");
+                        "", "", "", "", 5, category, description, "", "");
                     if (ok) imported++; else skipped++;
                 }
             } catch (Exception e) {
@@ -429,7 +526,10 @@ public class ActivityProductsActivity extends BaseActivity {
             }
 
             holder.itemView.setOnClickListener(v -> showProductDetails(product));
-            holder.itemView.setOnLongClickListener(v -> { editProduct(product); return true; });
+            holder.itemView.setOnLongClickListener(v -> {
+                showProductOptions(product);
+                return true;
+            });
         }
 
         @Override

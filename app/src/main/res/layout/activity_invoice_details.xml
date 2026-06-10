@@ -229,6 +229,39 @@
 					</LinearLayout>
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
+
+            <!-- QR Code — shown when qr_on_invoice is enabled in store settings -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_qr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="80dp"
+                android:visibility="gone"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_base">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invoice_qr_title"
+                        android:textSize="@dimen/text_sm"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginBottom="@dimen/spacing_sm"
+                        android:fontFamily="@font/cairo_regular" />
+                    <ImageView
+                        android:id="@+id/iv_invoice_qr"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:contentDescription="@string/invoice_qr_title"
+                        android:scaleType="fitCenter" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
 		</LinearLayout>
 	</androidx.core.widget.NestedScrollView>
 	<LinearLayout

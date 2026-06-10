@@ -651,4 +651,21 @@
     <!-- Privacy policy -->
     <string name="privacy_policy_url"></string>
 
+    <!-- QR code on invoice -->
+    <string name="store_qr_on_invoice">عرض QR Code على الفاتورة</string>
+    <string name="invoice_qr_title">رمز QR للفاتورة</string>
+
+    <!-- Price history -->
+    <string name="product_option_edit">تعديل المنتج</string>
+    <string name="product_option_price_history">آخر أسعار البيع</string>
+    <string name="price_history_title">آخر أسعار — %1$s</string>
+    <string name="price_history_empty">لا توجد مبيعات سابقة لهذا المنتج.</string>
+
+    <!-- CSV import options -->
+    <string name="import_csv_pick">اختر ملف CSV…</string>
+    <string name="import_csv_download_template">تنزيل قالب فارغ</string>
+
+    <!-- Main screen section separator -->
+    <string name="main_section_tools">أدوات متقدمة</string>
+
 </resources>

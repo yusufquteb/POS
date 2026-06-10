@@ -945,4 +945,21 @@
 
     <!-- Privacy policy -->
     <string name="privacy_policy_url"></string>
+
+    <!-- QR code on invoice -->
+    <string name="store_qr_on_invoice">Show QR code on invoice</string>
+    <string name="invoice_qr_title">Invoice QR Code</string>
+
+    <!-- Price history -->
+    <string name="product_option_edit">Edit Product</string>
+    <string name="product_option_price_history">Last Sell Prices</string>
+    <string name="price_history_title">Last prices — %1$s</string>
+    <string name="price_history_empty">No previous sales for this product.</string>
+
+    <!-- CSV import options -->
+    <string name="import_csv_pick">Open CSV file…</string>
+    <string name="import_csv_download_template">Download blank template</string>
+
+    <!-- Main screen section separator -->
+    <string name="main_section_tools">Advanced Tools</string>
 </resources>

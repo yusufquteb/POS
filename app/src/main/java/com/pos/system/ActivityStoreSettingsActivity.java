@@ -171,6 +171,12 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
                 selectedLogoPath = logo;
                 loadLogoFromPath(logo);
             }
+
+            // QR toggle
+            com.google.android.material.switchmaterial.SwitchMaterial swQr = binding.swQrOnInvoice;
+            if (swQr != null) {
+                swQr.setChecked("true".equalsIgnoreCase(settings.getOrDefault("qr_on_invoice", "false")));
+            }
         } catch (Exception e) {
             Log.e(TAG, "loadSettings error: " + e.getMessage(), e);
         }
@@ -295,6 +301,11 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
             dbHelper.saveStoreSetting("country_code", selectedCountryCode);
             dbHelper.saveStoreSetting("currency",     cfg.currency);
             dbHelper.saveStoreSetting("tax_rate",     tax);
+            // Save QR toggle
+            com.google.android.material.switchmaterial.SwitchMaterial swQr = binding.swQrOnInvoice;
+            if (swQr != null) {
+                dbHelper.saveStoreSetting("qr_on_invoice", swQr.isChecked() ? "true" : "false");
+            }
 
             showSnackbar(
                 success ? getString(R.string.store_updated) : getString(R.string.operation_failed),

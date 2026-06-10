@@ -1,5 +1,7 @@
 package com.pos.system;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
 import com.pos.system.BaseActivity;
 
 import android.content.Intent;
@@ -158,6 +160,26 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
             ItemsAdapter adapter = new ItemsAdapter(items);
             listItems.setAdapter(adapter);
         }
+
+        // QR code — show if enabled in store settings
+        showQrIfEnabled(invoice, finalTotal);
+    }
+
+    private void showQrIfEnabled(HashMap<String, Object> invoice, double total) {
+        try {
+            HashMap<String, String> settings = dbHelper.getStoreSettings();
+            boolean qrEnabled = "true".equalsIgnoreCase(
+                settings != null ? settings.getOrDefault("qr_on_invoice", "false") : "false");
+            View cardQr = binding.cardQr;
+            ImageView ivQr = binding.ivInvoiceQr;
+            if (!qrEnabled || cardQr == null || ivQr == null) return;
+            String storeName = settings.getOrDefault("name", "POS");
+            Bitmap qr = QRCodeGenerator.generateInvoiceQR(invoiceId, storeName, total);
+            if (qr != null) {
+                ivQr.setImageBitmap(qr);
+                cardQr.setVisibility(View.VISIBLE);
+            }
+        } catch (Exception ignored) {}
     }
     
     private void setupButtons() {

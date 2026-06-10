@@ -4073,6 +4073,21 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // ════════════════════════════════════════════════════════════
+    // Price history for a product
+    // ════════════════════════════════════════════════════════════
+
+    /** Returns last N sell prices for a product from invoice_items. */
+    public List<HashMap<String, String>> getProductPriceHistory(String productId, int limit) {
+        return queryTable(
+            "SELECT ii.price, ii.qty, i.created_at, i.invoice_number" +
+            " FROM " + TABLE_INVOICE_ITEMS + " ii" +
+            " JOIN " + TABLE_INVOICES + " i ON ii.invoice_id = i.id" +
+            " WHERE CAST(ii.product_id AS TEXT) = CAST(? AS TEXT)" +
+            " ORDER BY i.created_at DESC LIMIT ?",
+            new String[]{productId, String.valueOf(limit)});
+    }
+
+    // ════════════════════════════════════════════════════════════
     // Expiry reviewed
     // ════════════════════════════════════════════════════════════
 
