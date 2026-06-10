@@ -421,6 +421,13 @@
             android:screenOrientation="portrait"
             android:label="حذف البيانات"/>
 
+        <activity
+            android:name=".ActivitySectionHubActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name"/>
+
         <!-- ════════ FileProvider ════════ -->
         <provider
             android:name="androidx.core.content.FileProvider"

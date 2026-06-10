@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import java.util.HashMap;
 import java.util.List;
@@ -17,73 +17,40 @@ import com.pos.system.managers.ReviewManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.pos.system.databinding.ActivityMainBinding;
 
-/**
- * MainActivity - الصفحة الرئيسية
- *
- * يرث من BaseActivity الذي يتولى تطبيق الثيم واللغة تلقائياً.
- *
- * @author POS System
- * @version 2.0
- * @since 2026-02-17
- */
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ActivityMainBinding binding;
-
     private static final String TAG = "MainActivity";
 
-    private DBHelper      dbHelper;
+    private DBHelper dbHelper;
     private ReviewManager reviewManager;
     private com.pos.system.managers.AppUpdateManager appUpdateManager;
-    private DrawerLayout  drawerLayout;
+    private DrawerLayout drawerLayout;
     private NavigationView navView;
+    private BottomNavigationView bottomNav;
 
-    // Dashboard Cards
+    // Pages
+    private View pageHome, pageSales, pageInventory, pageCustomers, pageMore;
+
+    // Home page stats
     private MaterialCardView cardTodaySales;
     private MaterialCardView cardTodayInvoices;
     private MaterialCardView cardLowStock;
-
-    // Stats TextViews
     private TextView tvTodaySales;
     private TextView tvTodayInvoices;
     private TextView tvLowStockCount;
-
-    // Action Cards
-    private MaterialCardView cardPOS;
-    private MaterialCardView cardProducts;
-    private MaterialCardView cardInvoices;
-    private MaterialCardView cardCustomers;
-    private MaterialCardView cardSuppliers;
-    private MaterialCardView cardReports;
-    private MaterialCardView cardExpenses;
-    private MaterialCardView cardSettings;
-    private MaterialCardView cardReturns;
-    private MaterialCardView cardShifts;
-    private MaterialCardView cardDebts;
-    private MaterialCardView cardPurchaseOrders;
-    private MaterialCardView cardChecks;
-    private MaterialCardView cardInstallments;
-    private MaterialCardView cardCashDrawer;
-    private MaterialCardView cardStockCount;
-    private MaterialCardView cardUsers;
-    private MaterialCardView cardWallet;
-    private MaterialCardView cardPriceQuotes;
-    private MaterialCardView cardCustomerRemaining;
-    private MaterialCardView cardSupplierRemaining;
-
-    // Alert Card
     private MaterialCardView cardAlert;
-    private TextView         tvAlertMessage;
+    private TextView tvAlertMessage;
 
-    // FAB
-    private ExtendedFloatingActionButton fabQuickSale;
+    // Inventory tab stats
+    private TextView tvInvTotal;
+    private TextView tvInvLow;
+    private TextView tvInvExpiry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // BaseActivity يطبق الثيم واللغة تلقائياً
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -101,7 +68,6 @@ public class MainActivity extends BaseActivity
         dbHelper = new DBHelper(this);
         reviewManager = new ReviewManager(this);
         reviewManager.onAppLaunched();
-        // ✅ In-App Update – فحص تحديثات Google Play
         appUpdateManager = new com.pos.system.managers.AppUpdateManager(this);
         appUpdateManager.checkForFlexibleUpdate();
     }
@@ -109,8 +75,8 @@ public class MainActivity extends BaseActivity
     private void setupUI() {
         setupToolbar();
         initializeViews();
+        setupBottomNav();
         setupCardClicks();
-        setupFAB();
         setupDrawer();
     }
 
@@ -124,84 +90,107 @@ public class MainActivity extends BaseActivity
 
     private void initializeViews() {
         drawerLayout = binding.drawerLayout;
-        navView      = binding.navView;
+        navView = binding.navView;
+        bottomNav = binding.bottomNav;
+
+        pageHome      = binding.pageHome;
+        pageSales     = binding.pageSales;
+        pageInventory = binding.pageInventory;
+        pageCustomers = binding.pageCustomers;
+        pageMore      = binding.pageMore;
 
         cardTodaySales    = binding.cardTodaySales;
         cardTodayInvoices = binding.cardTodayInvoices;
         cardLowStock      = binding.cardLowStock;
+        tvTodaySales      = binding.tvTodaySales;
+        tvTodayInvoices   = binding.tvTodayInvoices;
+        tvLowStockCount   = binding.tvLowStockCount;
+        cardAlert         = binding.cardAlert;
+        tvAlertMessage    = binding.tvAlertMessage;
 
-        tvTodaySales    = binding.tvTodaySales;
-        tvTodayInvoices = binding.tvTodayInvoices;
-        tvLowStockCount = binding.tvLowStockCount;
+        tvInvTotal  = binding.tvInvTotal;
+        tvInvLow    = binding.tvInvLow;
+        tvInvExpiry = binding.tvInvExpiry;
+    }
 
-        cardPOS            = binding.cardPos;
-        cardProducts       = binding.cardProducts;
-        cardInvoices       = binding.cardInvoices;
-        cardCustomers      = binding.cardCustomers;
-        cardSuppliers      = binding.cardSuppliers;
-        cardReports        = binding.cardReports;
-        cardExpenses       = binding.cardExpenses;
-        cardSettings       = binding.cardSettings;
-        cardReturns        = binding.cardReturns;
-        cardShifts         = binding.cardShifts;
-        cardDebts          = binding.cardDebts;
-        cardPurchaseOrders = binding.cardPurchaseOrders;
-        cardChecks        = binding.cardChecks;
-        cardInstallments  = binding.cardInstallments;
-        cardCashDrawer    = binding.cardCashDrawer;
-        cardStockCount    = binding.cardStockCount;
-        cardUsers         = binding.cardUsers;
-        cardWallet            = binding.cardWallet;
-        cardPriceQuotes       = binding.cardPriceQuotes;
-        cardCustomerRemaining = binding.cardCustomerRemaining;
-        cardSupplierRemaining = binding.cardSupplierRemaining;
+    private void setupBottomNav() {
+        if (bottomNav == null) return;
+        showPage(pageHome);
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if      (id == R.id.tab_home)      { showPage(pageHome);      updateToolbarTitle(R.string.app_name); }
+            else if (id == R.id.tab_sales)     { showPage(pageSales);     updateToolbarTitle(R.string.tab_sales); }
+            else if (id == R.id.tab_inventory) { showPage(pageInventory); updateToolbarTitle(R.string.tab_inventory); }
+            else if (id == R.id.tab_customers) { showPage(pageCustomers); updateToolbarTitle(R.string.tab_customers); }
+            else if (id == R.id.tab_more)      { showPage(pageMore);      updateToolbarTitle(R.string.tab_more); }
+            return true;
+        });
+    }
 
-        cardAlert      = binding.cardAlert;
-        tvAlertMessage = binding.tvAlertMessage;
+    private void showPage(View target) {
+        View[] pages = {pageHome, pageSales, pageInventory, pageCustomers, pageMore};
+        for (View p : pages) {
+            if (p != null) p.setVisibility(p == target ? View.VISIBLE : View.GONE);
+        }
+    }
 
-        fabQuickSale = binding.fabQuickSale;
+    private void updateToolbarTitle(int titleRes) {
+        if (binding.toolbar != null) binding.toolbar.setTitle(getString(titleRes));
     }
 
     private void setupCardClicks() {
+        // Home page
         if (cardTodaySales  != null) cardTodaySales.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
         if (cardLowStock    != null) cardLowStock.setOnClickListener(v -> showLowStockDialog());
+        if (cardAlert       != null) cardAlert.setOnClickListener(v -> showLowStockDialog());
 
-        setCardClick(cardPOS,            ActivityCartActivity.class);
-        setCardClick(cardProducts,       ActivityProductsActivity.class);
-        setCardClick(cardInvoices,       ActivityInvoicesActivity.class);
-        setCardClick(cardCustomers,      ActivityCustomersActivity.class);
-        setCardClick(cardSuppliers,      ActivitySuppliersActivity.class);
-        setCardClick(cardReports,        ActivityReportsActivity.class);
-        setCardClick(cardExpenses,       ActivityExpensesActivity.class);
-        setCardClick(cardSettings,       ActivitySettingsActivity.class);
-        setCardClick(cardReturns,        ActivityReturnActivity.class);
-        setCardClick(cardShifts,         ActivityShiftActivity.class);
-        setCardClick(cardDebts,          ActivityDebtActivity.class);
-        setCardClick(cardPurchaseOrders, ActivityPurchaseOrderActivity.class);
-        setCardClick(cardChecks,        ActivityChecksActivity.class);
-        setCardClick(cardInstallments,  ActivityInstallmentsActivity.class);
-        setCardClick(cardWallet,            ActivityWalletActivity.class);
-        setCardClick(cardPriceQuotes,       ActivityPriceQuotesActivity.class);
-        setCardClick(cardCustomerRemaining, ActivityCustomerRemainingActivity.class);
-        setCardClick(cardSupplierRemaining, ActivitySupplierRemainingActivity.class);
-        setCardClick(cardCashDrawer,    ActivityCashDrawerActivity.class);
-        setCardClick(cardStockCount,    ActivityStockCountActivity.class);
-        setCardClick(cardUsers,         ActivityUsersActivity.class);
-        setCardClick(binding.cardInsights, ActivityBusinessInsightsActivity.class);
+        setClick(binding.cardPos,      () -> openActivity(ActivityCartActivity.class));
+        setClick(binding.cardProducts, () -> openActivity(ActivityProductsActivity.class));
+        setClick(binding.cardInvoices, () -> openActivity(ActivityInvoicesActivity.class));
+        setClick(binding.cardCustomers,() -> openActivity(ActivityCustomersActivity.class));
+        setClick(binding.cardSuppliers,() -> openActivity(ActivitySuppliersActivity.class));
+        setClick(binding.cardReports,  () -> openActivity(ActivityReportsActivity.class));
+        setClick(binding.cardSettings, () -> openActivity(ActivitySettingsActivity.class));
+
+        // Sales tab
+        setClick(binding.cardPosSales,      () -> openActivity(ActivityCartActivity.class));
+        setClick(binding.cardInvoicesSales, () -> openActivity(ActivityInvoicesActivity.class));
+        setClick(binding.cardReturnsSales,  () -> openActivity(ActivityReturnActivity.class));
+        setClick(binding.cardQuotesSales,   () -> openActivity(ActivityPriceQuotesActivity.class));
+        setClick(binding.cardDebtsSales,    () -> openActivity(ActivityDebtActivity.class));
+
+        // Inventory tab
+        setClick(binding.cardProductsInv,  () -> openActivity(ActivityProductsActivity.class));
+        setClick(binding.cardStockCountInv,() -> openActivity(ActivityStockCountActivity.class));
+        setClick(binding.cardExpiryInv,    () -> openActivity(ActivityExpiryDashboardActivity.class));
+        setClick(binding.cardInventoryHub, () -> openActivity(ActivityProductsActivity.class));
+
+        // Customers tab
+        setClick(binding.cardCustList,      () -> openActivity(ActivityCustomersActivity.class));
+        setClick(binding.cardCustInvoices,  () -> openActivity(ActivityInvoicesActivity.class));
+        setClick(binding.cardCustDebt,      () -> openActivity(ActivityDebtActivity.class));
+        setClick(binding.cardCustInstall,   () -> openActivity(ActivityInstallmentsActivity.class));
+        setClick(binding.cardCustChecks,    () -> openActivity(ActivityChecksActivity.class));
+        setClick(binding.cardCustRemaining, () -> openActivity(ActivityCustomerRemainingActivity.class));
+        setClick(binding.cardSuppList,      () -> openActivity(ActivitySuppliersActivity.class));
+        setClick(binding.cardSuppOrders,    () -> openActivity(ActivityPurchaseOrderActivity.class));
+        setClick(binding.cardSuppRemaining, () -> openActivity(ActivitySupplierRemainingActivity.class));
+
+        // More tab
+        setClick(binding.cardMoreWallet,   () -> openActivity(ActivityWalletActivity.class));
+        setClick(binding.cardMoreCash,     () -> openActivity(ActivityCashDrawerActivity.class));
+        setClick(binding.cardMoreExpenses, () -> openActivity(ActivityExpensesActivity.class));
+        setClick(binding.cardMoreShifts,   () -> openActivity(ActivityShiftActivity.class));
+        setClick(binding.cardMoreReports,  () -> openActivity(ActivityReportsActivity.class));
+        setClick(binding.cardMoreInsights, () -> openActivity(ActivityBusinessInsightsActivity.class));
+        setClick(binding.cardMoreSettings, () -> openActivity(ActivitySettingsActivity.class));
+        setClick(binding.cardMoreUsers,    () -> openActivity(ActivityUsersActivity.class));
+        setClick(binding.cardMoreBackup,   () -> openActivity(ActivityBackupActivity.class));
+        setClick(binding.cardMorePrinter,  () -> openActivity(ActivityPrinterSettingsActivity.class));
     }
 
-    private void setCardClick(MaterialCardView card, Class<?> cls) {
-        if (card != null) {
-            card.setOnClickListener(v -> openActivity(cls));
-        }
-    }
-
-
-
-    private void setupFAB() {
-        if (fabQuickSale != null) {
-            fabQuickSale.setOnClickListener(v -> openActivity(ActivityCartActivity.class));
-        }
+    private void setClick(View v, Runnable action) {
+        if (v != null) v.setOnClickListener(x -> action.run());
     }
 
     private void setupDrawer() {
@@ -213,8 +202,8 @@ public class MainActivity extends BaseActivity
     }
 
     private void updateDrawerHeader(View headerView) {
-        TextView  tvStoreName  = headerView.findViewById(R.id.tv_store_name);
-        TextView  tvStorePhone = headerView.findViewById(R.id.tv_store_phone);
+        TextView tvStoreName  = headerView.findViewById(R.id.tv_store_name);
+        TextView tvStorePhone = headerView.findViewById(R.id.tv_store_phone);
         try {
             HashMap<String, String> settings = dbHelper.getStoreSettings();
             if (settings != null) {
@@ -234,25 +223,30 @@ public class MainActivity extends BaseActivity
                 final HashMap<String, Object> stats = dbHelper.getInvoicesStatistics();
                 final java.util.List<HashMap<String, String>> lowStock = dbHelper.getLowStockProducts(5);
                 final String currency = getCurrencySymbol();
-
+                final int totalProducts = dbHelper.getProductsCount();
+                final int expiryCount   = dbHelper.getExpiringProducts(30) != null
+                                         ? dbHelper.getExpiringProducts(30).size() : 0;
                 runOnUiThread(() -> {
                     if (isFinishing() || isDestroyed()) return;
                     try {
-                        double todaySales    = 0;
-                        int    todayInvoices = 0;
+                        double todaySales = 0; int todayInvoices = 0;
                         if (stats != null) {
-                            Object s = stats.get("today_total");
-                            Object c = stats.get("today_count");
+                            Object s = stats.get("today_total"); Object c = stats.get("today_count");
                             if (s != null) todaySales    = ((Number) s).doubleValue();
                             if (c != null) todayInvoices = ((Number) c).intValue();
                         }
+                        int lowCount = lowStock != null ? lowStock.size() : 0;
                         if (tvTodaySales    != null) tvTodaySales.setText(String.format("%.2f %s", todaySales, currency));
                         if (tvTodayInvoices != null) tvTodayInvoices.setText(String.valueOf(todayInvoices));
-                        if (tvLowStockCount != null) tvLowStockCount.setText(lowStock != null ? String.valueOf(lowStock.size()) : "0");
+                        if (tvLowStockCount != null) tvLowStockCount.setText(String.valueOf(lowCount));
+                        // Inventory tab stats
+                        if (tvInvTotal  != null) tvInvTotal.setText(String.valueOf(totalProducts));
+                        if (tvInvLow    != null) tvInvLow.setText(String.valueOf(lowCount));
+                        if (tvInvExpiry != null) tvInvExpiry.setText(String.valueOf(expiryCount));
                     } catch (Exception ignored) {}
                 });
             } catch (Exception e) {
-                android.util.Log.e("MainActivity", "loadDashboardData bg: " + e.getMessage(), e);
+                android.util.Log.e(TAG, "loadDashboardData error", e);
             }
         });
     }
@@ -261,19 +255,16 @@ public class MainActivity extends BaseActivity
         try {
             HashMap<String, String> settings = dbHelper.getStoreSettings();
             return settings.getOrDefault("currency", "ج.م");
-        } catch (Exception e) {
-            return "ج.م";
-        }
+        } catch (Exception e) { return "ج.م"; }
     }
 
     private void checkAlerts() {
         try {
             List<HashMap<String, String>> lowStock = dbHelper.getLowStockProducts(5);
             if (lowStock != null && !lowStock.isEmpty()) {
-                if (cardAlert    != null) cardAlert.setVisibility(View.VISIBLE);
+                if (cardAlert      != null) cardAlert.setVisibility(View.VISIBLE);
                 if (tvAlertMessage != null)
                     tvAlertMessage.setText(getString(R.string.low_stock_alert_message, lowStock.size()));
-                if (cardAlert != null) cardAlert.setOnClickListener(v -> showLowStockDialog());
             } else {
                 if (cardAlert != null) cardAlert.setVisibility(View.GONE);
             }
@@ -286,7 +277,6 @@ public class MainActivity extends BaseActivity
     private void showTrialBannerIfNeeded() {
         try {
             int days = FeatureGate.remainingTrialDays(this);
-            // days == -1 means premium; days == 0 means trial expired; days > 0 means active trial
             if (days > 0) {
                 View root = findViewById(android.R.id.content);
                 if (root == null) return;
@@ -307,19 +297,16 @@ public class MainActivity extends BaseActivity
         try {
             List<HashMap<String, String>> lowStock = dbHelper.getLowStockProducts(5);
             if (lowStock == null || lowStock.isEmpty()) {
-                showToast(getString(R.string.no_low_stock));
-                return;
+                showToast(getString(R.string.no_low_stock)); return;
             }
             StringBuilder msg = new StringBuilder();
-            for (HashMap<String, String> p : lowStock) {
+            for (HashMap<String, String> p : lowStock)
                 msg.append("• ").append(p.get("name")).append(" (").append(p.get("qty")).append(")\n");
-            }
             new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
                     .setTitle(getString(R.string.low_stock_title, lowStock.size()))
                     .setMessage(msg.toString())
                     .setPositiveButton(R.string.view_products, (d, w) -> openActivity(ActivityProductsActivity.class))
-                    .setNegativeButton(R.string.close, null)
-                    .show();
+                    .setNegativeButton(R.string.close, null).show();
         } catch (Exception e) {
             showToast(getString(R.string.error_unknown));
         }
@@ -379,38 +366,29 @@ public class MainActivity extends BaseActivity
 
     private void showAboutDialog() {
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.about_app)
-                .setMessage(getString(R.string.about_message))
-                .setPositiveButton(R.string.ok, null)
-                .show();
+                .setTitle(R.string.about_app).setMessage(getString(R.string.about_message))
+                .setPositiveButton(R.string.ok, null).show();
     }
 
     private void confirmLogout() {
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.logout)
-                .setMessage(R.string.logout_confirm)
-                .setPositiveButton(R.string.yes, (d, w) -> {
-                    AuthActivity.logout(this);
-                    finish();
-                })
-                .setNegativeButton(R.string.no, null)
-                .show();
+                .setTitle(R.string.logout).setMessage(R.string.logout_confirm)
+                .setPositiveButton(R.string.yes, (d, w) -> { AuthActivity.logout(this); finish(); })
+                .setNegativeButton(R.string.no, null).show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         try {
-            loadDashboardData();
-            checkAlerts();
+            loadDashboardData(); checkAlerts();
             if (appUpdateManager != null) appUpdateManager.onResume();
-            // Refresh drawer header so store name changes appear immediately
             if (navView != null) {
                 View headerView = navView.getHeaderView(0);
                 if (headerView != null) updateDrawerHeader(headerView);
             }
         } catch (Exception e) {
-            android.util.Log.e("MainActivity", "onResume: " + e.getMessage(), e);
+            android.util.Log.e(TAG, "onResume error", e);
         }
     }
 
@@ -418,6 +396,8 @@ public class MainActivity extends BaseActivity
     public void onBackPressed() {
         if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
+        } else if (bottomNav != null && bottomNav.getSelectedItemId() != R.id.tab_home) {
+            bottomNav.setSelectedItemId(R.id.tab_home);
         } else {
             super.onBackPressed();
         }

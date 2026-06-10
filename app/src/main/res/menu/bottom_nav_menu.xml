@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/tab_home" />
+
+    <item
+        android:id="@+id/tab_sales"
+        android:icon="@drawable/ic_pos"
+        android:title="@string/tab_sales" />
+
+    <item
+        android:id="@+id/tab_inventory"
+        android:icon="@drawable/ic_inventory"
+        android:title="@string/tab_inventory" />
+
+    <item
+        android:id="@+id/tab_customers"
+        android:icon="@drawable/ic_customers"
+        android:title="@string/tab_customers" />
+
+    <item
+        android:id="@+id/tab_more"
+        android:icon="@drawable/ic_menu"
+        android:title="@string/tab_more" />
+
+</menu>

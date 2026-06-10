@@ -668,4 +668,41 @@
     <!-- Main screen section separator -->
     <string name="main_section_tools">أدوات متقدمة</string>
 
+    <!-- Section Hub titles and sub-labels -->
+    <string name="hub_inventory">المخزون</string>
+    <string name="hub_treasury">الخزينة</string>
+    <string name="hub_installments">الأقساط</string>
+    <string name="hub_checks">الشيكات</string>
+    <string name="hub_customer_remaining">مستحقات العملاء</string>
+    <string name="hub_price_quotes">عروض الأسعار</string>
+    <string name="hub_supplier_remaining">مستحقات الموردين</string>
+    <string name="hub_stock_count">جرد المخزون</string>
+    <string name="hub_expiry">لوحة الصلاحيات</string>
+    <string name="hub_wallet">المحفظة</string>
+    <string name="hub_cash_drawer">الصندوق النقدي</string>
+
+    <!-- Main screen new header and sub-hints -->
+    <string name="main_sections_header">الأقسام</string>
+    <string name="hub_subtitle_customers">فواتير · ديون · مرتجعات</string>
+    <string name="hub_subtitle_suppliers">طلبات · مستحقات</string>
+    <string name="hub_subtitle_inventory">منتجات · جرد · صلاحيات</string>
+    <string name="hub_subtitle_treasury">خزينة · مصروفات · ورديات</string>
+    <string name="hub_subtitle_reports">تقارير · إحصاءات</string>
+
+    <!-- Bottom Navigation tabs -->
+    <string name="tab_home">الرئيسية</string>
+    <string name="tab_sales">البيع</string>
+    <string name="tab_inventory">المخزون</string>
+    <string name="tab_customers">العملاء</string>
+    <string name="tab_more">المزيد</string>
+    <string name="tab_more_users">المستخدمون</string>
+    <string name="tab_more_backup">النسخ الاحتياطي</string>
+    <string name="tab_more_printer">الطابعة</string>
+
+    <!-- Inventory stats -->
+    <string name="inv_stats_label">إحصاءات المخزون</string>
+    <string name="inv_stat_total">منتج</string>
+    <string name="inv_stat_low">نواقص</string>
+    <string name="inv_stat_expiry">قاربت الانتهاء</string>
+
 </resources>
