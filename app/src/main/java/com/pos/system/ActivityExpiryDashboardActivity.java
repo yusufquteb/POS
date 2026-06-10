@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -89,7 +90,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
             @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        binding.btnMarkAllReviewed.setOnClickListener(v -> showSortDialog());
+        binding.btnMarkAllReviewed.setOnClickListener(v -> markAllReviewed());
 
         loadSummary();
         loadCurrentTab();
@@ -135,8 +136,24 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
         }
     }
 
-    private void showSortDialog() {
-        loadCurrentTab();
+    private void markAllReviewed() {
+        List<String> ids = adapter.getProductIds();
+        if (ids.isEmpty()) {
+            showSnackbar(getString(R.string.expiry_nothing_to_review), false);
+            return;
+        }
+        int count = ids.size();
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.expiry_mark_reviewed_title))
+            .setMessage(getString(R.string.expiry_mark_reviewed_msg, count))
+            .setPositiveButton(getString(R.string.ok), (d, w) -> {
+                int marked = dbHelper.markExpiryReviewed(ids);
+                loadSummary();
+                loadCurrentTab();
+                showSnackbar(getString(R.string.expiry_marked_done, marked), false);
+            })
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show();
     }
 
     @Override
@@ -161,6 +178,15 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
             barColor = color;
             tabType  = tab;
             notifyDataSetChanged();
+        }
+
+        List<String> getProductIds() {
+            List<String> ids = new ArrayList<>();
+            for (HashMap<String, String> p : data) {
+                String id = p.get("id");
+                if (id != null && !id.isEmpty()) ids.add(id);
+            }
+            return ids;
         }
 
         @NonNull @Override

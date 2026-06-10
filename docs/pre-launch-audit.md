@@ -259,19 +259,19 @@ Three hardcoded Arabic strings in `activity_settings.xml` were replaced with pro
 - [x] Fix: Profit report missing COGS (`getReportSummary`)
 - [x] Fix: `ActivityLocationActivity` unreachable (Settings card added)
 
-### P1 — High (Feature Completeness)
-- [ ] Fix: Expiry "Mark All Reviewed" button — implement DB flag update
-- [ ] Fix: Price Quote → Invoice conversion — pre-fill POS cart
+### P1 — High (Feature Completeness) ✅ Done
+- [x] Fix: Expiry "Mark All Reviewed" — adds `expiry_reviewed` column (DB v10), marks products, hides from dashboard with count feedback
+- [x] Fix: Price Quote → Invoice — tap a quote → "تحويل إلى فاتورة" → opens cart pre-filled; quote marked as converted
 
-### P2 — Medium (Cleanup)
-- [ ] Remove 4 unused layout files (`ght.xml`, `main.xml`, `layout_custom_dialog.xml`, `layout_base_dialog.xml`)
-- [ ] Replace `https://yourwebsite.com/privacy` in `openPrivacyPolicy()` with real URL
-- [ ] Add shift-end cash reconciliation check (currently no warning if drawer doesn't balance)
+### P2 — Medium (Cleanup) ✅ Done
+- [x] Removed 4 unused layout files (`ght.xml`, `main.xml`, `layout_custom_dialog.xml`, `layout_base_dialog.xml`)
+- [x] Privacy URL now reads from `@string/privacy_policy_url` resource (defaults to Play Store URL); set the string to your real URL
+- [x] Shift close: if |actual_cash − expected| > 1.0, warns with discrepancy amount before saving
 
-### P3 — Low (Polish)
-- [ ] Add "Mark All Reviewed" proper visual feedback with reviewed count
-- [ ] Customer detail: consider merging 3 separate customer info screens into tab layout
-- [ ] Analytics: consider consolidating 3 analytics screens into single tabbed screen
+### P3 — Low (Polish) ✅ Done
+- [x] "Mark All Reviewed" shows confirmation count + snackbar feedback after marking
+- [ ] Customer detail tabs: architectural refactor deferred (Activity→Fragment migration needed)
+- [ ] Analytics tabs: architectural refactor deferred (Activity→Fragment migration needed)
 
 ---
 

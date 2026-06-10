@@ -46,6 +46,7 @@ public class ActivityCartActivity extends BaseActivity {
 
 
     private static final String TAG = "CartActivity";
+    public  static final String EXTRA_QUOTE_ID = "quote_id";
 
     private DBHelper dbHelper;
     private CartAdapter cartAdapter;
@@ -99,6 +100,32 @@ public class ActivityCartActivity extends BaseActivity {
         setupRecyclerView();
         setupListeners();
         updateUI();
+
+        long quoteId = getIntent().getLongExtra(EXTRA_QUOTE_ID, -1);
+        if (quoteId > 0) loadFromQuote(quoteId);
+    }
+
+    private void loadFromQuote(long quoteId) {
+        try {
+            List<HashMap<String, String>> items = dbHelper.getPriceQuoteItems(quoteId);
+            for (HashMap<String, String> item : items) {
+                String id    = item.getOrDefault("product_id", "0");
+                String name  = item.getOrDefault("name", "");
+                double price = 0;
+                int    qty   = 1;
+                try { price = Double.parseDouble(item.getOrDefault("price", "0")); } catch (Exception ignored) {}
+                try { qty   = Integer.parseInt(item.getOrDefault("qty",   "1")); } catch (Exception ignored) {}
+                if (!name.isEmpty()) cartItems.add(new CartItem(id, name, price, qty));
+            }
+            if (!items.isEmpty()) {
+                cartAdapter.notifyDataSetChanged();
+                recalculateTotals();
+                updateUI();
+                dbHelper.updatePriceQuoteStatus(quoteId, "converted");
+            }
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "loadFromQuote: " + e.getMessage());
+        }
     }
 
     @Override

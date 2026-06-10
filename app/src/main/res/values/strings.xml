@@ -925,4 +925,24 @@
     <string name="nav_cash_drawer">الخزينة</string>
     <string name="nav_stock_count">جرد المخزون</string>
     <string name="nav_users">المستخدمون</string>
+
+    <!-- Expiry dashboard — mark reviewed -->
+    <string name="expiry_mark_reviewed_title">Mark as Reviewed</string>
+    <string name="expiry_mark_reviewed_msg">Mark %1$d products as reviewed? They will be hidden from this dashboard.</string>
+    <string name="expiry_marked_done">%1$d products marked as reviewed.</string>
+    <string name="expiry_nothing_to_review">No products to mark.</string>
+
+    <!-- Price quotes -->
+    <string name="quote_option_convert">Convert to Invoice</string>
+    <string name="quote_option_view">View Details</string>
+    <string name="quote_convert_title">Convert to Invoice</string>
+    <string name="quote_convert_msg">Convert quote %1$s into a new sale? The quote will be marked as converted.</string>
+
+    <!-- Shift reconciliation -->
+    <string name="shift_discrepancy_title">Cash Discrepancy</string>
+    <string name="shift_discrepancy_msg">Expected: %1$s\nActual: %2$s\nDifference: %3$s\n\nProceed with closing?</string>
+    <string name="shift_close_anyway">Close Anyway</string>
+
+    <!-- Privacy policy -->
+    <string name="privacy_policy_url"></string>
 </resources>

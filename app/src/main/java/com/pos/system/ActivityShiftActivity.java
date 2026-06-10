@@ -264,17 +264,37 @@ public class ActivityShiftActivity extends BaseActivity {
                     hideKeyboard();
                     String cashStr = etClosingCash.getText() != null
                             ? etClosingCash.getText().toString().trim() : "0";
-                    double closingCash = parseDouble(cashStr);
-                    boolean success = dbHelper.closeShift(shiftId, closingCash);
-                    if (success) {
-                        snack(getString(R.string.shift_closed_success));
-                        refreshUI();
+                    double closingCash  = parseDouble(cashStr);
+                    double openingVal   = parseDouble(openingCash);
+                    double salesVal     = parseDouble(totalSales);
+                    double expected     = openingVal + salesVal;
+                    double discrepancy  = Math.abs(closingCash - expected);
+                    if (discrepancy > 1.0) {
+                        new MaterialAlertDialogBuilder(this)
+                            .setTitle(getString(R.string.shift_discrepancy_title))
+                            .setMessage(getString(R.string.shift_discrepancy_msg,
+                                formatCurrency(expected), formatCurrency(closingCash),
+                                formatCurrency(discrepancy)))
+                            .setPositiveButton(getString(R.string.shift_close_anyway), (d2, w2) ->
+                                doCloseShift(shiftId, closingCash))
+                            .setNegativeButton(getString(R.string.cancel), null)
+                            .show();
                     } else {
-                        snack(getString(R.string.shift_close_error));
+                        doCloseShift(shiftId, closingCash);
                     }
                 })
                 .setNegativeButton(getString(R.string.cancel), null)
                 .show();
+    }
+
+    private void doCloseShift(long shiftId, double closingCash) {
+        boolean success = dbHelper.closeShift(shiftId, closingCash);
+        if (success) {
+            snack(getString(R.string.shift_closed_success));
+            refreshUI();
+        } else {
+            snack(getString(R.string.shift_close_error));
+        }
     }
 
     // ═══════════════════════════════════════════════════════════

@@ -297,8 +297,9 @@ public class ActivitySettingsActivity extends BaseActivity {
 
     /** سياسة الخصوصية */
     private void openPrivacyPolicy() {
-        Intent intent = new Intent(Intent.ACTION_VIEW,
-                android.net.Uri.parse("https://yourwebsite.com/privacy"));
+        String url = getString(R.string.privacy_policy_url);
+        if (url.isEmpty()) url = "https://play.google.com/store/apps/details?id=" + getPackageName();
+        Intent intent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url));
         try {
             startActivity(intent);
         } catch (Exception e) {

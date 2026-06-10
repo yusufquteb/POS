@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -97,7 +98,45 @@ public class ActivityPriceQuotesActivity extends BaseActivity {
                 String status = q.getOrDefault("status","active");
                 h.tvStatus.setText("active".equals(status) ? "نشط" : "محوّل");
             }
+            h.itemView.setOnClickListener(v -> showQuoteOptions(q));
         }
         @Override public int getItemCount() { return quotes.size(); }
+    }
+
+    private void showQuoteOptions(HashMap<String, String> q) {
+        String quoteNumber = q.getOrDefault("quote_number", "");
+        String status      = q.getOrDefault("status", "active");
+        boolean converted  = "converted".equals(status);
+
+        String[] options = converted
+            ? new String[]{getString(R.string.quote_option_view)}
+            : new String[]{getString(R.string.quote_option_convert), getString(R.string.quote_option_view)};
+
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(quoteNumber)
+            .setItems(options, (d, which) -> {
+                if (!converted && which == 0) {
+                    confirmConvertToInvoice(q);
+                }
+            })
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show();
+    }
+
+    private void confirmConvertToInvoice(HashMap<String, String> q) {
+        String quoteNumber = q.getOrDefault("quote_number", "");
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.quote_convert_title))
+            .setMessage(getString(R.string.quote_convert_msg, quoteNumber))
+            .setPositiveButton(getString(R.string.ok), (d, w) -> {
+                long quoteId = 0;
+                try { quoteId = Long.parseLong(q.getOrDefault("id", "0")); }
+                catch (Exception ignored) {}
+                Intent intent = new Intent(this, ActivityCartActivity.class);
+                intent.putExtra(ActivityCartActivity.EXTRA_QUOTE_ID, quoteId);
+                startActivity(intent);
+            })
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show();
     }
 }
