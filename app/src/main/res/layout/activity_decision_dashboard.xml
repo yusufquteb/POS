@@ -7,6 +7,7 @@
     android:background="?attr/colorSurface">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -49,7 +50,7 @@
                     android:padding="@dimen/spacing_base">
 
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛒" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
+                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_shopping_cart" android:tint="?attr/colorPrimary" android:layout_marginEnd="@dimen/spacing_sm" android:contentDescription="@null" />
                         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/str_88df6e" android:textSize="@dimen/text_base" android:textStyle="bold" />
                         <TextView android:id="@+id/tv_reorder_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="@dimen/text_xl" android:textStyle="bold" android:textColor="@color/color_warning" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_4cff5b" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
@@ -95,7 +96,7 @@
                     android:padding="@dimen/spacing_base">
 
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠️" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
+                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_warning" android:tint="@color/color_error" android:layout_marginEnd="@dimen/spacing_sm" android:contentDescription="@null" />
                         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/str_919712" android:textSize="@dimen/text_base" android:textStyle="bold" />
                         <TextView android:id="@+id/tv_expiry_risk_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="@dimen/text_xl" android:textStyle="bold" android:textColor="@color/color_error" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_4cff5b" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
@@ -141,7 +142,7 @@
                     android:padding="@dimen/spacing_base">
 
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😴" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
+                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_inventory_2" android:tint="?attr/colorOnSurfaceVariant" android:layout_marginEnd="@dimen/spacing_sm" android:contentDescription="@null" />
                         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/str_13565b" android:textSize="@dimen/text_base" android:textStyle="bold" />
                         <TextView android:id="@+id/tv_dead_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="@dimen/text_xl" android:textStyle="bold" android:textColor="?attr/colorOnSurfaceVariant" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/str_4cff5b" android:textSize="@dimen/text_xs" android:textColor="?attr/colorOnSurfaceVariant" />
@@ -179,7 +180,7 @@
                     android:padding="@dimen/spacing_base">
 
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="@dimen/spacing_sm">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📉" android:textSize="@dimen/text_xxl" android:layout_marginEnd="@dimen/spacing_sm" />
+                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_trending_down" android:tint="?attr/colorOnSurfaceVariant" android:layout_marginEnd="@dimen/spacing_sm" android:contentDescription="@null" />
                         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/str_2565d0" android:textSize="@dimen/text_base" android:textStyle="bold" />
                     </LinearLayout>
 

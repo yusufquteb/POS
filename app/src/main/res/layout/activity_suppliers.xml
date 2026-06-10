@@ -7,6 +7,7 @@
     android:background="?attr/colorSurface">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.appbar.MaterialToolbar
@@ -96,6 +97,14 @@
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:layout_marginTop="@dimen/spacing_sm"
                 android:fontFamily="@font/cairo_regular"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_empty_cta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:text="@string/supplier_add"
+                app:icon="@drawable/ic_add"
+                android:fontFamily="@font/cairo_semibold"/>
         </LinearLayout>
     </LinearLayout>
 

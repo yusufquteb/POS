@@ -8,6 +8,7 @@
     android:layoutDirection="rtl">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.Toolbar
@@ -61,13 +62,14 @@
                 android:gravity="center"
                 android:padding="@dimen/spacing_xxl"
                 android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:layout_gravity="center_horizontal"
-                    android:text="📅"
-                    android:textSize="@dimen/text_icon"
-                    android:layout_marginBottom="@dimen/spacing_base" />
+                    android:src="@drawable/ic_calendar_today"
+                    android:tint="?attr/colorOnSurfaceVariant"
+                    android:layout_marginBottom="@dimen/spacing_base"
+                    android:contentDescription="@null" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

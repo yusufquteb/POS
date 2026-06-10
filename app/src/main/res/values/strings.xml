@@ -373,8 +373,10 @@
     <string name="ok">حسناً</string>
     <string name="yes">نعم</string>
     <string name="no">No</string>
-    <string name="today_sales">Today\'s Sales</string>
-    <string name="today_invoices">Today\'s Invoices</string>
+    <string name="today_sales">مبيعات اليوم</string>
+    <string name="today_invoices">فواتير اليوم</string>
+    <string name="business_insights_title">إحصاءات الأعمال</string>
+    <string name="suggestion_applied">تم تعبئة بيانات المنتج تلقائياً</string>
     <string name="total_products">Total Products</string>
     <string name="quick_actions">Quick Actions</string>
     <string name="quick_sale">Quick Sale</string>
@@ -901,4 +903,23 @@
     <string name="str_5d10b4">نظام POS</string>
     <string name="str_501c36">نظام إدارة المبيعات المتكامل</string>
     <string name="str_b530ab">متجري</string>
+
+    <!-- Drawer section headers -->
+    <string name="nav_section_sales">المبيعات</string>
+    <string name="nav_section_finance">المالية</string>
+    <string name="nav_section_inventory">المخزون</string>
+    <string name="nav_section_contacts">جهات الاتصال</string>
+    <string name="nav_section_reports">التقارير</string>
+    <string name="nav_section_management">الإدارة</string>
+
+    <!-- Empty state subtitles -->
+    <string name="expenses_add_first">سجّل مصاريفك لتتبع التكاليف بدقة</string>
+    <string name="products_add_first">أضف منتجاتك لتبدأ البيع</string>
+
+    <!-- Drawer item labels -->
+    <string name="nav_checks">الشيكات</string>
+    <string name="nav_installments">الأقساط</string>
+    <string name="nav_cash_drawer">الخزينة</string>
+    <string name="nav_stock_count">جرد المخزون</string>
+    <string name="nav_users">المستخدمون</string>
 </resources>

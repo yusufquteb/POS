@@ -289,6 +289,14 @@
             android:screenOrientation="portrait"
             android:label="لوحة القرارات الذكية"/>
 
+        <!-- ════════ Business Insights ════════ -->
+        <activity
+            android:name=".ActivityBusinessInsightsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/business_insights_title"/>
+
         <!-- ════════ New Features ════════ -->
         <activity
             android:name=".ActivityChecksActivity"
