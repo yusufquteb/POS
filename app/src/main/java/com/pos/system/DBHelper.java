@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
 
     public static final String DATABASE_NAME    = "SmartPOS.db";
-    public static final int    DATABASE_VERSION = 9;
+    public static final int    DATABASE_VERSION = 10;
 
     private final Context mContext;
 
@@ -182,6 +182,9 @@ public class DBHelper extends SQLiteOpenHelper {
             createWalletTransactionsTable(db);
             createDirectPaymentsTable(db);
             createPriceQuotesTable(db);
+        }
+        if (oldVersion < 10) {
+            safeAlter(db, "ALTER TABLE " + TABLE_PRODUCTS + " ADD COLUMN expiry_reviewed INTEGER DEFAULT 0");
         }
     }
 
@@ -2701,7 +2704,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "SELECT * FROM " + TABLE_PRODUCTS +
             " WHERE expiry != '' AND expiry IS NOT NULL" +
             " AND DATE(expiry) BETWEEN DATE('now') AND DATE('now', '+' || ? || ' days')" +
-            " AND qty > 0 ORDER BY expiry ASC",
+            " AND qty > 0 AND (expiry_reviewed = 0 OR expiry_reviewed IS NULL)" +
+            " ORDER BY expiry ASC",
             new String[]{String.valueOf(days)});
     }
 
@@ -2750,7 +2754,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "SELECT * FROM " + TABLE_PRODUCTS +
             " WHERE expiry != '' AND expiry IS NOT NULL" +
             " AND DATE(expiry) < DATE('now')" +
-            " AND qty > 0 ORDER BY expiry ASC",
+            " AND qty > 0 AND (expiry_reviewed = 0 OR expiry_reviewed IS NULL)" +
+            " ORDER BY expiry ASC",
             null);
     }
 
@@ -4065,5 +4070,45 @@ public class DBHelper extends SQLiteOpenHelper {
             "JOIN " + TABLE_INVOICES + " i ON ii.invoice_id = i.id " +
             "WHERE ii.product_id = ? ORDER BY i.created_at DESC LIMIT 50",
             new String[]{productId});
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Price history for a product
+    // ════════════════════════════════════════════════════════════
+
+    /** Returns last N sell prices for a product from invoice_items. */
+    public List<HashMap<String, String>> getProductPriceHistory(String productId, int limit) {
+        return queryTable(
+            "SELECT ii.price, ii.qty, i.created_at, i.invoice_number" +
+            " FROM " + TABLE_INVOICE_ITEMS + " ii" +
+            " JOIN " + TABLE_INVOICES + " i ON ii.invoice_id = i.id" +
+            " WHERE CAST(ii.product_id AS TEXT) = CAST(? AS TEXT)" +
+            " ORDER BY i.created_at DESC LIMIT ?",
+            new String[]{productId, String.valueOf(limit)});
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // Expiry reviewed
+    // ════════════════════════════════════════════════════════════
+
+    public int markExpiryReviewed(List<String> productIds) {
+        if (productIds == null || productIds.isEmpty()) return 0;
+        SQLiteDatabase db = getWritableDatabase();
+        int count = 0;
+        db.beginTransaction();
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("expiry_reviewed", 1);
+            for (String id : productIds) {
+                count += db.update(TABLE_PRODUCTS, cv, "id=?", new String[]{id});
+            }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.e(TAG, "markExpiryReviewed: " + e.getMessage());
+            count = 0;
+        } finally {
+            db.endTransaction();
+        }
+        return count;
     }
 }

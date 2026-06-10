@@ -631,4 +631,41 @@
     <string name="redeem_points">استرداد النقاط</string>
     <string name="minimum_redeem">الحد الأدنى للاسترداد</string>
 
+    <!-- Expiry dashboard — mark reviewed -->
+    <string name="expiry_mark_reviewed_title">تعليم كـ مراجعة</string>
+    <string name="expiry_mark_reviewed_msg">هل تريد تعليم %1$d منتج كـ "تمت مراجعته"؟ سيتم إخفاؤها من لوحة التحكم.</string>
+    <string name="expiry_marked_done">تمت مراجعة %1$d منتج.</string>
+    <string name="expiry_nothing_to_review">لا توجد منتجات للمراجعة.</string>
+
+    <!-- Price quotes -->
+    <string name="quote_option_convert">تحويل إلى فاتورة</string>
+    <string name="quote_option_view">عرض التفاصيل</string>
+    <string name="quote_convert_title">تحويل إلى فاتورة</string>
+    <string name="quote_convert_msg">هل تريد تحويل العرض %1$s إلى فاتورة مبيعات؟ سيُعلَّم العرض كـ "محوّل".</string>
+
+    <!-- Shift reconciliation -->
+    <string name="shift_discrepancy_title">فارق في النقدية</string>
+    <string name="shift_discrepancy_msg">المتوقع: %1$s\nالفعلي: %2$s\nالفارق: %3$s\n\nهل تريد إغلاق الوردية على أي حال؟</string>
+    <string name="shift_close_anyway">إغلاق على أي حال</string>
+
+    <!-- Privacy policy -->
+    <string name="privacy_policy_url"></string>
+
+    <!-- QR code on invoice -->
+    <string name="store_qr_on_invoice">عرض QR Code على الفاتورة</string>
+    <string name="invoice_qr_title">رمز QR للفاتورة</string>
+
+    <!-- Price history -->
+    <string name="product_option_edit">تعديل المنتج</string>
+    <string name="product_option_price_history">آخر أسعار البيع</string>
+    <string name="price_history_title">آخر أسعار — %1$s</string>
+    <string name="price_history_empty">لا توجد مبيعات سابقة لهذا المنتج.</string>
+
+    <!-- CSV import options -->
+    <string name="import_csv_pick">اختر ملف CSV…</string>
+    <string name="import_csv_download_template">تنزيل قالب فارغ</string>
+
+    <!-- Main screen section separator -->
+    <string name="main_section_tools">أدوات متقدمة</string>
+
 </resources>
