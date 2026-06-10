@@ -581,6 +581,9 @@
     <string name="settings_store_desc">الاسم، العنوان، الهاتف</string>
     <string name="settings_printer_desc">ربط وإعداد الطابعة</string>
     <string name="settings_backup_desc">حفظ واستعادة البيانات</string>
+    <string name="settings_locations">المواقع والمخازن</string>
+    <string name="settings_locations_desc">إدارة الفروع ومواقع التخزين</string>
+    <string name="settings_remove_data">حذف البيانات</string>
     <string name="settings_version">الإصدار 1.0</string>
     <string name="settings_theme_colors">المظهر والألوان</string>
 

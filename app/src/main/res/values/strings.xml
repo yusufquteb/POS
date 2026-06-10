@@ -509,6 +509,9 @@
     <string name="settings_store_desc">Name, address, phone</string>
     <string name="settings_printer_desc">Connect and configure printer</string>
     <string name="settings_backup_desc">Save and restore data</string>
+    <string name="settings_locations">Locations &amp; Warehouses</string>
+    <string name="settings_locations_desc">Manage store branches and storage locations</string>
+    <string name="settings_remove_data">Delete Data</string>
     <string name="settings_version">Version 1.0</string>
     <string name="settings_theme_colors">Appearance &amp; Colors</string>
 

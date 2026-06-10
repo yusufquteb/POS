@@ -152,6 +152,31 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_locations" android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:cardCornerRadius="16dp"
+                app:cardElevation="4dp" android:layout_marginBottom="@dimen/spacing_md"
+                android:clickable="true" android:focusable="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:padding="@dimen/spacing_lg" android:gravity="center_vertical">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@drawable/ic_warehouse" android:tint="?attr/colorPrimary"
+                        android:contentDescription="@string/settings_locations" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="@dimen/spacing_base">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_locations" android:textSize="@dimen/text_base" android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" android:fontFamily="@font/cairo_semibold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="@string/settings_locations_desc" android:textSize="@dimen/text_sm"
+                            android:textColor="?attr/colorOnSurfaceVariant" android:layout_marginTop="@dimen/spacing_xs"
+                            android:fontFamily="@font/cairo_regular" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right" android:tint="?attr/colorOnSurfaceVariant"
+                        android:contentDescription="@string/more" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_printer" android:layout_width="match_parent"
                 android:layout_height="wrap_content" app:cardCornerRadius="16dp"
                 app:cardElevation="4dp" android:layout_marginBottom="@dimen/spacing_xl"
@@ -219,7 +244,7 @@
                     <ImageView android:layout_width="40dp" android:layout_height="40dp"
                         android:src="@drawable/ic_lock"
                         android:tint="?attr/colorPrimary"
-                        android:contentDescription="قفل الكاشير" />
+                        android:contentDescription="@string/str_53a947" />
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="@dimen/spacing_base">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -323,7 +348,7 @@
                 android:id="@+id/btn_remove_data"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="حذف البيانات"
+                android:text="@string/settings_remove_data"
                 android:textSize="@dimen/text_base"
                 app:icon="@drawable/ic_delete"
                 app:iconGravity="textStart"
