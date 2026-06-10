@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POS App — UI Mockup</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    gap: 30px;
+  }
+
+  h1 { color: #fff; font-size: 20px; text-align: center; margin-bottom: 10px; }
+  .tabs-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Phone frame */
+  .phone {
+    width: 320px;
+    background: #f5f5f5;
+    border-radius: 36px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 0 2px #333;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 640px;
+    position: relative;
+  }
+  .phone-label {
+    color: #aaa;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  /* Status bar */
+  .status-bar {
+    background: #6750A4;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-size: 10px;
+    color: #fff;
+  }
+
+  /* Toolbar */
+  .toolbar {
+    background: #6750A4;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .toolbar .menu-icon { font-size: 18px; color: #fff; cursor: pointer; }
+  .toolbar .title { color: #fff; font-size: 16px; font-weight: bold; flex: 1; }
+  .toolbar .store-badge {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  /* Page content */
+  .page {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    background: #f0eff4;
+  }
+  .page.active { display: flex; }
+
+  /* Cards */
+  .hero-card {
+    background: #6750A4;
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hero-card .label { color: rgba(255,255,255,0.8); font-size: 12px; }
+  .hero-card .amount { color: #fff; font-size: 26px; font-weight: bold; margin-top: 2px; }
+  .hero-card .icon { font-size: 36px; opacity: 0.4; }
+
+  .stats-row { display: flex; gap: 8px; }
+  .stat-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .stat-icon { font-size: 22px; }
+  .stat-num { font-size: 18px; font-weight: bold; color: #1d1b20; }
+  .stat-label { font-size: 10px; color: #888; }
+
+  .pos-cta {
+    background: #6750A4;
+    border-radius: 16px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: opacity .15s;
+  }
+  .pos-cta:hover { opacity: .9; }
+  .pos-cta .pos-icon { font-size: 24px; }
+  .pos-cta .pos-title { color: #fff; font-size: 15px; font-weight: bold; }
+  .pos-cta .pos-sub { color: rgba(255,255,255,0.75); font-size: 11px; }
+  .pos-cta .arrow { color: rgba(255,255,255,0.6); font-size: 20px; margin-right: auto; }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #79747e;
+    padding: 2px 2px;
+  }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 6px;
+    gap: 6px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+    transition: transform .1s, box-shadow .1s;
+    min-height: 72px;
+  }
+  .card:hover { transform: scale(0.97); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+  .card .card-icon { font-size: 22px; }
+  .card .card-label { font-size: 10px; font-weight: bold; color: #1d1b20; text-align: center; line-height: 1.3; }
+  .card .card-sub { font-size: 9px; color: #888; text-align: center; }
+
+  .card.primary { background: #eaddff; }
+  .card.primary .card-label { color: #4a0072; }
+  .card.secondary { background: #dce6f4; }
+  .card.secondary .card-label { color: #1a3a5c; }
+  .card.warn { background: #fce4ec; }
+  .card.warn .card-label { color: #880e4f; }
+
+  .section-header {
+    border-radius: 14px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .section-header.blue { background: #dce6f4; }
+  .section-header.purple { background: #eaddff; }
+  .section-header .sh-icon { font-size: 24px; }
+  .section-header .sh-title { font-size: 14px; font-weight: bold; }
+  .section-header .sh-sub { font-size: 10px; color: #666; }
+
+  .big-pos {
+    background: #6750A4;
+    border-radius: 20px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(103,80,164,0.4);
+  }
+  .big-pos .bp-icon { font-size: 32px; }
+  .big-pos .bp-title { color: #fff; font-size: 16px; font-weight: bold; }
+  .big-pos .bp-sub { color: rgba(255,255,255,0.7); font-size: 11px; }
+
+  .inv-header {
+    background: #d7f0e4;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .inv-header .ih-icon { font-size: 28px; }
+  .inv-header .ih-title { font-size: 14px; font-weight: bold; color: #1b5e20; }
+  .inv-header .ih-sub { font-size: 10px; color: #388e3c; }
+
+  .small-card {
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 4px;
+    gap: 4px;
+    min-height: 64px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+  }
+  .small-card .sc-icon { font-size: 18px; }
+  .small-card .sc-label { font-size: 9px; font-weight: bold; color: #1d1b20; text-align: center; }
+
+  .more-section { display: flex; flex-direction: column; gap: 6px; }
+
+  /* Alert */
+  .alert-banner {
+    background: #fce4ec;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #b71c1c;
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    padding: 6px 0 8px;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 16px;
+    transition: background .15s;
+    flex: 1;
+  }
+  .nav-item:hover { background: #f3eeff; }
+  .nav-item.active .nav-icon { color: #6750A4; }
+  .nav-item.active .nav-label { color: #6750A4; font-weight: bold; }
+  .nav-item .nav-icon { font-size: 20px; color: #79747e; }
+  .nav-item .nav-label { font-size: 9px; color: #79747e; }
+  .nav-item.active { background: #f3eeff; }
+
+  /* divider */
+  .divider { height: 1px; background: #e8e0f0; margin: 4px 0; }
+
+  /* Pill badge */
+  .badge {
+    background: #b00020;
+    color: #fff;
+    font-size: 8px;
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+  .row-label-with-badge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<h1>🎨 تصميم الواجهة — POS App</h1>
+
+<div class="tabs-row">
+
+  <!-- ── TAB 1: الرئيسية ── -->
+  <div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+      <div class="toolbar">
+        <span class="menu-icon">☰</span>
+        <span class="title">متجري</span>
+        <span class="store-badge">تجريبي</span>
+      </div>
+      <div class="page active">
+
+        <!-- Alert -->
+        <div class="alert-banner">⚠️ 3 منتجات بمخزون منخفض — اضغط للعرض</div>
+
+        <!-- Hero card -->
+        <div class="hero-card">
+          <div>
+            <div class="label">مبيعات اليوم</div>
+            <div class="amount">1,250.00 ج.م</div>
+          </div>
+          <div class="icon">📊</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon">🧾</div>
+            <div>
+              <div class="stat-num">7</div>
+              <div class="stat-label">فاتورة اليوم</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="color:#d32f2f">⚠️</div>
+            <div>
+              <div class="stat-num" style="color:#d32f2f">3</div>
+              <div class="stat-label">مخزون منخفض</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- POS CTA -->
+        <div class="pos-cta">
+          <span class="pos-icon">🛒</span>
+          <div>
+            <div class="pos-title">نقطة البيع</div>
+            <div class="pos-sub">ابدأ فاتورة جديدة</div>
+          </div>
+          <span class="arrow">›</span>
+        </div>
+
+        <div class="section-label">وصول سريع</div>
+
+        <!-- Quick shortcuts row 1 -->
+        <div class="grid-3">
+          <div class="card primary">
+            <span class="card-icon">📦</span>
+            <span class="card-label">المنتجات</span>
+          </div>
+          <div class="card primary">
+            <span class="card-icon">🧾</span>
+            <span class="card-label">الفواتير</span>
+          </div>
+          <div class="card primary">
+            <span class="card-icon">📊</span>
+            <span class="card-label">التقارير</span>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-icon">👥</span>
+            <span class="card-label">العملاء</span>
+          </div>
+          <div class="card">
+            <span class="card-icon">🚚</span>
+            <span class="card-label">الموردون</span>
+          </div>
+          <div class="card">
+            <span class="card-icon">⚙️</span>
+            <span class="card-label">الإعدادات</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab(0)"><span class="nav-icon">🏠</span><span class="nav-label">الرئيسية</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">🛒</span><span class="nav-label">البيع</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">📦</span><span class="nav-label">المخزون</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">👥</span><span class="nav-label">العملاء</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">☰</span><span class="nav-label">المزيد</span></div>
+      </div>
+    </div>
+    <div class="phone-label">① الرئيسية</div>
+  </div>
+
+  <!-- ── TAB 2: البيع ── -->
+  <div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+      <div class="toolbar">
+        <span class="menu-icon">☰</span>
+        <span class="title">البيع</span>
+      </div>
+      <div class="page active">
+
+        <div class="big-pos">
+          <span class="bp-icon">🛒</span>
+          <div class="bp-title">نقطة البيع</div>
+          <div class="bp-sub">اضغط لبدء فاتورة جديدة</div>
+        </div>
+
+        <div class="section-label">العمليات</div>
+
+        <div class="grid-2">
+          <div class="card primary">
+            <span class="card-icon">🧾</span>
+            <span class="card-label">الفواتير</span>
+            <span class="card-sub">سجل المبيعات</span>
+          </div>
+          <div class="card">
+            <span class="card-icon">↩️</span>
+            <span class="card-label">مرتجع بيع</span>
+            <span class="card-sub">إرجاع منتج</span>
+          </div>
+          <div class="card">
+            <span class="card-icon">📋</span>
+            <span class="card-label">عروض الأسعار</span>
+            <span class="card-sub">تحويل لفاتورة</span>
+          </div>
+          <div class="card warn">
+            <span class="card-icon">💰</span>
+            <span class="card-label">إدارة الديون</span>
+            <span class="card-sub">متأخرات العملاء</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">🏠</span><span class="nav-label">الرئيسية</span></div>
+        <div class="nav-item active" onclick="switchTab(0)"><span class="nav-icon">🛒</span><span class="nav-label">البيع</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">📦</span><span class="nav-label">المخزون</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">👥</span><span class="nav-label">العملاء</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">☰</span><span class="nav-label">المزيد</span></div>
+      </div>
+    </div>
+    <div class="phone-label">② البيع</div>
+  </div>
+
+  <!-- ── TAB 3: المخزون ── -->
+  <div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+      <div class="toolbar">
+        <span class="menu-icon">☰</span>
+        <span class="title">المخزون</span>
+      </div>
+      <div class="page active">
+
+        <div class="inv-header">
+          <span class="ih-icon">🏪</span>
+          <div>
+            <div class="ih-title">إدارة المخزون</div>
+            <div class="ih-sub">منتجات · جرد · صلاحيات</div>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card primary">
+            <span class="card-icon">📦</span>
+            <span class="card-label">المنتجات</span>
+          </div>
+          <div class="card secondary">
+            <span class="card-icon">🏭</span>
+            <span class="card-label">جرد المخزون</span>
+          </div>
+          <div class="card warn">
+            <span class="card-icon">📅</span>
+            <span class="card-label">الصلاحيات</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="section-label">إحصاءات المخزون</div>
+
+        <div class="stats-row">
+          <div class="stat-card" style="background:#f3e5f5">
+            <span style="font-size:20px">📦</span>
+            <div>
+              <div class="stat-num" style="color:#6750A4">142</div>
+              <div class="stat-label">منتج</div>
+            </div>
+          </div>
+          <div class="stat-card" style="background:#fce4ec">
+            <span style="font-size:20px">⚠️</span>
+            <div>
+              <div class="stat-num" style="color:#c62828">3</div>
+              <div class="stat-label">نواقص</div>
+            </div>
+          </div>
+          <div class="stat-card" style="background:#fff3e0">
+            <span style="font-size:20px">📅</span>
+            <div>
+              <div class="stat-num" style="color:#e65100">5</div>
+              <div class="stat-label">منتهية</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">🏠</span><span class="nav-label">الرئيسية</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">🛒</span><span class="nav-label">البيع</span></div>
+        <div class="nav-item active" onclick="switchTab(0)"><span class="nav-icon">📦</span><span class="nav-label">المخزون</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">👥</span><span class="nav-label">العملاء</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">☰</span><span class="nav-label">المزيد</span></div>
+      </div>
+    </div>
+    <div class="phone-label">③ المخزون</div>
+  </div>
+
+  <!-- ── TAB 4: العملاء ── -->
+  <div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+      <div class="toolbar">
+        <span class="menu-icon">☰</span>
+        <span class="title">العملاء والموردون</span>
+      </div>
+      <div class="page active" style="gap:6px">
+
+        <div class="section-header purple">
+          <span class="sh-icon">👥</span>
+          <div>
+            <div class="sh-title">العملاء</div>
+            <div class="sh-sub">فواتير · ديون · مرتجعات · أقساط</div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="gap:6px">
+          <div class="card"><span class="card-icon">👤</span><span class="card-label">قائمة العملاء</span></div>
+          <div class="card"><span class="card-icon">🧾</span><span class="card-label">الفواتير</span></div>
+          <div class="card warn"><span class="card-icon">💰</span><span class="card-label">إدارة الديون</span></div>
+        </div>
+        <div class="grid-3" style="gap:6px">
+          <div class="card"><span class="card-icon">↩️</span><span class="card-label">مرتجع بيع</span></div>
+          <div class="card"><span class="card-icon">🗓️</span><span class="card-label">الأقساط</span></div>
+          <div class="card"><span class="card-icon">💳</span><span class="card-label">الشيكات</span></div>
+        </div>
+
+        <div class="divider" style="margin:4px 0"></div>
+
+        <div class="section-header blue">
+          <span class="sh-icon">🚚</span>
+          <div>
+            <div class="sh-title">الموردون</div>
+            <div class="sh-sub">طلبات · مستحقات</div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="gap:6px">
+          <div class="card secondary"><span class="card-icon">🏭</span><span class="card-label">قائمة الموردين</span></div>
+          <div class="card secondary"><span class="card-icon">📦</span><span class="card-label">أوامر الشراء</span></div>
+          <div class="card secondary"><span class="card-icon">💵</span><span class="card-label">مستحقات الموردين</span></div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">🏠</span><span class="nav-label">الرئيسية</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">🛒</span><span class="nav-label">البيع</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">📦</span><span class="nav-label">المخزون</span></div>
+        <div class="nav-item active" onclick="switchTab(0)"><span class="nav-icon">👥</span><span class="nav-label">العملاء</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">☰</span><span class="nav-label">المزيد</span></div>
+      </div>
+    </div>
+    <div class="phone-label">④ العملاء والموردون</div>
+  </div>
+
+  <!-- ── TAB 5: المزيد ── -->
+  <div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+      <div class="toolbar">
+        <span class="menu-icon">☰</span>
+        <span class="title">المزيد</span>
+      </div>
+      <div class="page active">
+
+        <div class="section-label">💰 الخزينة</div>
+        <div class="grid-4">
+          <div class="small-card"><span class="sc-icon">🏦</span><span class="sc-label">المحفظة</span></div>
+          <div class="small-card"><span class="sc-icon">💵</span><span class="sc-label">الصندوق</span></div>
+          <div class="small-card"><span class="sc-icon">📉</span><span class="sc-label">المصروفات</span></div>
+          <div class="small-card"><span class="sc-icon">⏰</span><span class="sc-label">الورديات</span></div>
+        </div>
+
+        <div class="section-label">📊 التقارير</div>
+        <div class="grid-2">
+          <div class="card secondary">
+            <span class="card-icon">📊</span>
+            <span class="card-label">التقارير</span>
+            <span class="card-sub">مبيعات · أرباح · خسائر</span>
+          </div>
+          <div class="card secondary">
+            <span class="card-icon">📈</span>
+            <span class="card-label">إحصاءات الأعمال</span>
+            <span class="card-sub">أداء المتجر</span>
+          </div>
+        </div>
+
+        <div class="section-label">⚙️ الإدارة</div>
+        <div class="grid-4">
+          <div class="small-card"><span class="sc-icon">⚙️</span><span class="sc-label">الإعدادات</span></div>
+          <div class="small-card"><span class="sc-icon">👤</span><span class="sc-label">المستخدمون</span></div>
+          <div class="small-card"><span class="sc-icon">☁️</span><span class="sc-label">النسخ الاحتياطي</span></div>
+          <div class="small-card"><span class="sc-icon">🖨️</span><span class="sc-label">الطابعة</span></div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">🏠</span><span class="nav-label">الرئيسية</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">🛒</span><span class="nav-label">البيع</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">📦</span><span class="nav-label">المخزون</span></div>
+        <div class="nav-item" onclick="switchTab(0)"><span class="nav-icon">👥</span><span class="nav-label">العملاء</span></div>
+        <div class="nav-item active" onclick="switchTab(0)"><span class="nav-icon">☰</span><span class="nav-label">المزيد</span></div>
+      </div>
+    </div>
+    <div class="phone-label">⑤ المزيد</div>
+  </div>
+
+</div>
+
+<!-- Summary -->
+<div style="background:#2a2a4a; border-radius:16px; padding:24px; max-width:900px; width:100%; color:#e0e0e0; margin-top:10px;">
+  <h2 style="color:#c0adf0; margin-bottom:16px; font-size:16px;">📋 ملخص التصميم</h2>
+  <table style="width:100%; border-collapse:collapse; font-size:13px;">
+    <tr style="border-bottom:1px solid #3a3a5a">
+      <th style="text-align:right; padding:8px; color:#9090cc; width:120px">التبويب</th>
+      <th style="text-align:right; padding:8px; color:#9090cc">المحتوى</th>
+    </tr>
+    <tr style="border-bottom:1px solid #3a3a5a">
+      <td style="padding:8px">🏠 الرئيسية</td>
+      <td style="padding:8px">إجمالي اليوم الكبير + إحصاءات + زر POS + 6 اختصارات سريعة</td>
+    </tr>
+    <tr style="border-bottom:1px solid #3a3a5a">
+      <td style="padding:8px">🛒 البيع</td>
+      <td style="padding:8px">زر POS ضخم + فواتير + مرتجعات + عروض أسعار + ديون</td>
+    </tr>
+    <tr style="border-bottom:1px solid #3a3a5a">
+      <td style="padding:8px">📦 المخزون</td>
+      <td style="padding:8px">منتجات + جرد + صلاحيات + إحصاءات سريعة</td>
+    </tr>
+    <tr style="border-bottom:1px solid #3a3a5a">
+      <td style="padding:8px">👥 العملاء</td>
+      <td style="padding:8px">قسم العملاء (6 بنود) + قسم الموردين (3 بنود)</td>
+    </tr>
+    <tr>
+      <td style="padding:8px">☰ المزيد</td>
+      <td style="padding:8px">الخزينة (4) + التقارير (2) + الإدارة (4)</td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
