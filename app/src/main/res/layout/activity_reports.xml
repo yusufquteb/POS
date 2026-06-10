@@ -321,7 +321,7 @@
 				android:id="@+id/cardview8"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="80dp"
+				android:layout_marginBottom="@dimen/spacing_base"
 				app:cardElevation="2dp"
 				app:cardCornerRadius="12dp">
 				<LinearLayout
@@ -350,6 +350,42 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:text="@string/no_sales_period"
+						android:textSize="@dimen/text_md"
+						android:gravity="center"
+						android:padding="@dimen/spacing_base"
+						android:textColor="?attr/colorOnSurfaceVariant"
+						android:visibility="gone"/>
+				</LinearLayout>
+			</com.google.android.material.card.MaterialCardView>
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="80dp"
+				app:cardElevation="2dp"
+				app:cardCornerRadius="12dp">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="@dimen/spacing_base"
+					android:orientation="vertical">
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/spacing_md"
+						android:text="المبيعات حسب الفئة"
+						android:textSize="@dimen/text_lg"
+						android:textStyle="bold"/>
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/rv_sales_by_category"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:nestedScrollingEnabled="false"
+						android:clipToPadding="false"/>
+					<TextView
+						android:id="@+id/tv_no_category_data"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="لا توجد بيانات للفترة المحددة"
 						android:textSize="@dimen/text_md"
 						android:gravity="center"
 						android:padding="@dimen/spacing_base"

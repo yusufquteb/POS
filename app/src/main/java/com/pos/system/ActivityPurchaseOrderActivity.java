@@ -385,6 +385,12 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
             boolean success = dbHelper.receivePurchaseOrder(poId);
             View rootView = rvOrders != null ? rvOrders : findViewById(android.R.id.content);
             if (success) {
+                try {
+                    double orderTotal = parseDouble(safeGet(order, "total"));
+                    String poNum = safeGet(order, "po_number");
+                    String date = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(new java.util.Date());
+                    dbHelper.addWalletTransaction("OUT", orderTotal, "شراء بضاعة " + poNum, date);
+                } catch (Exception ignored) {}
                 loadOrders();
                 if (rootView != null) {
                     Snackbar.make(rootView,

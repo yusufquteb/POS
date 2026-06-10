@@ -26,48 +26,28 @@ public class ThemeManager {
     }
 
     public static void applyTheme() {
-        checkInit();
-        switch (getThemeMode()) {
-            case MODE_LIGHT:
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                break;
-            case MODE_DARK:
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                break;
-            default:
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                break;
-        }
+        // Always force light mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     public static void applyThemeToActivity(@NonNull Activity activity) {
-        checkInit();
-        activity.setTheme(isDarkModeActive() ? R.style.AppTheme_Dark : R.style.AppTheme);
+        activity.setTheme(R.style.AppTheme);
     }
 
     public static int getThemeResId() {
-        checkInit();
-        return isDarkModeActive() ? R.style.AppTheme_Dark : R.style.AppTheme;
+        return R.style.AppTheme;
     }
 
     public static int getThemeMode() {
-        checkInit();
-        return prefs.getInt(KEY_THEME_MODE, MODE_AUTO);
+        return MODE_LIGHT;
     }
 
     public static boolean isDarkModeActive() {
-        checkInit();
-        int mode = getThemeMode();
-        if (mode == MODE_DARK)  return true;
-        if (mode == MODE_LIGHT) return false;
-        int nightMode = appContext.getResources().getConfiguration().uiMode
-                & Configuration.UI_MODE_NIGHT_MASK;
-        return nightMode == Configuration.UI_MODE_NIGHT_YES;
+        return false;
     }
 
     public static void setThemeMode(int mode) {
-        checkInit();
-        prefs.edit().putInt(KEY_THEME_MODE, mode).apply();
+        // Ignore — light mode is fixed
         applyTheme();
     }
 

@@ -57,6 +57,10 @@ public class ActivityReportsActivity extends BaseActivity {
     private RecyclerView rvTopProducts;
     private TopProductsAdapter topAdapter;
     private List<Map<String,String>> topProducts = new ArrayList<>();
+    private RecyclerView rvSalesByCategory;
+    private SalesByCategoryAdapter salesByCatAdapter;
+    private List<HashMap<String,String>> salesByCatList = new ArrayList<>();
+
 
     // Buttons
     private Button btnExportPdf, btnShareReport, btnWhatsapp;
@@ -107,6 +111,14 @@ public class ActivityReportsActivity extends BaseActivity {
             rvTopProducts.setLayoutManager(new LinearLayoutManager(this));
             rvTopProducts.setAdapter(topAdapter);
             rvTopProducts.setNestedScrollingEnabled(false);
+        }
+
+        rvSalesByCategory = binding.rvSalesByCategory;
+        if (rvSalesByCategory != null) {
+            salesByCatAdapter = new SalesByCategoryAdapter();
+            rvSalesByCategory.setLayoutManager(new LinearLayoutManager(this));
+            rvSalesByCategory.setAdapter(salesByCatAdapter);
+            rvSalesByCategory.setNestedScrollingEnabled(false);
         }
 
         chipGroupPeriod = binding.chipGroupPeriod;
@@ -202,6 +214,7 @@ public class ActivityReportsActivity extends BaseActivity {
             loadSalesStats(start, end);
             loadInventoryStats();
             loadTopProducts(start, end);
+            loadSalesByCategory(start, end);
         } catch (Exception e) {
             Log.e(TAG, "loadReports: " + e.getMessage(), e);
             snack(getString(R.string.error_loading));
@@ -479,4 +492,47 @@ public class ActivityReportsActivity extends BaseActivity {
             }
         }
     }
+    private void loadSalesByCategory(String start, String end) {
+        try {
+            salesByCatList.clear();
+            List<HashMap<String, String>> data = dbHelper.getSalesByCategory(start, end);
+            if (data != null) salesByCatList.addAll(data);
+            if (salesByCatAdapter != null) salesByCatAdapter.notifyDataSetChanged();
+            View emptyView = binding.tvNoCategoryData;
+            if (emptyView != null)
+                emptyView.setVisibility(salesByCatList.isEmpty() ? View.VISIBLE : View.GONE);
+        } catch (Exception e) {
+            Log.e(TAG, "loadSalesByCategory: " + e.getMessage(), e);
+        }
+    }
+
+    private class SalesByCategoryAdapter extends RecyclerView.Adapter<SalesByCategoryAdapter.VH> {
+        @NonNull @Override
+        public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_top_product, parent, false);
+            return new VH(v);
+        }
+        @Override
+        public void onBindViewHolder(@NonNull VH h, int pos) {
+            HashMap<String, String> item = salesByCatList.get(pos);
+            if (h.rank    != null) h.rank.setText(String.valueOf(pos + 1));
+            if (h.name    != null) h.name.setText(item.getOrDefault("category", "غير مصنّف"));
+            if (h.qty     != null) h.qty.setText(item.getOrDefault("total_qty", "0") + " قطعة");
+            if (h.revenue != null) h.revenue.setText(
+                String.format(Locale.US, "%.2f %s",
+                    Double.parseDouble(item.getOrDefault("total_sales", "0")), currency));
+        }
+        @Override public int getItemCount() { return salesByCatList.size(); }
+        class VH extends RecyclerView.ViewHolder {
+            TextView rank, name, qty, revenue;
+            VH(@NonNull View v) {
+                super(v);
+                rank    = v.findViewById(R.id.tv_rank);
+                name    = v.findViewById(R.id.tv_product_name);
+                qty     = v.findViewById(R.id.tv_quantity);
+                revenue = v.findViewById(R.id.tv_revenue);
+            }
+        }
+    }
+
 }
