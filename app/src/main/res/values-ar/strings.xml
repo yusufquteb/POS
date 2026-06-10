@@ -689,4 +689,14 @@
     <string name="hub_subtitle_treasury">خزينة · مصروفات · ورديات</string>
     <string name="hub_subtitle_reports">تقارير · إحصاءات</string>
 
+    <!-- Bottom Navigation tabs -->
+    <string name="tab_home">الرئيسية</string>
+    <string name="tab_sales">البيع</string>
+    <string name="tab_inventory">المخزون</string>
+    <string name="tab_customers">العملاء</string>
+    <string name="tab_more">المزيد</string>
+    <string name="tab_more_users">المستخدمون</string>
+    <string name="tab_more_backup">النسخ الاحتياطي</string>
+    <string name="tab_more_printer">الطابعة</string>
+
 </resources>

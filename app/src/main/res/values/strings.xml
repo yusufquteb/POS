@@ -983,4 +983,14 @@
     <string name="hub_subtitle_inventory">Products · Count · Expiry</string>
     <string name="hub_subtitle_treasury">Cash · Expenses · Shifts</string>
     <string name="hub_subtitle_reports">Reports · Insights</string>
+
+    <!-- Bottom Navigation tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_sales">Sales</string>
+    <string name="tab_inventory">Inventory</string>
+    <string name="tab_customers">Customers</string>
+    <string name="tab_more">More</string>
+    <string name="tab_more_users">Users</string>
+    <string name="tab_more_backup">Backup</string>
+    <string name="tab_more_printer">Printer</string>
 </resources>
