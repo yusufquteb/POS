@@ -668,4 +668,25 @@
     <!-- Main screen section separator -->
     <string name="main_section_tools">أدوات متقدمة</string>
 
+    <!-- Section Hub titles and sub-labels -->
+    <string name="hub_inventory">المخزون</string>
+    <string name="hub_treasury">الخزينة</string>
+    <string name="hub_installments">الأقساط</string>
+    <string name="hub_checks">الشيكات</string>
+    <string name="hub_customer_remaining">مستحقات العملاء</string>
+    <string name="hub_price_quotes">عروض الأسعار</string>
+    <string name="hub_supplier_remaining">مستحقات الموردين</string>
+    <string name="hub_stock_count">جرد المخزون</string>
+    <string name="hub_expiry">لوحة الصلاحيات</string>
+    <string name="hub_wallet">المحفظة</string>
+    <string name="hub_cash_drawer">الصندوق النقدي</string>
+
+    <!-- Main screen new header and sub-hints -->
+    <string name="main_sections_header">الأقسام</string>
+    <string name="hub_subtitle_customers">فواتير · ديون · مرتجعات</string>
+    <string name="hub_subtitle_suppliers">طلبات · مستحقات</string>
+    <string name="hub_subtitle_inventory">منتجات · جرد · صلاحيات</string>
+    <string name="hub_subtitle_treasury">خزينة · مصروفات · ورديات</string>
+    <string name="hub_subtitle_reports">تقارير · إحصاءات</string>
+
 </resources>

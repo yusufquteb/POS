@@ -56,21 +56,9 @@ public class MainActivity extends BaseActivity
     private MaterialCardView cardCustomers;
     private MaterialCardView cardSuppliers;
     private MaterialCardView cardReports;
-    private MaterialCardView cardExpenses;
     private MaterialCardView cardSettings;
-    private MaterialCardView cardReturns;
-    private MaterialCardView cardShifts;
-    private MaterialCardView cardDebts;
-    private MaterialCardView cardPurchaseOrders;
-    private MaterialCardView cardChecks;
-    private MaterialCardView cardInstallments;
-    private MaterialCardView cardCashDrawer;
-    private MaterialCardView cardStockCount;
-    private MaterialCardView cardUsers;
-    private MaterialCardView cardWallet;
-    private MaterialCardView cardPriceQuotes;
-    private MaterialCardView cardCustomerRemaining;
-    private MaterialCardView cardSupplierRemaining;
+    private MaterialCardView cardInventoryHub;
+    private MaterialCardView cardTreasuryHub;
 
     // Alert Card
     private MaterialCardView cardAlert;
@@ -134,27 +122,15 @@ public class MainActivity extends BaseActivity
         tvTodayInvoices = binding.tvTodayInvoices;
         tvLowStockCount = binding.tvLowStockCount;
 
-        cardPOS            = binding.cardPos;
-        cardProducts       = binding.cardProducts;
-        cardInvoices       = binding.cardInvoices;
-        cardCustomers      = binding.cardCustomers;
-        cardSuppliers      = binding.cardSuppliers;
-        cardReports        = binding.cardReports;
-        cardExpenses       = binding.cardExpenses;
-        cardSettings       = binding.cardSettings;
-        cardReturns        = binding.cardReturns;
-        cardShifts         = binding.cardShifts;
-        cardDebts          = binding.cardDebts;
-        cardPurchaseOrders = binding.cardPurchaseOrders;
-        cardChecks        = binding.cardChecks;
-        cardInstallments  = binding.cardInstallments;
-        cardCashDrawer    = binding.cardCashDrawer;
-        cardStockCount    = binding.cardStockCount;
-        cardUsers         = binding.cardUsers;
-        cardWallet            = binding.cardWallet;
-        cardPriceQuotes       = binding.cardPriceQuotes;
-        cardCustomerRemaining = binding.cardCustomerRemaining;
-        cardSupplierRemaining = binding.cardSupplierRemaining;
+        cardPOS          = binding.cardPos;
+        cardProducts     = binding.cardProducts;
+        cardInvoices     = binding.cardInvoices;
+        cardCustomers    = binding.cardCustomers;
+        cardSuppliers    = binding.cardSuppliers;
+        cardReports      = binding.cardReports;
+        cardSettings     = binding.cardSettings;
+        cardInventoryHub = binding.cardInventoryHub;
+        cardTreasuryHub  = binding.cardTreasuryHub;
 
         cardAlert      = binding.cardAlert;
         tvAlertMessage = binding.tvAlertMessage;
@@ -163,31 +139,25 @@ public class MainActivity extends BaseActivity
     }
 
     private void setupCardClicks() {
-        if (cardTodaySales  != null) cardTodaySales.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
-        if (cardLowStock    != null) cardLowStock.setOnClickListener(v -> showLowStockDialog());
+        if (cardTodaySales != null) cardTodaySales.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
+        if (cardLowStock   != null) cardLowStock.setOnClickListener(v -> showLowStockDialog());
 
-        setCardClick(cardPOS,            ActivityCartActivity.class);
-        setCardClick(cardProducts,       ActivityProductsActivity.class);
-        setCardClick(cardInvoices,       ActivityInvoicesActivity.class);
-        setCardClick(cardCustomers,      ActivityCustomersActivity.class);
-        setCardClick(cardSuppliers,      ActivitySuppliersActivity.class);
-        setCardClick(cardReports,        ActivityReportsActivity.class);
-        setCardClick(cardExpenses,       ActivityExpensesActivity.class);
-        setCardClick(cardSettings,       ActivitySettingsActivity.class);
-        setCardClick(cardReturns,        ActivityReturnActivity.class);
-        setCardClick(cardShifts,         ActivityShiftActivity.class);
-        setCardClick(cardDebts,          ActivityDebtActivity.class);
-        setCardClick(cardPurchaseOrders, ActivityPurchaseOrderActivity.class);
-        setCardClick(cardChecks,        ActivityChecksActivity.class);
-        setCardClick(cardInstallments,  ActivityInstallmentsActivity.class);
-        setCardClick(cardWallet,            ActivityWalletActivity.class);
-        setCardClick(cardPriceQuotes,       ActivityPriceQuotesActivity.class);
-        setCardClick(cardCustomerRemaining, ActivityCustomerRemainingActivity.class);
-        setCardClick(cardSupplierRemaining, ActivitySupplierRemainingActivity.class);
-        setCardClick(cardCashDrawer,    ActivityCashDrawerActivity.class);
-        setCardClick(cardStockCount,    ActivityStockCountActivity.class);
-        setCardClick(cardUsers,         ActivityUsersActivity.class);
-        setCardClick(binding.cardInsights, ActivityBusinessInsightsActivity.class);
+        setCardClick(cardPOS,      ActivityCartActivity.class);
+        setCardClick(cardProducts, ActivityProductsActivity.class);
+        setCardClick(cardInvoices, ActivityInvoicesActivity.class);
+        setCardClick(cardSettings, ActivitySettingsActivity.class);
+
+        if (cardCustomers    != null) cardCustomers.setOnClickListener(v -> openHub(ActivitySectionHubActivity.SECTION_CUSTOMERS));
+        if (cardSuppliers    != null) cardSuppliers.setOnClickListener(v -> openHub(ActivitySectionHubActivity.SECTION_SUPPLIERS));
+        if (cardInventoryHub != null) cardInventoryHub.setOnClickListener(v -> openHub(ActivitySectionHubActivity.SECTION_INVENTORY));
+        if (cardTreasuryHub  != null) cardTreasuryHub.setOnClickListener(v -> openHub(ActivitySectionHubActivity.SECTION_TREASURY));
+        if (cardReports      != null) cardReports.setOnClickListener(v -> openHub(ActivitySectionHubActivity.SECTION_REPORTS));
+    }
+
+    private void openHub(String section) {
+        Intent intent = new Intent(this, ActivitySectionHubActivity.class);
+        intent.putExtra(ActivitySectionHubActivity.EXTRA_SECTION, section);
+        startActivity(intent);
     }
 
     private void setCardClick(MaterialCardView card, Class<?> cls) {

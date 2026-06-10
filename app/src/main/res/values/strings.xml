@@ -962,4 +962,25 @@
 
     <!-- Main screen section separator -->
     <string name="main_section_tools">Advanced Tools</string>
+
+    <!-- Section Hub titles and sub-labels -->
+    <string name="hub_inventory">Inventory</string>
+    <string name="hub_treasury">Treasury</string>
+    <string name="hub_installments">Installments</string>
+    <string name="hub_checks">Checks</string>
+    <string name="hub_customer_remaining">Customer Receivables</string>
+    <string name="hub_price_quotes">Price Quotes</string>
+    <string name="hub_supplier_remaining">Supplier Payables</string>
+    <string name="hub_stock_count">Stock Count</string>
+    <string name="hub_expiry">Expiry Dashboard</string>
+    <string name="hub_wallet">Wallet</string>
+    <string name="hub_cash_drawer">Cash Drawer</string>
+
+    <!-- Main screen new header and sub-hints -->
+    <string name="main_sections_header">Sections</string>
+    <string name="hub_subtitle_customers">Invoices · Debts · Returns</string>
+    <string name="hub_subtitle_suppliers">Orders · Payables</string>
+    <string name="hub_subtitle_inventory">Products · Count · Expiry</string>
+    <string name="hub_subtitle_treasury">Cash · Expenses · Shifts</string>
+    <string name="hub_subtitle_reports">Reports · Insights</string>
 </resources>
