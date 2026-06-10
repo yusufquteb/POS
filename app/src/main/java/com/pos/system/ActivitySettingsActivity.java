@@ -43,6 +43,7 @@ public class ActivitySettingsActivity extends BaseActivity {
     private TextView         tvCurrentLanguage;
 
     private MaterialCardView cardStore;
+    private MaterialCardView cardLocations;
     private MaterialCardView cardPrinter;
     private MaterialCardView cardBackup;
     private MaterialCardView cardPinLock;
@@ -84,10 +85,11 @@ public class ActivitySettingsActivity extends BaseActivity {
         cardLanguage      = binding.cardLanguage;
         tvCurrentLanguage = binding.tvCurrentLanguage;
 
-        cardStore   = binding.cardStore;
-        cardPrinter = binding.cardPrinter;
-        cardBackup  = binding.cardBackup;
-        cardPinLock = binding.cardPinLock;
+        cardStore     = binding.cardStore;
+        cardLocations = binding.cardLocations;
+        cardPrinter   = binding.cardPrinter;
+        cardBackup    = binding.cardBackup;
+        cardPinLock   = binding.cardPinLock;
 
         cardAccount  = binding.cardAccount;
         tvUserName   = binding.tvUserName;
@@ -155,8 +157,9 @@ public class ActivitySettingsActivity extends BaseActivity {
     private void setupListeners() {
         if (cardTheme    != null) cardTheme.setOnClickListener(v -> showThemeDialog());
         if (cardLanguage != null) cardLanguage.setOnClickListener(v -> showLanguageDialog());
-        if (cardStore    != null) cardStore.setOnClickListener(v -> openActivity(ActivityStoreSettingsActivity.class));
-        if (cardPrinter  != null) cardPrinter.setOnClickListener(v -> openActivity(ActivityPrinterSettingsActivity.class));
+        if (cardStore     != null) cardStore.setOnClickListener(v -> openActivity(ActivityStoreSettingsActivity.class));
+        if (cardLocations != null) cardLocations.setOnClickListener(v -> openActivity(ActivityLocationActivity.class));
+        if (cardPrinter   != null) cardPrinter.setOnClickListener(v -> openActivity(ActivityPrinterSettingsActivity.class));
         if (cardBackup   != null) cardBackup.setOnClickListener(v -> openActivity(ActivityBackupActivity.class));
         if (cardPinLock  != null) cardPinLock.setOnClickListener(v -> showPinOptions());
         if (cardAbout    != null) cardAbout.setOnClickListener(v -> showAboutDialog());
