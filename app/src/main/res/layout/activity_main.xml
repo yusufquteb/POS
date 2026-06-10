@@ -711,6 +711,90 @@
 
                     </LinearLayout>
 
+                    <!-- Inventory stats row -->
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="?attr/colorOutlineVariant" android:layout_marginVertical="4dp" />
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="@string/inv_stats_label"
+                        android:textSize="11sp" android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:fontFamily="@font/cairo_semibold" />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:weightSum="3">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_margin="4dp" android:layout_weight="1"
+                            app:cardCornerRadius="12dp" app:cardElevation="0dp"
+                            app:cardBackgroundColor="#f3e5f5">
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                                android:orientation="horizontal" android:padding="10dp" android:gravity="center_vertical">
+                                <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                                    android:src="@drawable/ic_inventory" android:tint="#6750A4"
+                                    android:layout_marginEnd="6dp" android:importantForAccessibility="no" />
+                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+                                    <TextView android:id="@+id/tv_inv_total"
+                                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                        android:text="—" android:textSize="16sp" android:textStyle="bold"
+                                        android:textColor="#6750A4" android:fontFamily="@font/cairo_bold" />
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                        android:text="@string/inv_stat_total"
+                                        android:textSize="9sp" android:textColor="#888"
+                                        android:fontFamily="@font/cairo_regular" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_margin="4dp" android:layout_weight="1"
+                            app:cardCornerRadius="12dp" app:cardElevation="0dp"
+                            app:cardBackgroundColor="#fce4ec">
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                                android:orientation="horizontal" android:padding="10dp" android:gravity="center_vertical">
+                                <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                                    android:src="@drawable/ic_warning" android:tint="#c62828"
+                                    android:layout_marginEnd="6dp" android:importantForAccessibility="no" />
+                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+                                    <TextView android:id="@+id/tv_inv_low"
+                                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                        android:text="—" android:textSize="16sp" android:textStyle="bold"
+                                        android:textColor="#c62828" android:fontFamily="@font/cairo_bold" />
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                        android:text="@string/inv_stat_low"
+                                        android:textSize="9sp" android:textColor="#888"
+                                        android:fontFamily="@font/cairo_regular" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_margin="4dp" android:layout_weight="1"
+                            app:cardCornerRadius="12dp" app:cardElevation="0dp"
+                            app:cardBackgroundColor="#fff3e0">
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                                android:orientation="horizontal" android:padding="10dp" android:gravity="center_vertical">
+                                <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                                    android:src="@drawable/ic_calendar" android:tint="#e65100"
+                                    android:layout_marginEnd="6dp" android:importantForAccessibility="no" />
+                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+                                    <TextView android:id="@+id/tv_inv_expiry"
+                                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                        android:text="—" android:textSize="16sp" android:textStyle="bold"
+                                        android:textColor="#e65100" android:fontFamily="@font/cairo_bold" />
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                        android:text="@string/inv_stat_expiry"
+                                        android:textSize="9sp" android:textColor="#888"
+                                        android:fontFamily="@font/cairo_regular" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 

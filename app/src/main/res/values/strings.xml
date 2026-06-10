@@ -993,4 +993,10 @@
     <string name="tab_more_users">Users</string>
     <string name="tab_more_backup">Backup</string>
     <string name="tab_more_printer">Printer</string>
+
+    <!-- Inventory stats -->
+    <string name="inv_stats_label">Inventory Stats</string>
+    <string name="inv_stat_total">Products</string>
+    <string name="inv_stat_low">Low Stock</string>
+    <string name="inv_stat_expiry">Expiring</string>
 </resources>

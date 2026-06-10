@@ -43,6 +43,11 @@ public class MainActivity extends BaseActivity
     private MaterialCardView cardAlert;
     private TextView tvAlertMessage;
 
+    // Inventory tab stats
+    private TextView tvInvTotal;
+    private TextView tvInvLow;
+    private TextView tvInvExpiry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +107,10 @@ public class MainActivity extends BaseActivity
         tvLowStockCount   = binding.tvLowStockCount;
         cardAlert         = binding.cardAlert;
         tvAlertMessage    = binding.tvAlertMessage;
+
+        tvInvTotal  = binding.tvInvTotal;
+        tvInvLow    = binding.tvInvLow;
+        tvInvExpiry = binding.tvInvExpiry;
     }
 
     private void setupBottomNav() {
@@ -214,6 +223,9 @@ public class MainActivity extends BaseActivity
                 final HashMap<String, Object> stats = dbHelper.getInvoicesStatistics();
                 final java.util.List<HashMap<String, String>> lowStock = dbHelper.getLowStockProducts(5);
                 final String currency = getCurrencySymbol();
+                final int totalProducts = dbHelper.getProductsCount();
+                final int expiryCount   = dbHelper.getExpiringProducts(30) != null
+                                         ? dbHelper.getExpiringProducts(30).size() : 0;
                 runOnUiThread(() -> {
                     if (isFinishing() || isDestroyed()) return;
                     try {
@@ -223,9 +235,14 @@ public class MainActivity extends BaseActivity
                             if (s != null) todaySales    = ((Number) s).doubleValue();
                             if (c != null) todayInvoices = ((Number) c).intValue();
                         }
+                        int lowCount = lowStock != null ? lowStock.size() : 0;
                         if (tvTodaySales    != null) tvTodaySales.setText(String.format("%.2f %s", todaySales, currency));
                         if (tvTodayInvoices != null) tvTodayInvoices.setText(String.valueOf(todayInvoices));
-                        if (tvLowStockCount != null) tvLowStockCount.setText(lowStock != null ? String.valueOf(lowStock.size()) : "0");
+                        if (tvLowStockCount != null) tvLowStockCount.setText(String.valueOf(lowCount));
+                        // Inventory tab stats
+                        if (tvInvTotal  != null) tvInvTotal.setText(String.valueOf(totalProducts));
+                        if (tvInvLow    != null) tvInvLow.setText(String.valueOf(lowCount));
+                        if (tvInvExpiry != null) tvInvExpiry.setText(String.valueOf(expiryCount));
                     } catch (Exception ignored) {}
                 });
             } catch (Exception e) {

@@ -699,4 +699,10 @@
     <string name="tab_more_backup">النسخ الاحتياطي</string>
     <string name="tab_more_printer">الطابعة</string>
 
+    <!-- Inventory stats -->
+    <string name="inv_stats_label">إحصاءات المخزون</string>
+    <string name="inv_stat_total">منتج</string>
+    <string name="inv_stat_low">نواقص</string>
+    <string name="inv_stat_expiry">قاربت الانتهاء</string>
+
 </resources>
