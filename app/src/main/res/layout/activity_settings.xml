@@ -317,6 +317,23 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+
+            <!-- Remove Data Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_remove_data"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="حذف البيانات"
+                android:textSize="@dimen/text_base"
+                app:icon="@drawable/ic_delete"
+                app:iconGravity="textStart"
+                app:cornerRadius="16dp"
+                app:backgroundTint="?attr/colorSurfaceVariant"
+                android:textColor="?attr/colorError"
+                app:iconTint="?attr/colorError"
+                android:fontFamily="@font/cairo_semibold"
+                android:layout_marginBottom="@dimen/spacing_md" />
+
             <!-- Logout Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_logout"
