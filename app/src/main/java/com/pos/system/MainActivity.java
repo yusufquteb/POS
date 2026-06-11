@@ -330,7 +330,7 @@ public class MainActivity extends BaseActivity {
         try { if (dbHelper != null) dbHelper.close(); } catch (Exception ignored) {}
     }
 
-    private void openActivity(Class<?> cls) {
+    protected void openActivity(Class<?> cls) {
         try { startActivity(new Intent(this, cls)); } catch (Exception e) {
             android.util.Log.e(TAG, "openActivity error: " + cls.getSimpleName(), e);
         }
