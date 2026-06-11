@@ -735,7 +735,6 @@
     <string name="no_products_selected">اختر منتجاً واحداً على الأقل</string>
     <string name="printing_labels">جارٍ الطباعة…</string>
     <string name="print_success">تمت الطباعة بنجاح</string>
-    <string name="printer_not_connected">الطابعة غير متصلة. قم بالضبط من الإعدادات.</string>
 
     <!-- Dark mode -->
     <string name="theme_mode_light">فاتح</string>
