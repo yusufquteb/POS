@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <!-- Today stats row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Total sales card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="?attr/colorPrimaryContainer">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_money"
+                    app:tint="?attr/colorOnPrimaryContainer"
+                    android:alpha="0.8"/>
+                <TextView
+                    android:id="@+id/tv_header_sales"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:layout_marginTop="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_today_sales"
+                    android:textSize="11sp"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:alpha="0.7"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Invoice count card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="?attr/colorSecondaryContainer">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_invoices"
+                    app:tint="?attr/colorOnSecondaryContainer"
+                    android:alpha="0.8"/>
+                <TextView
+                    android:id="@+id/tv_header_invoices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSecondaryContainer"
+                    android:layout_marginTop="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_today_invoices"
+                    android:textSize="11sp"
+                    android:textColor="?attr/colorOnSecondaryContainer"
+                    android:alpha="0.7"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Low stock card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="?attr/colorTertiaryContainer">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_inventory"
+                    app:tint="?attr/colorOnTertiaryContainer"
+                    android:alpha="0.8"/>
+                <TextView
+                    android:id="@+id/tv_header_low_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnTertiaryContainer"
+                    android:layout_marginTop="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inv_stat_low"
+                    android:textSize="11sp"
+                    android:textColor="?attr/colorOnTertiaryContainer"
+                    android:alpha="0.7"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <!-- Quick POS button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_quick_pos"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/pos_title"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:icon="@drawable/ic_pos"
+        app:iconGravity="textStart"
+        app:iconSize="22dp"
+        app:cornerRadius="16dp"
+        style="@style/Widget.Material3.Button"/>
+
+    <!-- Section label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp"
+        android:text="@string/main_sections_header"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface"/>
+
+</LinearLayout>
