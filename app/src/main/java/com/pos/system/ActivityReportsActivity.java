@@ -147,6 +147,41 @@ public class ActivityReportsActivity extends BaseActivity {
         if (btnExportPdf   != null) btnExportPdf.setOnClickListener(v -> exportToPDF());
         if (btnShareReport != null) btnShareReport.setOnClickListener(v -> shareReport());
         if (btnWhatsapp    != null) btnWhatsapp.setOnClickListener(v -> shareToWhatsApp());
+        android.widget.Button btnSalesByEmp = binding.btnSalesByEmployee;
+        if (btnSalesByEmp != null) btnSalesByEmp.setOnClickListener(v -> showSalesByEmployee());
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // مبيعات الموظفين
+    // ═══════════════════════════════════════════════════════════
+    private void showSalesByEmployee() {
+        try {
+            java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            String from = startDate != null ? fmt.format(startDate) : null;
+            String to   = endDate   != null ? fmt.format(endDate)   : null;
+            java.util.List<HashMap<String, String>> rows = dbHelper.getSalesByEmployee(from, to);
+            if (rows == null || rows.isEmpty()) {
+                showToast(getString(R.string.sales_by_employee_empty));
+                return;
+            }
+            StringBuilder msg = new StringBuilder();
+            for (HashMap<String, String> r : rows) {
+                double sales = 0;
+                try { sales = Double.parseDouble(r.getOrDefault("total_sales", "0")); } catch (Exception ignored) {}
+                msg.append("👤 ").append(r.getOrDefault("employee", "admin"))
+                   .append("\n   ").append(getString(R.string.sales_by_employee_invoices))
+                   .append(": ").append(r.getOrDefault("invoice_count", "0"))
+                   .append("   |   ").append(String.format(Locale.US, "%.2f %s", sales, currency))
+                   .append("\n\n");
+            }
+            new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                .setTitle(getString(R.string.sales_by_employee_title))
+                .setMessage(msg.toString().trim())
+                .setPositiveButton(R.string.close, null)
+                .show();
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "showSalesByEmployee: " + e.getMessage(), e);
+        }
     }
 
     // ═══════════════════════════════════════════════════════════

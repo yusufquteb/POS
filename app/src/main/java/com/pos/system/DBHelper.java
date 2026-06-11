@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
 
     public static final String DATABASE_NAME    = "SmartPOS.db";
-    public static final int    DATABASE_VERSION = 10;
+    public static final int    DATABASE_VERSION = 11;
 
     private final Context mContext;
 
@@ -186,6 +186,11 @@ public class DBHelper extends SQLiteOpenHelper {
         if (oldVersion < 10) {
             safeAlter(db, "ALTER TABLE " + TABLE_PRODUCTS + " ADD COLUMN expiry_reviewed INTEGER DEFAULT 0");
         }
+        if (oldVersion < 11) {
+            safeAlter(db, "ALTER TABLE " + TABLE_PRODUCTS + " ADD COLUMN wholesale_price REAL DEFAULT 0");
+            safeAlter(db, "ALTER TABLE " + TABLE_INVOICES + " ADD COLUMN paid_cash REAL DEFAULT 0");
+            safeAlter(db, "ALTER TABLE " + TABLE_INVOICES + " ADD COLUMN paid_card REAL DEFAULT 0");
+        }
     }
 
     /** ALTER TABLE آمن — يتجاهل فقط خطأ "duplicate column name" */
@@ -222,6 +227,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "unit TEXT, " +
             "cost REAL DEFAULT 0.0, " +
             "price REAL DEFAULT 0.0, " +
+            "wholesale_price REAL DEFAULT 0, " +
             "qty INTEGER DEFAULT 0, " +
             "location TEXT, " +
             "supplier TEXT, " +
@@ -275,6 +281,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "invoice_date TEXT DEFAULT '', " +
             "supplier_id INTEGER DEFAULT 0, " +
             "supplier_name TEXT DEFAULT '', " +
+            "paid_cash REAL DEFAULT 0, " +
+            "paid_card REAL DEFAULT 0, " +
             "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_INVOICE_ITEMS + " (" +
@@ -440,6 +448,7 @@ public class DBHelper extends SQLiteOpenHelper {
             cv.put("unit",               safeGet(product, "unit"));
             cv.put("cost",               safeDouble(product, "cost"));
             cv.put("price",              safeDouble(product, "price"));
+            cv.put("wholesale_price",    safeDouble(product, "wholesale_price"));
             cv.put("qty",                safeInt(product, "qty"));
             cv.put("location",           safeGet(product, "location"));
             cv.put("supplier",           safeGet(product, "supplier"));
@@ -538,6 +547,8 @@ public class DBHelper extends SQLiteOpenHelper {
             cv.put("notes",              safeGet(product, "notes"));
             cv.put("batch_number",       safeGet(product, "batch_number"));
             cv.put("supplier_reference", safeGet(product, "supplier_reference"));
+            if (product.containsKey("wholesale_price"))
+                cv.put("wholesale_price", safeDouble(product, "wholesale_price"));
             return db.update(TABLE_PRODUCTS, cv, "id=?", new String[]{id});
         } catch (Exception e) {
             Log.e(TAG, "updateProduct: " + e.getMessage(), e);
@@ -3802,6 +3813,10 @@ public class DBHelper extends SQLiteOpenHelper {
             cv.put("invoice_date",     getCurrentDate());
             cv.put("supplier_id",      supplierId);
             cv.put("supplier_name",    supplierName != null ? supplierName : "");
+            try {
+                cv.put("created_by",
+                    new com.pos.system.managers.UserManager(mContext).getCurrentUserName());
+            } catch (Exception ignored) {}
             invoiceId = db.insert(TABLE_INVOICES, null, cv);
             if (invoiceId == -1) throw new Exception("Failed to insert invoice");
             for (T item : cartItems) {
@@ -3841,6 +3856,64 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
         return invoiceId;
+    }
+
+    /** حفظ سعر الجملة لمنتج (بالباركود — متاح في الإضافة والتعديل) */
+    public boolean setProductWholesalePrice(String barcode, double wholesalePrice) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("wholesale_price", wholesalePrice);
+            return getWritableDatabase()
+                .update(TABLE_PRODUCTS, cv, "barcode=?", new String[]{barcode}) > 0;
+        } catch (Exception e) {
+            Log.e(TAG, "setProductWholesalePrice: " + e.getMessage(), e);
+            return false;
+        }
+    }
+
+    /** حفظ تفاصيل الدفع المختلط (نقدي + بطاقة) على الفاتورة */
+    public boolean setInvoiceSplitAmounts(long invoiceId, double paidCash, double paidCard) {
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("paid_cash", paidCash);
+            cv.put("paid_card", paidCard);
+            return getWritableDatabase()
+                .update(TABLE_INVOICES, cv, "id=?", new String[]{String.valueOf(invoiceId)}) > 0;
+        } catch (Exception e) {
+            Log.e(TAG, "setInvoiceSplitAmounts: " + e.getMessage(), e);
+            return false;
+        }
+    }
+
+    /** مبيعات الموظفين: اسم الموظف + عدد الفواتير + إجمالي المبيعات */
+    public List<HashMap<String, String>> getSalesByEmployee(String fromDate, String toDate) {
+        List<HashMap<String, String>> result = new ArrayList<>();
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            String sql = "SELECT COALESCE(NULLIF(created_by,''),'admin') AS employee, " +
+                         "COUNT(*) AS invoice_count, SUM(total) AS total_sales " +
+                         "FROM " + TABLE_INVOICES + " WHERE status != 'cancelled'";
+            List<String> args = new ArrayList<>();
+            if (fromDate != null && !fromDate.isEmpty()) {
+                sql += " AND DATE(created_at) >= DATE(?)"; args.add(fromDate);
+            }
+            if (toDate != null && !toDate.isEmpty()) {
+                sql += " AND DATE(created_at) <= DATE(?)"; args.add(toDate);
+            }
+            sql += " GROUP BY employee ORDER BY total_sales DESC";
+            Cursor c = db.rawQuery(sql, args.toArray(new String[0]));
+            while (c.moveToNext()) {
+                HashMap<String, String> row = new HashMap<>();
+                row.put("employee",      c.getString(0));
+                row.put("invoice_count", String.valueOf(c.getInt(1)));
+                row.put("total_sales",   String.valueOf(c.getDouble(2)));
+                result.add(row);
+            }
+            c.close();
+        } catch (Exception e) {
+            Log.e(TAG, "getSalesByEmployee: " + e.getMessage(), e);
+        }
+        return result;
     }
 
     public boolean updateInvoicePayment(long invoiceId, double paidAmount, double remainingAmount) {

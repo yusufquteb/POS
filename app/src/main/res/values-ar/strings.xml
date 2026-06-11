@@ -705,4 +705,21 @@
     <string name="inv_stat_low">نواقص</string>
     <string name="inv_stat_expiry">قاربت الانتهاء</string>
 
+    <!-- Wholesale price -->
+    <string name="wholesale_price_hint">سعر الجملة (اختياري)</string>
+    <string name="use_wholesale_price">البيع بسعر الجملة (%1$s)</string>
+
+    <!-- Per-item discount -->
+    <string name="item_discount_hint">خصم % (اختياري)</string>
+
+    <!-- Split payment -->
+    <string name="payment_split">مختلط</string>
+    <string name="split_cash_hint">نقدي</string>
+    <string name="split_card_hint">بطاقة</string>
+
+    <!-- Sales by employee -->
+    <string name="sales_by_employee_title">مبيعات الموظفين</string>
+    <string name="sales_by_employee_invoices">عدد الفواتير</string>
+    <string name="sales_by_employee_empty">لا توجد مبيعات في الفترة المحددة</string>
+
 </resources>

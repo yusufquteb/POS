@@ -393,6 +393,18 @@
 						android:visibility="gone"/>
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Sales by employee -->
+			<Button
+				android:id="@+id/btn_sales_by_employee"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/spacing_sm"
+				android:layout_marginBottom="80dp"
+				android:text="@string/sales_by_employee_title"
+				android:drawableStart="@drawable/ic_people"
+				android:drawablePadding="6dp"
+				style="@style/Widget.Material3.Button.TonalButton" />
 		</LinearLayout>
 	</androidx.core.widget.NestedScrollView>
 	<LinearLayout

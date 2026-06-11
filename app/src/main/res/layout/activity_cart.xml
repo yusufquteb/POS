@@ -123,6 +123,14 @@
                     android:tag="instapay"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:fontFamily="@font/cairo_regular"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_split"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_split"
+                    android:tag="split"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:fontFamily="@font/cairo_regular"/>
             </com.google.android.material.chip.ChipGroup>
 
         </LinearLayout>

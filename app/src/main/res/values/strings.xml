@@ -999,4 +999,21 @@
     <string name="inv_stat_total">Products</string>
     <string name="inv_stat_low">Low Stock</string>
     <string name="inv_stat_expiry">Expiring</string>
+
+    <!-- Wholesale price -->
+    <string name="wholesale_price_hint">Wholesale price (optional)</string>
+    <string name="use_wholesale_price">Sell at wholesale price (%1$s)</string>
+
+    <!-- Per-item discount -->
+    <string name="item_discount_hint">Discount % (optional)</string>
+
+    <!-- Split payment -->
+    <string name="payment_split">Split</string>
+    <string name="split_cash_hint">Cash</string>
+    <string name="split_card_hint">Card</string>
+
+    <!-- Sales by employee -->
+    <string name="sales_by_employee_title">Sales by Employee</string>
+    <string name="sales_by_employee_invoices">Invoices</string>
+    <string name="sales_by_employee_empty">No sales in the selected period</string>
 </resources>

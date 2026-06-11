@@ -288,43 +288,59 @@ public class ActivityCartActivity extends BaseActivity {
     }
 
     private void showQuantityDialog(HashMap<String, String> product) {
-        String name   = product.getOrDefault("name", "");
-        double price  = parseDouble(product.getOrDefault("price", "0"));
-        int    avail  = parseInt(product.getOrDefault("qty", "0"));
+        String name      = product.getOrDefault("name", "");
+        double price     = parseDouble(product.getOrDefault("price", "0"));
+        double wholesale = parseDouble(product.getOrDefault("wholesale_price", "0"));
+        int    avail     = parseInt(product.getOrDefault("qty", "0"));
+
+        android.widget.LinearLayout layout = new android.widget.LinearLayout(this);
+        layout.setOrientation(android.widget.LinearLayout.VERTICAL);
+        int p = (int)(12 * getResources().getDisplayMetrics().density);
+        layout.setPadding(p, p, p, 0);
 
         TextInputEditText etQty = new TextInputEditText(this);
         etQty.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
         etQty.setHint(getString(R.string.quantity_hint));
         etQty.setText("1");
-        int p = (int)(12 * getResources().getDisplayMetrics().density);
-        etQty.setPadding(p, p, p, p);
+        layout.addView(etQty);
+
+        final android.widget.CheckBox cbWholesale;
+        if (wholesale > 0) {
+            cbWholesale = new android.widget.CheckBox(this);
+            cbWholesale.setText(getString(R.string.use_wholesale_price, formatCurrency(wholesale)));
+            layout.addView(cbWholesale);
+        } else {
+            cbWholesale = null;
+        }
 
         new MaterialAlertDialogBuilder(this)
             .setTitle(name)
             .setMessage(getString(R.string.product_price) + ": " + formatCurrency(price) +
                 "\n" + getString(R.string.stock_available) + ": " + avail)
-            .setView(etQty)
+            .setView(layout)
             .setPositiveButton(getString(R.string.add_to_cart), (d, w) -> {
                 String qs = etQty.getText() != null ? etQty.getText().toString().trim() : "";
                 if (qs.isEmpty()) { showToast(getString(R.string.invalid_quantity)); return; }
                 try {
                     int qty = Integer.parseInt(qs);
+                    boolean useWholesale = cbWholesale != null && cbWholesale.isChecked();
                     if (qty <= 0) { showToast(getString(R.string.quantity_positive)); }
                     else if (qty > avail) { showToast(getString(R.string.quantity_exceeds) + " (" + avail + ")"); }
-                    else { addToCart(product, qty); }
+                    else { addToCart(product, qty, useWholesale ? wholesale : -1); }
                 } catch (NumberFormatException e) { showToast(getString(R.string.invalid_quantity)); }
             })
             .setNegativeButton(getString(R.string.cancel), null)
             .show();
     }
 
-    private void addToCart(HashMap<String, String> product, int qty) {
+    private void addToCart(HashMap<String, String> product, int qty, double priceOverride) {
         String id   = product.getOrDefault("id", "");
         String name = product.getOrDefault("name", "");
-        double pr   = parseDouble(product.getOrDefault("price", "0"));
+        double pr   = priceOverride > 0 ? priceOverride
+                      : parseDouble(product.getOrDefault("price", "0"));
         boolean found = false;
         for (CartItem item : cartItems) {
-            if (item.id.equals(id)) { item.quantity += qty; found = true; break; }
+            if (item.id.equals(id) && item.price == pr) { item.quantity += qty; found = true; break; }
         }
         if (!found) cartItems.add(new CartItem(id, name, pr, qty));
         updateUI();
@@ -415,6 +431,31 @@ public class ActivityCartActivity extends BaseActivity {
         TextView tvDebtWarning  = dialogView.findViewById(R.id.tv_debt_warning);
         TextInputEditText etPaidAmount = dialogView.findViewById(R.id.et_paid_amount);
         TextView tvChange       = dialogView.findViewById(R.id.tv_change);
+        View rowSplit           = dialogView.findViewById(R.id.row_split_payment);
+        TextInputEditText etSplitCash = dialogView.findViewById(R.id.et_split_cash);
+        TextInputEditText etSplitCard = dialogView.findViewById(R.id.et_split_card);
+
+        boolean isSplit = "split".equals(paymentMethod);
+        if (isSplit && rowSplit != null) {
+            rowSplit.setVisibility(View.VISIBLE);
+            if (etSplitCash != null) etSplitCash.setText(String.format(Locale.US, "%.2f", total));
+            if (etSplitCard != null) etSplitCard.setText("0");
+            // auto-fill card = total - cash
+            if (etSplitCash != null && etSplitCard != null) {
+                etSplitCash.addTextChangedListener(new android.text.TextWatcher() {
+                    @Override public void beforeTextChanged(CharSequence s, int a, int b, int c) {}
+                    @Override public void afterTextChanged(android.text.Editable s) {}
+                    @Override public void onTextChanged(CharSequence s, int a, int b, int c) {
+                        if (!etSplitCash.hasFocus()) return;
+                        try {
+                            double cash = Double.parseDouble(s.toString().trim());
+                            double card = Math.max(0, total - cash);
+                            etSplitCard.setText(String.format(Locale.US, "%.2f", card));
+                        } catch (Exception ignored) {}
+                    }
+                });
+            }
+        }
 
         StringBuilder msg = new StringBuilder();
         msg.append(getString(R.string.subtotal)).append(": ").append(formatCurrency(subtotal)).append("\n");
@@ -465,19 +506,28 @@ public class ActivityCartActivity extends BaseActivity {
             .setTitle(getString(R.string.cart_checkout))
             .setView(dialogView)
             .setPositiveButton(getString(R.string.confirm_sale), (d, w) -> {
+                if (isSplit) {
+                    double cash = 0, card = 0;
+                    try { cash = Double.parseDouble(etSplitCash.getText().toString().trim()); } catch (Exception ignored) {}
+                    try { card = Double.parseDouble(etSplitCard.getText().toString().trim()); } catch (Exception ignored) {}
+                    if (cash < 0) cash = 0;
+                    if (card < 0) card = 0;
+                    processCheckout(cash + card, cash, card);
+                    return;
+                }
                 double paidAmt = total;
                 if (etPaid != null && etPaid.getText() != null) {
                     try { paidAmt = Double.parseDouble(etPaid.getText().toString().trim()); }
                     catch (Exception ignored) {}
                 }
                 if (paidAmt < 0) paidAmt = 0;
-                processCheckout(paidAmt);
+                processCheckout(paidAmt, 0, 0);
             })
             .setNegativeButton(getString(R.string.cancel), null)
             .show();
     }
 
-    private void processCheckout(double paidAmount) {
+    private void processCheckout(double paidAmount, double splitCash, double splitCard) {
         try {
             String invoiceNumber = "INV-" + new java.text.SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(new java.util.Date());
             String custId   = selectedCustomerId   != null ? selectedCustomerId   : "0";
@@ -489,6 +539,9 @@ public class ActivityCartActivity extends BaseActivity {
                 paymentMethod, paidAmount, remainingAmount, "", 0L, "");
 
             if (invoiceId > 0) {
+                if ("split".equals(paymentMethod) && (splitCash > 0 || splitCard > 0)) {
+                    dbHelper.setInvoiceSplitAmounts(invoiceId, splitCash, splitCard);
+                }
                 for (CartItem item : cartItems) dbHelper.decreaseProductQuantity(item.id, item.quantity);
                 if (paidAmount > 0) {
                     try {
@@ -531,9 +584,20 @@ public class ActivityCartActivity extends BaseActivity {
         etPrice.setHint(getString(R.string.product_price));
         etPrice.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);
         etPrice.setText(String.format(Locale.US, "%.2f", item.price));
+        android.widget.LinearLayout.LayoutParams lpPrice =
+            new android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+        lpPrice.bottomMargin = (int)(8 * getResources().getDisplayMetrics().density);
+        etPrice.setLayoutParams(lpPrice);
+
+        TextInputEditText etItemDiscount = new TextInputEditText(this);
+        etItemDiscount.setHint(getString(R.string.item_discount_hint));
+        etItemDiscount.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
         layout.addView(etQty);
         layout.addView(etPrice);
+        layout.addView(etItemDiscount);
 
         new MaterialAlertDialogBuilder(this)
             .setTitle("تعديل: " + item.name)
@@ -542,10 +606,15 @@ public class ActivityCartActivity extends BaseActivity {
                 try {
                     String qtyStr   = etQty.getText()   != null ? etQty.getText().toString().trim()   : "1";
                     String priceStr = etPrice.getText() != null ? etPrice.getText().toString().trim() : "0";
+                    String discStr  = etItemDiscount.getText() != null ? etItemDiscount.getText().toString().trim() : "";
                     int    qty      = Integer.parseInt(qtyStr);
                     double price    = Double.parseDouble(priceStr);
                     if (qty <= 0)   { showToast(getString(R.string.quantity_positive)); return; }
                     if (price < 0)  { showToast(getString(R.string.invalid_quantity));  return; }
+                    if (!discStr.isEmpty()) {
+                        double disc = Double.parseDouble(discStr);
+                        if (disc > 0 && disc <= 100) price = price * (1 - disc / 100.0);
+                    }
                     cartItems.get(position).quantity = qty;
                     cartItems.get(position).price    = price;
                     updateUI();
@@ -619,6 +688,7 @@ public class ActivityCartActivity extends BaseActivity {
             case "credit":   return getString(R.string.payment_credit);
             case "vodafone": return getString(R.string.payment_vodafone);
             case "instapay": return getString(R.string.payment_instapay);
+            case "split":    return getString(R.string.payment_split);
             default:       return getString(R.string.payment_cash);
         }
     }
