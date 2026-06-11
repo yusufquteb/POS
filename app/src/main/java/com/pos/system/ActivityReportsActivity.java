@@ -13,9 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.android.material.appbar.MaterialToolbar;
 import android.widget.Button;
 import com.google.android.material.chip.ChipGroup;
@@ -61,6 +68,9 @@ public class ActivityReportsActivity extends BaseActivity {
     private SalesByCategoryAdapter salesByCatAdapter;
     private List<HashMap<String,String>> salesByCatList = new ArrayList<>();
 
+
+    // Chart
+    private BarChart barChartSales;
 
     // Buttons
     private Button btnExportPdf, btnShareReport, btnWhatsapp;
@@ -125,6 +135,8 @@ public class ActivityReportsActivity extends BaseActivity {
         btnExportPdf    = binding.btnExportPdf;
         btnShareReport  = binding.btnShareReport;
         btnWhatsapp     = binding.btnWhatsappReport;
+        barChartSales   = binding.barChartSales;
+        setupBarChart();
     }
 
     private void setupToolbar() {
@@ -240,6 +252,66 @@ public class ActivityReportsActivity extends BaseActivity {
     }
 
     // ═══════════════════════════════════════════════════════════
+    // Bar Chart Setup
+    // ═══════════════════════════════════════════════════════════
+    private void setupBarChart() {
+        if (barChartSales == null) return;
+        barChartSales.setDrawBarShadow(false);
+        barChartSales.setDrawValueAboveBar(true);
+        barChartSales.getDescription().setEnabled(false);
+        barChartSales.setMaxVisibleValueCount(10);
+        barChartSales.setPinchZoom(false);
+        barChartSales.setDrawGridBackground(false);
+        barChartSales.getLegend().setEnabled(false);
+        barChartSales.getAxisRight().setEnabled(false);
+        barChartSales.getAxisLeft().setDrawGridLines(false);
+        barChartSales.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChartSales.getXAxis().setDrawGridLines(false);
+        barChartSales.getXAxis().setGranularity(1f);
+        barChartSales.setNoDataText(getString(R.string.chart_no_data));
+        android.util.TypedValue tcv = new android.util.TypedValue();
+        getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurface, tcv, true);
+        int textColor = tcv.data;
+        barChartSales.getAxisLeft().setTextColor(textColor);
+        barChartSales.getXAxis().setTextColor(textColor);
+    }
+
+    private void loadSalesChart(String start, String end) {
+        if (barChartSales == null) return;
+        try {
+            List<HashMap<String, String>> rows = dbHelper.getSalesByPeriod(start, end);
+            if (rows == null || rows.isEmpty()) {
+                barChartSales.clear();
+                return;
+            }
+            List<BarEntry> entries = new ArrayList<>();
+            List<String> labels = new ArrayList<>();
+            for (int i = 0; i < rows.size(); i++) {
+                HashMap<String, String> row = rows.get(i);
+                float total = 0f;
+                try { total = Float.parseFloat(row.getOrDefault("total", "0")); } catch (Exception ignored) {}
+                entries.add(new BarEntry(i, total));
+                String date = row.getOrDefault("date", "");
+                if (date.length() >= 10) date = date.substring(5); // MM-DD
+                labels.add(date);
+            }
+            android.util.TypedValue tv = new android.util.TypedValue();
+            getTheme().resolveAttribute(com.google.android.material.R.attr.colorPrimary, tv, true);
+            int primaryColor = tv.data;
+            BarDataSet dataSet = new BarDataSet(entries, "");
+            dataSet.setColor(primaryColor);
+            dataSet.setDrawValues(rows.size() <= 14);
+            BarData data = new BarData(dataSet);
+            data.setBarWidth(0.7f);
+            barChartSales.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+            barChartSales.setData(data);
+            barChartSales.animateY(600);
+        } catch (Exception e) {
+            Log.e(TAG, "loadSalesChart: " + e.getMessage(), e);
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════
     // Load Reports
     // ═══════════════════════════════════════════════════════════
     private void loadReports() {
@@ -250,6 +322,7 @@ public class ActivityReportsActivity extends BaseActivity {
             loadInventoryStats();
             loadTopProducts(start, end);
             loadSalesByCategory(start, end);
+            loadSalesChart(start, end);
         } catch (Exception e) {
             Log.e(TAG, "loadReports: " + e.getMessage(), e);
             snack(getString(R.string.error_loading));

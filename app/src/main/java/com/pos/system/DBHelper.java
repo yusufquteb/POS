@@ -2196,6 +2196,19 @@ public class DBHelper extends SQLiteOpenHelper {
         return 0;
     }
 
+    /** Total points ever earned (ignoring redeems) — used for tier calculation. */
+    public int getCustomerLifetimeLoyaltyPoints(String customerId) {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor c = db.rawQuery(
+                "SELECT COALESCE(SUM(points),0) FROM " + TABLE_LOYALTY
+                + " WHERE customer_id=? AND type='earn'", new String[]{customerId});
+            if (c.moveToFirst()) { int pts = c.getInt(0); c.close(); return pts; }
+            c.close();
+        } catch (Exception e) { Log.e(TAG, "getLifetimeLoyaltyPoints: " + e.getMessage()); }
+        return 0;
+    }
+
     public boolean addLoyaltyPoints(String customerId, String customerName,
                                      int points, String type, String referenceId) {
         try {

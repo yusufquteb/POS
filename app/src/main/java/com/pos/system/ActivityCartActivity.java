@@ -550,6 +550,13 @@ public class ActivityCartActivity extends BaseActivity {
                     } catch (Exception ignored) {}
                 }
                 try { new ReviewManager(this).onInvoiceCreated(); } catch (Exception ignored) {}
+                // Earn loyalty points for customer
+                if (!"0".equals(custId) && !custId.isEmpty() && !custName.isEmpty()) {
+                    try {
+                        new com.pos.system.managers.LoyaltyManager(this)
+                            .earnPoints(custId, custName, total, invoiceNumber);
+                    } catch (Exception ignored) {}
+                }
                 showCheckoutSuccess(invoiceNumber, invoiceId);
             } else {
                 snack(getString(R.string.checkout_failed));

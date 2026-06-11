@@ -722,4 +722,23 @@
     <string name="sales_by_employee_invoices">عدد الفواتير</string>
     <string name="sales_by_employee_empty">لا توجد مبيعات في الفترة المحددة</string>
 
+
+    <!-- Sales chart -->
+    <string name="chart_daily_sales">مخطط المبيعات اليومية</string>
+    <string name="chart_no_data">لا توجد بيانات للفترة المحددة</string>
+
+    <!-- Barcode label printing -->
+    <string name="print_barcodes_title">طباعة تسميات الباركود</string>
+    <string name="print_barcodes_subtitle">اختر المنتجات واطبع الملصقات</string>
+    <string name="label_copies">عدد النسخ</string>
+    <string name="print_selected">طباعة المحدد (%1$d)</string>
+    <string name="no_products_selected">اختر منتجاً واحداً على الأقل</string>
+    <string name="printing_labels">جارٍ الطباعة…</string>
+    <string name="print_success">تمت الطباعة بنجاح</string>
+    <string name="printer_not_connected">الطابعة غير متصلة. قم بالضبط من الإعدادات.</string>
+
+    <!-- Dark mode -->
+    <string name="theme_mode_light">فاتح</string>
+    <string name="theme_mode_dark">داكن</string>
+    <string name="theme_mode_auto">تلقائي (حسب النظام)</string>
 </resources>

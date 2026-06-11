@@ -428,6 +428,13 @@
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
+        <activity
+            android:name=".ActivityBarcodeLabelActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/print_barcodes_title"/>
+
         <!-- ════════ FileProvider ════════ -->
         <provider
             android:name="androidx.core.content.FileProvider"

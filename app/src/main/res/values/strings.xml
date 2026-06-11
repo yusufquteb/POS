@@ -1016,4 +1016,23 @@
     <string name="sales_by_employee_title">Sales by Employee</string>
     <string name="sales_by_employee_invoices">Invoices</string>
     <string name="sales_by_employee_empty">No sales in the selected period</string>
+
+    <!-- Sales chart -->
+    <string name="chart_daily_sales">Daily Sales Chart</string>
+    <string name="chart_no_data">No data for the selected period</string>
+
+    <!-- Barcode label printing -->
+    <string name="print_barcodes_title">Print Barcode Labels</string>
+    <string name="print_barcodes_subtitle">Select products and print labels</string>
+    <string name="label_copies">Number of copies</string>
+    <string name="print_selected">Print Selected (%1$d)</string>
+    <string name="no_products_selected">Select at least one product</string>
+    <string name="printing_labels">Printing labels…</string>
+    <string name="print_success">Labels printed successfully</string>
+    <string name="printer_not_connected">Printer not connected. Configure from Settings.</string>
+
+    <!-- Dark mode -->
+    <string name="theme_mode_light">Light</string>
+    <string name="theme_mode_dark">Dark</string>
+    <string name="theme_mode_auto">Auto (System)</string>
 </resources>
