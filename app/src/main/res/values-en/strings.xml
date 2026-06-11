@@ -545,4 +545,19 @@
     <string name="redeem_points">Redeem Points</string>
     <string name="minimum_redeem">Minimum Redemption</string>
 
+    <!-- New report screens -->
+    <string name="advanced_reports">Advanced Reports</string>
+    <string name="report_product_profitability">Product Profitability</string>
+    <string name="report_customer_aging">Customer Aging</string>
+    <string name="report_supplier_aging">Supplier Aging</string>
+    <string name="report_purchases">Purchases Report</string>
+    <string name="report_purchases_total">Total Purchases</string>
+    <string name="report_cogs">Cost of Goods Sold</string>
+    <string name="aging_days">days</string>
+    <string name="aging_summary">Aging Summary</string>
+    <string name="filter_all">All</string>
+    <string name="no_data_available">No data available</string>
+    <string name="po_status_pending">Pending</string>
+    <string name="po_status_received">Received</string>
+
 </resources>

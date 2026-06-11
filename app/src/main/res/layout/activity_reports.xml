@@ -428,9 +428,59 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_sm"
-				android:layout_marginBottom="80dp"
 				android:text="@string/sales_by_employee_title"
 				android:drawableStart="@drawable/ic_people"
+				android:drawablePadding="6dp"
+				style="@style/Widget.Material3.Button.TonalButton" />
+
+			<!-- Advanced reports section -->
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="16dp"
+				android:layout_marginBottom="8dp"
+				android:text="@string/advanced_reports"
+				android:textSize="15sp"
+				android:textStyle="bold"
+				android:textColor="?attr/colorOnSurface"/>
+
+			<Button
+				android:id="@+id/btn_product_profitability"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="6dp"
+				android:text="@string/report_product_profitability"
+				android:drawableStart="@drawable/ic_bar_chart"
+				android:drawablePadding="6dp"
+				style="@style/Widget.Material3.Button.TonalButton" />
+
+			<Button
+				android:id="@+id/btn_purchases_report"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="6dp"
+				android:text="@string/report_purchases"
+				android:drawableStart="@drawable/ic_local_shipping"
+				android:drawablePadding="6dp"
+				style="@style/Widget.Material3.Button.TonalButton" />
+
+			<Button
+				android:id="@+id/btn_customer_aging"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="6dp"
+				android:text="@string/report_customer_aging"
+				android:drawableStart="@drawable/ic_customers"
+				android:drawablePadding="6dp"
+				style="@style/Widget.Material3.Button.TonalButton" />
+
+			<Button
+				android:id="@+id/btn_supplier_aging"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="80dp"
+				android:text="@string/report_supplier_aging"
+				android:drawableStart="@drawable/ic_suppliers"
 				android:drawablePadding="6dp"
 				style="@style/Widget.Material3.Button.TonalButton" />
 		</LinearLayout>

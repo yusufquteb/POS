@@ -161,6 +161,22 @@ public class ActivityReportsActivity extends BaseActivity {
         if (btnWhatsapp    != null) btnWhatsapp.setOnClickListener(v -> shareToWhatsApp());
         android.widget.Button btnSalesByEmp = binding.btnSalesByEmployee;
         if (btnSalesByEmp != null) btnSalesByEmp.setOnClickListener(v -> showSalesByEmployee());
+
+        android.widget.Button btnProfitability = binding.btnProductProfitability;
+        if (btnProfitability != null) btnProfitability.setOnClickListener(v ->
+            startActivity(new android.content.Intent(this, ActivityProductProfitabilityActivity.class)));
+
+        android.widget.Button btnPurchasesReport = binding.btnPurchasesReport;
+        if (btnPurchasesReport != null) btnPurchasesReport.setOnClickListener(v ->
+            startActivity(new android.content.Intent(this, ActivityPurchasesReportActivity.class)));
+
+        android.widget.Button btnCustomerAging = binding.btnCustomerAging;
+        if (btnCustomerAging != null) btnCustomerAging.setOnClickListener(v ->
+            startActivity(new android.content.Intent(this, ActivityCustomerAgingActivity.class)));
+
+        android.widget.Button btnSupplierAging = binding.btnSupplierAging;
+        if (btnSupplierAging != null) btnSupplierAging.setOnClickListener(v ->
+            startActivity(new android.content.Intent(this, ActivitySupplierAgingActivity.class)));
     }
 
     // ═══════════════════════════════════════════════════════════

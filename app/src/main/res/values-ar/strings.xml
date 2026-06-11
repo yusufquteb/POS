@@ -740,4 +740,19 @@
     <string name="theme_mode_light">فاتح</string>
     <string name="theme_mode_dark">داكن</string>
     <string name="theme_mode_auto">تلقائي (حسب النظام)</string>
+
+    <!-- New report screens -->
+    <string name="advanced_reports">تقارير متقدمة</string>
+    <string name="report_product_profitability">تقرير ربحية المنتجات</string>
+    <string name="report_customer_aging">تقادم ديون العملاء</string>
+    <string name="report_supplier_aging">تقادم ديون الموردين</string>
+    <string name="report_purchases">تقرير المشتريات</string>
+    <string name="report_purchases_total">إجمالي المشتريات</string>
+    <string name="report_cogs">تكلفة المبيعات</string>
+    <string name="aging_days">يوم</string>
+    <string name="aging_summary">ملخص تقادم الديون</string>
+    <string name="filter_all">الكل</string>
+    <string name="no_data_available">لا توجد بيانات</string>
+    <string name="po_status_pending">معلق</string>
+    <string name="po_status_received">مستلم</string>
 </resources>
