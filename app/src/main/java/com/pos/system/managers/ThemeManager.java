@@ -26,8 +26,18 @@ public class ThemeManager {
     }
 
     public static void applyTheme() {
-        // Always force light mode
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        int mode = getThemeMode();
+        switch (mode) {
+            case MODE_DARK:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case MODE_AUTO:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+        }
     }
 
     public static void applyThemeToActivity(@NonNull Activity activity) {
@@ -39,15 +49,24 @@ public class ThemeManager {
     }
 
     public static int getThemeMode() {
-        return MODE_LIGHT;
+        if (prefs == null) return MODE_LIGHT;
+        return prefs.getInt(KEY_THEME_MODE, MODE_LIGHT);
     }
 
     public static boolean isDarkModeActive() {
-        return false;
+        if (appContext == null) return false;
+        int mode = getThemeMode();
+        if (mode == MODE_DARK) return true;
+        if (mode == MODE_LIGHT) return false;
+        int nightMode = appContext.getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        return nightMode == Configuration.UI_MODE_NIGHT_YES;
     }
 
     public static void setThemeMode(int mode) {
-        // Ignore — light mode is fixed
+        if (prefs != null) {
+            prefs.edit().putInt(KEY_THEME_MODE, mode).apply();
+        }
         applyTheme();
     }
 
@@ -69,12 +88,5 @@ public class ThemeManager {
     @NonNull
     public static String[] getAvailableThemeModes() {
         return new String[]{"فاتح", "داكن", "تلقائي (حسب النظام)"};
-    }
-
-    private static void checkInit() {
-        if (appContext == null || prefs == null) {
-            throw new IllegalStateException(
-                "ThemeManager not initialized. Call ThemeManager.init(context) first.");
-        }
     }
 }

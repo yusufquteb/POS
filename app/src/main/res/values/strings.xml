@@ -999,4 +999,54 @@
     <string name="inv_stat_total">Products</string>
     <string name="inv_stat_low">Low Stock</string>
     <string name="inv_stat_expiry">Expiring</string>
+
+    <!-- Wholesale price -->
+    <string name="wholesale_price_hint">Wholesale price (optional)</string>
+    <string name="use_wholesale_price">Sell at wholesale price (%1$s)</string>
+
+    <!-- Per-item discount -->
+    <string name="item_discount_hint">Discount % (optional)</string>
+
+    <!-- Split payment -->
+    <string name="payment_split">Split</string>
+    <string name="split_cash_hint">Cash</string>
+    <string name="split_card_hint">Card</string>
+
+    <!-- Sales by employee -->
+    <string name="sales_by_employee_title">Sales by Employee</string>
+    <string name="sales_by_employee_invoices">Invoices</string>
+    <string name="sales_by_employee_empty">No sales in the selected period</string>
+
+    <!-- Sales chart -->
+    <string name="chart_daily_sales">Daily Sales Chart</string>
+    <string name="chart_no_data">No data for the selected period</string>
+
+    <!-- Barcode label printing -->
+    <string name="print_barcodes_title">Print Barcode Labels</string>
+    <string name="print_barcodes_subtitle">Select products and print labels</string>
+    <string name="label_copies">Number of copies</string>
+    <string name="print_selected">Print Selected (%1$d)</string>
+    <string name="no_products_selected">Select at least one product</string>
+    <string name="printing_labels">Printing labels…</string>
+    <string name="print_success">Labels printed successfully</string>
+
+    <!-- Dark mode -->
+    <string name="theme_mode_light">Light</string>
+    <string name="theme_mode_dark">Dark</string>
+    <string name="theme_mode_auto">Auto (System)</string>
+
+    <!-- New report screens -->
+    <string name="advanced_reports">تقارير متقدمة</string>
+    <string name="report_product_profitability">تقرير ربحية المنتجات</string>
+    <string name="report_customer_aging">تقادم ديون العملاء</string>
+    <string name="report_supplier_aging">تقادم ديون الموردين</string>
+    <string name="report_purchases">تقرير المشتريات</string>
+    <string name="report_purchases_total">إجمالي المشتريات</string>
+    <string name="report_cogs">تكلفة المبيعات</string>
+    <string name="aging_days">يوم</string>
+    <string name="aging_summary">ملخص تقادم الديون</string>
+    <string name="filter_all">الكل</string>
+    <string name="no_data_available">لا توجد بيانات</string>
+    <string name="po_status_pending">معلق</string>
+    <string name="po_status_received">مستلم</string>
 </resources>

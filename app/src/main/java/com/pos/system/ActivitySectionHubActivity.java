@@ -92,6 +92,7 @@ public class ActivitySectionHubActivity extends BaseActivity {
                 items.add(new HubItem(R.drawable.ic_inventory,      R.string.products_title,             ActivityProductsActivity.class));
                 items.add(new HubItem(R.drawable.ic_inventory,      R.string.hub_stock_count,            ActivityStockCountActivity.class));
                 items.add(new HubItem(R.drawable.ic_time,           R.string.hub_expiry,                 ActivityExpiryDashboardActivity.class));
+                items.add(new HubItem(R.drawable.ic_print,          R.string.print_barcodes_title,       ActivityBarcodeLabelActivity.class));
                 break;
             case SECTION_TREASURY:
                 items.add(new HubItem(R.drawable.ic_money,          R.string.hub_wallet,                 ActivityWalletActivity.class));

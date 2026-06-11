@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import com.pos.system.databinding.ActivityCustomerAccountsBinding;
+import com.pos.system.managers.LoyaltyManager;
 
 public class ActivityCustomerAccountsActivity extends BaseActivity {
 
@@ -93,6 +94,39 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
         binding.tvTotalDebt.setText(String.format(Locale.US, "%.2f %s", totalDebt, currency));
         binding.tvTotalPaid.setText(String.format(Locale.US, "%.2f %s", totalPaid, currency));
         adapter.notifyDataSetChanged();
+        loadLoyaltyInfo();
+    }
+
+    private void loadLoyaltyInfo() {
+        try {
+            LoyaltyManager lm = new LoyaltyManager(this);
+            int balance = lm.getBalance(String.valueOf(customerId));
+            LoyaltyManager.Tier tier = lm.getTier(String.valueOf(customerId));
+
+            android.widget.TextView tvTier   = binding.tvLoyaltyTier;
+            android.widget.TextView tvPoints = binding.tvLoyaltyPoints;
+
+            if (tvTier != null) {
+                tvTier.setText(tier.nameAr);
+                tvTier.setVisibility(android.view.View.VISIBLE);
+                int tierColor;
+                switch (tier) {
+                    case GOLD:   tierColor = 0xFFFFD700; break;
+                    case SILVER: tierColor = 0xFF9E9E9E; break;
+                    default:     tierColor = 0xFFCD7F32; break;
+                }
+                if (tvTier.getBackground() instanceof android.graphics.drawable.GradientDrawable) {
+                    ((android.graphics.drawable.GradientDrawable) tvTier.getBackground()).setColor(tierColor);
+                }
+            }
+            if (tvPoints != null) {
+                tvPoints.setText("نقاط الولاء: " + balance + " نقطة");
+                tvPoints.setVisibility(android.view.View.VISIBLE);
+            }
+            lm.close();
+        } catch (Exception e) {
+            android.util.Log.e("CustomerAccounts", "loadLoyaltyInfo: " + e.getMessage());
+        }
     }
 
     private void showAddPaymentDialog() {

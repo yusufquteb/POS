@@ -74,7 +74,7 @@ public class ActivityAddProductActivity extends BaseActivity {
     // ═══ Views ═══
     private AutoCompleteTextView etName;
     private TextInputEditText etBarcode, etBrand, etUnit,
-                              etCost, etPrice, etQty, etExpiry,
+                              etCost, etPrice, etWholesalePrice, etQty, etExpiry,
                               etReorderLevel, etNotes, etBatchNumber, etSupplierRef;
     private AutoCompleteTextView etSupplier, spinnerLocation, spinnerCategory;
     private TextView tvProfit, tvProfitPercentage;
@@ -202,6 +202,7 @@ public class ActivityAddProductActivity extends BaseActivity {
         etUnit          = binding.etUnit;
         etCost          = binding.etCost;
         etPrice         = binding.etPrice;
+        etWholesalePrice = binding.etWholesalePrice;
         etQty           = binding.etQty;
         etExpiry        = binding.etExpiry;
         etReorderLevel  = binding.etReorderLevel;
@@ -438,6 +439,10 @@ public class ActivityAddProductActivity extends BaseActivity {
             setText(etUnit,         product.get("unit"));
             setText(etCost,         product.get("cost"));
             setText(etPrice,        product.get("price"));
+            try {
+                double wp = Double.parseDouble(product.getOrDefault("wholesale_price", "0"));
+                if (wp > 0) setText(etWholesalePrice, product.get("wholesale_price"));
+            } catch (Exception ignored) {}
             setText(etQty,          product.get("qty"));
             setText(etExpiry,       product.get("expiry"));
             setText(etReorderLevel, product.get("reorder_level"));
@@ -544,6 +549,8 @@ public class ActivityAddProductActivity extends BaseActivity {
             );
 
             if (result) {
+                double wp = getDouble(etWholesalePrice);
+                if (wp > 0) dbHelper.setProductWholesalePrice(getText(etBarcode), wp);
                 showToast(getString(R.string.product_added));
                 clearForm();
                 // ✅ تحديث القائمة فوراً بدون الحاجة للخروج والدخول
@@ -587,6 +594,7 @@ public class ActivityAddProductActivity extends BaseActivity {
             );
 
             if (result) {
+                dbHelper.setProductWholesalePrice(getText(etBarcode), getDouble(etWholesalePrice));
                 showToast(getString(R.string.product_updated));
                 setResult(RESULT_OK);
                 finish();

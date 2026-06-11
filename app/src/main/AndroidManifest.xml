@@ -428,6 +428,37 @@
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
+        <activity
+            android:name=".ActivityBarcodeLabelActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/print_barcodes_title"/>
+
+        <activity
+            android:name=".ActivityProductProfitabilityActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityReportsActivity"
+            android:label="@string/report_product_profitability"/>
+
+        <activity
+            android:name=".ActivityCustomerAgingActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityReportsActivity"
+            android:label="@string/report_customer_aging"/>
+
+        <activity
+            android:name=".ActivitySupplierAgingActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityReportsActivity"
+            android:label="@string/report_supplier_aging"/>
+
+        <activity
+            android:name=".ActivityPurchasesReportActivity"
+            android:exported="false"
+            android:parentActivityName=".ActivityReportsActivity"
+            android:label="@string/report_purchases"/>
+
         <!-- ════════ FileProvider ════════ -->
         <provider
             android:name="androidx.core.content.FileProvider"
