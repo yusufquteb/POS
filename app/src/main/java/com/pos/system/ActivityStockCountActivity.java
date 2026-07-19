@@ -246,7 +246,14 @@ public class ActivityStockCountActivity extends BaseActivity {
                         if (!hasFocus) {
                             String val = h.etCounted.getText() != null ? h.etCounted.getText().toString().trim() : "";
                             if (!val.isEmpty()) {
-                                int counted = Integer.parseInt(val.isEmpty() ? "0" : val);
+                                int counted;
+                                try {
+                                    counted = Integer.parseInt(val);
+                                } catch (NumberFormatException e) {
+                                    showToast(getString(R.string.error_unknown));
+                                    h.etCounted.setText("");
+                                    return;
+                                }
                                 HashMap<String, String> ci = new HashMap<>(item);
                                 ci.put("product_id", pid);
                                 ci.put("system_qty", String.valueOf(sysQty));

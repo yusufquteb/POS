@@ -167,7 +167,13 @@ public class ActivityInstallmentsActivity extends BaseActivity {
     }
 
     private void showContractDetails(HashMap<String, String> contract) {
-        long cid = Long.parseLong(contract.getOrDefault("id", "0"));
+        long cid;
+        try {
+            cid = Long.parseLong(contract.getOrDefault("id", "0"));
+        } catch (NumberFormatException e) {
+            showSnackbar("بيانات العقد غير صالحة", true);
+            return;
+        }
         executor.execute(() -> {
             List<HashMap<String, String>> payments = dbHelper.getContractPayments(cid);
             StringBuilder sb = new StringBuilder();
@@ -201,7 +207,13 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                             new MaterialAlertDialogBuilder(this)
                                 .setTitle("اختر القسط")
                                 .setItems(opts, (d3, which) -> {
-                                    long pid = Long.parseLong(pending.get(which).getOrDefault("id", "0"));
+                                    long pid;
+                                    try {
+                                        pid = Long.parseLong(pending.get(which).getOrDefault("id", "0"));
+                                    } catch (NumberFormatException e) {
+                                        showSnackbar("بيانات القسط غير صالحة", true);
+                                        return;
+                                    }
                                     String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
                                     executor.execute(() -> {
                                         boolean ok = dbHelper.payInstallment(pid, today);

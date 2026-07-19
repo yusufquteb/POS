@@ -242,6 +242,51 @@
 
                     </LinearLayout>
 
+                    <!-- Profit trend chart -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="8dp">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/profit_chart_title"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    android:textColor="?attr/colorOnSurface"
+                                    android:fontFamily="@font/cairo_semibold" />
+                                <TextView
+                                    android:id="@+id/tv_profit_period_total"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/cairo_bold"
+                                    tools:text="+ 1,240.00 ج.م"
+                                    tools:textColor="@color/color_success" />
+                            </LinearLayout>
+                            <com.github.mikephil.charting.charts.BarChart
+                                android:id="@+id/chart_profit"
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
                     <!-- Quick actions label -->
                     <TextView
                         android:layout_width="wrap_content"

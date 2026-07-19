@@ -1358,6 +1358,7 @@ public class DBHelper extends SQLiteOpenHelper {
         result.put("cogs", 0.0);
         result.put("gross_profit", 0.0);
         result.put("expenses", 0.0);
+        result.put("extra_income", 0.0);
         result.put("net_profit", 0.0);
         result.put("invoice_count", 0.0);
 
@@ -1387,25 +1388,66 @@ public class DBHelper extends SQLiteOpenHelper {
             if (c.moveToFirst()) result.put("cogs", c.getDouble(0));
             c.close();
 
-            // 3. المصروفات
+            // 3. المصروفات والدخول الإضافي (expense_type: OUT = مصروف حقيقي، IN = دخل إضافي)
             c = db.rawQuery(
-                "SELECT COALESCE(SUM(amount), 0) FROM expenses " +
-                "WHERE DATE(created_at) BETWEEN ? AND ?",
+                "SELECT " +
+                "COALESCE(SUM(CASE WHEN expense_type='IN' THEN 0 ELSE amount END), 0), " +
+                "COALESCE(SUM(CASE WHEN expense_type='IN' THEN amount ELSE 0 END), 0) " +
+                "FROM expenses WHERE DATE(created_at) BETWEEN ? AND ?",
                 new String[]{startDate, endDate});
-            if (c.moveToFirst()) result.put("expenses", c.getDouble(0));
+            if (c.moveToFirst()) {
+                result.put("expenses",     c.getDouble(0));
+                result.put("extra_income", c.getDouble(1));
+            }
             c.close();
 
             // 4. الحسابات
-            double revenue = result.get("revenue");
-            double cogs    = result.get("cogs");
-            double exp     = result.get("expenses");
+            double revenue     = result.get("revenue");
+            double cogs        = result.get("cogs");
+            double exp         = result.get("expenses");
+            double extraIncome = result.get("extra_income");
             result.put("gross_profit", revenue - cogs);
-            result.put("net_profit",   revenue - cogs - exp);
+            result.put("net_profit",   revenue - cogs - exp + extraIncome);
 
         } catch (Exception e) {
             Log.e(TAG, "getFullProfitReport: " + e.getMessage(), e);
         }
         return result;
+    }
+
+    /**
+     * صافي الربح مجمّعًا يوميًا خلال فترة: الإيرادات - تكلفة البضاعة - المصروفات + الدخل الإضافي.
+     * يعيد فقط الأيام التي بها حركة (مبيعات أو مصروفات) — الأيام الفارغة تُملأ صفرًا من جهة الاستدعاء.
+     */
+    public List<HashMap<String, String>> getNetProfitByPeriod(String startDate, String endDate) {
+        String sql =
+            "WITH sales AS (" +
+            "  SELECT DATE(i.created_at) AS d," +
+            "         COALESCE(SUM(ii.total), 0) AS revenue," +
+            "         COALESCE(SUM(ii.buy_cost_per_unit * ii.qty), 0) AS cogs" +
+            "  FROM invoice_items ii" +
+            "  JOIN invoices i ON ii.invoice_id = i.id" +
+            "  WHERE i.status != 'returned' AND DATE(i.created_at) BETWEEN ? AND ?" +
+            "  GROUP BY DATE(i.created_at)" +
+            ")," +
+            "exp AS (" +
+            "  SELECT DATE(created_at) AS d," +
+            "         COALESCE(SUM(CASE WHEN expense_type='IN' THEN 0 ELSE amount END), 0) AS expenses," +
+            "         COALESCE(SUM(CASE WHEN expense_type='IN' THEN amount ELSE 0 END), 0) AS income" +
+            "  FROM expenses" +
+            "  WHERE DATE(created_at) BETWEEN ? AND ?" +
+            "  GROUP BY DATE(created_at)" +
+            ")," +
+            "days AS (SELECT d FROM sales UNION SELECT d FROM exp)" +
+            "SELECT days.d AS date," +
+            "  COALESCE(sales.revenue, 0) AS revenue," +
+            "  COALESCE(sales.cogs, 0) AS cogs," +
+            "  COALESCE(exp.expenses, 0) AS expenses," +
+            "  COALESCE(exp.income, 0) AS income," +
+            "  (COALESCE(sales.revenue,0) - COALESCE(sales.cogs,0) - COALESCE(exp.expenses,0) + COALESCE(exp.income,0)) AS net_profit " +
+            "FROM days LEFT JOIN sales ON sales.d = days.d LEFT JOIN exp ON exp.d = days.d " +
+            "ORDER BY days.d ASC";
+        return queryTable(sql, new String[]{startDate, endDate, startDate, endDate});
     }
 
     /** حفظ تاريخ بدء التجربة في قاعدة البيانات */
