@@ -371,15 +371,12 @@ public class AuthActivity extends BaseActivity {
      * الانتقال إلى الشاشة الرئيسية
      */
     private void navigateToMain() {
-        // التحقق من Onboarding
-        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
-        boolean onboardingCompleted = prefs.getBoolean("onboarding_completed", false);
-
+        // التحقق من Onboarding (نفس الفحص المستخدم في SplashActivity)
         Intent intent;
-        if (onboardingCompleted) {
-            intent = new Intent(this, MainActivity.class);
-        } else {
+        if (OnboardingActivity.isFirstTime(this)) {
             intent = new Intent(this, OnboardingActivity.class);
+        } else {
+            intent = new Intent(this, MainActivity.class);
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
