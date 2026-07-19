@@ -87,6 +87,7 @@ public class ActivityPriceQuotesActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= quotes.size()) return;
             HashMap<String, String> q = quotes.get(pos);
             double total = 0;
             try { total = Double.parseDouble(q.getOrDefault("total","0")); } catch (Exception ignored) {}

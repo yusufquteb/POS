@@ -255,6 +255,7 @@ public class ActivityBarcodeLabelActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= filteredItems.size()) return;
             LabelItem item = filteredItems.get(pos);
             h.tvName.setText(item.name);
             h.tvBarcode.setText(item.barcode);

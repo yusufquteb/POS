@@ -210,6 +210,7 @@ public class ActivityInvoicesActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            if (position < 0 || position >= data.size()) return;
             HashMap<String, String> invoice = data.get(position);
             holder.bind(invoice);
             holder.itemView.setOnClickListener(v -> openInvoiceDetails(invoice));

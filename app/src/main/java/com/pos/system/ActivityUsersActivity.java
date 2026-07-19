@@ -221,6 +221,7 @@ public class ActivityUsersActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(VH h, int pos) {
+            if (pos < 0 || pos >= usersList.size()) return;
             HashMap<String, String> user = usersList.get(pos);
             h.tvName.setText(user.getOrDefault("name","—"));
             h.tvUsername.setText("@" + user.getOrDefault("username",""));

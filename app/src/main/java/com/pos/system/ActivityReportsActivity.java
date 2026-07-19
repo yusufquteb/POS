@@ -598,6 +598,7 @@ public class ActivityReportsActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= topProducts.size()) return;
             Map<String,String> item = topProducts.get(pos);
             if (h.rank    != null) h.rank.setText(String.valueOf(pos + 1));
             if (h.name    != null) h.name.setText(item.getOrDefault("name", ""));

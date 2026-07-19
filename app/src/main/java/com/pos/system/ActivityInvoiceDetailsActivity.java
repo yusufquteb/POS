@@ -346,6 +346,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            if (position < 0 || position >= items.size()) return;
             HashMap<String, Object> item = items.get(position);
             String name  = safeObjStr(item, "name", "---");
             int    qty   = safeInt(item.get("qty"));

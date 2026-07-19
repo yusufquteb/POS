@@ -255,6 +255,7 @@ public class ActivitySuppliersActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH holder, int position) {
+            if (position < 0 || position >= data.size()) return;
             HashMap<String, Object> item = data.get(position);
             if (holder.tvName    != null) holder.tvName.setText(str(item, "name"));
             if (holder.tvPhone   != null) holder.tvPhone.setText(str(item, "phone"));

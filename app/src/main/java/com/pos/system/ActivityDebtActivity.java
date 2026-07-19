@@ -461,6 +461,7 @@ public class ActivityDebtActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= filteredCustomers.size()) return;
             HashMap<String, String> item = filteredCustomers.get(pos);
             String name  = safeGet(item, "name");
             String phone = safeGet(item, "phone");
@@ -510,6 +511,7 @@ public class ActivityDebtActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= filteredSuppliers.size()) return;
             HashMap<String, String> item = filteredSuppliers.get(pos);
             String name    = safeGet(item, "name");
             String company = safeGet(item, "company");

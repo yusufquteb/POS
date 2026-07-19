@@ -341,6 +341,7 @@ public class ActivityShiftActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ShiftViewHolder h, int position) {
+            if (position < 0 || position >= data.size()) return;
             HashMap<String, String> shift = data.get(position);
 
             String id           = shift.getOrDefault("id",            "-");

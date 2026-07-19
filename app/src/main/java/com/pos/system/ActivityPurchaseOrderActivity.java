@@ -475,6 +475,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH holder, int position) {
+            if (position < 0 || position >= ordersList.size()) return;
             HashMap<String, String> order = ordersList.get(position);
 
             String poNumber  = safeGet(order, "po_number");

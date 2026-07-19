@@ -480,6 +480,7 @@ public class ActivityProductsActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            if (position < 0 || position >= productsList.size()) return;
             HashMap<String, String> product = productsList.get(position);
 
             holder.tvName.setText(safeGet(product, "name"));

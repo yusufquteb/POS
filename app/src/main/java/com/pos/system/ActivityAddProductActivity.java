@@ -926,6 +926,7 @@ public class ActivityAddProductActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH holder, int position) {
+            if (position < 0 || position >= data.size()) return;
             HashMap<String, String> p = data.get(position);
             if (holder.text1 != null) holder.text1.setText(p.getOrDefault("name", ""));
             if (holder.text2 != null) holder.text2.setText(

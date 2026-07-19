@@ -240,6 +240,7 @@ public class ActivityCartActivity extends BaseActivity {
                 }
                 @Override
                 public void onBindViewHolder(@NonNull RecyclerView.ViewHolder h, int pos) {
+                    if (pos < 0 || pos >= filtered.size()) return;
                     HashMap<String, String> p = filtered.get(pos);
                     TextView tvName  = h.itemView.findViewById(R.id.tv_product_name);
                     TextView tvPrice = h.itemView.findViewById(R.id.tv_price);
@@ -717,6 +718,7 @@ public class ActivityCartActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= cartItems.size()) return;
             CartItem item = cartItems.get(pos);
             if (h.tvName     != null) h.tvName.setText(item.name);
             if (h.tvPrice    != null) h.tvPrice.setText(formatCurrency(item.price));
