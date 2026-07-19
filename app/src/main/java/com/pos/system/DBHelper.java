@@ -1478,7 +1478,24 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.e(TAG, "getStoreSettings: " + e.getMessage(), e);
         }
+        localizeCurrency(settings);
         return settings;
+    }
+
+    /**
+     * رمز العملة يعتمد على لغة الواجهة الحالية وليس على النص المخزَّن وقت
+     * اختيار الدولة — بدون هذا، يبقى رمز العملة بالعربية حتى بعد التبديل
+     * لواجهة إنجليزية. تُطبَّق فقط إذا كانت الدولة معروفة (country_code)،
+     * وإلا يبقى الحقل المخزَّن كما هو (توافق مع التثبيتات القديمة).
+     */
+    private void localizeCurrency(HashMap<String, String> settings) {
+        try {
+            String countryCode = settings.get("country_code");
+            if (countryCode == null || countryCode.isEmpty()) return;
+            CountryConfig cfg = CountryConfig.forCode(countryCode);
+            boolean arabic = com.pos.system.managers.LanguageManager.isArabic();
+            settings.put("currency", arabic ? cfg.currency : cfg.currencyCode);
+        } catch (Exception ignored) {}
     }
 
     public String getStoreSetting(String key) {

@@ -234,7 +234,14 @@ public class MainActivity extends BaseActivity
         try {
             HashMap<String, String> settings = dbHelper.getStoreSettings();
             if (settings != null) {
-                if (tvStoreName  != null) tvStoreName.setText(settings.getOrDefault("name", "متجري"));
+                String name = settings.get("name");
+                // "متجري" هو الاسم الافتراضي المزروع عند أول تشغيل — إن لم
+                // يغيّره المستخدم بعد، نعرضه بلغة الواجهة الحالية بدل تثبيته
+                // بالعربية دائمًا.
+                boolean isDefaultSeedName = name == null || name.isEmpty() || "متجري".equals(name);
+                if (tvStoreName != null) {
+                    tvStoreName.setText(isDefaultSeedName ? getString(R.string.str_b530ab) : name);
+                }
                 if (tvStorePhone != null) tvStorePhone.setText(settings.getOrDefault("phone", ""));
             }
         } catch (Exception e) {

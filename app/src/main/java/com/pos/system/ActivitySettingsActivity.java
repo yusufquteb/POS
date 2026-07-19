@@ -78,7 +78,6 @@ public class ActivitySettingsActivity extends BaseActivity {
     private void initializeViews() {
         cardTheme      = binding.cardTheme;
         tvCurrentTheme = binding.tvCurrentTheme;
-        if (cardTheme != null) cardTheme.setVisibility(View.GONE); // light-only mode
         View tvCurrentColor = binding.tvCurrentColor;
         if (tvCurrentColor != null) tvCurrentColor.setVisibility(View.GONE);
 
