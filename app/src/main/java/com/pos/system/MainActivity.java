@@ -11,11 +11,21 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import com.pos.system.managers.ReviewManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.pos.system.databinding.ActivityMainBinding;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,6 +52,8 @@ public class MainActivity extends BaseActivity
     private TextView tvLowStockCount;
     private MaterialCardView cardAlert;
     private TextView tvAlertMessage;
+    private BarChart chartProfit;
+    private TextView tvProfitPeriodTotal;
 
     // Inventory tab stats
     private TextView tvInvTotal;
@@ -78,6 +90,7 @@ public class MainActivity extends BaseActivity
         setupBottomNav();
         setupCardClicks();
         setupDrawer();
+        setupProfitChart();
     }
 
     private void setupToolbar() {
@@ -107,6 +120,8 @@ public class MainActivity extends BaseActivity
         tvLowStockCount   = binding.tvLowStockCount;
         cardAlert         = binding.cardAlert;
         tvAlertMessage    = binding.tvAlertMessage;
+        chartProfit         = binding.chartProfit;
+        tvProfitPeriodTotal = binding.tvProfitPeriodTotal;
 
         tvInvTotal  = binding.tvInvTotal;
         tvInvLow    = binding.tvInvLow;
@@ -141,6 +156,7 @@ public class MainActivity extends BaseActivity
     private void setupCardClicks() {
         // Home page
         if (cardTodaySales  != null) cardTodaySales.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
+        if (cardTodayInvoices != null) cardTodayInvoices.setOnClickListener(v -> openActivity(ActivityInvoicesActivity.class));
         if (cardLowStock    != null) cardLowStock.setOnClickListener(v -> showLowStockDialog());
         if (cardAlert       != null) cardAlert.setOnClickListener(v -> showLowStockDialog());
 
@@ -249,6 +265,119 @@ public class MainActivity extends BaseActivity
                 android.util.Log.e(TAG, "loadDashboardData error", e);
             }
         });
+        loadProfitChart();
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // Profit trend chart (home page) — X: day, Y: net profit
+    // ═══════════════════════════════════════════════════════════
+    private static final int PROFIT_CHART_DAYS = 7;
+
+    private void setupProfitChart() {
+        if (chartProfit == null) return;
+        chartProfit.setDrawBarShadow(false);
+        chartProfit.setDrawValueAboveBar(true);
+        chartProfit.getDescription().setEnabled(false);
+        chartProfit.setPinchZoom(false);
+        chartProfit.setDrawGridBackground(false);
+        chartProfit.getLegend().setEnabled(false);
+        chartProfit.getAxisRight().setEnabled(false);
+        chartProfit.getAxisLeft().setDrawGridLines(true);
+        chartProfit.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        chartProfit.getXAxis().setDrawGridLines(false);
+        chartProfit.getXAxis().setGranularity(1f);
+        chartProfit.setNoDataText(getString(R.string.chart_no_data));
+        chartProfit.setExtraBottomOffset(4f);
+
+        android.util.TypedValue tcv = new android.util.TypedValue();
+        getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, tcv, true);
+        int textColor = tcv.data;
+        chartProfit.getAxisLeft().setTextColor(textColor);
+        chartProfit.getXAxis().setTextColor(textColor);
+    }
+
+    private void loadProfitChart() {
+        if (chartProfit == null) return;
+        java.util.concurrent.Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                SimpleDateFormat sqlFmt   = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                SimpleDateFormat dayLabel = new SimpleDateFormat("MM-dd", Locale.US);
+
+                Calendar cal = Calendar.getInstance();
+                List<String> dates  = new ArrayList<>();
+                List<String> labels = new ArrayList<>();
+                cal.add(Calendar.DAY_OF_YEAR, -(PROFIT_CHART_DAYS - 1));
+                for (int i = 0; i < PROFIT_CHART_DAYS; i++) {
+                    dates.add(sqlFmt.format(cal.getTime()));
+                    labels.add(dayLabel.format(cal.getTime()));
+                    cal.add(Calendar.DAY_OF_YEAR, 1);
+                }
+                String startDate = dates.get(0);
+                String endDate   = dates.get(dates.size() - 1);
+
+                final List<HashMap<String, String>> rows = dbHelper.getNetProfitByPeriod(startDate, endDate);
+                final HashMap<String, Double> byDate = new HashMap<>();
+                if (rows != null) {
+                    for (HashMap<String, String> row : rows) {
+                        try {
+                            byDate.put(row.get("date"), Double.parseDouble(row.getOrDefault("net_profit", "0")));
+                        } catch (Exception ignored) {}
+                    }
+                }
+
+                final List<Float> values = new ArrayList<>();
+                double periodTotal = 0;
+                for (String d : dates) {
+                    double v = byDate.containsKey(d) ? byDate.get(d) : 0.0;
+                    values.add((float) v);
+                    periodTotal += v;
+                }
+                final double finalTotal = periodTotal;
+                final String currency = getCurrencySymbol();
+
+                runOnUiThread(() -> {
+                    if (isFinishing() || isDestroyed()) return;
+                    try {
+                        renderProfitChart(labels, values);
+                        if (tvProfitPeriodTotal != null) {
+                            int color = androidx.core.content.ContextCompat.getColor(this,
+                                finalTotal >= 0 ? R.color.color_success : R.color.color_error);
+                            String sign = finalTotal >= 0 ? "+" : "";
+                            tvProfitPeriodTotal.setTextColor(color);
+                            tvProfitPeriodTotal.setText(String.format(Locale.getDefault(),
+                                "%s%.2f %s", sign, finalTotal, currency));
+                        }
+                    } catch (Exception ignored) {}
+                });
+            } catch (Exception e) {
+                android.util.Log.e(TAG, "loadProfitChart error", e);
+            }
+        });
+    }
+
+    private void renderProfitChart(List<String> labels, List<Float> values) {
+        if (chartProfit == null) return;
+        int successColor = androidx.core.content.ContextCompat.getColor(this, R.color.color_success);
+        int errorColor    = androidx.core.content.ContextCompat.getColor(this, R.color.color_error);
+
+        List<BarEntry> entries = new ArrayList<>();
+        List<Integer> barColors = new ArrayList<>();
+        for (int i = 0; i < values.size(); i++) {
+            float v = values.get(i);
+            entries.add(new BarEntry(i, v));
+            barColors.add(v >= 0 ? successColor : errorColor);
+        }
+
+        BarDataSet dataSet = new BarDataSet(entries, "");
+        dataSet.setColors(barColors);
+        dataSet.setDrawValues(false);
+        BarData data = new BarData(dataSet);
+        data.setBarWidth(0.6f);
+
+        chartProfit.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+        chartProfit.setData(data);
+        chartProfit.animateY(500);
+        chartProfit.invalidate();
     }
 
     private String getCurrencySymbol() {

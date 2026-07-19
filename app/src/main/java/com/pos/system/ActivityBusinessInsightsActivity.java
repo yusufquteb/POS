@@ -46,6 +46,10 @@ public class ActivityBusinessInsightsActivity extends BaseActivity {
         binding.cardGoDebts.setOnClickListener(v -> openActivity(ActivityDebtActivity.class));
         binding.cardBestSeller.setOnClickListener(v -> openActivity(ActivityReportsActivity.class));
         binding.cardBestCustomer.setOnClickListener(v -> openActivity(ActivityCustomersActivity.class));
+        binding.cardExpiryAlert.setOnClickListener(v -> openActivity(ActivityExpiryDashboardActivity.class));
+        binding.cardDeadStock.setOnClickListener(v -> openActivity(ActivityDecisionDashboardActivity.class));
+        binding.cardCustomerDebt.setOnClickListener(v -> openActivity(ActivityDebtActivity.class));
+        binding.cardSupplierDebt.setOnClickListener(v -> openActivity(ActivityDebtActivity.class));
 
         loadData();
     }

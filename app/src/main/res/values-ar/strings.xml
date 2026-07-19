@@ -600,6 +600,10 @@
     <string name="edit_supplier_title">تعديل بيانات المورد</string>
     <string name="add_expense_title">إضافة مصروف جديد</string>
     <string name="total_expenses">إجمالي المصروفات</string>
+    <string name="total_income">إجمالي الدخل</string>
+    <string name="net_amount">الصافي</string>
+    <string name="profit_chart_title">الأرباح — آخر 7 أيام</string>
+    <string name="profit_chart_net_label">صافي الربح (الفترة)</string>
     <string name="filter_date">تصفية بالتاريخ</string>
     <string name="clear_filter">مسح التصفية</string>
     <string name="notes">ملاحظات</string>

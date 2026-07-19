@@ -514,6 +514,10 @@
     <string name="edit_supplier_title">Edit Supplier</string>
     <string name="add_expense_title">Add New Expense</string>
     <string name="total_expenses">Total Expenses</string>
+    <string name="total_income">Total Income</string>
+    <string name="net_amount">Net</string>
+    <string name="profit_chart_title">Profit — Last 7 Days</string>
+    <string name="profit_chart_net_label">Net profit (period)</string>
     <string name="filter_date">Filter by Date</string>
     <string name="clear_filter">Clear Filter</string>
     <string name="notes">Notes</string>

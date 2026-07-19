@@ -41,7 +41,7 @@ public class ActivityExpensesActivity extends BaseActivity {
     private DBHelper dbHelper;
     private String currency = "ج.م";
     private ExtendedFloatingActionButton fabAddExpense;
-    private TextView tvTotalExpenses, tvFilterDate;
+    private TextView tvTotalExpenses, tvTotalIncome, tvNetAmount, tvFilterDate;
     private View emptyState;
 
     private List<HashMap<String, String>> expensesList = new ArrayList<>();
@@ -71,6 +71,8 @@ public class ActivityExpensesActivity extends BaseActivity {
         recyclerExpenses = binding.recyclerExpenses;
         fabAddExpense    = binding.fabAddExpense;
         tvTotalExpenses  = binding.tvTotalExpenses;
+        tvTotalIncome    = binding.tvTotalIncome;
+        tvNetAmount      = binding.tvNetAmount;
         tvFilterDate     = binding.tvFilterDate;
         emptyState       = binding.emptyState;
     }
@@ -123,16 +125,23 @@ public class ActivityExpensesActivity extends BaseActivity {
     }
 
     private void calculateTotal() {
-        double total = 0;
+        double totalIn = 0, totalOut = 0;
         for (HashMap<String, String> e : expensesList) {
             try {
                 String amountStr = e.get("amount");
-                if (amountStr != null && !amountStr.isEmpty())
-                    total += Double.parseDouble(amountStr);
+                if (amountStr == null || amountStr.isEmpty()) continue;
+                double amount = Double.parseDouble(amountStr);
+                if ("IN".equals(e.getOrDefault("expense_type", "OUT"))) totalIn += amount;
+                else totalOut += amount;
             } catch (NumberFormatException ignored) {}
         }
-        if (tvTotalExpenses != null)
-            tvTotalExpenses.setText(String.format(Locale.getDefault(), "%.2f %s", total, currency));
+        double net = totalIn - totalOut;
+        if (tvTotalIncome   != null) tvTotalIncome.setText(String.format(Locale.getDefault(), "%.2f %s", totalIn, currency));
+        if (tvTotalExpenses != null) tvTotalExpenses.setText(String.format(Locale.getDefault(), "%.2f %s", totalOut, currency));
+        if (tvNetAmount     != null) {
+            String sign = net >= 0 ? "+" : "";
+            tvNetAmount.setText(String.format(Locale.getDefault(), "%s%.2f %s", sign, net, currency));
+        }
     }
 
     private void showAddExpenseDialog() {
