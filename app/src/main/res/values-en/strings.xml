@@ -722,10 +722,10 @@
     <string name="str_4cff5b"> product</string>
     <string name="str_029921">Products that have reached the reorder threshold</string>
     <string name="str_0da6f7">Create Automatic Purchase Order</string>
-    <string name="str_919712">What's about to expire?</string>
+    <string name="str_919712">What’s about to expire?</string>
     <string name="str_945afe">Products expiring within 7 days</string>
     <string name="str_d1ab2f">View All Expiry Products</string>
-    <string name="str_13565b">What's not moving?</string>
+    <string name="str_13565b">What’s not moving?</string>
     <string name="str_deda37">Not sold in the last 30 days</string>
     <string name="str_2565d0">Lowest Profit Products</string>
     <string name="str_b7a95b">Lowest profit margin over the last 30 days</string>
