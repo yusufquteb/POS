@@ -76,7 +76,7 @@ public class ActivityDebtActivity extends BaseActivity {
         applyWindowInsets(binding.getRoot());
 
         if (!FeatureGate.isUnlocked(this)) {
-            FeatureGate.requirePremium(this, "إدارة الديون", true);
+            FeatureGate.requirePremium(this, getString(R.string.feature_debts), true);
             return;
         }
 

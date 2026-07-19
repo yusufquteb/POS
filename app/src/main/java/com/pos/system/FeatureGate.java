@@ -100,19 +100,10 @@ public final class FeatureGate {
 
         new MaterialAlertDialogBuilder(activity)
             .setTitle("🔒 " + featureNameAr)
-            .setMessage(
-                "هذه الميزة متاحة لمشتركي SmartPOS Premium.\n\n" +
-                "✓ إدارة المرتجعات والاستبدال\n" +
-                "✓ إدارة الشيفتات وجرد الخزينة\n" +
-                "✓ إدارة ديون العملاء والموردين\n" +
-                "✓ أوامر الشراء من الموردين\n" +
-                "✓ نسخ احتياطي على السحابة\n" +
-                "✓ تقارير غير محدودة\n\n" +
-                "اشترك الآن بـ 99 ج.م / شهر"
-            )
-            .setPositiveButton("اشترك الآن", (d, w) ->
+            .setMessage(activity.getString(R.string.premium_dialog_message))
+            .setPositiveButton(R.string.btn_subscribe_now, (d, w) ->
                 activity.startActivity(new Intent(activity, ActivitySettingsActivity.class)))
-            .setNegativeButton("رجوع", backAction)
+            .setNegativeButton(R.string.btn_back, backAction)
             .setOnCancelListener(d -> { if (finishOnDismiss) activity.finish(); })
             .setCancelable(true)
             .show();
@@ -121,28 +112,22 @@ public final class FeatureGate {
     /** Shows limit-reached dialog for products. */
     public static void showProductLimitDialog(Activity activity) {
         new MaterialAlertDialogBuilder(activity)
-            .setTitle("حد المنتجات المجاني")
-            .setMessage(
-                "وصلت إلى الحد المجاني (" + FREE_PRODUCTS_LIMIT + " منتج).\n\n" +
-                "اشترك في Premium للحصول على منتجات غير محدودة."
-            )
-            .setPositiveButton("اشترك الآن", (d, w) ->
+            .setTitle(R.string.product_limit_title)
+            .setMessage(activity.getString(R.string.product_limit_message, FREE_PRODUCTS_LIMIT))
+            .setPositiveButton(R.string.btn_subscribe_now, (d, w) ->
                 activity.startActivity(new Intent(activity, ActivitySettingsActivity.class)))
-            .setNegativeButton("رجوع", null)
+            .setNegativeButton(R.string.btn_back, null)
             .show();
     }
 
     /** Shows limit-reached dialog for customers. */
     public static void showCustomerLimitDialog(Activity activity) {
         new MaterialAlertDialogBuilder(activity)
-            .setTitle("حد العملاء المجاني")
-            .setMessage(
-                "وصلت إلى الحد المجاني (" + FREE_CUSTOMERS_LIMIT + " عميل).\n\n" +
-                "اشترك في Premium للحصول على عملاء غير محدودين."
-            )
-            .setPositiveButton("اشترك الآن", (d, w) ->
+            .setTitle(R.string.customer_limit_title)
+            .setMessage(activity.getString(R.string.customer_limit_message, FREE_CUSTOMERS_LIMIT))
+            .setPositiveButton(R.string.btn_subscribe_now, (d, w) ->
                 activity.startActivity(new Intent(activity, ActivitySettingsActivity.class)))
-            .setNegativeButton("رجوع", null)
+            .setNegativeButton(R.string.btn_back, null)
             .show();
     }
 

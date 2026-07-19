@@ -113,7 +113,7 @@ public class ActivityBackupActivity extends BaseActivity {
         if (btnSelectFolder != null)
             btnSelectFolder.setOnClickListener(v -> {
                 if (!FeatureGate.isUnlocked(this)) {
-                    FeatureGate.requirePremium(this, "النسخ الاحتياطي على السحابة");
+                    FeatureGate.requirePremium(this, getString(R.string.feature_cloud_backup));
                     return;
                 }
                 folderPickerLauncher.launch(null);

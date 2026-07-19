@@ -79,7 +79,7 @@ public class ActivityReturnActivity extends BaseActivity {
         applyWindowInsets(binding.getRoot());
 
         if (!FeatureGate.isUnlocked(this)) {
-            FeatureGate.requirePremium(this, "إدارة المرتجعات", true);
+            FeatureGate.requirePremium(this, getString(R.string.feature_returns), true);
             return;
         }
 

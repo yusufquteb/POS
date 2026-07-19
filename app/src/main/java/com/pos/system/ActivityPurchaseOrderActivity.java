@@ -61,7 +61,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
         applyWindowInsets(binding.getRoot());
 
         if (!FeatureGate.isUnlocked(this)) {
-            FeatureGate.requirePremium(this, "أوامر الشراء", true);
+            FeatureGate.requirePremium(this, getString(R.string.feature_purchase_orders), true);
             return;
         }
 
