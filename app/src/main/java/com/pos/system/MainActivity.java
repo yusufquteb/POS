@@ -214,7 +214,18 @@ public class MainActivity extends BaseActivity
             navView.setNavigationItemSelectedListener(this);
             View headerView = navView.getHeaderView(0);
             if (headerView != null) updateDrawerHeader(headerView);
+            updateLogoutVisibility();
         }
+    }
+
+    /** "تسجيل الخروج" لا يظهر إلا لمستخدم سجّل دخوله فعلياً */
+    private void updateLogoutVisibility() {
+        if (navView == null) return;
+        try {
+            boolean isLoggedIn = AuthActivity.getCurrentUser(this) != null;
+            android.view.MenuItem logoutItem = navView.getMenu().findItem(R.id.nav_logout);
+            if (logoutItem != null) logoutItem.setVisible(isLoggedIn);
+        } catch (Exception ignored) {}
     }
 
     private void updateDrawerHeader(View headerView) {
@@ -515,6 +526,7 @@ public class MainActivity extends BaseActivity
             if (navView != null) {
                 View headerView = navView.getHeaderView(0);
                 if (headerView != null) updateDrawerHeader(headerView);
+                updateLogoutVisibility();
             }
         } catch (Exception e) {
             android.util.Log.e(TAG, "onResume error", e);

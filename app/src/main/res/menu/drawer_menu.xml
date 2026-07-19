@@ -7,6 +7,12 @@
         android:checkableBehavior="single">
 
         <item
+            android:id="@+id/header_sales"
+            android:enabled="false"
+            android:checkable="false"
+            android:title="@string/nav_section_sales" />
+
+        <item
             android:id="@+id/nav_pos"
             android:icon="@drawable/ic_pos"
             android:title="@string/nav_pos" />
@@ -32,6 +38,12 @@
     <group
         android:id="@+id/group_finance"
         android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/header_finance"
+            android:enabled="false"
+            android:checkable="false"
+            android:title="@string/nav_section_finance" />
 
         <item
             android:id="@+id/nav_expenses"
@@ -66,6 +78,12 @@
         android:checkableBehavior="single">
 
         <item
+            android:id="@+id/header_inventory"
+            android:enabled="false"
+            android:checkable="false"
+            android:title="@string/nav_section_inventory" />
+
+        <item
             android:id="@+id/nav_products"
             android:icon="@drawable/ic_products"
             android:title="@string/nav_products" />
@@ -88,6 +106,12 @@
         android:checkableBehavior="single">
 
         <item
+            android:id="@+id/header_contacts"
+            android:enabled="false"
+            android:checkable="false"
+            android:title="@string/nav_section_contacts" />
+
+        <item
             android:id="@+id/nav_customers"
             android:icon="@drawable/ic_customers"
             android:title="@string/nav_customers" />
@@ -105,6 +129,12 @@
         android:checkableBehavior="single">
 
         <item
+            android:id="@+id/header_reports"
+            android:enabled="false"
+            android:checkable="false"
+            android:title="@string/nav_section_reports" />
+
+        <item
             android:id="@+id/nav_reports"
             android:icon="@drawable/ic_reports"
             android:title="@string/nav_reports" />
@@ -115,6 +145,12 @@
     <group
         android:id="@+id/group_management"
         android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/header_management"
+            android:enabled="false"
+            android:checkable="false"
+            android:title="@string/nav_section_management" />
 
         <item
             android:id="@+id/nav_users"

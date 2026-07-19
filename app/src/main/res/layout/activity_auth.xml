@@ -219,6 +219,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textEmailAddress"
+                            android:autofillHints="emailAddress"
+                            android:importantForAutofill="yes"
                             android:maxLines="1"
                             android:fontFamily="@font/cairo_regular" />
 
@@ -244,6 +246,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"
+                            android:autofillHints="password"
+                            android:importantForAutofill="yes"
                             android:maxLines="1"
                             android:fontFamily="@font/cairo_regular" />
 
