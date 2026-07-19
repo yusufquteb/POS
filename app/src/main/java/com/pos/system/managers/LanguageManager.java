@@ -112,6 +112,21 @@ public class LanguageManager {
     }
 
     /**
+     * حفظ وتطبيق اللغة على السياق الحالي بدون إعادة تشغيل التطبيق —
+     * تُستخدم أثناء تسلسل الشاشات الأولى (اختيار الدولة ثم اللغة ثم
+     * المقدمة) حيث ننتقل يدويًا للشاشة التالية، وستُطبَّق اللغة تلقائيًا
+     * عليها عبر BaseActivity.attachBaseContext().
+     */
+    public static void setLanguagePreference(@NonNull Context context, @NonNull String languageCode) {
+        checkInit();
+        if (!isValidLanguage(languageCode)) {
+            throw new IllegalArgumentException("Invalid language code: " + languageCode);
+        }
+        prefs.edit().putString(KEY_LANGUAGE, languageCode).apply();
+        applyLanguage(context, languageCode);
+    }
+
+    /**
      * تبديل اللغة بين العربية والإنجليزية
      */
     public static void toggleLanguage(@NonNull Context context) {

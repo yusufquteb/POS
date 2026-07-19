@@ -518,6 +518,11 @@
     <string name="net_amount">Net</string>
     <string name="profit_chart_title">Profit — Last 7 Days</string>
     <string name="profit_chart_net_label">Net profit (period)</string>
+    <string name="onboarding_country_title">Choose your country</string>
+    <string name="onboarding_country_subtitle">We\'ll set up currency and tax rates for you</string>
+    <string name="onboarding_language_title">Choose your language</string>
+    <string name="onboarding_language_subtitle">You can change this later from Settings</string>
+    <string name="onboarding_language_coming_soon">Coming soon</string>
     <string name="filter_date">Filter by Date</string>
     <string name="clear_filter">Clear Filter</string>
     <string name="notes">Notes</string>

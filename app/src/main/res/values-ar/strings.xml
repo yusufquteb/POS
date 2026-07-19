@@ -604,6 +604,11 @@
     <string name="net_amount">الصافي</string>
     <string name="profit_chart_title">الأرباح — آخر 7 أيام</string>
     <string name="profit_chart_net_label">صافي الربح (الفترة)</string>
+    <string name="onboarding_country_title">اختر دولتك</string>
+    <string name="onboarding_country_subtitle">سنجهّز العملة ونسبة الضريبة تلقائيًا حسب دولتك</string>
+    <string name="onboarding_language_title">اختر اللغة</string>
+    <string name="onboarding_language_subtitle">يمكنك تغييرها لاحقًا من الإعدادات</string>
+    <string name="onboarding_language_coming_soon">قريبًا</string>
     <string name="filter_date">تصفية بالتاريخ</string>
     <string name="clear_filter">مسح التصفية</string>
     <string name="notes">ملاحظات</string>

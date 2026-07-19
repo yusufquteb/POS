@@ -16,9 +16,10 @@ public class CountryConfig {
     public final double vatRate;
     public final int    decimalPlaces;
     public final String phonePrefix;
+    public final int    flagRes;
 
     private CountryConfig(String code, String nameAr, String currency, String currencyCode,
-                          double vatRate, int decimalPlaces, String phonePrefix) {
+                          double vatRate, int decimalPlaces, String phonePrefix, int flagRes) {
         this.code          = code;
         this.nameAr        = nameAr;
         this.currency      = currency;
@@ -26,6 +27,7 @@ public class CountryConfig {
         this.vatRate       = vatRate;
         this.decimalPlaces = decimalPlaces;
         this.phonePrefix   = phonePrefix;
+        this.flagRes       = flagRes;
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -35,17 +37,17 @@ public class CountryConfig {
     private static final List<CountryConfig> ALL = new ArrayList<>();
 
     static {
-        ALL.add(new CountryConfig("EG", "مصر",         "ج.م",  "EGP", 14.0, 2, "+20"));
-        ALL.add(new CountryConfig("SA", "السعودية",     "ر.س",  "SAR", 15.0, 2, "+966"));
-        ALL.add(new CountryConfig("AE", "الإمارات",     "د.إ",  "AED",  5.0, 2, "+971"));
-        ALL.add(new CountryConfig("KW", "الكويت",       "د.ك",  "KWD",  0.0, 3, "+965"));
-        ALL.add(new CountryConfig("QA", "قطر",          "ر.ق",  "QAR",  0.0, 2, "+974"));
-        ALL.add(new CountryConfig("BH", "البحرين",      "د.ب",  "BHD", 10.0, 3, "+973")); // VAT 10% منذ 2019
-        ALL.add(new CountryConfig("OM", "عُمان",        "ر.ع",  "OMR",  5.0, 3, "+968")); // VAT 5% منذ 2021
-        ALL.add(new CountryConfig("JO", "الأردن",       "د.أ",  "JOD", 16.0, 3, "+962")); // GST 16%
-        ALL.add(new CountryConfig("MA", "المغرب",       "د.م",  "MAD", 20.0, 2, "+212")); // TVA 20%
-        ALL.add(new CountryConfig("DZ", "الجزائر",      "د.ج",  "DZD", 19.0, 2, "+213")); // TVA 19%
-        ALL.add(new CountryConfig("TN", "تونس",         "د.ت",  "TND", 19.0, 3, "+216")); // TVA 19%
+        ALL.add(new CountryConfig("EG", "مصر",         "ج.م",  "EGP", 14.0, 2, "+20",  R.drawable.flag_eg));
+        ALL.add(new CountryConfig("SA", "السعودية",     "ر.س",  "SAR", 15.0, 2, "+966", R.drawable.flag_sa));
+        ALL.add(new CountryConfig("AE", "الإمارات",     "د.إ",  "AED",  5.0, 2, "+971", R.drawable.flag_ae));
+        ALL.add(new CountryConfig("KW", "الكويت",       "د.ك",  "KWD",  0.0, 3, "+965", R.drawable.flag_kw));
+        ALL.add(new CountryConfig("QA", "قطر",          "ر.ق",  "QAR",  0.0, 2, "+974", R.drawable.flag_qa));
+        ALL.add(new CountryConfig("BH", "البحرين",      "د.ب",  "BHD", 10.0, 3, "+973", R.drawable.flag_bh)); // VAT 10% منذ 2019
+        ALL.add(new CountryConfig("OM", "عُمان",        "ر.ع",  "OMR",  5.0, 3, "+968", R.drawable.flag_om)); // VAT 5% منذ 2021
+        ALL.add(new CountryConfig("JO", "الأردن",       "د.أ",  "JOD", 16.0, 3, "+962", R.drawable.flag_jo)); // GST 16%
+        ALL.add(new CountryConfig("MA", "المغرب",       "د.م",  "MAD", 20.0, 2, "+212", R.drawable.flag_ma)); // TVA 20%
+        ALL.add(new CountryConfig("DZ", "الجزائر",      "د.ج",  "DZD", 19.0, 2, "+213", R.drawable.flag_dz)); // TVA 19%
+        ALL.add(new CountryConfig("TN", "تونس",         "د.ت",  "TND", 19.0, 3, "+216", R.drawable.flag_tn)); // TVA 19%
     }
 
     /** الحصول على إعدادات دولة بالكود */

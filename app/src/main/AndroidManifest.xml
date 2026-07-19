@@ -72,6 +72,19 @@
             </intent-filter>
         </activity>
 
+        <!-- ════════ Country / Language selection (أول تشغيل فقط) ════════ -->
+        <activity
+            android:name=".ActivityCountrySelectionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".ActivityLanguageSelectionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
         <!-- ════════ Onboarding ════════ -->
         <activity
             android:name=".OnboardingActivity"
