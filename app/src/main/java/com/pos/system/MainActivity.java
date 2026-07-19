@@ -2,11 +2,16 @@ package com.pos.system;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
@@ -54,6 +59,9 @@ public class MainActivity extends BaseActivity
     private TextView tvAlertMessage;
     private BarChart chartProfit;
     private TextView tvProfitPeriodTotal;
+    private RecyclerView recyclerRecentInvoices;
+    private TextView tvNoRecentInvoices;
+    private RecentInvoicesAdapter recentInvoicesAdapter;
 
     // Inventory tab stats
     private TextView tvInvTotal;
@@ -91,6 +99,112 @@ public class MainActivity extends BaseActivity
         setupCardClicks();
         setupDrawer();
         setupProfitChart();
+        setupRecentInvoices();
+    }
+
+    private void setupRecentInvoices() {
+        if (recyclerRecentInvoices == null) return;
+        recyclerRecentInvoices.setLayoutManager(new LinearLayoutManager(this));
+        recyclerRecentInvoices.setNestedScrollingEnabled(false);
+        recentInvoicesAdapter = new RecentInvoicesAdapter();
+        recyclerRecentInvoices.setAdapter(recentInvoicesAdapter);
+        View tvViewAll = binding.tvViewAllInvoices;
+        if (tvViewAll != null) tvViewAll.setOnClickListener(v -> openActivity(ActivityInvoicesActivity.class));
+    }
+
+    private void loadRecentInvoices() {
+        java.util.concurrent.Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                final List<HashMap<String, String>> invoices = dbHelper.getRecentInvoices(5);
+                runOnUiThread(() -> {
+                    if (isFinishing() || isDestroyed()) return;
+                    boolean empty = invoices == null || invoices.isEmpty();
+                    if (recyclerRecentInvoices != null) recyclerRecentInvoices.setVisibility(empty ? View.GONE : View.VISIBLE);
+                    if (tvNoRecentInvoices     != null) tvNoRecentInvoices.setVisibility(empty ? View.VISIBLE : View.GONE);
+                    if (!empty && recentInvoicesAdapter != null) recentInvoicesAdapter.setData(invoices);
+                });
+            } catch (Exception e) {
+                android.util.Log.e(TAG, "loadRecentInvoices error", e);
+            }
+        });
+    }
+
+    private class RecentInvoicesAdapter extends RecyclerView.Adapter<RecentInvoicesAdapter.VH> {
+        private List<HashMap<String, String>> invoices = new ArrayList<>();
+
+        void setData(List<HashMap<String, String>> data) {
+            this.invoices = data != null ? data : new ArrayList<>();
+            notifyDataSetChanged();
+        }
+
+        @NonNull @Override
+        public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_home_invoice, parent, false);
+            return new VH(v);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull VH holder, int position) {
+            if (position < 0 || position >= invoices.size()) return;
+            HashMap<String, String> inv = invoices.get(position);
+            String customerName = inv.getOrDefault("customer_name", "");
+            if (customerName == null || customerName.trim().isEmpty()) {
+                customerName = getString(R.string.general_customer);
+            }
+            String initial = customerName.isEmpty() ? "?" : customerName.substring(0, 1).toUpperCase(Locale.getDefault());
+
+            if (holder.tvAvatar       != null) holder.tvAvatar.setText(initial);
+            if (holder.tvCustomer     != null) holder.tvCustomer.setText(customerName);
+            if (holder.tvInvoiceNumber!= null) holder.tvInvoiceNumber.setText(inv.getOrDefault("invoice_number", "-"));
+
+            double total = 0;
+            try { total = Double.parseDouble(inv.getOrDefault("total", "0")); } catch (Exception ignored) {}
+            if (holder.tvAmount != null) {
+                holder.tvAmount.setText(String.format(Locale.getDefault(), "%.2f %s", total, getCurrencySymbol()));
+            }
+
+            String status = inv.getOrDefault("status", "completed");
+            int statusColor;
+            String statusLabel;
+            if ("returned".equalsIgnoreCase(status)) {
+                statusLabel = getString(R.string.status_returned);
+                statusColor = R.color.color_error;
+            } else if ("partial".equalsIgnoreCase(status)) {
+                statusLabel = getString(R.string.status_partial);
+                statusColor = R.color.color_info;
+            } else {
+                statusLabel = getString(R.string.status_paid);
+                statusColor = R.color.color_success;
+            }
+            if (holder.tvStatus != null) {
+                holder.tvStatus.setText(statusLabel);
+                holder.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(MainActivity.this, statusColor));
+            }
+
+            holder.itemView.setOnClickListener(v -> {
+                try {
+                    long id = Long.parseLong(inv.getOrDefault("id", "0"));
+                    Intent intent = new Intent(MainActivity.this, ActivityInvoiceDetailsActivity.class);
+                    intent.putExtra("invoice_id", id);
+                    startActivity(intent);
+                } catch (Exception ignored) {}
+            });
+        }
+
+        @Override public int getItemCount() { return invoices.size(); }
+
+        class VH extends RecyclerView.ViewHolder {
+            TextView tvAvatar, tvCustomer, tvInvoiceNumber, tvAmount, tvStatus;
+            VH(@NonNull View v) {
+                super(v);
+                tvAvatar        = v.findViewById(R.id.tv_avatar);
+                tvCustomer      = v.findViewById(R.id.tv_customer_name);
+                tvInvoiceNumber = v.findViewById(R.id.tv_invoice_number);
+                tvAmount        = v.findViewById(R.id.tv_amount);
+                tvStatus        = v.findViewById(R.id.tv_status);
+            }
+        }
     }
 
     private void setupToolbar() {
@@ -122,6 +236,8 @@ public class MainActivity extends BaseActivity
         tvAlertMessage    = binding.tvAlertMessage;
         chartProfit         = binding.chartProfit;
         tvProfitPeriodTotal = binding.tvProfitPeriodTotal;
+        recyclerRecentInvoices = binding.recyclerRecentInvoices;
+        tvNoRecentInvoices     = binding.tvNoRecentInvoices;
 
         tvInvTotal  = binding.tvInvTotal;
         tvInvLow    = binding.tvInvLow;

@@ -523,6 +523,13 @@
     <string name="onboarding_language_title">Choose your language</string>
     <string name="onboarding_language_subtitle">You can change this later from Settings</string>
     <string name="onboarding_language_coming_soon">Coming soon</string>
+    <string name="recent_invoices">Recent Invoices</string>
+    <string name="view_all">View All</string>
+    <string name="no_recent_invoices">No invoices yet</string>
+    <string name="status_paid">Paid</string>
+    <string name="status_partial">Partial</string>
+    <string name="status_returned">Returned</string>
+    <string name="general_customer">Walk-in Customer</string>
     <string name="filter_date">Filter by Date</string>
     <string name="clear_filter">Clear Filter</string>
     <string name="notes">Notes</string>

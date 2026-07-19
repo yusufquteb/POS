@@ -159,9 +159,10 @@ public class AuthActivity extends BaseActivity {
      * تسجيل الدخول (تخطي Firebase)
      */
     private void signInWithGoogle() {
-        // تم إلغاء Google Sign-in
+        // تم إلغاء Google Sign-in — لا ننتقل تلقائياً لوضع الضيف حتى لا
+        // يظن المستخدم أن تسجيل الدخول تم فعلاً؛ يمكنه الضغط على "تخطي"
+        // بنفسه إن أراد المتابعة بدون حساب.
         showToast("تسجيل الدخول عبر Google غير متاح حالياً");
-        skipAuth();
     }
 
     /**

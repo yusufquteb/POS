@@ -1105,6 +1105,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return queryTable("SELECT * FROM " + TABLE_INVOICES + " ORDER BY created_at DESC", null);
     }
 
+    /** أحدث الفواتير لعرضها في لوحة التحكم الرئيسية */
+    public List<HashMap<String, String>> getRecentInvoices(int limit) {
+        return queryTable(
+            "SELECT id, invoice_number, customer_name, total, status, created_at FROM " +
+            TABLE_INVOICES + " ORDER BY created_at DESC LIMIT " + limit, null);
+    }
+
     public List<HashMap<String, String>> searchInvoices(String query) {
         return queryTable(
             "SELECT * FROM " + TABLE_INVOICES +

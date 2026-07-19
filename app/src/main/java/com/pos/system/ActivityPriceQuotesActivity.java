@@ -91,7 +91,7 @@ public class ActivityPriceQuotesActivity extends BaseActivity {
             double total = 0;
             try { total = Double.parseDouble(q.getOrDefault("total","0")); } catch (Exception ignored) {}
             if (h.tvNumber   != null) h.tvNumber.setText(q.getOrDefault("quote_number",""));
-            if (h.tvCustomer != null) h.tvCustomer.setText(q.getOrDefault("customer_name","عميل عام"));
+            if (h.tvCustomer != null) h.tvCustomer.setText(q.getOrDefault("customer_name", getString(R.string.general_customer)));
             if (h.tvDate     != null) h.tvDate.setText(q.getOrDefault("created_at",""));
             if (h.tvTotal    != null) h.tvTotal.setText(String.format(Locale.US,"%.2f %s", total, currency));
             if (h.tvStatus   != null) {

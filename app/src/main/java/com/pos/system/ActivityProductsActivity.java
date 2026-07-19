@@ -55,6 +55,7 @@ public class ActivityProductsActivity extends BaseActivity {
     private RecyclerView                        recyclerProducts;
     private ProductsAdapter                     adapter;
     private DBHelper                            dbHelper;
+    private String                              currency = "ج.م";
     private ExtendedFloatingActionButton        fabAddProduct;
     private FloatingActionButton                fabImportCsv;
     private TextInputEditText                   etSearch;
@@ -103,6 +104,7 @@ public class ActivityProductsActivity extends BaseActivity {
         applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
+        try { currency = dbHelper.getStoreSettings().getOrDefault("currency", "ج.م"); } catch (Exception ignored) {}
         initViews();
         setupToolbar();
         setupRecyclerView();
@@ -301,8 +303,8 @@ public class ActivityProductsActivity extends BaseActivity {
             getString(R.string.barcode)     + ": " + safeGet(product, "barcode")   + "\n" +
             getString(R.string.product_name)+ ": " + safeGet(product, "name")      + "\n" +
             getString(R.string.brand)       + ": " + safeGet(product, "brand")     + "\n" +
-            getString(R.string.price)       + ": " + safeGet(product, "price")     + " " + getString(R.string.currency_egp) + "\n" +
-            getString(R.string.cost)        + ": " + safeGet(product, "cost")      + " " + getString(R.string.currency_egp) + "\n" +
+            getString(R.string.price)       + ": " + safeGet(product, "price")     + " " + currency + "\n" +
+            getString(R.string.cost)        + ": " + safeGet(product, "cost")      + " " + currency + "\n" +
             getString(R.string.quantity)    + ": " + safeGet(product, "qty")       + "\n" +
             getString(R.string.category)    + ": " + safeGet(product, "category")  + "\n" +
             getString(R.string.location)    + ": " + safeGet(product, "location")  + "\n" +
@@ -496,10 +498,10 @@ public class ActivityProductsActivity extends BaseActivity {
                 double price = Double.parseDouble(safeGet(product, "price"));
                 NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
                 nf.setMaximumFractionDigits(2);
-                holder.tvPrice.setText(nf.format(price) + " " + getString(R.string.currency_egp));
+                holder.tvPrice.setText(nf.format(price) + " " + currency);
             } catch (NumberFormatException e) {
                 Log.w(TAG, "Invalid price format: " + product.get("price"));
-                holder.tvPrice.setText("0.00 " + getString(R.string.currency_egp));
+                holder.tvPrice.setText("0.00 " + currency);
             }
 
             try {

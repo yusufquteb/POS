@@ -39,7 +39,8 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     
     private DBHelper dbHelper;
     private long invoiceId;
-    
+    private String currency = "ج.م";
+
     private TextView tvInvoiceNumber, tvDate;
     private TextView tvCustomerName, tvCustomerPhone;
     private TextView tvSubtotal, tvDiscount, tvTax, tvFinalTotal;
@@ -54,6 +55,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
+        try { currency = dbHelper.getStoreSettings().getOrDefault("currency", "ج.م"); } catch (Exception ignored) {}
         invoiceId = getIntent().getLongExtra("invoice_id", 0);
         
         if (invoiceId == 0) {
@@ -130,27 +132,27 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         double finalTotal = safeDouble(invoice.get("total"));
         
         if (tvSubtotal != null) {
-            tvSubtotal.setText(String.format("%.2f ج.م", subtotal));
+            tvSubtotal.setText(String.format("%.2f %s", subtotal, currency));
         }
-        
+
         // إخفاء/إظهار الخصم
         if (discount > 0) {
             if (layoutDiscount != null) layoutDiscount.setVisibility(View.VISIBLE);
-            if (tvDiscount != null) tvDiscount.setText(String.format("-%.2f ج.م", discount));
+            if (tvDiscount != null) tvDiscount.setText(String.format("-%.2f %s", discount, currency));
         } else {
             if (layoutDiscount != null) layoutDiscount.setVisibility(View.GONE);
         }
-        
+
         // إخفاء/إظهار الضريبة
         if (tax > 0) {
             if (layoutTax != null) layoutTax.setVisibility(View.VISIBLE);
-            if (tvTax != null) tvTax.setText(String.format("+%.2f ج.م", tax));
+            if (tvTax != null) tvTax.setText(String.format("+%.2f %s", tax, currency));
         } else {
             if (layoutTax != null) layoutTax.setVisibility(View.GONE);
         }
-        
+
         if (tvFinalTotal != null) {
-            tvFinalTotal.setText(String.format("%.2f ج.م", finalTotal));
+            tvFinalTotal.setText(String.format("%.2f %s", finalTotal, currency));
         }
         
         // تحميل العناصر
@@ -250,8 +252,8 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
                                        ArrayList<HashMap<String, Object>> items,
                                        HashMap<String, Object> customer) {
         HashMap<String, String> storeSettings = dbHelper.getStoreSettings();
-        String storeName = storeSettings != null ? storeSettings.getOrDefault("name", "متجرنا") : "متجرنا";
-        String currency  = storeSettings != null ? storeSettings.getOrDefault("currency", "ج.م")  : "ج.م";
+        String defaultStoreName = getString(R.string.str_b530ab);
+        String storeName = storeSettings != null ? storeSettings.getOrDefault("name", defaultStoreName) : defaultStoreName;
 
         String invoiceNum = safeObjStr(invoice, "invoice_number", String.valueOf(invoiceId));
         String createdAt  = safeObjStr(invoice, "created_at", "");

@@ -64,6 +64,7 @@ public class ActivityReturnActivity extends BaseActivity {
     // ─── Data ────────────────────────────────────────────────────
     private DBHelper dbHelper;
     private InvoicesAdapter adapter;
+    private String currency = "ج.م";
     private final List<HashMap<String, String>> invoicesList = new ArrayList<>();
 
     // ════════════════════════════════════════════════════════════
@@ -83,6 +84,7 @@ public class ActivityReturnActivity extends BaseActivity {
         }
 
         dbHelper = new DBHelper(this);
+        try { currency = dbHelper.getStoreSettings().getOrDefault("currency", "ج.م"); } catch (Exception ignored) {}
         initViews();
         setupToolbar();
         setupRecyclerView();
@@ -122,7 +124,7 @@ public class ActivityReturnActivity extends BaseActivity {
 
     private void setupRecyclerView() {
         if (rvInvoices == null) return;
-        adapter = new InvoicesAdapter(invoicesList, this::showReturnDialog);
+        adapter = new InvoicesAdapter(invoicesList, this::showReturnDialog, currency);
         rvInvoices.setLayoutManager(new LinearLayoutManager(this));
         rvInvoices.setAdapter(adapter);
     }
@@ -179,7 +181,7 @@ public class ActivityReturnActivity extends BaseActivity {
             if (tvReturnsCount != null)
                 tvReturnsCount.setText(String.valueOf(count));
             if (tvTotalRefunded != null)
-                tvTotalRefunded.setText(String.format(Locale.getDefault(), "%.2f ج.م", totalRefunded));
+                tvTotalRefunded.setText(String.format(Locale.getDefault(), "%.2f %s", totalRefunded, currency));
         } catch (Exception e) {
             Log.e(TAG, "loadReturnStats: " + e.getMessage(), e);
         }
@@ -233,13 +235,13 @@ public class ActivityReturnActivity extends BaseActivity {
 
         // ── Invoice header ──────────────────────────────────────
         String invoiceNumber = invoice.getOrDefault("invoice_number", "-");
-        String customerName  = invoice.getOrDefault("customer_name", "عميل عام");
+        String customerName  = invoice.getOrDefault("customer_name", getString(R.string.general_customer));
         String customerId    = invoice.getOrDefault("customer_id",   "0");
         String invoiceTotal  = invoice.getOrDefault("total",         "0");
 
         TextView tvHeader = new TextView(this);
         tvHeader.setText("فاتورة: " + invoiceNumber + "\nالعميل: " + customerName
-                + "\nالإجمالي: " + formatAmount(invoiceTotal) + " ج.م");
+                + "\nالإجمالي: " + formatAmount(invoiceTotal) + " " + currency);
         tvHeader.setTextSize(14);
         tvHeader.setPadding(0, 0, 0, dp8);
         tvHeader.setTextColor(getAttrColor(com.google.android.material.R.attr.colorOnSurface));
@@ -305,7 +307,7 @@ public class ActivityReturnActivity extends BaseActivity {
             infoLayout.addView(tvName);
 
             TextView tvPrice = new TextView(this);
-            tvPrice.setText(formatAmount(priceStr) + " ج.م × " + originalQty);
+            tvPrice.setText(formatAmount(priceStr) + " " + currency + " × " + originalQty);
             tvPrice.setTextSize(12);
             tvPrice.setTextColor(getAttrColor(com.google.android.material.R.attr.colorOnSurfaceVariant));
             infoLayout.addView(tvPrice);
@@ -510,7 +512,7 @@ public class ActivityReturnActivity extends BaseActivity {
 
         String msg = "✓ " + getString(R.string.refund_success)
                 + " | " + returnNumber
-                + " | " + String.format(Locale.getDefault(), "%.2f ج.م", totalRefund)
+                + " | " + String.format(Locale.getDefault(), "%.2f %s", totalRefund, currency)
                 + " | " + methodLabel;
 
         Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG)
@@ -569,10 +571,12 @@ public class ActivityReturnActivity extends BaseActivity {
 
         private final List<HashMap<String, String>> data;
         private final OnInvoiceClickListener listener;
+        private final String currency;
 
-        InvoicesAdapter(List<HashMap<String, String>> data, OnInvoiceClickListener listener) {
+        InvoicesAdapter(List<HashMap<String, String>> data, OnInvoiceClickListener listener, String currency) {
             this.data     = data;
             this.listener = listener;
+            this.currency = currency;
         }
 
         @NonNull
@@ -586,7 +590,7 @@ public class ActivityReturnActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             HashMap<String, String> invoice = data.get(position);
-            holder.bind(invoice);
+            holder.bind(invoice, currency);
             holder.itemView.setOnClickListener(v -> {
                 if (listener != null) listener.onInvoiceClick(invoice);
             });
@@ -611,16 +615,17 @@ public class ActivityReturnActivity extends BaseActivity {
                 tvDate     = itemView.findViewById(R.id.tv_date);
             }
 
-            void bind(HashMap<String, String> inv) {
+            void bind(HashMap<String, String> inv, String currency) {
                 if (tvNumber != null)
                     tvNumber.setText(inv.getOrDefault("invoice_number", "-"));
                 if (tvCustomer != null)
-                    tvCustomer.setText(inv.getOrDefault("customer_name", "عميل عام"));
+                    tvCustomer.setText(inv.getOrDefault("customer_name",
+                            itemView.getContext().getString(R.string.general_customer)));
                 if (tvTotal != null) {
                     String raw = inv.getOrDefault("total", "0");
                     try {
                         tvTotal.setText(String.format(Locale.getDefault(),
-                                "%.2f ج.م", Double.parseDouble(raw)));
+                                "%.2f %s", Double.parseDouble(raw), currency));
                     } catch (NumberFormatException e) {
                         tvTotal.setText(raw);
                     }

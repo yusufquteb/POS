@@ -228,7 +228,7 @@ public class ActivityInvoicesActivity extends BaseActivity {
             }
             void bind(HashMap<String, String> inv) {
                 if (tvNumber   != null) tvNumber.setText(inv.getOrDefault("invoice_number", "-"));
-                if (tvCustomer != null) tvCustomer.setText(inv.getOrDefault("customer_name", "عميل عام"));
+                if (tvCustomer != null) tvCustomer.setText(inv.getOrDefault("customer_name", getString(R.string.general_customer)));
                 if (tvTotal    != null) tvTotal.setText(
                     String.format("%.2f", safeDouble(inv.getOrDefault("total", "0"))));
                 if (tvDate     != null) tvDate.setText(inv.getOrDefault("created_at", ""));

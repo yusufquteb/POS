@@ -609,6 +609,13 @@
     <string name="onboarding_language_title">اختر اللغة</string>
     <string name="onboarding_language_subtitle">يمكنك تغييرها لاحقًا من الإعدادات</string>
     <string name="onboarding_language_coming_soon">قريبًا</string>
+    <string name="recent_invoices">آخر الفواتير</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="no_recent_invoices">لا توجد فواتير بعد</string>
+    <string name="status_paid">مدفوعة</string>
+    <string name="status_partial">جزئي</string>
+    <string name="status_returned">مرتجعة</string>
+    <string name="general_customer">عميل عام</string>
     <string name="filter_date">تصفية بالتاريخ</string>
     <string name="clear_filter">مسح التصفية</string>
     <string name="notes">ملاحظات</string>
