@@ -544,6 +544,7 @@
     <string name="status_partial">Partial</string>
     <string name="status_returned">Returned</string>
     <string name="general_customer">Walk-in Customer</string>
+    <string name="hint_location_name">Location Name</string>
     <string name="filter_date">Filter by Date</string>
     <string name="clear_filter">Clear Filter</string>
     <string name="notes">Notes</string>

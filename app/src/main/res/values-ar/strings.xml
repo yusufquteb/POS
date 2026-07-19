@@ -616,6 +616,7 @@
     <string name="status_partial">جزئي</string>
     <string name="status_returned">مرتجعة</string>
     <string name="general_customer">عميل عام</string>
+    <string name="hint_location_name">اسم الموقع</string>
     <string name="filter_date">تصفية بالتاريخ</string>
     <string name="clear_filter">مسح التصفية</string>
     <string name="notes">ملاحظات</string>
