@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -112,14 +113,12 @@ public class ActivityAddProductActivity extends BaseActivity {
             }
         );
 
-    private final ActivityResultLauncher<Intent> imagePickerLauncher =
+    /** منتقي الصور النظامي (Photo Picker) — لا يتطلب صلاحية READ_MEDIA_IMAGES */
+    private final ActivityResultLauncher<PickVisualMediaRequest> pickMediaLauncher =
         registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Uri imageUri = result.getData().getData();
-                    if (imageUri != null) handleImageSelection(imageUri);
-                }
+            new ActivityResultContracts.PickVisualMedia(),
+            uri -> {
+                if (uri != null) handleImageSelection(uri);
             }
         );
 
@@ -648,9 +647,9 @@ public class ActivityAddProductActivity extends BaseActivity {
     }
 
     private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK,
-            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        imagePickerLauncher.launch(intent);
+        pickMediaLauncher.launch(new PickVisualMediaRequest.Builder()
+            .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+            .build());
     }
 
     private File createImageFile() {
