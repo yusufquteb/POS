@@ -169,8 +169,13 @@ public class ActivityShiftActivity extends BaseActivity {
 
             // Wire close button
             String shiftId = current.getOrDefault("id", "0");
-            btnCloseShift.setOnClickListener(v ->
-                    showCloseShiftDialog(Long.parseLong(shiftId), current));
+            btnCloseShift.setOnClickListener(v -> {
+                try {
+                    showCloseShiftDialog(Long.parseLong(shiftId), current);
+                } catch (NumberFormatException e) {
+                    showSnackbar(getString(R.string.error_unknown), true);
+                }
+            });
 
         } else {
             // ── No open shift ──────────────────────────────────

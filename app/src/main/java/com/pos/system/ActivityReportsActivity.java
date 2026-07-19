@@ -642,9 +642,11 @@ public class ActivityReportsActivity extends BaseActivity {
             if (h.rank    != null) h.rank.setText(String.valueOf(pos + 1));
             if (h.name    != null) h.name.setText(item.getOrDefault("category", "غير مصنّف"));
             if (h.qty     != null) h.qty.setText(item.getOrDefault("total_qty", "0") + " قطعة");
-            if (h.revenue != null) h.revenue.setText(
-                String.format(Locale.US, "%.2f %s",
-                    Double.parseDouble(item.getOrDefault("total_sales", "0")), currency));
+            if (h.revenue != null) {
+                double sales = 0;
+                try { sales = Double.parseDouble(item.getOrDefault("total_sales", "0")); } catch (Exception ignored) {}
+                h.revenue.setText(String.format(Locale.US, "%.2f %s", sales, currency));
+            }
         }
         @Override public int getItemCount() { return salesByCatList.size(); }
         class VH extends RecyclerView.ViewHolder {

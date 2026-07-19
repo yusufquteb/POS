@@ -168,7 +168,9 @@ public class ActivityUsersActivity extends BaseActivity {
             .setPositiveButton(R.string.save, (d, w) -> {
                 String pin = et != null && et.getText() != null ? et.getText().toString().trim() : "";
                 if (pin.length() < 4) { showToast("PIN يجب أن يكون 4 أرقام على الأقل"); return; }
-                long uid = Long.parseLong(user.getOrDefault("id","0"));
+                long uid;
+                try { uid = Long.parseLong(user.getOrDefault("id","0")); }
+                catch (NumberFormatException e) { showToast(getString(R.string.error_unknown)); return; }
                 executor.execute(() -> {
                     boolean ok = dbHelper.updateUserPin(uid, pin);
                     runOnUiThread(() -> showToast(ok ? "تم تغيير PIN بنجاح" : "خطأ في التغيير"));
@@ -179,7 +181,9 @@ public class ActivityUsersActivity extends BaseActivity {
     }
 
     private void deactivateUser(HashMap<String, String> user) {
-        long uid = Long.parseLong(user.getOrDefault("id","0"));
+        long uid;
+        try { uid = Long.parseLong(user.getOrDefault("id","0")); }
+        catch (NumberFormatException e) { showToast(getString(R.string.error_unknown)); return; }
         executor.execute(() -> {
             boolean ok = dbHelper.updateUser(uid, user.getOrDefault("name",""),
                 user.getOrDefault("role","cashier"), 0);
@@ -192,7 +196,9 @@ public class ActivityUsersActivity extends BaseActivity {
             .setTitle("حذف المستخدم")
             .setMessage("هل أنت متأكد من حذف المستخدم " + user.getOrDefault("name","") + "؟")
             .setPositiveButton(R.string.delete, (d, w) -> {
-                long uid = Long.parseLong(user.getOrDefault("id","0"));
+                long uid;
+                try { uid = Long.parseLong(user.getOrDefault("id","0")); }
+                catch (NumberFormatException e) { showToast(getString(R.string.error_unknown)); return; }
                 executor.execute(() -> {
                     boolean ok = dbHelper.deleteUser(uid);
                     runOnUiThread(() -> { if (ok) { showToast("تم الحذف"); loadUsers(); } else showToast("لا يمكن حذف المستخدم"); });
