@@ -1254,4 +1254,22 @@
     <string name="status_label_format">Status: %1$s</string>
     <string name="status_cancelled">Cancelled</string>
     <string name="status_open">Open</string>
+
+    <!-- AuthActivity -->
+    <string name="google_signin_unavailable">Google Sign-In is not available right now</string>
+    <string name="please_enter_email">Please enter your email address</string>
+    <string name="invalid_email">Invalid email address</string>
+    <string name="please_enter_password">Please enter your password</string>
+    <string name="password_min_length">Password must be at least 6 characters</string>
+    <string name="default_user_name">User</string>
+    <string name="new_user_name">New User</string>
+    <string name="create_account_btn">Create Account</string>
+    <string name="sign_in_btn">Sign In</string>
+    <string name="have_account_login">Have an account? Sign in</string>
+    <string name="no_account_register">Don\'t have an account? Create one</string>
+    <string name="skip_login_title">Skip Sign-In</string>
+    <string name="skip_login_message">Continue without signing in?\n\nNote: You won\'t be able to sync your data.</string>
+    <string name="yes_continue">Yes, Continue</string>
+    <string name="welcome_user_format">Welcome %1$s!</string>
+    <string name="welcome_default_user">you</string>
 </resources>

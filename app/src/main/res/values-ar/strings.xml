@@ -1315,4 +1315,22 @@
     <string name="status_label_format">الحالة: %1$s</string>
     <string name="status_cancelled">ملغي</string>
     <string name="status_open">مفتوح</string>
+
+    <!-- AuthActivity -->
+    <string name="google_signin_unavailable">تسجيل الدخول عبر Google غير متاح حالياً</string>
+    <string name="please_enter_email">الرجاء إدخال البريد الإلكتروني</string>
+    <string name="invalid_email">البريد الإلكتروني غير صحيح</string>
+    <string name="please_enter_password">الرجاء إدخال كلمة المرور</string>
+    <string name="password_min_length">كلمة المرور يجب أن تكون 6 أحرف على الأقل</string>
+    <string name="default_user_name">مستخدم</string>
+    <string name="new_user_name">مستخدم جديد</string>
+    <string name="create_account_btn">إنشاء حساب</string>
+    <string name="sign_in_btn">تسجيل الدخول</string>
+    <string name="have_account_login">لديك حساب؟ تسجيل الدخول</string>
+    <string name="no_account_register">ليس لديك حساب؟ إنشاء حساب</string>
+    <string name="skip_login_title">تخطي تسجيل الدخول</string>
+    <string name="skip_login_message">هل تريد المتابعة بدون تسجيل الدخول؟\n\nملاحظة: لن تتمكن من مزامنة بياناتك.</string>
+    <string name="yes_continue">نعم، متابعة</string>
+    <string name="welcome_user_format">مرحباً %1$s!</string>
+    <string name="welcome_default_user">بك</string>
 </resources>
