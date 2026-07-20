@@ -1385,4 +1385,33 @@
     <string name="receipt_loyalty_points_format">Loyalty Points: %1$d pts</string>
     <string name="receipt_thank_you">Thank you for your business</string>
     <string name="receipt_wish_good_day">Have a wonderful day</string>
+
+    <!-- ActivityPurchaseOrderActivity -->
+    <string name="no_suppliers_registered">No suppliers registered</string>
+    <string name="select_supplier_title">Select Supplier</string>
+    <string name="next_btn">Next</string>
+    <string name="items_added_count_format">Items added: %1$d</string>
+    <string name="add_item_title_format">Add Item — %1$s</string>
+    <string name="add_another_item_btn">+ Add more</string>
+    <string name="review_btn">Review</string>
+    <string name="please_add_one_item">Please add at least one item</string>
+    <string name="please_enter_product_name">Please enter product name</string>
+    <string name="po_total_label_format">Total: %1$.2f %2$s</string>
+    <string name="notes_optional_hint">Notes (optional)</string>
+    <string name="confirm_po_title">Confirm Purchase Order</string>
+    <string name="create_btn">Create</string>
+    <string name="back_btn">Back</string>
+    <string name="po_created_success">✓ Purchase order created</string>
+    <string name="po_creation_failed">Failed to create purchase order</string>
+    <string name="po_title_format">Purchase Order %1$s</string>
+    <string name="po_details_message_format">Supplier: %1$s\nTotal: %2$.2f %3$s\nDate: %4$s</string>
+    <string name="mark_received_btn">Mark Received</string>
+    <string name="confirm_receipt_title">Confirm Receipt</string>
+    <string name="confirm_receive_po_message_format">Confirm receiving purchase order %1$s?\nProduct stock will be updated automatically.</string>
+    <string name="yes_received_btn">Yes, Received</string>
+    <string name="purchase_goods_wallet_note_format">Goods purchase %1$s</string>
+    <string name="po_received_success">✓ Order received &amp; stock updated</string>
+    <string name="po_update_failed">Failed to update order</string>
+    <string name="po_full_details_format">PO#: %1$s\nSupplier: %2$s\nTotal: %3$.2f %4$s\nStatus: %5$s\nDate: %6$s</string>
+    <string name="po_details_title">Purchase Order Details</string>
 </resources>

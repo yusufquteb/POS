@@ -1504,4 +1504,33 @@
     <string name="receipt_loyalty_points_format">نقاط الولاء: %1$d نقطة</string>
     <string name="receipt_thank_you">شكراً لتعاملكم معنا</string>
     <string name="receipt_wish_good_day">نتمنى لكم يوماً سعيداً</string>
+
+    <!-- ActivityPurchaseOrderActivity -->
+    <string name="no_suppliers_registered">لا يوجد موردون مسجّلون</string>
+    <string name="select_supplier_title">اختر المورد</string>
+    <string name="next_btn">التالي</string>
+    <string name="items_added_count_format">البنود المضافة: %1$d</string>
+    <string name="add_item_title_format">إضافة بند — %1$s</string>
+    <string name="add_another_item_btn">+ بند آخر</string>
+    <string name="review_btn">مراجعة</string>
+    <string name="please_add_one_item">يرجى إضافة بند واحد على الأقل</string>
+    <string name="please_enter_product_name">يرجى إدخال اسم المنتج</string>
+    <string name="po_total_label_format">الإجمالي: %1$.2f %2$s</string>
+    <string name="notes_optional_hint">ملاحظات (اختياري)</string>
+    <string name="confirm_po_title">تأكيد أمر الشراء</string>
+    <string name="create_btn">إنشاء</string>
+    <string name="back_btn">رجوع</string>
+    <string name="po_created_success">✓ تم إنشاء أمر الشراء</string>
+    <string name="po_creation_failed">فشل في إنشاء أمر الشراء</string>
+    <string name="po_title_format">أمر الشراء %1$s</string>
+    <string name="po_details_message_format">المورد: %1$s\nالإجمالي: %2$.2f %3$s\nالتاريخ: %4$s</string>
+    <string name="mark_received_btn">تم الاستلام</string>
+    <string name="confirm_receipt_title">تأكيد الاستلام</string>
+    <string name="confirm_receive_po_message_format">هل تأكد استلام أمر الشراء %1$s؟\nسيتم تحديث كميات المنتجات تلقائياً.</string>
+    <string name="yes_received_btn">نعم، تم الاستلام</string>
+    <string name="purchase_goods_wallet_note_format">شراء بضاعة %1$s</string>
+    <string name="po_received_success">✓ تم تأكيد الاستلام وتحديث المخزون</string>
+    <string name="po_update_failed">فشل في تحديث الأمر</string>
+    <string name="po_full_details_format">رقم الأمر: %1$s\nالمورد: %2$s\nالإجمالي: %3$.2f %4$s\nالحالة: %5$s\nالتاريخ: %6$s</string>
+    <string name="po_details_title">تفاصيل أمر الشراء</string>
 </resources>

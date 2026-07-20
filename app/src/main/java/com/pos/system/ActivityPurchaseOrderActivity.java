@@ -146,7 +146,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
         } catch (Exception ignored) {}
 
         if (suppliers.isEmpty()) {
-            showToast("لا يوجد موردون مسجّلون\nNo suppliers registered");
+            showToast(getString(R.string.no_suppliers_registered));
             return;
         }
 
@@ -160,14 +160,14 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
         final int[] selectedSupplierIdx = {0};
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("اختر المورد / Select Supplier")
+                .setTitle(R.string.select_supplier_title)
                 .setSingleChoiceItems(supplierNames, 0,
                         (dialog, which) -> selectedSupplierIdx[0] = which)
-                .setPositiveButton("التالي / Next", (dialog, which) -> {
+                .setPositiveButton(R.string.next_btn, (dialog, which) -> {
                     HashMap<String, String> chosenSupplier = suppliers.get(selectedSupplierIdx[0]);
                     showAddItemsDialog(chosenSupplier, new ArrayList<>());
                 })
-                .setNegativeButton("إلغاء / Cancel", null)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
@@ -188,14 +188,13 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
 
         // عرض عدد البنود المضافة حتى الآن
         if (tvItemsAdded != null)
-            tvItemsAdded.setText(String.format(Locale.getDefault(),
-                    "البنود المضافة / Items added: %d", existingItems.size()));
+            tvItemsAdded.setText(getString(R.string.items_added_count_format, existingItems.size()));
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("إضافة بند / Add Item  —  " + safeGet(supplier, "name"))
+                .setTitle(getString(R.string.add_item_title_format, safeGet(supplier, "name")))
                 .setView(dialogView)
                 // زر "إضافة بند آخر"
-                .setNeutralButton("+ بند آخر / Add more", (dialog, which) -> {
+                .setNeutralButton(R.string.add_another_item_btn, (dialog, which) -> {
                     HashMap<String, String> item = buildItemFromInputs(
                             etProductName, etQty, etCost);
                     if (item != null) {
@@ -206,18 +205,18 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
                     }
                 })
                 // زر "التالي: المراجعة"
-                .setPositiveButton("مراجعة / Review", (dialog, which) -> {
+                .setPositiveButton(R.string.review_btn, (dialog, which) -> {
                     HashMap<String, String> item = buildItemFromInputs(
                             etProductName, etQty, etCost);
                     if (item != null) existingItems.add(item);
                     if (existingItems.isEmpty()) {
-                        showToast("يرجى إضافة بند واحد على الأقل\nPlease add at least one item");
+                        showToast(getString(R.string.please_add_one_item));
                         showAddItemsDialog(supplier, existingItems);
                         return;
                     }
                     showConfirmPoDialog(supplier, existingItems);
                 })
-                .setNegativeButton("إلغاء / Cancel", null)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
@@ -235,7 +234,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
         if (name.isEmpty() && qtyStr.isEmpty() && costStr.isEmpty()) return null;
 
         if (name.isEmpty()) {
-            showToast("يرجى إدخال اسم المنتج\nPlease enter product name");
+            showToast(getString(R.string.please_enter_product_name));
             return null;
         }
         double qty  = 1;
@@ -270,17 +269,16 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
             summary.append("• ").append(safeGet(item, "name"))
                    .append("  ×").append(formatQty(qty))
                    .append("  @").append(String.format(Locale.getDefault(), "%.2f", cost))
-                   .append(" = ").append(String.format(Locale.getDefault(), "%.2f %s\n", currency, line));
+                   .append(" = ").append(String.format(Locale.getDefault(), "%.2f %s\n", line, currency));
         }
         summary.append("\n")
-               .append("الإجمالي / Total:  ")
-               .append(String.format(Locale.getDefault(), "%.2f %s", currency, total));
+               .append(getString(R.string.po_total_label_format, total, currency));
 
         final double finalTotal = total;
 
         // حقل الملاحظات
         TextInputLayout tilNotes = new TextInputLayout(this);
-        tilNotes.setHint("ملاحظات / Notes (اختياري / optional)");
+        tilNotes.setHint(getString(R.string.notes_optional_hint));
         TextInputEditText etNotes = new TextInputEditText(this);
         etNotes.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         tilNotes.addView(etNotes);
@@ -299,13 +297,13 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
         container.addView(tilNotes);
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("تأكيد أمر الشراء / Confirm Purchase Order")
+                .setTitle(R.string.confirm_po_title)
                 .setView(container)
-                .setPositiveButton("إنشاء / Create", (dialog, which) -> {
+                .setPositiveButton(R.string.create_btn, (dialog, which) -> {
                     String notes = getEditText(etNotes);
                     createPurchaseOrder(supplier, items, finalTotal, notes);
                 })
-                .setNegativeButton("رجوع / Back", (dialog, which) ->
+                .setNegativeButton(R.string.back_btn, (dialog, which) ->
                         showAddItemsDialog(supplier, items))
                 .show();
     }
@@ -324,16 +322,16 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
                 loadOrders();
                 if (rootView != null) {
                     Snackbar.make(rootView,
-                            "✓ تم إنشاء أمر الشراء / Purchase order created",
+                            getString(R.string.po_created_success),
                             Snackbar.LENGTH_LONG).show();
                 } else {
-                    showToast("✓ تم إنشاء أمر الشراء");
+                    showToast(getString(R.string.po_created_success));
                 }
             } else {
-                showSnackbar("فشل في إنشاء أمر الشراء\nFailed to create purchase order", true);
+                showSnackbar(getString(R.string.po_creation_failed), true);
             }
         } catch (Exception e) {
-            showToast("خطأ / Error: " + e.getMessage());
+            showToast(getString(R.string.error_with_message, e.getMessage()));
         }
     }
 
@@ -353,29 +351,25 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
         }
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("أمر الشراء " + poNumber + "\nPurchase Order " + poNumber)
-                .setMessage("المورد / Supplier: " + safeGet(order, "supplier_name")
-                        + "\nالإجمالي / Total: "
-                        + String.format(Locale.getDefault(),
-                                "%.2f %s", currency, parseDouble(safeGet(order, "total")))
-                        + "\nالتاريخ / Date: " + safeGet(order, "created_at"))
-                .setPositiveButton("تم الاستلام / Mark Received", (dialog, which) ->
+                .setTitle(getString(R.string.po_title_format, poNumber))
+                .setMessage(getString(R.string.po_details_message_format,
+                        safeGet(order, "supplier_name"),
+                        parseDouble(safeGet(order, "total")), currency,
+                        safeGet(order, "created_at")))
+                .setPositiveButton(R.string.mark_received_btn, (dialog, which) ->
                         confirmReceivePo(order))
-                .setNegativeButton("إغلاق / Close", null)
+                .setNegativeButton(R.string.close, null)
                 .show();
     }
 
     private void confirmReceivePo(HashMap<String, String> order) {
         String poNumber = safeGet(order, "po_number");
         new MaterialAlertDialogBuilder(this)
-                .setTitle("تأكيد الاستلام / Confirm Receipt")
-                .setMessage("هل تأكد استلام أمر الشراء " + poNumber + "؟\n"
-                        + "سيتم تحديث كميات المنتجات تلقائياً.\n\n"
-                        + "Confirm receiving PO " + poNumber + "?\n"
-                        + "Product stock will be updated automatically.")
-                .setPositiveButton("نعم، تم الاستلام / Yes, Received", (dialog, which) ->
+                .setTitle(R.string.confirm_receipt_title)
+                .setMessage(getString(R.string.confirm_receive_po_message_format, poNumber))
+                .setPositiveButton(R.string.yes_received_btn, (dialog, which) ->
                         receiveOrder(order))
-                .setNegativeButton("إلغاء / Cancel", null)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
@@ -389,39 +383,36 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
                     double orderTotal = parseDouble(safeGet(order, "total"));
                     String poNum = safeGet(order, "po_number");
                     String date = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(new java.util.Date());
-                    dbHelper.addWalletTransaction("OUT", orderTotal, "شراء بضاعة " + poNum, date);
+                    dbHelper.addWalletTransaction("OUT", orderTotal, getString(R.string.purchase_goods_wallet_note_format, poNum), date);
                 } catch (Exception ignored) {}
                 loadOrders();
                 if (rootView != null) {
                     Snackbar.make(rootView,
-                            "✓ تم تأكيد الاستلام وتحديث المخزون\nOrder received & stock updated",
+                            getString(R.string.po_received_success),
                             Snackbar.LENGTH_LONG).show();
                 } else {
-                    showToast("✓ تم تأكيد الاستلام");
+                    showToast(getString(R.string.po_received_success));
                 }
             } else {
-                showSnackbar("فشل في تحديث الأمر\nFailed to update order", true);
+                showSnackbar(getString(R.string.po_update_failed), true);
             }
         } catch (Exception e) {
-            showToast("خطأ / Error: " + e.getMessage());
+            showToast(getString(R.string.error_with_message, e.getMessage()));
         }
     }
 
     private void showOrderDetails(HashMap<String, String> order) {
-        String details =
-                "رقم الأمر / PO#: "       + safeGet(order, "po_number")   + "\n"
-              + "المورد / Supplier: "       + safeGet(order, "supplier_name") + "\n"
-              + "الإجمالي / Total: "
-              + String.format(Locale.getDefault(),
-                      "%.2f %s", currency, parseDouble(safeGet(order, "total")))    + "\n"
-              + "الحالة / Status: "
-              + formatStatus(safeGet(order, "status"))                      + "\n"
-              + "التاريخ / Date: "          + safeGet(order, "created_at");
+        String details = getString(R.string.po_full_details_format,
+                safeGet(order, "po_number"),
+                safeGet(order, "supplier_name"),
+                parseDouble(safeGet(order, "total")), currency,
+                formatStatus(safeGet(order, "status")),
+                safeGet(order, "created_at"));
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("تفاصيل أمر الشراء / Purchase Order Details")
+                .setTitle(R.string.po_details_title)
                 .setMessage(details)
-                .setPositiveButton("حسناً / OK", null)
+                .setPositiveButton(R.string.ok, null)
                 .show();
     }
 
@@ -454,8 +445,8 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
     }
 
     private String formatStatus(String status) {
-        if ("received".equalsIgnoreCase(status)) return "مستلم / Received";
-        if ("pending".equalsIgnoreCase(status))  return "معلّق / Pending";
+        if ("received".equalsIgnoreCase(status)) return getString(R.string.po_status_received);
+        if ("pending".equalsIgnoreCase(status))  return getString(R.string.po_status_pending);
         return status;
     }
 
@@ -489,7 +480,7 @@ public class ActivityPurchaseOrderActivity extends BaseActivity {
             if (holder.tvSupplier   != null) holder.tvSupplier.setText(supplier);
             if (holder.tvTotal      != null)
                 holder.tvTotal.setText(
-                        String.format(Locale.getDefault(), "%.2f %s", currency, total));
+                        String.format(Locale.getDefault(), "%.2f %s", total, currency));
             if (holder.tvDate       != null) holder.tvDate.setText(date);
             if (holder.tvStatus     != null) {
                 holder.tvStatus.setText(formatStatus(status));
