@@ -1171,4 +1171,29 @@
     <string name="confirm_delete_user_message">Are you sure you want to delete user %1$s?</string>
     <string name="cannot_delete_user">Cannot delete user</string>
     <string name="user_status_disabled">Disabled</string>
+
+    <!-- ActivityStockCountActivity -->
+    <string name="open_session_label_format">Open count session: %1$s</string>
+    <string name="no_open_session_label">No open count session</string>
+    <string name="start_new_count_session_title">Start New Count Session</string>
+    <string name="start_new_count_session_message">A new count session will begin. You can enter the actual quantities for each product, then complete the count to update inventory.</string>
+    <string name="start_btn">Start</string>
+    <string name="count_session_started">Count session started</string>
+    <string name="session_start_error">Error starting session</string>
+    <string name="complete_count_title">Complete Count</string>
+    <string name="complete_count_message_format">%1$d out of %2$d products entered.\n\nUncounted products will keep their current quantities.\n\nComplete the count and update inventory?</string>
+    <string name="complete_btn">Complete</string>
+    <string name="count_completed_success">Count completed and inventory updated successfully</string>
+    <string name="count_completion_error">Error completing count</string>
+    <string name="cancel_count_title">Cancel Count</string>
+    <string name="cancel_count_message">Cancel the current count session? No quantities will change.</string>
+    <string name="count_cancelled_success">Count session cancelled</string>
+    <string name="cancel_error">Error cancelling</string>
+    <string name="go_back">Go Back</string>
+    <string name="current_stock_label_format">Current stock: %1$d</string>
+    <string name="diff_label_format">Diff: %1$s</string>
+    <string name="started_label_format">Started: %1$s</string>
+    <string name="status_label_format">Status: %1$s</string>
+    <string name="status_cancelled">Cancelled</string>
+    <string name="status_open">Open</string>
 </resources>

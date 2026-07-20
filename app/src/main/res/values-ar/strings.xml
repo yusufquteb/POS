@@ -1290,4 +1290,29 @@
     <string name="confirm_delete_user_message">هل أنت متأكد من حذف المستخدم %1$s؟</string>
     <string name="cannot_delete_user">لا يمكن حذف المستخدم</string>
     <string name="user_status_disabled">معطّل</string>
+
+    <!-- ActivityStockCountActivity -->
+    <string name="open_session_label_format">جلسة جرد مفتوحة: %1$s</string>
+    <string name="no_open_session_label">لا توجد جلسة جرد مفتوحة</string>
+    <string name="start_new_count_session_title">بدء جلسة جرد جديدة</string>
+    <string name="start_new_count_session_message">سيتم بدء جلسة جرد جديدة. يمكنك إدخال الكميات الفعلية لكل منتج ثم إتمام الجرد لتحديث المخزون.</string>
+    <string name="start_btn">بدء</string>
+    <string name="count_session_started">تم بدء جلسة الجرد</string>
+    <string name="session_start_error">خطأ في بدء الجلسة</string>
+    <string name="complete_count_title">إتمام الجرد</string>
+    <string name="complete_count_message_format">تم إدخال %1$d منتج من أصل %2$d.\n\nالمنتجات غير المُعدّة لن تتغير كمياتها.\n\nهل تريد إتمام الجرد وتحديث المخزون؟</string>
+    <string name="complete_btn">إتمام</string>
+    <string name="count_completed_success">تم إتمام الجرد وتحديث المخزون بنجاح</string>
+    <string name="count_completion_error">خطأ في إتمام الجرد</string>
+    <string name="cancel_count_title">إلغاء الجرد</string>
+    <string name="cancel_count_message">هل تريد إلغاء جلسة الجرد الحالية؟ لن تتغير أي كميات.</string>
+    <string name="count_cancelled_success">تم إلغاء الجرد</string>
+    <string name="cancel_error">خطأ في الإلغاء</string>
+    <string name="go_back">تراجع</string>
+    <string name="current_stock_label_format">المخزون الحالي: %1$d</string>
+    <string name="diff_label_format">الفرق: %1$s</string>
+    <string name="started_label_format">بدأ: %1$s</string>
+    <string name="status_label_format">الحالة: %1$s</string>
+    <string name="status_cancelled">ملغي</string>
+    <string name="status_open">مفتوح</string>
 </resources>
