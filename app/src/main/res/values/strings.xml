@@ -583,7 +583,6 @@
     <string name="delete_all_data_title">Delete All Data</string>
     <string name="delete_all_data_msg">All data will be permanently deleted. Are you sure?</string>
     <string name="confirm_delete_action">Confirm Delete</string>
-    <string name="deleted_successfully">Deleted successfully</string>
     <string name="error_with_message">Error: %1$s</string>
     <string name="filter_date">Filter by Date</string>
     <string name="clear_filter">Clear Filter</string>

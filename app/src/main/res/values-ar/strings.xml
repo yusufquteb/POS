@@ -655,7 +655,6 @@
     <string name="delete_all_data_title">حذف كل البيانات</string>
     <string name="delete_all_data_msg">سيتم حذف جميع البيانات بالكامل. هل أنت متأكد؟</string>
     <string name="confirm_delete_action">تأكيد الحذف</string>
-    <string name="deleted_successfully">تم الحذف</string>
     <string name="error_with_message">خطأ: %1$s</string>
     <string name="filter_date">تصفية بالتاريخ</string>
     <string name="clear_filter">مسح التصفية</string>
