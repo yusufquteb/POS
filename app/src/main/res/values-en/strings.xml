@@ -1226,4 +1226,11 @@
     <string name="confirm_delete_product_message">Delete product \'%1$s\'?</string>
     <string name="invoice_ref_format">Invoice #%1$s</string>
     <string name="quantity_label_format">Quantity: %1$s</string>
+
+    <!-- CrashActivity -->
+    <string name="unknown_error_crash">Unknown error</string>
+    <string name="app_error_title">⚠️ App Error</string>
+    <string name="copy_error_instructions">Copy the text below and send it to the developer:</string>
+    <string name="copy_error_btn">📋 Copy Error</string>
+    <string name="copied_success_toast">✅ Copied!</string>
 </resources>

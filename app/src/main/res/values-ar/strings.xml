@@ -1345,4 +1345,11 @@
     <string name="confirm_delete_product_message">هل تريد حذف المنتج \'%1$s\'؟</string>
     <string name="invoice_ref_format">فاتورة #%1$s</string>
     <string name="quantity_label_format">الكمية: %1$s</string>
+
+    <!-- CrashActivity -->
+    <string name="unknown_error_crash">خطأ غير معروف</string>
+    <string name="app_error_title">⚠️ خطأ في التطبيق</string>
+    <string name="copy_error_instructions">انسخ النص أدناه وأرسله للمطور:</string>
+    <string name="copy_error_btn">📋 نسخ الخطأ</string>
+    <string name="copied_success_toast">✅ تم النسخ!</string>
 </resources>
