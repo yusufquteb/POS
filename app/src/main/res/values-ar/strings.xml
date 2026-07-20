@@ -1533,4 +1533,23 @@
     <string name="po_update_failed">فشل في تحديث الأمر</string>
     <string name="po_full_details_format">رقم الأمر: %1$s\nالمورد: %2$s\nالإجمالي: %3$.2f %4$s\nالحالة: %5$s\nالتاريخ: %6$s</string>
     <string name="po_details_title">تفاصيل أمر الشراء</string>
+
+    <!-- ActivityChecksActivity -->
+    <string name="total_pending_label_format">إجمالي المعلق: %1$s</string>
+    <string name="add_customer_check_title">إضافة شيك عميل</string>
+    <string name="add_supplier_check_title">إضافة شيك مورد</string>
+    <string name="amount_required">المبلغ مطلوب</string>
+    <string name="generic_error">حدث خطأ</string>
+    <string name="check_option_collected">تم التحصيل ✓</string>
+    <string name="check_option_bounced">مرتد ✗</string>
+    <string name="check_options_title">خيارات الشيك</string>
+    <string name="done_successfully">تم بنجاح</string>
+    <string name="check_number_label_format">شيك رقم: %1$s</string>
+    <string name="bank_label_format">البنك: %1$s</string>
+    <string name="due_date_label_format">تاريخ الاستحقاق: %1$s</string>
+    <string name="check_status_collected">محصّل</string>
+    <string name="check_status_paid">مدفوع</string>
+    <string name="check_status_bounced">مرتد</string>
+    <string name="check_status_cancelled">ملغي</string>
+    <string name="check_status_pending">معلق</string>
 </resources>

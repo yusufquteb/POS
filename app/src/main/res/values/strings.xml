@@ -1472,4 +1472,23 @@
     <string name="po_update_failed">Failed to update order</string>
     <string name="po_full_details_format">PO#: %1$s\nSupplier: %2$s\nTotal: %3$.2f %4$s\nStatus: %5$s\nDate: %6$s</string>
     <string name="po_details_title">Purchase Order Details</string>
+
+    <!-- ActivityChecksActivity -->
+    <string name="total_pending_label_format">Total Pending: %1$s</string>
+    <string name="add_customer_check_title">Add Customer Check</string>
+    <string name="add_supplier_check_title">Add Supplier Check</string>
+    <string name="amount_required">Amount is required</string>
+    <string name="generic_error">An error occurred</string>
+    <string name="check_option_collected">Collected ✓</string>
+    <string name="check_option_bounced">Bounced ✗</string>
+    <string name="check_options_title">Check Options</string>
+    <string name="done_successfully">Done successfully</string>
+    <string name="check_number_label_format">Check No: %1$s</string>
+    <string name="bank_label_format">Bank: %1$s</string>
+    <string name="due_date_label_format">Due Date: %1$s</string>
+    <string name="check_status_collected">Collected</string>
+    <string name="check_status_paid">Paid</string>
+    <string name="check_status_bounced">Bounced</string>
+    <string name="check_status_cancelled">Cancelled</string>
+    <string name="check_status_pending">Pending</string>
 </resources>
