@@ -1444,4 +1444,11 @@
     <string name="confirm_clear_pin_message">هل تريد إلغاء قفل الكاشير؟ سيتمكن أي شخص من الوصول بدون رمز.</string>
     <string name="clear_pin_btn">إلغاء الرمز</string>
     <string name="pin_cleared_toast">تم إلغاء رمز PIN</string>
+
+    <!-- ActivityDecisionDashboardActivity -->
+    <string name="error_loading_data">خطأ في تحميل البيانات</string>
+    <string name="reorder_stock_info_format">المخزون: %1$s · حد الطلب: %2$s</string>
+    <string name="expiry_stock_info_format">ينتهي: %1$s · الكمية: %2$s</string>
+    <string name="dead_stock_info_format">المخزون: %1$s · لم يُباع منذ 30 يوم</string>
+    <string name="margin_profit_info_format">هامش: %1$s%% · الربح: %2$s</string>
 </resources>

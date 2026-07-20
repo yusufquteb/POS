@@ -1383,4 +1383,11 @@
     <string name="confirm_clear_pin_message">Remove the cashier lock? Anyone will be able to access without a code.</string>
     <string name="clear_pin_btn">Remove Code</string>
     <string name="pin_cleared_toast">PIN code removed</string>
+
+    <!-- ActivityDecisionDashboardActivity -->
+    <string name="error_loading_data">Error loading data</string>
+    <string name="reorder_stock_info_format">Stock: %1$s · Reorder level: %2$s</string>
+    <string name="expiry_stock_info_format">Expires: %1$s · Qty: %2$s</string>
+    <string name="dead_stock_info_format">Stock: %1$s · Not sold for 30 days</string>
+    <string name="margin_profit_info_format">Margin: %1$s%% · Profit: %2$s</string>
 </resources>
