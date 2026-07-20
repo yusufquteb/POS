@@ -323,11 +323,11 @@ public class ActivitySettingsActivity extends BaseActivity {
     private void showPinOptions() {
         boolean pinEnabled = ActivityPinLockActivity.isPinEnabled(this);
         String[] options = pinEnabled
-            ? new String[]{"تغيير رمز PIN", "إلغاء رمز PIN"}
-            : new String[]{"تعيين رمز PIN جديد"};
+            ? new String[]{getString(R.string.change_pin_option), getString(R.string.clear_pin_option)}
+            : new String[]{getString(R.string.pin_set_title)};
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("قفل الكاشير (PIN)")
+            .setTitle(R.string.pin_lock_title)
             .setItems(options, (d, which) -> {
                 if (!pinEnabled || which == 0) {
                     Intent i = new Intent(this, ActivityPinLockActivity.class);
@@ -343,11 +343,11 @@ public class ActivitySettingsActivity extends BaseActivity {
 
     private void confirmClearPin() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("إلغاء رمز PIN")
-            .setMessage("هل تريد إلغاء قفل الكاشير؟ سيتمكن أي شخص من الوصول بدون رمز.")
-            .setPositiveButton("إلغاء الرمز", (d, w) -> {
+            .setTitle(R.string.clear_pin_option)
+            .setMessage(R.string.confirm_clear_pin_message)
+            .setPositiveButton(R.string.clear_pin_btn, (d, w) -> {
                 ActivityPinLockActivity.clearPin(this);
-                showToast("تم إلغاء رمز PIN");
+                showToast(getString(R.string.pin_cleared_toast));
             })
             .setNegativeButton(R.string.cancel, null)
             .show();

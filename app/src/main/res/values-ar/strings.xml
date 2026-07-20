@@ -1437,4 +1437,11 @@
     <string name="please_enter_barcode">⚠ الرجاء إدخال الباركود</string>
     <string name="cancel_emoji">✗ إلغاء</string>
     <string name="camera_permission_required_scan">⚠ يجب السماح باستخدام الكاميرا لمسح الباركود</string>
+
+    <!-- ActivitySettingsActivity -->
+    <string name="clear_pin_option">إلغاء رمز PIN</string>
+    <string name="pin_lock_title">قفل الكاشير (PIN)</string>
+    <string name="confirm_clear_pin_message">هل تريد إلغاء قفل الكاشير؟ سيتمكن أي شخص من الوصول بدون رمز.</string>
+    <string name="clear_pin_btn">إلغاء الرمز</string>
+    <string name="pin_cleared_toast">تم إلغاء رمز PIN</string>
 </resources>

@@ -1376,4 +1376,11 @@
     <string name="please_enter_barcode">⚠ Please enter the barcode</string>
     <string name="cancel_emoji">✗ Cancel</string>
     <string name="camera_permission_required_scan">⚠ Camera permission is required to scan barcodes</string>
+
+    <!-- ActivitySettingsActivity -->
+    <string name="clear_pin_option">Remove PIN Code</string>
+    <string name="pin_lock_title">Cashier Lock (PIN)</string>
+    <string name="confirm_clear_pin_message">Remove the cashier lock? Anyone will be able to access without a code.</string>
+    <string name="clear_pin_btn">Remove Code</string>
+    <string name="pin_cleared_toast">PIN code removed</string>
 </resources>
