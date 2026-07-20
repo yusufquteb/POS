@@ -99,12 +99,12 @@ public class UserManager {
         return dbHelper.hasPermission(userId, permission);
     }
 
-    public static String getRoleDisplayName(String role) {
-        if (role == null) return "كاشير";
+    public static String getRoleDisplayName(Context context, String role) {
+        if (role == null) return context.getString(com.pos.system.R.string.role_cashier);
         switch (role) {
-            case ROLE_ADMIN:   return "مدير النظام";
-            case ROLE_MANAGER: return "مدير";
-            case ROLE_CASHIER: return "كاشير";
+            case ROLE_ADMIN:   return context.getString(com.pos.system.R.string.role_admin);
+            case ROLE_MANAGER: return context.getString(com.pos.system.R.string.role_manager);
+            case ROLE_CASHIER: return context.getString(com.pos.system.R.string.role_cashier);
             default:           return role;
         }
     }

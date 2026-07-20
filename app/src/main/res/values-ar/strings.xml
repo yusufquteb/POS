@@ -1268,4 +1268,26 @@
     <string name="debt_prefix">✗ دين   </string>
     <string name="note_label_inline">\n   ملاحظة: %1$s</string>
     <string name="no_phone_number">لا يوجد رقم</string>
+
+    <!-- ActivityUsersActivity -->
+    <string name="users_management_title">إدارة المستخدمين</string>
+    <string name="role_admin">مدير النظام</string>
+    <string name="role_manager">مدير</string>
+    <string name="role_cashier">كاشير</string>
+    <string name="add_user_title">إضافة مستخدم جديد</string>
+    <string name="username_required">اسم المستخدم مطلوب</string>
+    <string name="user_pin_required">كلمة المرور مطلوبة</string>
+    <string name="pin_min_length_error">الـ PIN يجب أن يكون 4 أرقام على الأقل</string>
+    <string name="user_added_success">تمت إضافة المستخدم</string>
+    <string name="username_already_exists">اسم المستخدم موجود مسبقاً</string>
+    <string name="change_pin_option">تغيير PIN</string>
+    <string name="deactivate_user_option">تعطيل المستخدم</string>
+    <string name="change_pin_title_format">تغيير PIN - %1$s</string>
+    <string name="pin_changed_success">تم تغيير PIN بنجاح</string>
+    <string name="pin_change_error">خطأ في التغيير</string>
+    <string name="user_deactivated_success">تم تعطيل المستخدم</string>
+    <string name="delete_user_title">حذف المستخدم</string>
+    <string name="confirm_delete_user_message">هل أنت متأكد من حذف المستخدم %1$s؟</string>
+    <string name="cannot_delete_user">لا يمكن حذف المستخدم</string>
+    <string name="user_status_disabled">معطّل</string>
 </resources>

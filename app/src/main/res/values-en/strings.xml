@@ -1149,4 +1149,26 @@
     <string name="debt_prefix">✗ Debt   </string>
     <string name="note_label_inline">\n   Note: %1$s</string>
     <string name="no_phone_number">No phone number</string>
+
+    <!-- ActivityUsersActivity -->
+    <string name="users_management_title">User Management</string>
+    <string name="role_admin">System Admin</string>
+    <string name="role_manager">Manager</string>
+    <string name="role_cashier">Cashier</string>
+    <string name="add_user_title">Add New User</string>
+    <string name="username_required">Username is required</string>
+    <string name="user_pin_required">Password is required</string>
+    <string name="pin_min_length_error">PIN must be at least 4 digits</string>
+    <string name="user_added_success">User added successfully</string>
+    <string name="username_already_exists">Username already exists</string>
+    <string name="change_pin_option">Change PIN</string>
+    <string name="deactivate_user_option">Deactivate User</string>
+    <string name="change_pin_title_format">Change PIN - %1$s</string>
+    <string name="pin_changed_success">PIN changed successfully</string>
+    <string name="pin_change_error">Error changing PIN</string>
+    <string name="user_deactivated_success">User deactivated</string>
+    <string name="delete_user_title">Delete User</string>
+    <string name="confirm_delete_user_message">Are you sure you want to delete user %1$s?</string>
+    <string name="cannot_delete_user">Cannot delete user</string>
+    <string name="user_status_disabled">Disabled</string>
 </resources>
