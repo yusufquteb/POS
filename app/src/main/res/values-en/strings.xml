@@ -1266,4 +1266,31 @@
     <string name="confirm_clear_all_errors_message">Clear all saved errors?</string>
     <string name="cleared_success_toast">✓ Cleared</string>
     <string name="app_error_must_restart_message">An app error occurred. You must restart.</string>
+
+    <!-- ActivityExpensesActivity -->
+    <string name="add_new_expense_title">Add New Expense</string>
+    <string name="please_enter_category">Please enter a category</string>
+    <string name="please_enter_amount">Please enter an amount</string>
+    <string name="amount_must_be_positive">Amount must be greater than zero</string>
+    <string name="expense_added_success">✓ Expense added</string>
+    <string name="expense_wallet_note_format">Expense: %1$s</string>
+    <string name="expense_add_failed">Failed to add expense</string>
+    <string name="invalid_amount">Invalid amount</string>
+    <string name="delete_expense_title">Delete Expense</string>
+    <string name="confirm_delete_expense_message">Are you sure you want to delete this expense?</string>
+    <string name="delete_failed">Failed to delete</string>
+    <string name="delete_error">Error deleting</string>
+    <string name="filter_today">Today</string>
+    <string name="filter_this_week">This Week</string>
+    <string name="filter_this_month">This Month</string>
+    <string name="filter_last_3_months">Last 3 Months</string>
+    <string name="filter_this_year">This Year</string>
+    <string name="filter_clear_option">Clear Filter</string>
+    <string name="filter_expenses_title">Filter Expenses</string>
+    <string name="date_range_format">From %1$s to %2$s</string>
+    <string name="edit_expense_title">Edit Expense</string>
+    <string name="expense_updated_success">✓ Expense updated</string>
+    <string name="update_failed">Update failed</string>
+    <string name="expense_details_format">Category: %1$s\nAmount: %2$s %3$s\nDescription: %4$s\nDate: %5$s</string>
+    <string name="expense_details_title">Expense Details</string>
 </resources>

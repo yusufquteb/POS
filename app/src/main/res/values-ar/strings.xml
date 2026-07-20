@@ -1385,4 +1385,31 @@
     <string name="confirm_clear_all_errors_message">هل تريد مسح جميع الأخطاء المحفوظة؟</string>
     <string name="cleared_success_toast">✓ تم المسح</string>
     <string name="app_error_must_restart_message">حدث خطأ في التطبيق. يجب إعادة التشغيل.</string>
+
+    <!-- ActivityExpensesActivity -->
+    <string name="add_new_expense_title">إضافة مصروف جديد</string>
+    <string name="please_enter_category">يرجى إدخال التصنيف</string>
+    <string name="please_enter_amount">يرجى إدخال المبلغ</string>
+    <string name="amount_must_be_positive">المبلغ يجب أن يكون أكبر من صفر</string>
+    <string name="expense_added_success">✓ تمت إضافة المصروف</string>
+    <string name="expense_wallet_note_format">مصروف: %1$s</string>
+    <string name="expense_add_failed">فشل في إضافة المصروف</string>
+    <string name="invalid_amount">المبلغ غير صحيح</string>
+    <string name="delete_expense_title">حذف المصروف</string>
+    <string name="confirm_delete_expense_message">هل أنت متأكد من حذف هذا المصروف؟</string>
+    <string name="delete_failed">فشل في الحذف</string>
+    <string name="delete_error">خطأ في الحذف</string>
+    <string name="filter_today">اليوم</string>
+    <string name="filter_this_week">هذا الأسبوع</string>
+    <string name="filter_this_month">هذا الشهر</string>
+    <string name="filter_last_3_months">آخر 3 أشهر</string>
+    <string name="filter_this_year">هذا العام</string>
+    <string name="filter_clear_option">إلغاء التصفية</string>
+    <string name="filter_expenses_title">تصفية المصروفات</string>
+    <string name="date_range_format">من %1$s إلى %2$s</string>
+    <string name="edit_expense_title">تعديل المصروف</string>
+    <string name="expense_updated_success">✓ تم تحديث المصروف</string>
+    <string name="update_failed">فشل في التحديث</string>
+    <string name="expense_details_format">التصنيف: %1$s\nالمبلغ: %2$s %3$s\nالوصف: %4$s\nالتاريخ: %5$s</string>
+    <string name="expense_details_title">تفاصيل المصروف</string>
 </resources>
