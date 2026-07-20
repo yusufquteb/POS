@@ -1420,4 +1420,12 @@
     <string name="remaining_owed_by_customer_format">متبقي على العميل: %1$s</string>
     <string name="sale_invoice_wallet_note_format">فاتورة بيع %1$s</string>
     <string name="edit_item_title_format">تعديل: %1$s</string>
+
+    <!-- ActivityBackupActivity -->
+    <string name="cloud_enabled_label">مُفعّل ✓</string>
+    <string name="cloud_disabled_label">غير مُفعّل</string>
+    <string name="last_backup_label_format">آخر نسخة: %1$s</string>
+    <string name="cloud_backup_title">نسخ احتياطي على السحابة</string>
+    <string name="cloud_backup_confirm_message">هل تريد إنشاء نسخة احتياطية في المجلد المحدد؟</string>
+    <string name="backup_success_message">✓ تم النسخ الاحتياطي بنجاح</string>
 </resources>

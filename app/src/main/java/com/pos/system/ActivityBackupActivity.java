@@ -130,7 +130,7 @@ public class ActivityBackupActivity extends BaseActivity {
         boolean configured = cloudBackupManager.isFolderConfigured();
 
         if (tvCloudStatus != null) {
-            tvCloudStatus.setText(configured ? "مُفعّل ✓" : "غير مُفعّل");
+            tvCloudStatus.setText(configured ? R.string.cloud_enabled_label : R.string.cloud_disabled_label);
 
             TypedValue successVal = new TypedValue();
             TypedValue warningVal = new TypedValue();
@@ -145,7 +145,7 @@ public class ActivityBackupActivity extends BaseActivity {
         if (tvCloudLastBackup != null) {
             String last = cloudBackupManager.getLastBackupDate();
             if (last != null) {
-                tvCloudLastBackup.setText("آخر نسخة: " + last);
+                tvCloudLastBackup.setText(getString(R.string.last_backup_label_format, last));
                 tvCloudLastBackup.setVisibility(View.VISIBLE);
             } else {
                 tvCloudLastBackup.setVisibility(View.GONE);
@@ -155,11 +155,11 @@ public class ActivityBackupActivity extends BaseActivity {
 
     private void performCloudBackup() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("نسخ احتياطي على السحابة")
-            .setMessage("هل تريد إنشاء نسخة احتياطية في المجلد المحدد؟")
+            .setTitle(R.string.cloud_backup_title)
+            .setMessage(R.string.cloud_backup_confirm_message)
             .setPositiveButton(R.string.yes, (d, w) -> {
                 boolean ok = cloudBackupManager.backup();
-                showSnackbar(ok ? "✓ تم النسخ الاحتياطي بنجاح" : "فشل النسخ الاحتياطي", !ok);
+                showSnackbar(ok ? getString(R.string.backup_success_message) : getString(R.string.backup_failed), !ok);
                 updateCloudUI();
             })
             .setNegativeButton(R.string.cancel, null)

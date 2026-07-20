@@ -1359,4 +1359,12 @@
     <string name="remaining_owed_by_customer_format">Remaining owed by customer: %1$s</string>
     <string name="sale_invoice_wallet_note_format">Sale invoice %1$s</string>
     <string name="edit_item_title_format">Edit: %1$s</string>
+
+    <!-- ActivityBackupActivity -->
+    <string name="cloud_enabled_label">Enabled ✓</string>
+    <string name="cloud_disabled_label">Not Enabled</string>
+    <string name="last_backup_label_format">Last backup: %1$s</string>
+    <string name="cloud_backup_title">Cloud Backup</string>
+    <string name="cloud_backup_confirm_message">Create a backup in the selected folder?</string>
+    <string name="backup_success_message">✓ Backup created successfully</string>
 </resources>
