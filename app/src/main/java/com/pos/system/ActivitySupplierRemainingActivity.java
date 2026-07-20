@@ -84,7 +84,7 @@ public class ActivitySupplierRemainingActivity extends BaseActivity {
         View v = LayoutInflater.from(this).inflate(R.layout.dialog_simple_input, null);
         TextInputEditText etAmount = v.findViewById(R.id.et_input);
         if (etAmount != null) {
-            etAmount.setHint("المبلغ");
+            etAmount.setHint(getString(R.string.amount_hint));
             etAmount.setText(String.format(Locale.US, "%.2f", fDebt));
         }
 

@@ -79,13 +79,13 @@ public class ActivityWalletActivity extends BaseActivity {
     private void showTransactionDialog(String type) {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_simple_input, null);
         TextInputEditText etAmount = dialogView.findViewById(R.id.et_input);
-        if (etAmount != null) etAmount.setHint("المبلغ");
+        if (etAmount != null) etAmount.setHint(getString(R.string.amount_hint));
 
-        String title = "IN".equals(type) ? "إيداع في الخزينة" : "سحب من الخزينة";
+        String title = "IN".equals(type) ? getString(R.string.deposit_to_drawer) : getString(R.string.withdraw_from_drawer);
         new MaterialAlertDialogBuilder(this)
             .setTitle(title)
             .setView(dialogView)
-            .setPositiveButton("تأكيد", (d, w) -> {
+            .setPositiveButton(R.string.confirm, (d, w) -> {
                 try {
                     String amtStr = etAmount != null && etAmount.getText() != null
                         ? etAmount.getText().toString().trim() : "";
@@ -96,7 +96,7 @@ public class ActivityWalletActivity extends BaseActivity {
                     loadData();
                 } catch (NumberFormatException ignored) {}
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 

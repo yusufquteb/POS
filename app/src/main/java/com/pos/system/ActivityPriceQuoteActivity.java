@@ -68,7 +68,7 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
     private void setupToolbar() {
         MaterialToolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) getSupportActionBar().setTitle("عرض سعر جديد");
+        if (getSupportActionBar() != null) getSupportActionBar().setTitle(R.string.new_price_quote_title);
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
@@ -172,7 +172,7 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
     }
 
     private void setupCheckout() {
-        binding.btnCheckout.setText("حفظ عرض السعر");
+        binding.btnCheckout.setText(R.string.save_quote);
         binding.btnCheckout.setOnClickListener(v -> saveQuote());
 
         // Clear button clears cart

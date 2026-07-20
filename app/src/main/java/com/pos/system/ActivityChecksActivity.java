@@ -38,7 +38,7 @@ public class ActivityChecksActivity extends BaseActivity {
 
         dbHelper = new DBHelper(this);
         initViews();
-        setupToolbar("الشيكات");
+        setupToolbar(getString(R.string.hub_checks));
         loadData();
     }
 
@@ -48,8 +48,8 @@ public class ActivityChecksActivity extends BaseActivity {
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setItemAnimator(null);
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("شيكات العملاء"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("شيكات الموردين"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.checks_tab_customers));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.checks_tab_suppliers));
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) {
                 isCustomerTab = tab.getPosition() == 0;

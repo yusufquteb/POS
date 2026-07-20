@@ -147,7 +147,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                 setSupportActionBar(toolbar);
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                    getSupportActionBar().setTitle("إعدادات الطابعة");
+                    getSupportActionBar().setTitle(R.string.settings_printer);
                 }
                 toolbar.setNavigationOnClickListener(v -> finish());
             }

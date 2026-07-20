@@ -45,7 +45,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     private void setupToolbar() {
         setSupportActionBar(binding.toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("الخزينة");
+            getSupportActionBar().setTitle(R.string.hub_cash_drawer);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }

@@ -31,23 +31,23 @@ public class ActivityRemoveDataActivity extends BaseActivity {
 
     private void setupButtons() {
         binding.btnDeleteInvoices.setOnClickListener(v ->
-            confirmDelete("حذف جميع الفواتير", "هل تريد حذف جميع الفواتير؟ لا يمكن التراجع.",
+            confirmDelete(getString(R.string.delete_invoices_title), getString(R.string.delete_invoices_msg),
                 () -> { dbHelper.getWritableDatabase().delete("invoices", null, null);
                         dbHelper.getWritableDatabase().delete("invoice_items", null, null); }));
         binding.btnDeleteExpenses.setOnClickListener(v ->
-            confirmDelete("حذف المصروفات", "هل تريد حذف جميع المصروفات؟",
+            confirmDelete(getString(R.string.delete_expenses_title), getString(R.string.delete_expenses_msg),
                 () -> dbHelper.getWritableDatabase().delete("expenses", null, null)));
         binding.btnDeleteCustomers.setOnClickListener(v ->
-            confirmDelete("حذف العملاء", "هل تريد حذف جميع العملاء؟",
+            confirmDelete(getString(R.string.delete_customers_title), getString(R.string.delete_customers_msg),
                 () -> dbHelper.getWritableDatabase().delete("customers", null, null)));
         binding.btnDeleteSuppliers.setOnClickListener(v ->
-            confirmDelete("حذف الموردين", "هل تريد حذف جميع الموردين؟",
+            confirmDelete(getString(R.string.delete_suppliers_title), getString(R.string.delete_suppliers_msg),
                 () -> dbHelper.getWritableDatabase().delete("suppliers", null, null)));
         binding.btnDeleteProducts.setOnClickListener(v ->
-            confirmDelete("حذف المنتجات", "هل تريد حذف جميع المنتجات؟",
+            confirmDelete(getString(R.string.delete_products_title), getString(R.string.delete_products_msg),
                 () -> dbHelper.getWritableDatabase().delete("products", null, null)));
         binding.btnDeleteAll.setOnClickListener(v ->
-            confirmDelete("حذف كل البيانات", "سيتم حذف جميع البيانات بالكامل. هل أنت متأكد؟",
+            confirmDelete(getString(R.string.delete_all_data_title), getString(R.string.delete_all_data_msg),
                 () -> deleteAllData()));
     }
 
@@ -55,15 +55,15 @@ public class ActivityRemoveDataActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton("تأكيد الحذف", (d, w) -> {
+            .setPositiveButton(R.string.confirm_delete_action, (d, w) -> {
                 try {
                     action.run();
-                    Snackbar.make(binding.getRoot(), "تم الحذف", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), getString(R.string.deleted_successfully), Snackbar.LENGTH_SHORT).show();
                 } catch (Exception e) {
-                    Snackbar.make(binding.getRoot(), "خطأ: " + e.getMessage(), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(binding.getRoot(), getString(R.string.error_with_message, e.getMessage()), Snackbar.LENGTH_LONG).show();
                 }
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
