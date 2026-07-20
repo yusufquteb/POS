@@ -189,9 +189,9 @@ public class ActivityDebtActivity extends BaseActivity {
         if (rvSupplierDebts != null) rvSupplierDebts.setVisibility(isCustomers ? View.GONE : View.VISIBLE);
 
         if (tvStatsLabel != null)
-            tvStatsLabel.setText(isCustomers ? "إجمالي ديون العملاء" : "إجمالي ديون الموردين");
+            tvStatsLabel.setText(isCustomers ? R.string.total_customer_debts_label : R.string.total_supplier_debts_label);
         if (tvCountLabel != null)
-            tvCountLabel.setText(isCustomers ? "عميل مدين" : "مورد مدين");
+            tvCountLabel.setText(isCustomers ? R.string.indebted_customer_label : R.string.indebted_supplier_label);
         if (ivEmptyIcon != null)
             ivEmptyIcon.setImageResource(isCustomers ? R.drawable.ic_customers : R.drawable.ic_local_shipping);
 
@@ -214,7 +214,7 @@ public class ActivityDebtActivity extends BaseActivity {
             if (rvDebts    != null) rvDebts.setVisibility(empty ? View.GONE  : View.VISIBLE);
             if (tvEmpty    != null) tvEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
             if (empty && tvEmptySubtitle != null)
-                tvEmptySubtitle.setText("جميع العملاء سدّدوا ديونهم");
+                tvEmptySubtitle.setText(R.string.all_customers_settled);
             if (customerAdapter != null) customerAdapter.notifyDataSetChanged();
         } else {
             filteredSuppliers.clear();
@@ -225,7 +225,7 @@ public class ActivityDebtActivity extends BaseActivity {
             if (rvSupplierDebts != null) rvSupplierDebts.setVisibility(empty ? View.GONE  : View.VISIBLE);
             if (tvEmpty         != null) tvEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
             if (empty && tvEmptySubtitle != null)
-                tvEmptySubtitle.setText("لا توجد ديون على الموردين");
+                tvEmptySubtitle.setText(R.string.no_supplier_debts);
             if (supplierAdapter != null) supplierAdapter.notifyDataSetChanged();
         }
     }
@@ -260,14 +260,13 @@ public class ActivityDebtActivity extends BaseActivity {
         String phone        = safeGet(customer, "phone");
         double currentDebt  = dbHelper.getCustomerDebt(customerId);
 
-        String[] options = {"سداد دين", "تسجيل دين جديد", "عرض سجل الحركات", "اتصال"};
-        if (phone.isEmpty()) options = new String[]{"سداد دين", "تسجيل دين جديد", "عرض سجل الحركات"};
+        String[] options = {getString(R.string.settle_debt_option), getString(R.string.register_new_debt_option), getString(R.string.view_history_option), getString(R.string.call_option)};
+        if (phone.isEmpty()) options = new String[]{getString(R.string.settle_debt_option), getString(R.string.register_new_debt_option), getString(R.string.view_history_option)};
 
         final String[] finalOptions = options;
         new MaterialAlertDialogBuilder(this)
             .setTitle(customerName)
-            .setMessage(String.format(Locale.getDefault(),
-                "الرصيد الحالي: %.2f %s", currentDebt, currency))
+            .setMessage(getString(R.string.current_balance_format, currentDebt, currency))
             .setItems(finalOptions, (d, which) -> {
                 if (which == 0) showSettleDialog(customerId, customerName, currentDebt, true);
                 else if (which == 1) showAddDebtDialog(customerId, customerName, true);
@@ -288,14 +287,13 @@ public class ActivityDebtActivity extends BaseActivity {
         String phone        = safeGet(supplier, "phone");
         double currentDebt  = dbHelper.getSupplierDebt(supplierId);
 
-        String[] options = {"سداد دين للمورد", "تسجيل مشتريات بالآجل", "عرض سجل الحركات", "اتصال"};
-        if (phone.isEmpty()) options = new String[]{"سداد دين للمورد", "تسجيل مشتريات بالآجل", "عرض سجل الحركات"};
+        String[] options = {getString(R.string.settle_supplier_debt_option), getString(R.string.register_credit_purchase_option), getString(R.string.view_history_option), getString(R.string.call_option)};
+        if (phone.isEmpty()) options = new String[]{getString(R.string.settle_supplier_debt_option), getString(R.string.register_credit_purchase_option), getString(R.string.view_history_option)};
 
         final String[] finalOptions = options;
         new MaterialAlertDialogBuilder(this)
             .setTitle(supplierName)
-            .setMessage(String.format(Locale.getDefault(),
-                "المستحق للمورد: %.2f %s", currentDebt, currency))
+            .setMessage(getString(R.string.owed_to_supplier_format, currentDebt, currency))
             .setItems(finalOptions, (d, which) -> {
                 if (which == 0) showSettleDialog(supplierId, supplierName, currentDebt, false);
                 else if (which == 1) showAddDebtDialog(supplierId, supplierName, false);
@@ -318,17 +316,17 @@ public class ActivityDebtActivity extends BaseActivity {
         TextInputEditText etNote   = view.findViewById(R.id.et_payment_note);
 
         if (tvName != null) tvName.setText(name);
-        if (tvDebt != null) tvDebt.setText(String.format(Locale.getDefault(),
-            isCustomer ? "الدين الحالي: %.2f %s" : "المستحق للمورد: %.2f %s",
-            currentDebt, currency));
+        if (tvDebt != null) tvDebt.setText(isCustomer
+            ? getString(R.string.current_balance_format, currentDebt, currency)
+            : getString(R.string.owed_to_supplier_format, currentDebt, currency));
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle(isCustomer ? "سداد دين العميل" : "سداد دين للمورد")
+            .setTitle(isCustomer ? R.string.settle_customer_debt_title : R.string.settle_supplier_debt_title)
             .setView(view)
-            .setPositiveButton("تأكيد السداد", (d, w) -> {
+            .setPositiveButton(R.string.confirm_settlement, (d, w) -> {
                 double amount = parseAmount(etAmount);
-                if (amount <= 0) { showToast("يرجى إدخال مبلغ صحيح"); return; }
-                if (amount > currentDebt) { showToast("المبلغ أكبر من الدين الحالي"); return; }
+                if (amount <= 0) { showToast(getString(R.string.please_enter_valid_amount)); return; }
+                if (amount > currentDebt) { showToast(getString(R.string.amount_exceeds_debt)); return; }
                 String note = etNote != null && etNote.getText() != null
                     ? etNote.getText().toString().trim() : "";
 
@@ -337,11 +335,10 @@ public class ActivityDebtActivity extends BaseActivity {
                     : dbHelper.settleSupplierDebt(id, amount, note);
 
                 if (ok) {
-                    showSnackbar(String.format(Locale.getDefault(),
-                        "✓ تم السداد %.2f %s", amount, currency));
+                    showSnackbar(getString(R.string.settlement_success_format, amount, currency));
                     loadAllData();
                 } else {
-                    showSnackbar("فشل في تسجيل السداد", true);
+                    showSnackbar(getString(R.string.settlement_failed), true);
                 }
             })
             .setNegativeButton(R.string.cancel, null)
@@ -357,15 +354,14 @@ public class ActivityDebtActivity extends BaseActivity {
 
         if (tvName != null) tvName.setText(name);
         double curr = isCustomer ? dbHelper.getCustomerDebt(id) : dbHelper.getSupplierDebt(id);
-        if (tvDebt != null) tvDebt.setText(String.format(Locale.getDefault(),
-            "الرصيد الحالي: %.2f %s", curr, currency));
+        if (tvDebt != null) tvDebt.setText(getString(R.string.current_balance_format, curr, currency));
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle(isCustomer ? "تسجيل دين جديد على العميل" : "تسجيل مشتريات بالآجل من المورد")
+            .setTitle(isCustomer ? R.string.new_customer_debt_title : R.string.new_credit_purchase_title)
             .setView(view)
-            .setPositiveButton("تسجيل", (d, w) -> {
+            .setPositiveButton(R.string.register_btn, (d, w) -> {
                 double amount = parseAmount(etAmount);
-                if (amount <= 0) { showToast("يرجى إدخال مبلغ صحيح"); return; }
+                if (amount <= 0) { showToast(getString(R.string.please_enter_valid_amount)); return; }
                 String note = etNote != null && etNote.getText() != null
                     ? etNote.getText().toString().trim() : "";
 
@@ -374,11 +370,10 @@ public class ActivityDebtActivity extends BaseActivity {
                     : dbHelper.addSupplierDebt(id, amount, note);
 
                 if (ok) {
-                    showSnackbar(String.format(Locale.getDefault(),
-                        "✓ تم تسجيل الدين %.2f %s", amount, currency));
+                    showSnackbar(getString(R.string.debt_registered_success_format, amount, currency));
                     loadAllData();
                 } else {
-                    showSnackbar("فشل في تسجيل الدين", true);
+                    showSnackbar(getString(R.string.debt_registration_failed), true);
                 }
             })
             .setNegativeButton(R.string.cancel, null)
@@ -392,8 +387,8 @@ public class ActivityDebtActivity extends BaseActivity {
 
         if (payments.isEmpty()) {
             new MaterialAlertDialogBuilder(this)
-                .setTitle("سجل الحركات — " + name)
-                .setMessage("لا توجد حركات مسجلة بعد.")
+                .setTitle(getString(R.string.transaction_history_title_format, name))
+                .setMessage(R.string.no_transactions_yet)
                 .setPositiveButton(R.string.ok, null)
                 .show();
             return;
@@ -408,18 +403,18 @@ public class ActivityDebtActivity extends BaseActivity {
             if (date.length() > 16) date = date.substring(0, 16);
 
             boolean isPayment = "payment".equals(type);
-            sb.append(isPayment ? "✓ سداد  " : "✗ دين   ");
+            sb.append(getString(isPayment ? R.string.payment_prefix : R.string.debt_prefix));
             try {
                 sb.append(String.format(Locale.getDefault(), "%.2f %s",
                     Double.parseDouble(amount), currency));
             } catch (Exception e) { sb.append(amount).append(" ").append(currency); }
             sb.append("  |  ").append(date);
-            if (!note.isEmpty()) sb.append("\n   ملاحظة: ").append(note);
+            if (!note.isEmpty()) sb.append(getString(R.string.note_label_inline, note));
             sb.append("\n\n");
         }
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("سجل الحركات — " + name)
+            .setTitle(getString(R.string.transaction_history_title_format, name))
             .setMessage(sb.toString().trim())
             .setPositiveButton(R.string.close, null)
             .show();
@@ -467,7 +462,7 @@ public class ActivityDebtActivity extends BaseActivity {
             String phone = safeGet(item, "phone");
 
             if (h.tvName  != null) h.tvName.setText(name);
-            if (h.tvPhone != null) h.tvPhone.setText(phone.isEmpty() ? "لا يوجد رقم" : phone);
+            if (h.tvPhone != null) h.tvPhone.setText(phone.isEmpty() ? getString(R.string.no_phone_number) : phone);
             if (h.tvDebt  != null) {
                 try {
                     h.tvDebt.setText(String.format(Locale.getDefault(),
@@ -520,7 +515,7 @@ public class ActivityDebtActivity extends BaseActivity {
             if (h.tvName  != null) h.tvName.setText(name);
             if (h.tvPhone != null) {
                 String sub = company.isEmpty() ? phone : (company + (phone.isEmpty() ? "" : " · " + phone));
-                h.tvPhone.setText(sub.isEmpty() ? "مورد" : sub);
+                h.tvPhone.setText(sub.isEmpty() ? getString(R.string.supplier) : sub);
             }
             if (h.tvDebt != null) {
                 try {

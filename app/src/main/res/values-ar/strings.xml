@@ -1234,4 +1234,38 @@
     <string name="nav_cash_drawer">الخزينة</string>
     <string name="nav_stock_count">جرد المخزون</string>
     <string name="nav_users">المستخدمون</string>
+
+    <!-- ActivityDebtActivity -->
+    <string name="total_customer_debts_label">إجمالي ديون العملاء</string>
+    <string name="total_supplier_debts_label">إجمالي ديون الموردين</string>
+    <string name="indebted_customer_label">عميل مدين</string>
+    <string name="indebted_supplier_label">مورد مدين</string>
+    <string name="all_customers_settled">جميع العملاء سدّدوا ديونهم</string>
+    <string name="no_supplier_debts">لا توجد ديون على الموردين</string>
+    <string name="settle_debt_option">سداد دين</string>
+    <string name="register_new_debt_option">تسجيل دين جديد</string>
+    <string name="view_history_option">عرض سجل الحركات</string>
+    <string name="call_option">اتصال</string>
+    <string name="current_balance_format">الرصيد الحالي: %1$.2f %2$s</string>
+    <string name="settle_supplier_debt_option">سداد دين للمورد</string>
+    <string name="register_credit_purchase_option">تسجيل مشتريات بالآجل</string>
+    <string name="owed_to_supplier_format">المستحق للمورد: %1$.2f %2$s</string>
+    <string name="settle_customer_debt_title">سداد دين العميل</string>
+    <string name="settle_supplier_debt_title">سداد دين للمورد</string>
+    <string name="confirm_settlement">تأكيد السداد</string>
+    <string name="please_enter_valid_amount">يرجى إدخال مبلغ صحيح</string>
+    <string name="amount_exceeds_debt">المبلغ أكبر من الدين الحالي</string>
+    <string name="settlement_success_format">✓ تم السداد %1$.2f %2$s</string>
+    <string name="settlement_failed">فشل في تسجيل السداد</string>
+    <string name="new_customer_debt_title">تسجيل دين جديد على العميل</string>
+    <string name="new_credit_purchase_title">تسجيل مشتريات بالآجل من المورد</string>
+    <string name="register_btn">تسجيل</string>
+    <string name="debt_registered_success_format">✓ تم تسجيل الدين %1$.2f %2$s</string>
+    <string name="debt_registration_failed">فشل في تسجيل الدين</string>
+    <string name="transaction_history_title_format">سجل الحركات — %1$s</string>
+    <string name="no_transactions_yet">لا توجد حركات مسجلة بعد.</string>
+    <string name="payment_prefix">✓ سداد  </string>
+    <string name="debt_prefix">✗ دين   </string>
+    <string name="note_label_inline">\n   ملاحظة: %1$s</string>
+    <string name="no_phone_number">لا يوجد رقم</string>
 </resources>

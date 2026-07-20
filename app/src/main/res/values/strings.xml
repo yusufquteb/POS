@@ -1173,4 +1173,38 @@
     <string name="no_data_available">لا توجد بيانات</string>
     <string name="po_status_pending">معلق</string>
     <string name="po_status_received">مستلم</string>
+
+    <!-- ActivityDebtActivity -->
+    <string name="total_customer_debts_label">Total Customer Debts</string>
+    <string name="total_supplier_debts_label">Total Supplier Debts</string>
+    <string name="indebted_customer_label">Indebted customer</string>
+    <string name="indebted_supplier_label">Indebted supplier</string>
+    <string name="all_customers_settled">All customers have settled their debts</string>
+    <string name="no_supplier_debts">No debts owed to suppliers</string>
+    <string name="settle_debt_option">Settle Debt</string>
+    <string name="register_new_debt_option">Register New Debt</string>
+    <string name="view_history_option">View Transaction History</string>
+    <string name="call_option">Call</string>
+    <string name="current_balance_format">Current balance: %1$.2f %2$s</string>
+    <string name="settle_supplier_debt_option">Settle Supplier Debt</string>
+    <string name="register_credit_purchase_option">Register Credit Purchase</string>
+    <string name="owed_to_supplier_format">Owed to supplier: %1$.2f %2$s</string>
+    <string name="settle_customer_debt_title">Settle Customer Debt</string>
+    <string name="settle_supplier_debt_title">Settle Supplier Debt</string>
+    <string name="confirm_settlement">Confirm Settlement</string>
+    <string name="please_enter_valid_amount">Please enter a valid amount</string>
+    <string name="amount_exceeds_debt">Amount exceeds the current debt</string>
+    <string name="settlement_success_format">✓ Settled %1$.2f %2$s</string>
+    <string name="settlement_failed">Failed to record settlement</string>
+    <string name="new_customer_debt_title">Register New Customer Debt</string>
+    <string name="new_credit_purchase_title">Register Credit Purchase from Supplier</string>
+    <string name="register_btn">Register</string>
+    <string name="debt_registered_success_format">✓ Debt registered %1$.2f %2$s</string>
+    <string name="debt_registration_failed">Failed to register debt</string>
+    <string name="transaction_history_title_format">Transaction History — %1$s</string>
+    <string name="no_transactions_yet">No transactions recorded yet.</string>
+    <string name="payment_prefix">✓ Payment  </string>
+    <string name="debt_prefix">✗ Debt   </string>
+    <string name="note_label_inline">\n   Note: %1$s</string>
+    <string name="no_phone_number">No phone number</string>
 </resources>
