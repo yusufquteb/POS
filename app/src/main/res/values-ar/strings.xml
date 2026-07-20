@@ -1451,4 +1451,11 @@
     <string name="expiry_stock_info_format">ينتهي: %1$s · الكمية: %2$s</string>
     <string name="dead_stock_info_format">المخزون: %1$s · لم يُباع منذ 30 يوم</string>
     <string name="margin_profit_info_format">هامش: %1$s%% · الربح: %2$s</string>
+
+    <!-- SafeBackupManager -->
+    <string name="backup_creation_failed_format">فشل إنشاء النسخة الاحتياطية: %1$s</string>
+    <string name="select_data_to_restore_title">اختر البيانات للاستعادة</string>
+    <string name="restore_btn">استعادة</string>
+    <string name="select_all_btn">تحديد الكل</string>
+    <string name="unknown_date">تاريخ غير معروف</string>
 </resources>

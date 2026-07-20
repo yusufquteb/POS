@@ -87,7 +87,7 @@ public class SafeBackupManager {
             return backupFile;
             
         } catch (Exception e) {
-            throw new IOException("فشل إنشاء النسخة الاحتياطية: " + e.getMessage(), e);
+            throw new IOException(context.getString(R.string.backup_creation_failed_format, e.getMessage()), e);
         }
     }
     
@@ -96,11 +96,11 @@ public class SafeBackupManager {
      */
     public void showRestoreDialog(@NonNull File backupFile, @NonNull RestoreCallback callback) {
         String[] tables = {
-            "المنتجات",
-            "العملاء",
-            "الموردين",
-            "الفواتير",
-            "المصروفات"
+            context.getString(R.string.backup_products),
+            context.getString(R.string.backup_customers),
+            context.getString(R.string.backup_suppliers),
+            context.getString(R.string.backup_invoices),
+            context.getString(R.string.backup_expenses)
         };
         
         boolean[] selectedTables = new boolean[tables.length];
@@ -110,10 +110,10 @@ public class SafeBackupManager {
         }
         
         new MaterialAlertDialogBuilder(context)
-                .setTitle("اختر البيانات للاستعادة")
-                .setMultiChoiceItems(tables, selectedTables, 
+                .setTitle(R.string.select_data_to_restore_title)
+                .setMultiChoiceItems(tables, selectedTables,
                         (dialog, which, isChecked) -> selectedTables[which] = isChecked)
-                .setPositiveButton("استعادة", (d, w) -> {
+                .setPositiveButton(R.string.restore_btn, (d, w) -> {
                     try {
                         restoreBackup(backupFile, selectedTables, callback);
                     } catch (Exception e) {
@@ -121,7 +121,7 @@ public class SafeBackupManager {
                     }
                 })
                 .setNegativeButton(R.string.cancel, null)
-                .setNeutralButton("تحديد الكل", (d, w) -> {
+                .setNeutralButton(R.string.select_all_btn, (d, w) -> {
                     // لا شيء - سيتم التعامل معه في onShow
                 })
                 .show();
@@ -350,7 +350,7 @@ public class SafeBackupManager {
             SimpleDateFormat displayFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
             return displayFormat.format(date);
         } catch (Exception e) {
-            return "تاريخ غير معروف";
+            return context.getString(R.string.unknown_date);
         }
     }
     
