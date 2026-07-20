@@ -59,7 +59,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         invoiceId = getIntent().getLongExtra("invoice_id", 0);
         
         if (invoiceId == 0) {
-            showSnackbar("خطأ في تحميل الفاتورة", true);
+            showSnackbar(getString(R.string.error_loading_invoice), true);
             finish();
             return;
         }
@@ -101,28 +101,28 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         HashMap<String, Object> invoice = dbHelper.getInvoiceById(invoiceId);
         
         if (invoice == null) {
-            showSnackbar("لم يتم العثور على الفاتورة", true);
+            showSnackbar(getString(R.string.invoice_not_found), true);
             finish();
             return;
         }
-        
+
         // بيانات الفاتورة
         if (tvInvoiceNumber != null) {
             String invNum = safeObjStr(invoice, "invoice_number", String.valueOf(invoiceId));
-            tvInvoiceNumber.setText("فاتورة #" + invNum);
+            tvInvoiceNumber.setText(getString(R.string.invoice_ref_format, invNum));
         }
-        
+
         if (tvDate != null && invoice.containsKey("created_at")) {
             tvDate.setText(formatDate(invoice.get("created_at").toString()));
         }
-        
+
         // بيانات العميل
         if (tvCustomerName != null && invoice.containsKey("customer_name")) {
-            tvCustomerName.setText("الاسم: " + invoice.get("customer_name"));
+            tvCustomerName.setText(getString(R.string.customer_name_label_format, invoice.get("customer_name")));
         }
-        
+
         if (tvCustomerPhone != null && invoice.containsKey("customer_phone")) {
-            tvCustomerPhone.setText("الهاتف: " + invoice.get("customer_phone"));
+            tvCustomerPhone.setText(getString(R.string.phone_label_format, invoice.get("customer_phone")));
         }
         
         // الإجماليات — subtotal (قبل الخصم/الضريبة)، total (الإجمالي النهائي)
@@ -199,14 +199,14 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
     private void printInvoice() {
         try {
             HashMap<String, Object> invoice = dbHelper.getInvoiceById(invoiceId);
-            if (invoice == null) { showSnackbar("⚠️ لم يتم العثور على الفاتورة", true); return; }
+            if (invoice == null) { showSnackbar(getString(R.string.invoice_not_found_warning), true); return; }
             int customerId = invoice.containsKey("customer_id") ? safeInt(invoice.get("customer_id")) : 0;
             boolean ok = new InvoicePrinter(this).printInvoice(invoiceId, customerId);
-            showSnackbar(ok ? "✓ تمت الطباعة بنجاح"
-                            : "⚠️ فشلت الطباعة — تحقق من إعدادات الطابعة", !ok);
+            showSnackbar(ok ? getString(R.string.invoice_print_success)
+                            : getString(R.string.print_failed_check_settings), !ok);
         } catch (Exception e) {
             android.util.Log.e("InvDetails", "printInvoice: " + e.getMessage(), e);
-            showSnackbar("❌ خطأ في الطباعة", true);
+            showSnackbar(getString(R.string.print_error_generic), true);
         }
     }
     
@@ -219,13 +219,13 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
             HashMap<String, Object> customer = dbHelper.getCustomerById(customerId);
             
             if (customer == null || !customer.containsKey("phone")) {
-                showSnackbar("❌ لا يوجد رقم هاتف للعميل", true);
+                showSnackbar(getString(R.string.no_customer_phone_error), true);
                 return;
             }
-            
+
             String phone = customer.get("phone").toString();
             if (phone == null || phone.isEmpty() || phone.equals("00000000000")) {
-                showSnackbar("❌ رقم هاتف غير صحيح", true);
+                showSnackbar(getString(R.string.invalid_phone_error), true);
                 return;
             }
             
@@ -244,7 +244,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
             startActivity(intent);
             
         } catch (Exception e) {
-            showSnackbar("❌ حدث خطأ في إرسال الفاتورة", true);
+            showSnackbar(getString(R.string.send_invoice_error), true);
         }
     }
     
@@ -265,15 +265,15 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         double finalTotal = safeDouble(invoice.get("total"));
 
         StringBuilder sb = new StringBuilder();
-        sb.append("🛒 *فاتورة من ").append(storeName).append("*\n\n");
-        sb.append("📋 رقم الفاتورة: ").append(invoiceNum).append("\n");
+        sb.append(getString(R.string.invoice_from_store_format, storeName));
+        sb.append(getString(R.string.invoice_number_label_format, invoiceNum));
         if (!createdAt.isEmpty())
-            sb.append("📅 التاريخ: ").append(formatDate(createdAt)).append("\n");
+            sb.append(getString(R.string.report_date_label_format, formatDate(createdAt))).append("\n");
         if (customer != null)
-            sb.append("👤 العميل: ").append(safeObjStr(customer, "name", "")).append("\n");
+            sb.append(getString(R.string.customer_label_emoji_format, safeObjStr(customer, "name", "")));
         sb.append("\n");
 
-        sb.append("*المنتجات:*\n");
+        sb.append(getString(R.string.products_list_header)).append("\n");
         sb.append("━━━━━━━━━━━━━━━━━━━━\n");
 
         for (HashMap<String, Object> item : items) {
@@ -292,27 +292,27 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
         }
 
         sb.append("━━━━━━━━━━━━━━━━━━━━\n");
-        sb.append(String.format(Locale.getDefault(), "المجموع الفرعي: %.2f %s\n", subtotal, currency));
+        sb.append(getString(R.string.subtotal_label_format, subtotal, currency));
         if (discount > 0)
-            sb.append(String.format(Locale.getDefault(), "الخصم: -%.2f %s\n", discount, currency));
+            sb.append(getString(R.string.discount_label_format, discount, currency));
         if (tax > 0)
-            sb.append(String.format(Locale.getDefault(), "الضريبة: +%.2f %s\n", tax, currency));
+            sb.append(getString(R.string.tax_label_format, tax, currency));
         sb.append("━━━━━━━━━━━━━━━━━━━━\n");
-        sb.append(String.format(Locale.getDefault(), "*الإجمالي: %.2f %s*\n", finalTotal, currency));
-        sb.append("💳 طريقة الدفع: ").append(payMethod).append("\n\n");
-        sb.append("شكراً لتعاملكم معنا 🙏\n");
-        sb.append("نتمنى لكم يوماً سعيداً 😊");
+        sb.append(getString(R.string.final_total_label_format, finalTotal, currency));
+        sb.append(getString(R.string.payment_method_emoji_format, payMethod)).append("\n");
+        sb.append(getString(R.string.thank_you_message)).append("\n");
+        sb.append(getString(R.string.wish_good_day_message));
 
         return sb.toString();
     }
 
     private String paymentLabel(String code) {
-        if (code == null) return "نقدي";
+        if (code == null) return getString(R.string.payment_cash);
         switch (code.toLowerCase(Locale.ROOT)) {
-            case "vodafone":  return "فودافون كاش";
-            case "instapay":  return "انستاباي";
-            case "card":      return "بطاقة بنكية";
-            default:          return "نقدي";
+            case "vodafone":  return getString(R.string.payment_vodafone);
+            case "instapay":  return getString(R.string.payment_instapay);
+            case "card":      return getString(R.string.payment_card);
+            default:          return getString(R.string.payment_cash);
         }
     }
     
@@ -354,8 +354,7 @@ public class ActivityInvoiceDetailsActivity extends BaseActivity {
             double lineTotal = safeDouble(item.get("total"));
             if (lineTotal <= 0) lineTotal = price * qty;
             holder.tvName.setText(name);
-            holder.tvDetails.setText(
-                String.format(Locale.getDefault(), "الكمية: %d × %.2f = %.2f", qty, price, lineTotal));
+            holder.tvDetails.setText(getString(R.string.item_qty_price_total_format, qty, price, lineTotal));
         }
         
         @Override

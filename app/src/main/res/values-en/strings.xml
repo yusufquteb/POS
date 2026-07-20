@@ -1339,4 +1339,50 @@
     <string name="restore_btn">Restore</string>
     <string name="select_all_btn">Select All</string>
     <string name="unknown_date">Unknown date</string>
+
+    <!-- ActivityInvoiceDetailsActivity -->
+    <string name="error_loading_invoice">Error loading invoice</string>
+    <string name="invoice_not_found">Invoice not found</string>
+    <string name="invoice_not_found_warning">⚠️ Invoice not found</string>
+    <string name="customer_name_label_format">Name: %1$s</string>
+    <string name="phone_label_format">Phone: %1$s</string>
+    <string name="invoice_print_success">✓ Printed successfully</string>
+    <string name="print_failed_check_settings">⚠️ Print failed — check printer settings</string>
+    <string name="print_error_generic">❌ Error printing</string>
+    <string name="no_customer_phone_error">❌ Customer has no phone number</string>
+    <string name="invalid_phone_error">❌ Invalid phone number</string>
+    <string name="send_invoice_error">❌ An error occurred sending the invoice</string>
+    <string name="invoice_from_store_format">🛒 *Invoice from %1$s*\n\n</string>
+    <string name="invoice_number_label_format">📋 Invoice Number: %1$s\n</string>
+    <string name="customer_label_emoji_format">👤 Customer: %1$s\n</string>
+    <string name="products_list_header">*Products:*</string>
+    <string name="subtotal_label_format">Subtotal: %1$.2f %2$s\n</string>
+    <string name="discount_label_format">Discount: -%1$.2f %2$s\n</string>
+    <string name="tax_label_format">Tax: +%1$.2f %2$s\n</string>
+    <string name="final_total_label_format">*Total: %1$.2f %2$s*\n</string>
+    <string name="payment_method_emoji_format">💳 Payment Method: %1$s\n</string>
+    <string name="thank_you_message">Thank you for your business 🙏</string>
+    <string name="wish_good_day_message">Have a wonderful day 😊</string>
+    <string name="item_qty_price_total_format">Qty: %1$d × %2$.2f = %3$.2f</string>
+
+    <!-- InvoicePrinter -->
+    <string name="default_store_label">Store</string>
+    <string name="receipt_store_phone_format">Phone: %1$s</string>
+    <string name="receipt_tax_number_format">Tax No: %1$s</string>
+    <string name="receipt_invoice_number_format">Invoice No: %1$s</string>
+    <string name="receipt_date_format">Date:       %1$s</string>
+    <string name="receipt_customer_name_format">Customer: %1$s</string>
+    <string name="receipt_customer_phone_format">Phone: %1$s</string>
+    <string name="receipt_col_item">Item</string>
+    <string name="receipt_col_qty">Qty</string>
+    <string name="receipt_col_price">Price</string>
+    <string name="receipt_col_total">Total</string>
+    <string name="receipt_subtotal_format">Subtotal: %1$s</string>
+    <string name="receipt_discount_format">Discount: -%1$s</string>
+    <string name="receipt_tax_format">Tax: +%1$s</string>
+    <string name="receipt_final_total_format">Final Total: %1$s</string>
+    <string name="receipt_payment_method_format">Payment Method: %1$s</string>
+    <string name="receipt_loyalty_points_format">Loyalty Points: %1$d pts</string>
+    <string name="receipt_thank_you">Thank you for your business</string>
+    <string name="receipt_wish_good_day">Have a wonderful day</string>
 </resources>

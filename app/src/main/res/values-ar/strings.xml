@@ -1458,4 +1458,50 @@
     <string name="restore_btn">استعادة</string>
     <string name="select_all_btn">تحديد الكل</string>
     <string name="unknown_date">تاريخ غير معروف</string>
+
+    <!-- ActivityInvoiceDetailsActivity -->
+    <string name="error_loading_invoice">خطأ في تحميل الفاتورة</string>
+    <string name="invoice_not_found">لم يتم العثور على الفاتورة</string>
+    <string name="invoice_not_found_warning">⚠️ لم يتم العثور على الفاتورة</string>
+    <string name="customer_name_label_format">الاسم: %1$s</string>
+    <string name="phone_label_format">الهاتف: %1$s</string>
+    <string name="invoice_print_success">✓ تمت الطباعة بنجاح</string>
+    <string name="print_failed_check_settings">⚠️ فشلت الطباعة — تحقق من إعدادات الطابعة</string>
+    <string name="print_error_generic">❌ خطأ في الطباعة</string>
+    <string name="no_customer_phone_error">❌ لا يوجد رقم هاتف للعميل</string>
+    <string name="invalid_phone_error">❌ رقم هاتف غير صحيح</string>
+    <string name="send_invoice_error">❌ حدث خطأ في إرسال الفاتورة</string>
+    <string name="invoice_from_store_format">🛒 *فاتورة من %1$s*\n\n</string>
+    <string name="invoice_number_label_format">📋 رقم الفاتورة: %1$s\n</string>
+    <string name="customer_label_emoji_format">👤 العميل: %1$s\n</string>
+    <string name="products_list_header">*المنتجات:*</string>
+    <string name="subtotal_label_format">المجموع الفرعي: %1$.2f %2$s\n</string>
+    <string name="discount_label_format">الخصم: -%1$.2f %2$s\n</string>
+    <string name="tax_label_format">الضريبة: +%1$.2f %2$s\n</string>
+    <string name="final_total_label_format">*الإجمالي: %1$.2f %2$s*\n</string>
+    <string name="payment_method_emoji_format">💳 طريقة الدفع: %1$s\n</string>
+    <string name="thank_you_message">شكراً لتعاملكم معنا 🙏</string>
+    <string name="wish_good_day_message">نتمنى لكم يوماً سعيداً 😊</string>
+    <string name="item_qty_price_total_format">الكمية: %1$d × %2$.2f = %3$.2f</string>
+
+    <!-- InvoicePrinter -->
+    <string name="default_store_label">المتجر</string>
+    <string name="receipt_store_phone_format">هاتف: %1$s</string>
+    <string name="receipt_tax_number_format">الرقم الضريبي: %1$s</string>
+    <string name="receipt_invoice_number_format">رقم الفاتورة: %1$s</string>
+    <string name="receipt_date_format">التاريخ:       %1$s</string>
+    <string name="receipt_customer_name_format">العميل: %1$s</string>
+    <string name="receipt_customer_phone_format">الهاتف: %1$s</string>
+    <string name="receipt_col_item">الصنف</string>
+    <string name="receipt_col_qty">الكمية</string>
+    <string name="receipt_col_price">السعر</string>
+    <string name="receipt_col_total">الإجمالي</string>
+    <string name="receipt_subtotal_format">المجموع الفرعي: %1$s</string>
+    <string name="receipt_discount_format">الخصم: -%1$s</string>
+    <string name="receipt_tax_format">الضريبة: +%1$s</string>
+    <string name="receipt_final_total_format">الإجمالي النهائي: %1$s</string>
+    <string name="receipt_payment_method_format">طريقة الدفع: %1$s</string>
+    <string name="receipt_loyalty_points_format">نقاط الولاء: %1$d نقطة</string>
+    <string name="receipt_thank_you">شكراً لتعاملكم معنا</string>
+    <string name="receipt_wish_good_day">نتمنى لكم يوماً سعيداً</string>
 </resources>
