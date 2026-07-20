@@ -1428,4 +1428,13 @@
     <string name="cloud_backup_title">نسخ احتياطي على السحابة</string>
     <string name="cloud_backup_confirm_message">هل تريد إنشاء نسخة احتياطية في المجلد المحدد؟</string>
     <string name="backup_success_message">✓ تم النسخ الاحتياطي بنجاح</string>
+
+    <!-- ActivityBarcodeScannerActivity -->
+    <string name="barcode_hint_example">مثال: 6281234567890</string>
+    <string name="manual_barcode_entry_title">📱 إدخال الباركود يدوياً</string>
+    <string name="enter_barcode_message">أدخل رقم الباركود (13 رقم عادةً)</string>
+    <string name="confirm_ok_emoji">✓ موافق</string>
+    <string name="please_enter_barcode">⚠ الرجاء إدخال الباركود</string>
+    <string name="cancel_emoji">✗ إلغاء</string>
+    <string name="camera_permission_required_scan">⚠ يجب السماح باستخدام الكاميرا لمسح الباركود</string>
 </resources>

@@ -1367,4 +1367,13 @@
     <string name="cloud_backup_title">Cloud Backup</string>
     <string name="cloud_backup_confirm_message">Create a backup in the selected folder?</string>
     <string name="backup_success_message">✓ Backup created successfully</string>
+
+    <!-- ActivityBarcodeScannerActivity -->
+    <string name="barcode_hint_example">Example: 6281234567890</string>
+    <string name="manual_barcode_entry_title">📱 Enter Barcode Manually</string>
+    <string name="enter_barcode_message">Enter the barcode number (usually 13 digits)</string>
+    <string name="confirm_ok_emoji">✓ OK</string>
+    <string name="please_enter_barcode">⚠ Please enter the barcode</string>
+    <string name="cancel_emoji">✗ Cancel</string>
+    <string name="camera_permission_required_scan">⚠ Camera permission is required to scan barcodes</string>
 </resources>
