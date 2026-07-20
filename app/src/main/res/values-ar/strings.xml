@@ -1333,4 +1333,16 @@
     <string name="yes_continue">نعم، متابعة</string>
     <string name="welcome_user_format">مرحباً %1$s!</string>
     <string name="welcome_default_user">بك</string>
+
+    <!-- ActivityItemDetailsActivity -->
+    <string name="barcode_label_format">باركود: %1$s</string>
+    <string name="category_label_format">التصنيف: %1$s</string>
+    <string name="new_sell_price_hint">سعر البيع الجديد</string>
+    <string name="edit_sell_price_title">تعديل سعر البيع</string>
+    <string name="added_quantity_hint">الكمية المضافة</string>
+    <string name="add_quantity_title">إضافة كمية</string>
+    <string name="add_btn">إضافة</string>
+    <string name="confirm_delete_product_message">هل تريد حذف المنتج \'%1$s\'؟</string>
+    <string name="invoice_ref_format">فاتورة #%1$s</string>
+    <string name="quantity_label_format">الكمية: %1$s</string>
 </resources>

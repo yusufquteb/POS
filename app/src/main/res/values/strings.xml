@@ -1272,4 +1272,16 @@
     <string name="yes_continue">Yes, Continue</string>
     <string name="welcome_user_format">Welcome %1$s!</string>
     <string name="welcome_default_user">you</string>
+
+    <!-- ActivityItemDetailsActivity -->
+    <string name="barcode_label_format">Barcode: %1$s</string>
+    <string name="category_label_format">Category: %1$s</string>
+    <string name="new_sell_price_hint">New sell price</string>
+    <string name="edit_sell_price_title">Edit Sell Price</string>
+    <string name="added_quantity_hint">Quantity to add</string>
+    <string name="add_quantity_title">Add Quantity</string>
+    <string name="add_btn">Add</string>
+    <string name="confirm_delete_product_message">Delete product \'%1$s\'?</string>
+    <string name="invoice_ref_format">Invoice #%1$s</string>
+    <string name="quantity_label_format">Quantity: %1$s</string>
 </resources>
