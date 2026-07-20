@@ -96,8 +96,8 @@ public class DebugActivity extends BaseActivity {
         stackTrace = intent.getStringExtra(EXTRA_STACK);
         timestamp = intent.getLongExtra(EXTRA_TIMESTAMP, System.currentTimeMillis());
         
-        if (errorMessage == null) errorMessage = "خطأ غير معروف";
-        if (stackTrace == null) stackTrace = "لا توجد تفاصيل متاحة";
+        if (errorMessage == null) errorMessage = getString(R.string.unknown_error_crash);
+        if (stackTrace == null) stackTrace = getString(R.string.no_details_available);
         
         fullReport = buildFullReport();
     }
@@ -135,7 +135,7 @@ public class DebugActivity extends BaseActivity {
         
         if (tvTimestamp != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
-            tvTimestamp.setText("⏱️ " + sdf.format(new Date(timestamp)));
+            tvTimestamp.setText(getString(R.string.timestamp_display_format, sdf.format(new Date(timestamp))));
         }
         
         if (tvDeviceInfo != null) {
@@ -157,18 +157,18 @@ public class DebugActivity extends BaseActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         
         report.append("═══════════════════════════════════════════\n");
-        report.append("⚠️ تقرير خطأ - POS System\n");
+        report.append(getString(R.string.error_report_title)).append("\n");
         report.append("═══════════════════════════════════════════\n\n");
-        
-        report.append("📅 التاريخ: ").append(sdf.format(new Date(timestamp))).append("\n\n");
-        
-        report.append("🔴 الخطأ:\n");
+
+        report.append(getString(R.string.report_date_label_format, sdf.format(new Date(timestamp)))).append("\n\n");
+
+        report.append(getString(R.string.report_error_label)).append("\n");
         report.append(errorMessage).append("\n\n");
-        
-        report.append("📱 معلومات الجهاز:\n");
+
+        report.append(getString(R.string.report_device_info_label)).append("\n");
         report.append(getDeviceInfo()).append("\n\n");
-        
-        report.append("📋 التفاصيل الكاملة:\n");
+
+        report.append(getString(R.string.report_full_details_label)).append("\n");
         report.append(stackTrace).append("\n");
         
         return report.toString();
@@ -182,11 +182,7 @@ public class DebugActivity extends BaseActivity {
             android.content.pm.PackageInfo pInfo = getPackageManager()
                 .getPackageInfo(getPackageName(), 0);
             
-            return String.format(Locale.getDefault(),
-                "Android: %s (API %d)\n" +
-                "الشركة: %s\n" +
-                "الموديل: %s\n" +
-                "التطبيق: v%s (%d)",
+            return getString(R.string.device_info_format,
                 android.os.Build.VERSION.RELEASE,
                 android.os.Build.VERSION.SDK_INT,
                 android.os.Build.MANUFACTURER,
@@ -195,7 +191,7 @@ public class DebugActivity extends BaseActivity {
                 pInfo.versionCode
             );
         } catch (Exception e) {
-            return "لا يمكن الحصول على المعلومات";
+            return getString(R.string.device_info_unavailable);
         }
     }
     
@@ -254,7 +250,7 @@ public class DebugActivity extends BaseActivity {
             // قتل العملية للتأكد من إعادة التشغيل الكامل
             android.os.Process.killProcess(android.os.Process.myPid());
         } catch (Exception e) {
-            showToast("فشلت إعادة التشغيل");
+            showToast(getString(R.string.restart_failed));
         }
     }
     
@@ -269,8 +265,8 @@ public class DebugActivity extends BaseActivity {
         }
         
         if (btnToggleDetails != null) {
-            btnToggleDetails.setText(detailsExpanded ? 
-                "إخفاء التفاصيل ▲" : "عرض التفاصيل ▼");
+            btnToggleDetails.setText(detailsExpanded ?
+                R.string.hide_details_btn : R.string.show_details_btn);
         }
     }
     
@@ -284,9 +280,9 @@ public class DebugActivity extends BaseActivity {
             ClipData clip = ClipData.newPlainText("Error Report", fullReport);
             clipboard.setPrimaryClip(clip);
             
-            showToast("✓ تم النسخ للحافظة");
+            showToast(getString(R.string.copied_to_clipboard_toast));
         } catch (Exception e) {
-            showToast("فشل النسخ");
+            showToast(getString(R.string.copy_failed));
         }
     }
     
@@ -298,12 +294,12 @@ public class DebugActivity extends BaseActivity {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:"));
             intent.putExtra(Intent.EXTRA_EMAIL, new String[]{DEV_EMAIL});
-            intent.putExtra(Intent.EXTRA_SUBJECT, "⚠️ تقرير خطأ - POS System");
+            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.error_report_title));
             intent.putExtra(Intent.EXTRA_TEXT, fullReport);
-            
-            startActivity(Intent.createChooser(intent, "إرسال عبر البريد"));
+
+            startActivity(Intent.createChooser(intent, getString(R.string.send_via_email_chooser)));
         } catch (Exception e) {
-            showToast("لا يوجد تطبيق بريد");
+            showToast(getString(R.string.no_email_app));
         }
     }
     
@@ -312,19 +308,19 @@ public class DebugActivity extends BaseActivity {
      */
     private void sendWhatsApp() {
         if (DEV_WHATSAPP == null || DEV_WHATSAPP.isEmpty()) {
-            showToast("رقم الدعم غير محدد");
+            showToast(getString(R.string.support_number_not_set));
             return;
         }
         try {
             String shortReport = fullReport.length() > 5000 ?
-                fullReport.substring(0, 5000) + "\n\n[...تم اقتصاص التقرير]" :
+                fullReport.substring(0, 5000) + getString(R.string.report_truncated_suffix) :
                 fullReport;
             String msg = Uri.encode(shortReport);
             Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://wa.me/" + DEV_WHATSAPP + "?text=" + msg));
             startActivity(intent);
         } catch (Exception e) {
-            showToast("لا يوجد واتساب");
+            showToast(getString(R.string.no_whatsapp_app));
         }
     }
     
@@ -333,18 +329,18 @@ public class DebugActivity extends BaseActivity {
      */
     private void sendTelegram() {
         if (DEV_TELEGRAM == null || DEV_TELEGRAM.isEmpty()) {
-            showToast("معرف التليجرام غير محدد");
+            showToast(getString(R.string.telegram_id_not_set));
             return;
         }
         try {
             String msg = Uri.encode(fullReport.length() > 4000 ?
-                fullReport.substring(0, 4000) + "\n\n[...اقتصاص]" :
+                fullReport.substring(0, 4000) + getString(R.string.truncated_suffix_short) :
                 fullReport);
             Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://t.me/" + DEV_TELEGRAM + "?text=" + msg));
             startActivity(intent);
         } catch (Exception e) {
-            showToast("لا يوجد تليجرام");
+            showToast(getString(R.string.no_telegram_app));
         }
     }
     
@@ -365,7 +361,7 @@ public class DebugActivity extends BaseActivity {
                 if (error != null) {
                     history.append("═══════════════════════════════\n");
                     history.append("#").append(i + 1).append(" - ");
-                    history.append(time > 0 ? sdf.format(new Date(time)) : "غير معروف");
+                    history.append(time > 0 ? sdf.format(new Date(time)) : getString(R.string.unknown_generic));
                     history.append("\n───────────────────────────────\n");
                     
                     // استخراج السطر الأول من الخطأ
@@ -382,18 +378,18 @@ public class DebugActivity extends BaseActivity {
             }
             
             if (history.length() == 0) {
-                history.append("لا توجد أخطاء محفوظة");
+                history.append(getString(R.string.no_saved_errors));
             }
-            
+
             new MaterialAlertDialogBuilder(this)
-                .setTitle("📋 سجل الأخطاء")
+                .setTitle(R.string.error_history_title)
                 .setMessage(history.toString())
                 .setPositiveButton(R.string.ok, null)
-                .setNeutralButton("مسح السجل", (d, w) -> clearHistory())
+                .setNeutralButton(R.string.clear_history_btn, (d, w) -> clearHistory())
                 .show();
-                
+
         } catch (Exception e) {
-            showToast("فشل عرض السجل");
+            showToast(getString(R.string.show_history_failed));
         }
     }
     
@@ -402,11 +398,11 @@ public class DebugActivity extends BaseActivity {
      */
     private void clearHistory() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("⚠️ تأكيد")
-            .setMessage("هل تريد مسح جميع الأخطاء المحفوظة؟")
+            .setTitle(R.string.confirm_with_warning_title)
+            .setMessage(R.string.confirm_clear_all_errors_message)
             .setPositiveButton(R.string.yes, (d, w) -> {
                 GlobalExceptionHandler.clearErrorReports(this);
-                showToast("✓ تم المسح");
+                showToast(getString(R.string.cleared_success_toast));
             })
             .setNegativeButton(R.string.cancel, null)
             .show();
@@ -416,9 +412,9 @@ public class DebugActivity extends BaseActivity {
     public void onBackPressed() {
         // منع الرجوع - يجب إعادة التشغيل
         new MaterialAlertDialogBuilder(this)
-            .setTitle("تنبيه")
-            .setMessage("حدث خطأ في التطبيق. يجب إعادة التشغيل.")
-            .setPositiveButton("إعادة التشغيل", (d, w) -> restartApp())
+            .setTitle(R.string.alert)
+            .setMessage(R.string.app_error_must_restart_message)
+            .setPositiveButton(R.string.restart_app, (d, w) -> restartApp())
             .setCancelable(false)
             .show();
     }

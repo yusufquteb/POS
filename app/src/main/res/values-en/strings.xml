@@ -1233,4 +1233,37 @@
     <string name="copy_error_instructions">Copy the text below and send it to the developer:</string>
     <string name="copy_error_btn">📋 Copy Error</string>
     <string name="copied_success_toast">✅ Copied!</string>
+
+    <!-- DebugActivity -->
+    <string name="no_details_available">No details available</string>
+    <string name="timestamp_display_format">⏱️ %1$s</string>
+    <string name="error_report_title">⚠️ Error Report - POS System</string>
+    <string name="report_date_label_format">📅 Date: %1$s</string>
+    <string name="report_error_label">🔴 Error:</string>
+    <string name="report_device_info_label">📱 Device Info:</string>
+    <string name="report_full_details_label">📋 Full Details:</string>
+    <string name="device_info_format">Android: %1$s (API %2$d)\nManufacturer: %3$s\nModel: %4$s\nApp: v%5$s (%6$d)</string>
+    <string name="device_info_unavailable">Unable to retrieve device info</string>
+    <string name="restart_failed">Failed to restart</string>
+    <string name="hide_details_btn">Hide Details ▲</string>
+    <string name="show_details_btn">Show Details ▼</string>
+    <string name="copied_to_clipboard_toast">✓ Copied to clipboard</string>
+    <string name="copy_failed">Copy failed</string>
+    <string name="send_via_email_chooser">Send via Email</string>
+    <string name="no_email_app">No email app found</string>
+    <string name="support_number_not_set">Support number not set</string>
+    <string name="report_truncated_suffix">\n\n[...report truncated]</string>
+    <string name="no_whatsapp_app">WhatsApp not found</string>
+    <string name="telegram_id_not_set">Telegram ID not set</string>
+    <string name="truncated_suffix_short">\n\n[...truncated]</string>
+    <string name="no_telegram_app">Telegram not found</string>
+    <string name="unknown_generic">Unknown</string>
+    <string name="no_saved_errors">No saved errors</string>
+    <string name="error_history_title">📋 Error History</string>
+    <string name="clear_history_btn">Clear History</string>
+    <string name="show_history_failed">Failed to show history</string>
+    <string name="confirm_with_warning_title">⚠️ Confirm</string>
+    <string name="confirm_clear_all_errors_message">Clear all saved errors?</string>
+    <string name="cleared_success_toast">✓ Cleared</string>
+    <string name="app_error_must_restart_message">An app error occurred. You must restart.</string>
 </resources>

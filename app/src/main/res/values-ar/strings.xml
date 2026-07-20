@@ -1352,4 +1352,37 @@
     <string name="copy_error_instructions">انسخ النص أدناه وأرسله للمطور:</string>
     <string name="copy_error_btn">📋 نسخ الخطأ</string>
     <string name="copied_success_toast">✅ تم النسخ!</string>
+
+    <!-- DebugActivity -->
+    <string name="no_details_available">لا توجد تفاصيل متاحة</string>
+    <string name="timestamp_display_format">⏱️ %1$s</string>
+    <string name="error_report_title">⚠️ تقرير خطأ - POS System</string>
+    <string name="report_date_label_format">📅 التاريخ: %1$s</string>
+    <string name="report_error_label">🔴 الخطأ:</string>
+    <string name="report_device_info_label">📱 معلومات الجهاز:</string>
+    <string name="report_full_details_label">📋 التفاصيل الكاملة:</string>
+    <string name="device_info_format">Android: %1$s (API %2$d)\nالشركة: %3$s\nالموديل: %4$s\nالتطبيق: v%5$s (%6$d)</string>
+    <string name="device_info_unavailable">لا يمكن الحصول على المعلومات</string>
+    <string name="restart_failed">فشلت إعادة التشغيل</string>
+    <string name="hide_details_btn">إخفاء التفاصيل ▲</string>
+    <string name="show_details_btn">عرض التفاصيل ▼</string>
+    <string name="copied_to_clipboard_toast">✓ تم النسخ للحافظة</string>
+    <string name="copy_failed">فشل النسخ</string>
+    <string name="send_via_email_chooser">إرسال عبر البريد</string>
+    <string name="no_email_app">لا يوجد تطبيق بريد</string>
+    <string name="support_number_not_set">رقم الدعم غير محدد</string>
+    <string name="report_truncated_suffix">\n\n[...تم اقتصاص التقرير]</string>
+    <string name="no_whatsapp_app">لا يوجد واتساب</string>
+    <string name="telegram_id_not_set">معرف التليجرام غير محدد</string>
+    <string name="truncated_suffix_short">\n\n[...اقتصاص]</string>
+    <string name="no_telegram_app">لا يوجد تليجرام</string>
+    <string name="unknown_generic">غير معروف</string>
+    <string name="no_saved_errors">لا توجد أخطاء محفوظة</string>
+    <string name="error_history_title">📋 سجل الأخطاء</string>
+    <string name="clear_history_btn">مسح السجل</string>
+    <string name="show_history_failed">فشل عرض السجل</string>
+    <string name="confirm_with_warning_title">⚠️ تأكيد</string>
+    <string name="confirm_clear_all_errors_message">هل تريد مسح جميع الأخطاء المحفوظة؟</string>
+    <string name="cleared_success_toast">✓ تم المسح</string>
+    <string name="app_error_must_restart_message">حدث خطأ في التطبيق. يجب إعادة التشغيل.</string>
 </resources>
