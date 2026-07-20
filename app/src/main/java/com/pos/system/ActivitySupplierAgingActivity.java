@@ -150,6 +150,7 @@ public class ActivitySupplierAgingActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= data.size()) return;
             AgingRow row = data.get(pos);
             h.tvName.setText(row.name);
             h.tvDebt.setText(fmtAmt(row.debt));

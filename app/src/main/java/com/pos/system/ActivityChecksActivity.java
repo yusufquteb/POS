@@ -178,7 +178,9 @@ public class ActivityChecksActivity extends BaseActivity {
     }
 
     private void showCheckOptionsDialog(HashMap<String, String> check) {
-        long id = Long.parseLong(check.getOrDefault("id", "0"));
+        long id;
+        try { id = Long.parseLong(check.getOrDefault("id", "0")); }
+        catch (NumberFormatException e) { showToast(getString(R.string.error_unknown)); return; }
         String status = check.getOrDefault("status", "pending");
         String[] options;
         if ("pending".equals(status)) {
@@ -225,11 +227,14 @@ public class ActivityChecksActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(VH h, int position) {
+            if (position < 0 || position >= checksList.size()) return;
             HashMap<String, String> c = checksList.get(position);
             h.tvName.setText(c.getOrDefault(isCustomerTab ? "customer_name" : "supplier_name", "—"));
             h.tvCheckNumber.setText("شيك رقم: " + c.getOrDefault("check_number", "—"));
             h.tvBankName.setText("البنك: " + c.getOrDefault("bank_name", "—"));
-            h.tvAmount.setText(String.format("%.2f %s", Double.parseDouble(c.getOrDefault("amount", "0")), getCurrency()));
+            double amount = 0;
+            try { amount = Double.parseDouble(c.getOrDefault("amount", "0")); } catch (Exception ignored) {}
+            h.tvAmount.setText(String.format("%.2f %s", amount, getCurrency()));
             h.tvDueDate.setText("تاريخ الاستحقاق: " + c.getOrDefault("due_date", "—"));
             String status = c.getOrDefault("status", "pending");
             h.tvStatus.setText(getStatusAr(status));

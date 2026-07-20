@@ -122,6 +122,7 @@ public class ActivityWalletActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= transactions.size()) return;
             HashMap<String, String> t = transactions.get(pos);
             String type = t.getOrDefault("type", "OUT");
             boolean isIn = "IN".equals(type);

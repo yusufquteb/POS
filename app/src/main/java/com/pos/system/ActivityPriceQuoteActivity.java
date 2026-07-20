@@ -235,6 +235,7 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= cartItems.size()) return;
             CartItem item = cartItems.get(pos);
             if (h.tvName  != null) h.tvName.setText(item.name);
             if (h.tvPrice != null) h.tvPrice.setText(String.format(Locale.US, "%.2f %s", item.price, currency));

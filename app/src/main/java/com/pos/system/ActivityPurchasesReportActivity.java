@@ -111,6 +111,7 @@ public class ActivityPurchasesReportActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= filteredData.size()) return;
             HashMap<String, String> item = filteredData.get(pos);
             h.tvSupplier.setText(item.getOrDefault("supplier_name", getString(R.string.suppliers_title)));
             h.tvDate.setText(shortDate(item.getOrDefault("created_at", "")));

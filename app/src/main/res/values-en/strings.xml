@@ -543,6 +543,7 @@
     <string name="feature_debts">Debt Management</string>
     <string name="feature_purchase_orders">Purchase Orders</string>
     <string name="feature_cloud_backup">Cloud Backup</string>
+    <string name="swipe_hint_delete_edit">Swipe left to delete, right to edit</string>
     <string name="filter_date">Filter by Date</string>
     <string name="clear_filter">Clear Filter</string>
     <string name="notes">Notes</string>

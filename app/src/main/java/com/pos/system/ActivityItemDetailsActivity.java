@@ -172,6 +172,7 @@ public class ActivityItemDetailsActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= salesHistory.size()) return;
             HashMap<String, String> item = salesHistory.get(pos);
             if (h.tvRef  != null) h.tvRef.setText("فاتورة #" + item.getOrDefault("invoice_id",""));
             if (h.tvDate != null) h.tvDate.setText(item.getOrDefault("created_at",""));

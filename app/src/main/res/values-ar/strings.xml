@@ -629,6 +629,7 @@
     <string name="feature_debts">إدارة الديون</string>
     <string name="feature_purchase_orders">أوامر الشراء</string>
     <string name="feature_cloud_backup">النسخ الاحتياطي على السحابة</string>
+    <string name="swipe_hint_delete_edit">اسحب لليسار للحذف، ولليمين للتعديل</string>
     <string name="filter_date">تصفية بالتاريخ</string>
     <string name="clear_filter">مسح التصفية</string>
     <string name="notes">ملاحظات</string>

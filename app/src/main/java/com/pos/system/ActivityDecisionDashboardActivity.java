@@ -152,6 +152,7 @@ public class ActivityDecisionDashboardActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= data.size()) return;
             HashMap<String, String> p = data.get(pos);
             switch (type) {
                 case "reorder":

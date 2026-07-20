@@ -129,6 +129,7 @@ public class ActivityCustomerRemainingActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= customers.size()) return;
             HashMap<String, String> c = customers.get(pos);
             double debt = 0;
             try { debt = Double.parseDouble(c.getOrDefault("debt", "0")); } catch (Exception ignored) {}
