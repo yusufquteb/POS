@@ -38,7 +38,7 @@ public class ActivityChecksActivity extends BaseActivity {
 
         dbHelper = new DBHelper(this);
         initViews();
-        setupToolbar("الشيكات");
+        setupToolbar(getString(R.string.hub_checks));
         loadData();
     }
 
@@ -48,8 +48,8 @@ public class ActivityChecksActivity extends BaseActivity {
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setItemAnimator(null);
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("شيكات العملاء"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("شيكات الموردين"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.checks_tab_customers));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.checks_tab_suppliers));
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) {
                 isCustomerTab = tab.getPosition() == 0;
@@ -105,7 +105,7 @@ public class ActivityChecksActivity extends BaseActivity {
                 adapter.notifyDataSetChanged();
                 binding.tvEmpty.setVisibility(checksList.isEmpty() ? View.VISIBLE : View.GONE);
                 String currency = getCurrency();
-                binding.tvTotalAmount.setText("إجمالي المعلق: " + String.format("%.2f %s", finalTotal, currency));
+                binding.tvTotalAmount.setText(getString(R.string.total_pending_label_format, String.format("%.2f %s", finalTotal, currency)));
             });
         });
     }
@@ -130,7 +130,7 @@ public class ActivityChecksActivity extends BaseActivity {
         TextInputEditText etNotes = dialogView.findViewById(R.id.et_notes);
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle(isCustomerTab ? "إضافة شيك عميل" : "إضافة شيك مورد")
+            .setTitle(isCustomerTab ? R.string.add_customer_check_title : R.string.add_supplier_check_title)
             .setView(dialogView)
             .setPositiveButton(R.string.save, (d, w) -> {
                 if (tilName != null) tilName.setError(null);
@@ -145,16 +145,16 @@ public class ActivityChecksActivity extends BaseActivity {
                 String notes = etNotes != null && etNotes.getText() != null ? etNotes.getText().toString().trim() : "";
 
                 if (name.isEmpty()) {
-                    if (tilName != null) tilName.setError("الاسم مطلوب");
+                    if (tilName != null) tilName.setError(getString(R.string.name_required));
                     return;
                 }
                 if (amountStr.isEmpty()) {
-                    if (tilAmount != null) tilAmount.setError("المبلغ مطلوب");
+                    if (tilAmount != null) tilAmount.setError(getString(R.string.amount_required));
                     return;
                 }
                 double amount = 0;
                 try { amount = Double.parseDouble(amountStr); } catch (Exception ex) {
-                    if (tilAmount != null) tilAmount.setError("مبلغ غير صحيح");
+                    if (tilAmount != null) tilAmount.setError(getString(R.string.invalid_amount));
                     return;
                 }
 
@@ -169,7 +169,7 @@ public class ActivityChecksActivity extends BaseActivity {
                     if (result > 0) {
                         runOnUiThread(() -> { showToast(getString(R.string.saved_successfully)); loadData(); });
                     } else {
-                        runOnUiThread(() -> showSnackbar("حدث خطأ", true));
+                        runOnUiThread(() -> showSnackbar(getString(R.string.generic_error), true));
                     }
                 });
             })
@@ -178,16 +178,18 @@ public class ActivityChecksActivity extends BaseActivity {
     }
 
     private void showCheckOptionsDialog(HashMap<String, String> check) {
-        long id = Long.parseLong(check.getOrDefault("id", "0"));
+        long id;
+        try { id = Long.parseLong(check.getOrDefault("id", "0")); }
+        catch (NumberFormatException e) { showToast(getString(R.string.error_unknown)); return; }
         String status = check.getOrDefault("status", "pending");
         String[] options;
         if ("pending".equals(status)) {
-            options = new String[]{"تم التحصيل ✓", "مرتد ✗", "إلغاء", "حذف"};
+            options = new String[]{getString(R.string.check_option_collected), getString(R.string.check_option_bounced), getString(R.string.cancel), getString(R.string.delete)};
         } else {
-            options = new String[]{"حذف"};
+            options = new String[]{getString(R.string.delete)};
         }
         new MaterialAlertDialogBuilder(this)
-            .setTitle("خيارات الشيك")
+            .setTitle(R.string.check_options_title)
             .setItems(options, (d, w) -> {
                 executor.execute(() -> {
                     boolean success = false;
@@ -200,7 +202,7 @@ public class ActivityChecksActivity extends BaseActivity {
                         success = isCustomerTab ? dbHelper.deleteCustomerCheck(id) : (dbHelper.getWritableDatabase().delete("supplier_checks", "id=?", new String[]{String.valueOf(id)}) > 0);
                     }
                     boolean finalSuccess = success;
-                    runOnUiThread(() -> { if (finalSuccess) { showToast("تم بنجاح"); loadData(); } else showSnackbar("حدث خطأ", true); });
+                    runOnUiThread(() -> { if (finalSuccess) { showToast(getString(R.string.done_successfully)); loadData(); } else showSnackbar(getString(R.string.generic_error), true); });
                 });
             })
             .setNegativeButton(R.string.cancel, null)
@@ -225,14 +227,18 @@ public class ActivityChecksActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(VH h, int position) {
+            if (position < 0 || position >= checksList.size()) return;
             HashMap<String, String> c = checksList.get(position);
+            android.content.Context bindCtx = h.itemView.getContext();
             h.tvName.setText(c.getOrDefault(isCustomerTab ? "customer_name" : "supplier_name", "—"));
-            h.tvCheckNumber.setText("شيك رقم: " + c.getOrDefault("check_number", "—"));
-            h.tvBankName.setText("البنك: " + c.getOrDefault("bank_name", "—"));
-            h.tvAmount.setText(String.format("%.2f %s", Double.parseDouble(c.getOrDefault("amount", "0")), getCurrency()));
-            h.tvDueDate.setText("تاريخ الاستحقاق: " + c.getOrDefault("due_date", "—"));
+            h.tvCheckNumber.setText(bindCtx.getString(R.string.check_number_label_format, c.getOrDefault("check_number", "—")));
+            h.tvBankName.setText(bindCtx.getString(R.string.bank_label_format, c.getOrDefault("bank_name", "—")));
+            double amount = 0;
+            try { amount = Double.parseDouble(c.getOrDefault("amount", "0")); } catch (Exception ignored) {}
+            h.tvAmount.setText(String.format("%.2f %s", amount, getCurrency()));
+            h.tvDueDate.setText(bindCtx.getString(R.string.due_date_label_format, c.getOrDefault("due_date", "—")));
             String status = c.getOrDefault("status", "pending");
-            h.tvStatus.setText(getStatusAr(status));
+            h.tvStatus.setText(getStatusLabel(bindCtx, status));
             int color;
             android.content.Context ctx = h.itemView.getContext();
             switch (status) {
@@ -247,13 +253,13 @@ public class ActivityChecksActivity extends BaseActivity {
 
         @Override public int getItemCount() { return checksList.size(); }
 
-        private String getStatusAr(String status) {
+        private String getStatusLabel(android.content.Context ctx, String status) {
             switch (status) {
-                case "collected": return "محصّل";
-                case "paid": return "مدفوع";
-                case "bounced": return "مرتد";
-                case "cancelled": return "ملغي";
-                default: return "معلق";
+                case "collected": return ctx.getString(R.string.check_status_collected);
+                case "paid": return ctx.getString(R.string.check_status_paid);
+                case "bounced": return ctx.getString(R.string.check_status_bounced);
+                case "cancelled": return ctx.getString(R.string.check_status_cancelled);
+                default: return ctx.getString(R.string.check_status_pending);
             }
         }
 

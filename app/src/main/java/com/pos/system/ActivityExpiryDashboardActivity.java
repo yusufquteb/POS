@@ -73,9 +73,9 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
         layoutEmpty  = binding.layoutEmpty;
         tvSummary    = binding.tvSummary;
 
-        tabLayout.addTab(tabLayout.newTab().setText("منتهية ⛔"));
-        tabLayout.addTab(tabLayout.newTab().setText("7 أيام ⚠️"));
-        tabLayout.addTab(tabLayout.newTab().setText("30 يوم 🟡"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.expiry_tab_expired));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.expiry_tab_7days));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.expiry_tab_30days));
 
         adapter = new ExpiryAdapter();
         rvExpiry.setLayoutManager(new LinearLayoutManager(this));
@@ -198,6 +198,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= data.size()) return;
             HashMap<String, String> p = data.get(pos);
             String name    = p.getOrDefault("name", "—");
             String expiry  = p.getOrDefault("expiry", "");

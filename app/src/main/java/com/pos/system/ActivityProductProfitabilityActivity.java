@@ -115,6 +115,7 @@ public class ActivityProductProfitabilityActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= data.size()) return;
             HashMap<String, String> item = data.get(pos);
             h.tvName.setText(item.getOrDefault("name", ""));
             h.tvQty.setText(item.getOrDefault("total_qty", "0") + " " + getString(R.string.items));

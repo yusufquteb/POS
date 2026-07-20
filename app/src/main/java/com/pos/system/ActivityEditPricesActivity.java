@@ -18,6 +18,7 @@ public class ActivityEditPricesActivity extends BaseActivity {
 
     private ActivityEditPricesBinding binding;
     private DBHelper dbHelper;
+    private String currency = "ج.م";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class ActivityEditPricesActivity extends BaseActivity {
         applyWindowInsets(binding.getRoot());
 
         dbHelper = new DBHelper(this);
+        try { currency = dbHelper.getStoreSettings().getOrDefault("currency", "ج.م"); } catch (Exception ignored) {}
         setupToolbar();
         setupCategorySpinner();
         setupPreviewListener();
@@ -99,7 +101,7 @@ public class ActivityEditPricesActivity extends BaseActivity {
         final String fCat = category;
 
         String dir = isIncrease ? "زيادة" : "تخفيض";
-        String pType = isPercent ? "%" : " ج.م";
+        String pType = isPercent ? "%" : " " + currency;
         String priceType = isSell ? "سعر البيع" : "سعر الشراء";
         String catLabel = category.isEmpty() ? "كل المنتجات" : "تصنيف: " + category;
 

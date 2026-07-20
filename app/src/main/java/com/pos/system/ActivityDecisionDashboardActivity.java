@@ -118,7 +118,7 @@ public class ActivityDecisionDashboardActivity extends BaseActivity {
                 lowMargin.subList(0, Math.min(5, lowMargin.size())), "margin"));
 
         } catch (Exception e) {
-            showSnackbar("خطأ في تحميل البيانات", true);
+            showSnackbar(getString(R.string.error_loading_data), true);
         }
     }
 
@@ -152,28 +152,29 @@ public class ActivityDecisionDashboardActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= data.size()) return;
             HashMap<String, String> p = data.get(pos);
+            android.content.Context ctx = h.itemView.getContext();
             switch (type) {
                 case "reorder":
                     h.text1.setText(p.getOrDefault("name", "—"));
-                    h.text2.setText("المخزون: " + p.getOrDefault("qty", "0")
-                        + " · حد الطلب: " + p.getOrDefault("reorder_level", "5"));
+                    h.text2.setText(ctx.getString(R.string.reorder_stock_info_format,
+                        p.getOrDefault("qty", "0"), p.getOrDefault("reorder_level", "5")));
                     break;
                 case "expiry":
                     h.text1.setText(p.getOrDefault("name", "—"));
-                    h.text2.setText("ينتهي: " + p.getOrDefault("expiry", "—")
-                        + " · الكمية: " + p.getOrDefault("qty", "0"));
+                    h.text2.setText(ctx.getString(R.string.expiry_stock_info_format,
+                        p.getOrDefault("expiry", "—"), p.getOrDefault("qty", "0")));
                     break;
                 case "dead":
                     h.text1.setText(p.getOrDefault("name", "—"));
-                    h.text2.setText("المخزون: " + p.getOrDefault("qty", "0")
-                        + " · لم يُباع منذ 30 يوم");
+                    h.text2.setText(ctx.getString(R.string.dead_stock_info_format, p.getOrDefault("qty", "0")));
                     break;
                 case "margin":
                     h.text1.setText(p.getOrDefault("name", "—"));
                     String margin = p.getOrDefault("margin_pct", "0");
                     String profit = p.getOrDefault("profit", "0");
-                    h.text2.setText("هامش: " + margin + "% · الربح: " + profit);
+                    h.text2.setText(ctx.getString(R.string.margin_profit_info_format, margin, profit));
                     break;
             }
         }

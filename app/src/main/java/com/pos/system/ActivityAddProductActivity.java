@@ -83,6 +83,7 @@ public class ActivityAddProductActivity extends BaseActivity {
     private TextInputLayout layoutBarcode, layoutName, layoutPrice, layoutQty;
     private FloatingActionButton fabCamera;
     private MaterialButton btnSave, btnSaveAndNew, btnScan;
+    private MaterialButton btnAddLocation, btnAddSupplier, btnAddCategory;
     private ProgressBar progressBar;
     private RecyclerView recyclerProducts;
     private ProductsMiniAdapter productsAdapter;
@@ -230,6 +231,10 @@ public class ActivityAddProductActivity extends BaseActivity {
         fabCamera    = binding.fabCamera;
         progressBar  = binding.progressBar;
         recyclerProducts = binding.recyclerProducts;
+
+        btnAddLocation = binding.btnAddLocation;
+        btnAddSupplier = binding.btnAddSupplier;
+        btnAddCategory = binding.btnAddCategory;
     }
 
     private void setupToolbar() {
@@ -258,6 +263,62 @@ public class ActivityAddProductActivity extends BaseActivity {
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
             this, android.R.layout.simple_dropdown_item_1line, loadCategoriesFromDB());
         if (spinnerCategory != null) spinnerCategory.setAdapter(categoryAdapter);
+    }
+
+    private enum QuickAddType { LOCATION, SUPPLIER, CATEGORY }
+
+    /** إضافة سريعة لموقع/مورد/تصنيف جديد بدون مغادرة شاشة المنتج */
+    private void showQuickAddDialog(QuickAddType type) {
+        View dv = getLayoutInflater().inflate(R.layout.dialog_simple_input, null);
+        TextInputEditText et = dv.findViewById(R.id.et_input);
+        TextInputLayout til = dv.findViewById(R.id.til_input);
+
+        int titleRes;
+        switch (type) {
+            case LOCATION: titleRes = R.string.hint_location_name;  break;
+            case SUPPLIER: titleRes = R.string.supplier_name;       break;
+            default:       titleRes = R.string.category;           break;
+        }
+        if (til != null) til.setHint(getString(titleRes));
+
+        new MaterialAlertDialogBuilder(this)
+            .setTitle(titleRes)
+            .setView(dv)
+            .setPositiveButton(R.string.save, (d, w) -> {
+                String name = et != null && et.getText() != null ? et.getText().toString().trim() : "";
+                if (name.isEmpty()) { showToast(getString(R.string.required_field)); return; }
+                saveQuickAddEntry(type, name);
+            })
+            .setNegativeButton(R.string.cancel, null)
+            .show();
+    }
+
+    private void saveQuickAddEntry(QuickAddType type, String name) {
+        java.util.concurrent.Executors.newSingleThreadExecutor().execute(() -> {
+            long result = -1;
+            try {
+                switch (type) {
+                    case LOCATION: result = dbHelper.addLocation(name, "", false); break;
+                    case SUPPLIER: result = dbHelper.addSupplier(name, "", "", ""); break;
+                    case CATEGORY: result = dbHelper.addCategory(name, ""); break;
+                }
+            } catch (Exception ignored) {}
+            final long id = result;
+            runOnUiThread(() -> {
+                if (isFinishing() || isDestroyed()) return;
+                if (id > 0) {
+                    setupDropdowns();
+                    switch (type) {
+                        case LOCATION: if (spinnerLocation != null) spinnerLocation.setText(name, false); break;
+                        case SUPPLIER: if (etSupplier      != null) etSupplier.setText(name, false);      break;
+                        case CATEGORY: if (spinnerCategory != null) spinnerCategory.setText(name, false); break;
+                    }
+                    showToast(getString(R.string.saved_successfully));
+                } else {
+                    showSnackbar(getString(R.string.operation_failed), true);
+                }
+            });
+        });
     }
 
     private void setupListeners() {
@@ -300,11 +361,21 @@ public class ActivityAddProductActivity extends BaseActivity {
         if (fabCamera != null) {
             fabCamera.setOnClickListener(v -> showImageSourceDialog());
         }
+        // بطاقة الصورة نفسها قابلة للنقر أيضاً (لها ripple لكن لم تكن موصولة)
+        View cardImageContainer = binding.cardImageContainer;
+        if (cardImageContainer != null) {
+            cardImageContainer.setOnClickListener(v -> showImageSourceDialog());
+        }
 
         // تاريخ الانتهاء
         if (etExpiry != null) {
             etExpiry.setOnClickListener(v -> showDatePicker());
         }
+
+        // إضافة سريعة: موقع / مورد / تصنيف
+        if (btnAddLocation != null) btnAddLocation.setOnClickListener(v -> showQuickAddDialog(QuickAddType.LOCATION));
+        if (btnAddSupplier != null) btnAddSupplier.setOnClickListener(v -> showQuickAddDialog(QuickAddType.SUPPLIER));
+        if (btnAddCategory != null) btnAddCategory.setOnClickListener(v -> showQuickAddDialog(QuickAddType.CATEGORY));
 
         // حساب الربح
         TextWatcher profitWatcher = new TextWatcher() {
@@ -855,6 +926,7 @@ public class ActivityAddProductActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH holder, int position) {
+            if (position < 0 || position >= data.size()) return;
             HashMap<String, String> p = data.get(position);
             if (holder.text1 != null) holder.text1.setText(p.getOrDefault("name", ""));
             if (holder.text2 != null) holder.text2.setText(

@@ -81,7 +81,7 @@ public class InvoicePrinter {
         }
 
         // 2. Store header
-        String storeName    = safeStr(storeSettings, "name", "المتجر");
+        String storeName    = safeStr(storeSettings, "name", context.getString(R.string.default_store_label));
         String storeAddress = safeStr(storeSettings, "address", "");
         String storePhone   = safeStr(storeSettings, "phone", "");
         String taxNumber    = safeStr(storeSettings, "tax", "");
@@ -90,9 +90,9 @@ public class InvoicePrinter {
         if (!storeAddress.isEmpty())
             sb.append(centerText(storeAddress, width)).append("\n");
         if (!storePhone.isEmpty())
-            sb.append(centerText("هاتف: " + storePhone, width)).append("\n");
+            sb.append(centerText(context.getString(R.string.receipt_store_phone_format, storePhone), width)).append("\n");
         if (!taxNumber.isEmpty())
-            sb.append(centerText("الرقم الضريبي: " + taxNumber, width)).append("\n");
+            sb.append(centerText(context.getString(R.string.receipt_tax_number_format, taxNumber), width)).append("\n");
 
         sb.append(repeat("=", width)).append("\n");
 
@@ -101,21 +101,23 @@ public class InvoicePrinter {
             String.valueOf(invoice.get("id")));
         String invoiceDate   = formatInvoiceDate(safeObjStr(invoice, "created_at", ""));
 
-        sb.append("رقم الفاتورة: ").append(invoiceNumber).append("\n");
-        sb.append("التاريخ:       ").append(invoiceDate).append("\n");
+        sb.append(context.getString(R.string.receipt_invoice_number_format, invoiceNumber)).append("\n");
+        sb.append(context.getString(R.string.receipt_date_format, invoiceDate)).append("\n");
 
         // 4. Customer info
         if (customer != null) {
             String custName  = safeObjStr(customer, "name", "");
             String custPhone = safeObjStr(customer, "phone", "");
-            if (!custName.isEmpty())  sb.append("العميل: ").append(custName).append("\n");
-            if (!custPhone.isEmpty()) sb.append("الهاتف: ").append(custPhone).append("\n");
+            if (!custName.isEmpty())  sb.append(context.getString(R.string.receipt_customer_name_format, custName)).append("\n");
+            if (!custPhone.isEmpty()) sb.append(context.getString(R.string.receipt_customer_phone_format, custPhone)).append("\n");
         }
 
         sb.append(repeat("=", width)).append("\n");
 
         // 5. Items table
-        sb.append(String.format("%-20s %5s %8s %10s\n", "الصنف", "الكمية", "السعر", "الإجمالي"));
+        sb.append(String.format("%-20s %5s %8s %10s\n",
+            context.getString(R.string.receipt_col_item), context.getString(R.string.receipt_col_qty),
+            context.getString(R.string.receipt_col_price), context.getString(R.string.receipt_col_total)));
         sb.append(repeat("-", width)).append("\n");
 
         for (HashMap<String, Object> item : items) {
@@ -140,22 +142,22 @@ public class InvoicePrinter {
         // If subtotal not stored, derive it
         if (subtotal <= 0) subtotal = total + discount - tax;
 
-        sb.append(rightAlign("المجموع الفرعي: " + formatMoney(subtotal, currency), width)).append("\n");
+        sb.append(rightAlign(context.getString(R.string.receipt_subtotal_format, formatMoney(subtotal, currency)), width)).append("\n");
 
         if (discount > 0)
-            sb.append(rightAlign("الخصم: -" + formatMoney(discount, currency), width)).append("\n");
+            sb.append(rightAlign(context.getString(R.string.receipt_discount_format, formatMoney(discount, currency)), width)).append("\n");
 
         if (tax > 0)
-            sb.append(rightAlign("الضريبة: +" + formatMoney(tax, currency), width)).append("\n");
+            sb.append(rightAlign(context.getString(R.string.receipt_tax_format, formatMoney(tax, currency)), width)).append("\n");
 
         sb.append(repeat("=", width)).append("\n");
-        sb.append(rightAlign("الإجمالي النهائي: " + formatMoney(total, currency), width)).append("\n");
+        sb.append(rightAlign(context.getString(R.string.receipt_final_total_format, formatMoney(total, currency)), width)).append("\n");
         sb.append(repeat("=", width)).append("\n");
 
         // 7. Payment method
         String rawMethod  = safeObjStr(invoice, "payment_method", "نقدي");
         String methodLabel = paymentLabel(rawMethod);
-        sb.append("طريقة الدفع: ").append(methodLabel).append("\n");
+        sb.append(context.getString(R.string.receipt_payment_method_format, methodLabel)).append("\n");
 
         // 8. Loyalty points (shown only when customer has a balance)
         if (customer != null) {
@@ -164,7 +166,7 @@ public class InvoicePrinter {
                 try {
                     int points = dbHelper.getCustomerLoyaltyPoints(customerId);
                     if (points > 0)
-                        sb.append("نقاط الولاء: ").append(points).append(" نقطة\n");
+                        sb.append(context.getString(R.string.receipt_loyalty_points_format, points)).append("\n");
                 } catch (Exception ignored) {}
             }
         }
@@ -173,8 +175,8 @@ public class InvoicePrinter {
 
         // 9. Thank-you message
         sb.append("\n");
-        sb.append(centerText("شكراً لتعاملكم معنا", width)).append("\n");
-        sb.append(centerText("نتمنى لكم يوماً سعيداً", width)).append("\n");
+        sb.append(centerText(context.getString(R.string.receipt_thank_you), width)).append("\n");
+        sb.append(centerText(context.getString(R.string.receipt_wish_good_day), width)).append("\n");
 
         // 10. QR code — ZATCA TLV for SA, generic for others
         String countryCode = storeSettings != null
@@ -244,13 +246,13 @@ public class InvoicePrinter {
     // ─────────────────────────────────────────────────────────────────────────
 
     private String paymentLabel(String code) {
-        if (code == null) return "نقدي";
+        if (code == null) return context.getString(R.string.payment_cash);
         switch (code.toLowerCase(Locale.ROOT)) {
-            case "vodafone":  return "فودافون كاش";
-            case "instapay":  return "انستاباي";
-            case "card":      return "بطاقة بنكية";
+            case "vodafone":  return context.getString(R.string.payment_vodafone);
+            case "instapay":  return context.getString(R.string.payment_instapay);
+            case "card":      return context.getString(R.string.payment_card);
             case "cash":
-            default:          return "نقدي";
+            default:          return context.getString(R.string.payment_cash);
         }
     }
 
@@ -341,7 +343,7 @@ public class InvoicePrinter {
     private String buildZatcaQr(String sellerName, String vatNumber,
                                   String timestamp, double total, double vatAmount) {
         try {
-            byte[] name    = tlvField((byte) 1, sellerName.isEmpty() ? "المتجر" : sellerName);
+            byte[] name    = tlvField((byte) 1, sellerName.isEmpty() ? context.getString(R.string.default_store_label) : sellerName);
             byte[] vat     = tlvField((byte) 2, vatNumber.isEmpty()  ? "300000000000003" : vatNumber);
             byte[] ts      = tlvField((byte) 3, timestamp.isEmpty()
                 ? new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).format(new Date())

@@ -47,6 +47,7 @@ public class ActivityCustomersActivity extends BaseActivity {
     private ArrayList<HashMap<String, Object>> fullList = new ArrayList<>();
     private View emptyState;
     private TextInputEditText etSearch;
+    private String currency = "ج.م";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class ActivityCustomersActivity extends BaseActivity {
         applyWindowInsets(binding.getRoot());
 
         dbHelper    = new DBHelper(this);
+        try { currency = dbHelper.getStoreSettings().getOrDefault("currency", "ج.م"); } catch (Exception ignored) {}
         recyclerView = binding.recyclerView;
         emptyState   = binding.emptyState;
         etSearch     = binding.etSearch;
@@ -275,6 +277,7 @@ public class ActivityCustomersActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH holder, int position) {
+            if (position < 0 || position >= data.size()) return;
             HashMap<String, Object> item = data.get(position);
             if (holder.tvName  != null) holder.tvName.setText(str(item, "name"));
             if (holder.tvPhone != null) {
@@ -286,7 +289,7 @@ public class ActivityCustomersActivity extends BaseActivity {
             if (holder.tvTotalSpent != null) {
                 double spent = safeDouble(item.get("total_spent"));
                 if (spent > 0) {
-                    holder.tvTotalSpent.setText(String.format("إجمالي: %.0f ج.م", spent));
+                    holder.tvTotalSpent.setText(String.format("إجمالي: %.0f %s", spent, currency));
                     holder.tvTotalSpent.setVisibility(android.view.View.VISIBLE);
                 } else {
                     holder.tvTotalSpent.setVisibility(android.view.View.GONE);
@@ -297,7 +300,7 @@ public class ActivityCustomersActivity extends BaseActivity {
             if (holder.tvDebtBadge != null) {
                 double debt = safeDouble(item.get("debt"));
                 if (debt > 0.01) {
-                    holder.tvDebtBadge.setText(String.format("دين: %.0f ج.م", debt));
+                    holder.tvDebtBadge.setText(String.format("دين: %.0f %s", debt, currency));
                     holder.tvDebtBadge.setVisibility(android.view.View.VISIBLE);
                 } else {
                     holder.tvDebtBadge.setVisibility(android.view.View.GONE);

@@ -95,7 +95,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             
         } catch (Exception e) {
             Log.e(TAG, "❌ FATAL ERROR", e);
-            showToast("خطأ: " + e.getMessage());
+            showToast(getString(R.string.error_with_message, e.getMessage()));
             finish();
         }
     }
@@ -147,7 +147,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                 setSupportActionBar(toolbar);
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                    getSupportActionBar().setTitle("إعدادات الطابعة");
+                    getSupportActionBar().setTitle(R.string.settings_printer);
                 }
                 toolbar.setNavigationOnClickListener(v -> finish());
             }
@@ -184,8 +184,8 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             if (checkedId == R.id.rb_usb) {
                 // USB printing is not yet implemented — revert selection to Bluetooth
                 new MaterialAlertDialogBuilder(this)
-                    .setTitle("الطباعة عبر USB")
-                    .setMessage("الطباعة عبر USB غير متاحة في هذا الإصدار.\nيرجى استخدام البلوتوث في الوقت الحالي.")
+                    .setTitle(R.string.printer_usb_title)
+                    .setMessage(R.string.printer_usb_message)
                     .setPositiveButton(R.string.ok, (d, w) -> {
                         if (rgConnection != null) rgConnection.check(R.id.rb_bluetooth);
                     })
@@ -205,7 +205,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             
         } catch (Exception e) {
             Log.e(TAG, "Connection type change error", e);
-            showToast("خطأ: " + e.getMessage());
+            showToast(getString(R.string.error_with_message, e.getMessage()));
         }
     }
     
@@ -234,7 +234,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         }
         
         // كل شيء OK
-        showToast("✓ Bluetooth جاهز");
+        showToast(getString(R.string.bluetooth_ready_toast));
     }
     
     /**
@@ -250,7 +250,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         }
         
         // 2. رسالة توضيحية
-        showToast("✓ WiFi - يتطلب إدخال IP يدوياً");
+        showToast(getString(R.string.wifi_manual_ip_toast));
     }
     
     /**
@@ -261,12 +261,12 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         
         try {
             btnCheckPrinter.setEnabled(false);
-            btnCheckPrinter.setText("جارٍ الفحص...");
+            btnCheckPrinter.setText(getString(R.string.checking_printer));
             
             PrinterCheckResult result = printerManager.checkPrinters(currentPrinterType);
             
             btnCheckPrinter.setEnabled(true);
-            btnCheckPrinter.setText("فحص الطابعة");
+            btnCheckPrinter.setText(getString(R.string.check_printer));
             
             if (result.success && result.hasPrinters()) {
                 discoveredPrinters = result.printers;
@@ -278,8 +278,8 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         } catch (Exception e) {
             Log.e(TAG, "❌ Check error", e);
             btnCheckPrinter.setEnabled(true);
-            btnCheckPrinter.setText("فحص الطابعة");
-            showError("خطأ: " + e.getMessage());
+            btnCheckPrinter.setText(getString(R.string.check_printer));
+            showError(getString(R.string.error_with_message, e.getMessage()));
         }
     }
     
@@ -292,8 +292,8 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
      */
     private void showBluetoothNotSupportedDialog() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("⚠️ غير مدعوم")
-            .setMessage("البلوتوث غير مدعوم في هذا الجهاز")
+            .setTitle(R.string.bluetooth_not_supported_title)
+            .setMessage(R.string.bluetooth_not_supported_msg)
             .setPositiveButton(R.string.ok, (d, w) -> {
                 if (rbUsb != null) rbUsb.setChecked(true);
             })
@@ -306,9 +306,9 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
      */
     private void showBluetoothPermissionsDialog() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("⚠️ صلاحيات مطلوبة")
-            .setMessage("يحتاج التطبيق لصلاحيات البلوتوث للبحث عن الطابعات\n\nهل تريد منح الصلاحيات؟")
-            .setPositiveButton("منح الصلاحيات", (d, w) -> {
+            .setTitle(R.string.bluetooth_permissions_title)
+            .setMessage(R.string.bluetooth_permissions_msg)
+            .setPositiveButton(R.string.grant_permissions, (d, w) -> {
                 printerManager.requestBluetoothPermissions();
             })
             .setNegativeButton(R.string.cancel, (d, w) -> {
@@ -323,12 +323,12 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
      */
     private void showBluetoothDisabledDialog() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("⚠️ البلوتوث معطل")
-            .setMessage("يجب تفعيل البلوتوث لاستخدام طابعة Bluetooth\n\nاختر أحد الخيارات:")
-            .setPositiveButton("تفعيل البلوتوث", (d, w) -> {
+            .setTitle(R.string.bluetooth_disabled_title)
+            .setMessage(R.string.bluetooth_disabled_msg)
+            .setPositiveButton(R.string.enable_bluetooth, (d, w) -> {
                 requestEnableBluetoothSafely();
             })
-            .setNeutralButton("فتح الإعدادات", (d, w) -> {
+            .setNeutralButton(R.string.open_settings, (d, w) -> {
                 openBluetoothSettings();
             })
             .setNegativeButton(R.string.cancel, (d, w) -> {
@@ -365,10 +365,10 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         try {
             Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
             startActivity(intent);
-            showToast("فعّل البلوتوث ثم ارجع للتطبيق");
+            showToast(getString(R.string.bluetooth_enable_reminder_toast));
         } catch (Exception e) {
             Log.e(TAG, "Error opening Bluetooth settings", e);
-            showSnackbar("خطأ في فتح الإعدادات", true);
+            showSnackbar(getString(R.string.error_opening_settings), true);
         }
     }
     
@@ -381,9 +381,9 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
      */
     private void showWiFiDisabledDialog() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("⚠️ الواي فاي معطل")
-            .setMessage("يجب تفعيل الواي فاي والاتصال بنفس شبكة الطابعة")
-            .setPositiveButton("فتح الإعدادات", (d, w) -> {
+            .setTitle(R.string.wifi_disabled_title)
+            .setMessage(R.string.wifi_disabled_msg)
+            .setPositiveButton(R.string.open_settings, (d, w) -> {
                 openWiFiSettings();
             })
             .setNegativeButton(R.string.cancel, (d, w) -> {
@@ -407,10 +407,10 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                 Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
                 startActivity(intent);
             }
-            showToast("فعّل الواي فاي وارجع للتطبيق");
+            showToast(getString(R.string.wifi_enable_reminder_toast));
         } catch (Exception e) {
             Log.e(TAG, "Error opening WiFi settings", e);
-            showSnackbar("خطأ في فتح الإعدادات", true);
+            showSnackbar(getString(R.string.error_opening_settings), true);
         }
     }
     
@@ -422,7 +422,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         StringBuilder message = new StringBuilder();
         message.append("✅ ").append(result.message).append("\n\n");
         
-        message.append("الطابعات المكتشفة:\n");
+        message.append(getString(R.string.discovered_printers_label)).append("\n");
         for (int i = 0; i < result.printers.size(); i++) {
             PrinterDevice printer = result.printers.get(i);
             message.append((i + 1)).append(". ")
@@ -431,26 +431,24 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         }
         
         new MaterialAlertDialogBuilder(this)
-            .setTitle("✓ تم العثور على طابعات")
+            .setTitle(R.string.printers_found_title)
             .setMessage(message.toString())
             .setPositiveButton(R.string.ok, (d, w) -> saveSettings())
-            .setNeutralButton("اختبار الطباعة", (d, w) -> testPrint())
+            .setNeutralButton(R.string.test_print, (d, w) -> testPrint())
             .show();
     }
-    
+
     private void showPrinterNotFoundDialog(PrinterCheckResult result) {
-        String title = "⚠️ لم يتم العثور على طابعات";
-        
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
-            .setTitle(title)
+            .setTitle(R.string.printers_not_found_title)
             .setMessage(result.message)
             .setPositiveButton(R.string.ok, null);
-        
+
         if (currentPrinterType.equals(Constants.PrinterType.BLUETOOTH)) {
-            builder.setNeutralButton("فتح إعدادات البلوتوث", (d, w) -> 
+            builder.setNeutralButton(R.string.open_bluetooth_settings, (d, w) ->
                 openBluetoothSettings());
         } else if (currentPrinterType.equals(Constants.PrinterType.WIFI)) {
-            builder.setNeutralButton("فتح إعدادات الواي فاي", (d, w) -> 
+            builder.setNeutralButton(R.string.open_wifi_settings, (d, w) ->
                 openWiFiSettings());
         }
         
@@ -532,7 +530,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
     private void saveSettings() {
         try {
             if (prefs == null) {
-                showError("خطأ في الحفظ");
+                showError(getString(R.string.error_saving));
                 return;
             }
             
@@ -563,12 +561,12 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                 showToast("✓ تم حفظ الإعدادات");
                 Log.d(TAG, "✅ Saved: " + connectionType + ", " + paperWidth);
             } else {
-                showError("فشل الحفظ");
+                showError(getString(R.string.save_failed));
             }
             
         } catch (Exception e) {
             Log.e(TAG, "Save error", e);
-            showError("خطأ: " + e.getMessage());
+            showError(getString(R.string.error_with_message, e.getMessage()));
         }
     }
 
@@ -579,8 +577,8 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             if (discoveredPrinters.isEmpty()) {
                 new MaterialAlertDialogBuilder(this)
                     .setTitle("⚠️ تنبيه")
-                    .setMessage("لم يتم فحص الطابعة!\n\nاضغط 'فحص الطابعة' أولاً")
-                    .setPositiveButton("فحص الآن", (d, w) -> checkPrinterConnection())
+                    .setMessage(R.string.printer_not_checked_msg)
+                    .setPositiveButton(R.string.check_now, (d, w) -> checkPrinterConnection())
                     .setNegativeButton(R.string.cancel, null)
                     .show();
                 return;
@@ -590,7 +588,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             
         } catch (Exception e) {
             Log.e(TAG, "Test print error", e);
-            showError("فشل: " + e.getMessage());
+            showError(getString(R.string.error_with_message, e.getMessage()));
         }
     }
 
@@ -621,7 +619,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                     showBluetoothDisabledDialog();
                 }
             } else {
-                showToast("تم رفض الصلاحيات");
+                showToast(getString(R.string.permissions_denied_toast));
                 if (rbUsb != null) rbUsb.setChecked(true);
             }
         }
@@ -635,7 +633,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             if (resultCode == RESULT_OK) {
                 showToast("✓ تم تفعيل البلوتوث");
             } else {
-                showSnackbar("لم يتم تفعيل البلوتوث", true);
+                showSnackbar(getString(R.string.bluetooth_not_enabled_toast), true);
                 if (rbUsb != null) rbUsb.setChecked(true);
             }
             isRequestingBluetoothEnable = false;

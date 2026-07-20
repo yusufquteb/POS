@@ -9,10 +9,10 @@ import android.os.Looper;
  * SplashActivity - شاشة البداية
  *
  * المنطق:
- *   المرة الأولى  → Onboarding  → MainActivity
+ *   المرة الأولى  → اختيار الدولة → اختيار اللغة → Onboarding → MainActivity
  *   المرات التالية → MainActivity مباشرة
  *
- * @version 1.1 (Final)
+ * @version 1.2
  */
 public class SplashActivity extends BaseActivity {
 
@@ -30,7 +30,8 @@ public class SplashActivity extends BaseActivity {
     private void navigateNext() {
         Intent intent;
         if (OnboardingActivity.isFirstTime(this)) {
-            intent = new Intent(this, OnboardingActivity.class);
+            // أول تشغيل: الدولة ← اللغة ← مقدمة التطبيق ← الرئيسية
+            intent = new Intent(this, ActivityCountrySelectionActivity.class);
         } else {
             intent = new Intent(this, MainActivity.class);
         }

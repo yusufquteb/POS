@@ -75,8 +75,8 @@ public class ActivityPinLockActivity extends BaseActivity {
 
     private void setupMode() {
         if (mode == MODE_SET) {
-            tvTitle.setText("تعيين رمز PIN جديد");
-            tvSubtitle.setText("أدخل رمزاً مكوناً من 4 أرقام");
+            tvTitle.setText(R.string.pin_set_title);
+            tvSubtitle.setText(R.string.str_70a793);
         } else {
             String savedPin = getSavedPin();
             if (savedPin == null || savedPin.isEmpty()) {
@@ -84,8 +84,8 @@ public class ActivityPinLockActivity extends BaseActivity {
                 launchTarget();
                 return;
             }
-            tvTitle.setText("أدخل رمز PIN");
-            tvSubtitle.setText("أدخل الرمز المكون من 4 أرقام للمتابعة");
+            tvTitle.setText(R.string.str_5f6a45);
+            tvSubtitle.setText(R.string.str_70a793);
         }
     }
 

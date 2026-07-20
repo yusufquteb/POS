@@ -24,7 +24,7 @@ public class CrashActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         String error = getIntent().getStringExtra("error");
-        if (error == null) error = "خطأ غير معروف";
+        if (error == null) error = getString(R.string.unknown_error_crash);
 
         // ═══ بناء الـ UI بالكود (لا يحتاج XML) ═══
         LinearLayout root = new LinearLayout(this);
@@ -34,7 +34,7 @@ public class CrashActivity extends Activity {
 
         // العنوان
         TextView title = new TextView(this);
-        title.setText("⚠️ خطأ في التطبيق");
+        title.setText(R.string.app_error_title);
         title.setTextColor(Color.parseColor("#FF6B6B"));
         title.setTextSize(20);
         title.setTypeface(android.graphics.Typeface.DEFAULT_BOLD);
@@ -43,7 +43,7 @@ public class CrashActivity extends Activity {
 
         // التعليمات
         TextView instructions = new TextView(this);
-        instructions.setText("انسخ النص أدناه وأرسله للمطور:");
+        instructions.setText(R.string.copy_error_instructions);
         instructions.setTextColor(Color.parseColor("#AAAAAA"));
         instructions.setTextSize(14);
         instructions.setPadding(0, 0, 0, 16);
@@ -73,7 +73,7 @@ public class CrashActivity extends Activity {
         // زر النسخ
         final String finalError = error;
         Button btnCopy = new Button(this);
-        btnCopy.setText("📋 نسخ الخطأ");
+        btnCopy.setText(R.string.copy_error_btn);
         btnCopy.setBackgroundColor(Color.parseColor("#4CAF50"));
         btnCopy.setTextColor(Color.WHITE);
         LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(
@@ -85,13 +85,13 @@ public class CrashActivity extends Activity {
                     (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             clipboard.setPrimaryClip(
                     ClipData.newPlainText("crash_log", finalError));
-            Toast.makeText(this, "✅ تم النسخ!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.copied_success_toast, Toast.LENGTH_SHORT).show();
         });
         buttons.addView(btnCopy);
 
         // زر الإغلاق
         Button btnClose = new Button(this);
-        btnClose.setText("إغلاق");
+        btnClose.setText(R.string.close);
         btnClose.setBackgroundColor(Color.parseColor("#F44336"));
         btnClose.setTextColor(Color.WHITE);
         LinearLayout.LayoutParams closeParams = new LinearLayout.LayoutParams(

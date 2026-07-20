@@ -75,11 +75,11 @@ public class ActivityItemDetailsActivity extends BaseActivity {
             getSupportActionBar().setTitle(product.getOrDefault("name", ""));
 
         binding.tvProductName.setText(product.getOrDefault("name", ""));
-        binding.tvBarcode.setText("باركود: " + product.getOrDefault("barcode", ""));
+        binding.tvBarcode.setText(getString(R.string.barcode_label_format, product.getOrDefault("barcode", "")));
         binding.tvSellPrice.setText(String.format(Locale.US, "%.2f", safeDouble(product, "price")));
         binding.tvBuyPrice.setText(String.format(Locale.US, "%.2f", safeDouble(product, "cost")));
         binding.tvQty.setText(product.getOrDefault("qty", "0"));
-        binding.tvCategory.setText("التصنيف: " + product.getOrDefault("category", "-"));
+        binding.tvCategory.setText(getString(R.string.category_label_format, product.getOrDefault("category", "-")));
 
         // Load sales history for this product
         salesHistory.clear();
@@ -98,13 +98,13 @@ public class ActivityItemDetailsActivity extends BaseActivity {
         View v = LayoutInflater.from(this).inflate(R.layout.dialog_simple_input, null);
         TextInputEditText etInput = v.findViewById(R.id.et_input);
         if (etInput != null) {
-            etInput.setHint("سعر البيع الجديد");
+            etInput.setHint(R.string.new_sell_price_hint);
             etInput.setText(product != null ? product.getOrDefault("price", "0") : "0");
         }
         new MaterialAlertDialogBuilder(this)
-            .setTitle("تعديل سعر البيع")
+            .setTitle(R.string.edit_sell_price_title)
             .setView(v)
-            .setPositiveButton("حفظ", (d, w) -> {
+            .setPositiveButton(R.string.save, (d, w) -> {
                 try {
                     String s = etInput != null && etInput.getText() != null
                         ? etInput.getText().toString().trim() : "";
@@ -114,18 +114,18 @@ public class ActivityItemDetailsActivity extends BaseActivity {
                     loadData();
                 } catch (NumberFormatException ignored) {}
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
     private void showAddQtyDialog() {
         View v = LayoutInflater.from(this).inflate(R.layout.dialog_quantity, null);
         TextInputEditText etQty = v.findViewById(R.id.et_quantity);
-        if (etQty != null) { etQty.setHint("الكمية المضافة"); etQty.setText("1"); }
+        if (etQty != null) { etQty.setHint(R.string.added_quantity_hint); etQty.setText("1"); }
         new MaterialAlertDialogBuilder(this)
-            .setTitle("إضافة كمية")
+            .setTitle(R.string.add_quantity_title)
             .setView(v)
-            .setPositiveButton("إضافة", (d, w) -> {
+            .setPositiveButton(R.string.add_btn, (d, w) -> {
                 try {
                     String s = etQty != null && etQty.getText() != null
                         ? etQty.getText().toString().trim() : "";
@@ -135,21 +135,21 @@ public class ActivityItemDetailsActivity extends BaseActivity {
                     loadData();
                 } catch (NumberFormatException ignored) {}
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
     private void confirmDelete() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("تأكيد الحذف")
-            .setMessage("هل تريد حذف المنتج '" + (product != null ? product.getOrDefault("name","") : "") + "'؟")
-            .setPositiveButton("حذف", (d, w) -> {
+            .setTitle(R.string.confirm_delete_title)
+            .setMessage(getString(R.string.confirm_delete_product_message, product != null ? product.getOrDefault("name","") : ""))
+            .setPositiveButton(R.string.delete, (d, w) -> {
                 if (productId != null) {
                     dbHelper.deleteProduct(productId);
                     finish();
                 }
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -172,12 +172,13 @@ public class ActivityItemDetailsActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= salesHistory.size()) return;
             HashMap<String, String> item = salesHistory.get(pos);
-            if (h.tvRef  != null) h.tvRef.setText("فاتورة #" + item.getOrDefault("invoice_id",""));
+            if (h.tvRef  != null) h.tvRef.setText(getString(R.string.invoice_ref_format, item.getOrDefault("invoice_id","")));
             if (h.tvDate != null) h.tvDate.setText(item.getOrDefault("created_at",""));
             // Use tvNote for qty info
             TextView tvNote = h.itemView.findViewById(R.id.tv_note);
-            if (tvNote != null) tvNote.setText("الكمية: " + item.getOrDefault("qty","0"));
+            if (tvNote != null) tvNote.setText(getString(R.string.quantity_label_format, item.getOrDefault("qty","0")));
             // Use tvAmount for total
             TextView tvAmount = h.itemView.findViewById(R.id.tv_amount);
             if (tvAmount != null) {

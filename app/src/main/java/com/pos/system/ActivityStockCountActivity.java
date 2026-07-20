@@ -44,7 +44,7 @@ public class ActivityStockCountActivity extends BaseActivity {
     private void setupToolbar() {
         setSupportActionBar(binding.toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("جرد المخزون");
+            getSupportActionBar().setTitle(R.string.nav_stock_count);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -93,8 +93,8 @@ public class ActivityStockCountActivity extends BaseActivity {
 
     private void showSessionUI(boolean hasSession) {
         binding.tvSessionStatus.setText(hasSession
-            ? "جلسة جرد مفتوحة: " + (activeSession != null ? activeSession.getOrDefault("session_number","") : "")
-            : "لا توجد جلسة جرد مفتوحة");
+            ? getString(R.string.open_session_label_format, activeSession != null ? activeSession.getOrDefault("session_number","") : "")
+            : getString(R.string.no_open_session_label));
         binding.fabStart.setVisibility(hasSession ? View.GONE : View.VISIBLE);
         binding.btnComplete.setVisibility(hasSession ? View.VISIBLE : View.GONE);
         binding.btnCancel.setVisibility(hasSession ? View.VISIBLE : View.GONE);
@@ -139,14 +139,14 @@ public class ActivityStockCountActivity extends BaseActivity {
 
     private void startNewSession() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("بدء جلسة جرد جديدة")
-            .setMessage("سيتم بدء جلسة جرد جديدة. يمكنك إدخال الكميات الفعلية لكل منتج ثم إتمام الجرد لتحديث المخزون.")
-            .setPositiveButton("بدء", (d, w) ->
+            .setTitle(R.string.start_new_count_session_title)
+            .setMessage(R.string.start_new_count_session_message)
+            .setPositiveButton(R.string.start_btn, (d, w) ->
                 executor.execute(() -> {
                     long id = dbHelper.createStockCountSession("admin");
                     runOnUiThread(() -> {
-                        if (id > 0) { showToast("تم بدء جلسة الجرد"); checkActiveSession(); }
-                        else showSnackbar("خطأ في بدء الجلسة", true);
+                        if (id > 0) { showToast(getString(R.string.count_session_started)); checkActiveSession(); }
+                        else showSnackbar(getString(R.string.session_start_error), true);
                     });
                 }))
             .setNegativeButton(R.string.cancel, null)
@@ -158,11 +158,9 @@ public class ActivityStockCountActivity extends BaseActivity {
         int counted = countedItems.size();
         int total = allProducts.size();
         new MaterialAlertDialogBuilder(this)
-            .setTitle("إتمام الجرد")
-            .setMessage("تم إدخال " + counted + " منتج من أصل " + total + ".\n\n" +
-                "المنتجات غير المُعدّة لن تتغير كمياتها.\n\n" +
-                "هل تريد إتمام الجرد وتحديث المخزون؟")
-            .setPositiveButton("إتمام", (d, w) -> {
+            .setTitle(R.string.complete_count_title)
+            .setMessage(getString(R.string.complete_count_message_format, counted, total))
+            .setPositiveButton(R.string.complete_btn, (d, w) -> {
                 long sessionId = Long.parseLong(activeSession.getOrDefault("id","0"));
                 executor.execute(() -> {
                     // Save all counted items first
@@ -176,8 +174,8 @@ public class ActivityStockCountActivity extends BaseActivity {
                     }
                     boolean ok = dbHelper.completeStockCount(sessionId);
                     runOnUiThread(() -> {
-                        if (ok) { showToast("تم إتمام الجرد وتحديث المخزون بنجاح"); activeSession = null; countedItems.clear(); checkActiveSession(); }
-                        else showSnackbar("خطأ في إتمام الجرد", true);
+                        if (ok) { showToast(getString(R.string.count_completed_success)); activeSession = null; countedItems.clear(); checkActiveSession(); }
+                        else showSnackbar(getString(R.string.count_completion_error), true);
                     });
                 });
             })
@@ -187,19 +185,19 @@ public class ActivityStockCountActivity extends BaseActivity {
 
     private void confirmCancel() {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("إلغاء الجرد")
-            .setMessage("هل تريد إلغاء جلسة الجرد الحالية؟ لن تتغير أي كميات.")
-            .setPositiveButton("إلغاء الجرد", (d, w) -> {
+            .setTitle(R.string.cancel_count_title)
+            .setMessage(R.string.cancel_count_message)
+            .setPositiveButton(R.string.cancel_count_title, (d, w) -> {
                 long sessionId = Long.parseLong(activeSession.getOrDefault("id","0"));
                 executor.execute(() -> {
                     boolean ok = dbHelper.cancelStockCount(sessionId);
                     runOnUiThread(() -> {
-                        if (ok) { showToast("تم إلغاء الجرد"); activeSession = null; countedItems.clear(); checkActiveSession(); }
-                        else showSnackbar("خطأ في الإلغاء", true);
+                        if (ok) { showToast(getString(R.string.count_cancelled_success)); activeSession = null; countedItems.clear(); checkActiveSession(); }
+                        else showSnackbar(getString(R.string.cancel_error), true);
                     });
                 });
             })
-            .setNegativeButton("تراجع", null)
+            .setNegativeButton(R.string.go_back, null)
             .show();
     }
 
@@ -217,13 +215,14 @@ public class ActivityStockCountActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(VH h, int pos) {
+            if (pos < 0 || pos >= filteredList.size()) return;
             HashMap<String, String> item = filteredList.get(pos);
             if (activeSession != null) {
                 // Show product for counting
                 h.tvName.setText(item.getOrDefault("name","—"));
                 h.tvBarcode.setText(item.getOrDefault("barcode",""));
                 int sysQty = Integer.parseInt(item.getOrDefault("qty","0"));
-                h.tvSystemQty.setText("المخزون الحالي: " + sysQty);
+                h.tvSystemQty.setText(getString(R.string.current_stock_label_format, sysQty));
 
                 // Find if already counted
                 HashMap<String, String> existing = null;
@@ -263,7 +262,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                                 countedItems.add(ci);
                                 int diff = counted - sysQty;
                                 if (h.tvDiff != null) {
-                                    h.tvDiff.setText("الفرق: " + (diff >= 0 ? "+" : "") + diff);
+                                    h.tvDiff.setText(getString(R.string.diff_label_format, (diff >= 0 ? "+" : "") + diff));
                                     h.tvDiff.setTextColor(androidx.core.content.ContextCompat.getColor(h.itemView.getContext(), diff == 0 ? R.color.gray_400 : diff > 0 ? R.color.color_success : R.color.color_error));
                                 }
                             }
@@ -275,7 +274,7 @@ public class ActivityStockCountActivity extends BaseActivity {
                 if (h.tvDiff != null && existing != null) {
                     int cq = Integer.parseInt(existing.getOrDefault("counted_qty","0"));
                     int diff = cq - sysQty;
-                    h.tvDiff.setText("الفرق: " + (diff >= 0 ? "+" : "") + diff);
+                    h.tvDiff.setText(getString(R.string.diff_label_format, (diff >= 0 ? "+" : "") + diff));
                     h.tvDiff.setTextColor(androidx.core.content.ContextCompat.getColor(h.itemView.getContext(), diff == 0 ? R.color.gray_400 : diff > 0 ? R.color.color_success : R.color.color_error));
                     h.tvDiff.setVisibility(View.VISIBLE);
                 } else if (h.tvDiff != null) {
@@ -285,10 +284,11 @@ public class ActivityStockCountActivity extends BaseActivity {
             } else {
                 // Show past sessions
                 if (h.tvName != null) h.tvName.setText(item.getOrDefault("session_number","—"));
-                if (h.tvBarcode != null) h.tvBarcode.setText("بدأ: " + item.getOrDefault("started_at",""));
+                if (h.tvBarcode != null) h.tvBarcode.setText(getString(R.string.started_label_format, item.getOrDefault("started_at","")));
                 String status = item.getOrDefault("status","");
                 if (h.tvSystemQty != null) {
-                    h.tvSystemQty.setText("الحالة: " + ("completed".equals(status) ? "مكتمل" : "cancelled".equals(status) ? "ملغي" : "مفتوح"));
+                    h.tvSystemQty.setText(getString(R.string.status_label_format,
+                        getString("completed".equals(status) ? R.string.status_completed : "cancelled".equals(status) ? R.string.status_cancelled : R.string.status_open)));
                 }
             }
         }

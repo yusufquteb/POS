@@ -49,6 +49,12 @@ public class ActivityLocationActivity extends BaseActivity {
         setContentView(binding.getRoot());
         applyWindowInsets(binding.getRoot());
 
+        com.google.android.material.appbar.MaterialToolbar toolbar = binding.toolbarTitle;
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            toolbar.setNavigationOnClickListener(v -> finish());
+        }
+
         dbHelper = new DBHelper(this);
         recyclerView = binding.recyclerView;
         emptyState = binding.emptyState;
@@ -57,7 +63,7 @@ public class ActivityLocationActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         refreshData();
 
-        Snackbar.make(recyclerView, "اسحب لليسار للحذف، ولليمين للتعديل", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(recyclerView, getString(R.string.swipe_hint_delete_edit), Snackbar.LENGTH_LONG).show();
 
         binding.fabAdd.setOnClickListener(v -> showDataSheet(null));
 
@@ -265,6 +271,7 @@ public class ActivityLocationActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
+            if (i < 0 || i >= list.size()) return;
             HashMap<String, Object> item = list.get(i);
             
             String name = item.get("name") != null ? item.get("name").toString() : "غير محدد";

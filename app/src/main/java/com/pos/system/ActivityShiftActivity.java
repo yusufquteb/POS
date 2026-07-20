@@ -72,7 +72,7 @@ public class ActivityShiftActivity extends BaseActivity {
         setContentView(binding.getRoot());
 
         if (!FeatureGate.isUnlocked(this)) {
-            FeatureGate.requirePremium(this, "إدارة الشيفتات", true);
+            FeatureGate.requirePremium(this, getString(R.string.feature_shifts), true);
             return;
         }
 
@@ -169,8 +169,13 @@ public class ActivityShiftActivity extends BaseActivity {
 
             // Wire close button
             String shiftId = current.getOrDefault("id", "0");
-            btnCloseShift.setOnClickListener(v ->
-                    showCloseShiftDialog(Long.parseLong(shiftId), current));
+            btnCloseShift.setOnClickListener(v -> {
+                try {
+                    showCloseShiftDialog(Long.parseLong(shiftId), current);
+                } catch (NumberFormatException e) {
+                    showSnackbar(getString(R.string.error_unknown), true);
+                }
+            });
 
         } else {
             // ── No open shift ──────────────────────────────────
@@ -336,6 +341,7 @@ public class ActivityShiftActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ShiftViewHolder h, int position) {
+            if (position < 0 || position >= data.size()) return;
             HashMap<String, String> shift = data.get(position);
 
             String id           = shift.getOrDefault("id",            "-");

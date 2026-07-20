@@ -131,7 +131,7 @@ public class ActivityBarcodeScannerActivity extends BaseActivity {
         
         android.widget.EditText input = new android.widget.EditText(this);
         input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
-        input.setHint("مثال: 6281234567890");
+        input.setHint(getString(R.string.barcode_hint_example));
         input.setPadding(50, 30, 50, 30);
         
         android.widget.LinearLayout container = new android.widget.LinearLayout(this);
@@ -140,15 +140,15 @@ public class ActivityBarcodeScannerActivity extends BaseActivity {
         container.addView(input);
         
         new MaterialAlertDialogBuilder(this)
-            .setTitle("📱 إدخال الباركود يدوياً")
-            .setMessage("أدخل رقم الباركود (13 رقم عادةً)")
+            .setTitle(R.string.manual_barcode_entry_title)
+            .setMessage(R.string.enter_barcode_message)
             .setView(container)
-            .setPositiveButton("✓ موافق", (d, w) -> {
+            .setPositiveButton(R.string.confirm_ok_emoji, (d, w) -> {
                 String barcode = input.getText().toString().trim();
                 if (!barcode.isEmpty()) {
                     returnResult(barcode);
                 } else {
-                    showToast("⚠ الرجاء إدخال الباركود");
+                    showToast(getString(R.string.please_enter_barcode));
                     // Resume scanning if input was cancelled
                     if (!isFinishing()) {
                         isScanning = true;
@@ -156,7 +156,7 @@ public class ActivityBarcodeScannerActivity extends BaseActivity {
                     }
                 }
             })
-            .setNegativeButton("✗ إلغاء", (d, w) -> {
+            .setNegativeButton(R.string.cancel_emoji, (d, w) -> {
                 // Resume scanning if dialog cancelled
                 if (!isFinishing()) {
                     isScanning = true;
@@ -188,7 +188,7 @@ public class ActivityBarcodeScannerActivity extends BaseActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startScanning();
             } else {
-                showToast("⚠ يجب السماح باستخدام الكاميرا لمسح الباركود");
+                showToast(getString(R.string.camera_permission_required_scan));
                 showManualInputDialog();
             }
         }

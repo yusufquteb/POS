@@ -45,7 +45,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     private void setupToolbar() {
         setSupportActionBar(binding.toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("الخزينة");
+            getSupportActionBar().setTitle(R.string.hub_cash_drawer);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -95,10 +95,12 @@ public class ActivityCashDrawerActivity extends BaseActivity {
 
     private void selectDrawer(HashMap<String, String> drawer) {
         selectedDrawer = drawer;
-        long drawerId = Long.parseLong(drawer.getOrDefault("id", "0"));
+        long drawerId = 0;
+        double balance = 0;
+        try { drawerId = Long.parseLong(drawer.getOrDefault("id", "0")); } catch (Exception ignored) {}
+        try { balance  = Double.parseDouble(drawer.getOrDefault("current_balance", "0")); } catch (Exception ignored) {}
         binding.tvBalanceLabel.setText(drawer.getOrDefault("name", "الخزينة"));
-        binding.tvBalance.setText(String.format(Locale.US, "%.2f %s",
-            Double.parseDouble(drawer.getOrDefault("current_balance", "0")), getCurrency()));
+        binding.tvBalance.setText(String.format(Locale.US, "%.2f %s", balance, getCurrency()));
         binding.cardBalance.setVisibility(View.VISIBLE);
         loadTransactions(drawerId);
     }
@@ -157,7 +159,9 @@ public class ActivityCashDrawerActivity extends BaseActivity {
                     return;
                 }
                 if (amt <= 0) { showToast("المبلغ يجب أن يكون أكبر من صفر"); return; }
-                long drawerId = Long.parseLong(selectedDrawer.getOrDefault("id", "0"));
+                long drawerId;
+                try { drawerId = Long.parseLong(selectedDrawer.getOrDefault("id", "0")); }
+                catch (Exception e) { showToast(getString(R.string.error_unknown)); return; }
                 double finalAmt = amt;
                 executor.execute(() -> {
                     boolean ok = dbHelper.cashDrawerTransaction(drawerId, type, finalAmt, reason, "admin", "", "manual");
@@ -189,9 +193,12 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(VH h, int pos) {
+            if (pos < 0 || pos >= drawersList.size()) return;
             HashMap<String, String> d = drawersList.get(pos);
             h.tvName.setText(d.getOrDefault("name", "—"));
-            h.tvBal.setText(String.format(Locale.US, "%.2f", Double.parseDouble(d.getOrDefault("current_balance", "0"))));
+            double bal = 0;
+            try { bal = Double.parseDouble(d.getOrDefault("current_balance", "0")); } catch (Exception ignored) {}
+            h.tvBal.setText(String.format(Locale.US, "%.2f", bal));
             boolean sel = selectedDrawer != null && d.getOrDefault("id","").equals(selectedDrawer.getOrDefault("id",""));
             h.card.setStrokeWidth(sel ? 4 : 0);
             h.itemView.setOnClickListener(v -> { selectDrawer(d); drawersAdapter.notifyDataSetChanged(); });
@@ -212,6 +219,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(VH h, int pos) {
+            if (pos < 0 || pos >= txList.size()) return;
             HashMap<String, String> tx = txList.get(pos);
             String type = tx.getOrDefault("type", "in");
             h.tvType.setText("in".equals(type) ? "إيداع ↑" : "سحب ↓");
@@ -219,12 +227,13 @@ public class ActivityCashDrawerActivity extends BaseActivity {
             int colorIn  = androidx.core.content.ContextCompat.getColor(ctx, R.color.color_success);
             int colorOut = androidx.core.content.ContextCompat.getColor(ctx, R.color.color_error);
             h.tvType.setTextColor("in".equals(type) ? colorIn : colorOut);
-            h.tvAmount.setText(String.format(Locale.US, "%.2f %s",
-                Double.parseDouble(tx.getOrDefault("amount","0")), getCurrency()));
+            double amount = 0, balanceAfter = 0;
+            try { amount       = Double.parseDouble(tx.getOrDefault("amount","0")); } catch (Exception ignored) {}
+            try { balanceAfter = Double.parseDouble(tx.getOrDefault("balance_after","0")); } catch (Exception ignored) {}
+            h.tvAmount.setText(String.format(Locale.US, "%.2f %s", amount, getCurrency()));
             h.tvAmount.setTextColor("in".equals(type) ? colorIn : colorOut);
             h.tvReason.setText(tx.getOrDefault("reason", "—"));
-            h.tvBalance.setText("الرصيد: " + String.format(Locale.US, "%.2f",
-                Double.parseDouble(tx.getOrDefault("balance_after","0"))));
+            h.tvBalance.setText("الرصيد: " + String.format(Locale.US, "%.2f", balanceAfter));
             h.tvDate.setText(tx.getOrDefault("created_at","").replace("T"," "));
         }
         @Override public int getItemCount() { return txList.size(); }

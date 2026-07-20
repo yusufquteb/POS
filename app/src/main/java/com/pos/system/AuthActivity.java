@@ -159,9 +159,10 @@ public class AuthActivity extends BaseActivity {
      * تسجيل الدخول (تخطي Firebase)
      */
     private void signInWithGoogle() {
-        // تم إلغاء Google Sign-in
-        showToast("تسجيل الدخول عبر Google غير متاح حالياً");
-        skipAuth();
+        // تم إلغاء Google Sign-in — لا ننتقل تلقائياً لوضع الضيف حتى لا
+        // يظن المستخدم أن تسجيل الدخول تم فعلاً؛ يمكنه الضغط على "تخطي"
+        // بنفسه إن أراد المتابعة بدون حساب.
+        showToast(getString(R.string.google_signin_unavailable));
     }
 
     /**
@@ -226,12 +227,12 @@ public class AuthActivity extends BaseActivity {
         // التحقق من الإيميل
         if (email.isEmpty()) {
             if (tilEmail != null) {
-                tilEmail.setError("الرجاء إدخال البريد الإلكتروني");
+                tilEmail.setError(getString(R.string.please_enter_email));
             }
             valid = false;
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             if (tilEmail != null) {
-                tilEmail.setError("البريد الإلكتروني غير صحيح");
+                tilEmail.setError(getString(R.string.invalid_email));
             }
             valid = false;
         } else {
@@ -243,12 +244,12 @@ public class AuthActivity extends BaseActivity {
         // التحقق من كلمة المرور
         if (password.isEmpty()) {
             if (tilPassword != null) {
-                tilPassword.setError("الرجاء إدخال كلمة المرور");
+                tilPassword.setError(getString(R.string.please_enter_password));
             }
             valid = false;
         } else if (password.length() < 6) {
             if (tilPassword != null) {
-                tilPassword.setError("كلمة المرور يجب أن تكون 6 أحرف على الأقل");
+                tilPassword.setError(getString(R.string.password_min_length));
             }
             valid = false;
         } else {
@@ -266,7 +267,7 @@ public class AuthActivity extends BaseActivity {
     private void signInWithEmail(String email, String password) {
         showProgress(false);
         // تسجيل دخول بسيط - قبول أي بيانات
-        saveUserData(email, "مستخدم", null);
+        saveUserData(email, getString(R.string.default_user_name), null);
         navigateToMain();
     }
 
@@ -276,7 +277,7 @@ public class AuthActivity extends BaseActivity {
     private void createAccountWithEmail(String email, String password) {
         showProgress(false);
         // قبول أي بيانات
-        saveUserData(email, "مستخدم جديد", null);
+        saveUserData(email, getString(R.string.new_user_name), null);
         navigateToMain();
     }
 
@@ -287,13 +288,13 @@ public class AuthActivity extends BaseActivity {
         isSignUpMode = !isSignUpMode;
 
         if (btnEmailLogin != null) {
-            btnEmailLogin.setText(isSignUpMode ? "إنشاء حساب" : "تسجيل الدخول");
+            btnEmailLogin.setText(isSignUpMode ? R.string.create_account_btn : R.string.sign_in_btn);
         }
 
         if (tvSwitchMode != null) {
-            tvSwitchMode.setText(isSignUpMode ? 
-                "لديك حساب؟ تسجيل الدخول" : 
-                "ليس لديك حساب؟ إنشاء حساب");
+            tvSwitchMode.setText(isSignUpMode ?
+                R.string.have_account_login :
+                R.string.no_account_register);
         }
     }
 
@@ -302,10 +303,9 @@ public class AuthActivity extends BaseActivity {
      */
     private void skipAuth() {
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
-                .setTitle("تخطي تسجيل الدخول")
-                .setMessage("هل تريد المتابعة بدون تسجيل الدخول؟\n\n" +
-                        "ملاحظة: لن تتمكن من مزامنة بياناتك.")
-                .setPositiveButton("نعم، متابعة", (d, w) -> {
+                .setTitle(R.string.skip_login_title)
+                .setMessage(R.string.skip_login_message)
+                .setPositiveButton(R.string.yes_continue, (d, w) -> {
                     saveGuestMode();
                     navigateToMain();
                 })
@@ -327,7 +327,7 @@ public class AuthActivity extends BaseActivity {
      */
     private void onAuthSuccess(String email, String name) {
         saveUserData(email, name, null);
-        showSuccess("مرحباً " + (name != null ? name : "بك") + "!");
+        showSuccess(getString(R.string.welcome_user_format, name != null ? name : getString(R.string.welcome_default_user)));
         navigateToMain();
     }
 
@@ -371,15 +371,12 @@ public class AuthActivity extends BaseActivity {
      * الانتقال إلى الشاشة الرئيسية
      */
     private void navigateToMain() {
-        // التحقق من Onboarding
-        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
-        boolean onboardingCompleted = prefs.getBoolean("onboarding_completed", false);
-
+        // التحقق من Onboarding (نفس الفحص المستخدم في SplashActivity)
         Intent intent;
-        if (onboardingCompleted) {
-            intent = new Intent(this, MainActivity.class);
-        } else {
+        if (OnboardingActivity.isFirstTime(this)) {
             intent = new Intent(this, OnboardingActivity.class);
+        } else {
+            intent = new Intent(this, MainActivity.class);
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -526,8 +523,8 @@ public class AuthActivity extends BaseActivity {
         } else {
             // تأكيد الخروج
             new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
-                    .setTitle("تأكيد الخروج")
-                    .setMessage("هل تريد الخروج من التطبيق؟")
+                    .setTitle(R.string.confirm_exit_title)
+                    .setMessage(R.string.confirm_exit_message)
                     .setPositiveButton(R.string.yes, (d, w) -> finish())
                     .setNegativeButton(R.string.no, null)
                     .show();

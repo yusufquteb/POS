@@ -68,7 +68,7 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
     private void setupToolbar() {
         MaterialToolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) getSupportActionBar().setTitle("عرض سعر جديد");
+        if (getSupportActionBar() != null) getSupportActionBar().setTitle(R.string.new_price_quote_title);
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
@@ -172,7 +172,7 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
     }
 
     private void setupCheckout() {
-        binding.btnCheckout.setText("حفظ عرض السعر");
+        binding.btnCheckout.setText(R.string.save_quote);
         binding.btnCheckout.setOnClickListener(v -> saveQuote());
 
         // Clear button clears cart
@@ -235,6 +235,7 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
         }
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= cartItems.size()) return;
             CartItem item = cartItems.get(pos);
             if (h.tvName  != null) h.tvName.setText(item.name);
             if (h.tvPrice != null) h.tvPrice.setText(String.format(Locale.US, "%.2f %s", item.price, currency));

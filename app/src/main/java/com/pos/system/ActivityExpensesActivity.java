@@ -167,36 +167,36 @@ public class ActivityExpensesActivity extends BaseActivity {
         }
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("إضافة مصروف جديد")
+            .setTitle(R.string.add_new_expense_title)
             .setView(dialogView)
-            .setPositiveButton("إضافة", (dialog, which) -> {
+            .setPositiveButton(R.string.add_btn, (dialog, which) -> {
                 String category    = getText(etCategory);
                 String amountStr   = getText(etAmount);
                 String description = getText(etDescription);
                 String date        = getText(etDate);
 
-                if (category.isEmpty()) { showToast("يرجى إدخال التصنيف"); return; }
-                if (amountStr.isEmpty()) { showToast("يرجى إدخال المبلغ"); return; }
+                if (category.isEmpty()) { showToast(getString(R.string.please_enter_category)); return; }
+                if (amountStr.isEmpty()) { showToast(getString(R.string.please_enter_amount)); return; }
 
                 try {
                     double amount = Double.parseDouble(amountStr);
-                    if (amount <= 0) { showToast("المبلغ يجب أن يكون أكبر من صفر"); return; }
+                    if (amount <= 0) { showToast(getString(R.string.amount_must_be_positive)); return; }
 
                     String expenseType = (rgType != null && rgType.getCheckedRadioButtonId() == R.id.rb_expense_in)
                         ? "IN" : "OUT";
                     long result = dbHelper.addExpenseWithType(category, amount, description, date, "", expenseType);
                     if (result > 0) {
-                        showToast("✓ تمت إضافة المصروف");
+                        showToast(getString(R.string.expense_added_success));
                         try {
                             String walletType = "IN".equals(expenseType) ? "IN" : "OUT";
-                            dbHelper.addWalletTransaction(walletType, amount, "مصروف: " + category, date);
+                            dbHelper.addWalletTransaction(walletType, amount, getString(R.string.expense_wallet_note_format, category), date);
                         } catch (Exception ignored) {}
                         loadExpenses();
                     } else {
-                        showSnackbar("فشل في إضافة المصروف", true);
+                        showSnackbar(getString(R.string.expense_add_failed), true);
                     }
                 } catch (NumberFormatException e) {
-                    showSnackbar("المبلغ غير صحيح", true);
+                    showSnackbar(getString(R.string.invalid_amount), true);
                 }
             })
             .setNegativeButton(R.string.cancel, null)
@@ -213,8 +213,8 @@ public class ActivityExpensesActivity extends BaseActivity {
         HashMap<String, String> expense = expensesList.get(position);
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("حذف المصروف")
-            .setMessage("هل أنت متأكد من حذف هذا المصروف؟")
+            .setTitle(R.string.delete_expense_title)
+            .setMessage(R.string.confirm_delete_expense_message)
             .setPositiveButton(R.string.yes, (dialog, which) -> {
                 try {
                     long id = Long.parseLong(expense.getOrDefault("id", "0"));
@@ -224,12 +224,12 @@ public class ActivityExpensesActivity extends BaseActivity {
                         if (adapter != null) adapter.notifyItemRemoved(position);
                         calculateTotal();
                         updateUI();
-                        showToast("✓ تم الحذف");
+                        showToast(getString(R.string.deleted_successfully));
                     } else {
-                        showSnackbar("فشل في الحذف", true);
+                        showSnackbar(getString(R.string.delete_failed), true);
                     }
                 } catch (Exception e) {
-                    showSnackbar("خطأ في الحذف", true);
+                    showSnackbar(getString(R.string.delete_error), true);
                     if (adapter != null) adapter.notifyItemChanged(position);
                 }
             })
@@ -240,9 +240,11 @@ public class ActivityExpensesActivity extends BaseActivity {
     }
 
     private void showFilterDialog() {
-        String[] options = {"اليوم", "هذا الأسبوع", "هذا الشهر", "آخر 3 أشهر", "هذا العام", "إلغاء التصفية"};
+        String[] options = {getString(R.string.filter_today), getString(R.string.filter_this_week),
+            getString(R.string.filter_this_month), getString(R.string.filter_last_3_months),
+            getString(R.string.filter_this_year), getString(R.string.filter_clear_option)};
         new MaterialAlertDialogBuilder(this)
-            .setTitle("تصفية المصروفات")
+            .setTitle(R.string.filter_expenses_title)
             .setItems(options, (dialog, which) -> {
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -300,7 +302,7 @@ public class ActivityExpensesActivity extends BaseActivity {
         updateUI();
         calculateTotal();
         if (tvFilterDate != null) {
-            tvFilterDate.setText("من " + filterStartDate + " إلى " + filterEndDate);
+            tvFilterDate.setText(getString(R.string.date_range_format, filterStartDate, filterEndDate));
             tvFilterDate.setVisibility(View.VISIBLE);
         }
     }
@@ -320,6 +322,7 @@ public class ActivityExpensesActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH holder, int position) {
+            if (position < 0 || position >= expensesList.size()) return;
             HashMap<String, String> expense = expensesList.get(position);
             if (holder.tvCategory != null)    holder.tvCategory.setText(expense.getOrDefault("category", ""));
             if (holder.tvDescription != null) holder.tvDescription.setText(expense.getOrDefault("description", ""));
@@ -378,19 +381,19 @@ public class ActivityExpensesActivity extends BaseActivity {
         }
 
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
-            .setTitle("تعديل المصروف")
+            .setTitle(R.string.edit_expense_title)
             .setView(dialogView)
-            .setPositiveButton("حفظ", (dialog, which) -> {
+            .setPositiveButton(R.string.save, (dialog, which) -> {
                 String category    = getText(etCategory);
                 String amountStr   = getText(etAmount);
                 String description = getText(etDescription);
                 String date        = getText(etDate);
 
-                if (category.isEmpty())  { showToast("يرجى إدخال التصنيف"); return; }
-                if (amountStr.isEmpty()) { showToast("يرجى إدخال المبلغ");  return; }
+                if (category.isEmpty())  { showToast(getString(R.string.please_enter_category)); return; }
+                if (amountStr.isEmpty()) { showToast(getString(R.string.please_enter_amount));  return; }
                 try {
                     double amount = Double.parseDouble(amountStr);
-                    if (amount <= 0) { showToast("المبلغ يجب أن يكون أكبر من صفر"); return; }
+                    if (amount <= 0) { showToast(getString(R.string.amount_must_be_positive)); return; }
                     String expenseType = (rgType != null && rgType.getCheckedRadioButtonId() == R.id.rb_expense_in)
                         ? "IN" : "OUT";
                     long id = Long.parseLong(expense.getOrDefault("id", "0"));
@@ -401,20 +404,21 @@ public class ActivityExpensesActivity extends BaseActivity {
                     cv.put("date",         date);
                     cv.put("expense_type", expenseType);
                     int updated = dbHelper.getWritableDatabase().update("expenses", cv, "id=?", new String[]{String.valueOf(id)});
-                    if (updated > 0) { showToast("✓ تم تحديث المصروف"); loadExpenses(); }
-                    else showSnackbar("فشل في التحديث", true);
-                } catch (NumberFormatException e) { showSnackbar("المبلغ غير صحيح", true); }
+                    if (updated > 0) { showToast(getString(R.string.expense_updated_success)); loadExpenses(); }
+                    else showSnackbar(getString(R.string.update_failed), true);
+                } catch (NumberFormatException e) { showSnackbar(getString(R.string.invalid_amount), true); }
             })
             .setNegativeButton(R.string.cancel, null)
             .show();
     }
     private void showExpenseDetails(HashMap<String, String> expense) {
-        String details = "التصنيف: " + expense.getOrDefault("category", "") + "\n" +
-                         "المبلغ: "   + expense.getOrDefault("amount", "0") + " " + currency + "\n" +
-                         "الوصف: "    + expense.getOrDefault("description", "") + "\n" +
-                         "التاريخ: "  + expense.getOrDefault("date", "");
+        String details = getString(R.string.expense_details_format,
+            expense.getOrDefault("category", ""),
+            expense.getOrDefault("amount", "0"), currency,
+            expense.getOrDefault("description", ""),
+            expense.getOrDefault("date", ""));
         new MaterialAlertDialogBuilder(this)
-            .setTitle("تفاصيل المصروف")
+            .setTitle(R.string.expense_details_title)
             .setMessage(details)
             .setPositiveButton(R.string.ok, null)
             .show();

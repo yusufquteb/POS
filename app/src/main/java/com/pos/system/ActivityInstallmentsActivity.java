@@ -43,7 +43,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
     private void setupToolbar() {
         setSupportActionBar(binding.toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("الأقساط");
+            getSupportActionBar().setTitle(R.string.hub_installments);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -56,8 +56,8 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setItemAnimator(null);
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("العقود"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("المتأخرة"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.installments_tab_contracts));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.installments_tab_overdue));
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) {
                 currentTab = tab.getPosition();
@@ -94,7 +94,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                 dataList.addAll(fd);
                 adapter.notifyDataSetChanged();
                 binding.tvEmpty.setVisibility(dataList.isEmpty() ? View.VISIBLE : View.GONE);
-                binding.tvSummary.setText("إجمالي المستحق: " + String.format(Locale.US, "%.2f %s", ft, getCurrency()));
+                binding.tvSummary.setText(getString(R.string.total_receivable_label, ft, getCurrency()));
             });
         });
     }
@@ -118,7 +118,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         TextInputEditText etNotes           = dv.findViewById(R.id.et_notes);
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("إضافة عقد تقسيط")
+            .setTitle(R.string.add_installment_contract_title)
             .setView(dv)
             .setPositiveButton(R.string.save, (d, w) -> {
                 if (tilCustomerName != null) tilCustomerName.setError(null);
@@ -132,11 +132,11 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                 String notes  = etNotes        != null && etNotes.getText()        != null ? etNotes.getText().toString().trim()        : "";
 
                 if (name.isEmpty()) {
-                    if (tilCustomerName != null) tilCustomerName.setError("اسم العميل مطلوب");
+                    if (tilCustomerName != null) tilCustomerName.setError(getString(R.string.customer_name_required));
                     return;
                 }
                 if (totStr.isEmpty()) {
-                    if (tilTotalAmount != null) tilTotalAmount.setError("المبلغ الإجمالي مطلوب");
+                    if (tilTotalAmount != null) tilTotalAmount.setError(getString(R.string.total_amount_required));
                     return;
                 }
                 double tot = 0, dwn = 0;
@@ -146,19 +146,19 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                     dwn = Double.parseDouble(dwnStr.isEmpty() ? "0" : dwnStr);
                     cnt = Integer.parseInt(cntStr.isEmpty() ? "1" : cntStr);
                 } catch (Exception ex) {
-                    if (tilTotalAmount != null) tilTotalAmount.setError("بيانات غير صحيحة");
+                    if (tilTotalAmount != null) tilTotalAmount.setError(getString(R.string.invalid_data));
                     return;
                 }
-                if (tot <= 0) { showToast("المبلغ الإجمالي يجب أن يكون أكبر من صفر"); return; }
-                if (dwn >= tot) { showToast("الدفعة الأولى لا تصح أن تساوي أو تتجاوز الإجمالي"); return; }
-                if (cnt <= 0 || cnt > 120) { showToast("عدد الأقساط يجب أن يكون بين 1 و 120"); return; }
+                if (tot <= 0) { showToast(getString(R.string.total_amount_must_be_positive)); return; }
+                if (dwn >= tot) { showToast(getString(R.string.down_payment_exceeds_total)); return; }
+                if (cnt <= 0 || cnt > 120) { showToast(getString(R.string.installment_count_range_error)); return; }
                 double finalTot = tot, finalDwn = dwn;
                 int finalCnt = cnt;
                 executor.execute(() -> {
                     long id = dbHelper.createInstallmentContract(0, name, finalTot, finalDwn, finalCnt, start, notes);
                     runOnUiThread(() -> {
-                        if (id > 0) { showToast("تم إنشاء العقد بنجاح"); loadData(); }
-                        else showSnackbar("حدث خطأ أثناء الحفظ", true);
+                        if (id > 0) { showToast(getString(R.string.contract_created_success)); loadData(); }
+                        else showSnackbar(getString(R.string.save_failed), true);
                     });
                 });
             })
@@ -171,17 +171,17 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         try {
             cid = Long.parseLong(contract.getOrDefault("id", "0"));
         } catch (NumberFormatException e) {
-            showSnackbar("بيانات العقد غير صالحة", true);
+            showSnackbar(getString(R.string.invalid_contract_data), true);
             return;
         }
         executor.execute(() -> {
             List<HashMap<String, String>> payments = dbHelper.getContractPayments(cid);
             StringBuilder sb = new StringBuilder();
-            sb.append("العميل: ").append(contract.getOrDefault("customer_name", "—")).append("\n");
-            sb.append("الإجمالي: ").append(contract.getOrDefault("total_amount", "0")).append(" ").append(getCurrency()).append("\n");
-            sb.append("المسدد: ").append(contract.getOrDefault("paid_amount", "0")).append(" ").append(getCurrency()).append("\n");
-            sb.append("المتبقي: ").append(contract.getOrDefault("remaining_amount", "0")).append(" ").append(getCurrency()).append("\n\n");
-            sb.append("جدول الأقساط:\n");
+            sb.append(getString(R.string.contract_details_customer, contract.getOrDefault("customer_name", "—"))).append("\n");
+            sb.append(getString(R.string.contract_details_total, contract.getOrDefault("total_amount", "0"), getCurrency())).append("\n");
+            sb.append(getString(R.string.contract_details_paid, contract.getOrDefault("paid_amount", "0"), getCurrency())).append("\n");
+            sb.append(getString(R.string.contract_details_remaining, contract.getOrDefault("remaining_amount", "0"), getCurrency())).append("\n\n");
+            sb.append(getString(R.string.installments_schedule_label)).append("\n");
             List<HashMap<String, String>> pending = new ArrayList<>();
             for (HashMap<String, String> p : payments) {
                 String s = p.getOrDefault("status", "pending");
@@ -196,28 +196,29 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                     String[] opts = new String[pending.size()];
                     for (int i = 0; i < pending.size(); i++) {
                         HashMap<String, String> pp = pending.get(i);
-                        opts[i] = "دفع القسط " + pp.getOrDefault("installment_number", "") +
-                                  "  (" + pp.getOrDefault("due_date", "") + ")  " +
-                                  pp.getOrDefault("amount", "") + " " + getCurrency();
+                        opts[i] = getString(R.string.pay_installment_option,
+                                  pp.getOrDefault("installment_number", ""),
+                                  pp.getOrDefault("due_date", ""),
+                                  pp.getOrDefault("amount", ""), getCurrency());
                     }
                     new MaterialAlertDialogBuilder(this)
-                        .setTitle("تفاصيل العقد")
+                        .setTitle(R.string.contract_details_title)
                         .setMessage(sb.toString())
-                        .setPositiveButton("دفع قسط", (d2, w2) ->
+                        .setPositiveButton(R.string.pay_installment_btn, (d2, w2) ->
                             new MaterialAlertDialogBuilder(this)
-                                .setTitle("اختر القسط")
+                                .setTitle(R.string.select_installment_title)
                                 .setItems(opts, (d3, which) -> {
                                     long pid;
                                     try {
                                         pid = Long.parseLong(pending.get(which).getOrDefault("id", "0"));
                                     } catch (NumberFormatException e) {
-                                        showSnackbar("بيانات القسط غير صالحة", true);
+                                        showSnackbar(getString(R.string.invalid_installment_data), true);
                                         return;
                                     }
                                     String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
                                     executor.execute(() -> {
                                         boolean ok = dbHelper.payInstallment(pid, today);
-                                        runOnUiThread(() -> { if (ok) { showToast("تم الدفع بنجاح"); loadData(); } else showSnackbar("خطأ في الدفع", true); });
+                                        runOnUiThread(() -> { if (ok) { showToast(getString(R.string.payment_success)); loadData(); } else showSnackbar(getString(R.string.payment_error), true); });
                                     });
                                 })
                                 .show())
@@ -225,7 +226,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
                         .show();
                 } else {
                     new MaterialAlertDialogBuilder(this)
-                        .setTitle("تفاصيل العقد")
+                        .setTitle(R.string.contract_details_title)
                         .setMessage(sb.toString())
                         .setPositiveButton(R.string.close, null)
                         .show();
@@ -251,42 +252,43 @@ public class ActivityInstallmentsActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(VH h, int pos) {
+            if (pos < 0 || pos >= dataList.size()) return;
             HashMap<String, String> item = dataList.get(pos);
             String currency = getCurrency();
+            android.content.Context ctx = h.itemView.getContext();
             if (currentTab == 0) {
                 h.tvTitle.setText(item.getOrDefault("customer_name", "—"));
-                h.tvSubtitle.setText("رقم العقد: " + item.getOrDefault("contract_number", "—"));
+                h.tvSubtitle.setText(ctx.getString(R.string.contract_number_label, item.getOrDefault("contract_number", "—")));
                 h.tvAmount.setText(String.format(Locale.US, "%.2f %s",
                     parseD(item.getOrDefault("total_amount", "0")), currency));
-                h.tvInfo.setText("متبقي: " + String.format(Locale.US, "%.2f",
-                    parseD(item.getOrDefault("remaining_amount", "0"))) +
-                    " | أقساط: " + item.getOrDefault("installment_count", "0"));
+                h.tvInfo.setText(ctx.getString(R.string.remaining_installments_label,
+                    String.format(Locale.US, "%.2f", parseD(item.getOrDefault("remaining_amount", "0"))),
+                    item.getOrDefault("installment_count", "0")));
                 String status = item.getOrDefault("status", "active");
-                h.tvStatus.setText(statusAr(status));
-                android.content.Context ctx = h.itemView.getContext();
+                h.tvStatus.setText(statusLabel(ctx, status));
                 h.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(ctx,
                     "completed".equals(status) ? R.color.color_success : "overdue".equals(status) ? R.color.color_error : R.color.color_info));
                 h.itemView.setOnClickListener(v -> showContractDetails(item));
             } else {
                 h.tvTitle.setText(item.getOrDefault("customer_name", "—"));
-                h.tvSubtitle.setText("عقد: " + item.getOrDefault("contract_number", "—") +
-                    " - قسط رقم: " + item.getOrDefault("installment_number", ""));
+                h.tvSubtitle.setText(ctx.getString(R.string.contract_installment_label,
+                    item.getOrDefault("contract_number", "—"), item.getOrDefault("installment_number", "")));
                 h.tvAmount.setText(String.format(Locale.US, "%.2f %s",
                     parseD(item.getOrDefault("amount", "0")), currency));
-                h.tvInfo.setText("استحقاق: " + item.getOrDefault("due_date", "—"));
-                h.tvStatus.setText("متأخر");
-                h.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(h.itemView.getContext(), R.color.color_error));
+                h.tvInfo.setText(ctx.getString(R.string.due_date_label, item.getOrDefault("due_date", "—")));
+                h.tvStatus.setText(R.string.status_overdue);
+                h.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.color_error));
                 h.itemView.setOnClickListener(v -> {
                     long pid = Long.parseLong(item.getOrDefault("id", "0"));
                     String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
                     new MaterialAlertDialogBuilder(ActivityInstallmentsActivity.this)
-                        .setTitle("دفع القسط")
-                        .setMessage("دفع " + item.getOrDefault("amount","") + " " + currency +
-                            "\nالعميل: " + item.getOrDefault("customer_name",""))
-                        .setPositiveButton("تأكيد الدفع", (d, w) ->
+                        .setTitle(R.string.pay_installment_dialog_title)
+                        .setMessage(ctx.getString(R.string.pay_installment_message,
+                            item.getOrDefault("amount",""), currency, item.getOrDefault("customer_name","")))
+                        .setPositiveButton(R.string.confirm_payment_btn, (d, w) ->
                             executor.execute(() -> {
                                 boolean ok = dbHelper.payInstallment(pid, today);
-                                runOnUiThread(() -> { if (ok) { showToast("تم الدفع"); loadData(); } else showSnackbar("خطأ", true); });
+                                runOnUiThread(() -> { if (ok) { showToast(getString(R.string.payment_done)); loadData(); } else showSnackbar(getString(R.string.error_generic), true); });
                             }))
                         .setNegativeButton(R.string.cancel, null)
                         .show();
@@ -300,11 +302,11 @@ public class ActivityInstallmentsActivity extends BaseActivity {
             try { return Double.parseDouble(s); } catch (Exception e) { return 0; }
         }
 
-        private String statusAr(String s) {
+        private String statusLabel(android.content.Context ctx, String s) {
             switch (s) {
-                case "completed": return "مكتمل";
-                case "overdue":   return "متأخر";
-                default:          return "نشط";
+                case "completed": return ctx.getString(R.string.status_completed);
+                case "overdue":   return ctx.getString(R.string.status_overdue);
+                default:          return ctx.getString(R.string.status_active);
             }
         }
 

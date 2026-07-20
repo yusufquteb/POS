@@ -135,6 +135,7 @@ public class ActivitySupplierAccountsActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull VH h, int pos) {
+            if (pos < 0 || pos >= txList.size()) return;
             HashMap<String, String> t = txList.get(pos);
             String txType = t.getOrDefault("tx_type", "");
             double amt = 0;
