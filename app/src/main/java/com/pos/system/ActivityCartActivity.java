@@ -381,8 +381,7 @@ public class ActivityCartActivity extends BaseActivity {
             if (debt > 0.01) {
                 com.google.android.material.snackbar.Snackbar.make(
                     findViewById(android.R.id.content),
-                    String.format(java.util.Locale.getDefault(),
-                        "⚠️ على هذا العميل دين بقيمة %.2f %s", debt, currency),
+                    getString(R.string.customer_debt_warning_snackbar_format, debt, currency),
                     com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
                     .setBackgroundTint(androidx.core.content.ContextCompat.getColor(this, R.color.color_warning))
                     .setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
@@ -472,7 +471,7 @@ public class ActivityCartActivity extends BaseActivity {
             try {
                 double debt = dbHelper.getCustomerDebt(selectedCustomerId);
                 if (debt > 0.01) {
-                    tvDebtWarning.setText(String.format(Locale.getDefault(), "⚠️ دين سابق على العميل: %.2f %s", debt, currency));
+                    tvDebtWarning.setText(getString(R.string.customer_prior_debt_warning_format, debt, currency));
                     tvDebtWarning.setVisibility(View.VISIBLE);
                 }
             } catch (Exception ignored) {}
@@ -489,10 +488,10 @@ public class ActivityCartActivity extends BaseActivity {
                         double paid = Double.parseDouble(s.toString().trim());
                         double change = paid - total;
                         if (change >= 0) {
-                            tvChangeFinal.setText("الباقي للعميل: " + formatCurrency(change));
+                            tvChangeFinal.setText(getString(R.string.change_due_to_customer_format, formatCurrency(change)));
                             tvChangeFinal.setTextColor(0xFF16A34A);
                         } else {
-                            tvChangeFinal.setText("متبقي على العميل: " + formatCurrency(-change));
+                            tvChangeFinal.setText(getString(R.string.remaining_owed_by_customer_format, formatCurrency(-change)));
                             tvChangeFinal.setTextColor(0xFFDC2626);
                         }
                         tvChangeFinal.setVisibility(View.VISIBLE);
@@ -547,7 +546,7 @@ public class ActivityCartActivity extends BaseActivity {
                 if (paidAmount > 0) {
                     try {
                         String date = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
-                        dbHelper.addWalletTransaction("IN", paidAmount, "فاتورة بيع " + invoiceNumber, date);
+                        dbHelper.addWalletTransaction("IN", paidAmount, getString(R.string.sale_invoice_wallet_note_format, invoiceNumber), date);
                     } catch (Exception ignored) {}
                 }
                 try { new ReviewManager(this).onInvoiceCreated(); } catch (Exception ignored) {}
@@ -608,7 +607,7 @@ public class ActivityCartActivity extends BaseActivity {
         layout.addView(etItemDiscount);
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("تعديل: " + item.name)
+            .setTitle(getString(R.string.edit_item_title_format, item.name))
             .setView(layout)
             .setPositiveButton(R.string.save, (d, w) -> {
                 try {

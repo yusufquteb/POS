@@ -1351,4 +1351,12 @@
     <string name="update_failed">Update failed</string>
     <string name="expense_details_format">Category: %1$s\nAmount: %2$s %3$s\nDescription: %4$s\nDate: %5$s</string>
     <string name="expense_details_title">Expense Details</string>
+
+    <!-- ActivityCartActivity -->
+    <string name="customer_debt_warning_snackbar_format">⚠️ This customer has a debt of %1$.2f %2$s</string>
+    <string name="customer_prior_debt_warning_format">⚠️ Prior customer debt: %1$.2f %2$s</string>
+    <string name="change_due_to_customer_format">Change due to customer: %1$s</string>
+    <string name="remaining_owed_by_customer_format">Remaining owed by customer: %1$s</string>
+    <string name="sale_invoice_wallet_note_format">Sale invoice %1$s</string>
+    <string name="edit_item_title_format">Edit: %1$s</string>
 </resources>

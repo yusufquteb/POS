@@ -1412,4 +1412,12 @@
     <string name="update_failed">فشل في التحديث</string>
     <string name="expense_details_format">التصنيف: %1$s\nالمبلغ: %2$s %3$s\nالوصف: %4$s\nالتاريخ: %5$s</string>
     <string name="expense_details_title">تفاصيل المصروف</string>
+
+    <!-- ActivityCartActivity -->
+    <string name="customer_debt_warning_snackbar_format">⚠️ على هذا العميل دين بقيمة %1$.2f %2$s</string>
+    <string name="customer_prior_debt_warning_format">⚠️ دين سابق على العميل: %1$.2f %2$s</string>
+    <string name="change_due_to_customer_format">الباقي للعميل: %1$s</string>
+    <string name="remaining_owed_by_customer_format">متبقي على العميل: %1$s</string>
+    <string name="sale_invoice_wallet_note_format">فاتورة بيع %1$s</string>
+    <string name="edit_item_title_format">تعديل: %1$s</string>
 </resources>
