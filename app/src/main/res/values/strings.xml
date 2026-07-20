@@ -616,6 +616,8 @@
     <string name="check_now">Check Now</string>
     <string name="permissions_denied_toast">Permissions denied</string>
     <string name="bluetooth_not_enabled_toast">Bluetooth was not enabled</string>
+    <string name="installments_tab_contracts">Contracts</string>
+    <string name="installments_tab_overdue">Overdue</string>
     <string name="filter_date">Filter by Date</string>
     <string name="clear_filter">Clear Filter</string>
     <string name="notes">Notes</string>

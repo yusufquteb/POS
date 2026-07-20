@@ -688,6 +688,8 @@
     <string name="check_now">فحص الآن</string>
     <string name="permissions_denied_toast">تم رفض الصلاحيات</string>
     <string name="bluetooth_not_enabled_toast">لم يتم تفعيل البلوتوث</string>
+    <string name="installments_tab_contracts">العقود</string>
+    <string name="installments_tab_overdue">المتأخرة</string>
     <string name="filter_date">تصفية بالتاريخ</string>
     <string name="clear_filter">مسح التصفية</string>
     <string name="notes">ملاحظات</string>

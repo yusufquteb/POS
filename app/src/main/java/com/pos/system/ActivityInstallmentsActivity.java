@@ -43,7 +43,7 @@ public class ActivityInstallmentsActivity extends BaseActivity {
     private void setupToolbar() {
         setSupportActionBar(binding.toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("الأقساط");
+            getSupportActionBar().setTitle(R.string.hub_installments);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -56,8 +56,8 @@ public class ActivityInstallmentsActivity extends BaseActivity {
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setItemAnimator(null);
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("العقود"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("المتأخرة"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.installments_tab_contracts));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.installments_tab_overdue));
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) {
                 currentTab = tab.getPosition();
