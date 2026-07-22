@@ -1667,4 +1667,7 @@
     <!-- ActivityReportsActivity -->
     <string name="uncategorized">Uncategorized</string>
     <string name="qty_pieces_format">%1$s pcs</string>
+
+    <!-- ActivityPriceQuotesActivity -->
+    <string name="quote_status_converted">Converted</string>
 </resources>

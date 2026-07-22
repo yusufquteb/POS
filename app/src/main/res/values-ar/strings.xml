@@ -1728,4 +1728,7 @@
     <!-- ActivityReportsActivity -->
     <string name="uncategorized">غير مصنّف</string>
     <string name="qty_pieces_format">%1$s قطعة</string>
+
+    <!-- ActivityPriceQuotesActivity -->
+    <string name="quote_status_converted">محوّل</string>
 </resources>
