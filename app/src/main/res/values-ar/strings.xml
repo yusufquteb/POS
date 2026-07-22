@@ -1718,4 +1718,10 @@
     <string name="onboarding_slide_invoices_desc">أنشئ فواتير احترافية في ثوانٍ وأرسلها للعملاء. دعم كامل للطباعة الحرارية عبر البلوتوث.</string>
     <string name="onboarding_slide_reports_title">تقارير وإحصائيات</string>
     <string name="onboarding_slide_reports_desc">تقارير مبيعات يومية وشهرية وسنوية. رسوم بيانية تفاعلية لفهم أداء متجرك بلمحة.</string>
+
+    <!-- ActivityPinLockActivity -->
+    <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>
+    <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>
+    <string name="pin_enter_4_digit">أدخل رمزاً مكوناً من 4 أرقام</string>
+    <string name="pin_mismatch_retry">الرمزان غير متطابقين — حاول مرة أخرى</string>
 </resources>

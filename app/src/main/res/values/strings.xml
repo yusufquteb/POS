@@ -1657,4 +1657,10 @@
     <string name="onboarding_slide_invoices_desc">Create professional invoices in seconds and send them to customers. Full support for thermal printing over Bluetooth.</string>
     <string name="onboarding_slide_reports_title">Reports &amp; Analytics</string>
     <string name="onboarding_slide_reports_desc">Daily, monthly, and yearly sales reports. Interactive charts to understand your store\'s performance at a glance.</string>
+
+    <!-- ActivityPinLockActivity -->
+    <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>
+    <string name="pin_saved_success">PIN code saved successfully ✓</string>
+    <string name="pin_enter_4_digit">Enter a 4-digit code</string>
+    <string name="pin_mismatch_retry">Codes don\'t match — try again</string>
 </resources>
