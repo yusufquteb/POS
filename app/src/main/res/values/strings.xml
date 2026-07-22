@@ -1582,4 +1582,14 @@
     <string name="choose_product_title">Choose Product</string>
     <string name="add_products_first">Add products first</string>
     <string name="price_quote_saved">Price quote saved</string>
+
+    <!-- LowStockWorker -->
+    <string name="low_stock_notification_title">⚠️ Stock Alert</string>
+    <string name="reorder_channel_name">Automatic Purchase Orders</string>
+    <string name="reorder_notification_title">🛒 Reorder Suggestion</string>
+    <string name="reorder_created_format">Created %1$d automatic purchase order(s) — tap to review</string>
+    <string name="expiry_channel_name">Expiry Alerts</string>
+    <string name="expiry_notification_title_format">⚠️ %1$d product(s) expiring soon</string>
+    <string name="and_more_products_format">and %1$d more products…</string>
+    <string name="auto_order_note_format">Automatic order - %1$s</string>
 </resources>

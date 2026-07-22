@@ -1643,4 +1643,14 @@
     <string name="choose_product_title">اختر المنتج</string>
     <string name="add_products_first">أضف منتجات أولاً</string>
     <string name="price_quote_saved">تم حفظ عرض السعر</string>
+
+    <!-- LowStockWorker -->
+    <string name="low_stock_notification_title">⚠️ تنبيه المخزون</string>
+    <string name="reorder_channel_name">طلبات الشراء التلقائية</string>
+    <string name="reorder_notification_title">🛒 اقتراح إعادة الطلب</string>
+    <string name="reorder_created_format">تم إنشاء %1$d طلب شراء تلقائي — اضغط للمراجعة</string>
+    <string name="expiry_channel_name">تنبيهات انتهاء الصلاحية</string>
+    <string name="expiry_notification_title_format">⚠️ %1$d منتج تنتهي صلاحيته قريباً</string>
+    <string name="and_more_products_format">و %1$d منتجات أخرى...</string>
+    <string name="auto_order_note_format">طلب تلقائي - %1$s</string>
 </resources>

@@ -14,6 +14,7 @@ import com.pos.system.ActivityPurchaseOrderActivity;
 import com.pos.system.DBHelper;
 import com.pos.system.MainActivity;
 import com.pos.system.R;
+import com.pos.system.managers.LanguageManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,11 +65,12 @@ public class LowStockWorker extends Worker {
      */
     private int createSmartReorderSuggestions(DBHelper db, List<HashMap<String, String>> lowStock) {
         try {
+            Context ctx = LanguageManager.updateResources(getApplicationContext());
             // جمع المنتجات حسب المورد
             HashMap<String, List<HashMap<String, String>>> bySupplier = new HashMap<>();
             for (HashMap<String, String> p : lowStock) {
                 String supplier = p.getOrDefault("supplier", "").trim();
-                if (supplier.isEmpty()) supplier = "غير محدد";
+                if (supplier.isEmpty()) supplier = ctx.getString(R.string.not_specified);
                 if (!bySupplier.containsKey(supplier))
                     bySupplier.put(supplier, new ArrayList<>());
                 bySupplier.get(supplier).add(p);
@@ -106,8 +108,9 @@ public class LowStockWorker extends Worker {
                 }
 
                 long poId = db.addPurchaseOrder(supplierName, "", items, total,
-                    "طلب تلقائي - " + new java.text.SimpleDateFormat("yyyy-MM-dd",
-                        java.util.Locale.US).format(new java.util.Date()));
+                    ctx.getString(R.string.auto_order_note_format,
+                        new java.text.SimpleDateFormat("yyyy-MM-dd",
+                            java.util.Locale.US).format(new java.util.Date())));
                 if (poId > 0) created++;
             }
             return created;
@@ -117,19 +120,19 @@ public class LowStockWorker extends Worker {
     }
 
     private void showLowStockNotification(int count) {
-        Context ctx = getApplicationContext();
+        Context ctx = LanguageManager.updateResources(getApplicationContext());
         NotificationManager nm = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
-        createChannel(nm, CHANNEL_ID, "تنبيهات المخزون");
+        createChannel(nm, CHANNEL_ID, ctx.getString(R.string.stock_alerts));
 
         Intent intent = new Intent(ctx, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent,
             PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        String msg = count + " منتج على وشك النفاد";
+        String msg = ctx.getString(R.string.low_stock_alert_message, count);
         nm.notify(NOTIF_LOW_STOCK, new NotificationCompat.Builder(ctx, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_warning)
-            .setContentTitle("⚠️ تنبيه المخزون")
+            .setContentTitle(ctx.getString(R.string.low_stock_notification_title))
             .setContentText(msg)
             .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -139,19 +142,19 @@ public class LowStockWorker extends Worker {
     }
 
     private void showReorderNotification(int poCount) {
-        Context ctx = getApplicationContext();
+        Context ctx = LanguageManager.updateResources(getApplicationContext());
         NotificationManager nm = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
-        createChannel(nm, REORDER_CHANNEL, "طلبات الشراء التلقائية");
+        createChannel(nm, REORDER_CHANNEL, ctx.getString(R.string.reorder_channel_name));
 
         Intent intent = new Intent(ctx, ActivityPurchaseOrderActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pi = PendingIntent.getActivity(ctx, 1, intent,
             PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        String msg = "تم إنشاء " + poCount + " طلب شراء تلقائي — اضغط للمراجعة";
+        String msg = ctx.getString(R.string.reorder_created_format, poCount);
         nm.notify(NOTIF_REORDER, new NotificationCompat.Builder(ctx, REORDER_CHANNEL)
             .setSmallIcon(R.drawable.ic_shopping_cart)
-            .setContentTitle("🛒 اقتراح إعادة الطلب")
+            .setContentTitle(ctx.getString(R.string.reorder_notification_title))
             .setContentText(msg)
             .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -161,9 +164,9 @@ public class LowStockWorker extends Worker {
     }
 
     private void showExpiryNotification(List<HashMap<String, String>> expiring) {
-        Context ctx = getApplicationContext();
+        Context ctx = LanguageManager.updateResources(getApplicationContext());
         NotificationManager nm = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
-        createChannel(nm, EXPIRY_CHANNEL, "تنبيهات انتهاء الصلاحية");
+        createChannel(nm, EXPIRY_CHANNEL, ctx.getString(R.string.expiry_channel_name));
 
         Intent intent = new Intent(ctx, com.pos.system.ActivityProductsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -181,9 +184,9 @@ public class LowStockWorker extends Worker {
             if (!expiry.isEmpty()) names.append(" (").append(expiry).append(")");
             names.append("\n");
         }
-        if (expiring.size() > 5) names.append("و ").append(expiring.size() - 5).append(" منتجات أخرى...");
+        if (expiring.size() > 5) names.append(ctx.getString(R.string.and_more_products_format, expiring.size() - 5));
 
-        String title = "⚠️ " + expiring.size() + " منتج تنتهي صلاحيته قريباً";
+        String title = ctx.getString(R.string.expiry_notification_title_format, expiring.size());
         nm.notify(NOTIF_EXPIRY, new NotificationCompat.Builder(ctx, EXPIRY_CHANNEL)
             .setSmallIcon(R.drawable.ic_warning)
             .setContentTitle(title)
