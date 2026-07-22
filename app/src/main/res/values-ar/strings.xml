@@ -1701,4 +1701,8 @@
     <!-- ActivitySupplierRemainingActivity -->
     <string name="pay_supplier_due_format">دفع للمورد %1$s\nالمستحق: %2$s</string>
     <string name="debt_settlement_note">سداد مستحق</string>
+
+    <!-- ActivityCustomerRemainingActivity -->
+    <string name="collect_from_customer_format">تحصيل من %1$s\nالمتبقي: %2$s</string>
+    <string name="debt_payment_note">سداد دين</string>
 </resources>

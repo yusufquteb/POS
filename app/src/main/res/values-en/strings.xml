@@ -1582,4 +1582,8 @@
     <!-- ActivitySupplierRemainingActivity -->
     <string name="pay_supplier_due_format">Payment to supplier %1$s\nDue: %2$s</string>
     <string name="debt_settlement_note">Debt settlement</string>
+
+    <!-- ActivityCustomerRemainingActivity -->
+    <string name="collect_from_customer_format">Collect from %1$s\nRemaining: %2$s</string>
+    <string name="debt_payment_note">Debt payment</string>
 </resources>
