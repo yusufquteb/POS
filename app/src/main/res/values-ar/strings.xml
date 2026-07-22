@@ -1603,4 +1603,15 @@
     <string name="confirm_price_edit_message_format">%1$s %2$s بـ %3$s لـ %4$s</string>
     <string name="products_to_update_format">سيتم تعديل %1$d منتج</string>
     <string name="products_updated_format">تم تعديل %1$d منتج</string>
+
+    <!-- ActivityCashDrawerActivity -->
+    <string name="add_new_drawer_title">إضافة خزينة جديدة</string>
+    <string name="drawer_added_successfully">تمت الإضافة</string>
+    <string name="select_drawer_first">يرجى اختيار خزينة أولاً</string>
+    <string name="deposit_successful">تم الإيداع بنجاح</string>
+    <string name="withdraw_successful">تم السحب بنجاح</string>
+    <string name="insufficient_balance_or_error">خطأ: رصيد غير كافٍ أو خطأ في العملية</string>
+    <string name="transaction_type_deposit">إيداع ↑</string>
+    <string name="transaction_type_withdraw">سحب ↓</string>
+    <string name="balance_colon_format">الرصيد: %1$s</string>
 </resources>

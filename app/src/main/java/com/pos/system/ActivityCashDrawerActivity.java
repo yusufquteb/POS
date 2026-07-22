@@ -99,7 +99,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         double balance = 0;
         try { drawerId = Long.parseLong(drawer.getOrDefault("id", "0")); } catch (Exception ignored) {}
         try { balance  = Double.parseDouble(drawer.getOrDefault("current_balance", "0")); } catch (Exception ignored) {}
-        binding.tvBalanceLabel.setText(drawer.getOrDefault("name", "الخزينة"));
+        binding.tvBalanceLabel.setText(drawer.getOrDefault("name", getString(R.string.nav_cash_drawer)));
         binding.tvBalance.setText(String.format(Locale.US, "%.2f %s", balance, getCurrency()));
         binding.cardBalance.setVisibility(View.VISIBLE);
         loadTransactions(drawerId);
@@ -121,18 +121,18 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         TextInputLayout tilInput = dv.findViewById(R.id.til_input);
         TextInputEditText et = dv.findViewById(R.id.et_input);
         new MaterialAlertDialogBuilder(this)
-            .setTitle("إضافة خزينة جديدة")
+            .setTitle(R.string.add_new_drawer_title)
             .setView(dv)
             .setPositiveButton(R.string.save, (d, w) -> {
                 if (tilInput != null) tilInput.setError(null);
                 String name = et != null && et.getText() != null ? et.getText().toString().trim() : "";
                 if (name.isEmpty()) {
-                    if (tilInput != null) tilInput.setError("الاسم مطلوب");
+                    if (tilInput != null) tilInput.setError(getString(R.string.name_required));
                     return;
                 }
                 executor.execute(() -> {
                     long id = dbHelper.addCashDrawer(name);
-                    runOnUiThread(() -> { if (id > 0) { showToast("تمت الإضافة"); loadDrawers(); } else showSnackbar("خطأ", true); });
+                    runOnUiThread(() -> { if (id > 0) { showToast(getString(R.string.drawer_added_successfully)); loadDrawers(); } else showSnackbar(getString(R.string.error_title), true); });
                 });
             })
             .setNegativeButton(R.string.cancel, null)
@@ -140,25 +140,25 @@ public class ActivityCashDrawerActivity extends BaseActivity {
     }
 
     private void showTransactionDialog(String type) {
-        if (selectedDrawer == null) { showToast("يرجى اختيار خزينة أولاً"); return; }
+        if (selectedDrawer == null) { showToast(getString(R.string.select_drawer_first)); return; }
         View dv = getLayoutInflater().inflate(R.layout.dialog_cash_transaction, null);
         TextInputLayout tilAmount = dv.findViewById(R.id.til_amount);
         TextInputEditText etAmount = dv.findViewById(R.id.et_amount);
         TextInputEditText etReason = dv.findViewById(R.id.et_reason);
-        String title = "in".equals(type) ? "إيداع في الخزينة" : "سحب من الخزينة";
+        String title = "in".equals(type) ? getString(R.string.deposit_to_drawer) : getString(R.string.withdraw_from_drawer);
         new MaterialAlertDialogBuilder(this)
             .setTitle(title)
             .setView(dv)
-            .setPositiveButton("تأكيد", (d, w) -> {
+            .setPositiveButton(R.string.confirm, (d, w) -> {
                 if (tilAmount != null) tilAmount.setError(null);
                 String amtStr = etAmount != null && etAmount.getText() != null ? etAmount.getText().toString().trim() : "";
                 String reason = etReason != null && etReason.getText() != null ? etReason.getText().toString().trim() : "";
                 double amt = 0;
                 try { amt = Double.parseDouble(amtStr.isEmpty() ? "0" : amtStr); } catch (Exception e) {
-                    if (tilAmount != null) tilAmount.setError("مبلغ غير صحيح");
+                    if (tilAmount != null) tilAmount.setError(getString(R.string.invalid_amount));
                     return;
                 }
-                if (amt <= 0) { showToast("المبلغ يجب أن يكون أكبر من صفر"); return; }
+                if (amt <= 0) { showToast(getString(R.string.amount_must_be_positive)); return; }
                 long drawerId;
                 try { drawerId = Long.parseLong(selectedDrawer.getOrDefault("id", "0")); }
                 catch (Exception e) { showToast(getString(R.string.error_unknown)); return; }
@@ -166,8 +166,8 @@ public class ActivityCashDrawerActivity extends BaseActivity {
                 executor.execute(() -> {
                     boolean ok = dbHelper.cashDrawerTransaction(drawerId, type, finalAmt, reason, "admin", "", "manual");
                     runOnUiThread(() -> {
-                        if (ok) { showToast(("in".equals(type) ? "تم الإيداع" : "تم السحب") + " بنجاح"); loadDrawers(); }
-                        else showSnackbar("خطأ: رصيد غير كافٍ أو خطأ في العملية", true);
+                        if (ok) { showToast("in".equals(type) ? getString(R.string.deposit_successful) : getString(R.string.withdraw_successful)); loadDrawers(); }
+                        else showSnackbar(getString(R.string.insufficient_balance_or_error), true);
                     });
                 });
             })
@@ -222,7 +222,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
             if (pos < 0 || pos >= txList.size()) return;
             HashMap<String, String> tx = txList.get(pos);
             String type = tx.getOrDefault("type", "in");
-            h.tvType.setText("in".equals(type) ? "إيداع ↑" : "سحب ↓");
+            h.tvType.setText("in".equals(type) ? getString(R.string.transaction_type_deposit) : getString(R.string.transaction_type_withdraw));
             android.content.Context ctx = h.itemView.getContext();
             int colorIn  = androidx.core.content.ContextCompat.getColor(ctx, R.color.color_success);
             int colorOut = androidx.core.content.ContextCompat.getColor(ctx, R.color.color_error);
@@ -233,7 +233,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
             h.tvAmount.setText(String.format(Locale.US, "%.2f %s", amount, getCurrency()));
             h.tvAmount.setTextColor("in".equals(type) ? colorIn : colorOut);
             h.tvReason.setText(tx.getOrDefault("reason", "—"));
-            h.tvBalance.setText("الرصيد: " + String.format(Locale.US, "%.2f", balanceAfter));
+            h.tvBalance.setText(getString(R.string.balance_colon_format, String.format(Locale.US, "%.2f", balanceAfter)));
             h.tvDate.setText(tx.getOrDefault("created_at","").replace("T"," "));
         }
         @Override public int getItemCount() { return txList.size(); }

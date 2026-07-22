@@ -1484,4 +1484,15 @@
     <string name="confirm_price_edit_message_format">%1$s %2$s by %3$s for %4$s</string>
     <string name="products_to_update_format">%1$d product(s) will be updated</string>
     <string name="products_updated_format">%1$d product(s) updated</string>
+
+    <!-- ActivityCashDrawerActivity -->
+    <string name="add_new_drawer_title">Add New Drawer</string>
+    <string name="drawer_added_successfully">Added successfully</string>
+    <string name="select_drawer_first">Please select a drawer first</string>
+    <string name="deposit_successful">Deposit successful</string>
+    <string name="withdraw_successful">Withdrawal successful</string>
+    <string name="insufficient_balance_or_error">Error: insufficient balance or operation error</string>
+    <string name="transaction_type_deposit">Deposit ↑</string>
+    <string name="transaction_type_withdraw">Withdraw ↓</string>
+    <string name="balance_colon_format">Balance: %1$s</string>
 </resources>
