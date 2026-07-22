@@ -648,13 +648,14 @@
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card_invoices_sales"
-                            android:layout_width="0dp" android:layout_height="90dp"
+                            android:layout_width="0dp" android:layout_height="96dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical" android:padding="8dp">
-                                <ImageView android:layout_width="28dp" android:layout_height="28dp"
+                                <ImageView android:layout_width="36dp" android:layout_height="36dp"
+                                    android:padding="7dp" android:background="@drawable/bg_avatar_circle"
                                     android:src="@drawable/ic_invoices" android:tint="?attr/colorPrimary"
                                     android:importantForAccessibility="no" />
                                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -667,13 +668,14 @@
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card_returns_sales"
-                            android:layout_width="0dp" android:layout_height="90dp"
+                            android:layout_width="0dp" android:layout_height="96dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical" android:padding="8dp">
-                                <ImageView android:layout_width="28dp" android:layout_height="28dp"
+                                <ImageView android:layout_width="36dp" android:layout_height="36dp"
+                                    android:padding="7dp" android:background="@drawable/bg_avatar_circle"
                                     android:src="@drawable/ic_receive" android:tint="?attr/colorPrimary"
                                     android:importantForAccessibility="no" />
                                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -691,13 +693,14 @@
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card_quotes_sales"
-                            android:layout_width="0dp" android:layout_height="90dp"
+                            android:layout_width="0dp" android:layout_height="96dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical" android:padding="8dp">
-                                <ImageView android:layout_width="28dp" android:layout_height="28dp"
+                                <ImageView android:layout_width="36dp" android:layout_height="36dp"
+                                    android:padding="7dp" android:background="@drawable/bg_icon_circle_secondary"
                                     android:src="@drawable/ic_invoices" android:tint="?attr/colorSecondary"
                                     android:importantForAccessibility="no" />
                                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -710,13 +713,14 @@
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card_debts_sales"
-                            android:layout_width="0dp" android:layout_height="90dp"
+                            android:layout_width="0dp" android:layout_height="96dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical" android:padding="8dp">
-                                <ImageView android:layout_width="28dp" android:layout_height="28dp"
+                                <ImageView android:layout_width="36dp" android:layout_height="36dp"
+                                    android:padding="7dp" android:background="@drawable/bg_icon_circle_secondary"
                                     android:src="@drawable/ic_money" android:tint="?attr/colorSecondary"
                                     android:importantForAccessibility="no" />
                                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
