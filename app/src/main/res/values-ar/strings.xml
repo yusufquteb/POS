@@ -1661,4 +1661,12 @@
     <string name="record_payment_for_format">تسجيل دفعة لـ %1$s</string>
     <string name="payment_tx_label">دفعة</string>
     <string name="remaining_colon_format">متبقي: %1$s</string>
+
+    <!-- BillingManager -->
+    <string name="billing_not_ready_retry">خدمة الدفع غير جاهزة، يرجى المحاولة لاحقاً</string>
+    <string name="no_subscription_offers_available">لا توجد عروض اشتراك متاحة</string>
+    <string name="failed_to_get_product_info">فشل في الحصول على معلومات المنتج</string>
+    <string name="purchase_canceled">تم إلغاء عملية الشراء</string>
+    <string name="purchase_failed_generic">فشل في إتمام عملية الشراء</string>
+    <string name="failed_to_get_products">فشل في الحصول على المنتجات</string>
 </resources>

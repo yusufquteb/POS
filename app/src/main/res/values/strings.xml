@@ -1600,4 +1600,12 @@
     <string name="record_payment_for_format">Record payment for %1$s</string>
     <string name="payment_tx_label">Payment</string>
     <string name="remaining_colon_format">Remaining: %1$s</string>
+
+    <!-- BillingManager -->
+    <string name="billing_not_ready_retry">Billing service not ready, please try again later</string>
+    <string name="no_subscription_offers_available">No subscription offers available</string>
+    <string name="failed_to_get_product_info">Failed to get product info</string>
+    <string name="purchase_canceled">Purchase canceled</string>
+    <string name="purchase_failed_generic">Purchase failed</string>
+    <string name="failed_to_get_products">Failed to get products</string>
 </resources>
