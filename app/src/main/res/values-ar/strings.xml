@@ -1710,4 +1710,12 @@
     <string name="test_page_sent">تم إرسال صفحة اختبار</string>
     <string name="permissions_granted_toast">تم منح الصلاحيات</string>
     <string name="bluetooth_enabled_toast">تم تفعيل البلوتوث</string>
+
+    <!-- OnboardingAdapter -->
+    <string name="onboarding_slide_products_title">إدارة المنتجات</string>
+    <string name="onboarding_slide_products_desc">أضف منتجاتك بسهولة مع صور وباركود وأسعار. تتبع المخزون تلقائياً واحصل على تنبيهات عند نفاد الكميات.</string>
+    <string name="onboarding_slide_invoices_title">فواتير احترافية</string>
+    <string name="onboarding_slide_invoices_desc">أنشئ فواتير احترافية في ثوانٍ وأرسلها للعملاء. دعم كامل للطباعة الحرارية عبر البلوتوث.</string>
+    <string name="onboarding_slide_reports_title">تقارير وإحصائيات</string>
+    <string name="onboarding_slide_reports_desc">تقارير مبيعات يومية وشهرية وسنوية. رسوم بيانية تفاعلية لفهم أداء متجرك بلمحة.</string>
 </resources>

@@ -1591,4 +1591,12 @@
     <string name="test_page_sent">Test page sent</string>
     <string name="permissions_granted_toast">Permissions granted</string>
     <string name="bluetooth_enabled_toast">Bluetooth enabled</string>
+
+    <!-- OnboardingAdapter -->
+    <string name="onboarding_slide_products_title">Manage Products</string>
+    <string name="onboarding_slide_products_desc">Add your products easily with images, barcodes, and prices. Track stock automatically and get alerts when quantities run low.</string>
+    <string name="onboarding_slide_invoices_title">Professional Invoices</string>
+    <string name="onboarding_slide_invoices_desc">Create professional invoices in seconds and send them to customers. Full support for thermal printing over Bluetooth.</string>
+    <string name="onboarding_slide_reports_title">Reports &amp; Analytics</string>
+    <string name="onboarding_slide_reports_desc">Daily, monthly, and yearly sales reports. Interactive charts to understand your store\'s performance at a glance.</string>
 </resources>
