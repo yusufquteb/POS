@@ -1653,4 +1653,12 @@
     <string name="expiry_notification_title_format">⚠️ %1$d منتج تنتهي صلاحيته قريباً</string>
     <string name="and_more_products_format">و %1$d منتجات أخرى...</string>
     <string name="auto_order_note_format">طلب تلقائي - %1$s</string>
+
+    <!-- ActivityCustomerAccountsActivity -->
+    <string name="customer_default_name">عميل</string>
+    <string name="loyalty_points_format">نقاط الولاء: %1$d نقطة</string>
+    <string name="amount_paid_hint">المبلغ المدفوع</string>
+    <string name="record_payment_for_format">تسجيل دفعة لـ %1$s</string>
+    <string name="payment_tx_label">دفعة</string>
+    <string name="remaining_colon_format">متبقي: %1$s</string>
 </resources>

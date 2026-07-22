@@ -1592,4 +1592,12 @@
     <string name="expiry_notification_title_format">⚠️ %1$d product(s) expiring soon</string>
     <string name="and_more_products_format">and %1$d more products…</string>
     <string name="auto_order_note_format">Automatic order - %1$s</string>
+
+    <!-- ActivityCustomerAccountsActivity -->
+    <string name="customer_default_name">Customer</string>
+    <string name="loyalty_points_format">Loyalty Points: %1$d pts</string>
+    <string name="amount_paid_hint">Amount paid</string>
+    <string name="record_payment_for_format">Record payment for %1$s</string>
+    <string name="payment_tx_label">Payment</string>
+    <string name="remaining_colon_format">Remaining: %1$s</string>
 </resources>
