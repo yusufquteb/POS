@@ -1687,4 +1687,9 @@
     <string name="csv_template_header">اسم المنتج,الكمية,سعر الشراء,سعر البيع,التصنيف,رقم الباركود,وصف المنتج</string>
     <string name="csv_template_example">مثال منتج,10,50.00,75.00,إلكترونيات,1234567890,وصف اختياري</string>
     <string name="full_details_btn">تفاصيل كاملة</string>
+
+    <!-- ActivityAddProductActivity -->
+    <string name="error_loading_product_data">خطأ في تحميل بيانات المنتج</string>
+    <string name="error_loading_image">خطأ في تحميل الصورة</string>
+    <string name="qty_price_format">الكمية: %1$s | السعر: %2$s</string>
 </resources>

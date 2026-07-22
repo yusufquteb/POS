@@ -497,7 +497,7 @@ public class ActivityAddProductActivity extends BaseActivity {
         try {
             HashMap<String, String> product = dbHelper.getProductById(productId);
             if (product == null) {
-                showSnackbar("لم يتم العثور على المنتج", true);
+                showSnackbar(getString(R.string.product_not_found), true);
                 finish();
                 return;
             }
@@ -537,7 +537,7 @@ public class ActivityAddProductActivity extends BaseActivity {
             calculateProfit();
 
         } catch (Exception e) {
-            showSnackbar("خطأ في تحميل بيانات المنتج", true);
+            showSnackbar(getString(R.string.error_loading_product_data), true);
         }
     }
 
@@ -744,7 +744,7 @@ public class ActivityAddProductActivity extends BaseActivity {
                 selectedImagePath = saveImageToInternalStorage(bitmap);
             }
         } catch (Exception e) {
-            showSnackbar("خطأ في تحميل الصورة", true);
+            showSnackbar(getString(R.string.error_loading_image), true);
         }
     }
 
@@ -929,9 +929,8 @@ public class ActivityAddProductActivity extends BaseActivity {
             if (position < 0 || position >= data.size()) return;
             HashMap<String, String> p = data.get(position);
             if (holder.text1 != null) holder.text1.setText(p.getOrDefault("name", ""));
-            if (holder.text2 != null) holder.text2.setText(
-                "الكمية: " + p.getOrDefault("qty", "0") +
-                " | السعر: " + p.getOrDefault("price", "0"));
+            if (holder.text2 != null) holder.text2.setText(ctx.getString(R.string.qty_price_format,
+                p.getOrDefault("qty", "0"), p.getOrDefault("price", "0")));
 
             // ✅ الضغط على منتج لتعديله
             holder.itemView.setOnClickListener(v -> {

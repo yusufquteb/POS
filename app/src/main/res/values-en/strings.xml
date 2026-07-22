@@ -1568,4 +1568,9 @@
     <string name="csv_template_header">Product Name,Quantity,Purchase Price,Sale Price,Category,Barcode,Product Description</string>
     <string name="csv_template_example">Example Product,10,50.00,75.00,Electronics,1234567890,Optional description</string>
     <string name="full_details_btn">Full Details</string>
+
+    <!-- ActivityAddProductActivity -->
+    <string name="error_loading_product_data">Error loading product data</string>
+    <string name="error_loading_image">Error loading image</string>
+    <string name="qty_price_format">Quantity: %1$s | Price: %2$s</string>
 </resources>
