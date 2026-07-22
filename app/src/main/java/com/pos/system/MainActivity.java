@@ -57,6 +57,7 @@ public class MainActivity extends BaseActivity
     private TextView tvLowStockCount;
     private MaterialCardView cardAlert;
     private TextView tvAlertMessage;
+    private TextView tvGreeting;
     private BarChart chartProfit;
     private TextView tvProfitPeriodTotal;
     private RecyclerView recyclerRecentInvoices;
@@ -95,11 +96,21 @@ public class MainActivity extends BaseActivity
     private void setupUI() {
         setupToolbar();
         initializeViews();
+        setupGreeting();
         setupBottomNav();
         setupCardClicks();
         setupDrawer();
         setupProfitChart();
         setupRecentInvoices();
+    }
+
+    private void setupGreeting() {
+        if (tvGreeting == null) return;
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int resId = hour < 12 ? R.string.greeting_morning
+                  : hour < 18 ? R.string.greeting_afternoon
+                              : R.string.greeting_evening;
+        tvGreeting.setText(resId);
     }
 
     private void setupRecentInvoices() {
@@ -166,20 +177,25 @@ public class MainActivity extends BaseActivity
 
             String status = inv.getOrDefault("status", "completed");
             int statusColor;
+            int statusPillBg;
             String statusLabel;
             if ("returned".equalsIgnoreCase(status)) {
                 statusLabel = getString(R.string.status_returned);
                 statusColor = R.color.color_error;
+                statusPillBg = R.drawable.bg_status_pill_error;
             } else if ("partial".equalsIgnoreCase(status)) {
                 statusLabel = getString(R.string.status_partial);
                 statusColor = R.color.color_info;
+                statusPillBg = R.drawable.bg_status_pill_info;
             } else {
                 statusLabel = getString(R.string.status_paid);
                 statusColor = R.color.color_success;
+                statusPillBg = R.drawable.bg_status_pill_success;
             }
             if (holder.tvStatus != null) {
                 holder.tvStatus.setText(statusLabel);
                 holder.tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(MainActivity.this, statusColor));
+                holder.tvStatus.setBackgroundResource(statusPillBg);
             }
 
             holder.itemView.setOnClickListener(v -> {
@@ -234,6 +250,7 @@ public class MainActivity extends BaseActivity
         tvLowStockCount   = binding.tvLowStockCount;
         cardAlert         = binding.cardAlert;
         tvAlertMessage    = binding.tvAlertMessage;
+        tvGreeting        = binding.tvGreeting;
         chartProfit         = binding.chartProfit;
         tvProfitPeriodTotal = binding.tvProfitPeriodTotal;
         recyclerRecentInvoices = binding.recyclerRecentInvoices;

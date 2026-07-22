@@ -1552,4 +1552,10 @@
     <string name="check_status_bounced">مرتد</string>
     <string name="check_status_cancelled">ملغي</string>
     <string name="check_status_pending">معلق</string>
+
+    <!-- MainActivity home greeting -->
+    <string name="greeting_morning">صباح الخير ☀️</string>
+    <string name="greeting_afternoon">مساء الخير 🌤️</string>
+    <string name="greeting_evening">مساء الخير 🌙</string>
+    <string name="home_greeting_subtitle">إليك نظرة سريعة على نشاطك اليوم</string>
 </resources>

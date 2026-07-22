@@ -1491,4 +1491,10 @@
     <string name="check_status_bounced">Bounced</string>
     <string name="check_status_cancelled">Cancelled</string>
     <string name="check_status_pending">Pending</string>
+
+    <!-- MainActivity home greeting -->
+    <string name="greeting_morning">Good morning ☀️</string>
+    <string name="greeting_afternoon">Good afternoon 🌤️</string>
+    <string name="greeting_evening">Good evening 🌙</string>
+    <string name="home_greeting_subtitle">Here\'s a quick look at your activity today</string>
 </resources>
