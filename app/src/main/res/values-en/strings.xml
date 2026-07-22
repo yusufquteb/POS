@@ -1578,4 +1578,8 @@
     <string name="trial_last_day_message">Last day of your trial — subscribe now</string>
     <string name="trial_days_remaining_format">%1$d days left in your trial</string>
     <string name="upgrade_action">Upgrade</string>
+
+    <!-- ActivitySupplierRemainingActivity -->
+    <string name="pay_supplier_due_format">Payment to supplier %1$s\nDue: %2$s</string>
+    <string name="debt_settlement_note">Debt settlement</string>
 </resources>
