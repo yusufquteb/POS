@@ -1724,4 +1724,8 @@
     <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>
     <string name="pin_enter_4_digit">أدخل رمزاً مكوناً من 4 أرقام</string>
     <string name="pin_mismatch_retry">الرمزان غير متطابقين — حاول مرة أخرى</string>
+
+    <!-- ActivityReportsActivity -->
+    <string name="uncategorized">غير مصنّف</string>
+    <string name="qty_pieces_format">%1$s قطعة</string>
 </resources>

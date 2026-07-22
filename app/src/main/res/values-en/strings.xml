@@ -1605,4 +1605,8 @@
     <string name="pin_saved_success">PIN code saved successfully ✓</string>
     <string name="pin_enter_4_digit">Enter a 4-digit code</string>
     <string name="pin_mismatch_retry">Codes don\'t match — try again</string>
+
+    <!-- ActivityReportsActivity -->
+    <string name="uncategorized">Uncategorized</string>
+    <string name="qty_pieces_format">%1$s pcs</string>
 </resources>
