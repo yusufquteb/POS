@@ -1495,4 +1495,15 @@
     <string name="transaction_type_deposit">Deposit ↑</string>
     <string name="transaction_type_withdraw">Withdraw ↓</string>
     <string name="balance_colon_format">Balance: %1$s</string>
+
+    <!-- ActivityLocationActivity -->
+    <string name="location_name_required">Please enter the location name</string>
+    <string name="location_added_successfully">Location added</string>
+    <string name="location_add_failed">Failed to add location</string>
+    <string name="delete_location_title">Delete Location</string>
+    <string name="delete_location_confirm_message">Are you sure you want to delete this location?</string>
+    <string name="location_deleted_successfully">Location deleted</string>
+    <string name="location_delete_failed">Failed to delete location</string>
+    <string name="not_specified">Not specified</string>
+    <string name="location_number_format">Location #%1$d</string>
 </resources>

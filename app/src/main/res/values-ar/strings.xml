@@ -1614,4 +1614,15 @@
     <string name="transaction_type_deposit">إيداع ↑</string>
     <string name="transaction_type_withdraw">سحب ↓</string>
     <string name="balance_colon_format">الرصيد: %1$s</string>
+
+    <!-- ActivityLocationActivity -->
+    <string name="location_name_required">يرجى إدخال اسم الموقع</string>
+    <string name="location_added_successfully">تمت إضافة الموقع</string>
+    <string name="location_add_failed">فشل في إضافة الموقع</string>
+    <string name="delete_location_title">حذف الموقع</string>
+    <string name="delete_location_confirm_message">هل أنت متأكد من حذف هذا الموقع؟</string>
+    <string name="location_deleted_successfully">تم حذف الموقع</string>
+    <string name="location_delete_failed">فشل في حذف الموقع</string>
+    <string name="not_specified">غير محدد</string>
+    <string name="location_number_format">موقع رقم %1$d</string>
 </resources>

@@ -116,7 +116,7 @@ public class ActivityLocationActivity extends BaseActivity {
             String name = etName.getText() != null ? etName.getText().toString().trim() : "";
             
             if (name.isEmpty()) {
-                showToast("يرجى إدخال اسم الموقع");
+                showToast(getString(R.string.location_name_required));
                 return;
             }
 
@@ -129,25 +129,25 @@ public class ActivityLocationActivity extends BaseActivity {
                 if (editData == null) {
                     long result = db.insert("locations", null, cv);
                     if (result != -1) {
-                        showToast("تمت إضافة الموقع");
+                        showToast(getString(R.string.location_added_successfully));
                         refreshData();
                         dialog.dismiss();
                     } else {
-                        showSnackbar("فشل في إضافة الموقع", true);
+                        showSnackbar(getString(R.string.location_add_failed), true);
                     }
                 } else {
                     int result = db.update("locations", cv, "id=?", new String[]{editData.get("id").toString()});
                     if (result > 0) {
-                        showToast("تم تحديث البيانات");
+                        showToast(getString(R.string.success_updated));
                         refreshData();
                         dialog.dismiss();
                     } else {
-                        showSnackbar("فشل في تحديث البيانات", true);
+                        showSnackbar(getString(R.string.update_failed), true);
                     }
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Error updating location", e);
-                showToast("حدث خطأ: " + e.getMessage());
+                showToast(getString(R.string.error_with_message, e.getMessage()));
             }
         });
         
@@ -178,22 +178,22 @@ public class ActivityLocationActivity extends BaseActivity {
 
     private void showDeleteConfirmDialog(int position) {
         new MaterialAlertDialogBuilder(this)
-                .setTitle("حذف الموقع")
-                .setMessage("هل أنت متأكد من حذف هذا الموقع؟")
+                .setTitle(R.string.delete_location_title)
+                .setMessage(R.string.delete_location_confirm_message)
                 .setNegativeButton(R.string.cancel, (d, w) -> refreshData())
                 .setPositiveButton(R.string.delete, (d, w) -> {
                     try {
                         int id = (int) fullList.get(position).get("id");
                         int result = dbHelper.getWritableDatabase().delete("locations", "id=?", new String[]{String.valueOf(id)});
                         if (result > 0) {
-                            showToast("تم حذف الموقع");
+                            showToast(getString(R.string.location_deleted_successfully));
                             refreshData();
                         } else {
-                            showSnackbar("فشل في حذف الموقع", true);
+                            showSnackbar(getString(R.string.location_delete_failed), true);
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Error deleting location", e);
-                        showSnackbar("حدث خطأ أثناء الحذف", true);
+                        showSnackbar(getString(R.string.delete_error), true);
                     }
                 })
                 .setCancelable(false)
@@ -220,7 +220,7 @@ public class ActivityLocationActivity extends BaseActivity {
             }
         } catch (Exception e) {
             Log.e(TAG, "Error loading locations", e);
-            showSnackbar("خطأ في تحميل البيانات", true);
+            showSnackbar(getString(R.string.error_loading), true);
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -274,10 +274,10 @@ public class ActivityLocationActivity extends BaseActivity {
             if (i < 0 || i >= list.size()) return;
             HashMap<String, Object> item = list.get(i);
             
-            String name = item.get("name") != null ? item.get("name").toString() : "غير محدد";
-            
+            String name = item.get("name") != null ? item.get("name").toString() : getString(R.string.not_specified);
+
             holder.tvName.setText(name);
-            holder.tvDetails.setText("موقع رقم " + (i + 1));
+            holder.tvDetails.setText(getString(R.string.location_number_format, i + 1));
 
             holder.btnCall.setVisibility(View.GONE);
             holder.btnWhatsapp.setVisibility(View.GONE);
