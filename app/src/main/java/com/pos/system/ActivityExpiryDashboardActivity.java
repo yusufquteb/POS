@@ -101,8 +101,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
             int expired   = dbHelper.getExpiredProducts().size();
             int critical  = dbHelper.getExpiringProducts(7).size();
             int warning   = dbHelper.getExpiringProducts(30).size() - critical;
-            tvSummary.setText(
-                "منتهية: " + expired + " · خطر: " + critical + " · تحذير: " + warning);
+            tvSummary.setText(getString(R.string.expiry_summary_format, expired, critical, warning));
         } catch (Exception ignored) {}
     }
 
@@ -132,7 +131,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
             rvExpiry.setVisibility(empty ? View.GONE : View.VISIBLE);
             layoutEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
         } catch (Exception e) {
-            showSnackbar("خطأ في تحميل البيانات", true);
+            showSnackbar(getString(R.string.error_loading), true);
         }
     }
 
@@ -200,6 +199,7 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
         public void onBindViewHolder(@NonNull VH h, int pos) {
             if (pos < 0 || pos >= data.size()) return;
             HashMap<String, String> p = data.get(pos);
+            android.content.Context ctx = h.itemView.getContext();
             String name    = p.getOrDefault("name", "—");
             String expiry  = p.getOrDefault("expiry", "");
             String batch   = p.getOrDefault("batch_number", "");
@@ -207,9 +207,9 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
             String qty     = p.getOrDefault("qty", "0");
 
             h.tvName.setText(name);
-            h.tvBatch.setText("دفعة: " + (batch.isEmpty() ? "—" : batch));
-            h.tvSupplier.setText(supplier.isEmpty() ? "" : "المورد: " + supplier);
-            h.tvQty.setText(qty + " وحدة");
+            h.tvBatch.setText(ctx.getString(R.string.batch_label_format, batch.isEmpty() ? "—" : batch));
+            h.tvSupplier.setText(supplier.isEmpty() ? "" : ctx.getString(R.string.supplier_label_format, supplier));
+            h.tvQty.setText(ctx.getString(R.string.qty_units_format, qty));
 
             // Status bar color
             GradientDrawable bg = new GradientDrawable();
@@ -222,10 +222,10 @@ public class ActivityExpiryDashboardActivity extends BaseActivity {
                 long days = daysUntilExpiry(expiry);
                 if (tabType == TAB_EXPIRED) {
                     long ago = Math.abs(days);
-                    h.tvBadge.setText("منتهية منذ " + ago + " يوم");
+                    h.tvBadge.setText(ctx.getString(R.string.expired_days_ago_format, ago));
                     h.tvBadge.setBackgroundColor(barColor);
                 } else {
-                    h.tvBadge.setText("تنتهي: " + expiry + " (" + days + " يوم)");
+                    h.tvBadge.setText(ctx.getString(R.string.expires_in_days_format, expiry, days));
                     h.tvBadge.setBackgroundColor(barColor);
                 }
             } else {

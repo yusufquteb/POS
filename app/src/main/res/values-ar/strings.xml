@@ -1674,4 +1674,12 @@
     <string name="supplier_default_name">مورد</string>
     <string name="record_payment_to_supplier_format">تسجيل دفعة للمورد %1$s</string>
     <string name="purchase_order_ref_format">طلب شراء: %1$s</string>
+
+    <!-- ActivityExpiryDashboardActivity -->
+    <string name="expiry_summary_format">منتهية: %1$d · خطر: %2$d · تحذير: %3$d</string>
+    <string name="batch_label_format">دفعة: %1$s</string>
+    <string name="supplier_label_format">المورد: %1$s</string>
+    <string name="qty_units_format">%1$s وحدة</string>
+    <string name="expired_days_ago_format">منتهية منذ %1$d يوم</string>
+    <string name="expires_in_days_format">تنتهي: %1$s (%2$d يوم)</string>
 </resources>
