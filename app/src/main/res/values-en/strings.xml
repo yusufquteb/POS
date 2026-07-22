@@ -1474,4 +1474,14 @@
     <string name="wifi_disabled_message">Wi-Fi is not enabled\n\nPlease enable Wi-Fi and connect to the same network as the printer</string>
     <string name="wifi_printer_check_requirements_message">Checking Wi-Fi printers requires:\n\n1. The printer\'s IP address (e.g. 192.168.1.100)\n2. The port (usually 9100)\n\nPlease enter this information manually in printer settings</string>
     <string name="unknown_printer_type_format">Unknown printer type: %1$s</string>
+
+    <!-- ActivityEditPricesActivity -->
+    <string name="price_direction_increase">Increase</string>
+    <string name="price_direction_decrease">Decrease</string>
+    <string name="all_products_label">All products</string>
+    <string name="apply_btn">Apply</string>
+    <string name="confirm_price_edit_title">Confirm Edit</string>
+    <string name="confirm_price_edit_message_format">%1$s %2$s by %3$s for %4$s</string>
+    <string name="products_to_update_format">%1$d product(s) will be updated</string>
+    <string name="products_updated_format">%1$d product(s) updated</string>
 </resources>

@@ -1593,4 +1593,14 @@
     <string name="wifi_disabled_message">الواي فاي غير مفعّل\n\nيرجى تفعيل الواي فاي والاتصال بنفس شبكة الطابعة</string>
     <string name="wifi_printer_check_requirements_message">فحص طابعات الواي فاي يتطلب:\n\n1. عنوان IP الطابعة (مثل: 192.168.1.100)\n2. المنفذ (Port) عادة 9100\n\nيرجى إدخال هذه المعلومات يدوياً في إعدادات الطباعة</string>
     <string name="unknown_printer_type_format">نوع طابعة غير معروف: %1$s</string>
+
+    <!-- ActivityEditPricesActivity -->
+    <string name="price_direction_increase">زيادة</string>
+    <string name="price_direction_decrease">تخفيض</string>
+    <string name="all_products_label">كل المنتجات</string>
+    <string name="apply_btn">تطبيق</string>
+    <string name="confirm_price_edit_title">تأكيد التعديل</string>
+    <string name="confirm_price_edit_message_format">%1$s %2$s بـ %3$s لـ %4$s</string>
+    <string name="products_to_update_format">سيتم تعديل %1$d منتج</string>
+    <string name="products_updated_format">تم تعديل %1$d منتج</string>
 </resources>

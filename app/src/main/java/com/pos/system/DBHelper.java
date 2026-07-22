@@ -4020,11 +4020,15 @@ public class DBHelper extends SQLiteOpenHelper {
     // Bulk Price Editor
     // ════════════════════════════════════════════════════════════
 
+    private String getAllCategoriesLabel() {
+        return mContext.getString(R.string.filter_all);
+    }
+
     public int bulkUpdatePrice(boolean isSellPrice, boolean isIncrease, String category,
                                 double amount, boolean isPercent) {
         try {
             String col = isSellPrice ? "price" : "cost";
-            String catFilter = (category == null || category.isEmpty() || "الكل".equals(category))
+            String catFilter = (category == null || category.isEmpty() || getAllCategoriesLabel().equals(category))
                 ? "" : " WHERE category=?";
             String[] args = catFilter.isEmpty() ? null : new String[]{category};
             String expr;
@@ -4044,7 +4048,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public int bulkUpdateSellPrice(boolean isIncrease, String category, double amount, boolean isPercent) {
         try {
-            String catWhere = (category == null || category.isEmpty() || "الكل".equals(category))
+            String catWhere = (category == null || category.isEmpty() || getAllCategoriesLabel().equals(category))
                 ? "" : " WHERE category=?";
             String[] args = catWhere.isEmpty() ? null : new String[]{category};
             String newPrice;
@@ -4064,7 +4068,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public int bulkUpdateBuyCost(boolean isIncrease, String category, double amount, boolean isPercent) {
         try {
-            String catWhere = (category == null || category.isEmpty() || "الكل".equals(category))
+            String catWhere = (category == null || category.isEmpty() || getAllCategoriesLabel().equals(category))
                 ? "" : " WHERE category=?";
             String[] args = catWhere.isEmpty() ? null : new String[]{category};
             String newCost;
@@ -4085,7 +4089,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public int getProductCountByCategory(String category) {
         try {
             String sql; String[] args;
-            if (category == null || category.isEmpty() || "الكل".equals(category)) {
+            if (category == null || category.isEmpty() || getAllCategoriesLabel().equals(category)) {
                 sql = "SELECT COUNT(*) FROM " + TABLE_PRODUCTS; args = null;
             } else {
                 sql = "SELECT COUNT(*) FROM " + TABLE_PRODUCTS + " WHERE category=?";
@@ -4099,7 +4103,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public List<String> getAllProductCategories() {
         List<String> cats = new ArrayList<>();
-        cats.add("الكل");
+        cats.add(getAllCategoriesLabel());
         try {
             Cursor c = getReadableDatabase().rawQuery(
                 "SELECT DISTINCT category FROM " + TABLE_PRODUCTS +
