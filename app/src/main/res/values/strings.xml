@@ -1621,4 +1621,9 @@
     <string name="qty_units_format">%1$s units</string>
     <string name="expired_days_ago_format">Expired %1$d days ago</string>
     <string name="expires_in_days_format">Expires: %1$s (%2$d days)</string>
+
+    <!-- ActivityProductsActivity -->
+    <string name="csv_template_header">Product Name,Quantity,Purchase Price,Sale Price,Category,Barcode,Product Description</string>
+    <string name="csv_template_example">Example Product,10,50.00,75.00,Electronics,1234567890,Optional description</string>
+    <string name="full_details_btn">Full Details</string>
 </resources>

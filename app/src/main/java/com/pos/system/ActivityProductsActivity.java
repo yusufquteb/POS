@@ -186,8 +186,8 @@ public class ActivityProductsActivity extends BaseActivity {
 
     private void exportCsvTemplate() {
         try {
-            String header = "اسم المنتج,الكمية,سعر الشراء,سعر البيع,التصنيف,رقم الباركود,وصف المنتج\n";
-            String example = "مثال منتج,10,50.00,75.00,إلكترونيات,1234567890,وصف اختياري\n";
+            String header = getString(R.string.csv_template_header) + "\n";
+            String example = getString(R.string.csv_template_example) + "\n";
             String fileName = "products_template.csv";
             java.io.File dir = new java.io.File(getExternalFilesDir(null), "exports");
             dir.mkdirs();
@@ -313,7 +313,7 @@ public class ActivityProductsActivity extends BaseActivity {
         new MaterialAlertDialogBuilder(this)
             .setTitle(getString(R.string.product_details))
             .setMessage(details)
-            .setPositiveButton("تفاصيل كاملة", (dialog, which) -> {
+            .setPositiveButton(getString(R.string.full_details_btn), (dialog, which) -> {
                 Intent detailIntent = new Intent(this, ActivityItemDetailsActivity.class);
                 detailIntent.putExtra("product_id", safeGet(product, "id"));
                 startActivity(detailIntent);
