@@ -1669,4 +1669,9 @@
     <string name="purchase_canceled">تم إلغاء عملية الشراء</string>
     <string name="purchase_failed_generic">فشل في إتمام عملية الشراء</string>
     <string name="failed_to_get_products">فشل في الحصول على المنتجات</string>
+
+    <!-- ActivitySupplierAccountsActivity -->
+    <string name="supplier_default_name">مورد</string>
+    <string name="record_payment_to_supplier_format">تسجيل دفعة للمورد %1$s</string>
+    <string name="purchase_order_ref_format">طلب شراء: %1$s</string>
 </resources>

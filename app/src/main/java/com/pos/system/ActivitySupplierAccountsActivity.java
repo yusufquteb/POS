@@ -38,7 +38,7 @@ public class ActivitySupplierAccountsActivity extends BaseActivity {
 
         supplierId   = getIntent().getLongExtra("supplier_id", 0);
         supplierName = getIntent().getStringExtra("supplier_name");
-        if (supplierName == null) supplierName = "مورد";
+        if (supplierName == null) supplierName = getString(R.string.supplier_default_name);
 
         dbHelper = new DBHelper(this);
         try {
@@ -91,12 +91,12 @@ public class ActivitySupplierAccountsActivity extends BaseActivity {
     private void showAddPaymentDialog() {
         View v = LayoutInflater.from(this).inflate(R.layout.dialog_simple_input, null);
         TextInputEditText etAmount = v.findViewById(R.id.et_input);
-        if (etAmount != null) etAmount.setHint("المبلغ المدفوع");
+        if (etAmount != null) etAmount.setHint(getString(R.string.amount_paid_hint));
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("تسجيل دفعة للمورد " + supplierName)
+            .setTitle(getString(R.string.record_payment_to_supplier_format, supplierName))
             .setView(v)
-            .setPositiveButton("تأكيد", (d, w) -> {
+            .setPositiveButton(R.string.confirm, (d, w) -> {
                 try {
                     String s = etAmount != null && etAmount.getText() != null
                         ? etAmount.getText().toString().trim() : "";
@@ -107,7 +107,7 @@ public class ActivitySupplierAccountsActivity extends BaseActivity {
                     loadData();
                 } catch (NumberFormatException ignored) {}
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -141,7 +141,7 @@ public class ActivitySupplierAccountsActivity extends BaseActivity {
             double amt = 0;
             try { amt = Double.parseDouble(t.getOrDefault("amount", "0")); } catch (Exception ignored) {}
             if (h.tvRef    != null) h.tvRef.setText("purchase".equals(txType)
-                ? "طلب شراء: " + t.getOrDefault("ref", "") : "دفعة");
+                ? getString(R.string.purchase_order_ref_format, t.getOrDefault("ref", "")) : getString(R.string.payment_tx_label));
             if (h.tvNote   != null) h.tvNote.setText(t.getOrDefault("note", ""));
             if (h.tvDate   != null) h.tvDate.setText(t.getOrDefault("created_at", ""));
             if (h.tvAmount != null) h.tvAmount.setText(

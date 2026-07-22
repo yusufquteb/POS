@@ -1608,4 +1608,9 @@
     <string name="purchase_canceled">Purchase canceled</string>
     <string name="purchase_failed_generic">Purchase failed</string>
     <string name="failed_to_get_products">Failed to get products</string>
+
+    <!-- ActivitySupplierAccountsActivity -->
+    <string name="supplier_default_name">Supplier</string>
+    <string name="record_payment_to_supplier_format">Record payment to supplier %1$s</string>
+    <string name="purchase_order_ref_format">Purchase Order: %1$s</string>
 </resources>
