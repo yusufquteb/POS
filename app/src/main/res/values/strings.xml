@@ -1513,4 +1513,23 @@
     <string name="invalid_quantity_for_product_format">Invalid quantity for product: %1$s</string>
     <string name="select_at_least_one_item">Please select at least one item</string>
     <string name="return_registration_failed">Failed to register the return, please try again</string>
+
+    <!-- PrinterManager -->
+    <string name="usb_manager_unavailable">USB Manager not available</string>
+    <string name="no_usb_devices_connected">No USB devices connected</string>
+    <string name="no_usb_printers_connected_message">No USB printers connected\n\nMake sure:\n• The printer is connected via USB cable\n• The printer is powered on</string>
+    <string name="usb_printers_found_format">Found %1$d USB printer(s)</string>
+    <string name="usb_check_error_format">Error checking USB: %1$s</string>
+    <string name="bluetooth_not_supported_device">Bluetooth is not supported on this device</string>
+    <string name="please_grant_bluetooth_permission">Please grant Bluetooth permissions</string>
+    <string name="bluetooth_disabled_message">Bluetooth is not enabled\n\nPlease enable Bluetooth and try again</string>
+    <string name="no_bluetooth_devices_paired_message">No paired Bluetooth devices\n\nPairing steps:\n1. Open Bluetooth settings\n2. Search for the printer\n3. Pair with it</string>
+    <string name="no_bluetooth_printers_paired_format">No paired Bluetooth printers\n\nPaired devices: %1$d</string>
+    <string name="bluetooth_printers_found_format">Found %1$d Bluetooth printer(s)</string>
+    <string name="permission_error_bluetooth">Permission error. Please grant Bluetooth permissions</string>
+    <string name="bluetooth_check_error_format">Error checking Bluetooth: %1$s</string>
+    <string name="wifi_manager_unavailable">Wi-Fi manager not available</string>
+    <string name="wifi_disabled_message">Wi-Fi is not enabled\n\nPlease enable Wi-Fi and connect to the same network as the printer</string>
+    <string name="wifi_printer_check_requirements_message">Checking Wi-Fi printers requires:\n\n1. The printer\'s IP address (e.g. 192.168.1.100)\n2. The port (usually 9100)\n\nPlease enter this information manually in printer settings</string>
+    <string name="unknown_printer_type_format">Unknown printer type: %1$s</string>
 </resources>

@@ -14,6 +14,7 @@ import android.os.Build;
 import android.util.Log;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import com.pos.system.R;
 import com.pos.system.utils.Constants;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +65,11 @@ public class PrinterManager {
     // ═══════════════════════════════════════════════════════════════
     public PrinterCheckResult checkUSBPrinters() {
         if (usbManager == null)
-            return new PrinterCheckResult(false, "USB Manager غير متوفر", null);
+            return new PrinterCheckResult(false, context.getString(R.string.usb_manager_unavailable), null);
         try {
             java.util.HashMap<String, UsbDevice> deviceList = usbManager.getDeviceList();
             if (deviceList == null || deviceList.isEmpty())
-                return new PrinterCheckResult(false, "لا توجد أجهزة USB متصلة", null);
+                return new PrinterCheckResult(false, context.getString(R.string.no_usb_devices_connected), null);
 
             List<PrinterDevice> printers = new ArrayList<>();
             for (UsbDevice device : deviceList.values()) {
@@ -80,12 +81,11 @@ public class PrinterManager {
                 }
             }
             if (printers.isEmpty())
-                return new PrinterCheckResult(false,
-                    "لا توجد طابعات USB متصلة\n\nتأكد من:\n• توصيل الطابعة بكابل USB\n• تشغيل الطابعة", null);
+                return new PrinterCheckResult(false, context.getString(R.string.no_usb_printers_connected_message), null);
 
-            return new PrinterCheckResult(true, "تم العثور على " + printers.size() + " طابعة USB", printers);
+            return new PrinterCheckResult(true, context.getString(R.string.usb_printers_found_format, printers.size()), printers);
         } catch (Exception e) {
-            return new PrinterCheckResult(false, "خطأ في فحص USB: " + e.getMessage(), null);
+            return new PrinterCheckResult(false, context.getString(R.string.usb_check_error_format, e.getMessage()), null);
         }
     }
 
@@ -134,19 +134,16 @@ public class PrinterManager {
 
     public PrinterCheckResult checkBluetoothPrinters() {
         if (bluetoothAdapter == null)
-            return new PrinterCheckResult(false, "البلوتوث غير مدعوم في هذا الجهاز", null);
+            return new PrinterCheckResult(false, context.getString(R.string.bluetooth_not_supported_device), null);
         if (!checkBluetoothPermissions())
-            return new PrinterCheckResult(false, "يرجى منح صلاحيات البلوتوث", null);
+            return new PrinterCheckResult(false, context.getString(R.string.please_grant_bluetooth_permission), null);
         if (!isBluetoothEnabled())
-            return new PrinterCheckResult(false,
-                "البلوتوث غير مفعّل\n\nيرجى تفعيل البلوتوث والمحاولة مرة أخرى", null);
+            return new PrinterCheckResult(false, context.getString(R.string.bluetooth_disabled_message), null);
 
         try {
             Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
             if (pairedDevices == null || pairedDevices.isEmpty())
-                return new PrinterCheckResult(false,
-                    "لا توجد أجهزة بلوتوث مقترنة\n\nخطوات الاقتران:\n" +
-                    "1. افتح إعدادات البلوتوث\n2. ابحث عن الطابعة\n3. اقترن بها", null);
+                return new PrinterCheckResult(false, context.getString(R.string.no_bluetooth_devices_paired_message), null);
 
             List<PrinterDevice> printers = new ArrayList<>();
             for (BluetoothDevice device : pairedDevices) {
@@ -157,15 +154,15 @@ public class PrinterManager {
             }
             if (printers.isEmpty())
                 return new PrinterCheckResult(false,
-                    "لا توجد طابعات بلوتوث مقترنة\n\nالأجهزة المقترنة: " + pairedDevices.size(), null);
+                    context.getString(R.string.no_bluetooth_printers_paired_format, pairedDevices.size()), null);
 
             return new PrinterCheckResult(true,
-                "تم العثور على " + printers.size() + " طابعة بلوتوث", printers);
+                context.getString(R.string.bluetooth_printers_found_format, printers.size()), printers);
 
         } catch (SecurityException e) {
-            return new PrinterCheckResult(false, "خطأ في الصلاحيات. يرجى منح صلاحيات البلوتوث", null);
+            return new PrinterCheckResult(false, context.getString(R.string.permission_error_bluetooth), null);
         } catch (Exception e) {
-            return new PrinterCheckResult(false, "خطأ في فحص البلوتوث: " + e.getMessage(), null);
+            return new PrinterCheckResult(false, context.getString(R.string.bluetooth_check_error_format, e.getMessage()), null);
         }
     }
 
@@ -203,16 +200,12 @@ public class PrinterManager {
 
     public PrinterCheckResult checkWiFiPrinters() {
         if (wifiManager == null)
-            return new PrinterCheckResult(false, "مدير الواي فاي غير متوفر", null);
+            return new PrinterCheckResult(false, context.getString(R.string.wifi_manager_unavailable), null);
         if (!isWiFiEnabled())
-            return new PrinterCheckResult(false,
-                "الواي فاي غير مفعّل\n\nيرجى تفعيل الواي فاي والاتصال بنفس شبكة الطابعة", null);
+            return new PrinterCheckResult(false, context.getString(R.string.wifi_disabled_message), null);
 
         return new PrinterCheckResult(false,
-            "فحص طابعات الواي فاي يتطلب:\n\n" +
-            "1. عنوان IP الطابعة (مثل: 192.168.1.100)\n" +
-            "2. المنفذ (Port) عادة 9100\n\n" +
-            "يرجى إدخال هذه المعلومات يدوياً في إعدادات الطباعة", null);
+            context.getString(R.string.wifi_printer_check_requirements_message), null);
     }
 
     // ═══════════════════════════════════════════════════════════════
@@ -223,7 +216,7 @@ public class PrinterManager {
             case Constants.PrinterType.USB:       return checkUSBPrinters();
             case Constants.PrinterType.BLUETOOTH: return checkBluetoothPrinters();
             case Constants.PrinterType.WIFI:      return checkWiFiPrinters();
-            default: return new PrinterCheckResult(false, "نوع طابعة غير معروف: " + printerType, null);
+            default: return new PrinterCheckResult(false, context.getString(R.string.unknown_printer_type_format, printerType), null);
         }
     }
 

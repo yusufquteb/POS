@@ -1574,4 +1574,23 @@
     <string name="invalid_quantity_for_product_format">كمية غير صحيحة للمنتج: %1$s</string>
     <string name="select_at_least_one_item">يرجى تحديد منتج واحد على الأقل</string>
     <string name="return_registration_failed">فشل في تسجيل المرتجع، يرجى المحاولة مرة أخرى</string>
+
+    <!-- PrinterManager -->
+    <string name="usb_manager_unavailable">USB Manager غير متوفر</string>
+    <string name="no_usb_devices_connected">لا توجد أجهزة USB متصلة</string>
+    <string name="no_usb_printers_connected_message">لا توجد طابعات USB متصلة\n\nتأكد من:\n• توصيل الطابعة بكابل USB\n• تشغيل الطابعة</string>
+    <string name="usb_printers_found_format">تم العثور على %1$d طابعة USB</string>
+    <string name="usb_check_error_format">خطأ في فحص USB: %1$s</string>
+    <string name="bluetooth_not_supported_device">البلوتوث غير مدعوم في هذا الجهاز</string>
+    <string name="please_grant_bluetooth_permission">يرجى منح صلاحيات البلوتوث</string>
+    <string name="bluetooth_disabled_message">البلوتوث غير مفعّل\n\nيرجى تفعيل البلوتوث والمحاولة مرة أخرى</string>
+    <string name="no_bluetooth_devices_paired_message">لا توجد أجهزة بلوتوث مقترنة\n\nخطوات الاقتران:\n1. افتح إعدادات البلوتوث\n2. ابحث عن الطابعة\n3. اقترن بها</string>
+    <string name="no_bluetooth_printers_paired_format">لا توجد طابعات بلوتوث مقترنة\n\nالأجهزة المقترنة: %1$d</string>
+    <string name="bluetooth_printers_found_format">تم العثور على %1$d طابعة بلوتوث</string>
+    <string name="permission_error_bluetooth">خطأ في الصلاحيات. يرجى منح صلاحيات البلوتوث</string>
+    <string name="bluetooth_check_error_format">خطأ في فحص البلوتوث: %1$s</string>
+    <string name="wifi_manager_unavailable">مدير الواي فاي غير متوفر</string>
+    <string name="wifi_disabled_message">الواي فاي غير مفعّل\n\nيرجى تفعيل الواي فاي والاتصال بنفس شبكة الطابعة</string>
+    <string name="wifi_printer_check_requirements_message">فحص طابعات الواي فاي يتطلب:\n\n1. عنوان IP الطابعة (مثل: 192.168.1.100)\n2. المنفذ (Port) عادة 9100\n\nيرجى إدخال هذه المعلومات يدوياً في إعدادات الطباعة</string>
+    <string name="unknown_printer_type_format">نوع طابعة غير معروف: %1$s</string>
 </resources>
