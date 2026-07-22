@@ -107,7 +107,7 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
             android.widget.TextView tvPoints = binding.tvLoyaltyPoints;
 
             if (tvTier != null) {
-                tvTier.setText(tier.nameAr);
+                tvTier.setText(tier.displayName());
                 tvTier.setVisibility(android.view.View.VISIBLE);
                 int tierColor;
                 switch (tier) {

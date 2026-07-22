@@ -75,7 +75,7 @@ public class ActivityCountrySelectionActivity extends BaseActivity {
         public void onBindViewHolder(@NonNull VH holder, int position) {
             CountryConfig country = countries.get(position);
             if (holder.ivFlag != null) holder.ivFlag.setImageResource(country.flagRes);
-            if (holder.tvName != null) holder.tvName.setText(country.nameAr);
+            if (holder.tvName != null) holder.tvName.setText(country.displayName());
             if (holder.tvCurrency != null) holder.tvCurrency.setText(country.currency);
             holder.itemView.setOnClickListener(v -> onCountrySelected(country));
         }

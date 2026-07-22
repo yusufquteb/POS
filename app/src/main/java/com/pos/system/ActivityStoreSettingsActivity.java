@@ -121,7 +121,7 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
         if (spCountry == null) return;
         List<CountryConfig> countries = CountryConfig.all();
         List<String> labels = new java.util.ArrayList<>();
-        for (CountryConfig c : countries) labels.add(c.nameAr + " — " + c.currency);
+        for (CountryConfig c : countries) labels.add(c.displayName() + " — " + c.currency);
         android.widget.ArrayAdapter<String> adapter = new android.widget.ArrayAdapter<>(
             this, android.R.layout.simple_dropdown_item_1line, labels);
         spCountry.setAdapter(adapter);
@@ -164,7 +164,7 @@ public class ActivityStoreSettingsActivity extends BaseActivity {
             String storedCode = settings.get("country_code");
             if (storedCode != null && !storedCode.isEmpty()) selectedCountryCode = storedCode;
             CountryConfig cfg = CountryConfig.forCode(selectedCountryCode);
-            if (spCountry != null) spCountry.setText(cfg.nameAr + " — " + cfg.currency, false);
+            if (spCountry != null) spCountry.setText(cfg.displayName() + " — " + cfg.currency, false);
 
             String logo = settings.get("logo");
             if (logo != null && !logo.isEmpty()) {
