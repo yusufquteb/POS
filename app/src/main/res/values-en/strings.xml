@@ -1513,4 +1513,8 @@
     <string name="customer_debt_format">Debt: %1$.0f %2$s</string>
     <string name="option_view_account">View Account</string>
     <string name="option_edit_data">Edit Data</string>
+
+    <!-- ActivitySuppliersActivity -->
+    <string name="delete_supplier_confirm_format">Do you want to delete: %1$s?</string>
+    <string name="amount_currency_format">%1$.2f %2$s</string>
 </resources>

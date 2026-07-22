@@ -1632,4 +1632,8 @@
     <string name="customer_debt_format">دين: %1$.0f %2$s</string>
     <string name="option_view_account">عرض الحساب</string>
     <string name="option_edit_data">تعديل البيانات</string>
+
+    <!-- ActivitySuppliersActivity -->
+    <string name="delete_supplier_confirm_format">هل تريد حذف: %1$s؟</string>
+    <string name="amount_currency_format">%1$.2f %2$s</string>
 </resources>
