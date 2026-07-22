@@ -1705,4 +1705,9 @@
     <!-- ActivityCustomerRemainingActivity -->
     <string name="collect_from_customer_format">تحصيل من %1$s\nالمتبقي: %2$s</string>
     <string name="debt_payment_note">سداد دين</string>
+
+    <!-- ActivityPrinterSettingsActivity -->
+    <string name="test_page_sent">تم إرسال صفحة اختبار</string>
+    <string name="permissions_granted_toast">تم منح الصلاحيات</string>
+    <string name="bluetooth_enabled_toast">تم تفعيل البلوتوث</string>
 </resources>

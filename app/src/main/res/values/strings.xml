@@ -1644,4 +1644,9 @@
     <!-- ActivityCustomerRemainingActivity -->
     <string name="collect_from_customer_format">Collect from %1$s\nRemaining: %2$s</string>
     <string name="debt_payment_note">Debt payment</string>
+
+    <!-- ActivityPrinterSettingsActivity -->
+    <string name="test_page_sent">Test page sent</string>
+    <string name="permissions_granted_toast">Permissions granted</string>
+    <string name="bluetooth_enabled_toast">Bluetooth enabled</string>
 </resources>
