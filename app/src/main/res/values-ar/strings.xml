@@ -1625,4 +1625,11 @@
     <string name="location_delete_failed">فشل في حذف الموقع</string>
     <string name="not_specified">غير محدد</string>
     <string name="location_number_format">موقع رقم %1$d</string>
+
+    <!-- ActivityCustomersActivity -->
+    <string name="delete_customer_confirm_format">هل تريد حذف: %1$s؟</string>
+    <string name="customer_total_spent_format">إجمالي: %1$.0f %2$s</string>
+    <string name="customer_debt_format">دين: %1$.0f %2$s</string>
+    <string name="option_view_account">عرض الحساب</string>
+    <string name="option_edit_data">تعديل البيانات</string>
 </resources>

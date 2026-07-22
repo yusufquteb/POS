@@ -1506,4 +1506,11 @@
     <string name="location_delete_failed">Failed to delete location</string>
     <string name="not_specified">Not specified</string>
     <string name="location_number_format">Location #%1$d</string>
+
+    <!-- ActivityCustomersActivity -->
+    <string name="delete_customer_confirm_format">Do you want to delete: %1$s?</string>
+    <string name="customer_total_spent_format">Total: %1$.0f %2$s</string>
+    <string name="customer_debt_format">Debt: %1$.0f %2$s</string>
+    <string name="option_view_account">View Account</string>
+    <string name="option_edit_data">Edit Data</string>
 </resources>
