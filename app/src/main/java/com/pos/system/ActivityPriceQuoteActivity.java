@@ -86,17 +86,17 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
     private void showProductSearchDialog() {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_simple_input, null);
         TextInputEditText etSearch = dialogView.findViewById(R.id.et_input);
-        if (etSearch != null) etSearch.setHint("اسم المنتج أو الباركود");
+        if (etSearch != null) etSearch.setHint(getString(R.string.product_name_or_barcode_hint));
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("بحث عن منتج")
+            .setTitle(R.string.search_for_product_title)
             .setView(dialogView)
-            .setPositiveButton("بحث", (d, w) -> {
+            .setPositiveButton(R.string.action_search, (d, w) -> {
                 String query = etSearch != null && etSearch.getText() != null
                     ? etSearch.getText().toString().trim() : "";
                 if (!query.isEmpty()) searchProduct(query);
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -104,7 +104,7 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
         if (q.isEmpty()) return;
         List<HashMap<String, String>> results = dbHelper.searchProducts(q);
         if (results.isEmpty()) {
-            Snackbar.make(binding.getRoot(), "لم يتم العثور على منتج", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), getString(R.string.product_not_found), Snackbar.LENGTH_SHORT).show();
             return;
         }
         if (results.size() == 1) {
@@ -117,7 +117,7 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
             names[i] = results.get(i).getOrDefault("name","") + " - " + results.get(i).getOrDefault("price","0");
         final List<HashMap<String, String>> finalResults = results;
         new MaterialAlertDialogBuilder(this)
-            .setTitle("اختر المنتج")
+            .setTitle(R.string.choose_product_title)
             .setItems(names, (d, which) -> addToCart(finalResults.get(which)))
             .show();
     }
@@ -185,7 +185,7 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
 
     private void saveQuote() {
         if (cartItems.isEmpty()) {
-            Snackbar.make(binding.getRoot(), "أضف منتجات أولاً", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), getString(R.string.add_products_first), Snackbar.LENGTH_SHORT).show();
             return;
         }
         double subtotal = 0;
@@ -207,10 +207,10 @@ public class ActivityPriceQuoteActivity extends BaseActivity {
         long quoteId = dbHelper.addPriceQuote(selectedCustomerName, selectedCustomerId,
             items, subtotal, discount, tax, total, "");
         if (quoteId > 0) {
-            Snackbar.make(binding.getRoot(), "تم حفظ عرض السعر", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), getString(R.string.price_quote_saved), Snackbar.LENGTH_SHORT).show();
             finish();
         } else {
-            Snackbar.make(binding.getRoot(), "خطأ في الحفظ", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), getString(R.string.error_saving), Snackbar.LENGTH_SHORT).show();
         }
     }
 

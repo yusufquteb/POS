@@ -1636,4 +1636,11 @@
     <!-- ActivitySuppliersActivity -->
     <string name="delete_supplier_confirm_format">هل تريد حذف: %1$s؟</string>
     <string name="amount_currency_format">%1$.2f %2$s</string>
+
+    <!-- ActivityPriceQuoteActivity -->
+    <string name="product_name_or_barcode_hint">اسم المنتج أو الباركود</string>
+    <string name="search_for_product_title">بحث عن منتج</string>
+    <string name="choose_product_title">اختر المنتج</string>
+    <string name="add_products_first">أضف منتجات أولاً</string>
+    <string name="price_quote_saved">تم حفظ عرض السعر</string>
 </resources>

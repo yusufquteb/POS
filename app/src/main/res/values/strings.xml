@@ -1575,4 +1575,11 @@
     <!-- ActivitySuppliersActivity -->
     <string name="delete_supplier_confirm_format">Do you want to delete: %1$s?</string>
     <string name="amount_currency_format">%1$.2f %2$s</string>
+
+    <!-- ActivityPriceQuoteActivity -->
+    <string name="product_name_or_barcode_hint">Product name or barcode</string>
+    <string name="search_for_product_title">Search for a Product</string>
+    <string name="choose_product_title">Choose Product</string>
+    <string name="add_products_first">Add products first</string>
+    <string name="price_quote_saved">Price quote saved</string>
 </resources>
