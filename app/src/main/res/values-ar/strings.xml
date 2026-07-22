@@ -1558,4 +1558,20 @@
     <string name="greeting_afternoon">مساء الخير 🌤️</string>
     <string name="greeting_evening">مساء الخير 🌙</string>
     <string name="home_greeting_subtitle">إليك نظرة سريعة على نشاطك اليوم</string>
+
+    <!-- ActivityReturnActivity -->
+    <string name="invalid_invoice">فاتورة غير صالحة</string>
+    <string name="no_products_in_invoice">لا توجد منتجات في هذه الفاتورة</string>
+    <string name="return_invoice_header_format">فاتورة: %1$s\nالعميل: %2$s\nالإجمالي: %3$s %4$s</string>
+    <string name="select_items_to_return_label">اختر المنتجات المراد إرجاعها:</string>
+    <string name="default_product_name">منتج</string>
+    <string name="refund_method_label">طريقة الاسترداد:</string>
+    <string name="payment_bank_transfer">تحويل بنكي</string>
+    <string name="return_reason_label">سبب الإرجاع (اختياري):</string>
+    <string name="return_reason_hint">أدخل سبب الإرجاع...</string>
+    <string name="return_invoice_title_format">مرتجع فاتورة: %1$s</string>
+    <string name="execute_return_btn">تنفيذ المرتجع</string>
+    <string name="invalid_quantity_for_product_format">كمية غير صحيحة للمنتج: %1$s</string>
+    <string name="select_at_least_one_item">يرجى تحديد منتج واحد على الأقل</string>
+    <string name="return_registration_failed">فشل في تسجيل المرتجع، يرجى المحاولة مرة أخرى</string>
 </resources>

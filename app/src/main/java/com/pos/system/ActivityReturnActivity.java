@@ -205,7 +205,7 @@ public class ActivityReturnActivity extends BaseActivity {
         try {
             invoiceId = Long.parseLong(invoice.getOrDefault("id", "0"));
         } catch (NumberFormatException e) {
-            showSnackbar("فاتورة غير صالحة", true);
+            showSnackbar(getString(R.string.invalid_invoice), true);
             return;
         }
 
@@ -219,7 +219,7 @@ public class ActivityReturnActivity extends BaseActivity {
         }
 
         if (items.isEmpty()) {
-            showToast("لا توجد منتجات في هذه الفاتورة");
+            showToast(getString(R.string.no_products_in_invoice));
             return;
         }
 
@@ -240,8 +240,8 @@ public class ActivityReturnActivity extends BaseActivity {
         String invoiceTotal  = invoice.getOrDefault("total",         "0");
 
         TextView tvHeader = new TextView(this);
-        tvHeader.setText("فاتورة: " + invoiceNumber + "\nالعميل: " + customerName
-                + "\nالإجمالي: " + formatAmount(invoiceTotal) + " " + currency);
+        tvHeader.setText(getString(R.string.return_invoice_header_format, invoiceNumber, customerName,
+                formatAmount(invoiceTotal), currency));
         tvHeader.setTextSize(14);
         tvHeader.setPadding(0, 0, 0, dp8);
         tvHeader.setTextColor(getAttrColor(com.google.android.material.R.attr.colorOnSurface));
@@ -258,7 +258,7 @@ public class ActivityReturnActivity extends BaseActivity {
 
         // ── Section label ────────────────────────────────────────
         TextView tvItemsLabel = new TextView(this);
-        tvItemsLabel.setText("اختر المنتجات المراد إرجاعها:");
+        tvItemsLabel.setText(R.string.select_items_to_return_label);
         tvItemsLabel.setTextSize(13);
         tvItemsLabel.setTextColor(getAttrColor(com.google.android.material.R.attr.colorOnSurfaceVariant));
         tvItemsLabel.setPadding(0, 0, 0, dp8);
@@ -271,7 +271,7 @@ public class ActivityReturnActivity extends BaseActivity {
         List<Integer>   maxQties   = new ArrayList<>();
 
         for (HashMap<String, String> item : items) {
-            String name     = item.getOrDefault("name",  "منتج");
+            String name     = item.getOrDefault("name",  getString(R.string.default_product_name));
             String priceStr = item.getOrDefault("price", "0");
             String qtyStr   = item.getOrDefault("qty",   "1");
             int originalQty = safeInt(qtyStr, 1);
@@ -341,7 +341,7 @@ public class ActivityReturnActivity extends BaseActivity {
 
         // ── Refund method ────────────────────────────────────────
         TextView tvRefundMethod = new TextView(this);
-        tvRefundMethod.setText("طريقة الاسترداد:");
+        tvRefundMethod.setText(R.string.refund_method_label);
         tvRefundMethod.setTextSize(13);
         tvRefundMethod.setPadding(0, dp8, 0, dp4);
         tvRefundMethod.setTextColor(getAttrColor(com.google.android.material.R.attr.colorOnSurface));
@@ -352,18 +352,18 @@ public class ActivityReturnActivity extends BaseActivity {
         chipGroup.setSelectionRequired(true);
 
         Chip chipCash = new Chip(this);
-        chipCash.setText("نقداً");
+        chipCash.setText(R.string.payment_cash);
         chipCash.setCheckable(true);
         chipCash.setChecked(true);
         chipGroup.addView(chipCash);
 
         Chip chipCard = new Chip(this);
-        chipCard.setText("بطاقة");
+        chipCard.setText(R.string.payment_card);
         chipCard.setCheckable(true);
         chipGroup.addView(chipCard);
 
         Chip chipBank = new Chip(this);
-        chipBank.setText("تحويل بنكي");
+        chipBank.setText(R.string.payment_bank_transfer);
         chipBank.setCheckable(true);
         chipGroup.addView(chipBank);
 
@@ -375,14 +375,14 @@ public class ActivityReturnActivity extends BaseActivity {
 
         // ── Reason field ─────────────────────────────────────────
         TextView tvReasonLabel = new TextView(this);
-        tvReasonLabel.setText("سبب الإرجاع (اختياري):");
+        tvReasonLabel.setText(R.string.return_reason_label);
         tvReasonLabel.setTextSize(13);
         tvReasonLabel.setPadding(0, dp4, 0, dp4);
         tvReasonLabel.setTextColor(getAttrColor(com.google.android.material.R.attr.colorOnSurfaceVariant));
         root.addView(tvReasonLabel);
 
         TextInputEditText etReason = new TextInputEditText(this);
-        etReason.setHint("أدخل سبب الإرجاع...");
+        etReason.setHint(R.string.return_reason_hint);
         etReason.setLines(2);
         etReason.setMaxLines(3);
         etReason.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
@@ -396,9 +396,9 @@ public class ActivityReturnActivity extends BaseActivity {
         final long finalInvoiceId = invoiceId;
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("مرتجع فاتورة: " + invoiceNumber)
+                .setTitle(getString(R.string.return_invoice_title_format, invoiceNumber))
                 .setView(scrollView)
-                .setPositiveButton("تنفيذ المرتجع", (dialog, which) -> {
+                .setPositiveButton(R.string.execute_return_btn, (dialog, which) -> {
                     // Collect selected items
                     List<HashMap<String, String>> selectedItems = new ArrayList<>();
                     double totalRefund = 0;
@@ -412,7 +412,7 @@ public class ActivityReturnActivity extends BaseActivity {
                         int maxQty = maxQties.get(i);
 
                         if (qty <= 0 || qty > maxQty) {
-                            showToast("كمية غير صحيحة للمنتج: " + items.get(i).getOrDefault("name", ""));
+                            showToast(getString(R.string.invalid_quantity_for_product_format, items.get(i).getOrDefault("name", "")));
                             return;
                         }
 
@@ -432,7 +432,7 @@ public class ActivityReturnActivity extends BaseActivity {
                     }
 
                     if (selectedItems.isEmpty()) {
-                        showToast("يرجى تحديد منتج واحد على الأقل");
+                        showToast(getString(R.string.select_at_least_one_item));
                         return;
                     }
 
@@ -491,11 +491,11 @@ public class ActivityReturnActivity extends BaseActivity {
                 loadData();
                 showSuccessSnackbar(returnNumber, totalRefund, refundMethod);
             } else {
-                showSnackbar("فشل في تسجيل المرتجع، يرجى المحاولة مرة أخرى", true);
+                showSnackbar(getString(R.string.return_registration_failed), true);
             }
         } catch (Exception e) {
             Log.e(TAG, "processReturn error: " + e.getMessage(), e);
-            showToast("خطأ في تسجيل المرتجع: " + e.getMessage());
+            showToast(getString(R.string.error_with_message, e.getMessage()));
         }
     }
 
@@ -505,9 +505,9 @@ public class ActivityReturnActivity extends BaseActivity {
 
         String methodLabel;
         switch (refundMethod) {
-            case "card":          methodLabel = "بطاقة";        break;
-            case "bank_transfer": methodLabel = "تحويل بنكي";   break;
-            default:              methodLabel = "نقداً";         break;
+            case "card":          methodLabel = getString(R.string.payment_card);          break;
+            case "bank_transfer": methodLabel = getString(R.string.payment_bank_transfer); break;
+            default:              methodLabel = getString(R.string.payment_cash);          break;
         }
 
         String msg = "✓ " + getString(R.string.refund_success)
@@ -516,7 +516,7 @@ public class ActivityReturnActivity extends BaseActivity {
                 + " | " + methodLabel;
 
         Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG)
-                .setAction("حسناً", v -> { /* dismiss */ })
+                .setAction(R.string.ok, v -> { /* dismiss */ })
                 .show();
     }
 
@@ -589,6 +589,7 @@ public class ActivityReturnActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            if (position < 0 || position >= data.size()) return;
             HashMap<String, String> invoice = data.get(position);
             holder.bind(invoice, currency);
             holder.itemView.setOnClickListener(v -> {

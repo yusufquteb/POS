@@ -1497,4 +1497,20 @@
     <string name="greeting_afternoon">Good afternoon 🌤️</string>
     <string name="greeting_evening">Good evening 🌙</string>
     <string name="home_greeting_subtitle">Here\'s a quick look at your activity today</string>
+
+    <!-- ActivityReturnActivity -->
+    <string name="invalid_invoice">Invalid invoice</string>
+    <string name="no_products_in_invoice">No products in this invoice</string>
+    <string name="return_invoice_header_format">Invoice: %1$s\nCustomer: %2$s\nTotal: %3$s %4$s</string>
+    <string name="select_items_to_return_label">Select the products to return:</string>
+    <string name="default_product_name">Product</string>
+    <string name="refund_method_label">Refund Method:</string>
+    <string name="payment_bank_transfer">Bank Transfer</string>
+    <string name="return_reason_label">Return Reason (optional):</string>
+    <string name="return_reason_hint">Enter return reason...</string>
+    <string name="return_invoice_title_format">Return Invoice: %1$s</string>
+    <string name="execute_return_btn">Process Return</string>
+    <string name="invalid_quantity_for_product_format">Invalid quantity for product: %1$s</string>
+    <string name="select_at_least_one_item">Please select at least one item</string>
+    <string name="return_registration_failed">Failed to register the return, please try again</string>
 </resources>
