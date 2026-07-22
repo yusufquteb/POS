@@ -1631,4 +1631,9 @@
     <string name="error_loading_product_data">Error loading product data</string>
     <string name="error_loading_image">Error loading image</string>
     <string name="qty_price_format">Quantity: %1$s | Price: %2$s</string>
+
+    <!-- MainActivity trial banner -->
+    <string name="trial_last_day_message">Last day of your trial — subscribe now</string>
+    <string name="trial_days_remaining_format">%1$d days left in your trial</string>
+    <string name="upgrade_action">Upgrade</string>
 </resources>

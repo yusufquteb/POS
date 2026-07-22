@@ -1692,4 +1692,9 @@
     <string name="error_loading_product_data">خطأ في تحميل بيانات المنتج</string>
     <string name="error_loading_image">خطأ في تحميل الصورة</string>
     <string name="qty_price_format">الكمية: %1$s | السعر: %2$s</string>
+
+    <!-- MainActivity trial banner -->
+    <string name="trial_last_day_message">آخر يوم في الفترة التجريبية — اشترك الآن</string>
+    <string name="trial_days_remaining_format">تبقّى %1$d يوم في الفترة التجريبية</string>
+    <string name="upgrade_action">ترقية</string>
 </resources>

@@ -561,10 +561,10 @@ public class MainActivity extends BaseActivity
                 View root = findViewById(android.R.id.content);
                 if (root == null) return;
                 String msg = days == 1
-                    ? "آخر يوم في الفترة التجريبية — اشترك الآن"
-                    : "تبقّى " + days + " يوم في الفترة التجريبية";
+                    ? getString(R.string.trial_last_day_message)
+                    : getString(R.string.trial_days_remaining_format, days);
                 Snackbar.make(root, msg, Snackbar.LENGTH_LONG)
-                    .setAction("ترقية", v -> openActivity(ActivitySettingsActivity.class))
+                    .setAction(R.string.upgrade_action, v -> openActivity(ActivitySettingsActivity.class))
                     .setBackgroundTint(androidx.core.content.ContextCompat.getColor(this, R.color.color_info))
                     .setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.white))
                     .setActionTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.color_gold))
