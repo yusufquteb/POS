@@ -1711,6 +1711,12 @@
     <string name="products_to_update_placeholder">0 products will be updated</string>
     <string name="apply_price_changes_btn">Apply Changes</string>
 
+    <!-- activity_item_details.xml -->
+    <string name="edit_price_btn">Edit Price</string>
+    <string name="add_quantity_btn">Add Quantity</string>
+    <string name="delete_product_btn">Delete Product</string>
+    <string name="addition_history_label">Addition History</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>
     <string name="pin_saved_success">PIN code saved successfully ✓</string>

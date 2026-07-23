@@ -13,7 +13,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="تفاصيل المنتج"
+            app:title="@string/product_details"
             app:navigationIcon="@drawable/ic_arrow_back"/>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -63,7 +63,7 @@
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_weight="1" android:orientation="vertical" android:gravity="center">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:text="سعر البيع" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant"/>
+                                android:text="@string/price" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant"/>
                             <TextView android:id="@+id/tv_sell_price" android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:text="0.00"
                                 android:textSize="18sp" android:textStyle="bold" android:textColor="?attr/colorPrimary"/>
@@ -71,7 +71,7 @@
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_weight="1" android:orientation="vertical" android:gravity="center">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:text="سعر الشراء" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant"/>
+                                android:text="@string/cost" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant"/>
                             <TextView android:id="@+id/tv_buy_price" android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:text="0.00"
                                 android:textSize="18sp" android:textStyle="bold" android:textColor="?attr/colorSecondary"/>
@@ -79,7 +79,7 @@
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_weight="1" android:orientation="vertical" android:gravity="center">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:text="الكمية" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant"/>
+                                android:text="@string/quantity" android:textSize="12sp" android:textColor="?attr/colorOnSurfaceVariant"/>
                             <TextView android:id="@+id/tv_qty" android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:text="0"
                                 android:textSize="18sp" android:textStyle="bold" android:textColor="?attr/colorTertiary"/>
@@ -99,27 +99,27 @@
                     android:id="@+id/btn_edit_price"
                     android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:layout_marginEnd="4dp"
-                    android:text="تعديل السعر"
+                    android:text="@string/edit_price_btn"
                     style="@style/Widget.Material3.Button"/>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_add_qty"
                     android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:layout_marginStart="4dp"
-                    android:text="إضافة كمية"
+                    android:text="@string/add_quantity_btn"
                     style="@style/Widget.Material3.Button.TonalButton"/>
             </LinearLayout>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="حذف المنتج"
+                android:text="@string/delete_product_btn"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:strokeColor="?attr/colorError"
                 android:textColor="?attr/colorError"/>
 
             <!-- History Header -->
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="سجل الإضافات" android:textSize="16sp" android:textStyle="bold"
+                android:text="@string/addition_history_label" android:textSize="16sp" android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface" android:layout_marginBottom="8dp"/>
 
             <!-- Invoice items history -->

@@ -1772,6 +1772,12 @@
     <string name="products_to_update_placeholder">سيتم تعديل 0 منتج</string>
     <string name="apply_price_changes_btn">تطبيق التعديل</string>
 
+    <!-- activity_item_details.xml -->
+    <string name="edit_price_btn">تعديل السعر</string>
+    <string name="add_quantity_btn">إضافة كمية</string>
+    <string name="delete_product_btn">حذف المنتج</string>
+    <string name="addition_history_label">سجل الإضافات</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>
     <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>
