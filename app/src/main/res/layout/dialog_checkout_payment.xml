@@ -27,7 +27,7 @@
         android:id="@+id/til_paid_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="المبلغ المدفوع"
+        android:hint="@string/amount_paid_hint"
         android:layout_marginBottom="@dimen/spacing_sm"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText

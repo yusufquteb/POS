@@ -1784,6 +1784,11 @@
     <!-- activity_remove_data.xml -->
     <string name="remove_data_warning">تحذير: هذه العمليات لا يمكن التراجع عنها</string>
 
+    <!-- dialog_add_expense.xml / item_customer_debt.xml -->
+    <string name="expense_out_option">مصروف (خروج)</string>
+    <string name="income_in_option">إيراد (دخول)</string>
+    <string name="pay_btn">دفع</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>
     <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>

@@ -28,14 +28,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="مصروف (خروج)"
+            android:text="@string/expense_out_option"
             android:checked="true"/>
         <RadioButton
             android:id="@+id/rb_expense_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="إيراد (دخول)"/>
+            android:text="@string/income_in_option"/>
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout

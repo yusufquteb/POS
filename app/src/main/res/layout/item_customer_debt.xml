@@ -53,7 +53,7 @@
             android:id="@+id/btn_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="دفع"
+            android:text="@string/pay_btn"
             android:textSize="12sp"
             style="@style/Widget.Material3.Button.TonalButton"/>
     </LinearLayout>

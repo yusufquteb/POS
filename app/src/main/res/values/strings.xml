@@ -1723,6 +1723,11 @@
     <!-- activity_remove_data.xml -->
     <string name="remove_data_warning">Warning: these operations cannot be undone</string>
 
+    <!-- dialog_add_expense.xml / item_customer_debt.xml -->
+    <string name="expense_out_option">Expense (Out)</string>
+    <string name="income_in_option">Income (In)</string>
+    <string name="pay_btn">Pay</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>
     <string name="pin_saved_success">PIN code saved successfully ✓</string>
