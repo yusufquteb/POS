@@ -1628,6 +1628,21 @@
     <string name="no_invoices_found">No invoices found</string>
     <string name="shift_label">Shift</string>
 
+    <!-- Aging / dues screens -->
+    <string name="aging_range_0_30">0 – 30 days</string>
+    <string name="aging_range_31_60">31 – 60 days</string>
+    <string name="aging_range_61_90">61 – 90 days</string>
+    <string name="aging_range_90_plus">+90 days</string>
+    <string name="customer_dues_title">Customer Dues</string>
+    <string name="supplier_dues_title">Supplier Dues</string>
+    <string name="total_dues_label">Total Dues</string>
+    <string name="no_dues">No dues</string>
+
+    <!-- Misc toolbar titles -->
+    <string name="decision_dashboard_title">Smart Decisions Dashboard</string>
+    <string name="expiry_dashboard_title">Expiry Management</string>
+    <string name="invoice_details_title">Invoice Details</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>
     <string name="pin_saved_success">PIN code saved successfully ✓</string>

@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="لوحة القرارات الذكية" />
+            app:title="@string/decision_dashboard_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

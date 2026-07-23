@@ -1747,6 +1747,21 @@
     <string name="no_invoices_found">لا توجد فواتير</string>
     <string name="shift_label">وردية</string>
 
+    <!-- Aging / dues screens -->
+    <string name="aging_range_0_30">0 – 30 يوم</string>
+    <string name="aging_range_31_60">31 – 60 يوم</string>
+    <string name="aging_range_61_90">61 – 90 يوم</string>
+    <string name="aging_range_90_plus">+90 يوم</string>
+    <string name="customer_dues_title">مستحقات العملاء</string>
+    <string name="supplier_dues_title">مستحقات الموردين</string>
+    <string name="total_dues_label">إجمالي المستحقات</string>
+    <string name="no_dues">لا توجد مستحقات</string>
+
+    <!-- Misc toolbar titles -->
+    <string name="decision_dashboard_title">لوحة القرارات الذكية</string>
+    <string name="expiry_dashboard_title">إدارة الصلاحية</string>
+    <string name="invoice_details_title">تفاصيل الفاتورة</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>
     <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>

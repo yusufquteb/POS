@@ -15,7 +15,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="⚠️ تقرير خطأ"
+            app:title="@string/error_report_title"
             app:titleTextColor="?attr/colorOnErrorContainer"
             android:background="?attr/colorErrorContainer" />
 
