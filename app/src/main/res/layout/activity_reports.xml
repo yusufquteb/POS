@@ -16,7 +16,7 @@
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="?attr/actionBarSize"
-			app:title="التقاريروالإحصائيات"
+			app:title="@string/reports_toolbar_title"
 			app:navigationIcon="@drawable/ic_arrow_back" />
 	</com.google.android.material.appbar.AppBarLayout>
 	<androidx.core.widget.NestedScrollView
@@ -36,21 +36,37 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/spacing_base"
 				app:cardElevation="2dp"
-				app:cardCornerRadius="12dp">
+				app:cardCornerRadius="18dp">
 				<LinearLayout
 					android:id="@+id/linear16"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
-					<TextView
-						android:id="@+id/textview11"
-						android:layout_width="wrap_content"
+					<LinearLayout
+						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/spacing_md"
-						android:text="@string/str_aaa378"
-						android:textSize="@dimen/text_base"
-						android:textStyle="bold" />
+						android:orientation="horizontal"
+						android:gravity="center_vertical"
+						android:layout_marginBottom="@dimen/spacing_md">
+						<ImageView
+							android:layout_width="32dp"
+							android:layout_height="32dp"
+							android:padding="6dp"
+							android:background="@drawable/bg_avatar_circle"
+							android:src="@drawable/ic_filter"
+							android:tint="?attr/colorPrimary"
+							android:layout_marginEnd="8dp"
+							android:importantForAccessibility="no" />
+						<TextView
+							android:id="@+id/textview11"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/str_aaa378"
+							android:textSize="@dimen/text_base"
+							android:textStyle="bold" />
+					</LinearLayout>
 					<com.google.android.material.chip.ChipGroup
 						android:id="@+id/chip_group_period"
 						android:layout_width="match_parent"
@@ -87,21 +103,37 @@
 				android:layout_marginBottom="@dimen/spacing_base"
 				app:cardBackgroundColor="?attr/colorPrimaryContainer"
 				app:cardElevation="2dp"
-				app:cardCornerRadius="12dp">
+				app:cardCornerRadius="18dp">
 				<LinearLayout
 					android:id="@+id/linear17"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
-					<TextView
-						android:id="@+id/textview12"
-						android:layout_width="wrap_content"
+					<LinearLayout
+						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/spacing_base"
-						android:text="@string/str_1645b6"
-						android:textSize="@dimen/text_lg"
-						android:textStyle="bold" />
+						android:orientation="horizontal"
+						android:gravity="center_vertical"
+						android:layout_marginBottom="@dimen/spacing_base">
+						<ImageView
+							android:layout_width="32dp"
+							android:layout_height="32dp"
+							android:padding="6dp"
+							android:background="@drawable/bg_avatar_circle"
+							android:src="@drawable/ic_receipt"
+							android:tint="?attr/colorPrimary"
+							android:layout_marginEnd="8dp"
+							android:importantForAccessibility="no" />
+						<TextView
+							android:id="@+id/textview12"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/str_1645b6"
+							android:textSize="@dimen/text_lg"
+							android:textStyle="bold" />
+					</LinearLayout>
 					<LinearLayout
 						android:id="@+id/linear18"
 						android:layout_width="match_parent"
@@ -172,21 +204,37 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/spacing_base"
 				app:cardElevation="2dp"
-				app:cardCornerRadius="12dp">
+				app:cardCornerRadius="18dp">
 				<LinearLayout
 					android:id="@+id/linear21"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
-					<TextView
-						android:id="@+id/textview16"
-						android:layout_width="wrap_content"
+					<LinearLayout
+						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/spacing_base"
-						android:text="@string/str_09293f"
-						android:textSize="@dimen/text_lg"
-						android:textStyle="bold" />
+						android:orientation="horizontal"
+						android:gravity="center_vertical"
+						android:layout_marginBottom="@dimen/spacing_base">
+						<ImageView
+							android:layout_width="32dp"
+							android:layout_height="32dp"
+							android:padding="6dp"
+							android:background="@drawable/bg_icon_circle_secondary"
+							android:src="@drawable/ic_inventory_2"
+							android:tint="?attr/colorSecondary"
+							android:layout_marginEnd="8dp"
+							android:importantForAccessibility="no" />
+						<TextView
+							android:id="@+id/textview16"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/str_09293f"
+							android:textSize="@dimen/text_lg"
+							android:textStyle="bold" />
+					</LinearLayout>
 					<LinearLayout
 						android:id="@+id/linear22"
 						android:layout_width="match_parent"
@@ -259,17 +307,24 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/spacing_md"
 				app:cardElevation="2dp"
-				app:cardCornerRadius="12dp">
+				app:cardCornerRadius="18dp">
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
 
-					<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/spacing_md"
-						android:text="@string/str_cc6bac"
-						android:textSize="@dimen/text_lg" android:textStyle="bold"/>
+					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+						android:orientation="horizontal" android:gravity="center_vertical"
+						android:layout_marginBottom="@dimen/spacing_md">
+						<ImageView android:layout_width="32dp" android:layout_height="32dp"
+							android:padding="6dp" android:background="@drawable/bg_icon_circle_success"
+							android:src="@drawable/ic_money" android:tint="?attr/colorSuccess"
+							android:layout_marginEnd="8dp" android:importantForAccessibility="no" />
+						<TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+							android:text="@string/str_cc6bac"
+							android:textSize="@dimen/text_lg" android:textStyle="bold"/>
+					</LinearLayout>
 
 					<!-- تكلفة البضاعة المباعة COGS -->
 					<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -323,21 +378,37 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/spacing_base"
 				app:cardElevation="2dp"
-				app:cardCornerRadius="12dp">
+				app:cardCornerRadius="18dp">
 				<LinearLayout
 					android:id="@+id/linear25"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
-					<TextView
-						android:id="@+id/textview20"
-						android:layout_width="wrap_content"
+					<LinearLayout
+						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/spacing_base"
-						android:text="@string/str_c18be3"
-						android:textSize="@dimen/text_lg"
-						android:textStyle="bold" />
+						android:orientation="horizontal"
+						android:gravity="center_vertical"
+						android:layout_marginBottom="@dimen/spacing_base">
+						<ImageView
+							android:layout_width="32dp"
+							android:layout_height="32dp"
+							android:padding="6dp"
+							android:background="@drawable/bg_avatar_circle"
+							android:src="@drawable/ic_star"
+							android:tint="?attr/colorPrimary"
+							android:layout_marginEnd="8dp"
+							android:importantForAccessibility="no" />
+						<TextView
+							android:id="@+id/textview20"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/str_c18be3"
+							android:textSize="@dimen/text_lg"
+							android:textStyle="bold" />
+					</LinearLayout>
 					<androidx.recyclerview.widget.RecyclerView
 						android:id="@+id/rv_top_products"
 						android:layout_width="match_parent"
@@ -362,19 +433,35 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="80dp"
 				app:cardElevation="2dp"
-				app:cardCornerRadius="12dp">
+				app:cardCornerRadius="18dp">
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
-					<TextView
-						android:layout_width="wrap_content"
+					<LinearLayout
+						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/spacing_md"
-						android:text="المبيعات حسب الفئة"
-						android:textSize="@dimen/text_lg"
-						android:textStyle="bold"/>
+						android:orientation="horizontal"
+						android:gravity="center_vertical"
+						android:layout_marginBottom="@dimen/spacing_md">
+						<ImageView
+							android:layout_width="32dp"
+							android:layout_height="32dp"
+							android:padding="6dp"
+							android:background="@drawable/bg_icon_circle_secondary"
+							android:src="@drawable/ic_category"
+							android:tint="?attr/colorSecondary"
+							android:layout_marginEnd="8dp"
+							android:importantForAccessibility="no" />
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/sales_by_category_title"
+							android:textSize="@dimen/text_lg"
+							android:textStyle="bold" />
+					</LinearLayout>
 					<androidx.recyclerview.widget.RecyclerView
 						android:id="@+id/rv_sales_by_category"
 						android:layout_width="match_parent"
@@ -385,7 +472,7 @@
 						android:id="@+id/tv_no_category_data"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:text="لا توجد بيانات للفترة المحددة"
+						android:text="@string/no_category_data_for_period"
 						android:textSize="@dimen/text_md"
 						android:gravity="center"
 						android:padding="@dimen/spacing_base"
@@ -401,20 +488,36 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/spacing_base"
 				app:cardElevation="2dp"
-				app:cardCornerRadius="12dp">
+				app:cardCornerRadius="18dp">
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="@dimen/spacing_base"
 					android:orientation="vertical">
-					<TextView
-						android:id="@+id/tv_chart_title"
+					<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:text="@string/chart_daily_sales"
-						android:textSize="@dimen/text_base"
-						android:textStyle="bold"
-						android:layout_marginBottom="@dimen/spacing_sm"/>
+						android:orientation="horizontal"
+						android:gravity="center_vertical"
+						android:layout_marginBottom="@dimen/spacing_sm">
+						<ImageView
+							android:layout_width="32dp"
+							android:layout_height="32dp"
+							android:padding="6dp"
+							android:background="@drawable/bg_icon_circle_neutral"
+							android:src="@drawable/ic_bar_chart"
+							android:tint="?attr/colorOnSurfaceVariant"
+							android:layout_marginEnd="8dp"
+							android:importantForAccessibility="no" />
+						<TextView
+							android:id="@+id/tv_chart_title"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/chart_daily_sales"
+							android:textSize="@dimen/text_base"
+							android:textStyle="bold" />
+					</LinearLayout>
 					<com.github.mikephil.charting.charts.BarChart
 						android:id="@+id/bar_chart_sales"
 						android:layout_width="match_parent"
