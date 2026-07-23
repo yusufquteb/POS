@@ -1762,6 +1762,16 @@
     <string name="expiry_dashboard_title">إدارة الصلاحية</string>
     <string name="invoice_details_title">تفاصيل الفاتورة</string>
 
+    <!-- activity_edit_prices.xml -->
+    <string name="bulk_edit_prices_title">تعديل الأسعار جملة</string>
+    <string name="price_type_label">نوع السعر</string>
+    <string name="direction_label">الاتجاه</string>
+    <string name="amount_or_percentage_hint">المبلغ أو النسبة</string>
+    <string name="fixed_amount_option">مبلغ ثابت</string>
+    <string name="percentage_option">نسبة مئوية %</string>
+    <string name="products_to_update_placeholder">سيتم تعديل 0 منتج</string>
+    <string name="apply_price_changes_btn">تطبيق التعديل</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>
     <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>
