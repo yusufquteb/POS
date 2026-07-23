@@ -1659,6 +1659,12 @@
     <string name="delete_product_btn">Delete Product</string>
     <string name="addition_history_label">Addition History</string>
 
+    <!-- activity_price_quotes.xml -->
+    <string name="no_price_quotes">No price quotes</string>
+
+    <!-- activity_remove_data.xml -->
+    <string name="remove_data_warning">Warning: these operations cannot be undone</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>
     <string name="pin_saved_success">PIN code saved successfully ✓</string>

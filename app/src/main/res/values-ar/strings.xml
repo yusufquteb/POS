@@ -1778,6 +1778,12 @@
     <string name="delete_product_btn">حذف المنتج</string>
     <string name="addition_history_label">سجل الإضافات</string>
 
+    <!-- activity_price_quotes.xml -->
+    <string name="no_price_quotes">لا توجد عروض أسعار</string>
+
+    <!-- activity_remove_data.xml -->
+    <string name="remove_data_warning">تحذير: هذه العمليات لا يمكن التراجع عنها</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>
     <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>
