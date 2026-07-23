@@ -13,7 +13,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="حذف البيانات"
+            app:title="@string/settings_remove_data"
             app:navigationIcon="@drawable/ic_arrow_back"/>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,44 +28,44 @@
             android:padding="16dp">
 
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:text="تحذير: هذه العمليات لا يمكن التراجع عنها"
+                android:text="@string/remove_data_warning"
                 android:textSize="14sp" android:textColor="?attr/colorError"
                 android:layout_marginBottom="16dp" android:textStyle="bold"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete_invoices"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp" android:text="حذف جميع الفواتير"
+                android:layout_marginBottom="8dp" android:text="@string/delete_invoices_title"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:strokeColor="?attr/colorError" android:textColor="?attr/colorError"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete_expenses"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp" android:text="حذف جميع المصروفات"
+                android:layout_marginBottom="8dp" android:text="@string/delete_expenses_title"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:strokeColor="?attr/colorError" android:textColor="?attr/colorError"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete_customers"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp" android:text="حذف جميع العملاء"
+                android:layout_marginBottom="8dp" android:text="@string/delete_customers_title"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:strokeColor="?attr/colorError" android:textColor="?attr/colorError"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete_suppliers"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp" android:text="حذف جميع الموردين"
+                android:layout_marginBottom="8dp" android:text="@string/delete_suppliers_title"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:strokeColor="?attr/colorError" android:textColor="?attr/colorError"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete_products"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp" android:text="حذف جميع المنتجات"
+                android:layout_marginBottom="8dp" android:text="@string/delete_products_title"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:strokeColor="?attr/colorError" android:textColor="?attr/colorError"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete_all"
                 android:layout_width="match_parent" android:layout_height="56dp"
-                android:layout_marginTop="16dp" android:text="حذف كل البيانات"
+                android:layout_marginTop="16dp" android:text="@string/delete_all_data_title"
                 style="@style/Widget.Material3.Button"
                 android:backgroundTint="?attr/colorError"/>
         </LinearLayout>

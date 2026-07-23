@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="إدارة الديون"
+            app:title="@string/debt_management_title"
             app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
             app:navigationIcon="@drawable/ic_arrow_back" />
 
@@ -212,7 +212,7 @@
                     android:layout_height="80dp"
                     android:src="@drawable/ic_customers"
                     android:tint="?attr/colorOutlineVariant"
-                    android:contentDescription="لا توجد ديون" />
+                    android:contentDescription="@string/no_debts" />
 
                 <TextView
                     android:id="@+id/tv_empty_title"

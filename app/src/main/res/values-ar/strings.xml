@@ -1723,6 +1723,71 @@
     <string name="sales_by_category_title">المبيعات حسب الفئة</string>
     <string name="no_category_data_for_period">لا توجد بيانات للفترة المحددة</string>
     <string name="reports_toolbar_title">التقارير والإحصائيات</string>
+    <string name="invoices_filter_unsettled">غير مسدَّدة</string>
+
+    <!-- Customer/Supplier account layouts -->
+    <string name="customer_account_title">حساب العميل</string>
+    <string name="supplier_account_title">حساب المورد</string>
+    <string name="total_debt_label">المديونية</string>
+    <string name="total_paid_label">المدفوع</string>
+    <string name="add_payment_btn">إضافة دفعة</string>
+    <string name="record_payment_btn">تسجيل دفعة</string>
+
+    <!-- activity_debt.xml -->
+    <string name="debt_management_title">إدارة الديون</string>
+    <string name="no_debts">لا توجد ديون</string>
+
+    <!-- activity_wallet.xml -->
+    <string name="current_balance_label">الرصيد الحالي</string>
+    <string name="transaction_history_label">سجل الحركات</string>
+
+    <!-- Layout contentDescription fixes -->
+    <string name="turn_on_flash">تشغيل الفلاش</string>
+    <string name="no_purchase_orders">لا توجد أوامر شراء</string>
+    <string name="no_invoices_found">لا توجد فواتير</string>
+    <string name="shift_label">وردية</string>
+
+    <!-- Aging / dues screens -->
+    <string name="aging_range_0_30">0 – 30 يوم</string>
+    <string name="aging_range_31_60">31 – 60 يوم</string>
+    <string name="aging_range_61_90">61 – 90 يوم</string>
+    <string name="aging_range_90_plus">+90 يوم</string>
+    <string name="customer_dues_title">مستحقات العملاء</string>
+    <string name="supplier_dues_title">مستحقات الموردين</string>
+    <string name="total_dues_label">إجمالي المستحقات</string>
+    <string name="no_dues">لا توجد مستحقات</string>
+
+    <!-- Misc toolbar titles -->
+    <string name="decision_dashboard_title">لوحة القرارات الذكية</string>
+    <string name="expiry_dashboard_title">إدارة الصلاحية</string>
+    <string name="invoice_details_title">تفاصيل الفاتورة</string>
+
+    <!-- activity_edit_prices.xml -->
+    <string name="bulk_edit_prices_title">تعديل الأسعار جملة</string>
+    <string name="price_type_label">نوع السعر</string>
+    <string name="direction_label">الاتجاه</string>
+    <string name="amount_or_percentage_hint">المبلغ أو النسبة</string>
+    <string name="fixed_amount_option">مبلغ ثابت</string>
+    <string name="percentage_option">نسبة مئوية %</string>
+    <string name="products_to_update_placeholder">سيتم تعديل 0 منتج</string>
+    <string name="apply_price_changes_btn">تطبيق التعديل</string>
+
+    <!-- activity_item_details.xml -->
+    <string name="edit_price_btn">تعديل السعر</string>
+    <string name="add_quantity_btn">إضافة كمية</string>
+    <string name="delete_product_btn">حذف المنتج</string>
+    <string name="addition_history_label">سجل الإضافات</string>
+
+    <!-- activity_price_quotes.xml -->
+    <string name="no_price_quotes">لا توجد عروض أسعار</string>
+
+    <!-- activity_remove_data.xml -->
+    <string name="remove_data_warning">تحذير: هذه العمليات لا يمكن التراجع عنها</string>
+
+    <!-- dialog_add_expense.xml / item_customer_debt.xml -->
+    <string name="expense_out_option">مصروف (خروج)</string>
+    <string name="income_in_option">إيراد (دخول)</string>
+    <string name="pay_btn">دفع</string>
 
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>

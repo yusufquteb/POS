@@ -14,7 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="حساب العميل"
+            app:title="@string/customer_account_title"
             app:navigationIcon="@drawable/ic_arrow_back"/>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="18dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="?attr/colorPrimaryContainer">
             <LinearLayout
@@ -47,7 +47,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="اسم العميل"
+                        android:text="@string/customer_name"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnPrimaryContainer"/>
@@ -85,7 +85,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="المديونية"
+                            android:text="@string/total_debt_label"
                             android:textSize="12sp"
                             android:textColor="?attr/colorOnPrimaryContainer"/>
                         <TextView
@@ -110,7 +110,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="المدفوع"
+                            android:text="@string/total_paid_label"
                             android:textSize="12sp"
                             android:textColor="?attr/colorOnPrimaryContainer"/>
                         <TextView
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="8dp"
-            android:text="إضافة دفعة"
+            android:text="@string/add_payment_btn"
             app:icon="@drawable/ic_add"/>
 
         <!-- RecyclerView -->

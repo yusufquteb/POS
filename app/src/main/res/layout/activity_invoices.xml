@@ -48,7 +48,7 @@
 				app:cardBackgroundColor="?attr/colorPrimaryContainer"
 				android:layout_weight="1"
 				android:layout_marginEnd="6dp"
-				app:cardCornerRadius="16dp"
+				app:cardCornerRadius="18dp"
 				app:cardElevation="2dp"
 				app:strokeWidth="0dp">
 				<LinearLayout
@@ -90,7 +90,7 @@
 				app:cardBackgroundColor="?attr/colorSurface"
 				android:layout_weight="1"
 				android:layout_marginStart="6dp"
-				app:cardCornerRadius="16dp"
+				app:cardCornerRadius="18dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
@@ -193,14 +193,14 @@
 					android:id="@+id/chip_filter_all"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="الكل"
+					android:text="@string/filter_all"
 					android:checked="true"
 					style="@style/Widget.Material3.Chip.Filter"/>
 				<com.google.android.material.chip.Chip
 					android:id="@+id/chip_filter_unsettled"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="غير مسدَّدة"
+					android:text="@string/invoices_filter_unsettled"
 					style="@style/Widget.Material3.Chip.Filter"/>
 			</com.google.android.material.chip.ChipGroup>
 		</HorizontalScrollView>

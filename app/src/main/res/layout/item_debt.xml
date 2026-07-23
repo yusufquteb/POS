@@ -31,7 +31,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/ic_person"
                 android:tint="?attr/colorPrimary"
-                android:contentDescription="عميل" />
+                android:contentDescription="@string/customer_label" />
 
         </LinearLayout>
 
@@ -101,7 +101,7 @@
                 app:iconPadding="0dp"
                 app:cornerRadius="16dp"
                 style="@style/Widget.Material3.Button.TonalButton"
-                android:contentDescription="اتصال" />
+                android:contentDescription="@string/call_option" />
 
         </LinearLayout>
 

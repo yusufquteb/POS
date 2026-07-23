@@ -31,7 +31,7 @@
                 android:layout_height="20dp"
                 android:src="@drawable/ic_local_shipping"
                 android:tint="?attr/colorPrimary"
-                android:contentDescription="أمر شراء"
+                android:contentDescription="@string/purchase_orders_title"
                 android:layout_marginEnd="@dimen/spacing_sm" />
 
             <TextView
@@ -79,7 +79,7 @@
                 android:layout_height="16dp"
                 android:src="@drawable/ic_business"
                 android:tint="?attr/colorOnSurfaceVariant"
-                android:contentDescription="مورد"
+                android:contentDescription="@string/supplier"
                 android:layout_marginEnd="6dp" />
 
             <TextView
@@ -105,7 +105,7 @@
                 android:layout_height="16dp"
                 android:src="@drawable/ic_attach_money"
                 android:tint="?attr/colorPrimary"
-                android:contentDescription="إجمالي"
+                android:contentDescription="@string/invoice_total"
                 android:layout_marginEnd="6dp" />
 
             <TextView
@@ -123,7 +123,7 @@
                 android:layout_height="14dp"
                 android:src="@drawable/ic_calendar"
                 android:tint="?attr/colorOutline"
-                android:contentDescription="تاريخ"
+                android:contentDescription="@string/invoice_date"
                 android:layout_marginEnd="@dimen/spacing_xs" />
 
             <TextView

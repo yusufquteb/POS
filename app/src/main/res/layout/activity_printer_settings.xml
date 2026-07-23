@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
-            app:title="إعدادات الطابعة"
+            app:title="@string/printer_title"
             app:titleTextColor="?attr/colorOnPrimary" />
 
         <!-- نوع الاتصال -->
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_base"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="18dp"
             app:cardElevation="2dp">
 
             <RadioGroup
@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_base"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="18dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -158,7 +158,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_base"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="18dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -286,7 +286,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_base"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="18dp"
             app:cardBackgroundColor="?attr/colorSurfaceVariant"
             app:cardElevation="0dp">
 

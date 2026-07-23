@@ -15,7 +15,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="⚠️ تقرير خطأ"
+            app:title="@string/error_report_title"
             app:titleTextColor="?attr/colorOnErrorContainer"
             android:background="?attr/colorErrorContainer" />
 
@@ -37,7 +37,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="18dp"
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="?attr/colorErrorContainer"
                 android:layout_marginBottom="@dimen/spacing_base">
@@ -107,7 +107,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="18dp"
                 app:cardElevation="4dp"
                 android:layout_marginBottom="@dimen/spacing_base">
 
@@ -147,7 +147,7 @@
                 android:id="@+id/card_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="18dp"
                 app:cardElevation="4dp"
                 android:layout_marginBottom="@dimen/spacing_base">
 
@@ -235,7 +235,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="18dp"
                 app:cardElevation="4dp"
                 android:layout_marginBottom="@dimen/spacing_base">
 

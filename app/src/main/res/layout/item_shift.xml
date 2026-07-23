@@ -32,7 +32,7 @@
                 android:layout_height="20dp"
                 android:src="@drawable/ic_schedule"
                 android:tint="?attr/colorPrimary"
-                android:contentDescription="وردية"
+                android:contentDescription="@string/shift_label"
                 android:layout_marginEnd="@dimen/spacing_sm" />
 
             <TextView

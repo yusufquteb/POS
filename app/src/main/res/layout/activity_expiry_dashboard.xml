@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="إدارة الصلاحية" />
+            app:title="@string/expiry_dashboard_title" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"

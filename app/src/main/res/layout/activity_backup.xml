@@ -26,7 +26,7 @@
 			android:layout_height="24dp"
 			android:scaleType="center"
 			android:src="@android:drawable/ic_menu_revert"
-			android:contentDescription="رجوع"
+			android:contentDescription="@string/action_back"
 			android:tint="?attr/colorPrimary" />
 		<TextView
 			android:id="@+id/textview25"
@@ -180,7 +180,7 @@
 				android:scaleType="center"
 				android:src="@android:drawable/ic_menu_save"
 				android:tint="?attr/colorOutlineVariant"
-				android:contentDescription="لاتوجدنسخ" />
+				android:contentDescription="@string/str_05f3f8" />
 			<TextView
 				android:id="@+id/textview27"
 				android:layout_width="wrap_content"

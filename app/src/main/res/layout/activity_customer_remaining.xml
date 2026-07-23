@@ -14,7 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="مستحقات العملاء"
+            app:title="@string/customer_dues_title"
             app:navigationIcon="@drawable/ic_arrow_back"/>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="18dp"
             app:cardElevation="2dp"
             app:cardBackgroundColor="?attr/colorErrorContainer">
             <LinearLayout
@@ -42,7 +42,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="إجمالي المستحقات"
+                    android:text="@string/total_dues_label"
                     android:textSize="14sp"
                     android:textColor="?attr/colorOnErrorContainer"/>
                 <TextView
@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="لا توجد مستحقات"
+                android:text="@string/no_dues"
                 android:textSize="16sp"
                 android:textColor="?attr/colorOnSurfaceVariant"/>
         </LinearLayout>

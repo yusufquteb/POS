@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="18dp"
                 app:cardElevation="2dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:text="0 – 30 يوم" android:textSize="12sp"
+                                android:text="@string/aging_range_0_30" android:textSize="12sp"
                                 android:textColor="@color/color_success" android:textStyle="bold"/>
                             <TextView android:id="@+id/tv_count_0_30" android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:textSize="11sp"
@@ -76,7 +76,7 @@
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:text="31 – 60 يوم" android:textSize="12sp"
+                                android:text="@string/aging_range_31_60" android:textSize="12sp"
                                 android:textColor="@color/color_info" android:textStyle="bold"/>
                             <TextView android:id="@+id/tv_count_31_60" android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:textSize="11sp"
@@ -94,7 +94,7 @@
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:text="61 – 90 يوم" android:textSize="12sp"
+                                android:text="@string/aging_range_61_90" android:textSize="12sp"
                                 android:textColor="#FF9800" android:textStyle="bold"/>
                             <TextView android:id="@+id/tv_count_61_90" android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:textSize="11sp"
@@ -112,7 +112,7 @@
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                android:text="+90 يوم" android:textSize="12sp"
+                                android:text="@string/aging_range_90_plus" android:textSize="12sp"
                                 android:textColor="@color/color_error" android:textStyle="bold"/>
                             <TextView android:id="@+id/tv_count_90plus" android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:textSize="11sp"
