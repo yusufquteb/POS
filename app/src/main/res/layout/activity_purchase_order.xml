@@ -147,7 +147,7 @@
                     android:layout_height="18dp"
                     android:src="@drawable/ic_local_shipping"
                     android:tint="?attr/colorPrimary"
-                    android:contentDescription="أوامر الشراء" />
+                    android:contentDescription="@string/purchase_orders_title" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -178,7 +178,7 @@
                     android:layout_height="80dp"
                     android:src="@drawable/ic_local_shipping"
                     android:tint="?attr/colorOutlineVariant"
-                    android:contentDescription="لا توجد أوامر" />
+                    android:contentDescription="@string/no_purchase_orders" />
 
                 <TextView
                     android:layout_width="wrap_content"

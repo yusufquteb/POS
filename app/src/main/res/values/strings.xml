@@ -1680,6 +1680,12 @@
     <string name="current_balance_label">Current Balance</string>
     <string name="transaction_history_label">Transaction History</string>
 
+    <!-- Layout contentDescription fixes -->
+    <string name="turn_on_flash">Turn on flash</string>
+    <string name="no_purchase_orders">No purchase orders</string>
+    <string name="no_invoices_found">No invoices found</string>
+    <string name="shift_label">Shift</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>
     <string name="pin_saved_success">PIN code saved successfully ✓</string>

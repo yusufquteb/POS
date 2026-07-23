@@ -1741,6 +1741,12 @@
     <string name="current_balance_label">الرصيد الحالي</string>
     <string name="transaction_history_label">سجل الحركات</string>
 
+    <!-- Layout contentDescription fixes -->
+    <string name="turn_on_flash">تشغيل الفلاش</string>
+    <string name="no_purchase_orders">لا توجد أوامر شراء</string>
+    <string name="no_invoices_found">لا توجد فواتير</string>
+    <string name="shift_label">وردية</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>
     <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>
