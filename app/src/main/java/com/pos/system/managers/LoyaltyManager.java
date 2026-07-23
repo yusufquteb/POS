@@ -31,6 +31,11 @@ public class LoyaltyManager {
             this.pointsMultiplier = multiplier;
             this.egpPerPoint = egpPerPoint;
         }
+
+        /** Tier name in the currently active app language */
+        public String displayName() {
+            return LanguageManager.isArabic() ? nameAr : nameEn;
+        }
     }
 
     private static final double BASE_POINTS_PER_EGP = 1.0;

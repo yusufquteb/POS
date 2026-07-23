@@ -1552,4 +1552,183 @@
     <string name="check_status_bounced">مرتد</string>
     <string name="check_status_cancelled">ملغي</string>
     <string name="check_status_pending">معلق</string>
+
+    <!-- MainActivity home greeting -->
+    <string name="greeting_morning">صباح الخير ☀️</string>
+    <string name="greeting_afternoon">مساء الخير 🌤️</string>
+    <string name="greeting_evening">مساء الخير 🌙</string>
+    <string name="home_greeting_subtitle">إليك نظرة سريعة على نشاطك اليوم</string>
+
+    <!-- ActivityReturnActivity -->
+    <string name="invalid_invoice">فاتورة غير صالحة</string>
+    <string name="no_products_in_invoice">لا توجد منتجات في هذه الفاتورة</string>
+    <string name="return_invoice_header_format">فاتورة: %1$s\nالعميل: %2$s\nالإجمالي: %3$s %4$s</string>
+    <string name="select_items_to_return_label">اختر المنتجات المراد إرجاعها:</string>
+    <string name="default_product_name">منتج</string>
+    <string name="refund_method_label">طريقة الاسترداد:</string>
+    <string name="payment_bank_transfer">تحويل بنكي</string>
+    <string name="return_reason_label">سبب الإرجاع (اختياري):</string>
+    <string name="return_reason_hint">أدخل سبب الإرجاع...</string>
+    <string name="return_invoice_title_format">مرتجع فاتورة: %1$s</string>
+    <string name="execute_return_btn">تنفيذ المرتجع</string>
+    <string name="invalid_quantity_for_product_format">كمية غير صحيحة للمنتج: %1$s</string>
+    <string name="select_at_least_one_item">يرجى تحديد منتج واحد على الأقل</string>
+    <string name="return_registration_failed">فشل في تسجيل المرتجع، يرجى المحاولة مرة أخرى</string>
+
+    <!-- PrinterManager -->
+    <string name="usb_manager_unavailable">USB Manager غير متوفر</string>
+    <string name="no_usb_devices_connected">لا توجد أجهزة USB متصلة</string>
+    <string name="no_usb_printers_connected_message">لا توجد طابعات USB متصلة\n\nتأكد من:\n• توصيل الطابعة بكابل USB\n• تشغيل الطابعة</string>
+    <string name="usb_printers_found_format">تم العثور على %1$d طابعة USB</string>
+    <string name="usb_check_error_format">خطأ في فحص USB: %1$s</string>
+    <string name="bluetooth_not_supported_device">البلوتوث غير مدعوم في هذا الجهاز</string>
+    <string name="please_grant_bluetooth_permission">يرجى منح صلاحيات البلوتوث</string>
+    <string name="bluetooth_disabled_message">البلوتوث غير مفعّل\n\nيرجى تفعيل البلوتوث والمحاولة مرة أخرى</string>
+    <string name="no_bluetooth_devices_paired_message">لا توجد أجهزة بلوتوث مقترنة\n\nخطوات الاقتران:\n1. افتح إعدادات البلوتوث\n2. ابحث عن الطابعة\n3. اقترن بها</string>
+    <string name="no_bluetooth_printers_paired_format">لا توجد طابعات بلوتوث مقترنة\n\nالأجهزة المقترنة: %1$d</string>
+    <string name="bluetooth_printers_found_format">تم العثور على %1$d طابعة بلوتوث</string>
+    <string name="permission_error_bluetooth">خطأ في الصلاحيات. يرجى منح صلاحيات البلوتوث</string>
+    <string name="bluetooth_check_error_format">خطأ في فحص البلوتوث: %1$s</string>
+    <string name="wifi_manager_unavailable">مدير الواي فاي غير متوفر</string>
+    <string name="wifi_disabled_message">الواي فاي غير مفعّل\n\nيرجى تفعيل الواي فاي والاتصال بنفس شبكة الطابعة</string>
+    <string name="wifi_printer_check_requirements_message">فحص طابعات الواي فاي يتطلب:\n\n1. عنوان IP الطابعة (مثل: 192.168.1.100)\n2. المنفذ (Port) عادة 9100\n\nيرجى إدخال هذه المعلومات يدوياً في إعدادات الطباعة</string>
+    <string name="unknown_printer_type_format">نوع طابعة غير معروف: %1$s</string>
+
+    <!-- ActivityEditPricesActivity -->
+    <string name="price_direction_increase">زيادة</string>
+    <string name="price_direction_decrease">تخفيض</string>
+    <string name="all_products_label">كل المنتجات</string>
+    <string name="apply_btn">تطبيق</string>
+    <string name="confirm_price_edit_title">تأكيد التعديل</string>
+    <string name="confirm_price_edit_message_format">%1$s %2$s بـ %3$s لـ %4$s</string>
+    <string name="products_to_update_format">سيتم تعديل %1$d منتج</string>
+    <string name="products_updated_format">تم تعديل %1$d منتج</string>
+
+    <!-- ActivityCashDrawerActivity -->
+    <string name="add_new_drawer_title">إضافة خزينة جديدة</string>
+    <string name="drawer_added_successfully">تمت الإضافة</string>
+    <string name="select_drawer_first">يرجى اختيار خزينة أولاً</string>
+    <string name="deposit_successful">تم الإيداع بنجاح</string>
+    <string name="withdraw_successful">تم السحب بنجاح</string>
+    <string name="insufficient_balance_or_error">خطأ: رصيد غير كافٍ أو خطأ في العملية</string>
+    <string name="transaction_type_deposit">إيداع ↑</string>
+    <string name="transaction_type_withdraw">سحب ↓</string>
+    <string name="balance_colon_format">الرصيد: %1$s</string>
+
+    <!-- ActivityLocationActivity -->
+    <string name="location_name_required">يرجى إدخال اسم الموقع</string>
+    <string name="location_added_successfully">تمت إضافة الموقع</string>
+    <string name="location_add_failed">فشل في إضافة الموقع</string>
+    <string name="delete_location_title">حذف الموقع</string>
+    <string name="delete_location_confirm_message">هل أنت متأكد من حذف هذا الموقع؟</string>
+    <string name="location_deleted_successfully">تم حذف الموقع</string>
+    <string name="location_delete_failed">فشل في حذف الموقع</string>
+    <string name="not_specified">غير محدد</string>
+    <string name="location_number_format">موقع رقم %1$d</string>
+
+    <!-- ActivityCustomersActivity -->
+    <string name="delete_customer_confirm_format">هل تريد حذف: %1$s؟</string>
+    <string name="customer_total_spent_format">إجمالي: %1$.0f %2$s</string>
+    <string name="customer_debt_format">دين: %1$.0f %2$s</string>
+    <string name="option_view_account">عرض الحساب</string>
+    <string name="option_edit_data">تعديل البيانات</string>
+
+    <!-- ActivitySuppliersActivity -->
+    <string name="delete_supplier_confirm_format">هل تريد حذف: %1$s؟</string>
+    <string name="amount_currency_format">%1$.2f %2$s</string>
+
+    <!-- ActivityPriceQuoteActivity -->
+    <string name="product_name_or_barcode_hint">اسم المنتج أو الباركود</string>
+    <string name="search_for_product_title">بحث عن منتج</string>
+    <string name="choose_product_title">اختر المنتج</string>
+    <string name="add_products_first">أضف منتجات أولاً</string>
+    <string name="price_quote_saved">تم حفظ عرض السعر</string>
+
+    <!-- LowStockWorker -->
+    <string name="low_stock_notification_title">⚠️ تنبيه المخزون</string>
+    <string name="reorder_channel_name">طلبات الشراء التلقائية</string>
+    <string name="reorder_notification_title">🛒 اقتراح إعادة الطلب</string>
+    <string name="reorder_created_format">تم إنشاء %1$d طلب شراء تلقائي — اضغط للمراجعة</string>
+    <string name="expiry_channel_name">تنبيهات انتهاء الصلاحية</string>
+    <string name="expiry_notification_title_format">⚠️ %1$d منتج تنتهي صلاحيته قريباً</string>
+    <string name="and_more_products_format">و %1$d منتجات أخرى...</string>
+    <string name="auto_order_note_format">طلب تلقائي - %1$s</string>
+
+    <!-- ActivityCustomerAccountsActivity -->
+    <string name="customer_default_name">عميل</string>
+    <string name="loyalty_points_format">نقاط الولاء: %1$d نقطة</string>
+    <string name="amount_paid_hint">المبلغ المدفوع</string>
+    <string name="record_payment_for_format">تسجيل دفعة لـ %1$s</string>
+    <string name="payment_tx_label">دفعة</string>
+    <string name="remaining_colon_format">متبقي: %1$s</string>
+
+    <!-- BillingManager -->
+    <string name="billing_not_ready_retry">خدمة الدفع غير جاهزة، يرجى المحاولة لاحقاً</string>
+    <string name="no_subscription_offers_available">لا توجد عروض اشتراك متاحة</string>
+    <string name="failed_to_get_product_info">فشل في الحصول على معلومات المنتج</string>
+    <string name="purchase_canceled">تم إلغاء عملية الشراء</string>
+    <string name="purchase_failed_generic">فشل في إتمام عملية الشراء</string>
+    <string name="failed_to_get_products">فشل في الحصول على المنتجات</string>
+
+    <!-- ActivitySupplierAccountsActivity -->
+    <string name="supplier_default_name">مورد</string>
+    <string name="record_payment_to_supplier_format">تسجيل دفعة للمورد %1$s</string>
+    <string name="purchase_order_ref_format">طلب شراء: %1$s</string>
+
+    <!-- ActivityExpiryDashboardActivity -->
+    <string name="expiry_summary_format">منتهية: %1$d · خطر: %2$d · تحذير: %3$d</string>
+    <string name="batch_label_format">دفعة: %1$s</string>
+    <string name="supplier_label_format">المورد: %1$s</string>
+    <string name="qty_units_format">%1$s وحدة</string>
+    <string name="expired_days_ago_format">منتهية منذ %1$d يوم</string>
+    <string name="expires_in_days_format">تنتهي: %1$s (%2$d يوم)</string>
+
+    <!-- ActivityProductsActivity -->
+    <string name="csv_template_header">اسم المنتج,الكمية,سعر الشراء,سعر البيع,التصنيف,رقم الباركود,وصف المنتج</string>
+    <string name="csv_template_example">مثال منتج,10,50.00,75.00,إلكترونيات,1234567890,وصف اختياري</string>
+    <string name="full_details_btn">تفاصيل كاملة</string>
+
+    <!-- ActivityAddProductActivity -->
+    <string name="error_loading_product_data">خطأ في تحميل بيانات المنتج</string>
+    <string name="error_loading_image">خطأ في تحميل الصورة</string>
+    <string name="qty_price_format">الكمية: %1$s | السعر: %2$s</string>
+
+    <!-- MainActivity trial banner -->
+    <string name="trial_last_day_message">آخر يوم في الفترة التجريبية — اشترك الآن</string>
+    <string name="trial_days_remaining_format">تبقّى %1$d يوم في الفترة التجريبية</string>
+    <string name="upgrade_action">ترقية</string>
+
+    <!-- ActivitySupplierRemainingActivity -->
+    <string name="pay_supplier_due_format">دفع للمورد %1$s\nالمستحق: %2$s</string>
+    <string name="debt_settlement_note">سداد مستحق</string>
+
+    <!-- ActivityCustomerRemainingActivity -->
+    <string name="collect_from_customer_format">تحصيل من %1$s\nالمتبقي: %2$s</string>
+    <string name="debt_payment_note">سداد دين</string>
+
+    <!-- ActivityPrinterSettingsActivity -->
+    <string name="test_page_sent">تم إرسال صفحة اختبار</string>
+    <string name="permissions_granted_toast">تم منح الصلاحيات</string>
+    <string name="bluetooth_enabled_toast">تم تفعيل البلوتوث</string>
+
+    <!-- OnboardingAdapter -->
+    <string name="onboarding_slide_products_title">إدارة المنتجات</string>
+    <string name="onboarding_slide_products_desc">أضف منتجاتك بسهولة مع صور وباركود وأسعار. تتبع المخزون تلقائياً واحصل على تنبيهات عند نفاد الكميات.</string>
+    <string name="onboarding_slide_invoices_title">فواتير احترافية</string>
+    <string name="onboarding_slide_invoices_desc">أنشئ فواتير احترافية في ثوانٍ وأرسلها للعملاء. دعم كامل للطباعة الحرارية عبر البلوتوث.</string>
+    <string name="onboarding_slide_reports_title">تقارير وإحصائيات</string>
+    <string name="onboarding_slide_reports_desc">تقارير مبيعات يومية وشهرية وسنوية. رسوم بيانية تفاعلية لفهم أداء متجرك بلمحة.</string>
+
+    <!-- ActivityPinLockActivity -->
+    <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>
+    <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>
+    <string name="pin_enter_4_digit">أدخل رمزاً مكوناً من 4 أرقام</string>
+    <string name="pin_mismatch_retry">الرمزان غير متطابقين — حاول مرة أخرى</string>
+
+    <!-- ActivityReportsActivity -->
+    <string name="uncategorized">غير مصنّف</string>
+    <string name="qty_pieces_format">%1$s قطعة</string>
+
+    <!-- ActivityPriceQuotesActivity -->
+    <string name="quote_status_converted">محوّل</string>
 </resources>

@@ -148,20 +148,20 @@ public class ActivityPinLockActivity extends BaseActivity {
                 firstPin = pin;
                 enteredPin.setLength(0);
                 updateDots();
-                tvSubtitle.setText("أعد إدخال الرمز للتأكيد");
+                tvSubtitle.setText(getString(R.string.pin_reenter_to_confirm));
                 hideError();
             } else {
                 // Second entry — confirm
                 if (pin.equals(firstPin)) {
                     savePin(pin);
-                    showToast("تم حفظ رمز PIN بنجاح ✓");
+                    showToast(getString(R.string.pin_saved_success));
                     finish();
                 } else {
                     firstPin = null;
                     enteredPin.setLength(0);
                     updateDots();
-                    tvSubtitle.setText("أدخل رمزاً مكوناً من 4 أرقام");
-                    showError("الرمزان غير متطابقين — حاول مرة أخرى");
+                    tvSubtitle.setText(getString(R.string.pin_enter_4_digit));
+                    showError(getString(R.string.pin_mismatch_retry));
                 }
             }
         } else {
@@ -172,7 +172,7 @@ public class ActivityPinLockActivity extends BaseActivity {
             } else {
                 enteredPin.setLength(0);
                 updateDots();
-                showError("رمز PIN غير صحيح");
+                showError(getString(R.string.str_010e53));
             }
         }
     }

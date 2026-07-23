@@ -89,21 +89,21 @@ public class ActivitySupplierRemainingActivity extends BaseActivity {
         }
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("دفع للمورد " + name + "\nالمستحق: " +
-                String.format(Locale.US, "%.2f", fDebt) + " " + currency)
+            .setTitle(getString(R.string.pay_supplier_due_format, name,
+                String.format(Locale.US, "%.2f", fDebt) + " " + currency))
             .setView(v)
-            .setPositiveButton("تأكيد", (d, w) -> {
+            .setPositiveButton(R.string.confirm, (d, w) -> {
                 try {
                     String s = etAmount != null && etAmount.getText() != null
                         ? etAmount.getText().toString().trim() : "";
                     if (s.isEmpty()) return;
                     double paid = Double.parseDouble(s);
                     String date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
-                    dbHelper.addDirectPayment("supplier", fId, name, "OUT", paid, "سداد مستحق", date);
+                    dbHelper.addDirectPayment("supplier", fId, name, "OUT", paid, getString(R.string.debt_settlement_note), date);
                     loadData();
                 } catch (NumberFormatException ignored) {}
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 

@@ -39,7 +39,7 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
 
         customerId   = getIntent().getLongExtra("customer_id", 0);
         customerName = getIntent().getStringExtra("customer_name");
-        if (customerName == null) customerName = "عميل";
+        if (customerName == null) customerName = getString(R.string.customer_default_name);
 
         dbHelper = new DBHelper(this);
         try {
@@ -107,7 +107,7 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
             android.widget.TextView tvPoints = binding.tvLoyaltyPoints;
 
             if (tvTier != null) {
-                tvTier.setText(tier.nameAr);
+                tvTier.setText(tier.displayName());
                 tvTier.setVisibility(android.view.View.VISIBLE);
                 int tierColor;
                 switch (tier) {
@@ -120,7 +120,7 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
                 }
             }
             if (tvPoints != null) {
-                tvPoints.setText("نقاط الولاء: " + balance + " نقطة");
+                tvPoints.setText(getString(R.string.loyalty_points_format, balance));
                 tvPoints.setVisibility(android.view.View.VISIBLE);
             }
             lm.close();
@@ -132,12 +132,12 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
     private void showAddPaymentDialog() {
         View v = LayoutInflater.from(this).inflate(R.layout.dialog_simple_input, null);
         TextInputEditText etAmount = v.findViewById(R.id.et_input);
-        if (etAmount != null) etAmount.setHint("المبلغ المدفوع");
+        if (etAmount != null) etAmount.setHint(getString(R.string.amount_paid_hint));
 
         new MaterialAlertDialogBuilder(this)
-            .setTitle("تسجيل دفعة لـ " + customerName)
+            .setTitle(getString(R.string.record_payment_for_format, customerName))
             .setView(v)
-            .setPositiveButton("تأكيد", (d, w) -> {
+            .setPositiveButton(R.string.confirm, (d, w) -> {
                 try {
                     String s = etAmount != null && etAmount.getText() != null
                         ? etAmount.getText().toString().trim() : "";
@@ -148,7 +148,7 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
                     loadData();
                 } catch (NumberFormatException ignored) {}
             })
-            .setNegativeButton("إلغاء", null)
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 
@@ -185,7 +185,7 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
             try { rem = Double.parseDouble(t.getOrDefault("remaining_amount", "0")); } catch (Exception ignored) {}
 
             if (h.tvRef  != null) h.tvRef.setText(isInvoice
-                ? "فاتورة: " + t.getOrDefault("ref", "") : "دفعة");
+                ? getString(R.string.invoice_ref_format, t.getOrDefault("ref", "")) : getString(R.string.payment_tx_label));
             if (h.tvNote != null) h.tvNote.setText(t.getOrDefault("note", ""));
             if (h.tvDate != null) h.tvDate.setText(t.getOrDefault("created_at", ""));
             if (h.tvAmount != null) h.tvAmount.setText(
@@ -193,7 +193,7 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
             if (h.tvRemaining != null) {
                 if (isInvoice && rem > 0) {
                     h.tvRemaining.setVisibility(View.VISIBLE);
-                    h.tvRemaining.setText("متبقي: " + String.format(Locale.US, "%.2f", rem));
+                    h.tvRemaining.setText(getString(R.string.remaining_colon_format, String.format(Locale.US, "%.2f", rem)));
                 } else {
                     h.tvRemaining.setVisibility(View.GONE);
                 }

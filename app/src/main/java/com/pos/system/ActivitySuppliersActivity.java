@@ -104,7 +104,7 @@ public class ActivitySuppliersActivity extends BaseActivity {
         TextView tvTitle            = view.findViewById(R.id.tv_title);
 
         boolean isEdit = editData != null;
-        if (tvTitle != null) tvTitle.setText(isEdit ? "تعديل مورد" : "إضافة مورد جديد");
+        if (tvTitle != null) tvTitle.setText(isEdit ? R.string.edit_supplier_title : R.string.add_supplier_title);
 
         // ✅ تعبئة البيانات للتعديل
         if (isEdit) {
@@ -121,21 +121,21 @@ public class ActivitySuppliersActivity extends BaseActivity {
                 String address = getText(etAddress);
                 String notes   = getText(etNotes);
 
-                if (name.isEmpty()) { showToast("يرجى إدخال الاسم"); return; }
+                if (name.isEmpty()) { showToast(getString(R.string.name_required)); return; }
 
                 try {
                     if (isEdit) {
                         long id = getLong(editData, "id");
                         dbHelper.updateSupplier(id, name, phone, address, notes);
-                        showToast("✓ تم التعديل");
+                        showToast(getString(R.string.supplier_updated));
                     } else {
                         dbHelper.addSupplier(name, phone, address, notes);
-                        showToast("✓ تمت الإضافة");
+                        showToast(getString(R.string.supplier_added));
                     }
                     dialog.dismiss();
                     refreshData();
                 } catch (Exception e) {
-                    showToast("خطأ: " + e.getMessage());
+                    showToast(getString(R.string.error_with_message, e.getMessage()));
                 }
             });
         }
@@ -221,14 +221,14 @@ public class ActivitySuppliersActivity extends BaseActivity {
 
     private void confirmDelete(HashMap<String, Object> item, int pos) {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("حذف المورد")
-            .setMessage("هل تريد حذف: " + item.getOrDefault("name", "") + "؟")
+            .setTitle(R.string.delete_supplier)
+            .setMessage(getString(R.string.delete_supplier_confirm_format, item.getOrDefault("name", "")))
             .setPositiveButton(R.string.delete, (d, w) -> {
                 try {
                     dbHelper.deleteSupplier(getLong(item, "id"));
                     refreshData();
-                    showToast("✓ تم الحذف");
-                } catch (Exception e) { showSnackbar("خطأ في الحذف", true); }
+                    showToast(getString(R.string.supplier_deleted));
+                } catch (Exception e) { showSnackbar(getString(R.string.delete_error), true); }
             })
             .setNegativeButton(R.string.cancel, (d, w) -> {
                 if (adapter != null) adapter.notifyItemChanged(pos);
@@ -273,15 +273,14 @@ public class ActivitySuppliersActivity extends BaseActivity {
                         HashMap<String, String> s = dbHelper.getStoreSettings();
                         if (s != null) currency = s.getOrDefault("currency", "ج.م");
                     } catch (Exception ignored) {}
-                    holder.tvDebt.setText(String.format(java.util.Locale.getDefault(),
-                        "%.2f %s", debt, currency));
+                    holder.tvDebt.setText(getString(R.string.amount_currency_format, debt, currency));
                     holder.tvDebt.setVisibility(View.VISIBLE);
                 } else {
                     holder.tvDebt.setVisibility(View.GONE);
                 }
             }
             holder.itemView.setOnClickListener(v -> {
-                String[] options = {"عرض الحساب", "تعديل البيانات"};
+                String[] options = {getString(R.string.option_view_account), getString(R.string.option_edit_data)};
                 new com.google.android.material.dialog.MaterialAlertDialogBuilder(ActivitySuppliersActivity.this)
                     .setItems(options, (d, which) -> {
                         if (which == 0) {

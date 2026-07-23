@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import com.pos.system.DBHelper;
+import com.pos.system.R;
 import com.android.billingclient.api.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -119,11 +120,11 @@ public class BillingManager implements PurchasesUpdatedListener {
         if (!isReady) {
             Log.e(TAG, "Billing client not ready");
             if (billingListener != null) {
-                billingListener.onPurchaseFailure("خدمة الدفع غير جاهزة، يرجى المحاولة لاحقاً");
+                billingListener.onPurchaseFailure(context.getString(R.string.billing_not_ready_retry));
             }
             return;
         }
-        
+
         // إنشاء قائمة المنتجات
         List<QueryProductDetailsParams.Product> productList = new ArrayList<>();
         productList.add(
@@ -168,18 +169,18 @@ public class BillingManager implements PurchasesUpdatedListener {
                 } else {
                     Log.e(TAG, "No subscription offers available");
                     if (billingListener != null) {
-                        billingListener.onPurchaseFailure("لا توجد عروض اشتراك متاحة");
+                        billingListener.onPurchaseFailure(context.getString(R.string.no_subscription_offers_available));
                     }
                 }
             } else {
                 Log.e(TAG, "Failed to query product details: " + billingResult.getDebugMessage());
                 if (billingListener != null) {
-                    billingListener.onPurchaseFailure("فشل في الحصول على معلومات المنتج");
+                    billingListener.onPurchaseFailure(context.getString(R.string.failed_to_get_product_info));
                 }
             }
         });
     }
-    
+
     /**
      * شراء Premium مدى الحياة (In-App Purchase)
      */
@@ -187,7 +188,7 @@ public class BillingManager implements PurchasesUpdatedListener {
         if (!isReady) {
             Log.e(TAG, "Billing client not ready");
             if (billingListener != null) {
-                billingListener.onPurchaseFailure("خدمة الدفع غير جاهزة");
+                billingListener.onPurchaseFailure(context.getString(R.string.billing_not_ready));
             }
             return;
         }
@@ -224,7 +225,7 @@ public class BillingManager implements PurchasesUpdatedListener {
             } else {
                 Log.e(TAG, "Failed to query lifetime product: " + billingResult.getDebugMessage());
                 if (billingListener != null) {
-                    billingListener.onPurchaseFailure("فشل في الحصول على معلومات المنتج");
+                    billingListener.onPurchaseFailure(context.getString(R.string.failed_to_get_product_info));
                 }
             }
         });
@@ -245,12 +246,12 @@ public class BillingManager implements PurchasesUpdatedListener {
         } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
             Log.d(TAG, "User canceled the purchase");
             if (billingListener != null) {
-                billingListener.onPurchaseFailure("تم إلغاء عملية الشراء");
+                billingListener.onPurchaseFailure(context.getString(R.string.purchase_canceled));
             }
         } else {
             Log.e(TAG, "Purchase failed: " + billingResult.getDebugMessage());
             if (billingListener != null) {
-                billingListener.onPurchaseFailure("فشل في إتمام عملية الشراء");
+                billingListener.onPurchaseFailure(context.getString(R.string.purchase_failed_generic));
             }
         }
     }
@@ -386,7 +387,7 @@ public class BillingManager implements PurchasesUpdatedListener {
      */
     public void queryAvailableProducts(final ProductsCallback callback) {
         if (!isReady) {
-            callback.onFailure("خدمة الدفع غير جاهزة");
+            callback.onFailure(context.getString(R.string.billing_not_ready));
             return;
         }
         
@@ -418,7 +419,7 @@ public class BillingManager implements PurchasesUpdatedListener {
             if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                 callback.onSuccess(productDetailsList);
             } else {
-                callback.onFailure("فشل في الحصول على المنتجات");
+                callback.onFailure(context.getString(R.string.failed_to_get_products));
             }
         });
     }

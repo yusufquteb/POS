@@ -1433,4 +1433,183 @@
     <string name="check_status_bounced">Bounced</string>
     <string name="check_status_cancelled">Cancelled</string>
     <string name="check_status_pending">Pending</string>
+
+    <!-- MainActivity home greeting -->
+    <string name="greeting_morning">Good morning ☀️</string>
+    <string name="greeting_afternoon">Good afternoon 🌤️</string>
+    <string name="greeting_evening">Good evening 🌙</string>
+    <string name="home_greeting_subtitle">Here\'s a quick look at your activity today</string>
+
+    <!-- ActivityReturnActivity -->
+    <string name="invalid_invoice">Invalid invoice</string>
+    <string name="no_products_in_invoice">No products in this invoice</string>
+    <string name="return_invoice_header_format">Invoice: %1$s\nCustomer: %2$s\nTotal: %3$s %4$s</string>
+    <string name="select_items_to_return_label">Select the products to return:</string>
+    <string name="default_product_name">Product</string>
+    <string name="refund_method_label">Refund Method:</string>
+    <string name="payment_bank_transfer">Bank Transfer</string>
+    <string name="return_reason_label">Return Reason (optional):</string>
+    <string name="return_reason_hint">Enter return reason...</string>
+    <string name="return_invoice_title_format">Return Invoice: %1$s</string>
+    <string name="execute_return_btn">Process Return</string>
+    <string name="invalid_quantity_for_product_format">Invalid quantity for product: %1$s</string>
+    <string name="select_at_least_one_item">Please select at least one item</string>
+    <string name="return_registration_failed">Failed to register the return, please try again</string>
+
+    <!-- PrinterManager -->
+    <string name="usb_manager_unavailable">USB Manager not available</string>
+    <string name="no_usb_devices_connected">No USB devices connected</string>
+    <string name="no_usb_printers_connected_message">No USB printers connected\n\nMake sure:\n• The printer is connected via USB cable\n• The printer is powered on</string>
+    <string name="usb_printers_found_format">Found %1$d USB printer(s)</string>
+    <string name="usb_check_error_format">Error checking USB: %1$s</string>
+    <string name="bluetooth_not_supported_device">Bluetooth is not supported on this device</string>
+    <string name="please_grant_bluetooth_permission">Please grant Bluetooth permissions</string>
+    <string name="bluetooth_disabled_message">Bluetooth is not enabled\n\nPlease enable Bluetooth and try again</string>
+    <string name="no_bluetooth_devices_paired_message">No paired Bluetooth devices\n\nPairing steps:\n1. Open Bluetooth settings\n2. Search for the printer\n3. Pair with it</string>
+    <string name="no_bluetooth_printers_paired_format">No paired Bluetooth printers\n\nPaired devices: %1$d</string>
+    <string name="bluetooth_printers_found_format">Found %1$d Bluetooth printer(s)</string>
+    <string name="permission_error_bluetooth">Permission error. Please grant Bluetooth permissions</string>
+    <string name="bluetooth_check_error_format">Error checking Bluetooth: %1$s</string>
+    <string name="wifi_manager_unavailable">Wi-Fi manager not available</string>
+    <string name="wifi_disabled_message">Wi-Fi is not enabled\n\nPlease enable Wi-Fi and connect to the same network as the printer</string>
+    <string name="wifi_printer_check_requirements_message">Checking Wi-Fi printers requires:\n\n1. The printer\'s IP address (e.g. 192.168.1.100)\n2. The port (usually 9100)\n\nPlease enter this information manually in printer settings</string>
+    <string name="unknown_printer_type_format">Unknown printer type: %1$s</string>
+
+    <!-- ActivityEditPricesActivity -->
+    <string name="price_direction_increase">Increase</string>
+    <string name="price_direction_decrease">Decrease</string>
+    <string name="all_products_label">All products</string>
+    <string name="apply_btn">Apply</string>
+    <string name="confirm_price_edit_title">Confirm Edit</string>
+    <string name="confirm_price_edit_message_format">%1$s %2$s by %3$s for %4$s</string>
+    <string name="products_to_update_format">%1$d product(s) will be updated</string>
+    <string name="products_updated_format">%1$d product(s) updated</string>
+
+    <!-- ActivityCashDrawerActivity -->
+    <string name="add_new_drawer_title">Add New Drawer</string>
+    <string name="drawer_added_successfully">Added successfully</string>
+    <string name="select_drawer_first">Please select a drawer first</string>
+    <string name="deposit_successful">Deposit successful</string>
+    <string name="withdraw_successful">Withdrawal successful</string>
+    <string name="insufficient_balance_or_error">Error: insufficient balance or operation error</string>
+    <string name="transaction_type_deposit">Deposit ↑</string>
+    <string name="transaction_type_withdraw">Withdraw ↓</string>
+    <string name="balance_colon_format">Balance: %1$s</string>
+
+    <!-- ActivityLocationActivity -->
+    <string name="location_name_required">Please enter the location name</string>
+    <string name="location_added_successfully">Location added</string>
+    <string name="location_add_failed">Failed to add location</string>
+    <string name="delete_location_title">Delete Location</string>
+    <string name="delete_location_confirm_message">Are you sure you want to delete this location?</string>
+    <string name="location_deleted_successfully">Location deleted</string>
+    <string name="location_delete_failed">Failed to delete location</string>
+    <string name="not_specified">Not specified</string>
+    <string name="location_number_format">Location #%1$d</string>
+
+    <!-- ActivityCustomersActivity -->
+    <string name="delete_customer_confirm_format">Do you want to delete: %1$s?</string>
+    <string name="customer_total_spent_format">Total: %1$.0f %2$s</string>
+    <string name="customer_debt_format">Debt: %1$.0f %2$s</string>
+    <string name="option_view_account">View Account</string>
+    <string name="option_edit_data">Edit Data</string>
+
+    <!-- ActivitySuppliersActivity -->
+    <string name="delete_supplier_confirm_format">Do you want to delete: %1$s?</string>
+    <string name="amount_currency_format">%1$.2f %2$s</string>
+
+    <!-- ActivityPriceQuoteActivity -->
+    <string name="product_name_or_barcode_hint">Product name or barcode</string>
+    <string name="search_for_product_title">Search for a Product</string>
+    <string name="choose_product_title">Choose Product</string>
+    <string name="add_products_first">Add products first</string>
+    <string name="price_quote_saved">Price quote saved</string>
+
+    <!-- LowStockWorker -->
+    <string name="low_stock_notification_title">⚠️ Stock Alert</string>
+    <string name="reorder_channel_name">Automatic Purchase Orders</string>
+    <string name="reorder_notification_title">🛒 Reorder Suggestion</string>
+    <string name="reorder_created_format">Created %1$d automatic purchase order(s) — tap to review</string>
+    <string name="expiry_channel_name">Expiry Alerts</string>
+    <string name="expiry_notification_title_format">⚠️ %1$d product(s) expiring soon</string>
+    <string name="and_more_products_format">and %1$d more products…</string>
+    <string name="auto_order_note_format">Automatic order - %1$s</string>
+
+    <!-- ActivityCustomerAccountsActivity -->
+    <string name="customer_default_name">Customer</string>
+    <string name="loyalty_points_format">Loyalty Points: %1$d pts</string>
+    <string name="amount_paid_hint">Amount paid</string>
+    <string name="record_payment_for_format">Record payment for %1$s</string>
+    <string name="payment_tx_label">Payment</string>
+    <string name="remaining_colon_format">Remaining: %1$s</string>
+
+    <!-- BillingManager -->
+    <string name="billing_not_ready_retry">Billing service not ready, please try again later</string>
+    <string name="no_subscription_offers_available">No subscription offers available</string>
+    <string name="failed_to_get_product_info">Failed to get product info</string>
+    <string name="purchase_canceled">Purchase canceled</string>
+    <string name="purchase_failed_generic">Purchase failed</string>
+    <string name="failed_to_get_products">Failed to get products</string>
+
+    <!-- ActivitySupplierAccountsActivity -->
+    <string name="supplier_default_name">Supplier</string>
+    <string name="record_payment_to_supplier_format">Record payment to supplier %1$s</string>
+    <string name="purchase_order_ref_format">Purchase Order: %1$s</string>
+
+    <!-- ActivityExpiryDashboardActivity -->
+    <string name="expiry_summary_format">Expired: %1$d · Critical: %2$d · Warning: %3$d</string>
+    <string name="batch_label_format">Batch: %1$s</string>
+    <string name="supplier_label_format">Supplier: %1$s</string>
+    <string name="qty_units_format">%1$s units</string>
+    <string name="expired_days_ago_format">Expired %1$d days ago</string>
+    <string name="expires_in_days_format">Expires: %1$s (%2$d days)</string>
+
+    <!-- ActivityProductsActivity -->
+    <string name="csv_template_header">Product Name,Quantity,Purchase Price,Sale Price,Category,Barcode,Product Description</string>
+    <string name="csv_template_example">Example Product,10,50.00,75.00,Electronics,1234567890,Optional description</string>
+    <string name="full_details_btn">Full Details</string>
+
+    <!-- ActivityAddProductActivity -->
+    <string name="error_loading_product_data">Error loading product data</string>
+    <string name="error_loading_image">Error loading image</string>
+    <string name="qty_price_format">Quantity: %1$s | Price: %2$s</string>
+
+    <!-- MainActivity trial banner -->
+    <string name="trial_last_day_message">Last day of your trial — subscribe now</string>
+    <string name="trial_days_remaining_format">%1$d days left in your trial</string>
+    <string name="upgrade_action">Upgrade</string>
+
+    <!-- ActivitySupplierRemainingActivity -->
+    <string name="pay_supplier_due_format">Payment to supplier %1$s\nDue: %2$s</string>
+    <string name="debt_settlement_note">Debt settlement</string>
+
+    <!-- ActivityCustomerRemainingActivity -->
+    <string name="collect_from_customer_format">Collect from %1$s\nRemaining: %2$s</string>
+    <string name="debt_payment_note">Debt payment</string>
+
+    <!-- ActivityPrinterSettingsActivity -->
+    <string name="test_page_sent">Test page sent</string>
+    <string name="permissions_granted_toast">Permissions granted</string>
+    <string name="bluetooth_enabled_toast">Bluetooth enabled</string>
+
+    <!-- OnboardingAdapter -->
+    <string name="onboarding_slide_products_title">Manage Products</string>
+    <string name="onboarding_slide_products_desc">Add your products easily with images, barcodes, and prices. Track stock automatically and get alerts when quantities run low.</string>
+    <string name="onboarding_slide_invoices_title">Professional Invoices</string>
+    <string name="onboarding_slide_invoices_desc">Create professional invoices in seconds and send them to customers. Full support for thermal printing over Bluetooth.</string>
+    <string name="onboarding_slide_reports_title">Reports &amp; Analytics</string>
+    <string name="onboarding_slide_reports_desc">Daily, monthly, and yearly sales reports. Interactive charts to understand your store\'s performance at a glance.</string>
+
+    <!-- ActivityPinLockActivity -->
+    <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>
+    <string name="pin_saved_success">PIN code saved successfully ✓</string>
+    <string name="pin_enter_4_digit">Enter a 4-digit code</string>
+    <string name="pin_mismatch_retry">Codes don\'t match — try again</string>
+
+    <!-- ActivityReportsActivity -->
+    <string name="uncategorized">Uncategorized</string>
+    <string name="qty_pieces_format">%1$s pcs</string>
+
+    <!-- ActivityPriceQuotesActivity -->
+    <string name="quote_status_converted">Converted</string>
 </resources>

@@ -641,8 +641,8 @@ public class ActivityReportsActivity extends BaseActivity {
         public void onBindViewHolder(@NonNull VH h, int pos) {
             HashMap<String, String> item = salesByCatList.get(pos);
             if (h.rank    != null) h.rank.setText(String.valueOf(pos + 1));
-            if (h.name    != null) h.name.setText(item.getOrDefault("category", "غير مصنّف"));
-            if (h.qty     != null) h.qty.setText(item.getOrDefault("total_qty", "0") + " قطعة");
+            if (h.name    != null) h.name.setText(item.getOrDefault("category", getString(R.string.uncategorized)));
+            if (h.qty     != null) h.qty.setText(getString(R.string.qty_pieces_format, item.getOrDefault("total_qty", "0")));
             if (h.revenue != null) {
                 double sales = 0;
                 try { sales = Double.parseDouble(item.getOrDefault("total_sales", "0")); } catch (Exception ignored) {}

@@ -79,14 +79,18 @@ public class ThemeManager {
     @NonNull
     public static String getThemeModeName() {
         switch (getThemeMode()) {
-            case MODE_LIGHT: return "فاتح";
-            case MODE_DARK:  return "داكن";
-            default:         return "تلقائي";
+            case MODE_LIGHT: return appContext.getString(R.string.theme_light);
+            case MODE_DARK:  return appContext.getString(R.string.theme_dark);
+            default:         return appContext.getString(R.string.theme_auto);
         }
     }
 
     @NonNull
     public static String[] getAvailableThemeModes() {
-        return new String[]{"فاتح", "داكن", "تلقائي (حسب النظام)"};
+        return new String[]{
+            appContext.getString(R.string.theme_mode_light),
+            appContext.getString(R.string.theme_mode_dark),
+            appContext.getString(R.string.theme_mode_auto)
+        };
     }
 }

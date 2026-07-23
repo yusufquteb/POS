@@ -558,7 +558,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
                     }
                 }
                 
-                showToast("✓ تم حفظ الإعدادات");
+                showToast("✓ " + getString(R.string.settings_saved));
                 Log.d(TAG, "✅ Saved: " + connectionType + ", " + paperWidth);
             } else {
                 showError(getString(R.string.save_failed));
@@ -576,15 +576,15 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
             
             if (discoveredPrinters.isEmpty()) {
                 new MaterialAlertDialogBuilder(this)
-                    .setTitle("⚠️ تنبيه")
+                    .setTitle("⚠️ " + getString(R.string.warning))
                     .setMessage(R.string.printer_not_checked_msg)
                     .setPositiveButton(R.string.check_now, (d, w) -> checkPrinterConnection())
                     .setNegativeButton(R.string.cancel, null)
                     .show();
                 return;
             }
-            
-            showToast("✓ تم إرسال صفحة اختبار");
+
+            showToast("✓ " + getString(R.string.test_page_sent));
             
         } catch (Exception e) {
             Log.e(TAG, "Test print error", e);
@@ -595,7 +595,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
     private void showError(String message) {
         try {
             new MaterialAlertDialogBuilder(this)
-                .setTitle("⚠️ خطأ")
+                .setTitle("⚠️ " + getString(R.string.error_title))
                 .setMessage(message)
                 .setPositiveButton(R.string.ok, null)
                 .show();
@@ -612,7 +612,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         if (requestCode == PrinterManager.REQUEST_BLUETOOTH_PERMISSIONS) {
             if (grantResults.length > 0 && 
                 grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showToast("✓ تم منح الصلاحيات");
+                showToast("✓ " + getString(R.string.permissions_granted_toast));
                 
                 // التحقق من تفعيل البلوتوث
                 if (!printerManager.isBluetoothEnabled()) {
@@ -631,7 +631,7 @@ public class ActivityPrinterSettingsActivity extends BaseActivity {
         
         if (requestCode == PrinterManager.REQUEST_ENABLE_BLUETOOTH) {
             if (resultCode == RESULT_OK) {
-                showToast("✓ تم تفعيل البلوتوث");
+                showToast("✓ " + getString(R.string.bluetooth_enabled_toast));
             } else {
                 showSnackbar(getString(R.string.bluetooth_not_enabled_toast), true);
                 if (rbUsb != null) rbUsb.setChecked(true);

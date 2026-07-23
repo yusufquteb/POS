@@ -97,7 +97,7 @@ public class ActivityPriceQuotesActivity extends BaseActivity {
             if (h.tvTotal    != null) h.tvTotal.setText(String.format(Locale.US,"%.2f %s", total, currency));
             if (h.tvStatus   != null) {
                 String status = q.getOrDefault("status","active");
-                h.tvStatus.setText("active".equals(status) ? "نشط" : "محوّل");
+                h.tvStatus.setText("active".equals(status) ? getString(R.string.status_active) : getString(R.string.quote_status_converted));
             }
             h.itemView.setOnClickListener(v -> showQuoteOptions(q));
         }

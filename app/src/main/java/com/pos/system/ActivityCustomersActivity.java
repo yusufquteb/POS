@@ -118,7 +118,7 @@ public class ActivityCustomersActivity extends BaseActivity {
 
         boolean isEdit = editData != null;
 
-        if (tvTitle != null) tvTitle.setText(isEdit ? "تعديل عميل" : "إضافة عميل جديد");
+        if (tvTitle != null) tvTitle.setText(isEdit ? R.string.edit_customer_title : R.string.add_customer_title);
 
         // ✅ إصلاح: تعبئة الحقول بالبيانات القديمة عند التعديل
         if (isEdit) {
@@ -136,7 +136,7 @@ public class ActivityCustomersActivity extends BaseActivity {
                 String notes   = getEditText(etNotes);
 
                 if (name.isEmpty()) {
-                    showToast("يرجى إدخال الاسم");
+                    showToast(getString(R.string.name_required));
                     return;
                 }
 
@@ -144,15 +144,15 @@ public class ActivityCustomersActivity extends BaseActivity {
                     if (isEdit) {
                         long id = getLong(editData, "id");
                         dbHelper.updateCustomer(id, name, phone, address, notes);
-                        showToast("✓ تم التعديل بنجاح");
+                        showToast(getString(R.string.customer_updated));
                     } else {
                         dbHelper.addCustomer(name, phone, address, notes);
-                        showToast("✓ تمت الإضافة بنجاح");
+                        showToast(getString(R.string.customer_added));
                     }
                     dialog.dismiss();
                     refreshData();
                 } catch (Exception e) {
-                    showToast("خطأ: " + e.getMessage());
+                    showToast(getString(R.string.error_with_message, e.getMessage()));
                 }
             });
         }
@@ -239,16 +239,16 @@ public class ActivityCustomersActivity extends BaseActivity {
 
     private void confirmDelete(HashMap<String, Object> item, int pos) {
         new MaterialAlertDialogBuilder(this)
-            .setTitle("حذف العميل")
-            .setMessage("هل تريد حذف: " + item.getOrDefault("name", "") + "؟")
+            .setTitle(R.string.delete_customer)
+            .setMessage(getString(R.string.delete_customer_confirm_format, item.getOrDefault("name", "")))
             .setPositiveButton(R.string.delete, (d, w) -> {
                 try {
                     long id = getLong(item, "id");
                     dbHelper.deleteCustomer(id);
                     refreshData();
-                    showToast("✓ تم الحذف");
+                    showToast(getString(R.string.customer_deleted));
                 } catch (Exception e) {
-                    showSnackbar("خطأ في الحذف", true);
+                    showSnackbar(getString(R.string.delete_error), true);
                 }
             })
             .setNegativeButton(R.string.cancel, (d, w) -> {
@@ -289,7 +289,7 @@ public class ActivityCustomersActivity extends BaseActivity {
             if (holder.tvTotalSpent != null) {
                 double spent = safeDouble(item.get("total_spent"));
                 if (spent > 0) {
-                    holder.tvTotalSpent.setText(String.format("إجمالي: %.0f %s", spent, currency));
+                    holder.tvTotalSpent.setText(getString(R.string.customer_total_spent_format, spent, currency));
                     holder.tvTotalSpent.setVisibility(android.view.View.VISIBLE);
                 } else {
                     holder.tvTotalSpent.setVisibility(android.view.View.GONE);
@@ -300,7 +300,7 @@ public class ActivityCustomersActivity extends BaseActivity {
             if (holder.tvDebtBadge != null) {
                 double debt = safeDouble(item.get("debt"));
                 if (debt > 0.01) {
-                    holder.tvDebtBadge.setText(String.format("دين: %.0f %s", debt, currency));
+                    holder.tvDebtBadge.setText(getString(R.string.customer_debt_format, debt, currency));
                     holder.tvDebtBadge.setVisibility(android.view.View.VISIBLE);
                 } else {
                     holder.tvDebtBadge.setVisibility(android.view.View.GONE);
@@ -308,7 +308,7 @@ public class ActivityCustomersActivity extends BaseActivity {
             }
 
             holder.itemView.setOnClickListener(v -> {
-                String[] options = {"عرض الحساب", "تعديل البيانات"};
+                String[] options = {getString(R.string.option_view_account), getString(R.string.option_edit_data)};
                 new com.google.android.material.dialog.MaterialAlertDialogBuilder(ActivityCustomersActivity.this)
                     .setItems(options, (d, which) -> {
                         if (which == 0) {
