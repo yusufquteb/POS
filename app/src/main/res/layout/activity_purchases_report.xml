@@ -57,7 +57,7 @@
                         android:layout_weight="1" android:orientation="vertical" android:gravity="center">
                         <TextView android:id="@+id/tv_pending_count" android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:text="0" android:textSize="16sp"
-                            android:textStyle="bold" android:textColor="#FF9800"/>
+                            android:textStyle="bold" android:textColor="?attr/colorWarning"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                             android:text="@string/po_status_pending" android:textSize="11sp"
                             android:textColor="?attr/colorOnSurfaceVariant"/>

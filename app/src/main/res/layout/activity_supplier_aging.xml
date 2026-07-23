@@ -90,19 +90,19 @@
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                         android:orientation="horizontal" android:layout_marginBottom="8dp">
                         <View android:layout_width="4dp" android:layout_height="match_parent"
-                            android:background="#FF9800" android:layout_marginEnd="8dp"/>
+                            android:background="?attr/colorWarning" android:layout_marginEnd="8dp"/>
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                                 android:text="@string/aging_range_61_90" android:textSize="12sp"
-                                android:textColor="#FF9800" android:textStyle="bold"/>
+                                android:textColor="?attr/colorWarning" android:textStyle="bold"/>
                             <TextView android:id="@+id/tv_count_61_90" android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:textSize="11sp"
                                 android:textColor="?attr/colorOnSurfaceVariant"/>
                         </LinearLayout>
                         <TextView android:id="@+id/tv_total_61_90" android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:textSize="14sp"
-                            android:textStyle="bold" android:textColor="#FF9800"/>
+                            android:textStyle="bold" android:textColor="?attr/colorWarning"/>
                     </LinearLayout>
 
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
