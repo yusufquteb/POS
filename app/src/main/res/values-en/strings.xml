@@ -1606,6 +1606,22 @@
     <string name="reports_toolbar_title">Reports &amp; Statistics</string>
     <string name="invoices_filter_unsettled">Unsettled</string>
 
+    <!-- Customer/Supplier account layouts -->
+    <string name="customer_account_title">Customer Account</string>
+    <string name="supplier_account_title">Supplier Account</string>
+    <string name="total_debt_label">Debt</string>
+    <string name="total_paid_label">Paid</string>
+    <string name="add_payment_btn">Add Payment</string>
+    <string name="record_payment_btn">Record Payment</string>
+
+    <!-- activity_debt.xml -->
+    <string name="debt_management_title">Debt Management</string>
+    <string name="no_debts">No debts</string>
+
+    <!-- activity_wallet.xml -->
+    <string name="current_balance_label">Current Balance</string>
+    <string name="transaction_history_label">Transaction History</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>
     <string name="pin_saved_success">PIN code saved successfully ✓</string>

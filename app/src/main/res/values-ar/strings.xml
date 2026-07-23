@@ -1725,6 +1725,22 @@
     <string name="reports_toolbar_title">التقارير والإحصائيات</string>
     <string name="invoices_filter_unsettled">غير مسدَّدة</string>
 
+    <!-- Customer/Supplier account layouts -->
+    <string name="customer_account_title">حساب العميل</string>
+    <string name="supplier_account_title">حساب المورد</string>
+    <string name="total_debt_label">المديونية</string>
+    <string name="total_paid_label">المدفوع</string>
+    <string name="add_payment_btn">إضافة دفعة</string>
+    <string name="record_payment_btn">تسجيل دفعة</string>
+
+    <!-- activity_debt.xml -->
+    <string name="debt_management_title">إدارة الديون</string>
+    <string name="no_debts">لا توجد ديون</string>
+
+    <!-- activity_wallet.xml -->
+    <string name="current_balance_label">الرصيد الحالي</string>
+    <string name="transaction_history_label">سجل الحركات</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">أعد إدخال الرمز للتأكيد</string>
     <string name="pin_saved_success">تم حفظ رمز PIN بنجاح ✓</string>
