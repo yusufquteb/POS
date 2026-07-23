@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:background="?attr/colorPrimary"
             android:layout_height="?attr/actionBarSize"
-            app:title="المنتجات"
+            app:title="@string/products_title"
             app:titleTextColor="?attr/colorOnPrimary"
             app:navigationIcon="@drawable/ic_back"
             app:navigationIconTint="?attr/colorOnPrimary" />

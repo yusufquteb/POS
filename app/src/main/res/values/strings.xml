@@ -1662,6 +1662,7 @@
     <string name="sales_by_category_title">Sales by Category</string>
     <string name="no_category_data_for_period">No data for the selected period</string>
     <string name="reports_toolbar_title">Reports &amp; Statistics</string>
+    <string name="invoices_filter_unsettled">Unsettled</string>
 
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>

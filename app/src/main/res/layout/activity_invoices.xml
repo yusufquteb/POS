@@ -193,14 +193,14 @@
 					android:id="@+id/chip_filter_all"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="الكل"
+					android:text="@string/filter_all"
 					android:checked="true"
 					style="@style/Widget.Material3.Chip.Filter"/>
 				<com.google.android.material.chip.Chip
 					android:id="@+id/chip_filter_unsettled"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="غير مسدَّدة"
+					android:text="@string/invoices_filter_unsettled"
 					style="@style/Widget.Material3.Chip.Filter"/>
 			</com.google.android.material.chip.ChipGroup>
 		</HorizontalScrollView>
