@@ -84,7 +84,7 @@
                         android:layout_marginBottom="8dp"
                         android:visibility="gone"
                         app:cardBackgroundColor="?attr/colorErrorContainer"
-                        app:cardCornerRadius="12dp"
+                        app:cardCornerRadius="18dp"
                         app:cardElevation="0dp">
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -392,7 +392,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="72dp"
                         android:layout_marginBottom="12dp"
-                        app:cardCornerRadius="16dp"
+                        app:cardCornerRadius="18dp"
                         app:cardElevation="4dp"
                         app:cardBackgroundColor="?attr/colorPrimary">
                         <LinearLayout
@@ -453,7 +453,7 @@
                             android:id="@+id/card_products"
                             android:layout_width="0dp" android:layout_height="80dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -474,7 +474,7 @@
                             android:id="@+id/card_invoices"
                             android:layout_width="0dp" android:layout_height="80dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -495,7 +495,7 @@
                             android:id="@+id/card_reports"
                             android:layout_width="0dp" android:layout_height="80dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -525,7 +525,7 @@
                             android:id="@+id/card_customers"
                             android:layout_width="0dp" android:layout_height="80dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -546,7 +546,7 @@
                             android:id="@+id/card_suppliers"
                             android:layout_width="0dp" android:layout_height="80dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -567,7 +567,7 @@
                             android:id="@+id/card_settings"
                             android:layout_width="0dp" android:layout_height="80dp"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="14dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -867,7 +867,7 @@
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorInfoContainer">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                                 android:orientation="horizontal" android:padding="10dp" android:gravity="center_vertical">
@@ -890,7 +890,7 @@
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorErrorContainer">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                                 android:orientation="horizontal" android:padding="10dp" android:gravity="center_vertical">
@@ -913,7 +913,7 @@
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_margin="4dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorWarningContainer">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                                 android:orientation="horizontal" android:padding="10dp" android:gravity="center_vertical">
@@ -1214,7 +1214,7 @@
                             android:id="@+id/card_more_wallet"
                             android:layout_width="0dp" android:layout_height="86dp"
                             android:layout_margin="3dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -1233,7 +1233,7 @@
                             android:id="@+id/card_more_cash"
                             android:layout_width="0dp" android:layout_height="86dp"
                             android:layout_margin="3dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -1252,7 +1252,7 @@
                             android:id="@+id/card_more_expenses"
                             android:layout_width="0dp" android:layout_height="86dp"
                             android:layout_margin="3dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -1271,7 +1271,7 @@
                             android:id="@+id/card_more_shifts"
                             android:layout_width="0dp" android:layout_height="86dp"
                             android:layout_margin="3dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -1347,7 +1347,7 @@
                             android:id="@+id/card_more_settings"
                             android:layout_width="0dp" android:layout_height="86dp"
                             android:layout_margin="3dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -1366,7 +1366,7 @@
                             android:id="@+id/card_more_users"
                             android:layout_width="0dp" android:layout_height="86dp"
                             android:layout_margin="3dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -1385,7 +1385,7 @@
                             android:id="@+id/card_more_backup"
                             android:layout_width="0dp" android:layout_height="86dp"
                             android:layout_margin="3dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">
@@ -1404,7 +1404,7 @@
                             android:id="@+id/card_more_printer"
                             android:layout_width="0dp" android:layout_height="86dp"
                             android:layout_margin="3dp" android:layout_weight="1"
-                            app:cardCornerRadius="16dp" app:cardElevation="0dp"
+                            app:cardCornerRadius="18dp" app:cardElevation="0dp"
                             app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                                 android:gravity="center" android:orientation="vertical">

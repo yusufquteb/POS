@@ -38,7 +38,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="18dp"
                 app:cardElevation="1dp"
                 android:layout_marginBottom="@dimen/spacing_sm">
                 <LinearLayout

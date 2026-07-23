@@ -48,7 +48,7 @@
 				app:cardBackgroundColor="?attr/colorPrimaryContainer"
 				android:layout_weight="1"
 				android:layout_marginEnd="6dp"
-				app:cardCornerRadius="16dp"
+				app:cardCornerRadius="18dp"
 				app:cardElevation="2dp"
 				app:strokeWidth="0dp">
 				<LinearLayout
@@ -90,7 +90,7 @@
 				app:cardBackgroundColor="?attr/colorSurface"
 				android:layout_weight="1"
 				android:layout_marginStart="6dp"
-				app:cardCornerRadius="16dp"
+				app:cardCornerRadius="18dp"
 				app:cardElevation="2dp"
 				app:strokeColor="?attr/colorOutlineVariant"
 				app:strokeWidth="1dp">
