@@ -1658,6 +1658,11 @@
     <string name="onboarding_slide_reports_title">Reports &amp; Analytics</string>
     <string name="onboarding_slide_reports_desc">Daily, monthly, and yearly sales reports. Interactive charts to understand your store\'s performance at a glance.</string>
 
+    <!-- ActivityReportsActivity layout -->
+    <string name="sales_by_category_title">Sales by Category</string>
+    <string name="no_category_data_for_period">No data for the selected period</string>
+    <string name="reports_toolbar_title">Reports &amp; Statistics</string>
+
     <!-- ActivityPinLockActivity -->
     <string name="pin_reenter_to_confirm">Re-enter the code to confirm</string>
     <string name="pin_saved_success">PIN code saved successfully ✓</string>
