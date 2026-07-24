@@ -120,7 +120,7 @@ public class ActivityPurchasesReportActivity extends BaseActivity {
             h.tvStatus.setText("received".equals(status) ? getString(R.string.po_status_received) : getString(R.string.po_status_pending));
             int clr = "received".equals(status)
                 ? androidx.core.content.ContextCompat.getColor(ActivityPurchasesReportActivity.this, R.color.color_success)
-                : 0xFFFF9800;
+                : androidx.core.content.ContextCompat.getColor(ActivityPurchasesReportActivity.this, R.color.color_warning);
             h.tvStatus.setTextColor(clr);
         }
         @Override public int getItemCount() { return filteredData.size(); }

@@ -148,7 +148,7 @@ public class ActivitySupplierAccountsActivity extends BaseActivity {
                 String.format(Locale.US, "%.2f %s", amt, currency));
             if (h.tvRemaining != null) h.tvRemaining.setVisibility(View.GONE);
             if (h.indicator != null)
-                h.indicator.setBackgroundColor("payment".equals(txType) ? 0xFF4CAF50 : 0xFFF44336);
+                h.indicator.setBackgroundColor(androidx.core.content.ContextCompat.getColor(h.indicator.getContext(), "payment".equals(txType) ? R.color.color_success : R.color.color_error));
         }
 
         @Override

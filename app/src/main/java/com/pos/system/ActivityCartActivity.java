@@ -489,10 +489,10 @@ public class ActivityCartActivity extends BaseActivity {
                         double change = paid - total;
                         if (change >= 0) {
                             tvChangeFinal.setText(getString(R.string.change_due_to_customer_format, formatCurrency(change)));
-                            tvChangeFinal.setTextColor(0xFF16A34A);
+                            tvChangeFinal.setTextColor(androidx.core.content.ContextCompat.getColor(tvChangeFinal.getContext(), R.color.color_success));
                         } else {
                             tvChangeFinal.setText(getString(R.string.remaining_owed_by_customer_format, formatCurrency(-change)));
-                            tvChangeFinal.setTextColor(0xFFDC2626);
+                            tvChangeFinal.setTextColor(androidx.core.content.ContextCompat.getColor(tvChangeFinal.getContext(), R.color.color_error));
                         }
                         tvChangeFinal.setVisibility(View.VISIBLE);
                     } catch (Exception e) { tvChangeFinal.setVisibility(View.GONE); }

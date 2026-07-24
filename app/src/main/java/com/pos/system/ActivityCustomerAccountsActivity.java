@@ -199,8 +199,7 @@ public class ActivityCustomerAccountsActivity extends BaseActivity {
                 }
             }
             if (h.indicator != null) {
-                int color = isInvoice ? 0xFFF44336 : 0xFF4CAF50;
-                h.indicator.setBackgroundColor(color);
+                h.indicator.setBackgroundColor(androidx.core.content.ContextCompat.getColor(h.indicator.getContext(), isInvoice ? R.color.color_error : R.color.color_success));
             }
         }
 
