@@ -47,7 +47,7 @@
                 android:text="0.00 ج.م"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#F44336"/>
+                android:textColor="@color/color_error"/>
         </LinearLayout>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_pay"
