@@ -101,6 +101,7 @@ public class ActivityCashDrawerActivity extends BaseActivity {
         try { balance  = Double.parseDouble(drawer.getOrDefault("current_balance", "0")); } catch (Exception ignored) {}
         binding.tvBalanceLabel.setText(drawer.getOrDefault("name", getString(R.string.nav_cash_drawer)));
         binding.tvBalance.setText(String.format(Locale.US, "%.2f %s", balance, getCurrency()));
+        binding.tvCurrency.setText(getCurrency());
         binding.cardBalance.setVisibility(View.VISIBLE);
         loadTransactions(drawerId);
     }
