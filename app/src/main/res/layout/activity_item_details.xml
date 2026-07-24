@@ -43,7 +43,7 @@
                         android:id="@+id/tv_product_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="اسم المنتج"
+                        android:text="@string/product_name"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface"/>
@@ -51,7 +51,7 @@
                         android:id="@+id/tv_barcode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="الباركود"
+                        android:text="@string/barcode"
                         android:textSize="14sp"
                         android:textColor="?attr/colorOnSurfaceVariant"
                         android:layout_marginTop="4dp"/>
@@ -86,7 +86,7 @@
                         </LinearLayout>
                     </LinearLayout>
                     <TextView android:id="@+id/tv_category" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:text="التصنيف: -"
+                        android:layout_height="wrap_content" android:text=""
                         android:textSize="13sp" android:textColor="?attr/colorOnSurfaceVariant"
                         android:layout_marginTop="8dp"/>
                 </LinearLayout>

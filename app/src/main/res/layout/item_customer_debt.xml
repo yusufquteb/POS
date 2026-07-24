@@ -22,7 +22,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="اسم العميل"
+                android:text="@string/customer_name"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"/>
@@ -44,7 +44,7 @@
                 android:id="@+id/tv_debt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.00 ج.م"
+                android:text=""
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/color_error"/>
