@@ -1035,6 +1035,7 @@
     <string name="str_5d10b4">نظام POS</string>
     <string name="str_501c36">نظام إدارة المبيعات المتكامل</string>
     <string name="str_b530ab">متجري</string>
+    <string name="content_desc_store_logo">Store Logo</string>
 
     <!-- Drawer section headers -->
     <string name="nav_section_sales">المبيعات</string>

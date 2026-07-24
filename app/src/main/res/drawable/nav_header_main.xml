@@ -14,7 +14,7 @@
         android:id="@+id/iv_store_logo"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:contentDescription="شعار المتجر"
+        android:contentDescription="@string/content_desc_store_logo"
         android:src="@android:drawable/ic_menu_gallery" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="متجري"
+        android:text="@string/str_b530ab"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/white"
         android:textSize="18sp"

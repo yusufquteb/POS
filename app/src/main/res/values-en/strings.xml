@@ -1036,6 +1036,7 @@
     <string name="str_5d10b4">POS System</string>
     <string name="str_501c36">Complete Sales Management System</string>
     <string name="str_b530ab">My Store</string>
+    <string name="content_desc_store_logo">Store Logo</string>
     <string name="nav_section_sales">Sales</string>
     <string name="nav_section_finance">Finance</string>
     <string name="nav_section_inventory">Inventory</string>
