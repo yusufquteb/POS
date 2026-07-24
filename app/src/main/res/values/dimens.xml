@@ -34,8 +34,8 @@
     <!-- ============================================ -->
     <!-- Card System -->
     <!-- ============================================ -->
-    <dimen name="card_corner_radius">12dp</dimen>
-    <dimen name="card_corner_radius_large">16dp</dimen>
+    <dimen name="card_corner_radius">18dp</dimen>
+    <dimen name="card_corner_radius_large">18dp</dimen>
     <dimen name="card_corner_radius_small">8dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_elevation_raised">4dp</dimen>
