@@ -1,11 +1,14 @@
 package com.pos.system.ui.products;
 
+import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
+import com.pos.system.R;
 import com.pos.system.domain.model.Product;
 import com.pos.system.domain.repository.ProductRepository;
 
@@ -13,7 +16,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ProductsViewModel extends ViewModel {
+public class ProductsViewModel extends AndroidViewModel {
 
     private final ProductRepository repository;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -25,7 +28,8 @@ public class ProductsViewModel extends ViewModel {
     private final MutableLiveData<Long> insertedId = new MutableLiveData<>();
     private final MutableLiveData<Boolean> operationSuccess = new MutableLiveData<>();
 
-    public ProductsViewModel(ProductRepository repository) {
+    public ProductsViewModel(@NonNull Application application, ProductRepository repository) {
+        super(application);
         this.repository = repository;
     }
 
@@ -46,7 +50,7 @@ public class ProductsViewModel extends ViewModel {
                 });
             } catch (Exception e) {
                 mainHandler.post(() -> {
-                    error.setValue("فشل تحميل المنتجات");
+                    error.setValue(getApplication().getString(R.string.error_load_products));
                     loading.setValue(false);
                 });
             }
@@ -63,7 +67,7 @@ public class ProductsViewModel extends ViewModel {
                 List<Product> result = repository.searchProducts("%" + query.trim() + "%");
                 mainHandler.post(() -> products.setValue(result));
             } catch (Exception e) {
-                mainHandler.post(() -> error.setValue("فشل البحث"));
+                mainHandler.post(() -> error.setValue(getApplication().getString(R.string.error_search_products)));
             }
         });
     }
@@ -77,11 +81,11 @@ public class ProductsViewModel extends ViewModel {
                         insertedId.setValue(id);
                         loadAllProducts();
                     } else {
-                        error.setValue("فشل إضافة المنتج");
+                        error.setValue(getApplication().getString(R.string.error_add_product));
                     }
                 });
             } catch (Exception e) {
-                mainHandler.post(() -> error.setValue("فشل إضافة المنتج: " + e.getMessage()));
+                mainHandler.post(() -> error.setValue(getApplication().getString(R.string.error_add_product)));
             }
         });
     }
@@ -93,10 +97,10 @@ public class ProductsViewModel extends ViewModel {
                 mainHandler.post(() -> {
                     operationSuccess.setValue(rows > 0);
                     if (rows > 0) loadAllProducts();
-                    else error.setValue("فشل تحديث المنتج");
+                    else error.setValue(getApplication().getString(R.string.error_update_product));
                 });
             } catch (Exception e) {
-                mainHandler.post(() -> error.setValue("فشل تحديث المنتج: " + e.getMessage()));
+                mainHandler.post(() -> error.setValue(getApplication().getString(R.string.error_update_product)));
             }
         });
     }
@@ -108,10 +112,10 @@ public class ProductsViewModel extends ViewModel {
                 mainHandler.post(() -> {
                     operationSuccess.setValue(rows > 0);
                     if (rows > 0) loadAllProducts();
-                    else error.setValue("فشل حذف المنتج");
+                    else error.setValue(getApplication().getString(R.string.error_delete_product));
                 });
             } catch (Exception e) {
-                mainHandler.post(() -> error.setValue("فشل حذف المنتج"));
+                mainHandler.post(() -> error.setValue(getApplication().getString(R.string.error_delete_product)));
             }
         });
     }

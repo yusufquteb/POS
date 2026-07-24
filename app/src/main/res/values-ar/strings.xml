@@ -74,6 +74,11 @@
     <string name="product_quantity">الكمية</string>
     <string name="product_category">الفئة</string>
     <string name="product_description">الوصف</string>
+    <string name="error_load_products">فشل تحميل المنتجات</string>
+    <string name="error_search_products">فشل البحث</string>
+    <string name="error_add_product">فشل إضافة المنتج</string>
+    <string name="error_update_product">فشل تحديث المنتج</string>
+    <string name="error_delete_product">فشل حذف المنتج</string>
     <string name="product_save">حفظ</string>
     <string name="product_delete">حذف</string>
     <string name="product_edit">تعديل</string>
@@ -1221,6 +1226,7 @@
     <string name="str_5d10b4">نظام POS</string>
     <string name="str_501c36">نظام إدارة المبيعات المتكامل</string>
     <string name="str_b530ab">متجري</string>
+    <string name="content_desc_store_logo">شعار المتجر</string>
     <string name="nav_section_sales">المبيعات</string>
     <string name="nav_section_finance">المالية</string>
     <string name="nav_section_inventory">المخزون</string>

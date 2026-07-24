@@ -137,7 +137,7 @@ public class ActivityWalletActivity extends BaseActivity {
                 try { amt = Double.parseDouble(t.getOrDefault("amount", "0")); } catch (Exception ignored) {}
                 h.tvAmount.setText((isIn ? "+" : "-") +
                     String.format(Locale.US, "%.2f", amt) + " " + currency);
-                h.tvAmount.setTextColor(isIn ? 0xFF16A34A : 0xFFDC2626);
+                h.tvAmount.setTextColor(androidx.core.content.ContextCompat.getColor(h.tvAmount.getContext(), isIn ? R.color.color_success : R.color.color_error));
             }
         }
 

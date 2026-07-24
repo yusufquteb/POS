@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_edit_prices"
-        android:title="تعديل الأسعار جملة"
+        android:title="@string/bulk_edit_prices_title"
         app:showAsAction="never"/>
 </menu>
